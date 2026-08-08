@@ -5,36 +5,29 @@ where it came from and whether it was changed. This table is the substantive
 attribution required by the MIT licence in [`LICENSE`](./LICENSE), which carries
 both the nixpkgs copyright line and this project's.
 
-The table is **machine-read** by [`ci/compare-upstream.nix`](./ci/compare-upstream.nix),
-which diffs every row against the pinned nixpkgs input, so it cannot silently go
-stale:
-
-- a row whose `nixpkgs path` no longer exists fails the check;
-- a `verbatim` row that differs from upstream fails the check;
-- a `modified` row prints its diff as context, so upstream churn stays visible.
-
-CI runs that check with `continue-on-error`, because cosmetic churn upstream
-should be visible without red-flagging an unrelated pull request.
+Keeping it current is a review responsibility, not an automated one. The same
+people maintain this subsystem here and in nixpkgs, so a change on either side
+is known on both; a checked-in diff against upstream would report churn its
+author had already seen, and would constrain this table to a shape a parser can
+read. `checks.disable-keys-exist` covers the one case that *is* silent:
+`disabledModules` ignores a key matching nothing, so an upstream rename would
+turn [`environments/nixos/disable-upstream.nix`](./environments/nixos/disable-upstream.nix)
+into a no-op without any error.
 
 ## No per-file provenance headers
 
 Vendored files carry **no** added header comment. That is deliberate: keeping
-them byte-identical to upstream makes `diff` a valid drift check, and a header
-would defeat it on every single file. The files that genuinely had to change are
-marked `modified` below with the reason; those are the only places where a
-divergence exists at all.
+them byte-identical to upstream makes a plain `diff` against a nixpkgs checkout
+a usable answer to "what did we change", and a header would defeat it on every
+single file. The files that genuinely had to change are marked `modified` below
+with the reason; those are the only places where a divergence exists at all.
 
-The revision each file was vendored from is the one in
-[`flake.lock`](./flake.lock), which is also the revision the drift check
-compares against. Recording it per row as well would only be a second copy to
-keep in step, and would touch all 34 rows on every re-vendor.
-
-The pinned input is the `nixos-unstable` channel, which advances only once
-Hydra has built it, so it trails the nixpkgs default branch by a few days. A
-file vendored from the branch therefore reads as drifted, and a file whose
-upstream counterpart is younger than the channel reads as gone, until the
-channel catches up. That is what the drift check is for; it is not a signal to
-re-vendor backwards.
+No per-row revision either. [`flake.lock`](./flake.lock) records the pin, and a
+second copy per row would only be another thing to keep in step, touching all 34
+rows on every re-vendor. Note that the pin is the `nixos-unstable` channel, which
+advances only once Hydra has built it and so trails the nixpkgs default branch by
+a few days: a file vendored from the branch can be *newer* than its counterpart
+in the pinned nixpkgs.
 
 ## The table
 

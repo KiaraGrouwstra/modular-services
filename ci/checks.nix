@@ -63,22 +63,4 @@ assert lib.assertMsg (missing == [ ]) ''
 
   # The manual chapter renders, with both option references substituted in.
   docs = check (import ../doc { inherit lib self pkgs; });
-
-  # Vendored files, diffed against the pinned nixpkgs. Upstream cosmetic churn
-  # should be visible without red-flagging an unrelated pull request, so this is
-  # the one check CI is allowed to report and move on from.
-  upstream-drift =
-    check (
-      import ./compare-upstream.nix {
-        inherit
-          lib
-          nixpkgs
-          self
-          pkgs
-          ;
-      }
-    )
-    // {
-      allowFailure = true;
-    };
 }

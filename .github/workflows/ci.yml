@@ -64,7 +64,6 @@ jobs:
           skipPush: ${{ github.event_name == 'pull_request' }}
 
       - name: Build ${{ matrix.name }}
-        continue-on-error: ${{ matrix.allowFailure }}
         run: nix build -L --no-link ".#checks.$SYSTEM.${{ matrix.name }}"
 
   # Checks that boot a virtual machine, so they need KVM and rather more disk.
@@ -108,5 +107,4 @@ jobs:
           nix config show system-features | tr ' ,' '\n\n' | grep -qx kvm
 
       - name: Build ${{ matrix.name }}
-        continue-on-error: ${{ matrix.allowFailure }}
         run: nix build -L --no-link ".#checks.$SYSTEM.${{ matrix.name }}"

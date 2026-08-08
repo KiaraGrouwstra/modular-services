@@ -11,6 +11,5 @@
   include = lib.mapAttrsToList (name: c: {
     inherit name;
     inherit (c) kind env;
-    allowFailure = c.allowFailure or false;
   }) checks;
 }

@@ -123,10 +123,6 @@ certificates in, so on a host running many virtual machines at once the first
 request can arrive before the service is up. CI gives each test its own job and
 does not hit this.
 
-`checks.upstream-drift` diffs every file listed in `PROVENANCE.md` against the
-pinned nixpkgs. CI runs it without failing the build, so upstream churn stays
-visible without red-flagging an unrelated pull request.
-
 ### CI setup
 
 The workflows need two repository secrets. Both are optional; without them CI
