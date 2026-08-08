@@ -2,7 +2,7 @@
 #   nix build .#checks.<system>.nixos-pkg-php-fpm
 
 # Non-module dependencies (`importApply`)
-{ serviceModules }:
+{ modularServices }:
 
 { lib, php, ... }:
 {
@@ -39,7 +39,7 @@
       };
 
       system.services.php-fpm = {
-        imports = [ (serviceModules.php pkgs) ];
+        imports = [ (modularServices.php pkgs) ];
         php-fpm = {
           package = php;
           settings = {

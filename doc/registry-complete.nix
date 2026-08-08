@@ -1,4 +1,4 @@
-# Every entry of `serviceModules` must be documented, and every documented
+# Every entry of `modularServices` must be documented, and every documented
 # entry must exist.
 {
   lib,
@@ -7,11 +7,11 @@
 }:
 
 let
-  inherit (self) serviceModules;
+  inherit (self) modularServices;
 
   registry = import ./registry.nix;
 
-  provided = lib.attrNames serviceModules;
+  provided = lib.attrNames modularServices;
 
   undocumented = lib.subtractLists registry provided;
   unknown = lib.subtractLists provided registry;
@@ -25,7 +25,7 @@ assert lib.assertMsg (undocumented == [ ]) ''
 
 assert lib.assertMsg (unknown == [ ]) ''
   docs-registry-complete: doc/registry.nix lists names that are not in
-  service-modules/default.nix:
+  modular-services/default.nix:
 
   ${lib.concatMapStringsSep "\n" (n: "  - ${n}") unknown}
 '';

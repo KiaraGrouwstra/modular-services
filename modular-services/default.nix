@@ -1,8 +1,12 @@
-# The vendored per-package service modules, as `serviceModules.<name> pkgs`.
+# The modular services themselves, as `modularServices.<name> pkgs`.
 #
-# These modules are environment-agnostic by construction: every one of them
-# declares `_class = "service"` and none imports anything from `lib/services`.
-# They therefore live outside `environments/`.
+# A modular service is a module with `_class = "service"`. That is what makes
+# this directory the one holding them: `environments/nixos/systemd/system.nix`
+# declares the option surface a service lands in and translates what does, but
+# is not itself a service.
+#
+# They are environment-agnostic by construction: none imports anything from
+# `lib/services`. They therefore live outside `environments/`.
 #
 # Each entry reproduces two things that nixpkgs puts in the package's
 # `passthru.services.<n>`: the `importApply` of the service module with its
@@ -14,8 +18,8 @@
 # is strictly more permissive, and the review checklist only requires that the
 # default come from the providing package.
 #
-# `serviceModules.<pkg>` is the canonical way to consume a service from this
-# repo. `overlays.packageServices` exists as an opt-in compatibility shim for
+# `modularServices.<pkg>` is the canonical way to consume a service from this
+# repo. `overlays.passthruServices` exists as an opt-in compatibility shim for
 # code written against `pkgs.<pkg>.services.*`; see ../overlays/README section
 # in ../README.md for why it is not the default.
 { lib }:

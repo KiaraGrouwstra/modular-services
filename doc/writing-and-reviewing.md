@@ -35,7 +35,7 @@ When reviewing a modular service, you should check the following. Details and ra
 - [ ] Systemd-specific definitions are behind `optionalAttrs (options ? systemd)` to promote portability.
 - [ ] `_class = "service"`
 - [ ] Imports nothing from `lib/services`, so that it stays environment-agnostic
-- [ ] Has an entry in `service-modules/default.nix` whose `<ns>.package` default comes from the providing package
+- [ ] Has an entry in `modular-services/default.nix` whose `<ns>.package` default comes from the providing package
 - [ ] Is the modular services infrastructure sufficient for this service? If one or more features are not covered, comment in https://github.com/NixOS/nixpkgs/issues/428084
 - [ ] Has been added to `doc/registry.nix` (enforced by `checks.docs-registry-complete`)
 ```
@@ -45,7 +45,7 @@ When reviewing a modular service, you should check the following. Details and ra
 ### VM test
 
 For NixOS, add the test to [`environments/nixos/tests/packages/`](../environments/nixos/tests/packages) and register it in [`environments/nixos/tests/default.nix`](../environments/nixos/tests/default.nix); the surrounding tests there are worked examples.
-A test file takes `serviceModules` as a non-module dependency and imports `(serviceModules.<name> pkgs)` into the service.
+A test file takes `modularServices` as a non-module dependency and imports `(modularServices.<name> pkgs)` into the service.
 Best practices: keep tests minimal and focused (boot a VM, enable the service, and assert a basic request succeeds). For general guidance, see the [NixOS Tests chapter](https://nixos.org/manual/nixos/unstable/#sec-nixos-tests).
 
 ### `_class = "service"`
@@ -77,7 +77,7 @@ Provide it as the first attribute in the module:
 The package option of a service must default to the package that provides the service.
 Otherwise, since some packages are *defined* by an override, the modular service would launch a wrong package, if it builds at all.
 
-In this repository a service module is registered in [`service-modules/default.nix`](../service-modules/default.nix), which supplies both the `importApply` of its non-module dependencies and that default:
+In this repository a service module is registered in [`modular-services/default.nix`](../modular-services/default.nix), which supplies both the `importApply` of its non-module dependencies and that default:
 
 ```nix
 {

@@ -10,7 +10,7 @@
 # Exported as `nixosModules.documentation`. It is not part of
 # `nixosModules.default`, because rendering the NixOS manual is a cost a system
 # should opt into.
-{ lib, serviceModules }:
+{ lib, modularServices }:
 
 { pkgs, ... }:
 
@@ -33,8 +33,8 @@ let
   modularServicesModule = {
     options = lib.listToAttrs (
       map (name: {
-        name = "<imports = [ (serviceModules.${name} pkgs) ]>";
-        value = fakeSubmodule (serviceModules.${name} pkgs);
+        name = "<imports = [ (modularServices.${name} pkgs) ]>";
+        value = fakeSubmodule (modularServices.${name} pkgs);
       }) registry
     );
   };

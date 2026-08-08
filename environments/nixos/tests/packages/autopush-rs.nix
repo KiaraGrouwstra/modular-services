@@ -1,5 +1,5 @@
 # Non-module dependencies (`importApply`)
-{ serviceModules }:
+{ modularServices }:
 
 { lib, ... }:
 {
@@ -20,7 +20,7 @@
         };
         system.services.autopush-autoconnect = {
           imports = [
-            (serviceModules.autopush-rs-autoconnect pkgs)
+            (modularServices.autopush-rs-autoconnect pkgs)
           ];
           autoconnect.settings = {
             #do not use this key in production!!!
@@ -31,7 +31,7 @@
         };
         system.services.autopush-autoendpoint = {
           imports = [
-            (serviceModules.autopush-rs-autoendpoint pkgs)
+            (modularServices.autopush-rs-autoendpoint pkgs)
           ];
           autoendpoint.settings = {
             #do not use this key in production!!!

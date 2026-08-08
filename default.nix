@@ -19,7 +19,7 @@
 # in
 # {
 #   imports = [ modular-services.nixosModules.default ];
-#   system.services.tlshd.imports = [ (modular-services.serviceModules.ktls-utils pkgs) ];
+#   system.services.tlshd.imports = [ (modular-services.modularServices.ktls-utils pkgs) ];
 # }
 # ```
 {
@@ -52,7 +52,7 @@
 }:
 
 let
-  serviceModules = import ./service-modules { inherit lib; };
+  modularServices = import ./modular-services { inherit lib; };
 
   consumer = {
     lib = {
@@ -76,30 +76,30 @@ let
     };
 
     /**
-      The canonical way to consume a service: `serviceModules.<pkg> pkgs` yields a
+      The canonical way to consume a service: `modularServices.<pkg> pkgs` yields a
       module to import into `system.services.<name>`.
     */
-    inherit serviceModules;
+    inherit modularServices;
 
     nixosModules = {
       # Modular services from this repository, replacing the nixpkgs copy.
       default = ./environments/nixos;
       # Just the implementation, without the disable.
-      modularServices = ./environments/nixos/systemd;
+      systemServices = ./environments/nixos/systemd;
       # Just the disable, without the implementation.
       disableUpstream = ./environments/nixos/disable-upstream.nix;
       # Replacement for the option-documentation registry that disableUpstream
       # removes.
       documentation = import ./environments/nixos/documentation.nix {
-        inherit lib serviceModules;
+        inherit lib modularServices;
       };
     };
 
     overlays = {
       # Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.
-      default = import ./overlays { inherit serviceModules; };
+      default = import ./overlays { inherit modularServices; };
       # Opt-in: repoints `pkgs.<pkg>.services.*` at this repository.
-      packageServices = import ./overlays/package-services.nix { inherit serviceModules; };
+      passthruServices = import ./overlays/passthru-services.nix { inherit modularServices; };
     };
   };
 

@@ -1,5 +1,5 @@
 # Non-module dependencies (`importApply`)
-{ serviceModules }:
+{ modularServices }:
 
 { ... }:
 {
@@ -15,7 +15,7 @@
           pkgs.holo-cli
         ];
         system.services.holo-daemon = {
-          imports = [ (serviceModules.holo-daemon pkgs) ];
+          imports = [ (modularServices.holo-daemon pkgs) ];
         };
         users.users.holo = {
           isSystemUser = true;

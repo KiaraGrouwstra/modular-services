@@ -24,7 +24,7 @@ let
   };
 
   inherit (nixosLib) evalModules evalSystem runTest;
-  inherit (self) serviceModules;
+  inherit (self) modularServices;
 
   compliance = import ./compliance.nix {
     inherit
@@ -50,7 +50,7 @@ let
     extensions = { enabled, all }: with all; enabled ++ [ apcu ];
   };
 
-  # Per-package VM tests. Each is a `nixosTest` module taking `serviceModules`
+  # Per-package VM tests. Each is a `nixosTest` module taking `modularServices`
   # as a non-module dependency.
   pkgTests = {
     autopush-rs = ./packages/autopush-rs.nix;
@@ -88,11 +88,11 @@ in
 }) compliance
 // lib.mapAttrs' (name: module: {
   name = "pkg-${name}";
-  value = vm (runTest (lib.modules.importApply module { inherit serviceModules; }));
+  value = vm (runTest (lib.modules.importApply module { inherit modularServices; }));
 }) pkgTests
 // {
   pkg-php-fpm = vm (runTest {
-    imports = [ (lib.modules.importApply ./packages/php-fpm.nix { inherit serviceModules; }) ];
+    imports = [ (lib.modules.importApply ./packages/php-fpm.nix { inherit modularServices; }) ];
     _module.args.php = php';
   });
 }

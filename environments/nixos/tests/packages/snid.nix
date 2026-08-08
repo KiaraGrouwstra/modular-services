@@ -1,5 +1,5 @@
 # Non-module dependencies (`importApply`)
-{ serviceModules }:
+{ modularServices }:
 
 { lib, ... }:
 {
@@ -11,7 +11,7 @@
       { pkgs, ... }:
       {
         system.services.snid = {
-          imports = [ (serviceModules.snid pkgs) ];
+          imports = [ (modularServices.snid pkgs) ];
           snid = {
             listen = [ "tcp:8443" ];
             mode = "tcp";

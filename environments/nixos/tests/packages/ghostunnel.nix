@@ -1,5 +1,5 @@
 # Non-module dependencies (`importApply`)
-{ serviceModules }:
+{ modularServices }:
 
 { hostPkgs, lib, ... }:
 {
@@ -20,7 +20,7 @@
       { pkgs, ... }:
       {
         system.services."ghostunnel-plain-old" = {
-          imports = [ (serviceModules.ghostunnel pkgs) ];
+          imports = [ (modularServices.ghostunnel pkgs) ];
           ghostunnel = {
             listen = "0.0.0.0:443";
             cert = "/root/service-cert.pem";
@@ -31,7 +31,7 @@
           };
         };
         system.services."ghostunnel-client-cert" = {
-          imports = [ (serviceModules.ghostunnel pkgs) ];
+          imports = [ (modularServices.ghostunnel pkgs) ];
           ghostunnel = {
             listen = "0.0.0.0:1443";
             cert = "/root/service-cert.pem";

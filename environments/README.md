@@ -62,8 +62,8 @@ Manager emits systemd user units too, so a `user` variant is one both it and
 NixOS want. An `environments/nixos-user/` would bury it in one framework's
 directory, for the other to reach into.
 
-Variants therefore belong beside the service modules they vary, in
-`service-modules/`, and an environment owns the *registry*: which variant key it
+Variants therefore belong beside the services they vary, in
+`modular-services/`, and an environment owns the *registry*: which variant key it
 consumes, and which services it claims to support there. Upstream keeps its
 registry under `nixos/modules/`, having one environment to serve; that placement
 is the one part of its shape that does not carry over.
@@ -82,7 +82,7 @@ configuration is evaluated and tested through an entirely different entry point.
   *instantiates* it, supplying `evalConfig`, `mkTest`, `sharedDir` and
   `callReload`, and may add its own manager-specific assertions on top;
   `environments/nixos/tests/compliance.nix` shows both halves.
-- **Service modules** (`service-modules/`) are shared: every one declares
+- **The services** (`modular-services/`) are shared: every one declares
   `_class = "service"` and none imports anything from `lib/services`. A service
   that needs settings holding at only one privilege level gets a variant beside
   the pure module, not a copy inside an environment; see "What makes an
@@ -99,7 +99,7 @@ sketch. Then mirror `environments/nixos/` for the other three files.
 Home Manager is the intended next environment; it slots in as
 `environments/home-manager/` under the same four-file contract. [finix], which
 runs finit as pid 1, is the other obvious candidate: it already carries its own
-integration, and `service-modules/php/service.nix` keeps upstream's dormant
+integration, and `modular-services/php/service.nix` keeps upstream's dormant
 `lib.optionalAttrs (options ? finit)` branch for exactly that manager.
 
 [finix]: https://github.com/finix-community/finix

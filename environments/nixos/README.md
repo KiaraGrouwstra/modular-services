@@ -11,14 +11,14 @@ so the two cannot both be live.
 |---|---|
 | `default.nix` | What a NixOS configuration imports (`nixosModules.default`): the disable plus the implementation. |
 | `disable-upstream.nix` | `disabledModules` for the in-tree copy (`nixosModules.disableUpstream`). |
-| `systemd/` | The implementation (`nixosModules.modularServices`): `system.services`, the systemd unit options, and `configData` paths. |
+| `systemd/` | The implementation (`nixosModules.systemServices`): `system.services`, the systemd unit options, and `configData` paths. |
 | `documentation.nix` | Renders `doc/registry.nix` into `documentation.nixos.extraModules` (`nixosModules.documentation`), replacing the upstream registry the disable removes. |
 | `lib.nix` | `evalModules` / `evalSystem` / `runTest`, reproducing what `nixos/tests/all-tests.nix` gives in-tree tests. |
 | `tests/` | The environment's test set. |
 
 `systemd/user.nix` is a stub, here as upstream. Per-user services arrive as
 `users.users.<name>.services` in this same evaluation rather than as a second
-environment; [`../README.md`](../README.md) explains why the seam falls there.
+environment; [`../README.md`](../README.md) explains what makes an environment.
 
 ## Usage
 
@@ -33,7 +33,7 @@ environment; [`../README.md`](../README.md) explains why the seam falls there.
         (
           { pkgs, ... }:
           {
-            system.services.tlshd.imports = [ (modular-services.serviceModules.ktls-utils pkgs) ];
+            system.services.tlshd.imports = [ (modular-services.modularServices.ktls-utils pkgs) ];
           }
         )
       ];
@@ -52,7 +52,7 @@ let
 in
 {
   imports = [ modular-services.nixosModules.default ];
-  system.services.tlshd.imports = [ (modular-services.serviceModules.ktls-utils pkgs) ];
+  system.services.tlshd.imports = [ (modular-services.modularServices.ktls-utils pkgs) ];
 }
 ```
 
@@ -72,6 +72,6 @@ false.
 
 **`pkgs.<pkg>.services.default`.** Package `passthru` is untouched, so that
 attribute still resolves to the service module vendored in nixpkgs. Use
-`serviceModules.<pkg> pkgs`, which is what every test here does, or apply
-`overlays.packageServices` if you have existing code written against the
+`modularServices.<pkg> pkgs`, which is what every test here does, or apply
+`overlays.passthruServices` if you have existing code written against the
 `passthru` path.

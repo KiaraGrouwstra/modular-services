@@ -1,5 +1,5 @@
 # Non-module dependencies (`importApply`)
-{ serviceModules }:
+{ modularServices }:
 
 { lib, ... }:
 {
@@ -25,7 +25,7 @@
             ];
 
             system.services."easytier-default" = {
-              imports = [ (serviceModules.easytier pkgs) ];
+              imports = [ (modularServices.easytier pkgs) ];
               easytier.settings = {
                 instance_name = "default";
                 dev_name = "et_def";
@@ -76,7 +76,7 @@
             networking.firewall.allowedUDPPorts = [ 11020 ];
 
             system.services."easytier-second" = {
-              imports = [ (serviceModules.easytier pkgs) ];
+              imports = [ (modularServices.easytier pkgs) ];
               easytier = {
                 peers = [
                   "tcp://192.168.1.11:11010"

@@ -35,7 +35,7 @@ both be live:
           (
             { pkgs, ... }:
             {
-              system.services.tlshd.imports = [ (modular-services.serviceModules.ktls-utils pkgs) ];
+              system.services.tlshd.imports = [ (modular-services.modularServices.ktls-utils pkgs) ];
             }
           )
         ];
@@ -44,7 +44,7 @@ both be live:
 }
 ```
 
-`serviceModules.<pkg> pkgs` is the canonical way to consume a service. See
+`modularServices.<pkg> pkgs` is the canonical way to consume a service. See
 [`doc/modular-services.md`](./doc/modular-services.md) for the manual chapter and
 [`doc/writing-and-reviewing.md`](./doc/writing-and-reviewing.md) for how to write
 one.
@@ -69,7 +69,7 @@ let
 in
 {
   imports = [ modular-services.nixosModules.default ];
-  system.services.tlshd.imports = [ (modular-services.serviceModules.ktls-utils pkgs) ];
+  system.services.tlshd.imports = [ (modular-services.modularServices.ktls-utils pkgs) ];
 }
 ```
 
@@ -102,8 +102,8 @@ missing.
 
 **`pkgs.<pkg>.services.default`.** Package `passthru` is untouched, so that
 attribute still resolves to the service module vendored in nixpkgs. Use
-`serviceModules.<pkg> pkgs`, which is what every test here does, or apply
-`overlays.packageServices` if you have existing code written against the
+`modularServices.<pkg> pkgs`, which is what every test here does, or apply
+`overlays.passthruServices` if you have existing code written against the
 `passthru` path. That overlay excludes `php`, which regenerates its own
 `passthru` and cannot be overridden this way.
 
@@ -116,16 +116,16 @@ same whatever the system, and a flake publishes them unkeyed.
 
 | output | what |
 |---|---|
-| `serviceModules.<pkg>` | `pkgs -> module`, to import into `system.services.<name>`. |
+| `modularServices.<pkg>` | `pkgs -> module`, to import into `system.services.<name>`. |
 | `nixosModules.default` | The disable plus this repository's implementation. |
-| `nixosModules.modularServices` | Just the implementation. |
+| `nixosModules.systemServices` | Just the implementation. |
 | `nixosModules.disableUpstream` | Just the disable. |
 | `nixosModules.documentation` | Replacement option-documentation registry. |
 | `lib.servicesFor` | The portable layer against a caller-supplied `lib`; the entry point for a new environment. |
 | `lib.services` | `lib.servicesFor` against this flake's nixpkgs. |
 | `lib.mkComplianceSuite` | The environment-agnostic compliance suite, for a package set. |
 | `overlays.default` | Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds. |
-| `overlays.packageServices` | Opt-in; repoints `pkgs.<pkg>.services.*` here. |
+| `overlays.passthruServices` | Opt-in; repoints `pkgs.<pkg>.services.*` here. |
 | --- | --- |
 | `checks.*` | Every test, environment and repo-level alike. |
 | `packages.docs` | The manual chapter as HTML. |
@@ -139,7 +139,7 @@ same whatever the system, and a flake publishes them unkeyed.
 | `lib/services/` | The portable layer. No nixpkgs paths, no `pkgs` module argument. |
 | `compliance/` | The environment-agnostic compliance suite each environment instantiates. |
 | `environments/` | One directory per integration. See [`environments/README.md`](./environments/README.md). |
-| `service-modules/` | The per-package service modules, `_class = "service"` and environment-agnostic. |
+| `modular-services/` | The services themselves: `_class = "service"`, environment-agnostic, one directory per providing package. |
 | `doc/` | The manual chapter, and the list of services whose options it documents. One book about the subsystem, not one per environment; each environment renders that list its own way. |
 | `overlays/`, `ci/` | Overlays, and the test/matrix wiring. |
 | `default.nix`, `flake.nix` | Every output, and the flake wrapper that keys the per-system ones by system. |

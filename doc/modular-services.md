@@ -35,7 +35,7 @@ So note that the default value of `system.services.<name>` is not a complete ser
 ```nix
 {
   system.services.my-service-instance = {
-    imports = [ (modular-services.serviceModules.some-application pkgs) ];
+    imports = [ (modular-services.modularServices.some-application pkgs) ];
     foo.settings = {
       # ...
     };
@@ -43,8 +43,8 @@ So note that the default value of `system.services.<name>` is not a complete ser
 }
 ```
 
-`serviceModules.<pkg>` is the canonical way to consume a service from this repository.
-`pkgs.<pkg>.services.*` still resolves to the nixpkgs copy unless `overlays.packageServices` is applied; see [the README](../README.md#known-residue).
+`modularServices.<pkg>` is the canonical way to consume a service from this repository.
+`pkgs.<pkg>.services.*` still resolves to the nixpkgs copy unless `overlays.passthruServices` is applied; see [the README](../README.md#known-residue).
 
 ## Portability {#modular-service-portability}
 

@@ -1,5 +1,5 @@
 # Non-module dependencies (`importApply`)
-{ serviceModules }:
+{ modularServices }:
 
 { lib, pkgs, ... }:
 let
@@ -37,7 +37,7 @@ in
       { pkgs, ... }:
       {
         system.services.tlshd = {
-          imports = [ (serviceModules.ktls-utils pkgs) ];
+          imports = [ (modularServices.ktls-utils pkgs) ];
           tlshd.settings = {
             "authenticate.server" = {
               "x509.certificate" = toString serverCert;
@@ -62,7 +62,7 @@ in
       { pkgs, ... }:
       {
         system.services.tlshd = {
-          imports = [ (serviceModules.ktls-utils pkgs) ];
+          imports = [ (modularServices.ktls-utils pkgs) ];
           tlshd.settings = {
             "authenticate.client" = {
               "x509.certificate" = toString clientCert;

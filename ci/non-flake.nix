@@ -51,7 +51,7 @@ let
       {
         _class = "nixos";
         documentation.nixos.enable = false;
-        system.services.tlshd.imports = [ (base.serviceModules.ktls-utils pkgs) ];
+        system.services.tlshd.imports = [ (base.modularServices.ktls-utils pkgs) ];
       }
     ];
   };

@@ -81,22 +81,22 @@ in the pinned nixpkgs.
 | `environments/nixos/tests/compliance.nix` | `nixos/tests/system-services-compliance.nix` | modified | Drops the `callTest` parameter and the trailing `mapAttrs ... callTest` block, which exist only to satisfy `all-tests.nix` plumbing. Calls `self.lib.mkComplianceSuite` instead of `pkgs.testers.modularServiceCompliance`. The `systemdEvalTests` block is unchanged. |
 | `environments/nixos/tests/etc/test.nix` | `nixos/tests/modular-service-etc/test.nix` | modified | Run-instruction comment only. |
 | `environments/nixos/tests/etc/python-http-server.nix` | `nixos/tests/modular-service-etc/python-http-server.nix` | verbatim | |
-| `environments/nixos/tests/packages/autopush-rs.nix` | `nixos/tests/autopush-rs.nix` | modified | Takes `serviceModules` as a non-module dependency; `pkgs.autopush-rs.services.<n>` becomes `(serviceModules.autopush-rs-<n> pkgs)`. |
-| `environments/nixos/tests/packages/easytier.nix` | `nixos/tests/easytier-modular.nix` | modified | Takes `serviceModules` as a non-module dependency; `pkgs.easytier.services.default` becomes `(serviceModules.easytier pkgs)`. |
-| `environments/nixos/tests/packages/ghostunnel.nix` | `nixos/tests/ghostunnel-modular.nix` | modified | Takes `serviceModules` as a non-module dependency; `pkgs.ghostunnel.services.default` becomes `(serviceModules.ghostunnel pkgs)`. |
-| `environments/nixos/tests/packages/holo-daemon.nix` | `nixos/tests/holo-daemon-modular.nix` | modified | Takes `serviceModules` as a non-module dependency; `pkgs.holo-daemon.services.default` becomes `(serviceModules.holo-daemon pkgs)`. |
-| `environments/nixos/tests/packages/snid.nix` | `nixos/tests/snid.nix` | modified | Takes `serviceModules` as a non-module dependency; `pkgs.snid.services.default` becomes `(serviceModules.snid pkgs)`. |
-| `environments/nixos/tests/packages/tlshd.nix` | `nixos/tests/tlshd.nix` | modified | Takes `serviceModules` as a non-module dependency; `pkgs.ktls-utils.services.default` becomes `(serviceModules.ktls-utils pkgs)`. |
-| `environments/nixos/tests/packages/php-fpm.nix` | `nixos/tests/php/fpm-modular.nix` | modified | Takes `serviceModules` as a non-module dependency; `php.services.default` becomes `(serviceModules.php pkgs)`. The `php.buildEnv` wrapper it relies on moved to `environments/nixos/tests/default.nix`, from `nixos/tests/php/default.nix`. |
-| `service-modules/autopush-rs/service-autoconnect.nix` | `pkgs/by-name/au/autopush-rs/service-autoconnect.nix` | verbatim | |
-| `service-modules/autopush-rs/service-autoendpoint.nix` | `pkgs/by-name/au/autopush-rs/service-autoendpoint.nix` | verbatim | |
-| `service-modules/easytier/service.nix` | `pkgs/by-name/ea/easytier/service.nix` | verbatim | |
-| `service-modules/ghostunnel/service.nix` | `pkgs/by-name/gh/ghostunnel/service.nix` | verbatim | |
-| `service-modules/holo-daemon/service.nix` | `pkgs/by-name/ho/holo-daemon/service.nix` | verbatim | |
-| `service-modules/ktls-utils/service.nix` | `pkgs/by-name/kt/ktls-utils/service.nix` | verbatim | |
-| `service-modules/snid/service.nix` | `pkgs/by-name/sn/snid/service.nix` | verbatim | |
-| `service-modules/php/service.nix` | `pkgs/development/interpreters/php/service.nix` | modified | Test-path comment retargeted to `environments/nixos/tests/packages/php-fpm.nix`. |
-| `doc/modular-services.md` | `nixos/doc/manual/development/modular-services.md` | modified | Adds a note on this repository's relationship to nixpkgs; the consumption example uses `serviceModules`; the contributor-doc link points at `doc/writing-and-reviewing.md`. The two option-type links become absolute NixOS-manual URLs, because the chapter renders as a standalone book where a bare `#anchor` resolves to nothing. Keeps the `@PORTABLE_SERVICE_OPTIONS@` / `@SYSTEMD_SERVICE_OPTIONS@` placeholders. |
+| `environments/nixos/tests/packages/autopush-rs.nix` | `nixos/tests/autopush-rs.nix` | modified | Takes `modularServices` as a non-module dependency; `pkgs.autopush-rs.services.<n>` becomes `(modularServices.autopush-rs-<n> pkgs)`. |
+| `environments/nixos/tests/packages/easytier.nix` | `nixos/tests/easytier-modular.nix` | modified | Takes `modularServices` as a non-module dependency; `pkgs.easytier.services.default` becomes `(modularServices.easytier pkgs)`. |
+| `environments/nixos/tests/packages/ghostunnel.nix` | `nixos/tests/ghostunnel-modular.nix` | modified | Takes `modularServices` as a non-module dependency; `pkgs.ghostunnel.services.default` becomes `(modularServices.ghostunnel pkgs)`. |
+| `environments/nixos/tests/packages/holo-daemon.nix` | `nixos/tests/holo-daemon-modular.nix` | modified | Takes `modularServices` as a non-module dependency; `pkgs.holo-daemon.services.default` becomes `(modularServices.holo-daemon pkgs)`. |
+| `environments/nixos/tests/packages/snid.nix` | `nixos/tests/snid.nix` | modified | Takes `modularServices` as a non-module dependency; `pkgs.snid.services.default` becomes `(modularServices.snid pkgs)`. |
+| `environments/nixos/tests/packages/tlshd.nix` | `nixos/tests/tlshd.nix` | modified | Takes `modularServices` as a non-module dependency; `pkgs.ktls-utils.services.default` becomes `(modularServices.ktls-utils pkgs)`. |
+| `environments/nixos/tests/packages/php-fpm.nix` | `nixos/tests/php/fpm-modular.nix` | modified | Takes `modularServices` as a non-module dependency; `php.services.default` becomes `(modularServices.php pkgs)`. The `php.buildEnv` wrapper it relies on moved to `environments/nixos/tests/default.nix`, from `nixos/tests/php/default.nix`. |
+| `modular-services/autopush-rs/service-autoconnect.nix` | `pkgs/by-name/au/autopush-rs/service-autoconnect.nix` | verbatim | |
+| `modular-services/autopush-rs/service-autoendpoint.nix` | `pkgs/by-name/au/autopush-rs/service-autoendpoint.nix` | verbatim | |
+| `modular-services/easytier/service.nix` | `pkgs/by-name/ea/easytier/service.nix` | verbatim | |
+| `modular-services/ghostunnel/service.nix` | `pkgs/by-name/gh/ghostunnel/service.nix` | verbatim | |
+| `modular-services/holo-daemon/service.nix` | `pkgs/by-name/ho/holo-daemon/service.nix` | verbatim | |
+| `modular-services/ktls-utils/service.nix` | `pkgs/by-name/kt/ktls-utils/service.nix` | verbatim | |
+| `modular-services/snid/service.nix` | `pkgs/by-name/sn/snid/service.nix` | verbatim | |
+| `modular-services/php/service.nix` | `pkgs/development/interpreters/php/service.nix` | modified | Test-path comment retargeted to `environments/nixos/tests/packages/php-fpm.nix`. |
+| `doc/modular-services.md` | `nixos/doc/manual/development/modular-services.md` | modified | Adds a note on this repository's relationship to nixpkgs; the consumption example uses `modularServices`; the contributor-doc link points at `doc/writing-and-reviewing.md`. The two option-type links become absolute NixOS-manual URLs, because the chapter renders as a standalone book where a bare `#anchor` resolves to nothing. Keeps the `@PORTABLE_SERVICE_OPTIONS@` / `@SYSTEMD_SERVICE_OPTIONS@` placeholders. |
 | `doc/writing-and-reviewing.md` | `nixos/README-modular-services.md` | modified | Review checklist and worked examples retargeted at this repository's paths. |
 | `compliance/README.md` | `doc/build-helpers/testers.chapter.md` | modified | Extracted from the `modularServiceCompliance` section of the testers chapter; the nixpkgs-manual markup is dropped and the invocation example uses `self.lib.mkComplianceSuite`. |
 
@@ -107,7 +107,7 @@ in the pinned nixpkgs.
   `pkgs.testers.runNixOSTest` returns a derivation directly.
 - `nixos/modules/misc/documentation/modular-services.nix`. Replaced by
   [`environments/nixos/documentation.nix`](./environments/nixos/documentation.nix),
-  which is keyed on `serviceModules` rather than on package `passthru`, and
+  which is keyed on `modularServices` rather than on package `passthru`, and
   which covers `easytier` and `holo-daemon` -- two service modules the nixpkgs
   registry is missing. The list it renders is
   [`doc/registry.nix`](./doc/registry.nix), which
