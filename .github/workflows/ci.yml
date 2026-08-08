@@ -66,6 +66,53 @@ jobs:
       - name: Build ${{ matrix.name }}
         run: nix build -L --no-link ".#checks.$SYSTEM.${{ matrix.name }}"
 
+  # Publishes the manual to GitHub Pages.
+  #
+  # `gate` has already built it as `checks.docs`, so this only runs where there
+  # is somewhere to publish to: a repository has one Pages site, and a pull
+  # request must not replace what `main` put there.
+  pages:
+    needs: gate
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    # Deploys are not interchangeable the way check runs are: cancelling one
+    # mid-flight leaves the site as whatever the last complete deploy left.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+      - uses: cachix/cachix-action@v17
+        with:
+          name: modular-services
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Build the manual
+        run: nix build -L --out-link result ".#packages.$SYSTEM.docs"
+
+      - name: Collect the site
+        # Out of the store, because the artifact is uploaded by path and every
+        # file there is read-only.
+        run: |
+          mkdir site
+          cp -rL result/share/doc/nixos/. site/
+          chmod -R u+w site
+
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v5
+
   # Checks that boot a virtual machine, so they need KVM and rather more disk.
   vm-tests:
     needs: gate

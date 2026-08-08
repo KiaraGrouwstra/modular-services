@@ -44,10 +44,12 @@ both be live:
 }
 ```
 
-`modularServices.<pkg> pkgs` is the canonical way to consume a service. See
-[`doc/modular-services.md`](./doc/modular-services.md) for the manual chapter and
-[`doc/writing-and-reviewing.md`](./doc/writing-and-reviewing.md) for how to write
-one.
+`modularServices.<pkg> pkgs` is the canonical way to consume a service.
+
+The [manual](https://kiaragrouwstra.github.io/modular-services/) is what `main`
+publishes: the subsystem itself, how to write and review a service, the
+portable layer's own doc-comments, and every option and output this repository
+declares. `nix build .#docs` renders the same book from a working tree.
 
 Nothing forces you to pin the same nixpkgs this flake does: `nixosModules.default`
 disables the in-tree copy by *relative* module key, so it matches whichever
@@ -214,6 +216,14 @@ so a run is reproducible and a red result means this repository changed.
 the suite runs against the new nixpkgs there, and a break upstream shows up as a
 red pull request rather than a red `main`. It updates the action versions in the
 workflow the same way.
+
+A push to `main` also publishes `packages.docs` to
+[GitHub Pages](https://kiaragrouwstra.github.io/modular-services/). Pull
+requests do not: a repository has one Pages site, and a pull request must not
+replace what `main` put there. A fork gets the same site once Pages is switched
+to the GitHub Actions source in its Settings, which no workflow can do for
+itself -- `actions/configure-pages` needs a token wider than `GITHUB_TOKEN` to
+enable it.
 
 One optional repository secret, `CACHIX_AUTH_TOKEN`, holds a write token for
 the cache above, taken from its Settings tab at
