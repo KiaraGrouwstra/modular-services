@@ -118,7 +118,7 @@ same whatever the system, and a flake publishes them unkeyed.
 |---|---|
 | `modularServices.<pkg>` | `pkgs -> module`, to import into `system.services.<name>`. |
 | `nixosModules.default` | The disable plus this repository's implementation. |
-| `nixosModules.systemServices` | Just the implementation. |
+| `nixosModules.systemServices` | Just the systemd implementation. |
 | `nixosModules.disableUpstream` | Just the disable. |
 | `nixosModules.documentation` | Replacement option-documentation registry. |
 | `lib.servicesFor` | The portable layer against a caller-supplied `lib`; the entry point for a new environment. |

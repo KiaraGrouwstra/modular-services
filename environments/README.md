@@ -29,16 +29,23 @@ An environment owns an *evaluation*. `lib.nix` says how to build a configuration
 and how to test one; `disable-upstream.nix` says what that framework already
 ships that has to give way. Anything that shares those two answers belongs in the
 same directory, so `environments/` stays flat -- one directory per set of
-answers, one level deep, with whatever internal structure it needs.
+answers, one level deep.
+
+Flat bounds `environments/` itself, not what an environment contains. The
+implementation sits one level down, in a directory named for the service manager
+it targets: `environments/nixos/systemd/`. A framework that grows a second
+manager -- NixOS on finit, say -- gets a sibling there rather than a second
+environment, since it shares both answers, and `environments/nixos/default.nix`
+is where the choice between them is made.
 
 The rule is about those two answers rather than about an axis, because the axes
 are not knowable up front. Three are visible already and they do not nest: the
 configuration framework, the service manager an evaluation targets, and the
 privilege level of the unit that comes out.
 
-Whether a permutation is then a second environment, a second backend inside this
-one, or a variant key is worth deciding against something that runs. Four small
-files per environment is what keeps that decision cheap to revisit.
+Whether a permutation is then a second environment, a second implementation
+inside this one, or a variant key is worth deciding against something that runs.
+Four small files per environment is what keeps that decision cheap to revisit.
 
 Two in-progress upstream changes show the rule applied, and it lands on opposite
 sides of them.
