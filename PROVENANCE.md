@@ -14,6 +14,33 @@ read. `checks.disable-keys-exist` covers the one case that *is* silent:
 turn [`environments/nixos/disable-upstream.nix`](./environments/nixos/disable-upstream.nix)
 into a no-op without any error.
 
+## Licensing
+
+MIT throughout, which is what makes carrying code in both directions
+unremarkable. Every project this repository draws on, or expects to feed back
+into, ships the same licence text: [nixpkgs], [Home Manager], [`nix-darwin`] and
+[finix] are all MIT, and none of them asks a contributor to sign anything on top.
+Code that arrives here from one of them, or leaves here for one of them, is MIT
+at both ends, with no relicensing step for anyone to get wrong.
+
+Two rules keep it that way.
+
+**Contributions here are MIT.** Opening a pull request against this repository
+offers the change under [`LICENSE`](./LICENSE). A patch that cannot be offered on
+those terms cannot be taken, however good it is: it would strand whatever it
+touched, since that file could then never go upstream.
+
+**Vendoring from a new project adds that project's copyright line** to `LICENSE`,
+above the permission notice, and its files to the table below. One permission
+notice over several copyright lines is the ordinary shape for a derived work, and
+it is the whole of what MIT asks as long as the licence text itself is identical
+across the sources -- which, so far, it is.
+
+The case to plan for is an upstream that is *not* MIT. [NixNG] is MPL-2.0, which
+is copyleft per file: its code cannot be folded into an MIT file, so an
+environment built on it would need its own directory and its own `LICENSE`
+rather than another line in this one. Nothing here is in that position today.
+
 ## No per-file provenance headers
 
 Vendored files carry **no** added header comment. That is deliberate: keeping
@@ -21,6 +48,11 @@ them byte-identical to upstream makes a plain `diff` against a nixpkgs checkout
 a usable answer to "what did we change", and a header would defeat it on every
 single file. The files that genuinely had to change are marked `modified` below
 with the reason; those are the only places where a divergence exists at all.
+
+No `SPDX-License-Identifier` line either. Those earn their keep when files in one
+tree carry different licences; here every file is MIT under the same notice, so a
+header per file would restate `LICENSE` 34 times and still not say which upstream
+the file came from -- which is the question this table answers.
 
 No per-row revision either. [`flake.lock`](./flake.lock) records the pin, and a
 second copy per row would only be another thing to keep in step, touching all 34
@@ -76,9 +108,13 @@ in the pinned nixpkgs.
 - `nixos/modules/misc/documentation/modular-services.nix`. Replaced by
   [`doc/service-modules.nix`](./doc/service-modules.nix), which is keyed on
   `serviceModules` rather than on package `passthru`, and which covers
-  `easytier` and `holo-daemon` — two service modules the nixpkgs registry is
+  `easytier` and `holo-daemon` -- two service modules the nixpkgs registry is
   missing. `checks.docs-registry-complete` keeps it complete.
 - `nixos/modules/system/service/README.md`. Superseded by
   [`environments/nixos/README.md`](./environments/nixos/README.md).
 
 [nixpkgs]: https://github.com/NixOS/nixpkgs
+[Home Manager]: https://github.com/nix-community/home-manager
+[`nix-darwin`]: https://github.com/nix-darwin/nix-darwin
+[finix]: https://github.com/finix-community/finix
+[NixNG]: https://github.com/nix-community/NixNG

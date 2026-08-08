@@ -148,4 +148,7 @@ per-repository ceiling that VM test closures can reach.
 
 ## Licence
 
-MIT, as nixpkgs is. See [`LICENSE`](./LICENSE) and [`PROVENANCE.md`](./PROVENANCE.md).
+MIT, as nixpkgs, Home Manager, `nix-darwin` and finix all are, so code moves into
+this repository and back out to any of them without a relicensing step.
+Contributions are taken under the same terms. See [`LICENSE`](./LICENSE) and the
+licensing section of [`PROVENANCE.md`](./PROVENANCE.md#licensing).
