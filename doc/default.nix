@@ -20,15 +20,45 @@ let
 
   inherit (self) revision;
 
-  # Declaration sites must not point into the store, or the build gains a
-  # reference to the source tree.
-  stripPrefix = lib.removePrefix "${self}/";
+  # Where this repository is browsable. A dirty or absent revision is not a ref
+  # anyone can resolve, so fall back to the branch the source lives on.
+  repoUrl = "https://github.com/kiaragrouwstra/modular-services";
+  repoRef = if builtins.match "[0-9a-f]{40}" revision != null then revision else "main";
 
+  # The declaration sites nixpkgs records relative to its own root, `_module.args`
+  # in `lib/modules.nix` among them, belong to whichever nixpkgs this was
+  # evaluated against.
+  nixpkgsRef = lib.trivial.revisionWithDefault "master";
+
+  # Declaration sites must not point into the store, or the build gains a
+  # reference to the source tree. Each becomes an explicit `{ name, url }`
+  # instead: left as a bare relative path, `nixos-render-docs` would read it as
+  # a path into NixOS/nixpkgs and link it there at *this* repository's revision.
   transformOptions =
     opt:
     opt
     // {
-      declarations = map (d: stripPrefix (toString d)) opt.declarations;
+      declarations = map (
+        d:
+        let
+          path = toString d;
+        in
+        if lib.hasPrefix "${self}/" path then
+          let
+            rel = lib.removePrefix "${self}/" path;
+          in
+          {
+            name = rel;
+            url = "${repoUrl}/blob/${repoRef}/${rel}";
+          }
+        else if !lib.hasPrefix "/" path then
+          {
+            name = "<nixpkgs/${path}>";
+            url = "https://github.com/NixOS/nixpkgs/blob/${nixpkgsRef}/${path}";
+          }
+        else
+          path
+      ) opt.declarations;
     };
 
   portableServiceOptions = buildPackages.nixosOptionsDoc {
