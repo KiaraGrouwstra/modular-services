@@ -1,4 +1,4 @@
-# How to evaluate and test modular services in the NixOS environment.
+# How to evaluate and test modular services in the NixOS integration.
 #
 # This reproduces what `nixos/tests/all-tests.nix` provides to in-tree tests,
 # so that ported tests keep their original signatures.

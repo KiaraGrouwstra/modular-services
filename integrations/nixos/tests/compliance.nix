@@ -60,8 +60,8 @@ let
   # systemd-specific eval assertions. serviceConfig.Type/ExecReload only exist on
   # the resolved host units, so a fresh eval is used per case.
   #
-  # This block is the model for what a new environment adds on top of the shared
-  # suite: the suite covers the portable contract, and each environment asserts
+  # This block is the model for what a new integration adds on top of the shared
+  # suite: the suite covers the portable contract, and each integration asserts
   # how that contract lands in its own service manager.
   systemdEvalTests =
     let

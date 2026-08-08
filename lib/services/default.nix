@@ -44,19 +44,19 @@ rec {
     includes the portable service base and any service-manager-specific modules
     passed via `extraRootModules`.
 
-    **Implementing for a new environment** (e.g. home-manager, nix-darwin):
+    **Implementing for a new integration** (e.g. home-manager, nix-darwin):
 
-    An environment lives in `environments/<name>/` and provides exactly four files.
-    See `environments/README.md` for the full contract; this docstring covers the
-    one that calls `configure`.
+    An integration lives in `integrations/<name>/` and provides exactly four
+    files. See `integrations/README.md` for the full contract; this docstring
+    covers the one that calls `configure`.
 
-    `environments/<name>/default.nix` is the module that a user of that
+    `integrations/<name>/default.nix` is the module that a user of that
     configuration system imports. It declares the services option in terms of
     `configure`, and translates the resulting service tree into whatever the
-    environment's service manager consumes:
+    integration's service manager consumes:
 
     ```nix
-    # environments/darwin/default.nix
+    # integrations/darwin/default.nix
     { lib, config, pkgs, ... }:
     let
       portable-lib = import ../../lib/services { inherit lib; };
@@ -92,8 +92,8 @@ rec {
     that configuration system's in-tree copy, if it has one), `lib.nix`
     (`{ evalSystem, runTest, ... }`: how to evaluate and test there), and
     `tests/default.nix` (`{ <name> = { kind = "eval" | "vm"; drv; }; }`).
-    `ci/tests.nix` discovers `environments/` from the filesystem, so an
-    environment that honours the contract is picked up by `checks`,
+    `ci/tests.nix` discovers `integrations/` from the filesystem, so an
+    integration that honours the contract is picked up by `checks`,
     `nix flake check` and CI with no further wiring.
 
     lib.services.configure :: AttrSet -> { serviceSubmodule :: SubmoduleType }

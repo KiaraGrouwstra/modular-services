@@ -1,9 +1,9 @@
-# Discover every environment's test set from the filesystem.
+# Discover every integration's test set from the filesystem.
 #
-# An environment is any directory under `environments/` containing a
-# `tests/default.nix`. Its tests are exposed as `<env>-<test>`, so dropping in
-# `environments/home-manager/` extends `checks`, `nix flake check` and the CI
-# matrix without editing anything here or in the workflow.
+# An integration is any directory under `integrations/` containing a
+# `tests/default.nix`. Its tests are exposed as `<integration>-<test>`, so
+# dropping in `integrations/home-manager/` extends `checks`, `nix flake check`
+# and the CI matrix without editing anything here or in the workflow.
 {
   lib,
   nixpkgs,
@@ -12,13 +12,13 @@
 }:
 
 let
-  environmentsDir = ../environments;
+  integrationsDir = ../integrations;
 
-  isEnvironment =
+  isIntegration =
     name: type:
-    (type == "directory") && builtins.pathExists (environmentsDir + "/${name}/tests/default.nix");
+    (type == "directory") && builtins.pathExists (integrationsDir + "/${name}/tests/default.nix");
 
-  environments = lib.filterAttrs isEnvironment (builtins.readDir environmentsDir);
+  integrations = lib.filterAttrs isIntegration (builtins.readDir integrationsDir);
 
   testsOf =
     name:
@@ -26,12 +26,12 @@ let
       (testName: test: {
         name = "${name}-${testName}";
         value = test // {
-          env = name;
+          integration = name;
           test = testName;
         };
       })
       (
-        import (environmentsDir + "/${name}/tests") {
+        import (integrationsDir + "/${name}/tests") {
           inherit
             lib
             nixpkgs
@@ -42,4 +42,4 @@ let
       );
 in
 
-lib.foldl' lib.mergeAttrs { } (map testsOf (lib.attrNames environments))
+lib.foldl' lib.mergeAttrs { } (map testsOf (lib.attrNames integrations))

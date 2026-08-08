@@ -1,4 +1,4 @@
-# Tests in: ../../environments/nixos/tests/packages/php-fpm.nix
+# Tests in: ../../integrations/nixos/tests/packages/php-fpm.nix
 
 # Non-module dependencies (importApply)
 { formats, coreutils }:

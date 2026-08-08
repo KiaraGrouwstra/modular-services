@@ -1,12 +1,12 @@
 # The modular services themselves, as `modularServices.<name> pkgs`.
 #
 # A modular service is a module with `_class = "service"`. That is what makes
-# this directory the one holding them: `environments/nixos/systemd/system.nix`
+# this directory the one holding them: `integrations/nixos/systemd/system.nix`
 # declares the option surface a service lands in and translates what does, but
 # is not itself a service.
 #
-# They are environment-agnostic by construction: none imports anything from
-# `lib/services`. They therefore live outside `environments/`.
+# They are integration-agnostic by construction: none imports anything from
+# `lib/services`. They therefore live outside `integrations/`.
 #
 # Each entry reproduces two things that nixpkgs puts in the package's
 # `passthru.services.<n>`: the `importApply` of the service module with its

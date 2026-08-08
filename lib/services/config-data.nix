@@ -1,4 +1,4 @@
-# Tests in: ../../environments/nixos/tests/etc/test.nix
+# Tests in: ../../integrations/nixos/tests/etc/test.nix
 
 # Non-modular context provided by the modular services integration.
 { pkgs }:

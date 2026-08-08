@@ -1,6 +1,6 @@
-# Repo-level checks that are not tied to a single environment.
+# Repo-level checks that are not tied to a single integration.
 #
-# These use the same `{ kind, env, drv }` shape as an environment's
+# These use the same `{ kind, integration, drv }` shape as an integration's
 # `tests/default.nix`, so `ci/matrix.nix` covers them too and CI really builds
 # them. `nix flake check --no-build` would otherwise only instantiate them.
 {
@@ -12,20 +12,21 @@
 
 let
   # `disabledModules` matches with `builtins.elem` and ignores keys that match
-  # nothing, so a rename upstream would turn environments/nixos/disable-upstream.nix
-  # into a silent no-op. environments/nixos/tests/disable-proof.nix catches that
+  # nothing, so a rename upstream would turn
+  # integrations/nixos/disable-upstream.nix into a silent no-op.
+  # integrations/nixos/tests/disable-proof.nix catches that
   # from the effect side; this catches it from the cause side, with a message
   # that names the file to update.
   #
   # Read out of the module itself rather than restated here, so the guard cannot
   # end up checking a key the disable no longer uses.
-  inherit (import ../environments/nixos/disable-upstream.nix) disabledModules;
+  inherit (import ../integrations/nixos/disable-upstream.nix) disabledModules;
 
   missing = lib.filter (p: !builtins.pathExists "${nixpkgs}/nixos/modules/${p}") disabledModules;
 
   check = drv: {
     kind = "eval";
-    env = "repo";
+    integration = "repo";
     inherit drv;
   };
 in
@@ -36,7 +37,7 @@ assert lib.assertMsg (missing == [ ]) ''
   ${lib.concatMapStringsSep "\n" (p: "  - nixos/modules/${p}") missing}
 
   `disabledModules` silently ignores keys that match nothing, so
-  environments/nixos/disable-upstream.nix needs updating.
+  integrations/nixos/disable-upstream.nix needs updating.
 '';
 
 {

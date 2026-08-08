@@ -4,7 +4,7 @@
 Status: in development. This functionality is new in NixOS 25.11, and significant changes should be expected. We'd love to hear your feedback in <https://github.com/NixOS/nixpkgs/pull/372170>
 
 This repository carries the subsystem outside of nixpkgs so that it can move at its own pace and be consumed by NixOS, Home Manager and `nix-darwin` alike.
-The in-tree nixpkgs copy is disabled at evaluation time; see [`environments/nixos/disable-upstream.nix`](../environments/nixos/disable-upstream.nix).
+The in-tree nixpkgs copy is disabled at evaluation time; see [`integrations/nixos/disable-upstream.nix`](../integrations/nixos/disable-upstream.nix).
 
 Traditionally, NixOS services were defined using sets of options *in* modules, not *as* modules. This made them non-modular, resulting in problems with composability, reuse, and portability.
 
@@ -17,7 +17,7 @@ For NixOS this is the module wrapping [`systemd`](https://systemd.io/), on `nix-
 A *modular service* is a [module] that defines values for a core set of options declared in the service management component of a configuration management framework, including which program to run.
 Since it's a module, it can be composed with other modules via `imports` to extend its functionality.
 
-The NixOS environment provided by this repository declares two options into which such modules can be plugged:
+The NixOS integration provided by this repository declares two options into which such modules can be plugged:
 
 - `system.services.<name>`
 - an option for user services (TBD)

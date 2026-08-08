@@ -6,12 +6,12 @@ configuration frameworks.
 A conventional NixOS service is a module that writes into `systemd.services.*`.
 A modular service is a module that *is* the service: it declares its own
 options, its own processes, and its own config files, and knows nothing about
-the system it will run on. A framework integration -- an *environment* -- turns
-that description into whatever its service manager consumes.
+the system it will run on. A framework *integration* turns that description
+into whatever its service manager consumes.
 
 The subsystem lives in nixpkgs as of NixOS 25.11, still marked in development.
 This repository carries the canonical copy so it can move at its own pace, be
-consumed by NixOS, Home Manager and `nix-darwin` alike, and grow per-environment
+consumed by NixOS, Home Manager and `nix-darwin` alike, and grow per-integration
 test coverage that the nixpkgs tree cannot host. Everything here came from
 nixpkgs; [`PROVENANCE.md`](./PROVENANCE.md) records what, from where, and what
 changed.
@@ -121,13 +121,13 @@ same whatever the system, and a flake publishes them unkeyed.
 | `nixosModules.systemServices` | Just the systemd implementation. |
 | `nixosModules.disableUpstream` | Just the disable. |
 | `nixosModules.documentation` | Replacement option-documentation registry. |
-| `lib.servicesFor` | The portable layer against a caller-supplied `lib`; the entry point for a new environment. |
+| `lib.servicesFor` | The portable layer against a caller-supplied `lib`; the entry point for a new integration. |
 | `lib.services` | `lib.servicesFor` against this flake's nixpkgs. |
-| `lib.mkComplianceSuite` | The environment-agnostic compliance suite, for a package set. |
+| `lib.mkComplianceSuite` | The integration-agnostic compliance suite, for a package set. |
 | `overlays.default` | Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds. |
 | `overlays.passthruServices` | Opt-in; repoints `pkgs.<pkg>.services.*` here. |
 | --- | --- |
-| `checks.*` | Every test, environment and repo-level alike. |
+| `checks.*` | Every test, integration and repo-level alike. |
 | `packages.docs` | The manual chapter as HTML. |
 | `devShells.default`, `formatter` | `nixfmt-tree` and `jq`. |
 | `ci.matrix` | Consumed only by the GitHub Actions workflow. |
@@ -137,14 +137,14 @@ same whatever the system, and a flake publishes them unkeyed.
 | directory | what |
 |---|---|
 | `lib/services/` | The portable layer. No nixpkgs paths, no `pkgs` module argument. |
-| `compliance/` | The environment-agnostic compliance suite each environment instantiates. |
-| `environments/` | One directory per integration. See [`environments/README.md`](./environments/README.md). |
-| `modular-services/` | The services themselves: `_class = "service"`, environment-agnostic, one directory per providing package. |
-| `doc/` | The manual chapter, and the list of services whose options it documents. One book about the subsystem, not one per environment; each environment renders that list its own way. |
+| `compliance/` | The integration-agnostic compliance suite each integration instantiates. |
+| `integrations/` | One directory per integration. See [`integrations/README.md`](./integrations/README.md). |
+| `modular-services/` | The services themselves: `_class = "service"`, integration-agnostic, one directory per providing package. |
+| `doc/` | The manual chapter, and the list of services whose options it documents. One book about the subsystem, not one per integration; each integration renders that list its own way. |
 | `overlays/`, `ci/` | Overlays, and the test/matrix wiring. |
 | `default.nix`, `flake.nix` | Every output, and the flake wrapper that keys the per-system ones by system. |
 
-Adding an environment means adding `environments/<name>/` with four files;
+Adding an integration means adding `integrations/<name>/` with four files;
 `ci/tests.nix` discovers it from the filesystem, so `checks`, `nix flake check`
 and CI pick it up with no registration anywhere. Home Manager is the intended
 next one.

@@ -50,7 +50,7 @@ let
   # `systemdPackage` specialArg: the resulting missing-argument throw is never
   # forced by the documentation render.
   systemdServiceOptions = buildPackages.nixosOptionsDoc {
-    inherit (evalModules { modules = [ ../environments/nixos/systemd/service.nix ]; }) options;
+    inherit (evalModules { modules = [ ../integrations/nixos/systemd/service.nix ]; }) options;
     # TODO: filter out options that are not systemd-specific, maybe also change option prefix to just `service-opt-`?
     inherit revision transformOptions;
     warningsAreErrors = true;

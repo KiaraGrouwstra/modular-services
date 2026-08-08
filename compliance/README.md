@@ -5,10 +5,11 @@ Compliance suite for [modular service](../doc/modular-services.md) integrations.
 Tests that a service manager integration correctly handles the portable modular
 services contract: `process.argv`, sub-services, assertions, and warnings.
 
-The suite is environment-agnostic. Each environment under [`environments/`](../environments)
-instantiates it once, supplying the four functions below, and may add its own
+The suite is integration-agnostic. Each integration under
+[`integrations/`](../integrations) instantiates it once, supplying the four
+functions below, and may add its own
 manager-specific checks on top; see
-[`environments/nixos/tests/compliance.nix`](../environments/nixos/tests/compliance.nix)
+[`integrations/nixos/tests/compliance.nix`](../integrations/nixos/tests/compliance.nix)
 for a worked example.
 
 ## Invocation

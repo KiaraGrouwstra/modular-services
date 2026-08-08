@@ -33,7 +33,7 @@ assert lib.assertMsg upstreamRemoved ''
   nixos-disable-proof: `options.system.services` still exists with only
   `disableUpstream` loaded.
 
-  The keys in environments/nixos/disable-upstream.nix no longer match the
+  The keys in integrations/nixos/disable-upstream.nix no longer match the
   pinned nixpkgs, so the in-tree modular services were not removed. Check
   whether `nixos/modules/system/service/systemd/system.nix` was renamed
   upstream, and update the key list.
@@ -41,7 +41,7 @@ assert lib.assertMsg upstreamRemoved ''
 
 assert lib.assertMsg (declarations != [ ]) ''
   nixos-disable-proof: `options.system.services` has no declarations at all.
-  Expected it to be declared by environments/nixos/systemd/system.nix.
+  Expected it to be declared by integrations/nixos/systemd/system.nix.
 '';
 
 assert lib.assertMsg (foreign == [ ]) ''

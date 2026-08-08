@@ -1,4 +1,4 @@
-# The NixOS environment
+# The NixOS integration
 
 Modular services on systemd, for NixOS. This is the canonical copy: nixpkgs
 still carries the same code under `nixos/modules/system/service/systemd/`, and
@@ -14,11 +14,11 @@ so the two cannot both be live.
 | `systemd/` | The systemd implementation (`nixosModules.systemServices`): `system.services`, the systemd unit options, and `configData` paths. One directory per service manager, so a second would sit beside it. |
 | `documentation.nix` | Renders `doc/registry.nix` into `documentation.nixos.extraModules` (`nixosModules.documentation`), replacing the upstream registry the disable removes. |
 | `lib.nix` | `evalModules` / `evalSystem` / `runTest`, reproducing what `nixos/tests/all-tests.nix` gives in-tree tests. |
-| `tests/` | The environment's test set. |
+| `tests/` | The integration's test set. |
 
 `systemd/user.nix` is a stub, here as upstream. Per-user services arrive as
 `users.users.<name>.services` in this same evaluation rather than as a second
-environment; [`../README.md`](../README.md) explains what makes an environment.
+integration; [`../README.md`](../README.md) explains what makes an integration.
 
 ## Usage
 

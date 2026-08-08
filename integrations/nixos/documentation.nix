@@ -4,7 +4,7 @@
 # which `./disable-upstream.nix` removes. It lives here rather than under `doc/`
 # because it is a NixOS module: it is `_class = "nixos"` and writes to
 # `documentation.nixos.extraModules`, both of which mean nothing to any other
-# environment. What *is* shared is the list of services to document, which comes
+# integration. What *is* shared is the list of services to document, which comes
 # from `doc/registry.nix`.
 #
 # Exported as `nixosModules.documentation`. It is not part of

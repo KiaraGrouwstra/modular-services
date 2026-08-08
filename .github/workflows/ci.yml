@@ -53,7 +53,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.gate.outputs.eval) }}
-    name: eval (${{ matrix.env }}) ${{ matrix.name }}
+    name: eval (${{ matrix.integration }}) ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v7
       - uses: cachix/install-nix-action@v31
@@ -73,7 +73,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.gate.outputs.vm) }}
-    name: vm (${{ matrix.env }}) ${{ matrix.name }}
+    name: vm (${{ matrix.integration }}) ${{ matrix.name }}
     steps:
       - name: Free disk space
         # A VM test closure does not fit in the ~14 GB a fresh runner has left.

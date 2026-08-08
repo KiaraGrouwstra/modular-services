@@ -1,5 +1,5 @@
 {
-  description = "Modular services: services defined as modules, portable across environments using Nix modules.";
+  description = "Modular services: services defined as modules, portable across configuration frameworks.";
 
   inputs = {
     # The channel tarball rather than the git repository: it is a fraction of

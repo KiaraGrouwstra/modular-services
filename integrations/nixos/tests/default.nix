@@ -1,10 +1,10 @@
-# The NixOS environment's test set.
+# The NixOS integration's test set.
 #
 # Contract (see ../../README.md): an attrset of
 # `{ <name> = { kind = "eval" | "vm"; drv = <derivation>; }; }`.
 #
 # `kind` splits the CI matrix: `"eval"` tests build without a VM, `"vm"` tests
-# need `/dev/kvm`. `ci/tests.nix` prefixes each name with the environment name,
+# need `/dev/kvm`. `ci/tests.nix` prefixes each name with the integration name,
 # so `units` here becomes `checks.nixos-units`.
 {
   lib,

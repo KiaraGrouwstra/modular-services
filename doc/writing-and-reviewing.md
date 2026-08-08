@@ -20,7 +20,7 @@ The NixOS module maintainers have no obligation towards the modular service, exc
 
 ## Minimum Standard
 
-Modular services **MUST** be accompanied by a **VM test** that exercises the modular service, in at least one environment under [`environments/`](../environments).
+Modular services **MUST** be accompanied by a **VM test** that exercises the modular service, in at least one integration under [`integrations/`](../integrations).
 
 Modular services **MUST** have a `meta.maintainers` module attribute that lists the maintainers of the modular service.
 
@@ -29,12 +29,12 @@ Modular services **MUST** have a `meta.maintainers` module attribute that lists 
 When reviewing a modular service, you should check the following. Details and rationale are provided below.
 
 ```markdown
-- [ ] Has a VM test, in every environment it claims to support (at minimum `environments/nixos/tests/packages/`)
-- [ ] Registered in that environment's `tests/default.nix`
+- [ ] Has a VM test, in every integration it claims to support (at minimum `integrations/nixos/tests/packages/`)
+- [ ] Registered in that integration's `tests/default.nix`
 - [ ] Has a `meta.maintainers` attribute
 - [ ] Systemd-specific definitions are behind `optionalAttrs (options ? systemd)` to promote portability.
 - [ ] `_class = "service"`
-- [ ] Imports nothing from `lib/services`, so that it stays environment-agnostic
+- [ ] Imports nothing from `lib/services`, so that it stays integration-agnostic
 - [ ] Has an entry in `modular-services/default.nix` whose `<ns>.package` default comes from the providing package
 - [ ] Is the modular services infrastructure sufficient for this service? If one or more features are not covered, comment in https://github.com/NixOS/nixpkgs/issues/428084
 - [ ] Has been added to `doc/registry.nix` (enforced by `checks.docs-registry-complete`)
@@ -44,7 +44,7 @@ When reviewing a modular service, you should check the following. Details and ra
 
 ### VM test
 
-For NixOS, add the test to [`environments/nixos/tests/packages/`](../environments/nixos/tests/packages) and register it in [`environments/nixos/tests/default.nix`](../environments/nixos/tests/default.nix); the surrounding tests there are worked examples.
+For NixOS, add the test to [`integrations/nixos/tests/packages/`](../integrations/nixos/tests/packages) and register it in [`integrations/nixos/tests/default.nix`](../integrations/nixos/tests/default.nix); the surrounding tests there are worked examples.
 A test file takes `modularServices` as a non-module dependency and imports `(modularServices.<name> pkgs)` into the service.
 Best practices: keep tests minimal and focused (boot a VM, enable the service, and assert a basic request succeeds). For general guidance, see the [NixOS Tests chapter](https://nixos.org/manual/nixos/unstable/#sec-nixos-tests).
 

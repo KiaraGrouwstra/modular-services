@@ -1,4 +1,4 @@
-# Tests in: ../../environments/nixos/tests/etc/test.nix
+# Tests in: ../../integrations/nixos/tests/etc/test.nix
 # This file is a function that returns a module.
 pkgs:
 {
