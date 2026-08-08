@@ -125,20 +125,25 @@ does not hit this.
 
 ### CI setup
 
-The workflows need two repository secrets. Both are optional; without them CI
-still runs, it just gets slower and stops proposing updates.
+`ci.yml` runs on every push and pull request, against the pinned `flake.lock`,
+so a run is reproducible and a red result means this repository changed.
+[Dependabot](./.github/dependabot.yml) moves the pin, weekly, as a pull request:
+the suite runs against the new nixpkgs there, and a break upstream shows up as a
+red pull request rather than a red `main`. It updates the action versions in the
+workflow the same way.
 
-| secret | used by | how to get it |
-|---|---|---|
-| `CACHIX_AUTH_TOKEN` | `ci.yml` | A cache named `modular-services` at [cachix.org](https://cachix.org), then a write token from its Settings tab. Pull requests set `skipPush`, so a fork without the secret still builds read-only. |
-| `FLAKE_LOCK_TOKEN` | `update-flake-lock.yml` | A personal access token or GitHub App token with `contents: write` and `pull-requests: write`. `secrets.GITHUB_TOKEN` cannot trigger workflow runs, so a pull request opened with it would never be checked. |
+One optional repository secret, `CACHIX_AUTH_TOKEN`: create a cache named
+`modular-services` at [cachix.org](https://cachix.org) and take a write token
+from its Settings tab. Without it CI still runs, just without a cache. Pull
+requests set `skipPush`, so forks -- and Dependabot, which never receives
+repository secrets -- build read-only rather than failing.
 
-The `nixos-unstable` pin means everything from nixpkgs comes out of
-`cache.nixos.org` already, so the cache only ever holds this repository's own
-derivations: the rendered manual, and one small result per VM test. Its value
-is skipping a test that has not changed, not avoiding rebuilds of nixpkgs. If
-an external account is unwanted, `nix-community/cache-nix-action` does the same
-job through the GitHub Actions cache with no signup, at the cost of a 10 GB
+Expect modest gains from that cache. The `nixos-unstable` pin means everything
+from nixpkgs comes out of `cache.nixos.org` already, so it only ever holds this
+repository's own derivations: the rendered manual, and one small result per VM
+test. Its value is skipping a test that has not changed, not avoiding rebuilds
+of nixpkgs. `nix-community/cache-nix-action` does the same job through the
+GitHub Actions cache with no external account, at the cost of a 10 GB
 per-repository ceiling that VM test closures can reach.
 
 ## Licence

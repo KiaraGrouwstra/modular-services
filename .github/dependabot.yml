@@ -1,11 +1,23 @@
-# Dependabot has no Nix support, so it covers exactly one thing here: the
-# action versions in .github/workflows/. The nixpkgs pin is kept current by
-# update-flake-lock.yml instead.
+# Two ecosystems, both opening pull requests so the check suite runs against a
+# bump before anyone merges it.
 #
-# Updates land grouped, as one pull request rather than one per action, so the
-# check suite runs once per week's worth of bumps.
+# `nix` updates `flake.lock` by running `nix flake update <input>`. It follows
+# whatever the input already tracks rather than moving between them, so the
+# `nixos-unstable` channel pin in flake.nix keeps resolving to newer channel
+# revisions and never jumps to a release channel on its own.
+#
+# `github-actions` updates the `uses:` refs in .github/workflows/, grouped into
+# one pull request rather than one per action.
 version: 2
 updates:
+  - package-ecosystem: nix
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - dependencies
+
   - package-ecosystem: github-actions
     directory: /
     schedule:
