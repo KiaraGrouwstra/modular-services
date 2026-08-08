@@ -34,14 +34,34 @@ answers belongs in the same directory, so `environments/` stays flat -- one
 directory per framework, one level deep, with whatever internal structure that
 framework needs.
 
-Per-user services on NixOS are the case that makes the rule concrete. Upstream's
-in-progress version declares `users.users.<name>.services` as a NixOS module that
-siphons into `systemd.user.services`, reusing the same `service.nix` and reading
+Per-user services on NixOS are the case that makes the rule concrete, and two
+in-progress upstream changes bear on it.
+
+The first declares `users.users.<name>.services` as a NixOS module siphoning into
+`systemd.user.services`, reusing the same `service.nix` and reading
 `config.systemd.package` from the same evaluation as `system.services`. An
 `environments/nixos-user/` would restate all four contract files to describe one
 evaluation, and would double the NixOS test runs to prove it twice. It is a
 second option surface inside `environments/nixos/`, nested under `systemd/` as
 `system/` and `user/` the way upstream nests it.
+
+The second splits each service module in two: a pure half, and a variant holding
+what only holds in one place -- `DynamicUser`, `AmbientCapabilities`,
+`wantedBy = [ "multi-user.target" ]` -- enumerated in a registry keyed
+`<variant>.<pkg>.<service>`, with `system` today and `user` expected beside it.
+That registry calls its first key an environment, which reads like an argument
+for splitting `environments/` by privilege level. It is the opposite argument.
+What the key selects is a service module, and it selects along the privilege
+level of a systemd unit, an axis that cuts *across* frameworks: Home Manager
+emits systemd user units too, so a `user` variant is one both it and NixOS want.
+An `environments/nixos-user/` would bury it in one framework's directory, for the
+other to reach into.
+
+Variants therefore belong beside the service modules they vary, in
+`service-modules/`, and an environment owns the *registry*: which variant key it
+consumes, and which services it claims to support there. Upstream keeps its
+registry under `nixos/modules/`, having one environment to serve; that placement
+is the one part of its shape that does not carry over.
 
 Home Manager is the contrast that shows the seam is not the service manager
 either. It also targets systemd user units, and it is still its own environment,
@@ -58,10 +78,12 @@ different entry point.
   *instantiates* it, supplying `evalConfig`, `mkTest`, `sharedDir` and
   `callReload`, and may add its own manager-specific assertions on top;
   `environments/nixos/tests/compliance.nix` shows both halves.
-- **Service modules** (`service-modules/`) are environment-agnostic by
-  construction: every one declares `_class = "service"` and none imports
-  anything from `lib/services`. An environment that cannot run a given service
-  simply does not test it.
+- **Service modules** (`service-modules/`) are shared: every one declares
+  `_class = "service"` and none imports anything from `lib/services`. A service
+  that needs settings holding at only one privilege level gets a variant beside
+  the pure module, not a copy inside an environment; see "One environment per
+  framework" above. An environment that cannot run a given service simply does
+  not test it.
 
 ## Where to start
 
