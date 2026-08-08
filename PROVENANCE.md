@@ -29,6 +29,13 @@ The revision each file was vendored from is the one in
 compares against. Recording it per row as well would only be a second copy to
 keep in step, and would touch all 34 rows on every re-vendor.
 
+The pinned input is the `nixos-unstable` channel, which advances only once
+Hydra has built it, so it trails the nixpkgs default branch by a few days. A
+file vendored from the branch therefore reads as drifted, and a file whose
+upstream counterpart is younger than the channel reads as gone, until the
+channel catches up. That is what the drift check is for; it is not a signal to
+re-vendor backwards.
+
 ## The table
 
 | repo path | nixpkgs path | state | reason |

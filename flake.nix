@@ -1,8 +1,11 @@
 {
-  description = "Modular services: services defined as modules, portable across NixOS, Home Manager and nix-darwin";
+  description = "Modular services: services defined as modules, portable across environments using Nix modules.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    # The channel tarball rather than the git repository: it is a fraction of
+    # the download, and it only advances once Hydra has built the channel, so
+    # every derivation this flake evaluates is already in cache.nixos.org.
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
   };
 
   outputs =
