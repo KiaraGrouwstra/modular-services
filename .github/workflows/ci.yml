@@ -97,10 +97,15 @@ jobs:
           # `systemd-nspawn`, which needs pid 0 inside the build sandbox. That
           # is what the `uid-range` system feature grants, and Nix only honours
           # it with `auto-allocate-uids`. `nixos-pkg-php-fpm` is one such test.
+          #
+          # `experimental-features` spells out `nix-command flakes` as well:
+          # the action adds those two itself only while `extra_nix_config`
+          # mentions no form of the setting at all, so naming it here means
+          # naming the whole list.
           extra_nix_config: |
             auto-allocate-uids = true
             extra-system-features = uid-range
-            extra-experimental-features = auto-allocate-uids cgroups
+            experimental-features = nix-command flakes auto-allocate-uids cgroups
       - uses: cachix/cachix-action@v16
         with:
           name: modular-services
