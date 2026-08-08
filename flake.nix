@@ -17,6 +17,11 @@
 
       forAllSystems = f: lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
 
+      docs = import ./doc/service-modules.nix {
+        inherit lib;
+        inherit (self) serviceModules;
+      };
+
       # Every environment's tests, discovered from environments/ on disk, plus
       # the repo-level checks. Both carry `{ kind, env, drv }`, which is what
       # `checks` and the CI matrix are derived from.
@@ -73,9 +78,23 @@
         modularServices = ./environments/nixos/systemd;
         # Just the disable, without the implementation.
         disableUpstream = ./environments/nixos/disable-upstream.nix;
+        # Replacement for the option-documentation registry that
+        # disableUpstream removes.
+        documentation = docs.module;
+      };
+
+      overlays = {
+        # Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.
+        default = import ./overlays { inherit (self) serviceModules; };
+        # Opt-in: repoints `pkgs.<pkg>.services.*` at this repository.
+        packageServices = import ./overlays/package-services.nix { inherit (self) serviceModules; };
       };
 
       checks = forAllSystems (pkgs: lib.mapAttrs (_: c: c.drv) (checksFor pkgs));
+
+      packages = forAllSystems (pkgs: {
+        docs = import ./doc { inherit lib self pkgs; };
+      });
 
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShellNoCC {
