@@ -13,65 +13,32 @@
     let
       inherit (nixpkgs) lib;
 
-      # The consumer surface, which is flake-agnostic and lives in ./default.nix.
-      # Everything below adds to it; nothing below restates it, so a non-flake
-      # consumer cannot end up with a subset of what a flake consumer gets.
-      base = import ./. { inherit lib; };
+      # ./default.nix is the whole of it. All this adds is what a flake knows
+      # and a bare `import` does not: the pin resolved through `flake.lock`
+      # rather than re-fetched from it, and the source's revision.
+      call =
+        args:
+        import ./. (
+          {
+            nixpkgs = nixpkgs.outPath;
+            src = self;
+            revision = self.rev or self.dirtyRev or "dirty";
+          }
+          // args
+        );
 
       systems = [
         "x86_64-linux"
         "aarch64-linux"
       ];
 
-      forAllSystems = f: lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
-
-      # Every environment's tests, discovered from environments/ on disk, plus
-      # the repo-level checks. Both carry `{ kind, env, drv }`, which is what
-      # `checks` and the CI matrix are derived from.
-      checksFor =
-        pkgs:
-        import ./ci/tests.nix {
-          inherit
-            lib
-            nixpkgs
-            self
-            pkgs
-            ;
-        }
-        // import ./ci/checks.nix {
-          inherit
-            lib
-            nixpkgs
-            self
-            pkgs
-            ;
-        };
+      # The outputs ./default.nix produces for the one system it was called
+      # with. Everything else it produces is system-independent and passes
+      # through untouched; `checks.non-flake-consumer` proves that of each.
+      perSystem = import ./ci/per-system.nix;
     in
-    base
-    // {
-      checks = forAllSystems (pkgs: lib.mapAttrs (_: c: c.drv) (checksFor pkgs));
-
-      packages = forAllSystems (pkgs: {
-        docs = import ./doc { inherit lib self pkgs; };
-      });
-
-      devShells = forAllSystems (pkgs: {
-        default = pkgs.mkShellNoCC {
-          packages = [
-            pkgs.nixfmt-tree
-            pkgs.jq
-          ];
-        };
-      });
-
-      formatter = forAllSystems (pkgs: pkgs.nixfmt-tree);
-
-      # Consumed only by .github/workflows/ci.yml.
-      ci = forAllSystems (pkgs: {
-        matrix = import ./ci/matrix.nix {
-          inherit lib;
-          checks = checksFor pkgs;
-        };
-      });
-    };
+    # `call { }` leaves `system` at its default, which no attribute surviving
+    # this `removeAttrs` depends on, so it is never forced.
+    lib.removeAttrs (call { }) perSystem
+    // lib.genAttrs perSystem (attr: lib.genAttrs systems (system: (call { inherit system; }).${attr}));
 }

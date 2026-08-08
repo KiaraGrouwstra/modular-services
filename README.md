@@ -56,10 +56,11 @@ nixpkgs the consumer evaluates against.
 ### Without flakes
 
 Flakes are not required, and not the source of truth.
-[`default.nix`](./default.nix) holds the entire consumer surface and takes a
-`lib` from the caller; `flake.nix` imports it and adds the per-system outputs.
-Fetch the source however you like -- `npins`, `fetchTarball`, a subtree -- and
-call it:
+[`default.nix`](./default.nix) produces every output below;
+[`flake.nix`](./flake.nix) pins nixpkgs through `flake.lock`, maps the
+per-system outputs over the systems this repository supports, and adds nothing
+of its own. Fetch the source however you like -- `npins`, `fetchTarball`, a
+subtree -- and call it:
 
 ```nix
 { pkgs, ... }:
@@ -72,12 +73,18 @@ in
 }
 ```
 
-The two are kept in step by `checks.non-flake-consumer`, which evaluates a NixOS
-system from `default.nix` alone and fails if the flake exposes a consumer
-attribute that `default.nix` does not. This repository's own nixpkgs pin is
-never in the picture either way: the NixOS module takes `lib` and `pkgs` from
-the configuration importing it, so consuming this repository never pulls in a
-second nixpkgs.
+Every argument is lazy, so a call like that one never evaluates this
+repository's nixpkgs pin: the NixOS module takes `lib` and `pkgs` from the
+configuration importing it, and consuming this repository pulls in no second
+nixpkgs. Passing nothing at all -- `import ./. { }` -- instead resolves the pin
+out of `flake.lock` with `fetchTarball` and gives the development outputs as
+well, `nix-build default.nix -A checks.nixos-disable-proof` included.
+
+`checks.non-flake-consumer` keeps the two honest: it evaluates a NixOS system
+from `default.nix` alone, and it evaluates every output outside
+[`ci/per-system.nix`](./ci/per-system.nix) with the system, the package set and
+the pin all replaced by `throw`, so anything that quietly needs one of them
+fails there rather than in a consumer's evaluation.
 
 ### Known residue
 
@@ -102,9 +109,10 @@ attribute still resolves to the service module vendored in nixpkgs. Use
 
 ## Outputs
 
-Everything above the rule comes from [`default.nix`](./default.nix) and is
-available with or without flakes; everything below it is flake-only, being
-per-system.
+All of them come from [`default.nix`](./default.nix). The last group is
+produced for the system it was called with, which is the group a flake keys by
+system as `checks.<system>`, `packages.<system>` and so on; the rest are the
+same whatever the system, and a flake publishes them unkeyed.
 
 | output | what |
 |---|---|
@@ -119,9 +127,10 @@ per-system.
 | `overlays.default` | Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds. |
 | `overlays.packageServices` | Opt-in; repoints `pkgs.<pkg>.services.*` here. |
 | --- | --- |
-| `checks.<system>.*` | Every test, environment and repo-level alike. |
-| `packages.<system>.docs` | The manual chapter as HTML. |
-| `ci.<system>.matrix` | Consumed only by the GitHub Actions workflow. |
+| `checks.*` | Every test, environment and repo-level alike. |
+| `packages.docs` | The manual chapter as HTML. |
+| `devShells.default`, `formatter` | `nixfmt-tree` and `jq`. |
+| `ci.matrix` | Consumed only by the GitHub Actions workflow. |
 
 ## Layout
 
@@ -133,7 +142,7 @@ per-system.
 | `service-modules/` | The per-package service modules, `_class = "service"` and environment-agnostic. |
 | `doc/` | The manual chapter, and the list of services whose options it documents. One book about the subsystem, not one per environment; each environment renders that list its own way. |
 | `overlays/`, `ci/` | Overlays, and the test/matrix wiring. |
-| `default.nix`, `flake.nix` | The consumer surface, and the flake wrapper adding per-system outputs to it. |
+| `default.nix`, `flake.nix` | Every output, and the flake wrapper that keys the per-system ones by system. |
 
 Adding an environment means adding `environments/<name>/` with four files;
 `ci/tests.nix` discovers it from the filesystem, so `checks`, `nix flake check`
@@ -149,8 +158,18 @@ nix build -L .#checks.x86_64-linux.nixos-disable-proof   # the check the design 
 nix flake check -L              # everything, including the VM tests
 ```
 
-VM tests need `/dev/kvm`, and `kvm` in `nix config show system-features`. Run
-them a few at a time: `checks.nixos-pkg-ghostunnel` starts its service at boot
+The same without flakes, resolving the pin out of `flake.lock`:
+
+```bash
+nix-build default.nix -A checks.nixos-disable-proof
+nix-instantiate default.nix -A checks   # instantiate every check, build none
+```
+
+VM tests need `/dev/kvm`, and `kvm` in `nix config show system-features`.
+`checks.nixos-pkg-php-fpm` runs in a `systemd-nspawn` container rather than a
+virtual machine, and additionally wants `auto-allocate-uids` and the
+`uid-range` system feature; `nixos/doc/manual/development/running-nixos-tests.section.md`
+in nixpkgs lists the settings. Run them a few at a time: `checks.nixos-pkg-ghostunnel` starts its service at boot
 and only recovers, through `Restart=always`, once the test script has copied the
 certificates in, so on a host running many virtual machines at once the first
 request can arrive before the service is up. CI gives each test its own job and

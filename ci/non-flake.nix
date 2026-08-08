@@ -1,14 +1,15 @@
-# Proof that the consumer surface does not need a flake.
+# Proof that nothing here needs a flake.
 #
-# `flake.nix` wraps `default.nix` and may only add per-system outputs to it. Two
-# things have to hold for that to stay true, and neither fails loudly on its own:
+# Two things have to hold, and neither fails loudly on its own:
 #
 #   - A NixOS configuration must evaluate from `import ../. { inherit lib; }`
-#     alone, with no `self` anywhere in the chain. `disable-proof.nix` covers the
-#     disable itself; this covers reaching it without flake machinery.
-#   - The flake must expose the same consumer attributes as `default.nix`. An
-#     output added to `flake.nix` only would be invisible to everyone consuming
-#     this repository through `npins`, `fetchTarball` or a subtree.
+#     alone, with no `self` anywhere in the chain. `disable-proof.nix` covers
+#     the disable itself; this covers reaching it without flake machinery.
+#   - Every output outside `per-system.nix` must be system-independent. That is
+#     the assumption `flake.nix` rests on when it publishes those once and the
+#     rest keyed by system, and getting it wrong makes an output either
+#     unreachable or dependent on `builtins.currentSystem`, which no flake may
+#     evaluate.
 {
   lib,
   nixpkgs,
@@ -17,26 +18,34 @@
 }:
 
 let
-  base = import ../. { inherit lib; };
+  # Called the way a consumer would: no `system`, no `src`, no flake.
+  base = import ../. {
+    inherit lib nixpkgs pkgs;
+  };
 
-  # The three groups a new consumer-facing output would land in. `serviceModules`
-  # is compared as a whole, being a flat set of the same shape.
-  surface = [
-    "lib"
-    "nixosModules"
-    "overlays"
-    "serviceModules"
-  ];
+  perSystem = import ./per-system.nix;
 
-  divergent = lib.filter (
-    group: lib.attrNames base.${group} != lib.attrNames (self.${group} or { })
-  ) surface;
+  unknown = lib.subtractLists (lib.attrNames base) perSystem;
+
+  # The same call with everything system-shaped removed. Anything reachable
+  # from an output outside `perSystem` that touches one of these throws here,
+  # naming itself in the trace.
+  systemFree = import ../. {
+    inherit lib;
+    system = throw "ci/per-system.nix: this output was evaluated for a system";
+    pkgs = throw "ci/per-system.nix: this output was evaluated against a package set";
+    nixpkgs = throw "ci/per-system.nix: this output evaluated the pinned nixpkgs";
+  };
+
+  portable = builtins.deepSeq (lib.removeAttrs systemFree perSystem) "system-independent";
 
   # A system built purely out of `base`: the module, and a service module from
   # it, with nothing threaded through from the flake.
-  eval = lib.nixosSystem {
+  eval = import (nixpkgs + "/nixos/lib/eval-config.nix") {
+    inherit lib;
+    system = null;
     modules = [
-      nixpkgs.nixosModules.readOnlyPkgs
+      (nixpkgs + "/nixos/modules/misc/nixpkgs/read-only.nix")
       { nixpkgs.pkgs = pkgs; }
       base.nixosModules.default
       {
@@ -50,27 +59,25 @@ let
   unit = eval.config.systemd.services.tlshd or null;
 in
 
-assert lib.assertMsg (divergent == [ ]) ''
-  non-flake-consumer: flake.nix and default.nix disagree on:
+assert lib.assertMsg (unknown == [ ]) ''
+  non-flake-consumer: ci/per-system.nix names outputs default.nix does not
+  produce:
 
-  ${lib.concatMapStringsSep "\n" (
-    g:
-    "  - ${g}: flake has ${toString (lib.attrNames (self.${g} or { }))}, default.nix has ${
-        toString (lib.attrNames base.${g})
-      }"
-  ) divergent}
+  ${lib.concatMapStringsSep "\n" (n: "  - ${n}") unknown}
 
-  flake.nix must only add per-system outputs to what default.nix exposes.
+  flake.nix would publish each of them as an empty attribute set keyed by
+  system.
 '';
 
 assert lib.assertMsg (unit != null) ''
   non-flake-consumer: `system.services.tlshd` produced no systemd unit when the
-  configuration was built from `import ./. { inherit lib; }` rather than from
-  the flake.
+  configuration was built from `import ./. { }` rather than from the flake.
 '';
 
 pkgs.runCommand "non-flake-consumer" { } ''
-  echo 'consumer surface: ${toString surface}'
+  echo 'outputs: ${toString (lib.attrNames base)}'
+  echo 'per system: ${toString perSystem}'
+  echo 'the rest: ${portable}'
   echo 'system.services.tlshd -> systemd.services.tlshd'
   touch $out
 ''

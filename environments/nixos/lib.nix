@@ -16,14 +16,21 @@ rec {
     `evalSystem` for that.
 
     Equivalent to `all-tests.nix`'s `evalSystem` minus our own modules:
-    `lib.nixosSystem` already passes `system = null`, so `nixpkgs.pkgs` plus
-    `readOnlyPkgs` fully determines the package set.
+    `system = null` removes the legacy entry point's non-hermetic default, so
+    `nixpkgs.pkgs` plus `read-only.nix` fully determines the package set.
+
+    `eval-config.nix` and `read-only.nix` are named by path rather than through
+    `lib.nixosSystem` and `nixpkgs.nixosModules.readOnlyPkgs`, both of which
+    nixpkgs adds in its own `flake.nix`. `nixpkgs` here is a source tree, which
+    a flake is only one way to obtain.
   */
   evalModules =
     modules:
-    lib.nixosSystem {
+    import (nixpkgs + "/nixos/lib/eval-config.nix") {
+      inherit lib;
+      system = null;
       modules = [
-        nixpkgs.nixosModules.readOnlyPkgs
+        (nixpkgs + "/nixos/modules/misc/nixpkgs/read-only.nix")
         { nixpkgs.pkgs = pkgs; }
         testDefaults
       ]

@@ -18,7 +18,7 @@ let
   # Where nixosOptionsDoc puts options.json (nixos/doc/manual/common.nix).
   outputPath = "share/doc/nixos";
 
-  revision = self.rev or self.dirtyRev or "dirty";
+  inherit (self) revision;
 
   # Declaration sites must not point into the store, or the build gains a
   # reference to the source tree.
