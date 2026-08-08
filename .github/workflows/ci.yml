@@ -92,19 +92,31 @@ jobs:
 
       - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
+        with:
+          # Tests that declare `containers` rather than `nodes` run under
+          # `systemd-nspawn`, which needs pid 0 inside the build sandbox. That
+          # is what the `uid-range` system feature grants, and Nix only honours
+          # it with `auto-allocate-uids`. `nixos-pkg-php-fpm` is one such test.
+          extra_nix_config: |
+            auto-allocate-uids = true
+            extra-system-features = uid-range
+            extra-experimental-features = auto-allocate-uids cgroups
       - uses: cachix/cachix-action@v16
         with:
           name: modular-services
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           skipPush: ${{ github.event_name == 'pull_request' }}
 
-      - name: Assert KVM is usable
+      - name: Assert the runner can run the tests
         # Without this a lost KVM would not fail the job, it would just make
         # every VM test crawl under software emulation until the runner times
-        # out. Fail loudly instead.
+        # out, and a lost `uid-range` would fail each container test with a
+        # message about Nix settings rather than about the test. Fail loudly.
         run: |
           test -c /dev/kvm
-          nix config show system-features | tr ' ,' '\n\n' | grep -qx kvm
+          features=$(nix config show system-features | tr ' ,' '\n\n')
+          grep -qx kvm <<<"$features"
+          grep -qx uid-range <<<"$features"
 
       - name: Build ${{ matrix.name }}
         run: nix build -L --no-link ".#checks.$SYSTEM.${{ matrix.name }}"
