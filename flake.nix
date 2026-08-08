@@ -20,11 +20,6 @@
 
       forAllSystems = f: lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
 
-      docs = import ./doc/service-modules.nix {
-        inherit lib;
-        inherit (self) serviceModules;
-      };
-
       # Every environment's tests, discovered from environments/ on disk, plus
       # the repo-level checks. Both carry `{ kind, env, drv }`, which is what
       # `checks` and the CI matrix are derived from.
@@ -83,7 +78,10 @@
         disableUpstream = ./environments/nixos/disable-upstream.nix;
         # Replacement for the option-documentation registry that
         # disableUpstream removes.
-        documentation = docs.module;
+        documentation = import ./environments/nixos/documentation.nix {
+          inherit lib;
+          inherit (self) serviceModules;
+        };
       };
 
       overlays = {

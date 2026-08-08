@@ -58,7 +58,7 @@ assert lib.assertMsg (missing == [ ]) ''
     ''
   );
 
-  # Every service module must be documented; see doc/service-modules.nix.
+  # Every service module must be documented; see doc/registry.nix.
   docs-registry-complete = check (import ../doc/registry-complete.nix { inherit lib self pkgs; });
 
   # The manual chapter renders, with both option references substituted in.

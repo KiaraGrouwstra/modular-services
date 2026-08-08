@@ -106,10 +106,12 @@ in the pinned nixpkgs.
   satisfy the nixpkgs test registry and has no counterpart here;
   `pkgs.testers.runNixOSTest` returns a derivation directly.
 - `nixos/modules/misc/documentation/modular-services.nix`. Replaced by
-  [`doc/service-modules.nix`](./doc/service-modules.nix), which is keyed on
-  `serviceModules` rather than on package `passthru`, and which covers
-  `easytier` and `holo-daemon` -- two service modules the nixpkgs registry is
-  missing. `checks.docs-registry-complete` keeps it complete.
+  [`environments/nixos/documentation.nix`](./environments/nixos/documentation.nix),
+  which is keyed on `serviceModules` rather than on package `passthru`, and
+  which covers `easytier` and `holo-daemon` -- two service modules the nixpkgs
+  registry is missing. The list it renders is
+  [`doc/registry.nix`](./doc/registry.nix), which
+  `checks.docs-registry-complete` keeps complete.
 - `nixos/modules/system/service/README.md`. Superseded by
   [`environments/nixos/README.md`](./environments/nixos/README.md).
 

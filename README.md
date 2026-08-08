@@ -100,7 +100,8 @@ attribute still resolves to the service module vendored in nixpkgs. Use
 | `compliance/` | The environment-agnostic compliance suite each environment instantiates. |
 | `environments/` | One directory per configuration framework. See [`environments/README.md`](./environments/README.md). |
 | `service-modules/` | The per-package service modules, `_class = "service"` and environment-agnostic. |
-| `overlays/`, `doc/`, `ci/` | Overlays, the manual, and the test/matrix wiring. |
+| `doc/` | The manual chapter, and the list of services whose options it documents. One book about the subsystem, not one per environment; each environment renders that list its own way. |
+| `overlays/`, `ci/` | Overlays, and the test/matrix wiring. |
 
 Adding an environment means adding `environments/<name>/` with four files;
 `ci/tests.nix` discovers it from the filesystem, so `checks`, `nix flake check`

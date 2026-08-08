@@ -9,7 +9,7 @@
 let
   inherit (self) serviceModules;
 
-  inherit (import ./service-modules.nix { inherit lib serviceModules; }) registry;
+  registry = import ./registry.nix;
 
   provided = lib.attrNames serviceModules;
 
@@ -18,13 +18,13 @@ let
 in
 
 assert lib.assertMsg (undocumented == [ ]) ''
-  docs-registry-complete: service modules missing from doc/service-modules.nix:
+  docs-registry-complete: service modules missing from doc/registry.nix:
 
   ${lib.concatMapStringsSep "\n" (n: "  - ${n}") undocumented}
 '';
 
 assert lib.assertMsg (unknown == [ ]) ''
-  docs-registry-complete: doc/service-modules.nix lists names that are not in
+  docs-registry-complete: doc/registry.nix lists names that are not in
   service-modules/default.nix:
 
   ${lib.concatMapStringsSep "\n" (n: "  - ${n}") unknown}

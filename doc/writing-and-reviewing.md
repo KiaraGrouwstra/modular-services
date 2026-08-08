@@ -37,7 +37,7 @@ When reviewing a modular service, you should check the following. Details and ra
 - [ ] Imports nothing from `lib/services`, so that it stays environment-agnostic
 - [ ] Has an entry in `service-modules/default.nix` whose `<ns>.package` default comes from the providing package
 - [ ] Is the modular services infrastructure sufficient for this service? If one or more features are not covered, comment in https://github.com/NixOS/nixpkgs/issues/428084
-- [ ] Has been added to `doc/service-modules.nix` (enforced by `checks.docs-registry-complete`)
+- [ ] Has been added to `doc/registry.nix` (enforced by `checks.docs-registry-complete`)
 ```
 
 ## Details

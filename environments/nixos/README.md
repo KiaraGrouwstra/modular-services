@@ -12,6 +12,7 @@ so the two cannot both be live.
 | `default.nix` | What a NixOS configuration imports (`nixosModules.default`): the disable plus the implementation. |
 | `disable-upstream.nix` | `disabledModules` for the in-tree copy (`nixosModules.disableUpstream`). |
 | `systemd/` | The implementation (`nixosModules.modularServices`): `system.services`, the systemd unit options, and `configData` paths. |
+| `documentation.nix` | Renders `doc/registry.nix` into `documentation.nixos.extraModules` (`nixosModules.documentation`), replacing the upstream registry the disable removes. |
 | `lib.nix` | `evalModules` / `evalSystem` / `runTest`, reproducing what `nixos/tests/all-tests.nix` gives in-tree tests. |
 | `tests/` | The environment's test set. |
 
