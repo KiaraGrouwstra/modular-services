@@ -17,11 +17,20 @@
 
       forAllSystems = f: lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
 
-      # The repo-level checks, carrying `{ kind, env, drv }`, which is what
-      # `checks` is derived from.
+      # Every environment's tests, discovered from environments/ on disk, plus
+      # the repo-level checks. Both carry `{ kind, env, drv }`, which is what
+      # `checks` and the CI matrix are derived from.
       checksFor =
         pkgs:
-        import ./ci/checks.nix {
+        import ./ci/tests.nix {
+          inherit
+            lib
+            nixpkgs
+            self
+            pkgs
+            ;
+        }
+        // import ./ci/checks.nix {
           inherit
             lib
             nixpkgs
@@ -45,6 +54,15 @@
         services = self.lib.servicesFor lib;
       };
 
+      nixosModules = {
+        # Modular services from this repository, replacing the nixpkgs copy.
+        default = ./environments/nixos;
+        # Just the implementation, without the disable.
+        modularServices = ./environments/nixos/systemd;
+        # Just the disable, without the implementation.
+        disableUpstream = ./environments/nixos/disable-upstream.nix;
+      };
+
       checks = forAllSystems (pkgs: lib.mapAttrs (_: c: c.drv) (checksFor pkgs));
 
       devShells = forAllSystems (pkgs: {
@@ -57,5 +75,13 @@
       });
 
       formatter = forAllSystems (pkgs: pkgs.nixfmt-tree);
+
+      # Consumed only by .github/workflows/ci.yml.
+      ci = forAllSystems (pkgs: {
+        matrix = import ./ci/matrix.nix {
+          inherit lib;
+          checks = checksFor pkgs;
+        };
+      });
     };
 }
