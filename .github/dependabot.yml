@@ -8,6 +8,11 @@
 #
 # `github-actions` updates the `uses:` refs in .github/workflows/, grouped into
 # one pull request rather than one per action.
+#
+# No `labels`, deliberately. Naming labels here replaces the defaults with ones
+# Dependabot expects to already exist, and silently drops any that do not. Left
+# alone it applies `dependencies` plus one label per ecosystem, creating them in
+# the repository as needed.
 version: 2
 updates:
   - package-ecosystem: nix
@@ -15,16 +20,12 @@ updates:
     schedule:
       interval: weekly
       day: monday
-    labels:
-      - dependencies
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
       day: monday
-    labels:
-      - dependencies
     groups:
       actions:
         patterns:
