@@ -17,6 +17,13 @@
 #
 # This also applies inside NixOS VM tests: `nixos/lib/testing/nodes.nix` routes
 # node evaluation through the same `eval-config.nix`.
+#
+# Expect the two systemd keys to move once nixpkgs gains user-level services:
+# that work turns `system.nix` and `user.nix` into `system/` and `user/`
+# directories, so both keys lose their `.nix` suffix. `disabledModules` resolves
+# a directory key the same way, so the fix is those two lines and nothing else.
+# `checks.disable-keys-exist` is what reports it, on the pull request that moves
+# the pin rather than as a silent no-op afterwards.
 {
   _class = "nixos";
 

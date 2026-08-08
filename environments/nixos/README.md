@@ -16,6 +16,10 @@ so the two cannot both be live.
 | `lib.nix` | `evalModules` / `evalSystem` / `runTest`, reproducing what `nixos/tests/all-tests.nix` gives in-tree tests. |
 | `tests/` | The environment's test set. |
 
+`systemd/user.nix` is a stub, here as upstream. Per-user services arrive as
+`users.users.<name>.services` in this same evaluation rather than as a second
+environment; [`../README.md`](../README.md) explains why the seam falls there.
+
 ## Usage
 
 ```nix

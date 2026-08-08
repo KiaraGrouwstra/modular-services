@@ -24,6 +24,30 @@ workflow edits** and no registration anywhere.
 `kind` splits the CI matrix: `"eval"` tests build without a virtual machine and
 run on any runner; `"vm"` tests need `/dev/kvm`.
 
+## One environment per framework
+
+The seam is the configuration framework: not the service manager, and not the
+privilege level. An environment owns an *evaluation*. `lib.nix` says how to build
+a configuration and how to test one; `disable-upstream.nix` says what that
+framework already ships that has to give way. Anything that shares those two
+answers belongs in the same directory, so `environments/` stays flat -- one
+directory per framework, one level deep, with whatever internal structure that
+framework needs.
+
+Per-user services on NixOS are the case that makes the rule concrete. Upstream's
+in-progress version declares `users.users.<name>.services` as a NixOS module that
+siphons into `systemd.user.services`, reusing the same `service.nix` and reading
+`config.systemd.package` from the same evaluation as `system.services`. An
+`environments/nixos-user/` would restate all four contract files to describe one
+evaluation, and would double the NixOS test runs to prove it twice. It is a
+second option surface inside `environments/nixos/`, nested under `systemd/` as
+`system/` and `user/` the way upstream nests it.
+
+Home Manager is the contrast that shows the seam is not the service manager
+either. It also targets systemd user units, and it is still its own environment,
+because a Home Manager configuration is evaluated and tested through an entirely
+different entry point.
+
 ## What an environment does not own
 
 - **The portable layer** (`lib/services/`) is shared and must stay free of
@@ -47,4 +71,9 @@ authoritative how-to for the `default.nix` half, with a worked `nix-darwin`
 sketch. Then mirror `environments/nixos/` for the other three files.
 
 Home Manager is the intended next environment; it slots in as
-`environments/home-manager/` under the same four-file contract.
+`environments/home-manager/` under the same four-file contract. [finix], which
+runs finit as pid 1, is the other obvious candidate: it already carries its own
+integration, and `service-modules/php/service.nix` keeps upstream's dormant
+`lib.optionalAttrs (options ? finit)` branch for exactly that manager.
+
+[finix]: https://github.com/finix-community/finix
