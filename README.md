@@ -24,7 +24,7 @@ both be live:
 
 ```nix
 {
-  inputs.modular-services.url = "github:kiara-grouwstra/modular-services";
+  inputs.modular-services.url = "github:kiaragrouwstra/modular-services";
 
   outputs =
     { nixpkgs, modular-services, ... }:
@@ -175,6 +175,48 @@ certificates in, so on a host running many virtual machines at once the first
 request can arrive before the service is up. CI gives each test its own job and
 does not hit this.
 
+### Binary cache
+
+CI pushes what it builds on `main` to a public cache, so a VM test that has not
+changed since the last green run downloads instead of booting:
+
+```
+https://modular-services.cachix.org
+modular-services.cachix.org-1:SCCVjjlFpkNBm9YQS+rePVeK/nhc9kXA/6PC8gql4XQ=
+```
+
+Declaratively, on the machine you develop from:
+
+```nix
+{
+  nix.settings = {
+    substituters = [ "https://modular-services.cachix.org" ];
+    trusted-public-keys = [
+      "modular-services.cachix.org-1:SCCVjjlFpkNBm9YQS+rePVeK/nhc9kXA/6PC8gql4XQ="
+    ];
+  };
+}
+```
+
+For one command, without configuring anything:
+
+```bash
+nix flake check -L \
+  --extra-substituters https://modular-services.cachix.org \
+  --extra-trusted-public-keys modular-services.cachix.org-1:SCCVjjlFpkNBm9YQS+rePVeK/nhc9kXA/6PC8gql4XQ=
+```
+
+Nix ignores both flags unless you are a trusted user, so on a multi-user daemon
+install the settings have to come from the daemon's configuration rather than
+the command line.
+
+The cache is for working *on* this repository, not for consuming it. Everything
+here evaluates to modules, so a configuration that imports
+`nixosModules.default` builds nothing from this repository and gains nothing
+from the cache; it holds test results and the rendered manual. Pull requests
+build read-only against it, and `flake.nix` sets no `nixConfig`, so nothing
+about consuming this flake changes if you skip this section entirely.
+
 ### CI setup
 
 `ci.yml` runs on every push and pull request, against the pinned `flake.lock`,
@@ -184,17 +226,18 @@ the suite runs against the new nixpkgs there, and a break upstream shows up as a
 red pull request rather than a red `main`. It updates the action versions in the
 workflow the same way.
 
-One optional repository secret, `CACHIX_AUTH_TOKEN`: create a cache named
-`modular-services` at [cachix.org](https://cachix.org) and take a write token
-from its Settings tab. Without it CI still runs, just without a cache. Pull
-requests set `skipPush`, so forks -- and Dependabot, which never receives
-repository secrets -- build read-only rather than failing.
+One optional repository secret, `CACHIX_AUTH_TOKEN`, holds a write token for
+the cache above, taken from its Settings tab at
+[cachix.org](https://cachix.org). A fork that wants its own creates a cache
+there and sets the same secret. Without the secret CI still runs, just without
+pushing. Pull requests set `skipPush`, so forks -- and Dependabot, which never
+receives repository secrets -- build read-only rather than failing.
 
-Expect modest gains from that cache. The `nixos-unstable` pin means everything
-from nixpkgs comes out of `cache.nixos.org` already, so it only ever holds this
-repository's own derivations: the rendered manual, and one small result per VM
-test. Its value is skipping a test that has not changed, not avoiding rebuilds
-of nixpkgs. `nix-community/cache-nix-action` does the same job through the
+Gains are modest by construction. The `nixos-unstable` pin means everything
+from nixpkgs comes out of `cache.nixos.org` already, so the cache only ever
+holds this repository's own derivations. Its value is skipping a test that has
+not changed, not avoiding rebuilds of nixpkgs. `nix-community/cache-nix-action`
+does the same job through the
 GitHub Actions cache with no external account, at the cost of a 10 GB
 per-repository ceiling that VM test closures can reach.
 
