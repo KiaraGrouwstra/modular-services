@@ -1,30 +1,30 @@
 
-# Writing and Reviewing Modular Services
+# Writing and Reviewing Modular Services {#chap-writing-and-reviewing}
 
-## Status
+## Status {#writing-and-reviewing-status}
 
 Modular Services are, as of writing, a new feature with support in NixOS.
 It is in development, and be considerate of the fact that the intermediate outcome of RFC 163 is that we should try a module-based approach to portable services; it is not yet a widely agreed upon solution.
 
-## Relation to NixOS Modules
+## Relation to NixOS Modules {#writing-and-reviewing-nixos-modules}
 
 - A modular service is not a replacement for a NixOS module, but may be in the future.
 - Using a modular service to implement a NixOS module is an expected use case, but exposes the NixOS module to a degree of uncertainty that is not acceptable for widely used modules yet.
 
-## Maintainership
+## Maintainership {#writing-and-reviewing-maintainership}
 
 If you contribute a modular service, you must mark yourself as maintainer of the modular service.
 The maintainership of a modular service does not need to be the same as the maintainership of a NixOS module.
 If you are not a maintainer of the NixOS module, you should offer to join the NixOS module's `meta.maintainers` team, so that you are included in reviews and discussions, most of which also affect the modular service.
 The NixOS module maintainers have no obligation towards the modular service, except perhaps to notify you if they notice that the modular service breaks.
 
-## Minimum Standard
+## Minimum Standard {#writing-and-reviewing-minimum-standard}
 
-Modular services **MUST** be accompanied by a **VM test** that exercises the modular service, in at least one integration under [`integrations/`](../integrations).
+Modular services **MUST** be accompanied by a **VM test** that exercises the modular service, in at least one integration under [`integrations/`](https://github.com/kiaragrouwstra/modular-services/blob/main/integrations).
 
 Modular services **MUST** have a `meta.maintainers` module attribute that lists the maintainers of the modular service.
 
-## Reviewing Modular Services
+## Reviewing Modular Services {#writing-and-reviewing-checklist}
 
 When reviewing a modular service, you should check the following. Details and rationale are provided below.
 
@@ -40,15 +40,15 @@ When reviewing a modular service, you should check the following. Details and ra
 - [ ] Has been added to `doc/registry.nix` (enforced by `checks.docs-registry-complete`)
 ```
 
-## Details
+## Details {#writing-and-reviewing-details}
 
-### VM test
+### VM test {#writing-and-reviewing-vm-test}
 
-For NixOS, add the test to [`integrations/nixos/tests/packages/`](../integrations/nixos/tests/packages) and register it in [`integrations/nixos/tests/default.nix`](../integrations/nixos/tests/default.nix); the surrounding tests there are worked examples.
+For NixOS, add the test to [`integrations/nixos/tests/packages/`](https://github.com/kiaragrouwstra/modular-services/blob/main/integrations/nixos/tests/packages) and register it in [`integrations/nixos/tests/default.nix`](https://github.com/kiaragrouwstra/modular-services/blob/main/integrations/nixos/tests/default.nix); the surrounding tests there are worked examples.
 A test file takes `modularServices` as a non-module dependency and imports `(modularServices.<name> pkgs)` into the service.
 Best practices: keep tests minimal and focused (boot a VM, enable the service, and assert a basic request succeeds). For general guidance, see the [NixOS Tests chapter](https://nixos.org/manual/nixos/unstable/#sec-nixos-tests).
 
-### `_class = "service"`
+### `_class = "service"` {#writing-and-reviewing-class}
 
 A [`_class`](https://nixos.org/manual/nixpkgs/unstable/#module-system-lib-evalModules-param-class) declaration ensures a clear error when the module is accidentally imported into a configuration that isn't a modular service, such as a NixOS configuration.
 
@@ -72,12 +72,12 @@ Provide it as the first attribute in the module:
 }
 ```
 
-### Overriding the package default
+### Overriding the package default {#writing-and-reviewing-package-default}
 
 The package option of a service must default to the package that provides the service.
 Otherwise, since some packages are *defined* by an override, the modular service would launch a wrong package, if it builds at all.
 
-In this repository a service module is registered in [`modular-services/default.nix`](../modular-services/default.nix), which supplies both the `importApply` of its non-module dependencies and that default:
+In this repository a service module is registered in [`modular-services/default.nix`](https://github.com/kiaragrouwstra/modular-services/blob/main/modular-services/default.nix), which supplies both the `importApply` of its non-module dependencies and that default:
 
 ```nix
 {

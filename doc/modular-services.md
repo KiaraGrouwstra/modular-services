@@ -4,7 +4,7 @@
 Status: in development. This functionality is new in NixOS 25.11, and significant changes should be expected. We'd love to hear your feedback in <https://github.com/NixOS/nixpkgs/pull/372170>
 
 This repository carries the subsystem outside of nixpkgs so that it can move at its own pace and be consumed by NixOS, Home Manager and `nix-darwin` alike.
-The in-tree nixpkgs copy is disabled at evaluation time; see [`integrations/nixos/disable-upstream.nix`](../integrations/nixos/disable-upstream.nix).
+The in-tree nixpkgs copy is disabled at evaluation time; see [`integrations/nixos/disable-upstream.nix`](https://github.com/kiaragrouwstra/modular-services/blob/main/integrations/nixos/disable-upstream.nix).
 
 Traditionally, NixOS services were defined using sets of options *in* modules, not *as* modules. This made them non-modular, resulting in problems with composability, reuse, and portability.
 
@@ -44,7 +44,7 @@ So note that the default value of `system.services.<name>` is not a complete ser
 ```
 
 `modularServices.<pkg>` is the canonical way to consume a service from this repository.
-`pkgs.<pkg>.services.*` still resolves to the nixpkgs copy unless `overlays.passthruServices` is applied; see [the README](../README.md#known-residue).
+`pkgs.<pkg>.services.*` still resolves to the nixpkgs copy unless `overlays.passthruServices` is applied; see [the README](https://github.com/kiaragrouwstra/modular-services/blob/main/README.md#known-residue).
 
 ## Portability {#modular-service-portability}
 
@@ -93,7 +93,7 @@ Moving their logic into separate Nix files may still be beneficial for the effic
 
 A typical service module consists of the following:
 
-For more details, refer to the contributor documentation in [`doc/writing-and-reviewing.md`](./writing-and-reviewing.md).
+For more details, refer to the contributor documentation in [Writing and Reviewing Modular Services](#chap-writing-and-reviewing).
 
 ## Portable Service Options {#modular-service-options-portable}
 

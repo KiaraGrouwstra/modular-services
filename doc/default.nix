@@ -56,12 +56,16 @@ let
     warningsAreErrors = true;
   };
 
+  # One page rather than one file per chapter: `nixos-render-docs` has no
+  # search, so keeping the whole book in `index.html` leaves the browser's
+  # find-in-page as the way to look something up.
   manualRoot = pkgs.writeText "manual.md" ''
     # Modular Services {#book-modular-services}
     ## Revision ${revision}
 
     ```{=include=} chapters
     modular-services.md
+    writing-and-reviewing.md
     ```
   '';
 in
@@ -76,7 +80,16 @@ runCommand "modular-services-manual"
     dst=$out/${outputPath}
     mkdir -p $dst
 
+    # The NixOS manual's own assets, so the rendered book gets its sidebar,
+    # syntax highlighting and heading anchors rather than bare HTML.
+    cp ${pkgs.path + "/doc/style.css"} $dst/style.css
+    cp ${pkgs.path + "/doc/anchor.min.js"} $dst/anchor.min.js
+    cp ${pkgs.path + "/doc/anchor-use.js"} $dst/anchor-use.js
+    cp -r ${pkgs.documentation-highlighter} $dst/highlightjs
+    cp ${pkgs.roboto.src}/web/Roboto\[ital\,wdth\,wght\].ttf $dst/Roboto.ttf
+
     cp ${./modular-services.md} ./modular-services.md
+    cp ${./writing-and-reviewing.md} ./writing-and-reviewing.md
     cp ${manualRoot} ./manual.md
     chmod +w ./modular-services.md
 
@@ -93,6 +106,13 @@ runCommand "modular-services-manual"
       --manpage-urls ${pkgs.path + "/doc/manpage-urls.json"} \
       --revision ${lib.escapeShellArg revision} \
       --generator "nixos-render-docs ${lib.version}" \
+      --stylesheet style.css \
+      --stylesheet highlightjs/mono-blue.css \
+      --script ./highlightjs/highlight.pack.js \
+      --script ./highlightjs/loader.js \
+      --script ./anchor.min.js \
+      --script ./anchor-use.js \
+      --sidebar-depth 2 \
       --no-navheader \
       ./manual.md \
       $dst/index.html
