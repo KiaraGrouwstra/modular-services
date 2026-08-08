@@ -86,6 +86,22 @@ let
     warningsAreErrors = true;
   };
 
+  # The portable layer is plain functions rather than module options, so
+  # `nixosOptionsDoc` does not reach it and its doc-comments -- the `configure`
+  # one above all, which is the how-to for a new integration -- are readable
+  # only in the source. `nixdoc` renders them to the same CommonMark dialect the
+  # hand-written chapters use.
+  portableLayerChapter =
+    runCommand "portable-layer.md" { nativeBuildInputs = [ buildPackages.nixdoc ]; }
+      ''
+        nixdoc \
+          --category services \
+          --prefix lib \
+          --description "The Portable Layer" \
+          --file ${../lib/services/default.nix} \
+          > $out
+      '';
+
   # One page rather than one file per chapter: `nixos-render-docs` has no
   # search, so keeping the whole book in `index.html` leaves the browser's
   # find-in-page as the way to look something up.
@@ -96,6 +112,10 @@ let
     ```{=include=} chapters
     modular-services.md
     writing-and-reviewing.md
+    ```
+
+    ```{=include=} chapters auto-id-prefix=auto-generated
+    portable-layer.md
     ```
   '';
 in
@@ -120,6 +140,7 @@ runCommand "modular-services-manual"
 
     cp ${./modular-services.md} ./modular-services.md
     cp ${./writing-and-reviewing.md} ./writing-and-reviewing.md
+    cp ${portableLayerChapter} ./portable-layer.md
     cp ${manualRoot} ./manual.md
     chmod +w ./modular-services.md
 

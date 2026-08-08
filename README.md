@@ -140,7 +140,7 @@ same whatever the system, and a flake publishes them unkeyed.
 | `compliance/` | The integration-agnostic compliance suite each integration instantiates. |
 | `integrations/` | One directory per integration. See [`integrations/README.md`](./integrations/README.md). |
 | `modular-services/` | The services themselves: `_class = "service"`, integration-agnostic, one directory per providing package. |
-| `doc/` | The manual chapter, and the list of services whose options it documents. One book about the subsystem, not one per integration; each integration renders that list its own way. |
+| `doc/` | The manual: its chapters, and the list of services whose options it documents. One book about the subsystem, not one per integration; each integration renders that list its own way. |
 | `overlays/`, `ci/` | Overlays, and the test/matrix wiring. |
 | `default.nix`, `flake.nix` | Every output, and the flake wrapper that keys the per-system ones by system. |
 
