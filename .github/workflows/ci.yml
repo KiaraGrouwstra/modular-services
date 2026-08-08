@@ -4,11 +4,6 @@ on:
   push:
     branches: [main]
   pull_request:
-  # Surfaces upstream drift: the nixpkgs input is unpinned in flake.nix and this
-  # repository vendors from it, so a quiet weekly run is what catches a rename
-  # before someone else does.
-  schedule:
-    - cron: "0 4 * * 1"
   workflow_dispatch:
 
 concurrency:

@@ -1,0 +1,35 @@
+# Weekly bump of the nixpkgs pin, as a pull request.
+#
+# `flake.lock` makes every push and pull-request run of ci.yml deterministic,
+# which is what we want, but it also means CI never sees a newer nixpkgs on its
+# own. This is where that happens: the update lands as a pull request, so the
+# full check suite runs against the new pin before anyone merges it, and a
+# genuine break shows up as a red pull request rather than a red main.
+#
+# `secrets.GITHUB_TOKEN` deliberately cannot trigger further workflow runs, so
+# a pull request opened with it would sit there untested. `FLAKE_LOCK_TOKEN`
+# must therefore be a personal access token or a GitHub App token with
+# `contents: write` and `pull-requests: write`.
+name: Update flake.lock
+
+on:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/update-flake-lock@v28
+        with:
+          token: ${{ secrets.FLAKE_LOCK_TOKEN }}
+          pr-title: "flake.lock: update nixpkgs"
+          pr-labels: dependencies
+          commit-msg: "flake.lock: update nixpkgs"
