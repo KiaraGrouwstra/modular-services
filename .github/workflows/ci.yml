@@ -22,9 +22,9 @@ jobs:
       eval: ${{ steps.matrix.outputs.eval }}
       vm: ${{ steps.matrix.outputs.vm }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: cachix/install-nix-action@v31
-      - uses: cachix/cachix-action@v16
+      - uses: cachix/cachix-action@v17
         with:
           name: modular-services
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -55,9 +55,9 @@ jobs:
       matrix: ${{ fromJSON(needs.gate.outputs.eval) }}
     name: eval (${{ matrix.env }}) ${{ matrix.name }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: cachix/install-nix-action@v31
-      - uses: cachix/cachix-action@v16
+      - uses: cachix/cachix-action@v17
         with:
           name: modular-services
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -90,7 +90,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: cachix/install-nix-action@v31
         with:
           # Tests that declare `containers` rather than `nodes` run under
@@ -106,7 +106,7 @@ jobs:
             auto-allocate-uids = true
             extra-system-features = uid-range
             experimental-features = nix-command flakes auto-allocate-uids cgroups
-      - uses: cachix/cachix-action@v16
+      - uses: cachix/cachix-action@v17
         with:
           name: modular-services
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
