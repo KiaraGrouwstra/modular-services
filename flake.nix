@@ -52,6 +52,12 @@
           The portable layer, against this flake's nixpkgs.
         */
         services = self.lib.servicesFor lib;
+
+        /**
+          The environment-agnostic compliance suite, instantiated for a package
+          set. See compliance/README.md for the arguments it takes.
+        */
+        mkComplianceSuite = pkgs: pkgs.callPackage ./compliance { };
       };
 
       nixosModules = {

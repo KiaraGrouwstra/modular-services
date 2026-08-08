@@ -5,7 +5,7 @@
 #
 # `kind` splits the CI matrix: `"eval"` tests build without a VM, `"vm"` tests
 # need `/dev/kvm`. `ci/tests.nix` prefixes each name with the environment name,
-# so `disable-proof` here becomes `checks.nixos-disable-proof`.
+# so `units` here becomes `checks.nixos-units`.
 {
   lib,
   nixpkgs,
@@ -23,10 +23,23 @@ let
       ;
   };
 
-  inherit (nixosLib) evalModules evalSystem;
+  inherit (nixosLib) evalModules evalSystem runTest;
+
+  compliance = import ./compliance.nix {
+    inherit
+      pkgs
+      self
+      evalSystem
+      runTest
+      ;
+  };
 
   eval = drv: {
     kind = "eval";
+    inherit drv;
+  };
+  vm = drv: {
+    kind = "vm";
     inherit drv;
   };
 in
@@ -44,4 +57,11 @@ in
         ;
     }
   );
+
+  # Rendered systemd units for a representative service tree.
+  units = eval (pkgs.callPackage ./units.nix { inherit evalSystem; });
 }
+// lib.mapAttrs' (name: value: {
+  name = "compliance-${name}";
+  value = if lib.hasSuffix "eval" name then eval value else vm value;
+}) compliance
