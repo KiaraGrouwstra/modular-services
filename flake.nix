@@ -60,6 +60,12 @@
         mkComplianceSuite = pkgs: pkgs.callPackage ./compliance { };
       };
 
+      /**
+        The canonical way to consume a service: `serviceModules.<pkg> pkgs`
+        yields a module to import into `system.services.<name>`.
+      */
+      serviceModules = import ./service-modules { inherit lib; };
+
       nixosModules = {
         # Modular services from this repository, replacing the nixpkgs copy.
         default = ./environments/nixos;
