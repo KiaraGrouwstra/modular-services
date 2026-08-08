@@ -138,7 +138,7 @@ same whatever the system, and a flake publishes them unkeyed.
 |---|---|
 | `lib/services/` | The portable layer. No nixpkgs paths, no `pkgs` module argument. |
 | `compliance/` | The environment-agnostic compliance suite each environment instantiates. |
-| `environments/` | One directory per configuration framework. See [`environments/README.md`](./environments/README.md). |
+| `environments/` | One directory per integration. See [`environments/README.md`](./environments/README.md). |
 | `service-modules/` | The per-package service modules, `_class = "service"` and environment-agnostic. |
 | `doc/` | The manual chapter, and the list of services whose options it documents. One book about the subsystem, not one per environment; each environment renders that list its own way. |
 | `overlays/`, `ci/` | Overlays, and the test/matrix wiring. |
