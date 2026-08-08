@@ -40,15 +40,14 @@ let
       lines = lib.filter (l: lib.hasPrefix "|" (lib.trim l)) (lib.splitString "\n" provenance);
       parsed = map parseRow lines;
       dataRows = lib.filter (
-        cells: (lib.length cells == 5) && !isSeparator cells && (lib.elemAt cells 0 != "repo path")
+        cells: (lib.length cells == 4) && !isSeparator cells && (lib.elemAt cells 0 != "repo path")
       ) parsed;
     in
     map (cells: {
       repoPath = lib.elemAt cells 0;
       nixpkgsPath = lib.elemAt cells 1;
-      rev = lib.elemAt cells 2;
-      state = lib.elemAt cells 3;
-      reason = lib.elemAt cells 4;
+      state = lib.elemAt cells 2;
+      reason = lib.elemAt cells 3;
     }) dataRows;
 
   badState = lib.filter (
@@ -64,7 +63,7 @@ in
 
 assert lib.assertMsg (rows != [ ]) ''
   upstream-drift: parsed no rows out of PROVENANCE.md. The provenance table
-  must have five columns: repo path | nixpkgs path | rev | verbatim/modified | reason.
+  must have four columns: repo path | nixpkgs path | verbatim/modified | reason.
 '';
 
 assert lib.assertMsg (badState == [ ]) ''
