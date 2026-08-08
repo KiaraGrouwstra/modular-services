@@ -16,13 +16,12 @@ let
   # into a silent no-op. environments/nixos/tests/disable-proof.nix catches that
   # from the effect side; this catches it from the cause side, with a message
   # that names the file to update.
-  disabledNixosModules = [
-    "system/service/systemd/system.nix"
-    "system/service/systemd/user.nix"
-    "misc/documentation/modular-services.nix"
-  ];
+  #
+  # Read out of the module itself rather than restated here, so the guard cannot
+  # end up checking a key the disable no longer uses.
+  inherit (import ../environments/nixos/disable-upstream.nix) disabledModules;
 
-  missing = lib.filter (p: !builtins.pathExists "${nixpkgs}/nixos/modules/${p}") disabledNixosModules;
+  missing = lib.filter (p: !builtins.pathExists "${nixpkgs}/nixos/modules/${p}") disabledModules;
 
   check = drv: {
     kind = "eval";
@@ -53,7 +52,7 @@ assert lib.assertMsg (missing == [ ]) ''
   # The guard above; a derivation so it shows up as a check.
   disable-keys-exist = check (
     pkgs.runCommand "disable-keys-exist" { } ''
-      ${lib.concatMapStringsSep "\n" (p: "echo 'found nixos/modules/${p}'") disabledNixosModules}
+      ${lib.concatMapStringsSep "\n" (p: "echo 'found nixos/modules/${p}'") disabledModules}
       touch $out
     ''
   );
