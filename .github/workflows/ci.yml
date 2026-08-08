@@ -78,7 +78,8 @@ jobs:
     steps:
       - name: Free disk space
         # A VM test closure does not fit in the ~14 GB a fresh runner has left.
-        uses: jlumbroso/free-disk-space@main
+        # Pinned to a tag rather than a branch so Dependabot can see it.
+        uses: jlumbroso/free-disk-space@v1.3.1
         with:
           # The runner needs its swap; reclaiming it trades disk for OOM kills.
           swap-storage: false

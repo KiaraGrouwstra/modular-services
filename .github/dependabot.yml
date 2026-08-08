@@ -1,0 +1,19 @@
+# Dependabot has no Nix support, so it covers exactly one thing here: the
+# action versions in .github/workflows/. The nixpkgs pin is kept current by
+# update-flake-lock.yml instead.
+#
+# Updates land grouped, as one pull request rather than one per action, so the
+# check suite runs once per week's worth of bumps.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - dependencies
+    groups:
+      actions:
+        patterns:
+          - "*"
