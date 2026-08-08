@@ -109,28 +109,17 @@ attribute still resolves to the service module vendored in nixpkgs. Use
 
 ## Outputs
 
-All of them come from [`default.nix`](./default.nix). The last group is
-produced for the system it was called with, which is the group a flake keys by
-system as `checks.<system>`, `packages.<system>` and so on; the rest are the
-same whatever the system, and a flake publishes them unkeyed.
+All of them come from [`default.nix`](./default.nix), and what each one is for
+is written down once, in [`doc/outputs.nix`](./doc/outputs.nix). The manual's
+*Flake attributes* chapter renders that alongside the lists it can generate --
+every service module, and every check with its `kind` and `integration` --
+and `checks.docs-outputs-complete` fails if an output arrives undescribed or a
+description outlives its output.
 
-| output | what |
-|---|---|
-| `modularServices.<pkg>` | `pkgs -> module`, to import into `system.services.<name>`. |
-| `nixosModules.default` | The disable plus this repository's implementation. |
-| `nixosModules.systemServices` | Just the systemd implementation. |
-| `nixosModules.disableUpstream` | Just the disable. |
-| `nixosModules.documentation` | Replacement option-documentation registry. |
-| `lib.servicesFor` | The portable layer against a caller-supplied `lib`; the entry point for a new integration. |
-| `lib.services` | `lib.servicesFor` against this flake's nixpkgs. |
-| `lib.mkComplianceSuite` | The integration-agnostic compliance suite, for a package set. |
-| `overlays.default` | Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds. |
-| `overlays.passthruServices` | Opt-in; repoints `pkgs.<pkg>.services.*` here. |
-| --- | --- |
-| `checks.*` | Every test, integration and repo-level alike. |
-| `packages.docs` | The manual chapter as HTML. |
-| `devShells.default`, `formatter` | `nixfmt-tree` and `jq`. |
-| `ci.matrix` | Consumed only by the GitHub Actions workflow. |
+Everything named in [`ci/per-system.nix`](./ci/per-system.nix) is produced for
+the system `default.nix` was called with, which is the group a flake keys as
+`checks.<system>`, `packages.<system>` and so on; the rest are the same
+whatever the system, and a flake publishes them unkeyed.
 
 ## Layout
 
@@ -140,7 +129,7 @@ same whatever the system, and a flake publishes them unkeyed.
 | `compliance/` | The integration-agnostic compliance suite each integration instantiates. |
 | `integrations/` | One directory per integration. See [`integrations/README.md`](./integrations/README.md). |
 | `modular-services/` | The services themselves: `_class = "service"`, integration-agnostic, one directory per providing package. |
-| `doc/` | The manual: its chapters, and the list of services whose options it documents. One book about the subsystem, not one per integration; each integration renders that list its own way. |
+| `doc/` | The manual: its hand-written chapters, and the lists its generated ones render -- the services whose options it documents, and what each output is for. One book about the subsystem, not one per integration; each integration renders the service list its own way. |
 | `overlays/`, `ci/` | Overlays, and the test/matrix wiring. |
 | `default.nix`, `flake.nix` | Every output, and the flake wrapper that keys the per-system ones by system. |
 

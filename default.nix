@@ -116,6 +116,10 @@ let
   # Every integration's tests, discovered from integrations/ on disk, plus the
   # repo-level checks. Both carry `{ kind, integration, drv }`, which is what
   # `checks` and the CI matrix are derived from.
+  #
+  # `ci/checks.nix` is handed the set it is half of, because the manual lists
+  # the checks and the manual is one of them. It reads names and
+  # `kind`/`integration` only, neither of which forces a derivation.
   checks =
     import ./ci/tests.nix {
       inherit
@@ -131,6 +135,7 @@ let
         nixpkgs
         self
         pkgs
+        checks
         ;
     };
 in
@@ -139,7 +144,17 @@ consumer
 // {
   checks = lib.mapAttrs (_: c: c.drv) checks;
 
-  packages.docs = import ./doc { inherit lib self pkgs; };
+  # `checks` for the chapter listing them. The manual reads their names and
+  # their `kind`/`integration`, never their derivations, so `checks.docs` does
+  # not ask this to build itself.
+  packages.docs = import ./doc {
+    inherit
+      lib
+      self
+      pkgs
+      checks
+      ;
+  };
 
   devShells.default = pkgs.mkShellNoCC {
     packages = [

@@ -9,6 +9,7 @@
   lib,
   self,
   pkgs,
+  checks,
 }:
 
 let
@@ -102,6 +103,15 @@ let
           > $out
       '';
 
+  flakeAttributesChapter = import ./flake-attributes.nix {
+    inherit
+      lib
+      self
+      pkgs
+      checks
+      ;
+  };
+
   # One page rather than one file per chapter: `nixos-render-docs` has no
   # search, so keeping the whole book in `index.html` leaves the browser's
   # find-in-page as the way to look something up.
@@ -112,6 +122,7 @@ let
     ```{=include=} chapters
     modular-services.md
     writing-and-reviewing.md
+    flake-attributes.md
     ```
 
     ```{=include=} chapters auto-id-prefix=auto-generated
@@ -140,6 +151,7 @@ runCommand "modular-services-manual"
 
     cp ${./modular-services.md} ./modular-services.md
     cp ${./writing-and-reviewing.md} ./writing-and-reviewing.md
+    cp ${flakeAttributesChapter} ./flake-attributes.md
     cp ${portableLayerChapter} ./portable-layer.md
     cp ${manualRoot} ./manual.md
     chmod +w ./modular-services.md

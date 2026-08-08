@@ -3,11 +3,16 @@
 # These use the same `{ kind, integration, drv }` shape as an integration's
 # `tests/default.nix`, so `ci/matrix.nix` covers them too and CI really builds
 # them. `nix flake check --no-build` would otherwise only instantiate them.
+#
+# `checks` is the merged set these become part of, which the manual lists a
+# chapter of. Only names and `kind`/`integration` are read from it, so `docs`
+# defining one of its entries does not make it depend on itself.
 {
   lib,
   nixpkgs,
   self,
   pkgs,
+  checks,
 }:
 
 let
@@ -73,6 +78,27 @@ assert lib.assertMsg (missing == [ ]) ''
   # Every service module must be documented; see doc/registry.nix.
   docs-registry-complete = check (import ../doc/registry-complete.nix { inherit lib self pkgs; });
 
-  # The manual chapter renders, with both option references substituted in.
-  docs = check (import ../doc { inherit lib self pkgs; });
+  # Every output must be described; see doc/outputs.nix.
+  docs-outputs-complete = check (
+    import ../doc/outputs-complete.nix {
+      inherit
+        lib
+        nixpkgs
+        self
+        pkgs
+        ;
+    }
+  );
+
+  # The manual renders, with both option references substituted in.
+  docs = check (
+    import ../doc {
+      inherit
+        lib
+        self
+        pkgs
+        checks
+        ;
+    }
+  );
 }
