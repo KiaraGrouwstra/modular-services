@@ -42,6 +42,20 @@ environment; [`../README.md`](../README.md) explains why the seam falls there.
 }
 ```
 
+Without flakes, the same thing from [`../../default.nix`](../../default.nix),
+with `src` however you fetched this repository:
+
+```nix
+{ pkgs, ... }:
+let
+  modular-services = import src { inherit (pkgs) lib; };
+in
+{
+  imports = [ modular-services.nixosModules.default ];
+  system.services.tlshd.imports = [ (modular-services.serviceModules.ktls-utils pkgs) ];
+}
+```
+
 ## Known residue
 
 Two things survive the disable. Both are documented rather than fixed, because

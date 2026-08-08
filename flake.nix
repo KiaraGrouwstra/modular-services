@@ -13,6 +13,11 @@
     let
       inherit (nixpkgs) lib;
 
+      # The consumer surface, which is flake-agnostic and lives in ./default.nix.
+      # Everything below adds to it; nothing below restates it, so a non-flake
+      # consumer cannot end up with a subset of what a flake consumer gets.
+      base = import ./. { inherit lib; };
+
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -42,55 +47,8 @@
             ;
         };
     in
-    {
-      lib = {
-        /**
-          The portable layer, instantiated against a caller-supplied `lib`.
-          This is the entry point for implementing a new environment; see the
-          `configure` docstring in lib/services/default.nix.
-        */
-        servicesFor = lib': import ./lib/services { lib = lib'; };
-
-        /**
-          The portable layer, against this flake's nixpkgs.
-        */
-        services = self.lib.servicesFor lib;
-
-        /**
-          The environment-agnostic compliance suite, instantiated for a package
-          set. See compliance/README.md for the arguments it takes.
-        */
-        mkComplianceSuite = pkgs: pkgs.callPackage ./compliance { };
-      };
-
-      /**
-        The canonical way to consume a service: `serviceModules.<pkg> pkgs`
-        yields a module to import into `system.services.<name>`.
-      */
-      serviceModules = import ./service-modules { inherit lib; };
-
-      nixosModules = {
-        # Modular services from this repository, replacing the nixpkgs copy.
-        default = ./environments/nixos;
-        # Just the implementation, without the disable.
-        modularServices = ./environments/nixos/systemd;
-        # Just the disable, without the implementation.
-        disableUpstream = ./environments/nixos/disable-upstream.nix;
-        # Replacement for the option-documentation registry that
-        # disableUpstream removes.
-        documentation = import ./environments/nixos/documentation.nix {
-          inherit lib;
-          inherit (self) serviceModules;
-        };
-      };
-
-      overlays = {
-        # Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.
-        default = import ./overlays { inherit (self) serviceModules; };
-        # Opt-in: repoints `pkgs.<pkg>.services.*` at this repository.
-        packageServices = import ./overlays/package-services.nix { inherit (self) serviceModules; };
-      };
-
+    base
+    // {
       checks = forAllSystems (pkgs: lib.mapAttrs (_: c: c.drv) (checksFor pkgs));
 
       packages = forAllSystems (pkgs: {

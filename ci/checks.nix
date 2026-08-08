@@ -57,6 +57,18 @@ assert lib.assertMsg (missing == [ ]) ''
     ''
   );
 
+  # The consumer surface evaluates, and is complete, without a flake.
+  non-flake-consumer = check (
+    import ./non-flake.nix {
+      inherit
+        lib
+        nixpkgs
+        self
+        pkgs
+        ;
+    }
+  );
+
   # Every service module must be documented; see doc/registry.nix.
   docs-registry-complete = check (import ../doc/registry-complete.nix { inherit lib self pkgs; });
 
