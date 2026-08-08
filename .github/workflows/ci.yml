@@ -1,0 +1,116 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # Surfaces upstream drift: the nixpkgs input is unpinned in flake.nix and this
+  # repository vendors from it, so a quiet weekly run is what catches a rename
+  # before someone else does.
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  SYSTEM: x86_64-linux
+
+jobs:
+  # Evaluates every output and instantiates every check without running a single
+  # virtual machine, then hands the two job matrices to the tiers below.
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      eval: ${{ steps.matrix.outputs.eval }}
+      vm: ${{ steps.matrix.outputs.vm }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+      - uses: cachix/cachix-action@v16
+        with:
+          name: modular-services
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          # Forks and pull requests have no token; stay read-only there.
+          skipPush: ${{ github.event_name == 'pull_request' }}
+
+      - name: Evaluate the flake
+        # `nix flake check` on its own would build the checks, virtual machines
+        # included. `--no-build` keeps this tier at about a minute.
+        run: nix flake check --no-build -L
+
+      - name: Check formatting
+        run: nix fmt -- --ci
+
+      - name: Compute the matrices
+        id: matrix
+        run: |
+          m=$(nix eval --json ".#ci.$SYSTEM.matrix")
+          echo "eval=$(jq -c '{include: [.include[] | select(.kind == "eval")]}' <<<"$m")" >>"$GITHUB_OUTPUT"
+          echo "vm=$(jq -c '{include: [.include[] | select(.kind == "vm")]}' <<<"$m")" >>"$GITHUB_OUTPUT"
+
+  # Checks that build without a virtual machine, so any runner will do.
+  eval-checks:
+    needs: gate
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.gate.outputs.eval) }}
+    name: eval (${{ matrix.env }}) ${{ matrix.name }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+      - uses: cachix/cachix-action@v16
+        with:
+          name: modular-services
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          skipPush: ${{ github.event_name == 'pull_request' }}
+
+      - name: Build ${{ matrix.name }}
+        continue-on-error: ${{ matrix.allowFailure }}
+        run: nix build -L --no-link ".#checks.$SYSTEM.${{ matrix.name }}"
+
+  # Checks that boot a virtual machine, so they need KVM and rather more disk.
+  vm-tests:
+    needs: gate
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.gate.outputs.vm) }}
+    name: vm (${{ matrix.env }}) ${{ matrix.name }}
+    steps:
+      - name: Free disk space
+        # A VM test closure does not fit in the ~14 GB a fresh runner has left.
+        uses: jlumbroso/free-disk-space@main
+        with:
+          # The runner needs its swap; reclaiming it trades disk for OOM kills.
+          swap-storage: false
+
+      - name: Grant access to /dev/kvm
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
+            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+      - uses: cachix/cachix-action@v16
+        with:
+          name: modular-services
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+          skipPush: ${{ github.event_name == 'pull_request' }}
+
+      - name: Assert KVM is usable
+        # Without this a lost KVM would not fail the job, it would just make
+        # every VM test crawl under software emulation until the runner times
+        # out. Fail loudly instead.
+        run: |
+          test -c /dev/kvm
+          nix config show system-features | tr ' ,' '\n\n' | grep -qx kvm
+
+      - name: Build ${{ matrix.name }}
+        continue-on-error: ${{ matrix.allowFailure }}
+        run: nix build -L --no-link ".#checks.$SYSTEM.${{ matrix.name }}"
