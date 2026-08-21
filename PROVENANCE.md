@@ -103,7 +103,7 @@ in the pinned nixpkgs.
 | `modular-services/ktls-utils/service.nix` | `pkgs/by-name/kt/ktls-utils/service.nix` | modified | The systemd definitions move to `integrations/nixos/modular/ktls-utils/default/system.nix`. |
 | `modular-services/snid/service.nix` | `pkgs/by-name/sn/snid/service.nix` | modified | The systemd definitions move to `integrations/nixos/modular/snid/default/system.nix`. |
 | `modular-services/php/service.nix` | `pkgs/development/interpreters/php/service.nix` | modified | Test-path comment retargeted to `integrations/nixos/tests/packages/php-fpm.nix`. The systemd definitions move to `integrations/nixos/modular/php/default/system.nix`, which takes `coreutils` with them, so the service's non-module dependencies narrow to `{ formats }`. |
-| `doc/modular-services.md` | `nixos/doc/manual/development/modular-services.md` | modified | Adds a note on this repository's relationship to nixpkgs; the consumption example uses `modularServices`. The two option-type links become absolute NixOS-manual URLs, because the chapter renders as a standalone book where a bare `#anchor` is resolved against the book and rejected when it names nothing. Links into this repository are absolute for the same reason, so that they resolve both here and in the rendered manual. Keeps the `@PORTABLE_SERVICE_OPTIONS@` / `@SYSTEMD_SERVICE_OPTIONS@` placeholders. |
+| `doc/modular-services.md` | `doc/modules/modular-services.section.md`, `nixos/doc/manual/development/modular-services.md` | modified | One chapter where nixpkgs has two: the portable material lives in the nixpkgs manual and the NixOS manual carries a pointer chapter with the systemd-specific options, whereas this is one book about the subsystem rather than one chapter per integration. Adds a note on this repository's relationship to nixpkgs; the consumption example uses `modularServices`. The two option-type links become absolute NixOS-manual URLs, because the chapter renders as a standalone book where a bare `#anchor` is resolved against the book and rejected when it names nothing. Links into this repository are absolute for the same reason, so that they resolve both here and in the rendered manual. Keeps the `@PORTABLE_SERVICE_OPTIONS@` / `@SYSTEMD_SERVICE_OPTIONS@` placeholders. |
 | `doc/writing-and-reviewing.md` | `nixos/README-modular-services.md` | modified | Review checklist and worked examples retargeted at this repository's paths, and links into it made absolute. Every heading gains an explicit anchor, because the file is a chapter of the rendered manual rather than a standalone README. |
 | `compliance/README.md` | `doc/build-helpers/testers.chapter.md` | modified | Extracted from the `modularServiceCompliance` section of the testers chapter; the nixpkgs-manual markup is dropped and the invocation example uses `self.lib.mkComplianceSuite`. |
 
@@ -112,7 +112,8 @@ in the pinned nixpkgs.
 - `nixos/tests/all-tests.nix`'s `callTest` / `findTests` plumbing. It exists to
   satisfy the nixpkgs test registry and has no counterpart here;
   `pkgs.testers.runNixOSTest` returns a derivation directly.
-- `nixos/modules/misc/documentation/modular-services.nix`. Replaced by
+- `nixos/modules/misc/documentation/modular-services.nix`, including its
+  `bundledModularServiceNames` list. Replaced by
   [`integrations/nixos/documentation.nix`](./integrations/nixos/documentation.nix),
   which is keyed on `modularServices` rather than on package `passthru`, and
   which covers `easytier` and `holo-daemon` -- two service modules the nixpkgs
@@ -132,6 +133,10 @@ in the pinned nixpkgs.
   directly.
 - `ci/OWNERS`, and `modules/generic/meta-maintainers/test.nix`. Both are nixpkgs
   CI plumbing; neither the ownership file nor that test is vendored here.
+- The nixpkgs manual's build plumbing for the modular-services chapter:
+  `doc/doc-support/package.nix`, `doc/redirects.json` and the
+  `package-module-options` entry in `pkgs/top-level/all-packages.nix`. This book
+  is built by [`doc/default.nix`](./doc/default.nix) instead.
 - `nixos/modules/system/service/README.md`. Superseded by
   [`integrations/nixos/README.md`](./integrations/nixos/README.md).
 - `pkgs/by-name/gi/git-pages/package.nix`. Its `passthru.services.default`
