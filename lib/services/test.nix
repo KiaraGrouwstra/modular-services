@@ -10,12 +10,6 @@ let
 
   portable-lib = import ./. { inherit lib; };
 
-  configured = portable-lib.configure {
-    serviceManagerPkgs = throw "do not use pkgs in this test";
-    extraRootModules = [ ];
-    extraRootSpecialArgs = { };
-  };
-
   dummyPkg =
     name:
     derivation {
@@ -23,6 +17,17 @@ let
       name = name;
       builder = "/bin/false";
     };
+
+  configured = portable-lib.configure {
+    # `coreutils` is the only package the portable layer legitimately needs, to derive
+    # `process.reloadCommand` from `process.reloadSignal`. Anything else reaching for
+    # `pkgs` fails on the missing attribute.
+    serviceManagerPkgs = {
+      coreutils = dummyPkg "coreutils";
+    };
+    extraRootModules = [ ];
+    extraRootSpecialArgs = { };
+  };
 
   exampleConfig = {
     services = {
@@ -51,6 +56,7 @@ let
             (dummyPkg "cowsay.sh")
             "world"
           ];
+          reloadCommand = "${dummyPkg "cowsay.sh"} reload";
         };
       };
       service3 = {
@@ -68,6 +74,7 @@ let
               ))
               "!"
             ];
+            reloadSignal = "HUP";
           };
           assertions = [
             {
@@ -151,13 +158,15 @@ let
   # Every service carries some assertions that hold; only the violated ones are of interest here.
   failures = lib.filter (a: !a.assertion);
 
+  # The goal of this test is to perform and check a complete evaluation of all options.
+  # Only filter out values that are truly infeasible to check, such as function values.
   filterEval =
     config:
     lib.optionalAttrs (config ? process) {
       inherit (config) warnings;
       assertions = failures config.assertions;
-      # Only `argv` is relevant here; `process` also carries the reload options.
-      process = { inherit (config.process) argv; };
+      # `flagFormat` is a function and cannot be compared; the rest of `process` is checked.
+      process = { inherit (config.process) argv reloadCommand reloadSignal; };
     }
     // {
       services = lib.mapAttrs (k: filterEval) config.services;
@@ -173,6 +182,8 @@ let
                 "/usr/bin/echo"
                 "hello"
               ];
+              reloadCommand = null;
+              reloadSignal = null;
             };
             services = { };
             assertions = [
@@ -191,6 +202,8 @@ let
                 "${dummyPkg "cowsay.sh"}"
                 "world"
               ];
+              reloadCommand = "${dummyPkg "cowsay.sh"} reload";
+              reloadSignal = null;
             };
             services = { };
             assertions = [ ];
@@ -199,6 +212,8 @@ let
           service3 = {
             process = {
               argv = [ "/bin/false" ];
+              reloadCommand = null;
+              reloadSignal = null;
             };
             services.exclacow = {
               process = {
@@ -206,6 +221,8 @@ let
                   "${dummyPkg "cowsay-ng"}/bin/cowsay"
                   "!"
                 ];
+                reloadCommand = "${dummyPkg "coreutils"}/bin/kill -HUP $MAINPID";
+                reloadSignal = "HUP";
               };
               services = { };
               assertions = [
@@ -231,6 +248,8 @@ let
                 "--name"
                 "example"
               ];
+              reloadCommand = null;
+              reloadSignal = null;
             };
             services = { };
             assertions = [ ];
@@ -244,6 +263,8 @@ let
                 "--quiet=false"
                 "--verbose=true"
               ];
+              reloadCommand = null;
+              reloadSignal = null;
             };
             services = { };
             assertions = [ ];
@@ -258,6 +279,8 @@ let
                 "--host"
                 "b"
               ];
+              reloadCommand = null;
+              reloadSignal = null;
             };
             services = { };
             assertions = [ ];
@@ -273,6 +296,8 @@ let
                 "a"
                 "TRAILING"
               ];
+              reloadCommand = null;
+              reloadSignal = null;
             };
             services = { };
             assertions = [ ];
