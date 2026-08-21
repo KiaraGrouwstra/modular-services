@@ -37,6 +37,16 @@ rec {
   );
 
   /**
+    The portable service base, `service.nix`, with its non-module dependency
+    applied: `importService { inherit pkgs; }` is a module. `configure` loads it
+    by default; pass it, or a copy pinned from another revision, as
+    `baseModules` to choose the base explicitly.
+
+    lib.services.importService :: { pkgs :: AttrSet } -> Module
+  */
+  importService = lib.modules.importApply ./service.nix;
+
+  /**
     Entrypoint for integrating modular services into a containing module system.
 
     Each containing system (NixOS, ...) calls `configure` to
@@ -63,6 +73,8 @@ rec {
 
       modularServiceConfiguration = portable-lib.configure {
         serviceManagerPkgs = pkgs;
+        # To load a different portable service base, set `baseModules` instead:
+        #   baseModules = [ (portable-lib.importService { inherit pkgs; }) ];
         extraRootModules = [
           ./launchd/service.nix    # launchd-specific options (plist generation, etc.)
         ];
@@ -103,18 +115,27 @@ rec {
     `serviceManagerPkgs`
 
     : 1\. A Nixpkgs instance used for built-in logic such as converting
-    `configData.<path>.text` to a store path.
+    `configData.<path>.text` to a store path. Required unless `baseModules`
+    is set.
+
+    `baseModules`
+
+    : 2\. Modules that replace the portable service base. They are loaded
+    into the "root" service submodule and must handle propagation to
+    sub-`services` themselves. Defaults to this repository's portable service
+    base, `importService { pkgs = serviceManagerPkgs; }`. Set it to supply a
+    different one, for example a `service.nix` pinned from another revision.
 
     `extraRootModules`
 
-    : 2\. Modules to be loaded into the "root" service submodule, but not
+    : 3\. Modules to be loaded into the "root" service submodule, but not
     into its sub-`services`. That's the modules' own responsibility.
     Typically contains service-manager-specific option modules
     (e.g. systemd unit options, launchd plist options).
 
     `extraRootSpecialArgs`
 
-    : 3\. Fixed module arguments provided alongside `extraRootModules`.
+    : 4\. Fixed module arguments provided alongside `extraRootModules`.
 
     # Output
 
@@ -124,17 +145,15 @@ rec {
   */
   configure =
     {
-      serviceManagerPkgs,
+      serviceManagerPkgs ? throw "lib.services.configure: `serviceManagerPkgs` is required unless `baseModules` is set",
+      baseModules ? [ (importService { pkgs = serviceManagerPkgs; }) ],
       extraRootModules ? [ ],
       extraRootSpecialArgs ? { },
     }:
     let
-      modules = [
-        (lib.modules.importApply ./service.nix { pkgs = serviceManagerPkgs; })
-      ];
       serviceSubmodule = types.submoduleWith {
         class = "service";
-        modules = modules ++ extraRootModules;
+        modules = baseModules ++ extraRootModules;
         specialArgs = extraRootSpecialArgs;
       };
     in

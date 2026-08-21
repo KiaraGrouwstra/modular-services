@@ -1,5 +1,6 @@
 { lib, ... }:
 {
+  _class = null; # not specific to NixOS
 
   options = {
 
