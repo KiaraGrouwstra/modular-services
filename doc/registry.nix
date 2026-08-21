@@ -17,5 +17,6 @@
   "holo-daemon"
   "ktls-utils"
   "php"
+  "redlib"
   "snid"
 ]
