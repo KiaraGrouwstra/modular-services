@@ -57,6 +57,10 @@ let
             "world"
           ];
           reloadCommand = "${dummyPkg "cowsay.sh"} reload";
+          environment = {
+            FOO = "bar";
+            DROPPED = null;
+          };
         };
       };
       service3 = {
@@ -166,7 +170,14 @@ let
       inherit (config) warnings;
       assertions = failures config.assertions;
       # `flagFormat` is a function and cannot be compared; the rest of `process` is checked.
-      process = { inherit (config.process) argv reloadCommand reloadSignal; };
+      process = {
+        inherit (config.process)
+          argv
+          environment
+          reloadCommand
+          reloadSignal
+          ;
+      };
     }
     // {
       services = lib.mapAttrs (k: filterEval) config.services;
@@ -184,6 +195,7 @@ let
               ];
               reloadCommand = null;
               reloadSignal = null;
+              environment = { };
             };
             services = { };
             assertions = [
@@ -204,6 +216,10 @@ let
               ];
               reloadCommand = "${dummyPkg "cowsay.sh"} reload";
               reloadSignal = null;
+              environment = {
+                FOO = "bar";
+                DROPPED = null;
+              };
             };
             services = { };
             assertions = [ ];
@@ -214,6 +230,7 @@ let
               argv = [ "/bin/false" ];
               reloadCommand = null;
               reloadSignal = null;
+              environment = { };
             };
             services.exclacow = {
               process = {
@@ -223,6 +240,7 @@ let
                 ];
                 reloadCommand = "${dummyPkg "coreutils"}/bin/kill -HUP $MAINPID";
                 reloadSignal = "HUP";
+                environment = { };
               };
               services = { };
               assertions = [
@@ -250,6 +268,7 @@ let
               ];
               reloadCommand = null;
               reloadSignal = null;
+              environment = { };
             };
             services = { };
             assertions = [ ];
@@ -265,6 +284,7 @@ let
               ];
               reloadCommand = null;
               reloadSignal = null;
+              environment = { };
             };
             services = { };
             assertions = [ ];
@@ -281,6 +301,7 @@ let
               ];
               reloadCommand = null;
               reloadSignal = null;
+              environment = { };
             };
             services = { };
             assertions = [ ];
@@ -298,6 +319,7 @@ let
               ];
               reloadCommand = null;
               reloadSignal = null;
+              environment = { };
             };
             services = { };
             assertions = [ ];
