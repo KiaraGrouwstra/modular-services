@@ -81,9 +81,14 @@ in
 
   # File attribution of the NixOS variants in `../modular`.
   modular-variants = eval (pkgs.callPackage ./modular-variants.nix { inherit evalSystem; });
+  # The same, for per-user services: unit naming, and the per-user profile.
+  user-units = eval (pkgs.callPackage ./user-units.nix { inherit evalSystem; });
 
   # `configData` -> `environment.etc`.
   etc = vm (runTest ./etc/test.nix);
+
+  # A per-user service actually starting under the user's systemd instance.
+  user-service = vm (runTest ./user-service.nix);
 }
 // lib.mapAttrs' (name: value: {
   name = "compliance-${name}";

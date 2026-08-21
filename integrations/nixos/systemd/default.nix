@@ -8,6 +8,6 @@
 
   imports = [
     ./system
-    ./user.nix
+    ./user
   ];
 }

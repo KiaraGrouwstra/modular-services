@@ -80,9 +80,13 @@ in the pinned nixpkgs.
 | `integrations/nixos/systemd/defaults.nix` | `nixos/modules/system/service/systemd/defaults.nix` | verbatim | |
 | `integrations/nixos/systemd/service.nix` | `nixos/modules/system/service/systemd/service.nix` | verbatim | |
 | `integrations/nixos/systemd/system/config-data-path.nix` | `nixos/modules/system/service/systemd/system/config-data-path.nix` | modified | Test-path comment retargeted to `../../tests/etc/test.nix`. |
-| `integrations/nixos/systemd/user.nix` | `nixos/modules/system/service/systemd/user.nix` | verbatim | Still a stub upstream. |
+| `integrations/nixos/systemd/user/default.nix` | `nixos/modules/system/service/systemd/user/default.nix` | modified | The portable-layer import becomes `../../../../lib/services`, as in `../system/default.nix`. |
+| `integrations/nixos/systemd/user/config-data-path.nix` | `nixos/modules/system/service/systemd/user/config-data-path.nix` | verbatim | |
+| `integrations/nixos/systemd/user/defaults.nix` | `nixos/modules/system/service/systemd/user/defaults.nix` | verbatim | |
 | `integrations/nixos/tests/units.nix` | `nixos/modules/system/service/systemd/system/test.nix` | modified | Run-instruction comment only; `evalSystem` now comes from `integrations/nixos/lib.nix` instead of `all-tests.nix`, which needs no change to the file. |
 | `integrations/nixos/tests/modular-variants.nix` | `nixos/modules/system/service/modular/test.nix` | modified | Run-instruction comment, the `system.stateVersion` this repository's tests use, and the expected attribution paths, which name `integrations/nixos/modular/` and `modular-services/` rather than the nixpkgs tree. |
+| `integrations/nixos/tests/user-units.nix` | `nixos/modules/system/service/systemd/user/test.nix` | modified | Run-instruction comment only, as for `units.nix`. |
+| `integrations/nixos/tests/user-service.nix` | `nixos/tests/modular-user-service.nix` | modified | Run-instruction comment only. |
 | `integrations/nixos/tests/compliance.nix` | `nixos/tests/system-services-compliance.nix` | modified | Drops the `callTest` parameter and the trailing `mapAttrs ... callTest` block, which exist only to satisfy `all-tests.nix` plumbing. Calls `self.lib.mkComplianceSuite` instead of `pkgs.testers.modularServiceCompliance`. The `systemdEvalTests` block is unchanged. |
 | `integrations/nixos/tests/etc/test.nix` | `nixos/tests/modular-service-etc/test.nix` | modified | Run-instruction comment, and `config` is taken on the `server` node's module arguments rather than the test's, which is where `modularServices` is declared. |
 | `integrations/nixos/tests/etc/python-http-server.nix` | `nixos/tests/modular-service-etc/python-http-server.nix` | verbatim | |
