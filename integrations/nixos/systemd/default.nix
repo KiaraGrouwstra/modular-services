@@ -7,7 +7,7 @@
   _class = "nixos";
 
   imports = [
-    ./system.nix
+    ./system
     ./user.nix
   ];
 }

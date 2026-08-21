@@ -41,7 +41,7 @@ assert lib.assertMsg upstreamRemoved ''
 
 assert lib.assertMsg (declarations != [ ]) ''
   nixos-disable-proof: `options.system.services` has no declarations at all.
-  Expected it to be declared by integrations/nixos/systemd/system.nix.
+  Expected it to be declared by integrations/nixos/systemd/system/default.nix.
 '';
 
 assert lib.assertMsg (foreign == [ ]) ''

@@ -1,4 +1,4 @@
-# Tests in: ../tests/etc/test.nix
+# Tests in: ../../tests/etc/test.nix
 # This module sets the path for configData entries in systemd services
 let
   setPathsModule =
