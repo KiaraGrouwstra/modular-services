@@ -154,6 +154,7 @@ in
     php-fpm.settings = {
       error_log = "syslog";
       daemonize = false;
+      systemd_interval = lib.mkDefault 10;
     };
 
     process.argv = [
