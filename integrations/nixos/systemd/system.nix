@@ -17,6 +17,8 @@ let
 
   portable-lib = import ../../../lib/services { inherit lib; };
 
+  modularServices = import ../../../modular-services { inherit lib; };
+
   dash =
     before: after:
     if after == "" then
@@ -68,11 +70,19 @@ let
     ];
     extraRootSpecialArgs = {
       systemdPackage = config.systemd.package;
+      # Exposed so environment-specific service variants under
+      # `integrations/nixos/modular/` can pull in their pure base from
+      # `modularServices.<name>`.
+      inherit pkgs modularServices;
     };
   };
 in
 {
   _class = "nixos";
+
+  imports = [
+    ./defaults.nix
+  ];
 
   # First half of the magic: mix systemd logic into the otherwise abstract services
   options = {

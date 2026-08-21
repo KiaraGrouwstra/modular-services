@@ -33,9 +33,9 @@ both be live:
         modules = [
           modular-services.nixosModules.default
           (
-            { pkgs, ... }:
+            { config, ... }:
             {
-              system.services.tlshd.imports = [ (modular-services.modularServices.ktls-utils pkgs) ];
+              system.services.tlshd.imports = [ config.modularServices.ktls-utils.default ];
             }
           )
         ];
@@ -44,7 +44,10 @@ both be live:
 }
 ```
 
-`modularServices.<pkg> pkgs` is the canonical way to consume a service.
+`config.modularServices.<pkg>.<svc>` is how a NixOS configuration consumes a
+service: the service itself, out of `modularServices.<pkg> pkgs`, plus the
+systemd definitions that only the integration can supply. See
+[`integrations/nixos/README.md`](./integrations/nixos/README.md#service-variants).
 
 The [manual](https://kiaragrouwstra.github.io/modular-services/) is what `main`
 publishes: the subsystem itself, how to write and review a service, the
@@ -65,13 +68,13 @@ of its own. Fetch the source however you like -- `npins`, `fetchTarball`, a
 subtree -- and call it:
 
 ```nix
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   modular-services = import sources.modular-services { inherit (pkgs) lib; };
 in
 {
   imports = [ modular-services.nixosModules.default ];
-  system.services.tlshd.imports = [ (modular-services.modularServices.ktls-utils pkgs) ];
+  system.services.tlshd.imports = [ config.modularServices.ktls-utils.default ];
 }
 ```
 
@@ -104,8 +107,8 @@ missing.
 
 **`pkgs.<pkg>.services.default`.** Package `passthru` is untouched, so that
 attribute still resolves to the service module vendored in nixpkgs. Use
-`modularServices.<pkg> pkgs`, which is what every test here does, or apply
-`overlays.passthruServices` if you have existing code written against the
+`config.modularServices.<pkg>.<svc>`, which is what every test here does, or
+apply `overlays.passthruServices` if you have existing code written against the
 `passthru` path. That overlay excludes `php`, which regenerates its own
 `passthru` and cannot be overridden this way.
 

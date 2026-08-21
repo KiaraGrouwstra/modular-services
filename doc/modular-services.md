@@ -33,9 +33,10 @@ So note that the default value of `system.services.<name>` is not a complete ser
 
 <!-- Not using typical example syntax, because reading this is *not* optional, and should it should not be folded closed. -->
 ```nix
+{ config, ... }:
 {
   system.services.my-service-instance = {
-    imports = [ (modular-services.modularServices.some-application pkgs) ];
+    imports = [ config.modularServices.some-application.default ];
     foo.settings = {
       # ...
     };
@@ -43,7 +44,8 @@ So note that the default value of `system.services.<name>` is not a complete ser
 }
 ```
 
-`modularServices.<pkg>` is the canonical way to consume a service from this repository.
+`config.modularServices.<pkg>.<svc>` is how a NixOS configuration consumes a service: the service itself, plus the systemd-specific definitions that only this integration can supply.
+`modularServices.<pkg> pkgs` is that service on its own, for an integration whose service manager is not systemd.
 `pkgs.<pkg>.services.*` still resolves to the nixpkgs copy unless `overlays.passthruServices` is applied; see [the README](https://github.com/kiaragrouwstra/modular-services/blob/main/README.md#known-residue).
 
 ## Portability {#modular-service-portability}
@@ -70,6 +72,9 @@ It is possible to write service modules that are portable. This is done by eithe
 
 This way, the module can be loaded into a configuration manager that does not use systemd, and the `systemd` definitions will be ignored.
 Similarly, other configuration managers can declare their own options for services to customize.
+
+The services in this repository take the second route further, and keep the manager-specific definitions out of the service module entirely: they live in a variant alongside the integration that understands them, `integrations/nixos/modular/<pkg>/<svc>/system.nix` for NixOS.
+That leaves the service module in [`modular-services/`](https://github.com/kiaragrouwstra/modular-services/blob/main/modular-services) portable by construction rather than by convention, and it lets an integration refine a service it does not own.
 
 ## Composition and Ownership {#modular-service-composition}
 

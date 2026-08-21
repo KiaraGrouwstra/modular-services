@@ -24,7 +24,6 @@ let
   };
 
   inherit (nixosLib) evalModules evalSystem runTest;
-  inherit (self) modularServices;
 
   compliance = import ./compliance.nix {
     inherit
@@ -50,8 +49,8 @@ let
     extensions = { enabled, all }: with all; enabled ++ [ apcu ];
   };
 
-  # Per-package VM tests. Each is a `nixosTest` module taking `modularServices`
-  # as a non-module dependency.
+  # Per-package VM tests. Each is a `nixosTest` module whose nodes import the
+  # NixOS variant of the service from `config.modularServices`.
   pkgTests = {
     autopush-rs = ./packages/autopush-rs.nix;
     easytier = ./packages/easytier.nix;
@@ -79,6 +78,9 @@ in
   # Rendered systemd units for a representative service tree.
   units = eval (pkgs.callPackage ./units.nix { inherit evalSystem; });
 
+  # File attribution of the NixOS variants in `../modular`.
+  modular-variants = eval (pkgs.callPackage ./modular-variants.nix { inherit evalSystem; });
+
   # `configData` -> `environment.etc`.
   etc = vm (runTest ./etc/test.nix);
 }
@@ -88,11 +90,11 @@ in
 }) compliance
 // lib.mapAttrs' (name: module: {
   name = "pkg-${name}";
-  value = vm (runTest (lib.modules.importApply module { inherit modularServices; }));
+  value = vm (runTest module);
 }) pkgTests
 // {
   pkg-php-fpm = vm (runTest {
-    imports = [ (lib.modules.importApply ./packages/php-fpm.nix { inherit modularServices; }) ];
+    imports = [ ./packages/php-fpm.nix ];
     _module.args.php = php';
   });
 }

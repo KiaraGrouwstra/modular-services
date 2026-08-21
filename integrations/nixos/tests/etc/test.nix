@@ -10,12 +10,12 @@
 
   nodes = {
     server =
-      { pkgs, ... }:
+      { config, pkgs, ... }:
       let
         # Normally the package services.default attribute combines this, but we
         # don't have that, because this is not a production service. Should it be?
         python-http-server = {
-          imports = [ ./python-http-server.nix ];
+          imports = [ config.modularServices.python-http-server.default ];
           python-http-server.package = pkgs.python3;
         };
       in
