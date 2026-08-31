@@ -300,6 +300,12 @@ answer to what an entry is doing in the corpus.
 - [NixOS/nixpkgs#476861](https://github.com/NixOS/nixpkgs/pull/476861) -- easytier.services.default: init (closed)
 - [NixOS/nixpkgs#518860](https://github.com/NixOS/nixpkgs/pull/518860) -- nixos/modular-services: add portable `process.environment` (closed)
 
+## Matrix (1)
+
+| room | messages | span | visibility |
+| --- | --- | --- | --- |
+| [Nix Modular Services](https://matrix.to/#/#modular-services:nixos.org) `#modular-services:nixos.org` | 1298 | 2025-08-09 to 2026-08-31 | world_readable, join rule public |
+
 ## Pads (1)
 
 - [`raw/hedgedoc/pad.md`](pad.md) -- <https://pad.lassul.us/modular-services>
@@ -376,11 +382,10 @@ answer to what an entry is doing in the corpus.
 | `discourse-secrets-not-in-config` | discourse-topic | discourse.nixos.org/t/79078 | Secrets don't belong in config. The argument behind the secrets work, stated for a general audience. |
 | `discourse-sixos` | discourse-topic | discourse.nixos.org/t/58141 | sixos: a NixOS without systemd. Another framework with its own answer, and a critic of this one. |
 | `discourse-nixify-kubernetes` | discourse-topic | discourse.nixos.org/t/70899 | Nixifying Kubernetes. The meetings keep citing k8s for how it wants services declared separately so it can tell what failed. |
+| `matrix` | matrix-room | `#modular-services:nixos.org` | The day-to-day channel, and the only source here that needs a credential: reading any room requires an account, since matrix.nixos.org has guest access and registration disabled and the Matrix Public Archive was discontinued. The room itself sets history_visibility to world_readable and its join rule to public, so its operators have made the history readable to anyone who asks; the account is a formality of the protocol rather than a permission. A run without MATRIX_TOKEN skips this and says so. |
 
 ## Deliberately not fetched
 
-- **Matrix: #modular-services:nixos.org (!skjfPnBZwrJbAxHTxh:nixos.org)** -- <https://matrix.to/#/#modular-services:nixos.org>  
-  The day-to-day channel, and the one real hole in this corpus. What was checked, so nobody has to check it again: the alias resolves without authentication, but every read of the room returns M_MISSING_TOKEN; matrix.nixos.org has guest access disabled and registration disabled; the Matrix Public Archive, which used to render world-readable rooms as static HTML, was discontinued by the Matrix.org Foundation; and the room is not in that homeserver's public directory, so its history-visibility setting cannot be read from outside either. Fetching it therefore needs an access token for an account that has joined. That is doable -- the token would be an environment variable and a CI secret, the way GH_TOKEN already is -- and it is not done. Until it is, what gets decided here is expected to reach the pad or an issue.
 - **roberth's compliance-suite branch** -- <https://github.com/NixOS/nixpkgs/compare/master...roberth:nixpkgs:modular-services-compliance-suite>  
   Code under discussion, not discussion. Cited from the pad; fetch the diff from git when it matters.
 - **DigitalBrewStudios service-api generalization branch** -- <https://github.com/NixOS/nixpkgs/compare/master...DigitalBrewStudios:nixpkgs:modular-service-generalization-service-api>  

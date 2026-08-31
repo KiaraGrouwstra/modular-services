@@ -59,10 +59,15 @@ jobs:
             *) echo "crowdsource-sync failed with $status"; exit "$status" ;;
           esac
 
+      # MATRIX_TOKEN is optional: without it the sync skips the Matrix room and
+      # reports the skip, so the job still refreshes everything else. Use a
+      # throwaway account -- a Matrix access token is full access to whichever
+      # account issued it, and this one lives in CI.
       - name: Refresh
         if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MATRIX_TOKEN: ${{ secrets.MATRIX_TOKEN }}
         run: nix run .#crowdsource-sync
 
       # `add-paths` confines the commit to the corpus: a scheduled job that can

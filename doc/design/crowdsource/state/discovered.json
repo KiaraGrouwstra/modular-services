@@ -13,6 +13,14 @@
    "ref": "NixOS/nixpkgs#370444"
   },
   {
+   "mentions": 5,
+   "ref": "NixOS/nixpkgs#383911"
+  },
+  {
+   "mentions": 5,
+   "ref": "NixOS/nixpkgs#544695"
+  },
+  {
    "mentions": 4,
    "ref": "NixOS/nixpkgs#425923"
   },
@@ -231,6 +239,10 @@
   {
    "mentions": 2,
    "ref": "discourse:discourse.nixos.org/t/77888"
+  },
+  {
+   "mentions": 2,
+   "ref": "finix-community/modular-services#2"
   },
   {
    "mentions": 2,
@@ -539,6 +551,10 @@
   {
    "mentions": 1,
    "ref": "NixOS/nixpkgs#510142"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#513040"
   },
   {
    "mentions": 1,
@@ -923,6 +939,10 @@
   {
    "mentions": 1,
    "ref": "ngi-nix/ngipkgs#507"
+  },
+  {
+   "mentions": 1,
+   "ref": "nix-community/NUR#1151"
   },
   {
    "mentions": 1,

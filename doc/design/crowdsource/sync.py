@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -39,6 +40,10 @@ def set_dir(directory: Path) -> None:
     STATE = HERE / "state"
 
 USER_AGENT = "modular-services-crowdsource-sync"
+
+# Any homeserver can read a public federated room, so this is only a default for
+# whichever account MATRIX_TOKEN belongs to.
+DEFAULT_HOMESERVER = "https://matrix-client.matrix.org"
 
 # Distinguishes "the server says nothing changed" from "there is nothing here".
 NOT_MODIFIED = object()
@@ -319,18 +324,24 @@ class Fetcher:
             print(f"  ! {path}: {proc.stderr.strip()[:120]}; retry in {wait}s", file=sys.stderr)
             time.sleep(wait)
 
-    def http(self, url: str, as_json: bool = True, conditional: bool = False):
+    def http(
+        self,
+        url: str,
+        as_json: bool = True,
+        conditional: bool = False,
+        headers: dict | None = None,
+    ):
         """Plain GET. With `conditional`, replays the stored ETag and returns
         the sentinel `NOT_MODIFIED` on a 304. Discourse and the project board
         send `cache-control: no-store`, so only the pad benefits; the support is
         here because a source that gains a validator should not need new code."""
-        headers = {"User-Agent": USER_AGENT}
+        head = {"User-Agent": USER_AGENT, **(headers or {})}
         if conditional and url in self.etags:
-            headers["If-None-Match"] = self.etags[url]
+            head["If-None-Match"] = self.etags[url]
         for attempt in range(5):
             self.requests += 1
             self.log(f"GET {url}")
-            req = urllib.request.Request(url, headers=headers)
+            req = urllib.request.Request(url, headers=head)
             try:
                 with urllib.request.urlopen(req, timeout=60) as resp:
                     body = resp.read().decode("utf-8")
@@ -343,6 +354,11 @@ class Fetcher:
                     return NOT_MODIFIED
                 if e.code == 404:
                     return None
+                if e.code in (401, 403):
+                    try:
+                        return json.load(e)
+                    except Exception:
+                        return {"errcode": f"HTTP_{e.code}"}
                 if attempt == 4:
                     raise
             except Exception:
@@ -364,6 +380,7 @@ class Report:
     updated: list[str] = field(default_factory=list)
     unchanged: int = 0
     removed: list[str] = field(default_factory=list)
+    skipped: list[str] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
 
 
@@ -664,6 +681,151 @@ def fetch_hedgedoc(f: Fetcher, url: str):
     return f.http(url.rstrip("/") + "/download", as_json=False, conditional=True)
 
 
+
+# ---------------------------------------------------------------------------
+# Matrix
+#
+# The one source that needs a credential. Reading any room, even a
+# world-readable one, requires an account: `matrix.nixos.org` has guest access
+# and registration disabled, and the Matrix Public Archive that used to render
+# such rooms as static HTML was discontinued. So the token comes from the
+# environment, never from this repository, and a run without one skips these
+# sources and says so rather than failing -- the other 99% of the corpus does
+# not need it.
+#
+# The homeserver is a property of the credential, not of the room: a public
+# federated room is readable from any server, so `MATRIX_HOMESERVER` pairs with
+# whichever account `MATRIX_TOKEN` belongs to.
+#
+# Events are immutable, so a refresh pages backwards only until it meets an
+# event already on disk. `unsigned.age` is dropped because it is the number of
+# milliseconds since the event happened, recomputed per request, and would
+# rewrite every message on every sync.
+# ---------------------------------------------------------------------------
+
+MATRIX_STATE = ("m.room.name", "m.room.topic", "m.room.history_visibility", "m.room.join_rules")
+
+
+def matrix_token() -> str | None:
+    token = os.environ.get("MATRIX_TOKEN")
+    if token:
+        return token.strip()
+    path = os.environ.get("MATRIX_TOKEN_FILE")
+    if path and Path(path).exists():
+        return Path(path).read_text(encoding="utf-8").strip()
+    return None
+
+
+def strip_formatted(value):
+    """Drop the HTML rendering of a message body, at any depth.
+
+    `formatted_body` is to a Matrix message what `body_html` is to a GitHub
+    comment and `cooked` is to a Discourse post: the same text again, in
+    markup. Every event here has a plain `body`, so it is the same rule applied
+    to the third source. Nested, because an edit carries its own copy under
+    `m.new_content`.
+    """
+    if isinstance(value, dict):
+        return {
+            k: strip_formatted(v)
+            for k, v in value.items()
+            if k not in ("formatted_body", "format")
+        }
+    if isinstance(value, list):
+        return [strip_formatted(v) for v in value]
+    return value
+
+
+def matrix_event(e: dict) -> dict:
+    """One message, reduced to who said what and when.
+
+    `unsigned` goes entirely. It holds `age` -- milliseconds since the event,
+    recomputed on every request, so keeping it would rewrite the whole room on
+    every sync. It also holds `m.relations`, the server's running aggregation of
+    edits and reactions, which is a moving summary of events this corpus already
+    stores individually; and `redacted_because`, the redaction event itself.
+
+    A redacted message arrives with `content` already emptied by the server, so
+    nothing anyone deleted is kept here. The tombstone is: somebody said
+    something here and took it back.
+    """
+    unsigned = e.get("unsigned") or {}
+    out = {
+        k: e[k]
+        for k in ("event_id", "sender", "origin_server_ts", "type", "content")
+        if k in e
+    }
+    out["content"] = strip_formatted(out.get("content"))
+    if "redacted_because" in unsigned or e.get("redacted_because"):
+        out["content"] = {}
+        out["redacted"] = True
+    return out
+
+
+def fetch_matrix_room(
+    f: Fetcher, homeserver: str, token: str, room: str, existing: dict | None
+) -> dict | None:
+    hs = homeserver.rstrip("/")
+    auth = {"Authorization": "Bearer " + token}
+
+    room_id = room
+    if room.startswith("#"):
+        resolved = f.http(
+            f"{hs}/_matrix/client/v3/directory/room/{urllib.parse.quote(room, safe='')}"
+        )
+        if not resolved or "room_id" not in resolved:
+            return None
+        room_id = resolved["room_id"]
+    q = urllib.parse.quote(room_id, safe="")
+
+    state = {}
+    for kind in MATRIX_STATE:
+        got = f.http(f"{hs}/_matrix/client/v3/rooms/{q}/state/{kind}", headers=auth)
+        if isinstance(got, dict) and "errcode" not in got:
+            state[kind] = got
+
+    known = {e["event_id"] for e in (existing or {}).get("events", [])}
+    collected: list[dict] = []
+    frm = None
+    for _ in range(200):
+        url = f"{hs}/_matrix/client/v3/rooms/{q}/messages?dir=b&limit=100"
+        if frm:
+            url += "&from=" + urllib.parse.quote(frm, safe="")
+        page = f.http(url, headers=auth)
+        if not isinstance(page, dict) or "chunk" not in page:
+            break
+        hit_known = False
+        for e in page["chunk"]:
+            if e.get("event_id") in known:
+                hit_known = True
+                break
+            if e.get("type") == "m.room.message":
+                collected.append(matrix_event(e))
+        frm = page.get("end")
+        if hit_known or not page["chunk"] or not frm:
+            break
+
+    events = list((existing or {}).get("events", [])) + collected
+    seen: dict[str, dict] = {}
+    for e in events:
+        seen[e["event_id"]] = e
+    ordered = sorted(seen.values(), key=lambda e: (e.get("origin_server_ts", 0), e["event_id"]))
+
+    return {
+        "room": room,
+        "room_id": room_id,
+        "name": (state.get("m.room.name") or {}).get("name"),
+        "topic": (state.get("m.room.topic") or {}).get("topic")
+        or json.dumps((state.get("m.room.topic") or {}).get("m.topic", "")),
+        "history_visibility": (state.get("m.room.history_visibility") or {}).get(
+            "history_visibility"
+        ),
+        "join_rule": (state.get("m.room.join_rules") or {}).get("join_rule"),
+        "event_count": len(ordered),
+        "events": ordered,
+    }
+
+
 # ---------------------------------------------------------------------------
 # link extraction
 #
@@ -731,6 +893,10 @@ def harvest_links(blob: str, counts: dict[str, int]) -> None:
 # Nothing in it carries a timestamp -- a generated file that changes on every
 # run teaches a reader to ignore its diff.
 # ---------------------------------------------------------------------------
+
+
+def stamp(epoch_seconds: int) -> str:
+    return time.strftime("%Y-%m-%d", time.gmtime(epoch_seconds))
 
 
 def sort_key(ref: str):
@@ -811,6 +977,27 @@ def write_index(manifest: dict, check: bool) -> None:
                 add(f"- [{ref}]({it.get('url')}) -- {it.get('title')} ({it.get('state')})")
             add("")
 
+    rooms = sorted(RAW.glob("matrix/*.json"))
+    if rooms:
+        add(f"## Matrix ({len(rooms)})")
+        add("")
+        add("| room | messages | span | visibility |")
+        add("| --- | --- | --- | --- |")
+        for path in rooms:
+            r = json.loads(path.read_text(encoding="utf-8"))
+            ev = r.get("events") or []
+            span = "-"
+            if ev:
+                first = ev[0]["origin_server_ts"] // 1000
+                last = ev[-1]["origin_server_ts"] // 1000
+                span = f"{stamp(first)} to {stamp(last)}"
+            add(
+                f"| [{r.get('name')}](https://matrix.to/#/{r.get('room')}) "
+                f"`{r.get('room')}` | {r.get('event_count')} | {span} | "
+                f"{r.get('history_visibility')}, join rule {r.get('join_rule')} |"
+            )
+        add("")
+
     pads = sorted(RAW.glob("hedgedoc/*.md"))
     if pads:
         add(f"## Pads ({len(pads)})")
@@ -835,6 +1022,7 @@ def write_index(manifest: dict, check: bool) -> None:
             "discourse-topic": lambda s: f"{s['host']}/t/{s['topic']}",
             "discourse-query": lambda s: f"`{s['q']}` on {s['host']}",
             "hedgedoc": lambda s: s["url"],
+            "matrix-room": lambda s: f"`{s['room']}`",
         }.get(s["kind"], lambda s: "")(s)
         note = " (recorded, not fetched)" if s.get("expand") is False else ""
         add(f"| `{s['id']}` | {s['kind']}{note} | {reach} | {why[s['id']]} |")
@@ -959,7 +1147,7 @@ def run(args) -> int:
             )
         elif kind == "discourse-topic":
             note(sid, f"discourse:{s['host']}/t/{s['topic']}")
-        elif kind in ("github-project", "hedgedoc"):
+        elif kind in ("github-project", "hedgedoc", "matrix-room"):
             pass  # fetched in pass 3; they resolve to nothing first.
         else:
             # `checks.crowdsource-manifest` rejects this at eval time, so
@@ -1050,6 +1238,34 @@ def run(args) -> int:
                 report.updated.append(label)
             else:
                 report.unchanged += 1
+        elif s["kind"] == "matrix-room":
+            token = matrix_token()
+            if not token:
+                report.skipped.append(
+                    f"{s['id']}: no MATRIX_TOKEN; the room needs an account to read"
+                )
+                continue
+            homeserver = os.environ.get("MATRIX_HOMESERVER", DEFAULT_HOMESERVER)
+            path = RAW / "matrix" / f"{s['id']}.json"
+            existing = None
+            if path.exists():
+                try:
+                    existing = json.loads(path.read_text(encoding="utf-8"))
+                except json.JSONDecodeError:
+                    existing = None
+            record = fetch_matrix_room(f, homeserver, token, s["room"], existing)
+            if record is None:
+                report.errors.append(f"{s['id']}: {s['room']} not readable")
+                continue
+            harvest_links("\n".join(texts(record)), links)
+            state = write_json(path, record, args.check)
+            label = f"{s['id']} — {record.get('name')} ({record['event_count']} messages)"
+            if state == "new":
+                report.new.append(label)
+            elif state == "updated":
+                report.updated.append(label)
+            else:
+                report.unchanged += 1
         elif s["kind"] == "github-project":
             record = fetch_github_project(f, s["org"], s["number"])
             if record is None:
@@ -1093,6 +1309,14 @@ def run(args) -> int:
         owner, repo = path.parent.parent.name, path.parent.name
         if f"{owner}/{repo}#{path.stem}" not in tracked:
             report.removed.append(f"{owner}/{repo}#{path.stem}")
+            if not args.check:
+                path.unlink()
+    matrix_ids = {s["id"] for s in sources if s["kind"] == "matrix-room"}
+    for path in sorted(RAW.glob("matrix/*.json")):
+        # A run without a token skips the source rather than losing it, so the
+        # file survives an unauthenticated sync.
+        if path.stem not in matrix_ids:
+            report.removed.append(f"matrix:{path.stem}")
             if not args.check:
                 path.unlink()
     for path in sorted(RAW.glob("discourse/*/*.json")):
@@ -1167,6 +1391,10 @@ def report_run(report: Report, f: Fetcher, discovered: dict) -> None:
         for k, v in top:
             print(f"  ? {k}  ({v})")
         print("  -> state/discovered.json for the full list")
+    if report.skipped:
+        print(f"skipped ({len(report.skipped)}):")
+        for x in report.skipped:
+            print(f"  · {x}")
     if report.errors:
         print(f"errors ({len(report.errors)}):")
         for e in report.errors:

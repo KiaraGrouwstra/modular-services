@@ -35,6 +35,7 @@ let
       "q"
     ];
     hedgedoc = [ "url" ];
+    matrix-room = [ "room" ];
   };
 
   ids = map (s: s.id) manifest.sources;

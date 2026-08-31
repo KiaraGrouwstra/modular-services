@@ -38,6 +38,7 @@ link, not in place of it.
 | `raw/discourse/<host>/<n>.json` | One Discourse topic, every post, Markdown source rather than rendered HTML. |
 | `raw/github-project/<org>-<n>.json` | The project board: items grouped by status, which no issue query recovers. |
 | `raw/hedgedoc/<id>.md` | A pad, as Markdown. |
+| `raw/matrix/<id>.json` | A Matrix room: every message, oldest first. Needs a token; see below. |
 | `state/queries.json` | What each search matched last run, kept or filtered. |
 | `state/provenance.json` | Which manifest entries reached each item. |
 | `state/discovered.json` | Links the corpus mentions that nothing tracks yet. The triage queue. |
@@ -64,6 +65,8 @@ uses to decide whether there is a pull request to open.
 
 Other flags: `--only <id>...` for one source, `--force` to ignore the validator
 cache, `--no-prune` to keep every API field, `-v` to log each request.
+
+`MATRIX_TOKEN` is the one credential beyond `gh`; see below.
 
 ## What "tracked" means, and what it does not
 
@@ -154,26 +157,47 @@ notice: an item whose ETag still matches is left exactly as it was. Follow such
 a change with one `--force` run, which refetches the corpus against the new
 rules.
 
-## The gap
+## Matrix, the one source that needs a credential
 
-The Matrix channel `#modular-services:nixos.org` is where the day-to-day
-conversation happens, and nothing here reads it.
+`#modular-services:nixos.org` is where the day-to-day conversation happens, and
+it is the only source here that no anonymous request can reach. Every read of a
+Matrix room answers `M_MISSING_TOKEN`; `matrix.nixos.org` has guest access and
+registration both disabled; and the Matrix Public Archive, which used to render
+world-readable rooms as static HTML, has been discontinued. Only the alias
+resolution is public.
 
-Not for want of a public door. The alias resolves unauthenticated to
-`!skjfPnBZwrJbAxHTxh:nixos.org`, but every read of the room answers
-`M_MISSING_TOKEN`; `matrix.nixos.org` has guest access and registration both
-disabled; the Matrix Public Archive that used to render world-readable rooms as
-static HTML has been discontinued; and the room is absent from that
-homeserver's public directory, so even its history-visibility setting is
-unreadable from outside. Fetching it needs an access token for an account that
-has joined.
+So the token comes from the environment:
 
-That is a solvable problem, not an impossible one -- the token would be an
-environment variable and a CI secret exactly as `GH_TOKEN` already is -- and it
-is simply not solved yet. `sources.json` records it under `unfetched` alongside
-the two proposal branches that have no thread to fetch. Until it is solved, this
-corpus rests on the assumption that what is decided in the channel reaches the
-pad or an issue, and that assumption is worth distrusting.
+```console
+$ MATRIX_TOKEN=… nix run .#crowdsource-sync
+```
+
+`MATRIX_TOKEN_FILE` works too, pointing at a file holding the token, and
+`MATRIX_HOMESERVER` overrides the default of `matrix-client.matrix.org`. **A run
+without a token skips the room and says so** rather than failing, because the
+other 99% of the corpus needs no credential and a contributor without one should
+still be able to refresh it.
+
+The homeserver is a property of the credential, not of the room. This room is
+federated across three dozen servers, so any account anywhere can read it -- and
+because a Matrix access token is full access to whichever account issued it,
+the right one to use is a throwaway account rather than a personal one.
+
+### That it is readable at all is the room's own decision
+
+The room sets `history_visibility` to `world_readable` and its join rule to
+`public`. Its operators have deliberately made the history readable to anyone
+who asks; the account is a formality of the protocol, not a permission being
+worked around. That is the difference between this and archiving a chat that
+merely happened to be joinable, and it is worth re-checking if the setting ever
+changes -- the fetched record carries both values in its header for exactly that
+reason.
+
+Two things are dropped and will not appear in the corpus. A redacted message
+arrives from the server with its content already emptied, so nothing anyone
+deleted is stored; what remains is the tombstone, that somebody said something
+and took it back. And `formatted_body`, the HTML rendering of a message, goes
+the way of `body_html` and `cooked` -- the plain `body` is on every event.
 
 ## Adding a source
 
@@ -189,8 +213,9 @@ Add an entry to `sources.json` and run the sync. The `kind` decides the rest:
 ```
 
 `kind` is one of `github-item`, `github-query`, `github-project`,
-`discourse-topic`, `discourse-query` or `hedgedoc`. A source that needs a
-seventh kind needs a function in `sync.py`; they are around forty lines each.
+`discourse-topic`, `discourse-query`, `hedgedoc` or `matrix-room`. A source that
+needs an eighth kind needs a function in `sync.py`; they are around forty lines
+each.
 
 The `why` is not decoration. It is what tells the next reader -- or the next
 agent -- whether an item is worth opening, and it is the only part of this

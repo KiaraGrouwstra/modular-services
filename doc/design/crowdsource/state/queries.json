@@ -2234,20 +2234,20 @@
    "updated_at": "2026-07-31T22:35:41Z"
   },
   {
-   "comments": 7,
-   "kept": true,
-   "ref": "NixOS/nixpkgs#508462",
-   "state": "closed",
-   "title": "tlshd: add modular service and test",
-   "updated_at": "2026-04-17T00:48:57Z"
-  },
-  {
    "comments": 3,
    "kept": true,
    "ref": "NixOS/nixpkgs#476861",
    "state": "closed",
    "title": "easytier.services.default: init",
    "updated_at": "2026-08-07T16:23:56Z"
+  },
+  {
+   "comments": 7,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#508462",
+   "state": "closed",
+   "title": "tlshd: add modular service and test",
+   "updated_at": "2026-04-17T00:48:57Z"
   },
   {
    "comments": 2,
