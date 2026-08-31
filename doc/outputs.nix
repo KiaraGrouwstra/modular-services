@@ -28,7 +28,9 @@
       "Opt-in: repoints `pkgs.<pkg>.services.*` at this repository. Excludes `php`, which regenerates its own `passthru`.";
 
     "packages.docs" = "This manual.";
-    "devShells.default" = "`nixfmt-tree` and `jq`.";
+    "packages.crowdsource-sync" =
+      "Refreshes `doc/design/crowdsource/` from the discussions it tracks. Writes to the working tree, not the store.";
+    "devShells.default" = "`nixfmt-tree`, `jq`, and what `crowdsource-sync` needs: `python3` and `gh`.";
     "formatter" = "`nixfmt-tree`, so `nix fmt` formats the tree.";
     "ci.matrix" = "The GitHub Actions job matrix. Consumed only by the workflow.";
   };

@@ -90,6 +90,12 @@ assert lib.assertMsg (missing == [ ]) ''
     }
   );
 
+  # The crowdsourced design record's manifest is well-formed; see
+  # doc/design/crowdsource/manifest-valid.nix.
+  crowdsource-manifest = check (
+    import ../doc/design/crowdsource/manifest-valid.nix { inherit lib pkgs; }
+  );
+
   # The manual renders, with both option references substituted in.
   docs = check (
     import ../doc {

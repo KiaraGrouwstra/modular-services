@@ -132,6 +132,7 @@ whatever the system, and a flake publishes them unkeyed.
 | `integrations/` | One directory per integration. See [`integrations/README.md`](./integrations/README.md). |
 | `modular-services/` | The services themselves: `_class = "service"`, integration-agnostic, one directory per providing package. |
 | `doc/` | The manual: its hand-written chapters, and the lists its generated ones render -- the services whose options it documents, and what each output is for. One book about the subsystem, not one per integration; each integration renders the service list its own way. |
+| `doc/design/` | Working material rather than manual: the design as it was argued, not as it settled. [`crowdsource/`](./doc/design/crowdsource/README.md) is the discussion itself -- issues, RFCs, meeting minutes and the project board -- fetched from where it happened and kept current by `nix run .#crowdsource-sync`. |
 | `overlays/`, `ci/` | Overlays, and the test/matrix wiring. |
 | `default.nix`, `flake.nix` | Every output, and the flake wrapper that keys the per-system ones by system. |
 

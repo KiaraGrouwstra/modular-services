@@ -1,0 +1,464 @@
+{
+  "about": "Where the design discussion of modular services happens. `sync.py` reads this file and nothing else; see README.md for what each `kind` means and how to add a source.",
+  "sources": [
+    {
+      "id": "nixpkgs-tracking",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#428084",
+      "why": "The tracking issue. The manual points contributors at it for gaps in the infrastructure, so it collects the requirements nobody has met yet."
+    },
+    {
+      "id": "nixpkgs-modular-services-pr",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#372170",
+      "why": "The pull request that landed the subsystem. Its review thread is the longest argument on record about the shape of the portable layer."
+    },
+    {
+      "id": "nixpkgs-poc",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#267111",
+      "why": "The 2023 proof of concept that preceded the merged design. Read for what was tried and dropped."
+    },
+    {
+      "id": "nixpkgs-service-abstraction-layer",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#26067",
+      "why": "The 2017 issue asking for a service abstraction layer. The oldest statement of the problem this subsystem answers."
+    },
+    {
+      "id": "rfc-163-portable-service-layer",
+      "kind": "github-item",
+      "ref": "NixOS/rfcs#163",
+      "why": "RFC 163. Closed, and its intermediate outcome -- try a module-based approach -- is the premise this repository works from, so the objections in it are still live."
+    },
+    {
+      "id": "rfc-189-contracts",
+      "kind": "github-item",
+      "ref": "NixOS/rfcs#189",
+      "why": "Contracts: the competing/complementary answer to how services compose. Meetings keep returning to how the two relate."
+    },
+    {
+      "id": "rfc-157-granular-control",
+      "kind": "github-item",
+      "ref": "NixOS/rfcs#157",
+      "why": "More granular control over the system. Adjacent design space -- what a configuration framework owns versus what a service does."
+    },
+    {
+      "id": "rfc-201-security-artifacts",
+      "kind": "github-item",
+      "ref": "NixOS/rfcs#201",
+      "why": "Backend-agnostic secret management. Secrets are the open question a portable service cannot answer on its own."
+    },
+    {
+      "id": "rfc-59-systemd-service-secrets",
+      "kind": "github-item",
+      "ref": "NixOS/rfcs#59",
+      "why": "The earlier secrets RFC, for the history behind RFC 201."
+    },
+    {
+      "id": "nixpkgs-artifacts-interface",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#519619",
+      "why": "The `nixos/artifacts` implementation of RFC 201. The most-cited untracked link in the corpus: a modular service that needs a secret has nowhere portable to get one, and this is the current answer."
+    },
+    {
+      "id": "nixpkgs-secrets-contract",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#495303",
+      "why": "Contract for files containing secrets. The contracts side of the same question."
+    },
+    {
+      "id": "nixpkgs-secrets-outside-store",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#24288",
+      "why": "The 2017 issue on storing secrets outside the store. Everything since restates it."
+    },
+    {
+      "id": "nix-private-files",
+      "kind": "github-item",
+      "ref": "NixOS/nix#8",
+      "why": "Private files in the Nix store, from the Nix side. The constraint that makes the secrets question hard rather than tedious."
+    },
+    {
+      "id": "nixpkgs-other-service-types",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#26075",
+      "why": "One way to do other types of services -- the sketch that came out of the 2017 abstraction-layer issue."
+    },
+    {
+      "id": "nixpkgs-systemd-template-units",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#135557",
+      "why": "The NixOS systemd abstraction does not handle template units. A concrete limit any portable description inherits."
+    },
+    {
+      "id": "nixpkgs-imports-all-modules",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#137168",
+      "why": "NixOS always imports all modules. Why a service that is *only* a module costs something."
+    },
+    {
+      "id": "nixpkgs-a-la-carte",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#148456",
+      "why": "NixOS a la carte: an earlier attempt at making the module set separable."
+    },
+    {
+      "id": "nixpkgs-replace-systemd",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#24346",
+      "why": "Replacing systemd with OpenRC or runit. The user-facing form of the demand."
+    },
+    {
+      "id": "nixpkgs-nginx-in-modules",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#277723",
+      "why": "When a service module should configure nginx. The reverse-proxy case is where service-to-service composition first bites."
+    },
+    {
+      "id": "nixpkgs-eris-go",
+      "kind": "github-item",
+      "ref": "NixOS/nixpkgs#393345",
+      "why": "A modular service written by someone outside the design, which is the useful kind of evidence."
+    },
+    {
+      "id": "rfc-42-settings-options",
+      "kind": "github-item",
+      "ref": "NixOS/rfcs#42",
+      "why": "RFC 42, freeform `settings`. The direct ancestor of `configData`."
+    },
+    {
+      "id": "rfc-78-config-generators",
+      "kind": "github-item",
+      "ref": "NixOS/rfcs#78",
+      "why": "RFC 78, system-agnostic configuration file generators. Same portability goal, one layer down."
+    },
+    {
+      "id": "selfhostblocks-contracts-across-nodes",
+      "kind": "github-item",
+      "ref": "ibizaman/selfhostblocks#541",
+      "why": "Contracts across nodes, from the project contracts came from. The meetings raise the same question about services on separate machines."
+    },
+    {
+      "id": "selfhostblocks-vars",
+      "kind": "github-item",
+      "ref": "ibizaman/selfhostblocks#467",
+      "why": "The vars secrets provider, for how contracts and vars were reconciled in practice."
+    },
+    {
+      "id": "nixpkgs-label-issues",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs label:\"6.topic: package configuration modules\" is:issue",
+      "why": "The label the subsystem's own issues carry. Precise, curated by the people doing the work, and the best single view of what is open."
+    },
+    {
+      "id": "nixpkgs-label-prs",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs label:\"6.topic: package configuration modules\" is:pull-request",
+      "why": "Same label, pull request side: every infrastructure change and every service port that got labelled."
+    },
+    {
+      "id": "nixpkgs-phrase-issues",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs \"modular service\" is:issue",
+      "exclude": "^(Update [Rr]equest|Backport to Stable|Build failure|\\[Backport)",
+      "why": "Catches what the label misses -- the label is applied by hand and lags. The exclusion drops the bot-filed update and backport families, which match the phrase only by accident."
+    },
+    {
+      "id": "nixpkgs-phrase-prs",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs \"modular service\" is:pull-request",
+      "exclude": "^(Update [Rr]equest|Backport to Stable|Build failure|\\[Backport)",
+      "why": "The widest reliable net on the nixpkgs side. Deliberately not narrowed further: a service port that argues with the infrastructure is exactly the material wanted, and it rarely carries the label."
+    },
+    {
+      "id": "nixpkgs-portable-service-layer-issues",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs \"portable service layer\" is:issue",
+      "why": "The name the subsystem had before it was renamed. Reaches the pre-2025 history that \"modular service\" does not."
+    },
+    {
+      "id": "nixpkgs-portable-service-layer-prs",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs \"portable service layer\" is:pull-request",
+      "why": "The name the subsystem had before it was renamed. Reaches the pre-2025 history that \"modular service\" does not."
+    },
+    {
+      "id": "nixpkgs-lib-services-issues",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs \"lib.services\" is:issue",
+      "why": "The portable layer by its attribute path: changes to the layer itself rather than to services built on it."
+    },
+    {
+      "id": "nixpkgs-lib-services-prs",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs \"lib.services\" is:pull-request",
+      "why": "The portable layer by its attribute path: changes to the layer itself rather than to services built on it."
+    },
+    {
+      "id": "nixpkgs-system-services-issues",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs \"system.services\" is:issue",
+      "why": "The NixOS-side option. Reaches consumers complaining about the interface, which is where interface problems surface first."
+    },
+    {
+      "id": "nixpkgs-system-services-prs",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs \"system.services\" is:pull-request",
+      "why": "The NixOS-side option. Reaches consumers complaining about the interface, which is where interface problems surface first."
+    },
+    {
+      "id": "rfcs-portable-service-issues",
+      "kind": "github-query",
+      "q": "repo:NixOS/rfcs \"portable service\" is:issue",
+      "why": "The RFC repository under the older name."
+    },
+    {
+      "id": "rfcs-portable-service-prs",
+      "kind": "github-query",
+      "q": "repo:NixOS/rfcs \"portable service\" is:pull-request",
+      "why": "The RFC repository under the older name."
+    },
+    {
+      "id": "rfcs-modular-service-issues",
+      "kind": "github-query",
+      "q": "repo:NixOS/rfcs \"modular service\" is:issue",
+      "why": "The RFC repository under the current name."
+    },
+    {
+      "id": "rfcs-modular-service-prs",
+      "kind": "github-query",
+      "q": "repo:NixOS/rfcs \"modular service\" is:pull-request",
+      "why": "The RFC repository under the current name."
+    },
+    {
+      "id": "home-manager-issues",
+      "kind": "github-query",
+      "q": "repo:nix-community/home-manager \"modular service\" is:issue",
+      "why": "Home Manager is the second integration. What breaks there is what the portable layer assumed about NixOS without noticing."
+    },
+    {
+      "id": "home-manager-prs",
+      "kind": "github-query",
+      "q": "repo:nix-community/home-manager \"modular service\" is:pull-request",
+      "why": "The Home Manager integration as it was built, including the post-merge corrections."
+    },
+    {
+      "id": "nix-darwin-issues",
+      "kind": "github-query",
+      "q": "repo:nix-darwin/nix-darwin \"modular service\" is:issue",
+      "why": "The launchd integration: the one integration with no systemd underneath, so it decides what is genuinely portable."
+    },
+    {
+      "id": "nix-darwin-prs",
+      "kind": "github-query",
+      "q": "repo:nix-darwin/nix-darwin \"modular service\" is:pull-request",
+      "why": "The launchd integration: the one integration with no systemd underneath, so it decides what is genuinely portable."
+    },
+    {
+      "id": "nixng-issues",
+      "kind": "github-query",
+      "q": "repo:nix-community/NixNG \"modular service\" is:issue",
+      "why": "A non-systemd framework evaluating the subsystem from outside."
+    },
+    {
+      "id": "nixng-prs",
+      "kind": "github-query",
+      "q": "repo:nix-community/NixNG \"modular service\" is:pull-request",
+      "why": "A non-systemd framework evaluating the subsystem from outside."
+    },
+    {
+      "id": "finix-issues",
+      "kind": "github-query",
+      "q": "repo:finix-community/finix \"modular service\" is:issue",
+      "why": "finit as pid 1. Same question as NixNG, different answer."
+    },
+    {
+      "id": "finix-prs",
+      "kind": "github-query",
+      "q": "repo:finix-community/finix \"modular service\" is:pull-request",
+      "why": "finit as pid 1. Same question as NixNG, different answer."
+    },
+    {
+      "id": "this-repo-issues",
+      "kind": "github-query",
+      "q": "repo:KiaraGrouwstra/modular-services is:issue",
+      "why": "This repository's own issues and pull requests. Dependabot's are excluded: they are dependency bumps, not design.",
+      "exclude": "^build\\(deps\\)"
+    },
+    {
+      "id": "this-repo-prs",
+      "kind": "github-query",
+      "q": "repo:KiaraGrouwstra/modular-services is:pull-request",
+      "why": "This repository's own issues and pull requests. Dependabot's are excluded: they are dependency bumps, not design.",
+      "exclude": "^build\\(deps\\)"
+    },
+    {
+      "id": "nixpkgs-module-system-watchlist",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixpkgs label:\"6.topic: module system\" is:issue is:open",
+      "expand": false,
+      "why": "Adjacent, not tracked: modular services are built on the module system, so its open issues bound what the design can do. Six hundred items is too many to carry, so this records the list in state/queries.json for triage instead of fetching it."
+    },
+    {
+      "id": "nixos-search-issues",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixos-search \"modular service\" is:issue",
+      "why": "Search has to render the options before anyone can find a modular service. What it cannot index is a statement about the interface."
+    },
+    {
+      "id": "nixos-search-prs",
+      "kind": "github-query",
+      "q": "repo:NixOS/nixos-search \"modular service\" is:pull-request",
+      "why": "The indexing work itself, including the base/environment split it had to model."
+    },
+    {
+      "id": "board",
+      "kind": "github-project",
+      "org": "NixOS",
+      "number": 116,
+      "why": "The Modular Services / Package Configuration Modules board. It is the only place the work is ordered and given a status, which no issue query recovers."
+    },
+    {
+      "id": "pad",
+      "kind": "hedgedoc",
+      "url": "https://pad.lassul.us/modular-services",
+      "why": "The working pad: the agenda of the next meeting and the minutes of every past one, written live. It runs ahead of the Discourse posts, and it is where the link list at the top named most of the other sources here."
+    },
+    {
+      "id": "discourse-meetings",
+      "kind": "discourse-query",
+      "host": "discourse.nixos.org",
+      "q": "modular services",
+      "match": "modular service",
+      "why": "Auto-expanding: the meeting minutes are posted to Discourse one topic per meeting, so a title match picks up meeting N+1 without anyone editing this file."
+    },
+    {
+      "id": "discourse-expose-the-type",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 73751,
+      "why": "Should we expose the type for modular services -- a direct interface question."
+    },
+    {
+      "id": "discourse-rust-runner",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 74338,
+      "why": "A service runner built against the spec from outside Nix. The clearest test of whether the description is really framework-independent."
+    },
+    {
+      "id": "discourse-init-freedom",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 78333,
+      "why": "Init system freedom on NixOS. The demand that makes a portable service description worth having, argued at length by people who want it for other reasons."
+    },
+    {
+      "id": "discourse-structured-typing",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 58257,
+      "why": "Pre-RFC: decouple services using structured typing. The ancestor of contracts."
+    },
+    {
+      "id": "discourse-portable-submodules",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 54109,
+      "why": "Portable submodules: the module-system mechanism the whole approach rests on."
+    },
+    {
+      "id": "discourse-finix",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 76749,
+      "why": "The finix announcement thread, where a framework that is not NixOS states what it needs from a service description."
+    },
+    {
+      "id": "discourse-without-systemd",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 21298,
+      "why": "Restructuring NixOS to work without systemd. The long-running background thread; most objections raised later appear here first."
+    },
+    {
+      "id": "discourse-self-host-blocks",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 26963,
+      "why": "Self Host Blocks, where the contracts work came from."
+    },
+    {
+      "id": "discourse-vars",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 62411,
+      "why": "Vars: a framework for managing secrets and computed values. The most-cited untracked link of all; the meetings treat it as the likely answer for secrets."
+    },
+    {
+      "id": "discourse-rfc-163",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 33886,
+      "why": "The Discourse thread for RFC 163, where the RFC was argued outside the pull request."
+    },
+    {
+      "id": "discourse-service-module-conventions",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 79706,
+      "why": "Conventions for service modules? -- an open question about the very interface this repository documents."
+    },
+    {
+      "id": "discourse-secrets-not-in-config",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 79078,
+      "why": "Secrets don't belong in config. The argument behind the secrets work, stated for a general audience."
+    },
+    {
+      "id": "discourse-sixos",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 58141,
+      "why": "sixos: a NixOS without systemd. Another framework with its own answer, and a critic of this one."
+    },
+    {
+      "id": "discourse-nixify-kubernetes",
+      "kind": "discourse-topic",
+      "host": "discourse.nixos.org",
+      "topic": 70899,
+      "why": "Nixifying Kubernetes. The meetings keep citing k8s for how it wants services declared separately so it can tell what failed."
+    }
+  ],
+  "unfetched": [
+    {
+      "what": "Matrix: #modular-services:nixos.org",
+      "url": "https://matrix.to/#/#modular-services:nixos.org",
+      "why": "The day-to-day channel. Reading it needs an account and a homeserver, which a checked-in sync tool should not carry credentials for. Anything decided there is expected to reach the pad or an issue; if that stops being true, this becomes a gap worth solving."
+    },
+    {
+      "what": "roberth's compliance-suite branch",
+      "url": "https://github.com/NixOS/nixpkgs/compare/master...roberth:nixpkgs:modular-services-compliance-suite",
+      "why": "Code under discussion, not discussion. Cited from the pad; fetch the diff from git when it matters."
+    },
+    {
+      "what": "DigitalBrewStudios service-api generalization branch",
+      "url": "https://github.com/NixOS/nixpkgs/compare/master...DigitalBrewStudios:nixpkgs:modular-service-generalization-service-api",
+      "why": "As above: a proposal carried as a branch rather than as a pull request, so it has no thread to fetch."
+    },
+    {
+      "what": "DigitalBrewStudios/Database-Modular-Services and DigitalBrewStudios/nix-windows",
+      "url": "https://github.com/DigitalBrewStudios/Database-Modular-Services",
+      "why": "Out-of-tree experiments named in the meetings. Neither carries issues yet; add a github-query here when one does."
+    }
+  ],
+  "ignore": [
+    "^actions/checkout#",
+    "^NixOS/nixpkgs#77858$",
+    "^discourse:discourse\\.nixos\\.org/t/(2617|3032|17574|18589|64882)$",
+    "^[\\w.-]+/[\\w.-]+#0$"
+  ],
+  "ignore_why": "Seen often enough to crowd the triage list, and not about this design. The `actions/checkout` refs come from this repository's own Dependabot pull requests; nixpkgs#77858 is a dracut issue quoted inside a diff hunk in RFC 157; the Discourse topics are the review queues, the breaking-changes announcement, the community calendar and a hackathon report."
+}

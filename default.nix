@@ -156,10 +156,30 @@ consumer
       ;
   };
 
+  # Refreshes doc/design/crowdsource/ from the sources its manifest names.
+  # The script is run out of the store but told to write to the working tree:
+  # the corpus is checked in, and a store path is read-only anyway.
+  packages.crowdsource-sync = pkgs.writeShellApplication {
+    name = "crowdsource-sync";
+    runtimeInputs = [
+      pkgs.python3
+      pkgs.gh
+      pkgs.git
+    ];
+    text = ''
+      root="$(git rev-parse --show-toplevel)"
+      exec python3 ${./doc/design/crowdsource/sync.py} \
+        --dir "$root/doc/design/crowdsource" "$@"
+    '';
+  };
+
   devShells.default = pkgs.mkShellNoCC {
     packages = [
       pkgs.nixfmt-tree
       pkgs.jq
+      # `doc/design/crowdsource/sync.py` needs both, and nothing else.
+      pkgs.python3
+      pkgs.gh
     ];
   };
 
