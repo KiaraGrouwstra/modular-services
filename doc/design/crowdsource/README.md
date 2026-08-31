@@ -97,17 +97,27 @@ a nearby source line would otherwise outrank the links people actually posted.
 GitHub allows 5000 core requests an hour and **30 searches a minute**; the
 searches are the tighter of the two, and `sync.py` paces itself under them.
 
-A full fetch is around 950 requests. A refresh where nothing moved is far
-cheaper, because every item is gated behind a conditional request: the ETag of
+A full fetch is around 950 requests. A refresh where nothing moved is about 240,
+of which fewer than 30 count against the limit, because every item is gated
+behind one conditional request: the ETag of
 the last response is replayed as `If-None-Match`, and GitHub answers 304 without
-counting it against the limit. `issues/{n}` moves when a comment, edit, label or
-state change lands and `pulls/{n}` moves when a review does, so two 304s are
-reason enough not to ask for the six list endpoints behind them. `--force`
-declines that reasoning.
+counting it against the limit.
+
+The gate is `issues/{n}`, for pull requests too. A pull request is an issue
+underneath, and both endpoints report the same `updated_at` -- moved by a
+comment, an edit, a review, a review comment, a label or a state change alike --
+so one 304 is reason enough not to ask for the six list endpoints behind it.
+
+Gating on `pulls/{n}` as well was the first attempt and was worse than useless:
+that payload embeds the repository object, live star and fork counts included,
+and on nixpkgs those move every few minutes and take the ETag with them. It
+refetched a hundred pull requests a run to write byte-identical files.
+
+`--force` declines the whole arrangement.
 
 Discourse and the project board send `cache-control: no-store` and no validator,
-so they are fetched unconditionally every time. They are about thirty requests
-against nobody's quota.
+so they are fetched unconditionally every time. That is most of what a quiet
+refresh still spends, and it is against nobody's quota.
 
 ## What is pruned, and why
 

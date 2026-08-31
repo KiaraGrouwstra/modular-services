@@ -412,11 +412,19 @@ def fetch_github_item(
     """Fetch one issue or pull request. Returns `(record, fetched)`.
 
     The expensive part is the three-to-six list requests per item, so they are
-    gated behind a conditional GET of the item itself. `issues/{n}.updated_at`
-    moves when a comment, an edit, a label or a state change lands, and
-    `pulls/{n}.updated_at` moves when a review or a review comment does, so a
-    304 on both is a sound reason not to ask for the lists. `--force` skips the
-    gate for anyone who does not want to rely on that.
+    gated behind a single conditional GET of `issues/{n}`. A pull request is an
+    issue underneath -- the two endpoints report the same `updated_at`, moved
+    by a comment, an edit, a review, a review comment, a label or a state
+    change alike -- so one 304 covers the lot.
+
+    `pulls/{n}` is deliberately *not* also gated on, though it was at first: its
+    payload embeds the repository object, complete with the live star and fork
+    counts of whichever repository the pull request is against. Those move
+    every few minutes on nixpkgs, taking the ETag with them, so gating on it
+    meant refetching a hundred pull requests every run to write byte-identical
+    files.
+
+    `--force` skips the gate for anyone who does not want to rely on this.
     """
     m = ITEM_RE.match(ref)
     if not m:
@@ -426,13 +434,8 @@ def fetch_github_item(
 
     changed, issue = f.conditional(f"{base}/issues/{number}")
     if not changed and existing is not None:
-        if existing.get("kind") != "pull_request":
-            return existing, False
-        pr_changed, _ = f.conditional(f"{base}/pulls/{number}")
-        if not pr_changed:
-            return existing, False
-        _, issue = f.conditional(f"{base}/issues/{number}", replay=False)
-    elif issue is None:
+        return existing, False
+    if issue is None:
         if not changed:
             # An ETag without the file it described: fetch unconditionally.
             _, issue = f.conditional(f"{base}/issues/{number}", replay=False)
