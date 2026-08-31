@@ -558,8 +558,8 @@
   }
  ],
  "sources": [
-  "nixpkgs-poc",
   "nixpkgs-phrase-prs",
+  "nixpkgs-poc",
   "nixpkgs-portable-service-layer-prs"
  ],
  "timeline": [

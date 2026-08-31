@@ -389,8 +389,8 @@
   }
  ],
  "sources": [
-  "nixpkgs-phrase-prs",
-  "nixpkgs-lib-services-prs"
+  "nixpkgs-lib-services-prs",
+  "nixpkgs-phrase-prs"
  ],
  "timeline": [
   {

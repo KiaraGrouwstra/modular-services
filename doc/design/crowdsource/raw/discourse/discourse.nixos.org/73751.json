@@ -104,8 +104,8 @@
  "reply_count": 0,
  "slug": "should-we-expose-the-type-for-modular-services",
  "sources": [
-  "discourse-meetings",
-  "discourse-expose-the-type"
+  "discourse-expose-the-type",
+  "discourse-meetings"
  ],
  "tags": null,
  "title": "Should we expose the type for modular services",

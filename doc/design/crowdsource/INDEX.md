@@ -83,7 +83,7 @@ answer to what an entry is doing in the corpus.
 | [#13877](https://github.com/NixOS/nixpkgs/pull/13877) | freeradius: init at 3.0.11 | merged | 3 | 2016-03-14 | nixpkgs-phrase-prs |
 | [#24288](https://github.com/NixOS/nixpkgs/issues/24288) | Provide options for storing secrets outside the Nix store | open | 76 | 2026-08-29 | nixpkgs-secrets-outside-store |
 | [#24346](https://github.com/NixOS/nixpkgs/issues/24346) | Can I replace systemd with OpenRC or runit on NixOS? | closed | 36 | 2025-10-21 | nixpkgs-replace-systemd |
-| [#26067](https://github.com/NixOS/nixpkgs/issues/26067) | Make a service abstraction layer | open | 33 | 2026-06-23 | nixpkgs-service-abstraction-layer, nixpkgs-phrase-issues |
+| [#26067](https://github.com/NixOS/nixpkgs/issues/26067) | Make a service abstraction layer | open | 33 | 2026-06-23 | nixpkgs-phrase-issues, nixpkgs-service-abstraction-layer |
 | [#26075](https://github.com/NixOS/nixpkgs/pull/26075) | [WIP] One way to do other types of services | closed | 8 | 2019-10-05 | nixpkgs-other-service-types |
 | [#132407](https://github.com/NixOS/nixpkgs/pull/132407) | autosuspend: init at 3.1.3 | closed | 27 | 2023-06-12 | nixpkgs-system-services-prs |
 | [#135557](https://github.com/NixOS/nixpkgs/issues/135557) | NixOS's systemd abstraction doesn't work with systemd template units | closed | 12 | 2024-07-28 | nixpkgs-systemd-template-units |
@@ -91,18 +91,18 @@ answer to what an entry is doing in the corpus.
 | [#148456](https://github.com/NixOS/nixpkgs/pull/148456) | [RFC22, RFC78] NixOS a la carte (proof of concept) | closed | 14 | 2025-01-20 | nixpkgs-a-la-carte |
 | [#231065](https://github.com/NixOS/nixpkgs/pull/231065) | nixos/fastnetmon-advanced: init | merged | 47 | 2023-11-02 | nixpkgs-phrase-prs |
 | [#262151](https://github.com/NixOS/nixpkgs/issues/262151) | dex module assumes local postgresql | open | 4 | 2025-07-03 | nixpkgs-system-services-issues |
-| [#267111](https://github.com/NixOS/nixpkgs/pull/267111) | init Modular Portable Service Layer, proof of concept | closed | 11 | 2025-03-25 | nixpkgs-poc, nixpkgs-phrase-prs, nixpkgs-portable-service-layer-prs |
+| [#267111](https://github.com/NixOS/nixpkgs/pull/267111) | init Modular Portable Service Layer, proof of concept | closed | 11 | 2025-03-25 | nixpkgs-phrase-prs, nixpkgs-poc, nixpkgs-portable-service-layer-prs |
 | [#277723](https://github.com/NixOS/nixpkgs/issues/277723) | Guidelines / Recommendations for when to configure nginx in a service module? | open | 6 | 2026-03-19 | nixpkgs-nginx-in-modules |
 | [#329657](https://github.com/NixOS/nixpkgs/pull/329657) | nixos/mailpit: init | merged | 14 | 2026-07-13 | nixpkgs-phrase-prs |
 | [#356532](https://github.com/NixOS/nixpkgs/pull/356532) | nixos/libvirtd: add options to configure modular libvirt daemons | open | 0 | 2025-06-25 | nixpkgs-phrase-prs |
-| [#372170](https://github.com/NixOS/nixpkgs/pull/372170) | Modular services | merged | 96 | 2026-07-23 | nixpkgs-modular-services-pr, nixpkgs-label-prs, nixpkgs-phrase-prs, nixpkgs-system-services-prs |
+| [#372170](https://github.com/NixOS/nixpkgs/pull/372170) | Modular services | merged | 96 | 2026-07-23 | nixpkgs-label-prs, nixpkgs-modular-services-pr, nixpkgs-phrase-prs, nixpkgs-system-services-prs |
 | [#388939](https://github.com/NixOS/nixpkgs/pull/388939) | postal: init at 3.3.7; nixos/postal: init module | open | 104 | 2026-08-05 | nixpkgs-phrase-prs |
 | [#393051](https://github.com/NixOS/nixpkgs/pull/393051) | libvirt: switch to socket based daemons | open | 1 | 2025-09-30 | nixpkgs-phrase-prs |
 | [#393345](https://github.com/NixOS/nixpkgs/pull/393345) | Modular services: eris-go server | closed | 0 | 2025-05-12 | nixpkgs-eris-go |
 | [#401680](https://github.com/NixOS/nixpkgs/pull/401680) | systemd: Add functions.escapeSystemdExecArg[s] | open | 16 | 2026-07-23 | nixpkgs-label-prs, nixpkgs-phrase-prs |
 | [#401751](https://github.com/NixOS/nixpkgs/pull/401751) | nixosMinimal: init - nixos with minimal modules | open | 13 | 2025-12-14 | nixpkgs-phrase-prs |
 | [#419533](https://github.com/NixOS/nixpkgs/pull/419533) | fosrl-pangolin: 1.2.0 -> 1.8.0 | merged | 22 | 2025-08-13 | nixpkgs-phrase-prs |
-| [#428084](https://github.com/NixOS/nixpkgs/issues/428084) | Modular services tracking | open | 43 | 2026-07-25 | nixpkgs-tracking, nixpkgs-label-issues, nixpkgs-phrase-issues, nixpkgs-portable-service-layer-issues |
+| [#428084](https://github.com/NixOS/nixpkgs/issues/428084) | Modular services tracking | open | 43 | 2026-07-25 | nixpkgs-label-issues, nixpkgs-phrase-issues, nixpkgs-portable-service-layer-issues, nixpkgs-tracking |
 | [#430490](https://github.com/NixOS/nixpkgs/pull/430490) | php.services.default: init | merged | 35 | 2026-07-23 | nixpkgs-label-prs, nixpkgs-phrase-prs |
 | [#430876](https://github.com/NixOS/nixpkgs/pull/430876) | nixos/documentation/modular-services: init | merged | 0 | 2026-07-23 | nixpkgs-label-prs, nixpkgs-phrase-prs |
 | [#431396](https://github.com/NixOS/nixpkgs/pull/431396) | Contributor documentation for Modular Services | merged | 1 | 2025-08-19 | nixpkgs-phrase-prs |
@@ -139,7 +139,7 @@ answer to what an entry is doing in the corpus.
 | [#502210](https://github.com/NixOS/nixpkgs/pull/502210) | stirling-pdf.services.default: init modular service | open | 17 | 2026-07-23 | nixpkgs-label-prs, nixpkgs-phrase-prs |
 | [#503858](https://github.com/NixOS/nixpkgs/pull/503858) | utils: init genSecretsReplacement | open | 88 | 2026-08-26 | nixpkgs-phrase-prs |
 | [#506343](https://github.com/NixOS/nixpkgs/pull/506343) | contracts: init | open | 14 | 2026-08-08 | nixpkgs-label-prs, nixpkgs-phrase-prs |
-| [#506519](https://github.com/NixOS/nixpkgs/pull/506519) | lib/services: move portable service infrastructure out of nixos/ | merged | 5 | 2026-04-05 | nixpkgs-phrase-prs, nixpkgs-lib-services-prs |
+| [#506519](https://github.com/NixOS/nixpkgs/pull/506519) | lib/services: move portable service infrastructure out of nixos/ | merged | 5 | 2026-04-05 | nixpkgs-lib-services-prs, nixpkgs-phrase-prs |
 | [#506645](https://github.com/NixOS/nixpkgs/pull/506645) | easyturn: convert to modular service | open | 3 | 2026-07-23 | nixpkgs-label-prs, nixpkgs-phrase-prs |
 | [#507052](https://github.com/NixOS/nixpkgs/pull/507052) | lib/services: expose portable service lib as `lib.services` | open | 7 | 2026-08-31 | nixpkgs-label-prs, nixpkgs-lib-services-prs |
 | [#507588](https://github.com/NixOS/nixpkgs/pull/507588) | switch-to-configuration-ng: restart changed user units on switch | merged | 10 | 2026-04-21 | nixpkgs-phrase-prs |
@@ -211,7 +211,7 @@ answer to what an entry is doing in the corpus.
 | [#59](https://github.com/NixOS/rfcs/pull/59) | [RFC 0059]: Systemd Service Secrets | closed | 122 | 2020-11-25 | rfc-59-systemd-service-secrets |
 | [#78](https://github.com/NixOS/rfcs/pull/78) | [RFC 0078] System-agnostic configuration file generators | closed | 120 | 2024-05-12 | rfc-78-config-generators |
 | [#157](https://github.com/NixOS/rfcs/pull/157) | [RFC 0157] More granular control over the system | closed | 57 | 2023-11-01 | rfc-157-granular-control, rfcs-portable-service-prs |
-| [#163](https://github.com/NixOS/rfcs/pull/163) | [RFC 0163] Portable Service Layer | closed | 194 | 2026-02-24 | rfc-163-portable-service-layer, rfcs-portable-service-prs, rfcs-modular-service-prs |
+| [#163](https://github.com/NixOS/rfcs/pull/163) | [RFC 0163] Portable Service Layer | closed | 194 | 2026-02-24 | rfc-163-portable-service-layer, rfcs-modular-service-prs, rfcs-portable-service-prs |
 | [#189](https://github.com/NixOS/rfcs/pull/189) | [RFC 0189] Contracts | open | 48 | 2026-08-26 | rfc-189-contracts, rfcs-portable-service-prs |
 | [#201](https://github.com/NixOS/rfcs/pull/201) | [RFC 0201] security.artifacts: backend-agnostic secret management | open | 14 | 2026-05-13 | rfc-201-security-artifacts, rfcs-modular-service-prs |
 
@@ -227,7 +227,7 @@ answer to what an entry is doing in the corpus.
 | [Pre-RFC: Decouple services using structured typing](https://discourse.nixos.org/t/pre-rfc-decouple-services-using-structured-typing/58257) | 46 | 2026-05-20 | discourse-structured-typing |
 | [Vars: A framework for managing secrets and computed values](https://discourse.nixos.org/t/vars-a-framework-for-managing-secrets-and-computed-values/62411) | 15 | 2025-04-08 | discourse-vars |
 | [Nixifying Kubernetes with nix-csi, easykubenix and dinix](https://discourse.nixos.org/t/nixifying-kubernetes-with-nix-csi-easykubenix-and-dinix/70899) | 35 | 2026-03-29 | discourse-nixify-kubernetes |
-| [Should we expose the type for modular services](https://discourse.nixos.org/t/should-we-expose-the-type-for-modular-services/73751) | 2 | 2026-01-11 | discourse-meetings, discourse-expose-the-type |
+| [Should we expose the type for modular services](https://discourse.nixos.org/t/should-we-expose-the-type-for-modular-services/73751) | 2 | 2026-01-11 | discourse-expose-the-type, discourse-meetings |
 | [Portable rust based service runner for the experimental modular services spec](https://discourse.nixos.org/t/portable-rust-based-service-runner-for-the-experimental-modular-services-spec/74338) | 5 | 2026-01-15 | discourse-meetings, discourse-rust-runner |
 | [Finix - a daily-drivable experimental os, featuring finit as pid 1, to explore the NixOS design space](https://discourse.nixos.org/t/finix-a-daily-drivable-experimental-os-featuring-finit-as-pid-1-to-explore-the-nixos-design-space/76749) | 16 | 2026-05-09 | discourse-finix |
 | [Modular services meeting #1 2026-05-26](https://discourse.nixos.org/t/modular-services-meeting-1-2026-05-26/77846) | 1 | 2026-05-26 | discourse-meetings |

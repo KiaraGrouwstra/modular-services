@@ -6235,8 +6235,8 @@
  ],
  "sources": [
   "rfc-163-portable-service-layer",
-  "rfcs-portable-service-prs",
-  "rfcs-modular-service-prs"
+  "rfcs-modular-service-prs",
+  "rfcs-portable-service-prs"
  ],
  "timeline": [
   {

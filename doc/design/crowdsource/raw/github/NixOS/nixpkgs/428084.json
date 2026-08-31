@@ -1146,10 +1146,10 @@
  "kind": "issue",
  "ref": "NixOS/nixpkgs#428084",
  "sources": [
-  "nixpkgs-tracking",
   "nixpkgs-label-issues",
   "nixpkgs-phrase-issues",
-  "nixpkgs-portable-service-layer-issues"
+  "nixpkgs-portable-service-layer-issues",
+  "nixpkgs-tracking"
  ],
  "timeline": []
 }

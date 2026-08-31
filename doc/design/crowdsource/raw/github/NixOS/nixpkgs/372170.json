@@ -3758,8 +3758,8 @@
   }
  ],
  "sources": [
-  "nixpkgs-modular-services-pr",
   "nixpkgs-label-prs",
+  "nixpkgs-modular-services-pr",
   "nixpkgs-phrase-prs",
   "nixpkgs-system-services-prs"
  ],

@@ -995,7 +995,16 @@ def run(args) -> int:
         if record is None:
             report.errors.append(f"{ref}: not found or not readable")
             continue
-        record["sources"] = provenance.get(ref, [])
+        # Under `--only` the run has seen a fraction of the manifest, so what
+        # it knows about provenance is a fraction too. Merging rather than
+        # replacing keeps it from writing that fraction into the record as if
+        # it were the whole answer.
+        reached = set(provenance.get(ref, []))
+        if args.only and existing:
+            reached |= set(existing.get("sources", []))
+        # Sorted, not in manifest order: reordering sources.json is then not a
+        # reason for every record in the corpus to change.
+        record["sources"] = sorted(reached)
         harvest_links("\n".join(texts(record)), links)
         state = write_json(path, record, args.check)
         label = f"{ref} — {record['issue'].get('title', '')[:70]}"
@@ -1012,7 +1021,7 @@ def run(args) -> int:
         if record is None:
             report.errors.append(f"{ref}: not found")
             continue
-        record["sources"] = provenance[ref]
+        record["sources"] = sorted(provenance[ref])
         harvest_links("\n".join(texts(record)), links)
         state = write_json(RAW / "discourse" / host / f"{topic}.json", record, args.check)
         label = f"{ref} — {record.get('title', '')[:70]}"
@@ -1172,7 +1181,13 @@ def is_ignored(manifest: dict, key: str) -> bool:
 
 
 def main() -> int:
-    p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    # `prog` is set because the Nix wrapper runs this from the store, and a
+    # usage line beginning with a hash helps nobody.
+    p = argparse.ArgumentParser(
+        prog="crowdsource-sync",
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     p.add_argument("--check", action="store_true", help="write nothing; exit 1 if a run would")
     p.add_argument("--only", nargs="+", metavar="ID", help="only these source ids")
     p.add_argument("--no-prune", action="store_true", help="keep every API field")

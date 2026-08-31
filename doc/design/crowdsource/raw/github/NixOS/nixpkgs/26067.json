@@ -896,8 +896,8 @@
  "kind": "issue",
  "ref": "NixOS/nixpkgs#26067",
  "sources": [
-  "nixpkgs-service-abstraction-layer",
-  "nixpkgs-phrase-issues"
+  "nixpkgs-phrase-issues",
+  "nixpkgs-service-abstraction-layer"
  ],
  "timeline": []
 }
