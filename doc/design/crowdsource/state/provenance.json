@@ -1,0 +1,628 @@
+{
+ "NixOS/nix#8": [
+  "nix-private-files"
+ ],
+ "NixOS/nixos-search#1167": [
+  "nixos-search-issues"
+ ],
+ "NixOS/nixos-search#1186": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1189": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1192": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1194": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1197": [
+  "nixos-search-issues"
+ ],
+ "NixOS/nixos-search#1200": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1202": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1207": [
+  "nixos-search-issues"
+ ],
+ "NixOS/nixos-search#1209": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1210": [
+  "nixos-search-issues"
+ ],
+ "NixOS/nixos-search#1217": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1222": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1236": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1262": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1281": [
+  "nixos-search-issues"
+ ],
+ "NixOS/nixos-search#1289": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1310": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1346": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1464": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixos-search#1542": [
+  "nixos-search-prs"
+ ],
+ "NixOS/nixpkgs#132407": [
+  "nixpkgs-system-services-prs"
+ ],
+ "NixOS/nixpkgs#135557": [
+  "nixpkgs-systemd-template-units"
+ ],
+ "NixOS/nixpkgs#137168": [
+  "nixpkgs-imports-all-modules"
+ ],
+ "NixOS/nixpkgs#13877": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#148456": [
+  "nixpkgs-a-la-carte"
+ ],
+ "NixOS/nixpkgs#231065": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#24288": [
+  "nixpkgs-secrets-outside-store"
+ ],
+ "NixOS/nixpkgs#24346": [
+  "nixpkgs-replace-systemd"
+ ],
+ "NixOS/nixpkgs#26067": [
+  "nixpkgs-phrase-issues",
+  "nixpkgs-service-abstraction-layer"
+ ],
+ "NixOS/nixpkgs#26075": [
+  "nixpkgs-other-service-types"
+ ],
+ "NixOS/nixpkgs#262151": [
+  "nixpkgs-system-services-issues"
+ ],
+ "NixOS/nixpkgs#267111": [
+  "nixpkgs-phrase-prs",
+  "nixpkgs-poc",
+  "nixpkgs-portable-service-layer-prs"
+ ],
+ "NixOS/nixpkgs#277723": [
+  "nixpkgs-nginx-in-modules"
+ ],
+ "NixOS/nixpkgs#2920": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#329657": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#356532": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#372170": [
+  "nixpkgs-label-prs",
+  "nixpkgs-modular-services-pr",
+  "nixpkgs-phrase-prs",
+  "nixpkgs-system-services-prs"
+ ],
+ "NixOS/nixpkgs#388939": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#393051": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#393345": [
+  "nixpkgs-eris-go"
+ ],
+ "NixOS/nixpkgs#401680": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#401751": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#419533": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#428084": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues",
+  "nixpkgs-portable-service-layer-issues",
+  "nixpkgs-tracking"
+ ],
+ "NixOS/nixpkgs#430490": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#430876": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#431396": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#431450": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#432529": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#432550": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues",
+  "nixpkgs-system-services-issues"
+ ],
+ "NixOS/nixpkgs#434262": [
+  "nixpkgs-label-prs"
+ ],
+ "NixOS/nixpkgs#435060": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#435092": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#435512": [
+  "nixpkgs-label-prs"
+ ],
+ "NixOS/nixpkgs#442408": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#442886": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#446133": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#453196": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#4594": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#461350": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#469450": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#470416": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#475372": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#476861": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#485453": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#487367": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#489143": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#490640": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#490662": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#490688": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#490813": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#494052": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#495094": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#495303": [
+  "nixpkgs-secrets-contract"
+ ],
+ "NixOS/nixpkgs#495731": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#496296": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#498536": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#500287": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#502210": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#503858": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#506343": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#506519": [
+  "nixpkgs-lib-services-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#506645": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#507052": [
+  "nixpkgs-label-prs",
+  "nixpkgs-lib-services-prs"
+ ],
+ "NixOS/nixpkgs#507588": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#507875": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#508211": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#508462": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#508577": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#509117": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#509595": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#509610": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#509630": [
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#510166": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#510662": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#510698": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#511741": [
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#512367": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#512671": [
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#512864": [
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#513026": [
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#513251": [
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#513525": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#513758": [
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#518717": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#518860": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#519015": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#519494": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#519619": [
+  "nixpkgs-artifacts-interface"
+ ],
+ "NixOS/nixpkgs#520110": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#520118": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#520214": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#522054": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#524517": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#525025": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#531062": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#533562": [
+  "nixpkgs-label-prs"
+ ],
+ "NixOS/nixpkgs#534124": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#535695": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#536086": [
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#540857": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#540863": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs",
+  "nixpkgs-portable-service-layer-prs"
+ ],
+ "NixOS/nixpkgs#540974": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#541020": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#541269": [
+  "nixpkgs-label-prs"
+ ],
+ "NixOS/nixpkgs#541270": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#545204": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#545287": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#545295": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#545519": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#545521": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#545732": [
+  "nixpkgs-label-prs"
+ ],
+ "NixOS/nixpkgs#546008": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#546886": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#547171": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#548052": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#548831": [
+  "nixpkgs-phrase-issues",
+  "nixpkgs-system-services-issues"
+ ],
+ "NixOS/nixpkgs#551799": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#552737": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#554366": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#554965": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#555154": [
+  "nixpkgs-lib-services-prs"
+ ],
+ "NixOS/nixpkgs#556069": [
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/nixpkgs#557068": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "NixOS/rfcs#157": [
+  "rfc-157-granular-control",
+  "rfcs-portable-service-prs"
+ ],
+ "NixOS/rfcs#163": [
+  "rfc-163-portable-service-layer",
+  "rfcs-modular-service-prs",
+  "rfcs-portable-service-prs"
+ ],
+ "NixOS/rfcs#189": [
+  "rfc-189-contracts",
+  "rfcs-portable-service-prs"
+ ],
+ "NixOS/rfcs#201": [
+  "rfc-201-security-artifacts",
+  "rfcs-modular-service-prs"
+ ],
+ "NixOS/rfcs#42": [
+  "rfc-42-settings-options"
+ ],
+ "NixOS/rfcs#59": [
+  "rfc-59-systemd-service-secrets"
+ ],
+ "NixOS/rfcs#78": [
+  "rfc-78-config-generators"
+ ],
+ "discourse:discourse.nixos.org/t/21298": [
+  "discourse-without-systemd"
+ ],
+ "discourse:discourse.nixos.org/t/26963": [
+  "discourse-self-host-blocks"
+ ],
+ "discourse:discourse.nixos.org/t/33886": [
+  "discourse-rfc-163"
+ ],
+ "discourse:discourse.nixos.org/t/54109": [
+  "discourse-portable-submodules"
+ ],
+ "discourse:discourse.nixos.org/t/58141": [
+  "discourse-sixos"
+ ],
+ "discourse:discourse.nixos.org/t/58257": [
+  "discourse-structured-typing"
+ ],
+ "discourse:discourse.nixos.org/t/62411": [
+  "discourse-vars"
+ ],
+ "discourse:discourse.nixos.org/t/70899": [
+  "discourse-nixify-kubernetes"
+ ],
+ "discourse:discourse.nixos.org/t/73751": [
+  "discourse-expose-the-type",
+  "discourse-meetings"
+ ],
+ "discourse:discourse.nixos.org/t/74338": [
+  "discourse-meetings",
+  "discourse-rust-runner"
+ ],
+ "discourse:discourse.nixos.org/t/76749": [
+  "discourse-finix"
+ ],
+ "discourse:discourse.nixos.org/t/77846": [
+  "discourse-meetings"
+ ],
+ "discourse:discourse.nixos.org/t/78235": [
+  "discourse-meetings"
+ ],
+ "discourse:discourse.nixos.org/t/78333": [
+  "discourse-init-freedom"
+ ],
+ "discourse:discourse.nixos.org/t/78582": [
+  "discourse-meetings"
+ ],
+ "discourse:discourse.nixos.org/t/78847": [
+  "discourse-meetings"
+ ],
+ "discourse:discourse.nixos.org/t/79078": [
+  "discourse-secrets-not-in-config"
+ ],
+ "discourse:discourse.nixos.org/t/79145": [
+  "discourse-meetings"
+ ],
+ "discourse:discourse.nixos.org/t/79408": [
+  "discourse-meetings"
+ ],
+ "discourse:discourse.nixos.org/t/79684": [
+  "discourse-meetings"
+ ],
+ "discourse:discourse.nixos.org/t/79706": [
+  "discourse-service-module-conventions"
+ ],
+ "ibizaman/selfhostblocks#467": [
+  "selfhostblocks-vars"
+ ],
+ "ibizaman/selfhostblocks#541": [
+  "selfhostblocks-contracts-across-nodes"
+ ],
+ "nix-community/NixNG#67": [
+  "nixng-issues"
+ ],
+ "nix-community/home-manager#4751": [
+  "home-manager-issues"
+ ],
+ "nix-community/home-manager#9185": [
+  "home-manager-issues"
+ ],
+ "nix-community/home-manager#9212": [
+  "home-manager-issues"
+ ],
+ "nix-community/home-manager#9215": [
+  "home-manager-prs"
+ ],
+ "nix-community/home-manager#9263": [
+  "home-manager-issues"
+ ],
+ "nix-community/home-manager#9264": [
+  "home-manager-prs"
+ ],
+ "nix-community/home-manager#9471": [
+  "home-manager-issues"
+ ],
+ "nix-community/home-manager#9473": [
+  "home-manager-issues"
+ ],
+ "nix-community/home-manager#9693": [
+  "home-manager-prs"
+ ],
+ "nix-community/home-manager#9708": [
+  "home-manager-prs"
+ ],
+ "nix-community/home-manager#9714": [
+  "home-manager-prs"
+ ],
+ "nix-darwin/nix-darwin#1744": [
+  "nix-darwin-prs"
+ ],
+ "nix-darwin/nix-darwin#1765": [
+  "nix-darwin-prs"
+ ]
+}

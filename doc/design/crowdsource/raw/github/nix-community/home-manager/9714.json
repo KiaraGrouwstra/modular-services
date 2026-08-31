@@ -1,0 +1,301 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/nix-community/home-manager/pull/9714",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Fixes #9708.\r\n\r\nMake the import of nixpkgs' modular services (see #9215) robust to its temporary closure wrapper (added in NixOS/nixpkgs#518860, reverted in NixOS/nixpkgs#545519), making Home Manager robust to this mismatch (still present in `nixpkgs-unstable` as per https://github.com/nix-community/home-manager/pull/9708#issuecomment-5085652500).\r\n\r\nAssisted-by: Claude:claude-opus-5\r\n\r\n/cc @DaVinci42 @pyrox0\r\n\r\n### Description\r\n\r\n<!--\r\n\r\nPlease provide a brief description of your change.\r\n\r\n-->\r\n\r\n### Checklist\r\n\r\n<!--\r\n\r\nPlease go through the following checklist before opening a non-WIP\r\npull-request.\r\n\r\nAlso make sure to read the guidelines found at\r\n\r\n  https://nix-community.github.io/home-manager/#sec-guidelines\r\n\r\n-->\r\n\r\n- [x] Change is backwards compatible.\r\n\r\n- [x] Code formatted with `nix fmt` or\r\n      `nix-shell -A dev --run treefmt`.\r\n\r\n- [x] Code tested through `nix build .#test-all`\r\n      or a targeted `nix run .#tests -- <pattern>`\r\n    - `nix run .#tests -- home-services`\r\n\r\n- [ ] Test cases updated/added. See [example](https://github.com/nix-community/home-manager/commit/f3fbb50b68df20da47f9b0def5607857fcc0d021#diff-b61a6d542f9036550ba9c401c80f00ef).\r\n\r\n- [x] Commit messages are formatted like\r\n\r\n  ```\r\n  {component}: {description}\r\n\r\n  {long description}\r\n  ```\r\n\r\n  See [CONTRIBUTING](https://nix-community.github.io/home-manager/#sec-commit-style) for more information and [recent commit messages](https://github.com/nix-community/home-manager/commits/master) for examples.\r\n\r\n- If this PR adds a new module\r\n\r\n  - [ ] Added myself as module maintainer. See [example](https://github.com/nix-community/home-manager/blob/a51598236f23c89e59ee77eb8e0614358b0e896c/modules/programs/lesspipe.nix#L11).\r\n  - [ ] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n  - [ ] Basic tests added. See [Tests](https://nix-community.github.io/home-manager/index.xhtml#sec-tests)\r\n\r\n- If this PR adds an exciting new feature or contains a breaking change.\r\n  - [ ] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n",
+  "closed_at": "2026-07-28T16:39:14Z",
+  "closed_by": {
+   "id": 1778670,
+   "login": "khaneliman",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 0,
+  "created_at": "2026-07-27T09:55:14Z",
+  "draft": false,
+  "id": 4986657606,
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 9714,
+  "pull_request": {
+   "diff_url": "https://github.com/nix-community/home-manager/pull/9714.diff",
+   "merged_at": "2026-07-28T16:39:14Z",
+   "patch_url": "https://github.com/nix-community/home-manager/pull/9714.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "closed",
+  "state_reason": null,
+  "title": "services-modular: accept both shapes of the nixpkgs service module",
+  "type": null,
+  "updated_at": "2026-07-28T18:23:41Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 31,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "nix-community:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2017-01-14T12:11:06Z",
+    "default_branch": "master",
+    "description": "Manage a user environment using Nix  [maintainer=@khaneliman, @rycee] ",
+    "disabled": false,
+    "fork": false,
+    "forks": 2465,
+    "forks_count": 2465,
+    "full_name": "nix-community/home-manager",
+    "git_commits_url": "https://api.github.com/repos/nix-community/home-manager/git/commits{/sha}",
+    "has_discussions": true,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": true,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-community.github.io/home-manager/",
+    "id": 78938149,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/nix-community/home-manager/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/nix-community/home-manager/milestones{/number}",
+    "name": "home-manager",
+    "open_issues": 1011,
+    "open_issues_count": 1011,
+    "owner": {
+     "id": 33221035,
+     "login": "nix-community",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/nix-community/home-manager/pulls{/number}",
+    "pushed_at": "2026-08-31T03:26:44Z",
+    "size": 355203,
+    "stargazers_count": 10299,
+    "subscription_url": "https://api.github.com/repos/nix-community/home-manager/subscription",
+    "tags_url": "https://api.github.com/repos/nix-community/home-manager/tags",
+    "topics": [
+     "dotfiles",
+     "nix",
+     "nix-dotfiles",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T07:33:23Z",
+    "visibility": "public",
+    "watchers": 10299,
+    "watchers_count": 10299,
+    "web_commit_signoff_required": false
+   },
+   "sha": "e83dffa86cccb6237fe194d4eeb47f41557749d1",
+   "user": {
+    "id": 33221035,
+    "login": "nix-community",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Fixes #9708.\r\n\r\nMake the import of nixpkgs' modular services (see #9215) robust to its temporary closure wrapper (added in NixOS/nixpkgs#518860, reverted in NixOS/nixpkgs#545519), making Home Manager robust to this mismatch (still present in `nixpkgs-unstable` as per https://github.com/nix-community/home-manager/pull/9708#issuecomment-5085652500).\r\n\r\nAssisted-by: Claude:claude-opus-5\r\n\r\n/cc @DaVinci42 @pyrox0\r\n\r\n### Description\r\n\r\n<!--\r\n\r\nPlease provide a brief description of your change.\r\n\r\n-->\r\n\r\n### Checklist\r\n\r\n<!--\r\n\r\nPlease go through the following checklist before opening a non-WIP\r\npull-request.\r\n\r\nAlso make sure to read the guidelines found at\r\n\r\n  https://nix-community.github.io/home-manager/#sec-guidelines\r\n\r\n-->\r\n\r\n- [x] Change is backwards compatible.\r\n\r\n- [x] Code formatted with `nix fmt` or\r\n      `nix-shell -A dev --run treefmt`.\r\n\r\n- [x] Code tested through `nix build .#test-all`\r\n      or a targeted `nix run .#tests -- <pattern>`\r\n    - `nix run .#tests -- home-services`\r\n\r\n- [ ] Test cases updated/added. See [example](https://github.com/nix-community/home-manager/commit/f3fbb50b68df20da47f9b0def5607857fcc0d021#diff-b61a6d542f9036550ba9c401c80f00ef).\r\n\r\n- [x] Commit messages are formatted like\r\n\r\n  ```\r\n  {component}: {description}\r\n\r\n  {long description}\r\n  ```\r\n\r\n  See [CONTRIBUTING](https://nix-community.github.io/home-manager/#sec-commit-style) for more information and [recent commit messages](https://github.com/nix-community/home-manager/commits/master) for examples.\r\n\r\n- If this PR adds a new module\r\n\r\n  - [ ] Added myself as module maintainer. See [example](https://github.com/nix-community/home-manager/blob/a51598236f23c89e59ee77eb8e0614358b0e896c/modules/programs/lesspipe.nix#L11).\r\n  - [ ] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n  - [ ] Basic tests added. See [Tests](https://nix-community.github.io/home-manager/index.xhtml#sec-tests)\r\n\r\n- If this PR adds an exciting new feature or contains a breaking change.\r\n  - [ ] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n",
+  "changed_files": 2,
+  "closed_at": "2026-07-28T16:39:14Z",
+  "comments": 0,
+  "commits": 1,
+  "created_at": "2026-07-27T09:55:14Z",
+  "deletions": 6,
+  "diff_url": "https://github.com/nix-community/home-manager/pull/9714.diff",
+  "draft": false,
+  "head": {
+   "label": "KiaraGrouwstra:modular-services-closure",
+   "ref": "modular-services-closure",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-12-27T17:40:18Z",
+    "default_branch": "master",
+    "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/home-manager",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-community.github.io/home-manager/",
+    "id": 909087867,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/milestones{/number}",
+    "name": "home-manager",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/pulls{/number}",
+    "pushed_at": "2026-07-28T18:23:41Z",
+    "size": 15912,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/tags",
+    "topics": [],
+    "updated_at": "2024-12-27T17:40:19Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "4853452363f67b1d8b2f1545091eb15830686350",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4141275668,
+  "labels": [],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "fe6c96269436ba80aa6453714947ce8dccdc7689",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-07-28T16:39:14Z",
+  "merged_by": {
+   "id": 1778670,
+   "login": "khaneliman",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 9714,
+  "patch_url": "https://github.com/nix-community/home-manager/pull/9714.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 12465195,
+    "login": "ambroisie",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "services-modular: accept both shapes of the nixpkgs service module",
+  "updated_at": "2026-07-28T18:23:41Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "nix-community/home-manager#9714",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "4853452363f67b1d8b2f1545091eb15830686350",
+   "id": 4788035390,
+   "state": "APPROVED",
+   "submitted_at": "2026-07-27T14:19:46Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "home-manager-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fe6c96269436ba80aa6453714947ce8dccdc7689",
+   "commit_url": "https://api.github.com/repos/nix-community/home-manager/commits/fe6c96269436ba80aa6453714947ce8dccdc7689",
+   "created_at": "2026-07-28T16:39:14Z",
+   "event": "merged",
+   "id": 28611497121
+  },
+  {
+   "actor": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-28T16:39:14Z",
+   "event": "closed",
+   "id": 28611497200,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

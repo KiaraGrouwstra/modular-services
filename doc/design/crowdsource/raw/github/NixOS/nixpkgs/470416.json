@@ -1,0 +1,1732 @@
+{
+ "comments": [
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha)\n\nCommand: `nixpkgs-review pr 470416 --package goupile --package goupile.passthru.tests`\nCommit: [`381a02a8fc3c29c0420306cc163ba1d2979dfe27`](https://github.com/NixOS/nixpkgs/commit/381a02a8fc3c29c0420306cc163ba1d2979dfe27) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/381a02a8fc3c29c0420306cc163ba1d2979dfe27..pull/470416/head))\nMerge: [`6ed0fbd8e207a0571ac9ccba53444a7a33793425`](https://github.com/NixOS/nixpkgs/commit/6ed0fbd8e207a0571ac9ccba53444a7a33793425)\n\nLogs: https://github.com/phanirithvij/nixpkgs-review-gha/actions/runs/22480973064\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 2 packages built:</summary>\n  <ul>\n    <li>goupile</li>\n    <li>goupile.passthru.tests.goupile</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:white_check_mark: 2 packages built:</summary>\n  <ul>\n    <li>goupile</li>\n    <li>goupile.passthru.tests.goupile</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-02-27T09:51:25Z",
+   "id": 3971900058,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-27T09:51:25Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha)\n\nCommand: `nixpkgs-review pr 470416`\nCommit: [`c5020dc4ebce715d56b385d50800e11e572d7774`](https://github.com/NixOS/nixpkgs/commit/c5020dc4ebce715d56b385d50800e11e572d7774) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/c5020dc4ebce715d56b385d50800e11e572d7774..pull/470416/head))\nMerge: [`468a7084628bfbd87169cdf3b2ebd8821faf8bf2`](https://github.com/NixOS/nixpkgs/commit/468a7084628bfbd87169cdf3b2ebd8821faf8bf2)\n\nLogs: https://github.com/imincik/nixpkgs-review-gha/actions/runs/23238594100\n\n<details><summary>Download packages from cache:</summary><ul>\n<li><details><summary><code>x86_64-linux</code></summary>\n\n```shell\nnix-store -r --add-root nixpkgs-pr-470416-x86_64-linux \\\n  --option binary-caches 'https://cache.nixos.org/ https://imincik-nixpkgs-review-gha.cachix.org' \\\n  --option trusted-public-keys '\n  cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=\n  imincik-nixpkgs-review-gha.cachix.org-1:vbkvABMrxmQ+ObRDwmF2qaLIEhGHdbF4MwXtOPU8Jmk=\n  ' \\\n  /nix/store/dfivwl6xwsmkxzb2jvdh4s82g905p0l5-goupile-3.12.1\n```\n</details></li>\n<li><details><summary><code>aarch64-linux</code></summary>\n\n```shell\nnix-store -r --add-root nixpkgs-pr-470416-aarch64-linux \\\n  --option binary-caches 'https://cache.nixos.org/ https://imincik-nixpkgs-review-gha.cachix.org' \\\n  --option trusted-public-keys '\n  cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=\n  imincik-nixpkgs-review-gha.cachix.org-1:vbkvABMrxmQ+ObRDwmF2qaLIEhGHdbF4MwXtOPU8Jmk=\n  ' \\\n  /nix/store/lyr2pmfp086d9a1m6nx8bkwinl1kjan3-goupile-3.12.1\n```\n</details></li>\n</ul></details>\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>goupile</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>goupile</li>\n  </ul>\n</details>\n\n---\n### `x86_64-darwin`\n:white_check_mark: *No rebuilds*\n\n---\n### `aarch64-darwin`\n:white_check_mark: *No rebuilds*\n",
+   "created_at": "2026-03-18T09:53:31Z",
+   "id": 4081170568,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-18T09:53:31Z",
+   "user": {
+    "id": 476346,
+    "login": "imincik",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha)\n\nCommand: `nixpkgs-review pr 470416 --package goupile.passthru.tests`\nCommit: [`c5020dc4ebce715d56b385d50800e11e572d7774`](https://github.com/NixOS/nixpkgs/commit/c5020dc4ebce715d56b385d50800e11e572d7774) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/c5020dc4ebce715d56b385d50800e11e572d7774..pull/470416/head))\nMerge: [`468a7084628bfbd87169cdf3b2ebd8821faf8bf2`](https://github.com/NixOS/nixpkgs/commit/468a7084628bfbd87169cdf3b2ebd8821faf8bf2)\n\nLogs: https://github.com/phanirithvij/nixpkgs-review-gha/actions/runs/23242562385\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>goupile.passthru.tests.goupile</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>goupile.passthru.tests.goupile</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-03-18T11:40:56Z",
+   "id": 4081836015,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-18T11:40:56Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha)\n\nCommand: `nixpkgs-review pr 470416 -p goupile -p goupile.passthru.tests`\nCommit: [`7203310af608723711c2ce60a086dc2eb26f33ce`](https://github.com/NixOS/nixpkgs/commit/7203310af608723711c2ce60a086dc2eb26f33ce) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/7203310af608723711c2ce60a086dc2eb26f33ce..pull/470416/head))\nMerge: [`50ee3eeffc410149de1c98aa41c35b5c5da52d92`](https://github.com/NixOS/nixpkgs/commit/50ee3eeffc410149de1c98aa41c35b5c5da52d92)\n\nLogs: https://github.com/Prince213/nixpkgs-review-gha/actions/runs/23275931729\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 2 packages built:</summary>\n  <ul>\n    <li>goupile</li>\n    <li>goupile.passthru.tests.goupile</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:x: 1 package failed to build:</summary>\n  <ul>\n    <li>goupile.passthru.tests.goupile</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>goupile</li>\n  </ul>\n</details>\n\n---\n### `x86_64-darwin` (sandbox = relaxed)\n<details>\n  <summary>:x: 1 package failed to build:</summary>\n  <ul>\n    <li>goupile.passthru.tests.goupile</li>\n  </ul>\n</details>\n\n---\n### `aarch64-darwin` (sandbox = relaxed)\n<details>\n  <summary>:x: 1 package failed to build:</summary>\n  <ul>\n    <li>goupile.passthru.tests.goupile</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-03-19T02:03:51Z",
+   "id": 4087053508,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-19T02:03:51Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The test failure on aarch64-Linux is due to missing configuration for nixos features in the runner. It can be fixed by adding a github actions environment variable named EXTRA_NIX_CONFIG\r\n\r\nWith value `system-features = nixos-test benchmark big-parallel kvm uid-range`\r\n\r\nGoupile is Linux only for now. ",
+   "created_at": "2026-03-19T06:13:45Z",
+   "id": 4088058920,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-19T06:13:45Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I believe the errors on aarch64-linux is because the runners don't support KVM, so they can be ignored.",
+   "created_at": "2026-03-19T06:19:58Z",
+   "id": 4088077457,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-19T06:19:58Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@Prince213 they must support kvm see my above comment on how to enable it, the tests worked on aarch64 Linux https://github.com/NixOS/nixpkgs/pull/470416#issuecomment-4081836015\r\n\r\nI'm not sure why it's working if it's not supported. And why it's not discovered by nix if it is supported. ",
+   "created_at": "2026-03-19T06:38:48Z",
+   "id": 4088138010,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-19T06:38:48Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/nix-ngi-goupile-packaged-for-ngi-forge-and-nixpkgs/77581/1\n",
+   "created_at": "2026-05-12T16:57:02Z",
+   "id": 4432861263,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-12T16:57:02Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/470416",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Tracking https://github.com/ngi-nix/projects/issues/134\r\n\r\n- closes https://github.com/ngi-nix/projects/issues/1568\r\n- closes https://github.com/ngi-nix/projects/issues/1569\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [x] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": "2026-03-19T06:27:05Z",
+  "closed_by": {
+   "id": 25235514,
+   "login": "Prince213",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 8,
+  "created_at": "2025-12-13T11:40:30Z",
+  "draft": false,
+  "id": 3725851627,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The project is part of the NGI funding grant. https://nlnet.nl/NGI/",
+    "id": 1361647463,
+    "name": "6.topic: NLNet / NGI"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 470416,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/470416.diff",
+   "merged_at": "2026-03-19T06:27:04Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/470416.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "nixos/goupile: init; goupile: init at 3.12.1",
+  "type": null,
+  "updated_at": "2026-05-12T16:57:02Z",
+  "user": {
+   "id": 29627898,
+   "login": "phanirithvij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 559,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21132,
+    "open_issues_count": 21132,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:37:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "80fa4a0ad81ebe0222308510cae132a7951e7ff7",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Tracking https://github.com/ngi-nix/projects/issues/134\r\n\r\n- closes https://github.com/ngi-nix/projects/issues/1568\r\n- closes https://github.com/ngi-nix/projects/issues/1569\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [x] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 7,
+  "closed_at": "2026-03-19T06:27:05Z",
+  "comments": 8,
+  "commits": 3,
+  "created_at": "2025-12-13T11:40:30Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/470416.diff",
+  "draft": false,
+  "head": {
+   "label": "phanirithvij:goupile-module",
+   "ref": "goupile-module",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-08-12T15:42:02Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "phanirithvij/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/phanirithvij/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 841533886,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/phanirithvij/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/phanirithvij/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 29627898,
+     "login": "phanirithvij",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/phanirithvij/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:00:58Z",
+    "size": 2912212,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/phanirithvij/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/phanirithvij/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-08-31T16:21:48Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "7203310af608723711c2ce60a086dc2eb26f33ce",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3098608710,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The project is part of the NGI funding grant. https://nlnet.nl/NGI/",
+    "id": 1361647463,
+    "name": "6.topic: NLNet / NGI"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "9fbe055270246ccdafe157ed256c0807a37e3d2a",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-03-19T06:27:04Z",
+  "merged_by": {
+   "id": 25235514,
+   "login": "Prince213",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 470416,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/470416.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 23,
+  "state": "closed",
+  "title": "nixos/goupile: init; goupile: init at 3.12.1",
+  "updated_at": "2026-05-12T16:57:02Z",
+  "user": {
+   "id": 29627898,
+   "login": "phanirithvij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#470416",
+ "review_comments": [
+  {
+   "body": "Not sure, but 3.12.1 should be >3.11.1 and satisfy the condition?",
+   "commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "created_at": "2026-03-16T06:53:07Z",
+   "diff_hunk": "@@ -0,0 +1,72 @@\n+{\n+  lib,\n+  fetchFromGitHub,\n+  versionCheckHook,\n+  installShellFiles,\n+\n+  stdenv,\n+  clangStdenv,\n+  llvmPackages,\n+  nixosTests,\n+\n+  # https://goupile.org/en/build recommends a Paranoid build\n+  # which is not bit by bit reproducible, whereas others are\n+  profile ? \"Paranoid\", # Debug/Fast\n+}:\n+let\n+  stdenv' = if (profile == \"Paranoid\") then clangStdenv else stdenv;\n+in\n+stdenv'.mkDerivation (finalAttrs: {\n+  pname = \"goupile\";\n+  version = \"3.12.1\";\n+\n+  # https://github.com/Koromix/rygel/tags\n+  src = fetchFromGitHub {\n+    owner = \"Koromix\";\n+    repo = \"rygel\";\n+    tag = \"goupile/${finalAttrs.version}\";\n+    hash = \"sha256-Pn/0tjezVKJedAtqj69avxeIK2l3l9FGioYSyEao12E=\";\n+  };\n+\n+  nativeBuildInputs = [\n+    installShellFiles\n+  ]\n+  ++ lib.optionals (profile == \"Paranoid\") [\n+    llvmPackages.bintools\n+  ];\n+\n+  # pipe2() is only exposed with _GNU_SOURCE\n+  NIX_CFLAGS_COMPILE = [ \"-D_GNU_SOURCE\" ];\n+\n+  # NOTE: in the next release >3.11.1",
+   "id": 2938487209,
+   "line": null,
+   "original_commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "original_line": 41,
+   "original_position": 41,
+   "original_start_line": null,
+   "path": "pkgs/by-name/go/goupile/package.nix",
+   "position": 1,
+   "pull_request_review_id": 3951780407,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-16T06:57:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Add a assertion to check that `profile` is one of `Paranoid`, `Debug` or `Fast`.",
+   "commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "created_at": "2026-03-16T06:54:17Z",
+   "diff_hunk": "@@ -0,0 +1,72 @@\n+{\n+  lib,\n+  fetchFromGitHub,\n+  versionCheckHook,\n+  installShellFiles,\n+\n+  stdenv,\n+  clangStdenv,\n+  llvmPackages,\n+  nixosTests,\n+\n+  # https://goupile.org/en/build recommends a Paranoid build\n+  # which is not bit by bit reproducible, whereas others are\n+  profile ? \"Paranoid\", # Debug/Fast",
+   "id": 2938490832,
+   "line": null,
+   "original_commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "original_line": 14,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "pkgs/by-name/go/goupile/package.nix",
+   "position": 1,
+   "pull_request_review_id": 3951780407,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-16T06:57:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Will this work?\n\n```suggestion\n  goupile = runTest ./web-apps/goupile;\n```",
+   "commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "created_at": "2026-03-16T06:54:40Z",
+   "diff_hunk": "@@ -689,6 +681,7 @@ in\n   gotenberg = runTest ./gotenberg.nix;\n   gotify-server = runTest ./gotify-server.nix;\n   gotosocial = runTest ./web-apps/gotosocial.nix;\n+  goupile = runTest ./web-apps/goupile/default.nix;",
+   "id": 2938492075,
+   "line": null,
+   "original_commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "original_line": 684,
+   "original_position": 28,
+   "original_start_line": null,
+   "path": "nixos/tests/all-tests.nix",
+   "position": 1,
+   "pull_request_review_id": 3951780407,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-16T06:57:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Can we just merge these two and reduce one level of indent?",
+   "commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "created_at": "2026-03-16T06:55:10Z",
+   "diff_hunk": "@@ -0,0 +1,170 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  goupileWebServiceName = \"goupile\";\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options = {\n+    services.goupile = {",
+   "id": 2938493598,
+   "line": null,
+   "original_commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "original_line": 14,
+   "original_position": 14,
+   "original_start_line": 13,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 1,
+   "pull_request_review_id": 3951780407,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-16T06:57:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Feels a bit weird.  Maybe expose `goupileWebServiceName` and let users set through `services.nginx.virtualHosts.${goupileWebServiceName}` directly?",
+   "commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "created_at": "2026-03-16T06:56:03Z",
+   "diff_hunk": "@@ -0,0 +1,170 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  goupileWebServiceName = \"goupile\";\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options = {\n+    services.goupile = {\n+      enable = lib.mkEnableOption \"Goupile server\";\n+      package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+      enableSandbox = lib.mkOption {\n+        type = lib.types.bool;\n+        default = true;\n+        description = \"Enable the sandbox option.\";\n+      };\n+\n+      settings = lib.mkOption {\n+        type = lib.types.submodule {\n+          freeformType = settingsFormat.type;\n+          options = {\n+            HTTP.Port = lib.mkOption {\n+              type = lib.types.port;\n+              default = 8889;\n+              description = \"The port goupile runs on\";\n+            };\n+            Data.RootDirectory = lib.mkOption {\n+              type = lib.types.str;\n+              default = \"/var/lib/goupile\";\n+              description = \"Goupile's data directory\";\n+            };\n+          };\n+        };\n+        default = { }; # default will be lost for submodules if overriden\n+        example = lib.literalExpression ''\n+          {\n+            HTTP.Port = 8888;\n+          }\n+        '';\n+        description = ''\n+          The options for `systemd.services.goupile` in ini format.\n+\n+          The configuration options available can be found here\n+          https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+        '';\n+      };\n+\n+      configFile = lib.mkOption {\n+        type = lib.types.path;\n+        description = ''\n+          The configuration file to be passed to goupile server.\n+\n+          By default the configuration file is created from `services.goupile.settings`.\n+        '';\n+      };\n+\n+      nginx = lib.mkOption {\n+        type = lib.types.submodule (\n+          lib.recursiveUpdate (import ../web-servers/nginx/vhost-options.nix { inherit config lib; }) { }\n+        );\n+        default = { };\n+        example = lib.literalExpression ''\n+          {\n+            serverAliases = [\n+              \"goupile.''${config.networking.domain}\"\n+            ];\n+            # To enable encryption and let let's encrypt take care of certificate\n+            forceSSL = true;\n+            enableACME = true;\n+          }\n+        '';\n+        description = \"nginx virtualHost settings.\";\n+      };\n+    };",
+   "id": 2938496621,
+   "line": null,
+   "original_commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "original_line": 80,
+   "original_position": 80,
+   "original_start_line": 63,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 1,
+   "pull_request_review_id": 3951780407,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-16T06:57:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I am exposing it as an option now, let me know if I missed anything else.",
+   "commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "created_at": "2026-03-16T07:33:04Z",
+   "diff_hunk": "@@ -0,0 +1,170 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  goupileWebServiceName = \"goupile\";\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options = {\n+    services.goupile = {\n+      enable = lib.mkEnableOption \"Goupile server\";\n+      package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+      enableSandbox = lib.mkOption {\n+        type = lib.types.bool;\n+        default = true;\n+        description = \"Enable the sandbox option.\";\n+      };\n+\n+      settings = lib.mkOption {\n+        type = lib.types.submodule {\n+          freeformType = settingsFormat.type;\n+          options = {\n+            HTTP.Port = lib.mkOption {\n+              type = lib.types.port;\n+              default = 8889;\n+              description = \"The port goupile runs on\";\n+            };\n+            Data.RootDirectory = lib.mkOption {\n+              type = lib.types.str;\n+              default = \"/var/lib/goupile\";\n+              description = \"Goupile's data directory\";\n+            };\n+          };\n+        };\n+        default = { }; # default will be lost for submodules if overriden\n+        example = lib.literalExpression ''\n+          {\n+            HTTP.Port = 8888;\n+          }\n+        '';\n+        description = ''\n+          The options for `systemd.services.goupile` in ini format.\n+\n+          The configuration options available can be found here\n+          https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+        '';\n+      };\n+\n+      configFile = lib.mkOption {\n+        type = lib.types.path;\n+        description = ''\n+          The configuration file to be passed to goupile server.\n+\n+          By default the configuration file is created from `services.goupile.settings`.\n+        '';\n+      };\n+\n+      nginx = lib.mkOption {\n+        type = lib.types.submodule (\n+          lib.recursiveUpdate (import ../web-servers/nginx/vhost-options.nix { inherit config lib; }) { }\n+        );\n+        default = { };\n+        example = lib.literalExpression ''\n+          {\n+            serverAliases = [\n+              \"goupile.''${config.networking.domain}\"\n+            ];\n+            # To enable encryption and let let's encrypt take care of certificate\n+            forceSSL = true;\n+            enableACME = true;\n+          }\n+        '';\n+        description = \"nginx virtualHost settings.\";\n+      };\n+    };",
+   "id": 2938627518,
+   "in_reply_to_id": 2938496621,
+   "line": null,
+   "original_commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "original_line": 80,
+   "original_position": 80,
+   "original_start_line": 63,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 1,
+   "pull_request_review_id": 3951924933,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-16T07:33:05Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "thanks, removed",
+   "commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "created_at": "2026-03-16T07:33:23Z",
+   "diff_hunk": "@@ -0,0 +1,72 @@\n+{\n+  lib,\n+  fetchFromGitHub,\n+  versionCheckHook,\n+  installShellFiles,\n+\n+  stdenv,\n+  clangStdenv,\n+  llvmPackages,\n+  nixosTests,\n+\n+  # https://goupile.org/en/build recommends a Paranoid build\n+  # which is not bit by bit reproducible, whereas others are\n+  profile ? \"Paranoid\", # Debug/Fast\n+}:\n+let\n+  stdenv' = if (profile == \"Paranoid\") then clangStdenv else stdenv;\n+in\n+stdenv'.mkDerivation (finalAttrs: {\n+  pname = \"goupile\";\n+  version = \"3.12.1\";\n+\n+  # https://github.com/Koromix/rygel/tags\n+  src = fetchFromGitHub {\n+    owner = \"Koromix\";\n+    repo = \"rygel\";\n+    tag = \"goupile/${finalAttrs.version}\";\n+    hash = \"sha256-Pn/0tjezVKJedAtqj69avxeIK2l3l9FGioYSyEao12E=\";\n+  };\n+\n+  nativeBuildInputs = [\n+    installShellFiles\n+  ]\n+  ++ lib.optionals (profile == \"Paranoid\") [\n+    llvmPackages.bintools\n+  ];\n+\n+  # pipe2() is only exposed with _GNU_SOURCE\n+  NIX_CFLAGS_COMPILE = [ \"-D_GNU_SOURCE\" ];\n+\n+  # NOTE: in the next release >3.11.1",
+   "id": 2938628712,
+   "in_reply_to_id": 2938487209,
+   "line": null,
+   "original_commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "original_line": 41,
+   "original_position": 41,
+   "original_start_line": null,
+   "path": "pkgs/by-name/go/goupile/package.nix",
+   "position": 1,
+   "pull_request_review_id": 3951926031,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-16T07:33:24Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Typo:\n\n```suggestion\n- [Goupile](https://goupile.org/en), an open-source design tool for secure forms including Clinical Report Forms (eCRF). Available as [services.goupile](#opt-services.goupile.enable).\n```",
+   "commit_id": "198fd5a7c198e30ebb8ef39b86a5275cdbfee7e8",
+   "created_at": "2026-03-18T09:32:26Z",
+   "diff_hunk": "@@ -14,6 +14,8 @@\n   designed to run on affordable, low-power devices. Available as [services.meshtasticd]\n   (#opt-services.meshtasticd.enable).\n \n+- [Goupile](https://goupile.org/en), an open-source design tool for secure forms including Clinical Report Forms (eCRF). Avaliable as [services.goupile](#opt-services.goupile.enable).",
+   "id": 2952087836,
+   "line": null,
+   "original_commit_id": "198fd5a7c198e30ebb8ef39b86a5275cdbfee7e8",
+   "original_line": 17,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/doc/manual/release-notes/rl-2605.section.md",
+   "position": 1,
+   "pull_request_review_id": 3966362759,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-18T09:33:55Z",
+   "user": {
+    "id": 476346,
+    "login": "imincik",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Fixed, thanks",
+   "commit_id": "198fd5a7c198e30ebb8ef39b86a5275cdbfee7e8",
+   "created_at": "2026-03-18T09:37:56Z",
+   "diff_hunk": "@@ -14,6 +14,8 @@\n   designed to run on affordable, low-power devices. Available as [services.meshtasticd]\n   (#opt-services.meshtasticd.enable).\n \n+- [Goupile](https://goupile.org/en), an open-source design tool for secure forms including Clinical Report Forms (eCRF). Avaliable as [services.goupile](#opt-services.goupile.enable).",
+   "id": 2952118112,
+   "in_reply_to_id": 2952087836,
+   "line": null,
+   "original_commit_id": "198fd5a7c198e30ebb8ef39b86a5275cdbfee7e8",
+   "original_line": 17,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/doc/manual/release-notes/rl-2605.section.md",
+   "position": 1,
+   "pull_request_review_id": 3966395307,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-18T09:37:56Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Now I think this part can simply be removed?  This is because users can set up nginx config directly.  The only thing we need is `cfg.hostName`.",
+   "commit_id": "5e8d3b49e5518fa4a0e51596dac30c879130419b",
+   "created_at": "2026-03-18T11:34:48Z",
+   "diff_hunk": "@@ -0,0 +1,172 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options.services.goupile = {\n+    enable = lib.mkEnableOption \"Goupile server\";\n+    package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+    enableSandbox = lib.mkOption {\n+      type = lib.types.bool;\n+      default = true;\n+      description = \"Enable the sandbox option.\";\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType = settingsFormat.type;\n+        options = {\n+          HTTP.Port = lib.mkOption {\n+            type = lib.types.port;\n+            default = 8889;\n+            description = \"The port goupile runs on\";\n+          };\n+          Data.RootDirectory = lib.mkOption {\n+            type = lib.types.str;\n+            default = \"/var/lib/goupile\";\n+            description = \"Goupile's data directory.\";\n+          };\n+        };\n+      };\n+      default = { }; # default will be lost for submodules if overriden\n+      example = lib.literalExpression ''\n+        {\n+          HTTP.Port = 8888;\n+        }\n+      '';\n+      description = ''\n+        The options for `systemd.services.goupile` in ini format.\n+\n+        The configuration options available can be found here\n+        https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+      '';\n+    };\n+\n+    configFile = lib.mkOption {\n+      type = lib.types.path;\n+      description = ''\n+        The configuration file to be passed to goupile server.\n+\n+        By default the configuration file is created from `services.goupile.settings`.\n+      '';\n+    };\n+\n+    nginx = lib.mkOption {\n+      type = lib.types.submodule (\n+        lib.recursiveUpdate (import ../web-servers/nginx/vhost-options.nix { inherit config lib; }) { }\n+      );\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          serverAliases = [\n+            \"goupile.''${config.networking.domain}\"\n+          ];\n+          # To enable encryption and let let's encrypt take care of certificate\n+          forceSSL = true;\n+          enableACME = true;\n+        }\n+      '';\n+      description = \"Extra configuration for the nginx virtual host of Goupile.\";\n+    };",
+   "id": 2952772527,
+   "line": null,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 77,
+   "original_position": 77,
+   "original_start_line": 61,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 1,
+   "pull_request_review_id": 3967082280,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:43:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "So this line can be removed.",
+   "commit_id": "5e8d3b49e5518fa4a0e51596dac30c879130419b",
+   "created_at": "2026-03-18T11:35:02Z",
+   "diff_hunk": "@@ -0,0 +1,172 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options.services.goupile = {\n+    enable = lib.mkEnableOption \"Goupile server\";\n+    package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+    enableSandbox = lib.mkOption {\n+      type = lib.types.bool;\n+      default = true;\n+      description = \"Enable the sandbox option.\";\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType = settingsFormat.type;\n+        options = {\n+          HTTP.Port = lib.mkOption {\n+            type = lib.types.port;\n+            default = 8889;\n+            description = \"The port goupile runs on\";\n+          };\n+          Data.RootDirectory = lib.mkOption {\n+            type = lib.types.str;\n+            default = \"/var/lib/goupile\";\n+            description = \"Goupile's data directory.\";\n+          };\n+        };\n+      };\n+      default = { }; # default will be lost for submodules if overriden\n+      example = lib.literalExpression ''\n+        {\n+          HTTP.Port = 8888;\n+        }\n+      '';\n+      description = ''\n+        The options for `systemd.services.goupile` in ini format.\n+\n+        The configuration options available can be found here\n+        https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+      '';\n+    };\n+\n+    configFile = lib.mkOption {\n+      type = lib.types.path;\n+      description = ''\n+        The configuration file to be passed to goupile server.\n+\n+        By default the configuration file is created from `services.goupile.settings`.\n+      '';\n+    };\n+\n+    nginx = lib.mkOption {\n+      type = lib.types.submodule (\n+        lib.recursiveUpdate (import ../web-servers/nginx/vhost-options.nix { inherit config lib; }) { }\n+      );\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          serverAliases = [\n+            \"goupile.''${config.networking.domain}\"\n+          ];\n+          # To enable encryption and let let's encrypt take care of certificate\n+          forceSSL = true;\n+          enableACME = true;\n+        }\n+      '';\n+      description = \"Extra configuration for the nginx virtual host of Goupile.\";\n+    };\n+\n+    hostName = lib.mkOption {\n+      type = lib.types.str;\n+      default = \"goupile\";\n+      description = \"Nginx service name for goupile service.\";\n+    };\n+  };\n+  config = lib.mkIf cfg.enable (\n+    lib.mkMerge [\n+      {\n+        services.nginx = {\n+          enable = lib.mkDefault true;\n+          virtualHosts.${cfg.hostName} = lib.mkMerge [\n+            cfg.nginx",
+   "id": 2952773825,
+   "line": null,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 91,
+   "original_position": 91,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 1,
+   "pull_request_review_id": 3967082280,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:43:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Not sure, but if you use default priority (i.e. without using lib.mk*Default), then the user may get a better warning if they choose to set configFile directly.\n\nNot blocking, the current implementation is certainly fine.",
+   "commit_id": "9e7a50d5ee7f9e9695ffe03854ca832a23ffde17",
+   "created_at": "2026-03-18T11:36:52Z",
+   "diff_hunk": "@@ -0,0 +1,172 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options.services.goupile = {\n+    enable = lib.mkEnableOption \"Goupile server\";\n+    package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+    enableSandbox = lib.mkOption {\n+      type = lib.types.bool;\n+      default = true;\n+      description = \"Enable the sandbox option.\";\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType = settingsFormat.type;\n+        options = {\n+          HTTP.Port = lib.mkOption {\n+            type = lib.types.port;\n+            default = 8889;\n+            description = \"The port goupile runs on\";\n+          };\n+          Data.RootDirectory = lib.mkOption {\n+            type = lib.types.str;\n+            default = \"/var/lib/goupile\";\n+            description = \"Goupile's data directory.\";\n+          };\n+        };\n+      };\n+      default = { }; # default will be lost for submodules if overriden\n+      example = lib.literalExpression ''\n+        {\n+          HTTP.Port = 8888;\n+        }\n+      '';\n+      description = ''\n+        The options for `systemd.services.goupile` in ini format.\n+\n+        The configuration options available can be found here\n+        https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+      '';\n+    };\n+\n+    configFile = lib.mkOption {\n+      type = lib.types.path;\n+      description = ''\n+        The configuration file to be passed to goupile server.\n+\n+        By default the configuration file is created from `services.goupile.settings`.\n+      '';\n+    };\n+\n+    nginx = lib.mkOption {\n+      type = lib.types.submodule (\n+        lib.recursiveUpdate (import ../web-servers/nginx/vhost-options.nix { inherit config lib; }) { }\n+      );\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          serverAliases = [\n+            \"goupile.''${config.networking.domain}\"\n+          ];\n+          # To enable encryption and let let's encrypt take care of certificate\n+          forceSSL = true;\n+          enableACME = true;\n+        }\n+      '';\n+      description = \"Extra configuration for the nginx virtual host of Goupile.\";\n+    };\n+\n+    hostName = lib.mkOption {\n+      type = lib.types.str;\n+      default = \"goupile\";\n+      description = \"Nginx service name for goupile service.\";\n+    };\n+  };\n+  config = lib.mkIf cfg.enable (\n+    lib.mkMerge [\n+      {\n+        services.nginx = {\n+          enable = lib.mkDefault true;\n+          virtualHosts.${cfg.hostName} = lib.mkMerge [\n+            cfg.nginx\n+            {\n+              locations.\"/\".proxyPass = \"http://${cfg.hostName}:${builtins.toString cfg.settings.HTTP.Port}\";\n+            }\n+          ];\n+        };\n+      }\n+      {\n+        services.goupile.configFile = lib.mkOptionDefault (\n+          settingsFormat.generate \"goupile.ini\" cfg.settings\n+        );",
+   "id": 2952785405,
+   "line": null,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 101,
+   "original_position": 101,
+   "original_start_line": 99,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 1,
+   "pull_request_review_id": 3967082280,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:43:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n          documentation = \"https://goupile.org/en\";\n          description = \"Goupile eCRF\";\n```\n",
+   "commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "created_at": "2026-03-18T11:37:41Z",
+   "diff_hunk": "@@ -0,0 +1,172 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options.services.goupile = {\n+    enable = lib.mkEnableOption \"Goupile server\";\n+    package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+    enableSandbox = lib.mkOption {\n+      type = lib.types.bool;\n+      default = true;\n+      description = \"Enable the sandbox option.\";\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType = settingsFormat.type;\n+        options = {\n+          HTTP.Port = lib.mkOption {\n+            type = lib.types.port;\n+            default = 8889;\n+            description = \"The port goupile runs on\";\n+          };\n+          Data.RootDirectory = lib.mkOption {\n+            type = lib.types.str;\n+            default = \"/var/lib/goupile\";\n+            description = \"Goupile's data directory.\";\n+          };\n+        };\n+      };\n+      default = { }; # default will be lost for submodules if overriden\n+      example = lib.literalExpression ''\n+        {\n+          HTTP.Port = 8888;\n+        }\n+      '';\n+      description = ''\n+        The options for `systemd.services.goupile` in ini format.\n+\n+        The configuration options available can be found here\n+        https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+      '';\n+    };\n+\n+    configFile = lib.mkOption {\n+      type = lib.types.path;\n+      description = ''\n+        The configuration file to be passed to goupile server.\n+\n+        By default the configuration file is created from `services.goupile.settings`.\n+      '';\n+    };\n+\n+    nginx = lib.mkOption {\n+      type = lib.types.submodule (\n+        lib.recursiveUpdate (import ../web-servers/nginx/vhost-options.nix { inherit config lib; }) { }\n+      );\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          serverAliases = [\n+            \"goupile.''${config.networking.domain}\"\n+          ];\n+          # To enable encryption and let let's encrypt take care of certificate\n+          forceSSL = true;\n+          enableACME = true;\n+        }\n+      '';\n+      description = \"Extra configuration for the nginx virtual host of Goupile.\";\n+    };\n+\n+    hostName = lib.mkOption {\n+      type = lib.types.str;\n+      default = \"goupile\";\n+      description = \"Nginx service name for goupile service.\";\n+    };\n+  };\n+  config = lib.mkIf cfg.enable (\n+    lib.mkMerge [\n+      {\n+        services.nginx = {\n+          enable = lib.mkDefault true;\n+          virtualHosts.${cfg.hostName} = lib.mkMerge [\n+            cfg.nginx\n+            {\n+              locations.\"/\".proxyPass = \"http://${cfg.hostName}:${builtins.toString cfg.settings.HTTP.Port}\";\n+            }\n+          ];\n+        };\n+      }\n+      {\n+        services.goupile.configFile = lib.mkOptionDefault (\n+          settingsFormat.generate \"goupile.ini\" cfg.settings\n+        );\n+      }\n+      {\n+        systemd.services.goupile = {\n+          wants = [ \"network-online.target\" ];\n+          after = [ \"network-online.target\" ];\n+          wantedBy = [ \"multi-user.target\" ];\n+\n+          unitConfig = {\n+            Documentation = \"https://goupile.org/en\";\n+            Description = \"Goupile eCRF\";\n+          };",
+   "id": 2952790767,
+   "line": null,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 112,
+   "original_position": 112,
+   "original_start_line": 109,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 1,
+   "pull_request_review_id": 3967082280,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:43:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "If this is useful / necessary for the normal use of the service then we'd probably want to include it in the nixos modules?",
+   "commit_id": "7203310af608723711c2ce60a086dc2eb26f33ce",
+   "created_at": "2026-03-18T11:40:05Z",
+   "diff_hunk": "@@ -0,0 +1,151 @@\n+{\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+let\n+  python = pkgs.python3.withPackages (\n+    ps: with ps; [\n+      requests\n+      playwright\n+      openpyxl\n+    ]\n+  );\n+\n+  runScript = \"${lib.getExe python} ${./basic_interaction_test.py}\";\n+\n+  run-goupile-test = pkgs.writeShellScriptBin \"run-goupile-test\" ''\n+    set -euo pipefail\n+\n+    export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}\n+    export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1\n+\n+    # check if attached to a terminal\n+    if [ -t 1 ]; then\n+      # interactive testing\n+      export HEADFUL=''${HEADFUL:-1}\n+      export PWDEBUG=''${PWDEBUG:-0}\n+      export DISPLAY=''${DISPLAY:-:0}\n+      if [ \"$(id -u)\" = \"0\" ] && [ -d \"/home/alice\" ]; then\n+        runuser -u alice \\\n+          -w DISPLAY,HEADFUL,PWDEBUG,PLAYWRIGHT_BROWSERS_PATH,PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD \\\n+          -- ${runScript}\n+      else\n+        ${runScript}\n+      fi\n+    else\n+      # non-interactive nixos test\n+\n+      # Print instructions to the nix logs\n+      cat <<'EOF' | tee >(systemd-cat -t goupile-e2e)\n+    ================================================================================\n+    NOTE: The goupile e2e test can be run interactively either inside the vm or on the host\n+      - First, run `nix-build -A nixosTests.goupile.driverInteractive` and `./result/bin/nixos-test-driver`\n+      - Run `start_all()` inside the repl\n+      - Then `$(nix-build -A nixosTests.goupile.interactive-script)/bin/run-goupile-test` to run the full test interactively\n+      - Or `env PWDEBUG=1 $(nix-build -A nixosTests.goupile.interactive-script)/bin/run-goupile-test` to show the playwright inspector to debug\n+    ================================================================================\n+    EOF\n+\n+      echo \"Starting smoke test...\" | systemd-cat -t goupile-e2e\n+      ${runScript} 2>&1 | tee >(systemd-cat -t goupile-e2e)\n+    fi\n+  '';\n+in\n+{\n+  name = \"goupile\";\n+\n+  passthru.interactive-script = run-goupile-test;\n+\n+  nodes.machine =\n+    {\n+      lib,\n+      pkgs,\n+      config,\n+      ...\n+    }:\n+    {\n+      services.goupile = {\n+        enable = true;\n+        enableSandbox = true;\n+        settings.HTTP.Port = 8889;\n+      };\n+      #systemd.services.goupile.environment.DEFAULT_SECCOMP_ACTION = \"Log\"; # Block|Log|Kill\n+      networking = {\n+        firewall.allowedTCPPorts = [ config.services.nginx.defaultHTTPListenPort ];\n+        hostName = \"goupile\";\n+        domain = \"local\";\n+      };\n+\n+      # goupile tries to resolve it at runtime, resolve it instead of patching it out\n+      # as the dns resolution step serves a purpose, to force glibc to load NSS libraries\n+      # see server/goupile.cc and search for getaddrinfo or www.example.com\n+      networking.extraHosts = ''\n+        127.0.0.1 www.example.com\n+      '';",
+   "id": 2952806240,
+   "line": 85,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 85,
+   "original_position": 85,
+   "original_start_line": 80,
+   "path": "nixos/tests/web-apps/goupile/default.nix",
+   "position": 85,
+   "pull_request_review_id": 3967082280,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 80,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:43:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't see why use map for a list with just one element.\n\n```suggestion\n      virtualisation.forwardPorts = [\n        {\n          from = \"host\";\n          host.port = port;\n          guest.port = port;\n        }\n      ];\n```",
+   "commit_id": "0239bc7a2e1b375add8d498a41245ba7a7c0a76c",
+   "created_at": "2026-03-18T11:41:12Z",
+   "diff_hunk": "@@ -0,0 +1,151 @@\n+{\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+let\n+  python = pkgs.python3.withPackages (\n+    ps: with ps; [\n+      requests\n+      playwright\n+      openpyxl\n+    ]\n+  );\n+\n+  runScript = \"${lib.getExe python} ${./basic_interaction_test.py}\";\n+\n+  run-goupile-test = pkgs.writeShellScriptBin \"run-goupile-test\" ''\n+    set -euo pipefail\n+\n+    export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}\n+    export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1\n+\n+    # check if attached to a terminal\n+    if [ -t 1 ]; then\n+      # interactive testing\n+      export HEADFUL=''${HEADFUL:-1}\n+      export PWDEBUG=''${PWDEBUG:-0}\n+      export DISPLAY=''${DISPLAY:-:0}\n+      if [ \"$(id -u)\" = \"0\" ] && [ -d \"/home/alice\" ]; then\n+        runuser -u alice \\\n+          -w DISPLAY,HEADFUL,PWDEBUG,PLAYWRIGHT_BROWSERS_PATH,PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD \\\n+          -- ${runScript}\n+      else\n+        ${runScript}\n+      fi\n+    else\n+      # non-interactive nixos test\n+\n+      # Print instructions to the nix logs\n+      cat <<'EOF' | tee >(systemd-cat -t goupile-e2e)\n+    ================================================================================\n+    NOTE: The goupile e2e test can be run interactively either inside the vm or on the host\n+      - First, run `nix-build -A nixosTests.goupile.driverInteractive` and `./result/bin/nixos-test-driver`\n+      - Run `start_all()` inside the repl\n+      - Then `$(nix-build -A nixosTests.goupile.interactive-script)/bin/run-goupile-test` to run the full test interactively\n+      - Or `env PWDEBUG=1 $(nix-build -A nixosTests.goupile.interactive-script)/bin/run-goupile-test` to show the playwright inspector to debug\n+    ================================================================================\n+    EOF\n+\n+      echo \"Starting smoke test...\" | systemd-cat -t goupile-e2e\n+      ${runScript} 2>&1 | tee >(systemd-cat -t goupile-e2e)\n+    fi\n+  '';\n+in\n+{\n+  name = \"goupile\";\n+\n+  passthru.interactive-script = run-goupile-test;\n+\n+  nodes.machine =\n+    {\n+      lib,\n+      pkgs,\n+      config,\n+      ...\n+    }:\n+    {\n+      services.goupile = {\n+        enable = true;\n+        enableSandbox = true;\n+        settings.HTTP.Port = 8889;\n+      };\n+      #systemd.services.goupile.environment.DEFAULT_SECCOMP_ACTION = \"Log\"; # Block|Log|Kill\n+      networking = {\n+        firewall.allowedTCPPorts = [ config.services.nginx.defaultHTTPListenPort ];\n+        hostName = \"goupile\";\n+        domain = \"local\";\n+      };\n+\n+      # goupile tries to resolve it at runtime, resolve it instead of patching it out\n+      # as the dns resolution step serves a purpose, to force glibc to load NSS libraries\n+      # see server/goupile.cc and search for getaddrinfo or www.example.com\n+      networking.extraHosts = ''\n+        127.0.0.1 www.example.com\n+      '';\n+\n+      environment.systemPackages = [\n+        python\n+        run-goupile-test\n+      ];\n+\n+      # more cores and memory to improve chromium performance\n+      virtualisation.memorySize = lib.mkForce 8192;\n+      virtualisation.cores = 4;\n+    };\n+\n+  testScript =\n+    { nodes, ... }:\n+    let\n+      port = builtins.toString nodes.machine.services.goupile.settings.HTTP.Port;\n+    in\n+    # py\n+    ''\n+      import os\n+      start_all()\n+\n+      machine.wait_for_unit(\"goupile.service\")\n+      machine.wait_for_open_port(${port})\n+\n+      machine.succeed(\"curl -q http://localhost:${port}\")\n+      machine.succeed(\"curl -q http://goupile.local\")\n+      machine.succeed(\"curl -q http://localhost\")\n+\n+      machine.succeed(\"run-goupile-test\")\n+      out_dir = os.environ.get(\"out\", os.getcwd())\n+      machine.copy_from_vm(\"/tmp/videos\", out_dir)\n+    '';\n+\n+  # Debug interactively with:\n+  # - nix-build -A nixosTests.goupile.driverInteractive\n+  # - ./result/bin/nixos-test-driver\n+  # - run_tests()\n+  # ssh -o User=root vsock%3 (can also do vsock/3, but % works with scp etc.)\n+  interactive.sshBackdoor.enable = true;\n+\n+  interactive.nodes.machine =\n+    { config, ... }:\n+    let\n+      port = config.services.goupile.settings.HTTP.Port;\n+    in\n+    {\n+      imports = [\n+        # enable graphical session + users (alice, bob)\n+        ../../common/x11.nix\n+        ../../common/user-account.nix\n+      ];\n+      services.xserver.enable = true;\n+      test-support.displayManager.auto.user = \"alice\";\n+\n+      virtualisation.forwardPorts = map (port: {\n+        from = \"host\";\n+        host.port = port;\n+        guest.port = port;\n+      }) [ port ];",
+   "id": 2952812975,
+   "line": null,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 144,
+   "original_position": 144,
+   "original_start_line": 140,
+   "path": "nixos/tests/web-apps/goupile/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3967082280,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:43:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Might want to provide some message about available options with assertMsg?  Vaguely recall that nix only print the first line of the source code.",
+   "commit_id": "7203310af608723711c2ce60a086dc2eb26f33ce",
+   "created_at": "2026-03-18T11:42:28Z",
+   "diff_hunk": "@@ -0,0 +1,77 @@\n+{\n+  lib,\n+  fetchFromGitHub,\n+  versionCheckHook,\n+  installShellFiles,\n+\n+  stdenv,\n+  clangStdenv,\n+  llvmPackages,\n+  nixosTests,\n+\n+  # https://goupile.org/en/build recommends a Paranoid build\n+  # which is not bit by bit reproducible, whereas others are\n+  profile ? \"Paranoid\",\n+}:\n+\n+assert lib.assertOneOf \"profile\" profile [\n+  \"Fast\"\n+  \"Debug\"\n+  \"Paranoid\"\n+];",
+   "id": 2952820617,
+   "line": 21,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 21,
+   "original_position": 21,
+   "original_start_line": 17,
+   "path": "pkgs/by-name/go/goupile/package.nix",
+   "position": 21,
+   "pull_request_review_id": 3967082280,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 17,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:43:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It is useful only during the nixos test, as we don't have internet access, but if we configure it for normal users they will be confused why example.com is not working",
+   "commit_id": "7203310af608723711c2ce60a086dc2eb26f33ce",
+   "created_at": "2026-03-18T11:50:29Z",
+   "diff_hunk": "@@ -0,0 +1,151 @@\n+{\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+let\n+  python = pkgs.python3.withPackages (\n+    ps: with ps; [\n+      requests\n+      playwright\n+      openpyxl\n+    ]\n+  );\n+\n+  runScript = \"${lib.getExe python} ${./basic_interaction_test.py}\";\n+\n+  run-goupile-test = pkgs.writeShellScriptBin \"run-goupile-test\" ''\n+    set -euo pipefail\n+\n+    export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}\n+    export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1\n+\n+    # check if attached to a terminal\n+    if [ -t 1 ]; then\n+      # interactive testing\n+      export HEADFUL=''${HEADFUL:-1}\n+      export PWDEBUG=''${PWDEBUG:-0}\n+      export DISPLAY=''${DISPLAY:-:0}\n+      if [ \"$(id -u)\" = \"0\" ] && [ -d \"/home/alice\" ]; then\n+        runuser -u alice \\\n+          -w DISPLAY,HEADFUL,PWDEBUG,PLAYWRIGHT_BROWSERS_PATH,PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD \\\n+          -- ${runScript}\n+      else\n+        ${runScript}\n+      fi\n+    else\n+      # non-interactive nixos test\n+\n+      # Print instructions to the nix logs\n+      cat <<'EOF' | tee >(systemd-cat -t goupile-e2e)\n+    ================================================================================\n+    NOTE: The goupile e2e test can be run interactively either inside the vm or on the host\n+      - First, run `nix-build -A nixosTests.goupile.driverInteractive` and `./result/bin/nixos-test-driver`\n+      - Run `start_all()` inside the repl\n+      - Then `$(nix-build -A nixosTests.goupile.interactive-script)/bin/run-goupile-test` to run the full test interactively\n+      - Or `env PWDEBUG=1 $(nix-build -A nixosTests.goupile.interactive-script)/bin/run-goupile-test` to show the playwright inspector to debug\n+    ================================================================================\n+    EOF\n+\n+      echo \"Starting smoke test...\" | systemd-cat -t goupile-e2e\n+      ${runScript} 2>&1 | tee >(systemd-cat -t goupile-e2e)\n+    fi\n+  '';\n+in\n+{\n+  name = \"goupile\";\n+\n+  passthru.interactive-script = run-goupile-test;\n+\n+  nodes.machine =\n+    {\n+      lib,\n+      pkgs,\n+      config,\n+      ...\n+    }:\n+    {\n+      services.goupile = {\n+        enable = true;\n+        enableSandbox = true;\n+        settings.HTTP.Port = 8889;\n+      };\n+      #systemd.services.goupile.environment.DEFAULT_SECCOMP_ACTION = \"Log\"; # Block|Log|Kill\n+      networking = {\n+        firewall.allowedTCPPorts = [ config.services.nginx.defaultHTTPListenPort ];\n+        hostName = \"goupile\";\n+        domain = \"local\";\n+      };\n+\n+      # goupile tries to resolve it at runtime, resolve it instead of patching it out\n+      # as the dns resolution step serves a purpose, to force glibc to load NSS libraries\n+      # see server/goupile.cc and search for getaddrinfo or www.example.com\n+      networking.extraHosts = ''\n+        127.0.0.1 www.example.com\n+      '';",
+   "id": 2952874776,
+   "in_reply_to_id": 2952806240,
+   "line": 85,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 85,
+   "original_position": 85,
+   "original_start_line": 80,
+   "path": "nixos/tests/web-apps/goupile/default.nix",
+   "position": 85,
+   "pull_request_review_id": 3967197921,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": 80,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:50:30Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "When I set it to something not in these I see currently\r\n\r\n```\r\n       error: profile must be one of [\r\n         \"Fast\"\r\n         \"Debug\"\r\n         \"Paranoid\"\r\n       ], but is: \"invalid\"\r\n```\r\n\r\nI think it is clear?",
+   "commit_id": "7203310af608723711c2ce60a086dc2eb26f33ce",
+   "created_at": "2026-03-18T11:51:53Z",
+   "diff_hunk": "@@ -0,0 +1,77 @@\n+{\n+  lib,\n+  fetchFromGitHub,\n+  versionCheckHook,\n+  installShellFiles,\n+\n+  stdenv,\n+  clangStdenv,\n+  llvmPackages,\n+  nixosTests,\n+\n+  # https://goupile.org/en/build recommends a Paranoid build\n+  # which is not bit by bit reproducible, whereas others are\n+  profile ? \"Paranoid\",\n+}:\n+\n+assert lib.assertOneOf \"profile\" profile [\n+  \"Fast\"\n+  \"Debug\"\n+  \"Paranoid\"\n+];",
+   "id": 2952885499,
+   "in_reply_to_id": 2952820617,
+   "line": 21,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 21,
+   "original_position": 21,
+   "original_start_line": 17,
+   "path": "pkgs/by-name/go/goupile/package.nix",
+   "position": 21,
+   "pull_request_review_id": 3967210289,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": 17,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:51:53Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "changed it to use default priority",
+   "commit_id": "9e7a50d5ee7f9e9695ffe03854ca832a23ffde17",
+   "created_at": "2026-03-18T11:54:15Z",
+   "diff_hunk": "@@ -0,0 +1,172 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options.services.goupile = {\n+    enable = lib.mkEnableOption \"Goupile server\";\n+    package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+    enableSandbox = lib.mkOption {\n+      type = lib.types.bool;\n+      default = true;\n+      description = \"Enable the sandbox option.\";\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType = settingsFormat.type;\n+        options = {\n+          HTTP.Port = lib.mkOption {\n+            type = lib.types.port;\n+            default = 8889;\n+            description = \"The port goupile runs on\";\n+          };\n+          Data.RootDirectory = lib.mkOption {\n+            type = lib.types.str;\n+            default = \"/var/lib/goupile\";\n+            description = \"Goupile's data directory.\";\n+          };\n+        };\n+      };\n+      default = { }; # default will be lost for submodules if overriden\n+      example = lib.literalExpression ''\n+        {\n+          HTTP.Port = 8888;\n+        }\n+      '';\n+      description = ''\n+        The options for `systemd.services.goupile` in ini format.\n+\n+        The configuration options available can be found here\n+        https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+      '';\n+    };\n+\n+    configFile = lib.mkOption {\n+      type = lib.types.path;\n+      description = ''\n+        The configuration file to be passed to goupile server.\n+\n+        By default the configuration file is created from `services.goupile.settings`.\n+      '';\n+    };\n+\n+    nginx = lib.mkOption {\n+      type = lib.types.submodule (\n+        lib.recursiveUpdate (import ../web-servers/nginx/vhost-options.nix { inherit config lib; }) { }\n+      );\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          serverAliases = [\n+            \"goupile.''${config.networking.domain}\"\n+          ];\n+          # To enable encryption and let let's encrypt take care of certificate\n+          forceSSL = true;\n+          enableACME = true;\n+        }\n+      '';\n+      description = \"Extra configuration for the nginx virtual host of Goupile.\";\n+    };\n+\n+    hostName = lib.mkOption {\n+      type = lib.types.str;\n+      default = \"goupile\";\n+      description = \"Nginx service name for goupile service.\";\n+    };\n+  };\n+  config = lib.mkIf cfg.enable (\n+    lib.mkMerge [\n+      {\n+        services.nginx = {\n+          enable = lib.mkDefault true;\n+          virtualHosts.${cfg.hostName} = lib.mkMerge [\n+            cfg.nginx\n+            {\n+              locations.\"/\".proxyPass = \"http://${cfg.hostName}:${builtins.toString cfg.settings.HTTP.Port}\";\n+            }\n+          ];\n+        };\n+      }\n+      {\n+        services.goupile.configFile = lib.mkOptionDefault (\n+          settingsFormat.generate \"goupile.ini\" cfg.settings\n+        );",
+   "id": 2952903731,
+   "in_reply_to_id": 2952785405,
+   "line": null,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 101,
+   "original_position": 101,
+   "original_start_line": 99,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 1,
+   "pull_request_review_id": 3967231130,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:54:16Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "removed",
+   "commit_id": "5e8d3b49e5518fa4a0e51596dac30c879130419b",
+   "created_at": "2026-03-18T11:55:01Z",
+   "diff_hunk": "@@ -0,0 +1,172 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options.services.goupile = {\n+    enable = lib.mkEnableOption \"Goupile server\";\n+    package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+    enableSandbox = lib.mkOption {\n+      type = lib.types.bool;\n+      default = true;\n+      description = \"Enable the sandbox option.\";\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType = settingsFormat.type;\n+        options = {\n+          HTTP.Port = lib.mkOption {\n+            type = lib.types.port;\n+            default = 8889;\n+            description = \"The port goupile runs on\";\n+          };\n+          Data.RootDirectory = lib.mkOption {\n+            type = lib.types.str;\n+            default = \"/var/lib/goupile\";\n+            description = \"Goupile's data directory.\";\n+          };\n+        };\n+      };\n+      default = { }; # default will be lost for submodules if overriden\n+      example = lib.literalExpression ''\n+        {\n+          HTTP.Port = 8888;\n+        }\n+      '';\n+      description = ''\n+        The options for `systemd.services.goupile` in ini format.\n+\n+        The configuration options available can be found here\n+        https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+      '';\n+    };\n+\n+    configFile = lib.mkOption {\n+      type = lib.types.path;\n+      description = ''\n+        The configuration file to be passed to goupile server.\n+\n+        By default the configuration file is created from `services.goupile.settings`.\n+      '';\n+    };\n+\n+    nginx = lib.mkOption {\n+      type = lib.types.submodule (\n+        lib.recursiveUpdate (import ../web-servers/nginx/vhost-options.nix { inherit config lib; }) { }\n+      );\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          serverAliases = [\n+            \"goupile.''${config.networking.domain}\"\n+          ];\n+          # To enable encryption and let let's encrypt take care of certificate\n+          forceSSL = true;\n+          enableACME = true;\n+        }\n+      '';\n+      description = \"Extra configuration for the nginx virtual host of Goupile.\";\n+    };",
+   "id": 2952909648,
+   "in_reply_to_id": 2952772527,
+   "line": null,
+   "original_commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "original_line": 77,
+   "original_position": 77,
+   "original_start_line": 61,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 1,
+   "pull_request_review_id": 3967238000,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T11:55:01Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n          virtualHosts.${cfg.hostName} = {\n            locations.\"/\".proxyPass = \"http://${cfg.hostName}:${builtins.toString cfg.settings.HTTP.Port}\";\n          };\n```",
+   "commit_id": "f89e1ab6bf62b250e5a88b5759c9b7abe003e688",
+   "created_at": "2026-03-18T14:13:52Z",
+   "diff_hunk": "@@ -0,0 +1,149 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options.services.goupile = {\n+    enable = lib.mkEnableOption \"Goupile server\";\n+    package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+    enableSandbox = lib.mkOption {\n+      type = lib.types.bool;\n+      default = true;\n+      description = \"Enable the sandbox option.\";\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType = settingsFormat.type;\n+        options = {\n+          HTTP.Port = lib.mkOption {\n+            type = lib.types.port;\n+            default = 8889;\n+            description = \"The port goupile runs on\";\n+          };\n+          Data.RootDirectory = lib.mkOption {\n+            type = lib.types.str;\n+            default = \"/var/lib/goupile\";\n+            description = \"Goupile's data directory.\";\n+          };\n+        };\n+      };\n+      default = { }; # default will be lost for submodules if overriden\n+      example = lib.literalExpression ''\n+        {\n+          HTTP.Port = 8888;\n+        }\n+      '';\n+      description = ''\n+        The options for `systemd.services.goupile` in ini format.\n+\n+        The configuration options available can be found here\n+        https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+      '';\n+    };\n+\n+    configFile = lib.mkOption {\n+      type = lib.types.path;\n+      description = ''\n+        The configuration file to be passed to goupile server.\n+\n+        By default the configuration file is created from `services.goupile.settings`.\n+      '';\n+    };\n+\n+    hostName = lib.mkOption {\n+      type = lib.types.str;\n+      default = \"goupile\";\n+      description = \"Nginx service name for goupile service.\";\n+    };\n+  };\n+  config = lib.mkIf cfg.enable (\n+    lib.mkMerge [\n+      {\n+        services.nginx = {\n+          enable = lib.mkDefault true;\n+          virtualHosts.${cfg.hostName} = lib.mkMerge [\n+            {\n+              locations.\"/\".proxyPass = \"http://${cfg.hostName}:${builtins.toString cfg.settings.HTTP.Port}\";\n+            }\n+          ];",
+   "id": 2953741964,
+   "line": null,
+   "original_commit_id": "f89e1ab6bf62b250e5a88b5759c9b7abe003e688",
+   "original_line": 76,
+   "original_position": 76,
+   "original_start_line": 72,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 1,
+   "pull_request_review_id": 3968162200,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-18T14:17:57Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Do we need this mkMerge? we don't have any conditionals",
+   "commit_id": "7203310af608723711c2ce60a086dc2eb26f33ce",
+   "created_at": "2026-03-18T14:33:55Z",
+   "diff_hunk": "@@ -0,0 +1,149 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options.services.goupile = {\n+    enable = lib.mkEnableOption \"Goupile server\";\n+    package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+    enableSandbox = lib.mkOption {\n+      type = lib.types.bool;\n+      default = true;\n+      description = \"Enable the sandbox option.\";\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType = settingsFormat.type;\n+        options = {\n+          HTTP.Port = lib.mkOption {\n+            type = lib.types.port;\n+            default = 8889;\n+            description = \"The port goupile runs on\";\n+          };\n+          Data.RootDirectory = lib.mkOption {\n+            type = lib.types.str;\n+            default = \"/var/lib/goupile\";\n+            description = \"Goupile's data directory.\";\n+          };\n+        };\n+      };\n+      default = { }; # default will be lost for submodules if overriden\n+      example = lib.literalExpression ''\n+        {\n+          HTTP.Port = 8888;\n+        }\n+      '';\n+      description = ''\n+        The options for `systemd.services.goupile` in ini format.\n+\n+        The configuration options available can be found here\n+        https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+      '';\n+    };\n+\n+    configFile = lib.mkOption {\n+      type = lib.types.path;\n+      description = ''\n+        The configuration file to be passed to goupile server.\n+\n+        By default the configuration file is created from `services.goupile.settings`.\n+      '';\n+    };\n+\n+    hostName = lib.mkOption {\n+      type = lib.types.str;\n+      default = \"goupile\";\n+      description = \"Nginx service name for goupile service.\";\n+    };\n+  };\n+  config = lib.mkIf cfg.enable (\n+    lib.mkMerge [",
+   "id": 2953871718,
+   "line": 68,
+   "original_commit_id": "f89e1ab6bf62b250e5a88b5759c9b7abe003e688",
+   "original_line": 68,
+   "original_position": 68,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 68,
+   "pull_request_review_id": 3968295195,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-18T14:33:55Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "No, just using it for when I want to switch it to a modular service.",
+   "commit_id": "7203310af608723711c2ce60a086dc2eb26f33ce",
+   "created_at": "2026-03-18T14:40:18Z",
+   "diff_hunk": "@@ -0,0 +1,149 @@\n+{\n+  lib,\n+  pkgs,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.goupile;\n+  settingsFormat = pkgs.formats.ini { };\n+in\n+{\n+  options.services.goupile = {\n+    enable = lib.mkEnableOption \"Goupile server\";\n+    package = lib.mkPackageOption pkgs \"goupile\" { };\n+\n+    enableSandbox = lib.mkOption {\n+      type = lib.types.bool;\n+      default = true;\n+      description = \"Enable the sandbox option.\";\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType = settingsFormat.type;\n+        options = {\n+          HTTP.Port = lib.mkOption {\n+            type = lib.types.port;\n+            default = 8889;\n+            description = \"The port goupile runs on\";\n+          };\n+          Data.RootDirectory = lib.mkOption {\n+            type = lib.types.str;\n+            default = \"/var/lib/goupile\";\n+            description = \"Goupile's data directory.\";\n+          };\n+        };\n+      };\n+      default = { }; # default will be lost for submodules if overriden\n+      example = lib.literalExpression ''\n+        {\n+          HTTP.Port = 8888;\n+        }\n+      '';\n+      description = ''\n+        The options for `systemd.services.goupile` in ini format.\n+\n+        The configuration options available can be found here\n+        https://github.com/Koromix/rygel/blob/goupile/3.11.1/src/goupile/server/admin.cc#L41\n+      '';\n+    };\n+\n+    configFile = lib.mkOption {\n+      type = lib.types.path;\n+      description = ''\n+        The configuration file to be passed to goupile server.\n+\n+        By default the configuration file is created from `services.goupile.settings`.\n+      '';\n+    };\n+\n+    hostName = lib.mkOption {\n+      type = lib.types.str;\n+      default = \"goupile\";\n+      description = \"Nginx service name for goupile service.\";\n+    };\n+  };\n+  config = lib.mkIf cfg.enable (\n+    lib.mkMerge [",
+   "id": 2953912860,
+   "in_reply_to_id": 2953871718,
+   "line": 68,
+   "original_commit_id": "f89e1ab6bf62b250e5a88b5759c9b7abe003e688",
+   "original_line": 68,
+   "original_position": 68,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/goupile.nix",
+   "position": 68,
+   "pull_request_review_id": 3968339930,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-18T14:40:18Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "id": 3951780407,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-03-16T06:57:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "id": 3951924933,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-16T07:33:05Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3723b4bb120d76fc30e653e102e37be65d2737f5",
+   "id": 3951926031,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-16T07:33:24Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Great work Phani ! I found one small typo, otherwise looks good. ",
+   "commit_id": "198fd5a7c198e30ebb8ef39b86a5275cdbfee7e8",
+   "id": 3966362759,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-03-18T09:33:55Z",
+   "user": {
+    "id": 476346,
+    "login": "imincik",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "198fd5a7c198e30ebb8ef39b86a5275cdbfee7e8",
+   "id": 3966395307,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-18T09:37:56Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks, looks good now.",
+   "commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "id": 3966459653,
+   "state": "APPROVED",
+   "submitted_at": "2026-03-18T09:50:03Z",
+   "user": {
+    "id": 476346,
+    "login": "imincik",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "id": 3967082280,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-03-18T11:43:07Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "id": 3967197921,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-18T11:50:30Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "id": 3967210289,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-18T11:51:53Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "id": 3967231130,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-18T11:54:16Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "c5020dc4ebce715d56b385d50800e11e572d7774",
+   "id": 3967238000,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-18T11:55:01Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "f89e1ab6bf62b250e5a88b5759c9b7abe003e688",
+   "id": 3968162200,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-18T14:17:57Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "f89e1ab6bf62b250e5a88b5759c9b7abe003e688",
+   "id": 3968295195,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-18T14:33:54Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Diff LGTM",
+   "commit_id": "f89e1ab6bf62b250e5a88b5759c9b7abe003e688",
+   "id": 3968305479,
+   "state": "APPROVED",
+   "submitted_at": "2026-03-18T14:35:29Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "f89e1ab6bf62b250e5a88b5759c9b7abe003e688",
+   "id": 3968339930,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-18T14:40:18Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "7203310af608723711c2ce60a086dc2eb26f33ce",
+   "id": 3973093988,
+   "state": "APPROVED",
+   "submitted_at": "2026-03-19T06:21:08Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-02-25T15:47:59Z",
+   "event": "renamed",
+   "id": 23072878717,
+   "rename": {
+    "from": "WIP nixos/goupile: init; goupile: init at 3.11.1",
+    "to": "nixos/goupile: init; goupile: init at 3.12.beta.7"
+   }
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-02-27T09:36:37Z",
+   "event": "renamed",
+   "id": 23130823938,
+   "rename": {
+    "from": "nixos/goupile: init; goupile: init at 3.12.beta.7",
+    "to": "nixos/goupile: init; goupile: init at 3.12.beta.9"
+   }
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-03-16T06:19:48Z",
+   "event": "renamed",
+   "id": 23595742867,
+   "rename": {
+    "from": "nixos/goupile: init; goupile: init at 3.12.beta.9",
+    "to": "nixos/goupile: init; goupile: init at 3.12"
+   }
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-03-16T06:20:14Z",
+   "event": "renamed",
+   "id": 23595751488,
+   "rename": {
+    "from": "nixos/goupile: init; goupile: init at 3.12",
+    "to": "nixos/goupile: init; goupile: init at 3.12.1"
+   }
+  },
+  {
+   "actor": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "9fbe055270246ccdafe157ed256c0807a37e3d2a",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/9fbe055270246ccdafe157ed256c0807a37e3d2a",
+   "created_at": "2026-03-19T06:27:04Z",
+   "event": "merged",
+   "id": 23707090909
+  },
+  {
+   "actor": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-03-19T06:27:05Z",
+   "event": "closed",
+   "id": 23707090931,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

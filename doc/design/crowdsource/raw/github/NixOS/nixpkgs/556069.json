@@ -1,0 +1,1085 @@
+{
+ "comments": [
+  {
+   "body": "## `nixpkgs-review` result\r\n\r\nGenerated using [`nixpkgs-review`](https://github.com/Mic92/nixpkgs-review).\r\n\r\nCommand: `nixpkgs-review pr 556069 --additional-package nixosTests.kapla`\r\nCommit: `642e370015234bbe1cd1fd5628b0a0912a3b17fc`\r\n\r\n---\r\n### `aarch64-linux`\r\n<details>\r\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\r\n  <ul>\r\n    <li>nixos-install-tools</li>\r\n    <li>tests.nixos-functions.nixos-test</li>\r\n  </ul>\r\n</details>\r\n<details>\r\n  <summary>:white_check_mark: 1 test built:</summary>\r\n  <ul>\r\n    <li>nixosTests.kapla</li>\r\n  </ul>\r\n</details>\r\n<details>\r\n  <summary>:white_check_mark: 10 packages built:</summary>\r\n  <ul>\r\n    <li>ocamlPackages.base32</li>\r\n    <li>ocamlPackages.cborl</li>\r\n    <li>ocamlPackages.eris</li>\r\n    <li>ocamlPackages.kapla</li>\r\n    <li>ocamlPackages.monocypher</li>\r\n    <li>ocamlPackages_latest.base32</li>\r\n    <li>ocamlPackages_latest.cborl</li>\r\n    <li>ocamlPackages_latest.eris</li>\r\n    <li>ocamlPackages_latest.kapla</li>\r\n    <li>ocamlPackages_latest.monocypher</li>\r\n  </ul>\r\n</details>\r\n\r\n\r\n---\r\n### `aarch64-darwin`\r\n<details>\r\n  <summary>:white_check_mark: 1 test built:</summary>\r\n  <ul>\r\n    <li>nixosTests.kapla</li>\r\n  </ul>\r\n</details>\r\n<details>\r\n  <summary>:white_check_mark: 10 packages built:</summary>\r\n  <ul>\r\n    <li>ocamlPackages.base32</li>\r\n    <li>ocamlPackages.cborl</li>\r\n    <li>ocamlPackages.eris</li>\r\n    <li>ocamlPackages.kapla</li>\r\n    <li>ocamlPackages.monocypher</li>\r\n    <li>ocamlPackages_latest.base32</li>\r\n    <li>ocamlPackages_latest.cborl</li>\r\n    <li>ocamlPackages_latest.eris</li>\r\n    <li>ocamlPackages_latest.kapla</li>\r\n    <li>ocamlPackages_latest.monocypher</li>\r\n  </ul>\r\n</details>\r\n",
+   "created_at": "2026-08-30T17:03:23Z",
+   "id": 5470063686,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-30T17:03:23Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/556069",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\nAn ERIS-based server, with tools to migrate data in from sql databases and more. See https://codeberg.org/eris/kapla.\r\n\r\nNote that unlike the other ERIS packages removed in #439158, these packages are made by a different maintainer, with history before the ban occurred, so hopefully there is little risk of the tags being change out from under us.\r\n\r\nCloses: https://github.com/ngi-nix/projects/issues/2237\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [x] aarch64-linux\r\n  - [x] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-08-31T11:21:53Z",
+  "closed_by": {
+   "id": 81826728,
+   "login": "stepbrobd",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 1,
+  "created_at": "2026-08-24T13:35:47Z",
+  "draft": false,
+  "id": 5235349256,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "OCaml is a general-purpose, high-level, multi-paradigm programming language.",
+    "id": 446025054,
+    "name": "6.topic: ocaml"
+   },
+   {
+    "color": "fbca04",
+    "default": false,
+    "description": "This PR causes between 11 and 100 packages to rebuild on Linux.",
+    "id": 731734101,
+    "name": "10.rebuild-linux: 11-100"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The project is part of the NGI funding grant. https://nlnet.nl/NGI/",
+    "id": 1361647463,
+    "name": "6.topic: NLNet / NGI"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 556069,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/556069.diff",
+   "merged_at": "2026-08-31T11:21:53Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/556069.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "ocamlPackages.kapla: init at 0.4.0",
+  "type": null,
+  "updated_at": "2026-08-31T11:21:53Z",
+  "user": {
+   "id": 78790545,
+   "login": "sempiternal-aurora",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 475,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:35:41Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "bbc4f9f965dc2e108e4b92448698264226a8207f",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\nAn ERIS-based server, with tools to migrate data in from sql databases and more. See https://codeberg.org/eris/kapla.\r\n\r\nNote that unlike the other ERIS packages removed in #439158, these packages are made by a different maintainer, with history before the ban occurred, so hopefully there is little risk of the tags being change out from under us.\r\n\r\nCloses: https://github.com/ngi-nix/projects/issues/2237\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [x] aarch64-linux\r\n  - [x] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 11,
+  "closed_at": "2026-08-31T11:21:53Z",
+  "comments": 1,
+  "commits": 7,
+  "created_at": "2026-08-24T13:35:47Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/556069.diff",
+  "draft": false,
+  "head": {
+   "label": "sempiternal-aurora:init-kapla",
+   "ref": "init-kapla",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2025-07-30T05:32:49Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "sempiternal-aurora/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/sempiternal-aurora/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 1028816250,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/sempiternal-aurora/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/sempiternal-aurora/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 78790545,
+     "login": "sempiternal-aurora",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/sempiternal-aurora/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T15:17:08Z",
+    "size": 2896100,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/sempiternal-aurora/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/sempiternal-aurora/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-07-02T13:12:53Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4348940609,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "OCaml is a general-purpose, high-level, multi-paradigm programming language.",
+    "id": 446025054,
+    "name": "6.topic: ocaml"
+   },
+   {
+    "color": "fbca04",
+    "default": false,
+    "description": "This PR causes between 11 and 100 packages to rebuild on Linux.",
+    "id": 731734101,
+    "name": "10.rebuild-linux: 11-100"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The project is part of the NGI funding grant. https://nlnet.nl/NGI/",
+    "id": 1361647463,
+    "name": "6.topic: NLNet / NGI"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "8c44db7779ca82b60952cc48e0b925ad4f7bf400",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-08-31T11:21:53Z",
+  "merged_by": {
+   "id": 81826728,
+   "login": "stepbrobd",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 556069,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/556069.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 1607770,
+    "login": "ulrikstrid",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 12,
+  "state": "closed",
+  "title": "ocamlPackages.kapla: init at 0.4.0",
+  "updated_at": "2026-08-31T11:21:53Z",
+  "user": {
+   "id": 78790545,
+   "login": "sempiternal-aurora",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#556069",
+ "review_comments": [
+  {
+   "body": "```suggestion\n}:\n\n```\n\nusually my preference is to add a space here ;)",
+   "commit_id": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "created_at": "2026-08-25T11:25:55Z",
+   "diff_hunk": "@@ -0,0 +1,33 @@\n+{\n+  lib,\n+  buildDunePackage,\n+  fetchFromCodeberg,\n+  alcotest,\n+  qcheck,\n+  qcheck-alcotest,\n+}:",
+   "id": 3852481345,
+   "line": 9,
+   "original_commit_id": "c754badf610bcf0ec9dc929bfebd442509eb64b4",
+   "original_line": 8,
+   "original_position": 8,
+   "original_start_line": null,
+   "path": "pkgs/development/ocaml-modules/base32/default.nix",
+   "position": 9,
+   "pull_request_review_id": 5018327048,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-25T11:25:55Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "this dont seem specific to nixpkgs, maybe upstream this?",
+   "commit_id": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "created_at": "2026-08-29T14:09:02Z",
+   "diff_hunk": "@@ -0,0 +1,12 @@\n+diff --git a/bin/dune b/bin/dune\n+index 1c1e128..c3b53f8 100644\n+--- a/bin/dune\n++++ b/bin/dune\n+@@ -7,6 +7,7 @@\n+   kapla_fs\n+   kapla_sqlite\n+   cmdliner\n++  rresult",
+   "id": 3886781067,
+   "line": 9,
+   "original_commit_id": "700fcc8b6dabd73f21c106f37ac0455c7b64023f",
+   "original_line": 9,
+   "original_position": 9,
+   "original_start_line": null,
+   "path": "pkgs/development/ocaml-modules/kapla/add-rresult-dependency.patch",
+   "position": 9,
+   "pull_request_review_id": 5058290620,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-29T14:09:02Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "also set ngi team where applicable",
+   "commit_id": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "created_at": "2026-08-29T14:09:27Z",
+   "diff_hunk": "@@ -0,0 +1,34 @@\n+{\n+  lib,\n+  buildDunePackage,\n+  fetchFromCodeberg,\n+  alcotest,\n+  qcheck,\n+  qcheck-alcotest,\n+}:\n+\n+buildDunePackage (finalAttrs: {\n+  pname = \"base32\";\n+  version = \"1.0.0\";\n+\n+  src = fetchFromCodeberg {\n+    owner = \"pukkamustard\";\n+    repo = \"ocaml-base32\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-YREcrUF2EdNjO+8W4rNbELh+yH5DlLFsbeiEbtmjijE=\";\n+  };\n+\n+  doCheck = true;\n+  checkInputs = [\n+    alcotest\n+    qcheck\n+    qcheck-alcotest\n+  ];\n+\n+  meta = {",
+   "id": 3886782420,
+   "line": 31,
+   "original_commit_id": "700fcc8b6dabd73f21c106f37ac0455c7b64023f",
+   "original_line": 28,
+   "original_position": 28,
+   "original_start_line": null,
+   "path": "pkgs/development/ocaml-modules/base32/default.nix",
+   "position": 31,
+   "pull_request_review_id": 5058292486,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-29T14:09:28Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "My plan was just `eris` and `kapla` since they were really the two main who seemed to be under grants (ERIS was in the past sort of, kapla currently). Sound good?",
+   "commit_id": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "created_at": "2026-08-29T14:25:50Z",
+   "diff_hunk": "@@ -0,0 +1,34 @@\n+{\n+  lib,\n+  buildDunePackage,\n+  fetchFromCodeberg,\n+  alcotest,\n+  qcheck,\n+  qcheck-alcotest,\n+}:\n+\n+buildDunePackage (finalAttrs: {\n+  pname = \"base32\";\n+  version = \"1.0.0\";\n+\n+  src = fetchFromCodeberg {\n+    owner = \"pukkamustard\";\n+    repo = \"ocaml-base32\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-YREcrUF2EdNjO+8W4rNbELh+yH5DlLFsbeiEbtmjijE=\";\n+  };\n+\n+  doCheck = true;\n+  checkInputs = [\n+    alcotest\n+    qcheck\n+    qcheck-alcotest\n+  ];\n+\n+  meta = {",
+   "id": 3886816107,
+   "in_reply_to_id": 3886782420,
+   "line": 31,
+   "original_commit_id": "700fcc8b6dabd73f21c106f37ac0455c7b64023f",
+   "original_line": 28,
+   "original_position": 28,
+   "original_start_line": null,
+   "path": "pkgs/development/ocaml-modules/base32/default.nix",
+   "position": 31,
+   "pull_request_review_id": 5058331977,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-29T14:25:50Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "https://codeberg.org/eris/kapla/pulls/2",
+   "commit_id": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "created_at": "2026-08-30T14:46:29Z",
+   "diff_hunk": "@@ -0,0 +1,12 @@\n+diff --git a/bin/dune b/bin/dune\n+index 1c1e128..c3b53f8 100644\n+--- a/bin/dune\n++++ b/bin/dune\n+@@ -7,6 +7,7 @@\n+   kapla_fs\n+   kapla_sqlite\n+   cmdliner\n++  rresult",
+   "id": 3889671626,
+   "in_reply_to_id": 3886781067,
+   "line": 9,
+   "original_commit_id": "700fcc8b6dabd73f21c106f37ac0455c7b64023f",
+   "original_line": 9,
+   "original_position": 9,
+   "original_start_line": null,
+   "path": "pkgs/development/ocaml-modules/kapla/add-rresult-dependency.patch",
+   "position": 9,
+   "pull_request_review_id": 5061110911,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-30T14:46:29Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "uses fetchpatch2 instead (but i'm not sure if codeberg have similar url format like github's .patch, also it seems codeberg's captcha is quite aggressive?)\n\nif they dont have it feel free to ignore",
+   "commit_id": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "created_at": "2026-08-30T15:29:37Z",
+   "diff_hunk": "@@ -0,0 +1,89 @@\n+{\n+  lib,\n+  buildDunePackage,\n+  fetchFromCodeberg,\n+  nix-update-script,\n+  nixosTests,\n+  cmdliner,\n+  bytesrw,\n+  fmt,\n+  eris,\n+  base32,\n+  psq,\n+  lru,\n+  miou,\n+  sqlite3,\n+  astring,\n+  fpath,\n+  rresult,\n+  bos,\n+  logs,\n+  uuidm,\n+  ptime,\n+  htmlit,\n+  zarith,\n+  csexp,\n+}:\n+\n+buildDunePackage (finalAttrs: {\n+  pname = \"kapla\";\n+  version = \"0.4.0\";\n+\n+  src = fetchFromCodeberg {\n+    owner = \"eris\";\n+    repo = \"kapla\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-xnPBv/20dH+fyNK6J/qJyyFTizhWfvbl6nUA8JzTRco=\";\n+  };\n+\n+  patches = [\n+    # Replace with fetchpatch when https://codeberg.org/eris/kapla/pulls/2 is merged\n+    ./add-rresult-dependency.patch",
+   "id": 3889768532,
+   "line": 41,
+   "original_commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "original_line": 41,
+   "original_position": 41,
+   "original_start_line": null,
+   "path": "pkgs/development/ocaml-modules/kapla/default.nix",
+   "position": 41,
+   "pull_request_review_id": 5061197621,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-30T15:29:37Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "maybe this is not needed because kapla isn't a modular service?",
+   "commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "created_at": "2026-08-30T15:31:24Z",
+   "diff_hunk": "@@ -0,0 +1,31 @@\n+{ lib, ... }:\n+{\n+  _class = \"nixosTest\";",
+   "id": 3889772504,
+   "line": null,
+   "original_commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "original_line": 3,
+   "original_position": 3,
+   "original_start_line": null,
+   "path": "nixos/tests/kapla.nix",
+   "position": 1,
+   "pull_request_review_id": 5061201425,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-30T15:31:24Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Oops, letfover from when it was one",
+   "commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "created_at": "2026-08-30T15:32:34Z",
+   "diff_hunk": "@@ -0,0 +1,31 @@\n+{ lib, ... }:\n+{\n+  _class = \"nixosTest\";",
+   "id": 3889774959,
+   "in_reply_to_id": 3889772504,
+   "line": null,
+   "original_commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "original_line": 3,
+   "original_position": 3,
+   "original_start_line": null,
+   "path": "nixos/tests/kapla.nix",
+   "position": 1,
+   "pull_request_review_id": 5061203596,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-30T15:32:35Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i think this should be moved to the module instead as systemPackage = [ cfg.package ]",
+   "commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "created_at": "2026-08-30T15:33:02Z",
+   "diff_hunk": "@@ -0,0 +1,31 @@\n+{ lib, ... }:\n+{\n+  _class = \"nixosTest\";\n+  name = \"kapla\";\n+\n+  nodes.machine =\n+    { pkgs, ... }:\n+    {\n+      environment.systemPackages = [\n+        pkgs.ocamlPackages.kapla",
+   "id": 3889775993,
+   "line": null,
+   "original_commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "original_line": 10,
+   "original_position": 10,
+   "original_start_line": null,
+   "path": "nixos/tests/kapla.nix",
+   "position": 1,
+   "pull_request_review_id": 5061204485,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-30T15:33:02Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "What do you mean by this, as in, replace this with fetchpatch2 now, or when the pr is merged?",
+   "commit_id": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "created_at": "2026-08-30T15:33:10Z",
+   "diff_hunk": "@@ -0,0 +1,89 @@\n+{\n+  lib,\n+  buildDunePackage,\n+  fetchFromCodeberg,\n+  nix-update-script,\n+  nixosTests,\n+  cmdliner,\n+  bytesrw,\n+  fmt,\n+  eris,\n+  base32,\n+  psq,\n+  lru,\n+  miou,\n+  sqlite3,\n+  astring,\n+  fpath,\n+  rresult,\n+  bos,\n+  logs,\n+  uuidm,\n+  ptime,\n+  htmlit,\n+  zarith,\n+  csexp,\n+}:\n+\n+buildDunePackage (finalAttrs: {\n+  pname = \"kapla\";\n+  version = \"0.4.0\";\n+\n+  src = fetchFromCodeberg {\n+    owner = \"eris\";\n+    repo = \"kapla\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-xnPBv/20dH+fyNK6J/qJyyFTizhWfvbl6nUA8JzTRco=\";\n+  };\n+\n+  patches = [\n+    # Replace with fetchpatch when https://codeberg.org/eris/kapla/pulls/2 is merged\n+    ./add-rresult-dependency.patch",
+   "id": 3889776264,
+   "in_reply_to_id": 3889768532,
+   "line": 41,
+   "original_commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "original_line": 41,
+   "original_position": 41,
+   "original_start_line": null,
+   "path": "pkgs/development/ocaml-modules/kapla/default.nix",
+   "position": 41,
+   "pull_request_review_id": 5061204744,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-30T15:33:10Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "bad wording, sorry.\r\n\r\ni mean use fetchpatch2 on https://codeberg.org/eris/kapla/commit/626b08cfff14cf3727b92e2be239f1edcbbb1e9a.patch instead\r\n\r\n\r\ni was just wondering if codeberg have *.patch url available like GitHub",
+   "commit_id": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "created_at": "2026-08-30T15:38:07Z",
+   "diff_hunk": "@@ -0,0 +1,89 @@\n+{\n+  lib,\n+  buildDunePackage,\n+  fetchFromCodeberg,\n+  nix-update-script,\n+  nixosTests,\n+  cmdliner,\n+  bytesrw,\n+  fmt,\n+  eris,\n+  base32,\n+  psq,\n+  lru,\n+  miou,\n+  sqlite3,\n+  astring,\n+  fpath,\n+  rresult,\n+  bos,\n+  logs,\n+  uuidm,\n+  ptime,\n+  htmlit,\n+  zarith,\n+  csexp,\n+}:\n+\n+buildDunePackage (finalAttrs: {\n+  pname = \"kapla\";\n+  version = \"0.4.0\";\n+\n+  src = fetchFromCodeberg {\n+    owner = \"eris\";\n+    repo = \"kapla\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-xnPBv/20dH+fyNK6J/qJyyFTizhWfvbl6nUA8JzTRco=\";\n+  };\n+\n+  patches = [\n+    # Replace with fetchpatch when https://codeberg.org/eris/kapla/pulls/2 is merged\n+    ./add-rresult-dependency.patch",
+   "id": 3889787198,
+   "in_reply_to_id": 3889768532,
+   "line": 41,
+   "original_commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "original_line": 41,
+   "original_position": 41,
+   "original_start_line": null,
+   "path": "pkgs/development/ocaml-modules/kapla/default.nix",
+   "position": 41,
+   "pull_request_review_id": 5061214567,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-30T15:38:08Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Uhhh, I wouldn't want to do that before it's merged, in case something else comes up and they don't merge it for some reason, or in a different form.",
+   "commit_id": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "created_at": "2026-08-30T15:46:29Z",
+   "diff_hunk": "@@ -0,0 +1,89 @@\n+{\n+  lib,\n+  buildDunePackage,\n+  fetchFromCodeberg,\n+  nix-update-script,\n+  nixosTests,\n+  cmdliner,\n+  bytesrw,\n+  fmt,\n+  eris,\n+  base32,\n+  psq,\n+  lru,\n+  miou,\n+  sqlite3,\n+  astring,\n+  fpath,\n+  rresult,\n+  bos,\n+  logs,\n+  uuidm,\n+  ptime,\n+  htmlit,\n+  zarith,\n+  csexp,\n+}:\n+\n+buildDunePackage (finalAttrs: {\n+  pname = \"kapla\";\n+  version = \"0.4.0\";\n+\n+  src = fetchFromCodeberg {\n+    owner = \"eris\";\n+    repo = \"kapla\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-xnPBv/20dH+fyNK6J/qJyyFTizhWfvbl6nUA8JzTRco=\";\n+  };\n+\n+  patches = [\n+    # Replace with fetchpatch when https://codeberg.org/eris/kapla/pulls/2 is merged\n+    ./add-rresult-dependency.patch",
+   "id": 3889806417,
+   "in_reply_to_id": 3889768532,
+   "line": 41,
+   "original_commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "original_line": 41,
+   "original_position": 41,
+   "original_start_line": null,
+   "path": "pkgs/development/ocaml-modules/kapla/default.nix",
+   "position": 41,
+   "pull_request_review_id": 5061231879,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-30T15:46:29Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "c754badf610bcf0ec9dc929bfebd442509eb64b4",
+   "id": 5018327048,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-25T11:25:54Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "700fcc8b6dabd73f21c106f37ac0455c7b64023f",
+   "id": 5058290620,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-29T14:09:02Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "700fcc8b6dabd73f21c106f37ac0455c7b64023f",
+   "id": 5058292486,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-29T14:09:27Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "700fcc8b6dabd73f21c106f37ac0455c7b64023f",
+   "id": 5058331977,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-29T14:25:50Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "700fcc8b6dabd73f21c106f37ac0455c7b64023f",
+   "id": 5061110911,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-30T14:46:29Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "id": 5061197621,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-30T15:29:36Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "id": 5061201425,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-30T15:31:24Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "id": 5061203596,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-30T15:32:34Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "id": 5061204485,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-30T15:33:02Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "id": 5061204744,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-30T15:33:10Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "id": 5061214567,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-30T15:38:07Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3eed95ea3d000a2cecc3e0bef02666aa46ac610a",
+   "id": 5061231879,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-30T15:46:29Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "642e370015234bbe1cd1fd5628b0a0912a3b17fc",
+   "id": 5065810943,
+   "state": "APPROVED",
+   "submitted_at": "2026-08-31T11:15:08Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 24505474,
+    "login": "wamirez",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-08-26T08:47:58Z",
+   "event": "connected",
+   "id": 30031306786,
+   "subject": {
+    "issue_type": {
+     "color": "yellow",
+     "id": 12272143,
+     "name": "Task"
+    },
+    "number": 2237,
+    "repository": {
+     "description": "Packaging tasks for NGI projects.",
+     "fork": false,
+     "full_name": "ngi-nix/projects",
+     "git_commits_url": "https://api.github.com/repos/ngi-nix/projects/git/commits{/sha}",
+     "id": 1222494439,
+     "issues_url": "https://api.github.com/repos/ngi-nix/projects/issues{/number}",
+     "milestones_url": "https://api.github.com/repos/ngi-nix/projects/milestones{/number}",
+     "name": "projects",
+     "owner": {
+      "id": 64417844,
+      "login": "ngi-nix",
+      "site_admin": false,
+      "type": "Organization"
+     },
+     "private": false,
+     "pulls_url": "https://api.github.com/repos/ngi-nix/projects/pulls{/number}",
+     "subscription_url": "https://api.github.com/repos/ngi-nix/projects/subscription",
+     "tags_url": "https://api.github.com/repos/ngi-nix/projects/tags"
+    },
+    "state": "closed",
+    "state_reason": null,
+    "title": "ERIS: package `kapla` in nixpkgs"
+   }
+  },
+  {
+   "actor": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "8c44db7779ca82b60952cc48e0b925ad4f7bf400",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/8c44db7779ca82b60952cc48e0b925ad4f7bf400",
+   "created_at": "2026-08-31T11:21:53Z",
+   "event": "merged",
+   "id": 30274917388
+  },
+  {
+   "actor": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-08-31T11:21:53Z",
+   "event": "closed",
+   "id": 30274917503,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

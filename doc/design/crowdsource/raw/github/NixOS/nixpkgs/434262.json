@@ -1,0 +1,653 @@
+{
+ "comments": [
+  {
+   "body": "> error: The option `nodes.machine.system.services.php-fpm.meta' does not exist.\r\n\r\nWorking on a better implementation, but https://github.com/NixOS/nixpkgs/pull/435005 will take care of the error in the meantime.",
+   "created_at": "2025-08-19T14:03:41Z",
+   "id": 3200906514,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-08-19T14:07:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "You might also be able to set [`WatchdogSec=`](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html#WatchdogSec=), maybe derived from the php interval (times 2?), and/or vice versa.\r\n\r\n(not a blocker)",
+   "created_at": "2025-08-31T21:48:37Z",
+   "id": 3240436213,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-09-02T14:57:39Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/434262",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\nas promised in https://github.com/NixOS/nixpkgs/pull/430490#discussion_r2258445519 adding `notify-reload` support\r\n\r\nfrom `php-fpm` documentation:\r\n> systemd_interval [int](https://www.php.net/manual/en/language.types.integer.php)\r\n>\r\n>    When FPM is build with systemd integration, specify the interval, in second, between health report notification to systemd. Set to 0 to disable. Default value: 10.\r\n\r\ni browsed through the `php-fpm` source and basically if this option isn't `0` then `php-fpm` will write `READY=1\\n` to the `systemd` socket every `n` seconds as defined in config... which means incidentally `notify-reload` will work\r\n\r\n---\r\n\r\nbtw... @roberth any idea what is going on here? did something change or was this error missed somehow in the last PR? when i run `nix-build -A nixosTests.php.fpm-modular` i get this error:\r\n```\r\n       error: The option `nodes.machine.system.services.php-fpm.meta' does not exist. Definition values:\r\n       - In `/home/aaron/nixpkgs/pkgs/development/interpreters/php/service.nix':\r\n           {\r\n             maintainers = [\r\n               {\r\n                 email =\r\n```\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 2,
+  "created_at": "2025-08-16T15:52:28Z",
+  "draft": false,
+  "id": 3327397570,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "PHP is a general-purpose scripting language geared towards web development.",
+    "id": 6685855770,
+    "name": "6.topic: php"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 434262,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/434262.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/434262.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 1,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "nixos/phpfpm: set systemd Type to notify-reload when possible",
+  "type": null,
+  "updated_at": "2026-08-27T14:17:40Z",
+  "user": {
+   "id": 7755101,
+   "login": "aanderse",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 29,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "ac2797f216b035a764d9a37a1ebebaa61724a475",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\nas promised in https://github.com/NixOS/nixpkgs/pull/430490#discussion_r2258445519 adding `notify-reload` support\r\n\r\nfrom `php-fpm` documentation:\r\n> systemd_interval [int](https://www.php.net/manual/en/language.types.integer.php)\r\n>\r\n>    When FPM is build with systemd integration, specify the interval, in second, between health report notification to systemd. Set to 0 to disable. Default value: 10.\r\n\r\ni browsed through the `php-fpm` source and basically if this option isn't `0` then `php-fpm` will write `READY=1\\n` to the `systemd` socket every `n` seconds as defined in config... which means incidentally `notify-reload` will work\r\n\r\n---\r\n\r\nbtw... @roberth any idea what is going on here? did something change or was this error missed somehow in the last PR? when i run `nix-build -A nixosTests.php.fpm-modular` i get this error:\r\n```\r\n       error: The option `nodes.machine.system.services.php-fpm.meta' does not exist. Definition values:\r\n       - In `/home/aaron/nixpkgs/pkgs/development/interpreters/php/service.nix':\r\n           {\r\n             maintainers = [\r\n               {\r\n                 email =\r\n```\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 2,
+  "closed_at": null,
+  "comments": 2,
+  "commits": 2,
+  "created_at": "2025-08-16T15:52:28Z",
+  "deletions": 6,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/434262.diff",
+  "draft": false,
+  "head": {
+   "label": "aanderse:nixos/phpfpm",
+   "ref": "nixos/phpfpm",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2018-08-04T01:55:49Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "aanderse/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/aanderse/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 143489391,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/aanderse/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/aanderse/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 7755101,
+     "login": "aanderse",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/aanderse/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-26T19:59:46Z",
+    "size": 2955465,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/aanderse/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/aanderse/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2023-07-09T23:11:48Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "866944f3342d680229c4815d23db6f5e20886a6b",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 2750569631,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "PHP is a general-purpose scripting language geared towards web development.",
+    "id": 6685855770,
+    "name": "6.topic: php"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 434262,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/434262.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 63433,
+    "login": "talyz",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 252042,
+    "login": "drupol",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 705123,
+    "login": "jtojnar",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 1447245,
+    "login": "globin",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 4,
+  "state": "open",
+  "title": "nixos/phpfpm: set systemd Type to notify-reload when possible",
+  "updated_at": "2026-08-27T14:17:40Z",
+  "user": {
+   "id": 7755101,
+   "login": "aanderse",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#434262",
+ "review_comments": [
+  {
+   "body": "iiuc this is covered by the built-in behavior\r\n> Behavior of notify-reload is similar to notify, with one difference: the SIGHUP UNIX process signal is sent to the service's main process when the service is asked to reload and the manager will wait for a notification about the reload being finished.\r\n\r\nhttps://www.freedesktop.org/software/systemd/man/latest/systemd.service.html#Type=\r\n\r\n```suggestion\r\n```\r\n\r\n",
+   "commit_id": "866944f3342d680229c4815d23db6f5e20886a6b",
+   "created_at": "2025-08-19T14:10:39Z",
+   "diff_hunk": "@@ -296,7 +297,7 @@ in\n             ProtectHome = true;\n             # XXX: We need AF_NETLINK to make the sendmail SUID binary from postfix work\n             RestrictAddressFamilies = \"AF_UNIX AF_INET AF_INET6 AF_NETLINK\";\n-            Type = \"notify\";\n+            Type = if cfg.settings.systemd_interval != 0 then \"notify-reload\" else \"notify\";\n             ExecStart = \"${poolOpts.phpPackage}/bin/php-fpm -y ${cfgFile} -c ${iniFile}\";\n             ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";",
+   "id": 2285404698,
+   "line": null,
+   "original_commit_id": "407cff2ff51390e1d1d2f370dae0e396cf8010fa",
+   "original_line": 302,
+   "original_position": 15,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-servers/phpfpm/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3132535109,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-19T14:10:39Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "the documentation you quoted specifies `SIGHUP` but `php-fpm` requires `SIGUSR2`, hence the custom `ExecReload`",
+   "commit_id": "866944f3342d680229c4815d23db6f5e20886a6b",
+   "created_at": "2025-08-19T20:45:10Z",
+   "diff_hunk": "@@ -296,7 +297,7 @@ in\n             ProtectHome = true;\n             # XXX: We need AF_NETLINK to make the sendmail SUID binary from postfix work\n             RestrictAddressFamilies = \"AF_UNIX AF_INET AF_INET6 AF_NETLINK\";\n-            Type = \"notify\";\n+            Type = if cfg.settings.systemd_interval != 0 then \"notify-reload\" else \"notify\";\n             ExecStart = \"${poolOpts.phpPackage}/bin/php-fpm -y ${cfgFile} -c ${iniFile}\";\n             ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";",
+   "id": 2286294127,
+   "in_reply_to_id": 2285404698,
+   "line": null,
+   "original_commit_id": "407cff2ff51390e1d1d2f370dae0e396cf8010fa",
+   "original_line": 302,
+   "original_position": 15,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-servers/phpfpm/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3133779855,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-19T20:45:10Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This can be changed with `ReloadSignal=` though.",
+   "commit_id": "866944f3342d680229c4815d23db6f5e20886a6b",
+   "created_at": "2025-08-29T16:26:30Z",
+   "diff_hunk": "@@ -296,7 +297,7 @@ in\n             ProtectHome = true;\n             # XXX: We need AF_NETLINK to make the sendmail SUID binary from postfix work\n             RestrictAddressFamilies = \"AF_UNIX AF_INET AF_INET6 AF_NETLINK\";\n-            Type = \"notify\";\n+            Type = if cfg.settings.systemd_interval != 0 then \"notify-reload\" else \"notify\";\n             ExecStart = \"${poolOpts.phpPackage}/bin/php-fpm -y ${cfgFile} -c ${iniFile}\";\n             ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";",
+   "id": 2310601805,
+   "in_reply_to_id": 2285404698,
+   "line": null,
+   "original_commit_id": "407cff2ff51390e1d1d2f370dae0e396cf8010fa",
+   "original_line": 302,
+   "original_position": 15,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-servers/phpfpm/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3169346574,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-29T16:26:30Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "ho ho i hadn't seen that one yet! thanks @Ma27 :heart:",
+   "commit_id": "866944f3342d680229c4815d23db6f5e20886a6b",
+   "created_at": "2025-08-29T17:15:56Z",
+   "diff_hunk": "@@ -296,7 +297,7 @@ in\n             ProtectHome = true;\n             # XXX: We need AF_NETLINK to make the sendmail SUID binary from postfix work\n             RestrictAddressFamilies = \"AF_UNIX AF_INET AF_INET6 AF_NETLINK\";\n-            Type = \"notify\";\n+            Type = if cfg.settings.systemd_interval != 0 then \"notify-reload\" else \"notify\";\n             ExecStart = \"${poolOpts.phpPackage}/bin/php-fpm -y ${cfgFile} -c ${iniFile}\";\n             ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";",
+   "id": 2310700411,
+   "in_reply_to_id": 2285404698,
+   "line": null,
+   "original_commit_id": "407cff2ff51390e1d1d2f370dae0e396cf8010fa",
+   "original_line": 302,
+   "original_position": 15,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-servers/phpfpm/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3169489200,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-29T17:15:56Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3132535109,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-19T14:10:39Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3133779855,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-19T20:45:10Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3169346574,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-29T16:26:30Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Rest LGTM.",
+   "commit_id": null,
+   "id": 3169397495,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-29T16:42:59Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3169489200,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-29T17:15:56Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "When I deploy this to a relatively normal Nextcloud installation, the reload runs into a timeout:\r\n\r\n```\r\n\r\nSep 05 08:29:10 cloud php-fpm[1779427]: [NOTICE] Reloading in progress ...\r\nSep 05 08:29:10 cloud systemd[1]: Reloading PHP FastCGI Process Manager service for pool nextcloud...\r\nSep 05 08:29:10 cloud php-fpm[1779427]: [NOTICE] reloading: execvp(\"/nix/store/7c9pia7r4vvjb28lmndm46pkzqdc65wv-php-with-extensions-8.3.24/bin/php-fpm\", {\"/nix/store/7c9pia7r4vvjb28lmndm46pkzqdc65wv-php-with-extensions-8.3.24/bin/php-fpm\", \"-y\", \"/nix/store/c6lm1hzg6v4ygiinvw6s3inprp6ksxx1-phpfpm-nextcloud.conf\", \"-c\", \"/nix/store/xpq174hpbllkiw7hgryi43k91433ssxg-php.ini\"})\r\nSep 05 08:29:10 cloud php-fpm[1779427]: [NOTICE] using inherited socket fd=7, \"/run/phpfpm/nextcloud.sock\"\r\nSep 05 08:29:10 cloud php-fpm[1779427]: [NOTICE] using inherited socket fd=7, \"/run/phpfpm/nextcloud.sock\"\r\nSep 05 08:29:10 cloud php-fpm[1779427]: [NOTICE] fpm is running, pid 1779427\r\nSep 05 08:29:11 cloud php-fpm[1779427]: [NOTICE] ready to handle connections\r\nSep 05 08:29:11 cloud php-fpm[1779427]: [NOTICE] systemd monitor interval set to 10000ms\r\n[...]\r\nSep 05 08:29:56 cloud systemd[1]: phpfpm-nextcloud.service: Reload operation timed out. Killing reload process.\r\nSep 05 08:29:56 cloud systemd[1]: Reload failed for PHP FastCGI Process Manager service for pool nextcloud.\r\n```\r\n\r\nThe reload signal was correctly handled given the logs, but apparently the sd_notify isn't happening?\r\n\r\nDid you have some special configuration that made it work for you and we're probably missing in nixpkgs?\r\n\r\nThis is btw not a Nextcloud-specific thing, I can reproduce this with other phpfpm installations as well.\r\n\r\nBlocking for now to prevent accidental merges until this is resolved.",
+   "commit_id": "866944f3342d680229c4815d23db6f5e20886a6b",
+   "id": 3188484539,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2025-09-05T08:33:57Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Please look into the `reloadCommand` and `reloadSignal` as these should cleanup most of these changes.",
+   "commit_id": "866944f3342d680229c4815d23db6f5e20886a6b",
+   "id": 5040544898,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-08-27T12:07:28Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs"
+ ],
+ "timeline": []
+}

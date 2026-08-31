@@ -1,0 +1,703 @@
+{
+ "comments": [
+  {
+   "body": "💯  Vars should definitely be integrated.\n\nI see [Vars options](https://github.com/Lassulus/vars/blob/main/options.nix) as a contract and the [`on-machine.nix` backend](https://github.com/Lassulus/vars/blob/main/backends/on-machine.nix) as one of the blocks.\n\nThe SHB secrets contract is higher-level than the Vars one. SHB really just cares that a file exists at some location while the Vars one is also interested in how the file is generated. I see value in both so I don't think we need to merge them. But making them compatible would be great.\n\nThe secrets contract in SHB for now defines the [`path` as a result](https://shb.skarabox.com/contracts-secret.html#contracts-secret-options-shb.contracts.secret.result.path), like Vars does, but also expects the provider to understand some more options under the [`request` submodule option](https://shb.skarabox.com/contracts-secret.html#contracts-secret-options-shb.contracts.secret.request) like the `owner`, `mode` and `group` . It shouldn't be too hard but Vars would need to understand those and generate a file with the correct `owner`, `mode` and `group`.\n\nAssuming that works, one can then use Vars to generate a SHB config!\n\nAs you know, I'm planning on using the [module interfaces](https://github.com/fricklerhandwerk/module-interfaces) pattern instead of the current one for contract. The options would stay the same though, so I think we can start integrating Vars without needing to wait on that.",
+   "created_at": "2025-06-08T21:35:12Z",
+   "id": 2954286843,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-06-08T21:35:12Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "okay, i understand that vars may need some extra functionality there to be compatible.\n\nif we see both SHB secrets and vars as contracts tho, i wonder, would this match:\n\n- contracts interacting with one another, with the secrets contract having the vars contract as its consumer, and conversely the vars contract having the secrets contract as its provider? i.e. the types of A's consumer and B's provider match (edit: or alternatively, contract B _being_ contract A's consumer, with conversely contract A being contract B's provider).\n- the vars contract (generalized to support groups/...) forming a more concrete instance of the secrets one? i.e. 'sub-classing' it, with for example the expectations of the secrets contract (provider, consumer, behavior?) each being at least as general as those of the vars contract.\n\n/cc @fricklerhandwerk\n",
+   "created_at": "2025-06-09T08:34:31Z",
+   "id": 2955076756,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-06-10T08:41:21Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@KiaraGrouwstra yes something like that. But in any case we'd need to be able express \"side effects\" in the \"modular\" function application first: something like Vars both returns a path and writes to `config`. Right now module interfaces can only do the pure returning of values.",
+   "created_at": "2025-06-09T13:16:24Z",
+   "id": 2955767245,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-06-09T13:16:24Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@fricklerhandwerk makes sense, thanks.\nlet me know if we have an upstream issue at https://github.com/fricklerhandwerk/module-interfaces that we can track on that.",
+   "created_at": "2025-06-09T16:07:58Z",
+   "id": 2956242616,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-06-09T16:07:58Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@fricklerhandwerk\n\n> [@KiaraGrouwstra](https://github.com/KiaraGrouwstra) yes something like that. But in any case we'd need to be able express \"side effects\" in the \"modular\" function application first: something like Vars both returns a path and writes to `config`. Right now module interfaces can only do the pure returning of values.\n\non second thought, humor me, why do we _need_ need that for this?\n\nin other words, out of all the reasons i use nix, type safety wasn't one.\n",
+   "created_at": "2025-06-10T06:22:25Z",
+   "id": 2957820382,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-06-10T06:22:25Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "What we called \"modular interfaces\" as a working title are simply function types at the module system layer. We need them if we don't want to construct values manually at the call site, which requires knowing the inner workings of what typically would happen in a function.\n\nWe don't strictly require it to do work, but the whole point of the module system is type safety and automatic documentation. Without function types it's impossible to fully describe how things are plugged together -- which is essential for abstracting away interchangeable parts. There's currently only `functionTo` which just checks the output type.",
+   "created_at": "2025-06-10T07:40:44Z",
+   "id": 2958006472,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-06-10T07:40:44Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@fricklerhandwerk why would you want to model side effects though? My issue with that is it’s super easy to forget about a die effect and not model it. And then you’re left with an incomplete model and no compiler helps you here. Am I reading this right?",
+   "created_at": "2025-06-10T09:05:48Z",
+   "id": 2958294925,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-06-10T09:05:48Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> why would you want to model side effects though\n\nBecause if all you can declare in your function type is `inputs` and `outputs`, how do you even express that *also something is added to `activationScript`*? And I don't mean \"philosophically talk about the notion\" but actually writing it down such that the file appears on function application.",
+   "created_at": "2025-06-10T09:14:04Z",
+   "id": 2958320886,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-06-10T09:14:04Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> we'd need to be able express \"side effects\" in the \"modular\" function application first: something like Vars both returns a path and writes to `config`. Right now module interfaces can only do the pure returning of values.\n\ni hope this [file generation PoC](https://github.com/fricklerhandwerk/module-interfaces/compare/main...KiaraGrouwstra:module-interfaces:effects) may help for this\n\nedit: with thanks to @edef1c who helped me figure this out :tada:\n",
+   "created_at": "2025-09-05T12:34:44Z",
+   "id": 3258197623,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-05T15:55:25Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> The secrets contract in SHB for now defines the [`path` as a result](https://shb.skarabox.com/contracts-secret.html#contracts-secret-options-shb.contracts.secret.result.path), like Vars does, but also expects the provider to understand some more options under the [`request` submodule option](https://shb.skarabox.com/contracts-secret.html#contracts-secret-options-shb.contracts.secret.request) like the `owner`, `mode` and `group` . It shouldn't be too hard but Vars would need to understand those and generate a file with the correct `owner`, `mode` and `group`.\n\nthis one i addressed for the implementation decoupled from clan at https://github.com/Lassulus/vars/commit/52ee8bab58593573f809374b79c009dfa832d52a.\n\nnow, i should maybe recheck what contract integration adds over Vars, if they managed to somehow handle their use-case without them.\ni guess in their case things may not have been decoupled as much (tho they offer multiple back-ends), tho they do have service modules indicating how to generate their secrets.\nto be fair, the decoupled implementation of Vars does not fully automate things: the whole design seemed very much geared toward their Clan use-case.\n\nthe need to manually trigger generation currently makes configurations using it [not work in one go](https://github.com/Lassulus/vars/issues/5), which in Clan was maybe acceptable in the sense that deployer nodes could handle generation and injection upfront.\nin a single-node context, that maybe implies a need to handle generation outside nix builds.\none approach to that is [manually juggling systemd requisites](https://github.com/Lassulus/nix-templating/blob/master/tests/template.nix) - which seems pretty awkward.\nan alternate approach seems loading credentials in systemd services by `LoadCredential`.\n\nedit: could [`systemd-openbao`](https://git.lix.systems/the-distro/systemd-openbao) with a [Vars OpenBao back-end](https://git.clan.lol/clan/clan-core/issues/6805) maybe handle generation?\n",
+   "created_at": "2026-02-18T23:26:17Z",
+   "id": 3923750198,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-18T23:40:12Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "a vars contract could maybe work in modular services, as an approach to https://github.com/NixOS/nixpkgs/issues/490813 that should work even in distributed settings  (#541)",
+   "created_at": "2026-02-19T14:15:37Z",
+   "id": 3927572065,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-19T14:15:37Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I now feel that rather than having vars land upstream as is, it should just be reimplemented as a contract.\n\nsuch a generating contract should not necessarily need to interface with a fileSecrets contract directly.\nif the consumer side of two secrets related contracts were consistently used together, we may find a way to nicely handle that.\n\ngenerating secrets I'm not sure returns any info, given file paths may not apply with openbao, so that could make a generating contract simpler, tho it may make for more of a need to align things nicely to ensure we have the needed info for consuming secrets as well.",
+   "created_at": "2026-03-15T14:50:32Z",
+   "id": 4063155555,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-15T14:50:32Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "From the latest onboarding issues, clearly generating secrets would be really nice. I really want to try vars. One thing we need to add in the contract is the ability to specify a minimum chars length. It's needed for LLDAP and Authelia at least. And for Authelia we must be able to generate an openssl certificate too, not just a random string.\n\nFor openbao, I'm on the fence. If the upstream service interfaces directly with openbao, sure we don't need a path. But if there's vars -> openbao -> systemd -> service, then systemd pretty much imposes us to use files for LoadCredentials IIUC.",
+   "created_at": "2026-03-15T16:19:33Z",
+   "id": 4063316917,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-15T16:19:33Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> then systemd pretty much imposes us to use files for LoadCredentials IIUC\n\ni think from the nix perspective you don't interface with them like files, this should be a matter of using systemd-vaultd / systemd-openbaod",
+   "created_at": "2026-03-16T03:59:18Z",
+   "id": 4064898112,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-16T03:59:18Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "[wip attempt](https://github.com/KiaraGrouwstra/nixpkgs/compare/contracts-automated...contracts-new-types)",
+   "created_at": "2026-04-07T22:10:55Z",
+   "id": 4202501773,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-07T22:10:55Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/ibizaman/selfhostblocks/issues/467",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "at some point, it may be of interest to integrate [vars](https://github.com/Lassulus/vars) as a secrets provider. given this, we may be able to hook into their back-ends to use with [SHB secrets](https://shb.skarabox.com/contracts-secret.html) consumers.\n\nif that sounds like vars should instead be at the level of the contract rather than as the provider, i thought of that although I'm not quite confident if it makes sense yet.\n\n(c.f. [`nix-templating`](https://github.com/Lassulus/nix-templating), an effort to enable templating that may be used with file-based secrets.)\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 15,
+  "created_at": "2025-06-08T20:16:59Z",
+  "id": 3128669373,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "labels": [
+   {
+    "color": "546F46",
+    "default": false,
+    "description": "New block to be added",
+    "id": 6327797211,
+    "name": "new block"
+   },
+   {
+    "color": "748F86",
+    "default": false,
+    "description": "Add new contract",
+    "id": 8759483725,
+    "name": "new contract"
+   }
+  ],
+  "locked": false,
+  "milestone": {
+   "closed_at": null,
+   "closed_issues": 0,
+   "created_at": "2026-02-16T21:03:24Z",
+   "creator": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "description": "Track work on the contracts for secrets.",
+   "due_on": null,
+   "id": 14835076,
+   "number": 4,
+   "open_issues": 2,
+   "state": "open",
+   "title": "Secrets",
+   "updated_at": "2026-02-16T21:04:13Z"
+  },
+  "number": 467,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/ibizaman/selfhostblocks",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "secrets provider: vars",
+  "updated_at": "2026-04-07T22:10:55Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "ibizaman/selfhostblocks#467",
+ "sources": [
+  "selfhostblocks-vars"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "cba519dccfcfdfcdedc27c184e1589a52d37c165",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/module-interfaces/commits/cba519dccfcfdfcdedc27c184e1589a52d37c165",
+   "created_at": "2025-09-05T11:50:25Z",
+   "event": "referenced",
+   "id": 19527487899
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "6f4e6ebd1c29ad98523f25979ad175d57b948352",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/6f4e6ebd1c29ad98523f25979ad175d57b948352",
+   "created_at": "2026-04-06T13:49:02Z",
+   "event": "referenced",
+   "id": 24225457812
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "c422354cef8dcdd5d07421f74105f6e7a38d8637",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/c422354cef8dcdd5d07421f74105f6e7a38d8637",
+   "created_at": "2026-04-06T14:12:02Z",
+   "event": "referenced",
+   "id": 24226070395
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "3e3cd501ee371dd56e57a04c65bee53da3c3999a",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/3e3cd501ee371dd56e57a04c65bee53da3c3999a",
+   "created_at": "2026-04-06T17:09:37Z",
+   "event": "referenced",
+   "id": 24230512814
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "31f2e298797a07f34e996f8393a85740b398aef2",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/31f2e298797a07f34e996f8393a85740b398aef2",
+   "created_at": "2026-04-07T08:50:55Z",
+   "event": "referenced",
+   "id": 24250298141
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "f52a6e666c0e7aad296330d150639f44ca285d67",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/f52a6e666c0e7aad296330d150639f44ca285d67",
+   "created_at": "2026-04-08T13:05:07Z",
+   "event": "referenced",
+   "id": 24296101881
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "be5f6783e103e6d6e7e3b606a34ef6f6e33ac950",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/be5f6783e103e6d6e7e3b606a34ef6f6e33ac950",
+   "created_at": "2026-04-08T13:18:30Z",
+   "event": "referenced",
+   "id": 24296552317
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "5e4726297e1c7feecc3565ec3b7e2768fecc5075",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/5e4726297e1c7feecc3565ec3b7e2768fecc5075",
+   "created_at": "2026-05-23T19:52:36Z",
+   "event": "referenced",
+   "id": 25888528731
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "16902e6882d2a2e06658549986517e7d23c5faff",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/16902e6882d2a2e06658549986517e7d23c5faff",
+   "created_at": "2026-05-24T06:20:00Z",
+   "event": "referenced",
+   "id": 25894534228
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "c3f7a74e7c56039b1b5a7117e5999ae485b381a5",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/c3f7a74e7c56039b1b5a7117e5999ae485b381a5",
+   "created_at": "2026-05-24T07:30:52Z",
+   "event": "referenced",
+   "id": 25895191073
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "73af262461028a5682057fffa3a08fafaab6bea1",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/73af262461028a5682057fffa3a08fafaab6bea1",
+   "created_at": "2026-05-24T07:44:35Z",
+   "event": "referenced",
+   "id": 25895354284
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fb314fe7ed9c91a151ba236b157944cf0f01da42",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/fb314fe7ed9c91a151ba236b157944cf0f01da42",
+   "created_at": "2026-05-26T12:12:17Z",
+   "event": "referenced",
+   "id": 25966035780
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "d0a3741fe1160e957282fa08bec07cdce0900f0c",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/d0a3741fe1160e957282fa08bec07cdce0900f0c",
+   "created_at": "2026-05-29T20:22:17Z",
+   "event": "referenced",
+   "id": 26126771487
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "baaf19e43f740e81fa55ab5088f617fa9c25abaa",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/baaf19e43f740e81fa55ab5088f617fa9c25abaa",
+   "created_at": "2026-06-04T13:14:50Z",
+   "event": "referenced",
+   "id": 26338566149
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "ea3853709118d2991aea533b9cd962b7bdea34fa",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/ea3853709118d2991aea533b9cd962b7bdea34fa",
+   "created_at": "2026-06-04T20:59:30Z",
+   "event": "referenced",
+   "id": 26356928762
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "c4af2b7c73d985166f77fddf890bac6a464d1e6d",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/c4af2b7c73d985166f77fddf890bac6a464d1e6d",
+   "created_at": "2026-07-01T17:28:02Z",
+   "event": "referenced",
+   "id": 27441793916
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "2d29d8dd4dbaa4a1409c7f20c9d06f6650deee22",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/2d29d8dd4dbaa4a1409c7f20c9d06f6650deee22",
+   "created_at": "2026-07-01T18:45:09Z",
+   "event": "referenced",
+   "id": 27444596109
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "2d1f4692f3af5a582141a9dff32915167c5da0c9",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/2d1f4692f3af5a582141a9dff32915167c5da0c9",
+   "created_at": "2026-07-04T19:22:48Z",
+   "event": "referenced",
+   "id": 27561987640
+  }
+ ]
+}

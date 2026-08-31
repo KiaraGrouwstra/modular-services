@@ -1,0 +1,2465 @@
+{
+ "comments": [
+  {
+   "body": "FYI, check out how I handle secrets throughout all the apps here: https://github.com/ip1981/nixsap/tree/master/modules/apps\r\n\r\nEspecially, with Jenkins :)",
+   "created_at": "2017-03-24T13:50:16Z",
+   "id": 289027491,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2017-03-24T13:50:16Z",
+   "user": {
+    "id": 131844,
+    "login": "ip1981",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I suspect @fpletz is now the maintainer for gitlab (sorry, I see you'r name is in this list a lot!)",
+   "created_at": "2017-03-24T13:50:31Z",
+   "id": 289027541,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T13:50:31Z",
+   "user": {
+    "id": 139251,
+    "login": "teh",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Wow, I didn't know the situation was this bad. All of these options should be removed really. It's almost as if people don't realize that the Nix store is world readable...",
+   "created_at": "2017-03-24T14:08:31Z",
+   "id": 289032210,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 22,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 22
+   },
+   "updated_at": "2017-03-24T14:08:31Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@basvandijk — any plan for preventing future changes adding secrets to the Nix store, beyond eternal vigilance?",
+   "created_at": "2017-03-24T14:13:58Z",
+   "id": 289033584,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T14:13:58Z",
+   "user": {
+    "id": 125674,
+    "login": "jml",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Hmm, I didn't re-read https://github.com/NixOS/nix/issues/8 completely, but it seemed to me last time that @edolstra 's solution using encryption in the store and decryption at startup time was working and there was mostly bikeshedding about encryption vs ACLs?\r\n\r\nThis would be much easier than trying to patch every single upstream program that does not accept password files, especially given that some may not be willing to do it as it adds quite a bit of complexity. Wouldn't it?",
+   "created_at": "2017-03-24T14:28:17Z",
+   "id": 289037587,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T14:28:17Z",
+   "user": {
+    "id": 411447,
+    "login": "Ekleog",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Besides being quite inconvenient, storing passwords/keys in a file with restricted access outside the store, may not solve the problem: they could end up in a systemd environment file or a unit file if you need to pass those as an command line argument. \r\nAlso expecting everyone upstream to comply seems incredibly too optimistic for me.",
+   "created_at": "2017-03-24T14:32:51Z",
+   "id": 289038974,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2017-03-24T14:32:51Z",
+   "user": {
+    "id": 2817565,
+    "login": "rnhmjoj",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": ">  any plan for preventing future changes adding secrets to the Nix store, beyond eternal vigilance?\r\n\r\n@jml we could add something to the [PULL_REQUEST_TEMPLATE.md](https://github.com/NixOS/nixpkgs/blob/master/.github/PULL_REQUEST_TEMPLATE.md) instructing contributors to use `passwordFile` instead of `password` options. ",
+   "created_at": "2017-03-24T14:38:19Z",
+   "id": 289040557,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T14:38:19Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": ">  All of these options should be removed really...\r\n\r\n@edolstra we could do that eventually but to ease the transition we should first provide a backwards compatible `passwordFile` option, then in a next release we could start throwing warnings when users use the `password` option and finally in a third release we can remove the `password` options.",
+   "created_at": "2017-03-24T14:43:22Z",
+   "id": 289042037,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T14:43:22Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@Ekleog regarding https://github.com/NixOS/nix/issues/8, even if we have the ability to encrypt files in the Nix store I think it would be best to only encrypt files that should be encrypted. Currently we have big config files that somewhere contain a password. It would nicer if the config file remains unencrypted because then it can be shared and it makes debugging easier. Only the password needs to be encrypted. So having passwords in individual files would still be desirable.",
+   "created_at": "2017-03-24T14:48:58Z",
+   "id": 289043652,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T14:48:58Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@basvandijk The encryption stuff allows you to encrypt only the \"secret\" parts of a configuration file. See https://github.com/edolstra/nixpkgs/commit/4c8212069429bf9fb959e00ce8d9345ac7cb7ff0#diff-6c3fcb531890fdce200531b9ac69e4f8R14 for an example.",
+   "created_at": "2017-03-24T14:54:39Z",
+   "id": 289045292,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T14:54:39Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@basvandijk Sometimes even the password stored in the configuration file needs to be readable. dnschain, for example, parses namecoin.conf to connect to the rpc server.",
+   "created_at": "2017-03-24T14:58:15Z",
+   "id": 289046420,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T14:58:15Z",
+   "user": {
+    "id": 2817565,
+    "login": "rnhmjoj",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@rnhmjoj lets see how upstream reacts to a [request for a `rpcpasswordFile` parameter](https://github.com/namecoin/namecoin-core/issues/148)...",
+   "created_at": "2017-03-24T15:55:37Z",
+   "id": 289063306,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T15:55:37Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> The encryption stuff allows you to encrypt only the \"secret\" parts of a configuration file.\r\n\r\n@edolstra that's great! What needs to be done to get this merged into Nix?",
+   "created_at": "2017-03-24T15:58:32Z",
+   "id": 289064153,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T16:17:08Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Well, it's not clear whether this is the way to go. @kevincox listed the issues here: https://github.com/NixOS/nix/issues/8#issuecomment-265256236",
+   "created_at": "2017-03-24T16:21:55Z",
+   "id": 289070672,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T16:21:55Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@rnhmjoj regarding `namecoind`, would [cookie based authentication](https://github.com/namecoin/namecoin-core/blob/master/doc/release-notes/release-notes-0.12.0.md#rpc-random-cookie-rpc-authentication) work?",
+   "created_at": "2017-03-24T17:14:07Z",
+   "id": 289085147,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T17:14:07Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Besides being quite inconvenient, storing passwords/keys in a file with restricted access outside the store, may not solve the problem: they could end up in a systemd environment file or a unit file if you need to pass those as an command line argument.\r\n\r\n@rnhmjoj regarding secrets in systemd unit files, we can always create a wrapper script that cats the password file and passes that on to the original script. I do something similar [here](https://github.com/NixOS/nixpkgs/pull/24146/files#diff-157b11c01d1c80f9941bc15943ae97f0R279).",
+   "created_at": "2017-03-24T17:57:04Z",
+   "id": 289098745,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T17:57:04Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@basvandijk Regarding upstream changes for password file options: I think some `cat`/`sed` trickery, maybe creating a config file in `/run` from a template should also do the job for most cases where upstream doesn't have or doesn't want to add a password file, shouldn't it?",
+   "created_at": "2017-03-24T23:37:07Z",
+   "id": 289167908,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T23:37:07Z",
+   "user": {
+    "id": 2971615,
+    "login": "mbrgm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@mbrgm sure and we should do that in case upstream doesn't provide a password file option.",
+   "created_at": "2017-03-25T01:38:49Z",
+   "id": 289179195,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-25T01:38:49Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@basvandijk I would not tick the package until the PR is _merged_.",
+   "created_at": "2017-03-25T12:10:07Z",
+   "id": 289207945,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-25T12:10:07Z",
+   "user": {
+    "id": 1366419,
+    "login": "rasendubi",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@basvandijk That seems a valid alternative for authenticating to namecoind however dnschain does not support it, so it would break the service. Anyway, thank you for opening the issue.",
+   "created_at": "2017-03-25T14:59:36Z",
+   "id": 289216987,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-25T14:59:36Z",
+   "user": {
+    "id": 2817565,
+    "login": "rnhmjoj",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I would not tick the package until the PR is merged.\r\n\r\n@rasendubi makes sense. I've unticked the wordpress checkbox.",
+   "created_at": "2017-03-25T18:13:02Z",
+   "id": 289229289,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-25T18:13:02Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Well for aiccu; [SixXS is closing down its IPv6 tunnel in June](https://www.sixxs.net/news/2017/#sunsettingsixxs20170606-201703) so it doesn't seem worth the effort to create a patch for aiccu to support password files. Lets just remove the service in 0606.",
+   "created_at": "2017-03-25T20:29:16Z",
+   "id": 289237497,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-25T20:29:16Z",
+   "user": {
+    "id": 54799,
+    "login": "edwtjo",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Nix encryption is going to take a while to get there given nix's release history speed. I don't think it should be a blocker for trying alternative implementations.\r\n\r\nOn the nixpkgs side, the protection would be based on unix file ACL. How about treating secrets like any other state? We could introduce a \"mkState\" interface that defines any kind of state reference on the filesystem.\r\n\r\n```nix\r\nlet\r\n  postgresState = mkState {\r\n    type = \"directory\";\r\n    name = \"postgres\";\r\n    owner = \"postgres\";\r\n    group = \"postgres\";\r\n    mode = \"0700\";\r\n    mustExist = false;\r\n    # run a command if it's missing\r\n    onMissing = \"pg_init\";\r\n  };\r\n  assert (toString postgresState) == \"/var/lib/postgres\";\r\n  # mkSecret is a specialization of mkState with a default dir to /run/keys/${name}, mode = 0700 and mustExist = true  \r\n  nginxSecret = mkSecret {\r\n    owner = \"nginx\";\r\n  };\r\n```\r\n\r\nThis would translate to (1) some activation script actions like creating the state dir (2) systemd service to initialize and/or check the secret, which can then be used as a dependency for other services.\r\n\r\nI know it's still pretty vague but hopefully enough to convey the idea.",
+   "created_at": "2017-03-26T14:59:52Z",
+   "id": 289289715,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-26T15:00:32Z",
+   "user": {
+    "id": 3248,
+    "login": "zimbatm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@zimbatm that would be quite interesting. Especially how that could work together with NixOps.\r\n\r\nWe'd need:\r\n\r\n1. Generic mechanism to facilitate generating secrets .\r\n2. A way to expose how a secret must be created from a service.\r\n3. Make it possible for NixOps to manage those secrets (generating them on the deploying machine, then storing them in the statefile and on the necessary machines).\r\n\r\nYour `mkSecret` function could be extended to take a nixpkgs provided `method` or generic `command`.\r\n```nix\r\n{  \r\n  s1 = mkSecret {  owner = \"nginx\"; method = \"sha256\"; };\r\n  secretGeneratorProgram = stdenv.mkDerivation { /* ... */ };\r\n  s2 = mkSecret { owner = \"nginx\"; command = \"${secretGeneratorProgram}/bin/gen > $out\"; };\r\n}\r\n```",
+   "created_at": "2017-03-26T21:18:28Z",
+   "id": 289317030,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-26T21:18:28Z",
+   "user": {
+    "id": 99988,
+    "login": "moretea",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Relevant nixops thread: NixOS/nixops#627",
+   "created_at": "2017-04-12T13:46:05Z",
+   "id": 293581418,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-04-12T13:46:05Z",
+   "user": {
+    "id": 1663259,
+    "login": "joepie91",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "1. Would anyone like to review my module PR #24366.\r\n2. If anyone has a module listed here and no time to fix it, I could do a couple.",
+   "created_at": "2017-04-22T09:53:35Z",
+   "id": 296362045,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-04-22T09:53:35Z",
+   "user": {
+    "id": 1019641,
+    "login": "rvl",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> 1. Would anyone like to review my module PR #24366.\r\n\r\nLGTM (but I haven't tested it).\r\n\r\n> 2. If anyone has a module listed here and no time to fix it, I could do a couple.\r\n\r\nThat would be much appreciated. Thanks @rvl!",
+   "created_at": "2017-04-22T11:27:15Z",
+   "id": 296366884,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-04-22T11:27:15Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> If anyone has a module listed here and no time to fix it, I could do a couple.\r\n\r\nCan you take a look at [gogs](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/gogs.nix#L102)' database configuration?  Thanks 😃 ",
+   "created_at": "2017-04-22T12:02:34Z",
+   "id": 296368661,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-04-22T12:02:34Z",
+   "user": {
+    "id": 15379000,
+    "login": "schneefux",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'd like to think of keys/passwords as of the data, not the code (which is in Nix store).\r\nI'm handling secrets on top of existing facilities with https://github.com/ip1981/nixsap/blob/master/modules/deployment/keyrings.nix",
+   "created_at": "2017-05-04T09:14:17Z",
+   "id": 299134134,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-04T09:14:17Z",
+   "user": {
+    "id": 131844,
+    "login": "ip1981",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@basvandijk in your 5 you have:\r\n\r\n```\r\n$(cat \"${cfg.passwordFile}\")\r\n```\r\n\r\nif cfg.passwordFile type is set to `types.path` and someone specifies a path instead of string, it would still get pulled into nix store.\r\n\r\nI propose we create a type called `types.nonStorePath` that can be set to path or string, but the resolved value would be a string that's not in nix store.",
+   "created_at": "2017-11-15T18:17:57Z",
+   "id": 344681430,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 5,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2017-11-15T18:17:57Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I propose we create a type called types.nonStorePath that can be set to path or string, but the resolved value would be a string that's not in nix store.\r\n\r\nI like that idea. Sounds pragmatic and easy to understand (don't know about the implementation part though). Anyway, I think any solution to the problem would be welcome to most people. Imho secret management is one of NixOS' major weaknesses in practice.",
+   "created_at": "2017-11-15T20:59:48Z",
+   "id": 344726491,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-11-15T21:02:38Z",
+   "user": {
+    "id": 2971615,
+    "login": "mbrgm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Groundwork is in https://github.com/NixOS/nixpkgs/pull/31715",
+   "created_at": "2017-11-15T21:11:45Z",
+   "id": 344729544,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-11-15T21:11:45Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Implementation shouldn't be too difficult. I think we should have three types:\r\n\r\n- `path`: any kind of absolute path\r\n- `nonStorePath`: path that must NOT be in nix store\r\n- ` storePath`: path that must be in nix store\r\n\r\nNote: `types.package` means a derivation path, but not a path within it.",
+   "created_at": "2017-11-15T21:13:21Z",
+   "id": 344729999,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-11-15T21:13:51Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Suppose there are secrets that are only needed during the evaluation of configuration.nix (such as secrets required to download a particular package or install a particular package), then this can be done by passing in variables during invocation. Then there are secrets that are needed all the time by the services (and these have to be the plain text secret), then this would mean that these secrets exist as plain text on the filesystem. Is there a solution that allows the secrets to still be encrypted on disk, while the nixos system can still access them only when needed (possibly decrypting on the fly with an in-memory key).",
+   "created_at": "2017-11-16T05:56:32Z",
+   "id": 344823890,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-11-16T05:56:32Z",
+   "user": {
+    "id": 640797,
+    "login": "CMCDragonkai",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@domenkozar I like having those types.\r\n\r\nHowever, setting the type of `passwordFile` to `nonStorePath` does mean we can't have backwards compatibility as described in point 3. ",
+   "created_at": "2017-11-16T09:20:16Z",
+   "id": 344862967,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-11-16T09:20:16Z",
+   "user": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> However, setting the type of passwordFile to nonStorePath does mean we can't have backwards compatibility as described in point 3.\r\n\r\nHow about just breaking it? As long as it’s not causing stuff to fail silently, that should be very much appropriate for a bad security issue like passwords in the store.\r\nFor stable users this will hit in the next release with a big notice. Unstable users will have to adjust, but that’s what they’re in for.",
+   "created_at": "2017-11-16T12:54:19Z",
+   "id": 344914291,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2017-11-16T12:54:19Z",
+   "user": {
+    "id": 3153638,
+    "login": "Profpatsch",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@basvandijk I think for sake of security we can change it to path and it will report an error. It will force the user to rethink how to set the passwords, which is a good thing.",
+   "created_at": "2017-11-16T14:38:18Z",
+   "id": 344941610,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2017-11-16T14:38:18Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Software already sucks too much :) IOW, let's keep it simple. You need a key somewhere anyway outside the Nix store.",
+   "created_at": "2018-03-21T10:01:44Z",
+   "id": 374885509,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2018-03-21T10:04:56Z",
+   "user": {
+    "id": 131844,
+    "login": "ip1981",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@volth \r\n\r\n```\r\n\"We can solve any problem by introducing an extra level of indirection.\" -- Andrew Koenig\r\n```\r\n\r\nI am reminding people discussing this issue to reflect and meditate on the root issue that is causing this problem/concern. Encryption should not be used for fixing architectural flaws.\r\n\r\nWhat are the assumptions of the nix store? What additional assumption should there be?\r\n[Please read my original rant on this topic.](https://github.com/NixOS/nixpkgs/issues/18881#issuecomment-279585887)",
+   "created_at": "2018-03-21T11:43:11Z",
+   "id": 374910072,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 1,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2018-03-21T11:43:36Z",
+   "user": {
+    "id": 668926,
+    "login": "mguentner",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "How is storing secrets in the nix store different from hardcoding them into the binary? Or a library used by the binary? No difference to me.",
+   "created_at": "2018-03-21T12:26:13Z",
+   "id": 374919676,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2018-03-21T12:26:13Z",
+   "user": {
+    "id": 131844,
+    "login": "ip1981",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@volth Your problem is just a different manifestation of an architectural flaw.\r\n\r\nI solution I came up with:\r\nThe /nix/store of an OS using Nix (e.g. NixOS) could check if the file / path requested is allowed for the caller *environment*, *container* or *user*. The store would be mounted using e.g. fuse or a custom kernel module which communicates with the nix daemon.\r\nThis would fix the information leak once an for all. Of course, a binary cache would still serve your plaintext files.\r\n\r\nTo supply *secrets* to a machine, I think that the method `nixops send-keys` demonstrates is perfect for online machines (VPS, Server etc.). For offsite, embedded, \"install and forget\" machines this could also be made permanent by doing `scp -R secrets_of_machine machine:/etc/secrets` and then on the machine creating a bootup systemd unit with `cp -r /etc/secrets/ /run`",
+   "created_at": "2018-03-21T12:56:15Z",
+   "id": 374927052,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2018-03-21T12:56:15Z",
+   "user": {
+    "id": 668926,
+    "login": "mguentner",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@volth Regarding encryption, see https://github.com/NixOS/rfcs/pull/5.",
+   "created_at": "2018-03-21T14:36:35Z",
+   "id": 374959251,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2018-03-21T14:36:35Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@volth @mguentner Another possible solution is to write configs with “holes”, by writing a template with interpolated variables where the passwords should be, e.g. in https://dhall-lang.org. Then you have a principled way to “fill in the holes” before giving the config to a process.",
+   "created_at": "2018-03-21T17:14:43Z",
+   "id": 375023387,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2018-03-21T17:14:55Z",
+   "user": {
+    "id": 3153638,
+    "login": "Profpatsch",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Secrets are traditionally very static and it's easy to think that they are configuration. I would like to argue that they should be treated as state instead.\r\n\r\nIdeally we want to be in a place where they can be rotated dynamically with for example HashiCorp Vault. When there is a breach we want to be able to quickly rotate the keys. And during the investigation is helps if each machine has a unique key to figure out where the attack was coming from. It also discourages having the secrets stored in git since they are comming from another place. The nixops user should only have one secret, how to access HashiCorp Vault (and maybe a SSH key).\r\n\r\nIn that regard I think this initiative makes sense. Encourage upstream to provide paths to secrets instead of embedding them in configuration. And when not possible, generate the config at runtime with a template. At some point we'll figure out how to source those secrets from other places than the filesystem.",
+   "created_at": "2018-03-21T21:46:28Z",
+   "id": 375106708,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 19,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 19
+   },
+   "updated_at": "2018-03-21T21:46:28Z",
+   "user": {
+    "id": 3248,
+    "login": "zimbatm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@Profpatsch @zimbatm not all secrets are configuration and state, however. You may not want to have your system-wide config be effectively traceable by everyone -- security through obscurity does not do any good on its own, but that doesn't mean it isn't useful. You may very well want to keep source files or actual package derivations hidden from most users in a mixed public/private environment, if they are proprietary in nature.\r\n\r\nNix is based on the idea of 'deployment as memory management', but it is memory management as seen purely from a language or application perspective, with nothing from an OS perspective, where isolation and protection are the norm. This is perhaps an oversight.",
+   "created_at": "2018-03-23T05:19:07Z",
+   "id": 375548078,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2018-03-23T05:19:07Z",
+   "user": {
+    "id": 338268,
+    "login": "Shados",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@Shados maybe your case is better handled by running different things in different namespaces with only the allowed paths bind-mounted from the global store. In the OS RAM management terms, let the main store be like physical RAM and give the programs page tables according to their needs/access level.",
+   "created_at": "2018-03-23T07:12:48Z",
+   "id": 375564464,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2018-03-23T07:12:48Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@Shados these approaches are not mutually exclusive, even if paths are configurable it's still possible to point into the /nix/store. The difference is that path extractions is something we can do today without any changes to the nix language or runtime.\r\n\r\nIn Nix 2.0 and Linux it's also possible to maintain your own private nix store by passing the `--store ~/your-store`.",
+   "created_at": "2018-03-23T13:08:31Z",
+   "id": 375659408,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2018-03-23T13:08:31Z",
+   "user": {
+    "id": 3248,
+    "login": "zimbatm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@zimbatm About your last comment about nix 2.0, can you provide an example of how you use that to manage secrets from a private nix store?",
+   "created_at": "2018-07-13T05:00:28Z",
+   "id": 404725954,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2018-07-13T05:00:28Z",
+   "user": {
+    "id": 640797,
+    "login": "CMCDragonkai",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "So if someone puts a password in plain text in a .nix file, that password gets uploaded to somewhere online that could be accessed by anyone?",
+   "created_at": "2018-07-13T11:05:51Z",
+   "id": 404801896,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2018-07-13T11:05:51Z",
+   "user": {
+    "id": 6877929,
+    "login": "ob7",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ob7 \"World readable\" in this sense means that any _user_ on your system can read the file. It does not mean that files included in the nix store are somehow uploaded elsewhere.",
+   "created_at": "2018-07-13T11:08:01Z",
+   "id": 404802349,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2018-07-13T11:08:01Z",
+   "user": {
+    "id": 219362,
+    "login": "srhb",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@basvandijk You can mark redmine as complete as of 18.09 as a passwordFile option has been added.",
+   "created_at": "2018-09-06T11:58:20Z",
+   "id": 419067010,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2018-09-06T11:58:20Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@basvandijk the owncloud module was removed so you can tick that off.",
+   "created_at": "2019-02-10T17:30:17Z",
+   "id": 462153760,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2019-02-10T17:30:17Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This is a related topic I started on Discourse: [In configuration.nix can I read a value from a file? ](https://discourse.nixos.org/t/in-configuration-nix-can-i-read-a-value-from-a-file/4809/5])",
+   "created_at": "2019-11-16T14:16:46Z",
+   "id": 554641428,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2019-11-16T14:16:46Z",
+   "user": {
+    "id": 12426520,
+    "login": "gbiscuolo",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Also see https://github.com/NixOS/rfcs/pull/59",
+   "created_at": "2019-11-16T22:11:51Z",
+   "id": 554679108,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2019-11-16T22:11:51Z",
+   "user": {
+    "id": 1447245,
+    "login": "globin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`services.mattermost.localDatabasePassword` needs adjustment too.",
+   "created_at": "2020-01-13T10:16:48Z",
+   "id": 573592118,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-01-13T10:16:48Z",
+   "user": {
+    "id": 20400405,
+    "login": "wucke13",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Related is my PR which adds `types.secretPath`: https://github.com/NixOS/nixpkgs/pull/78640",
+   "created_at": "2020-02-09T22:58:16Z",
+   "id": 583904389,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-02-09T22:58:16Z",
+   "user": {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "**List Updates**\r\nThese options now exist:\r\n- `services.grafana.database.passwordFile`\r\n- `services.grafana.security.secretKeyFile`\r\n- `services.grafana.security.adminPasswordFile`\r\n\r\nThese options need an associated `passwordFile` option:\r\n- `services.grafana.provision.datasources.*.password`\r\n- `services.grafana.provision.datasources.*.basicAuthPassword`",
+   "created_at": "2020-06-02T02:49:53Z",
+   "id": 637237774,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2020-06-02T02:49:53Z",
+   "user": {
+    "id": 1769386,
+    "login": "liamdiprose",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/any-default-config-for-reproducible-configurations/5268/17\n",
+   "created_at": "2020-06-26T02:05:57Z",
+   "id": 649907885,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-06-26T02:05:57Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`services.mattermost.localDatabasePassword` is not possible via file as well.",
+   "created_at": "2020-08-06T12:36:43Z",
+   "id": 669900917,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-08-06T12:36:43Z",
+   "user": {
+    "id": 20400405,
+    "login": "wucke13",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think we should add to this list the mpd module, which now gets the ability to store it's `password \"<pwd>@permissions\"` entry outside the store, at https://github.com/NixOS/nixpkgs/pull/95599 .",
+   "created_at": "2020-09-11T06:08:28Z",
+   "id": 690896716,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2020-09-11T06:08:28Z",
+   "user": {
+    "id": 10998835,
+    "login": "doronbehar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I just noticed that [`virtualisation.oci-containers.containers.<name>.environment`](https://search.nixos.org/options?show=virtualisation.oci-containers.containers.%3Cname%3E.environment&query=virtualisation.oci-containers.containers.%3Cname%3E.environment&from=0&size=15&sort=relevance&channel=unstable) doesn't allow scripting:\r\nhttps://github.com/NixOS/nixpkgs/blob/master/nixos/modules/virtualisation/oci-containers.nix#L242\r\n\r\nContainer environment variables are frequently used for secrets, too, thus I think we should provide an easy way to include them.\r\nI see a few different ways to solve this:\r\n- stop escaping the value of the environment variables and thus allow for shell scripting (potentially breaking current configs)\r\n- add an `environmentFiles` option that reads variables from files, similar to the `passwordFile` options\r\n- add an option or separate config to opt-in to shell scripting in environment variables",
+   "created_at": "2020-10-22T18:03:51Z",
+   "id": 714664457,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-10-22T18:04:21Z",
+   "user": {
+    "id": 3314323,
+    "login": "felschr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "**UPDATE**: For Vault it's not the optimal solution, but this approach can be suitable for other services that have secrets in (somewhat) arbitary places in the config file *BUT* can not load multiple config files.\r\n\r\n-----\r\n\r\n\r\nFor hashicorp Vault here's a PR that lets you upload the config via NixOps or use any path.\r\nhttps://github.com/NixOS/nixpkgs/pull/107323\r\n\r\nI don't think I've seen this approach before.\r\nExample config:\r\n\r\n```nix\r\n{ config, ... }:\r\n{\r\n  services.vault.storageConfig = ''connection_url = \"${somethingSensitive}\"'';\r\n  services.vault.configPath = \"/run/keys/vault.hcl\";\r\n  users.users.vault.extraGroups = [\"keys\"];\r\n  deployment.keys.\"vault.hcl\" = {\r\n    text = config.services.vault.configText;\r\n    user = \"vault\";\r\n  };\r\n}\r\n```\r\n\r\nNote, vault storageConfig isn't _super_ sensitive because a leak isn't supposed to affect confidentiality or integrity, but it will affect availability and accountability.",
+   "created_at": "2021-01-04T11:29:41Z",
+   "id": 753922425,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-01-04T18:11:27Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm trying to fix wpa_supplicant (`networking.wireless`) in #134618. Could anyone help by reviewing it?",
+   "created_at": "2021-09-24T06:59:00Z",
+   "id": 926392668,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2021-09-24T06:59:00Z",
+   "user": {
+    "id": 2817565,
+    "login": "rnhmjoj",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "There are now docs for how to handle this for new modules at https://github.com/NixOS/nixpkgs/pull/142282",
+   "created_at": "2021-12-16T10:52:30Z",
+   "id": 995669169,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-12-16T10:52:30Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "These docs handle the easy part of the problem. They are about how use use secrets outside of the store, not how to manage the secrets themselves. Ideally we wouldn't need to push this complexity onto the user.",
+   "created_at": "2021-12-16T14:07:05Z",
+   "id": 995848826,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-12-16T14:07:05Z",
+   "user": {
+    "id": 494012,
+    "login": "kevincox",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "We can probably tick the `networking.wireless.networks.*.psk` box now that https://github.com/NixOS/nixpkgs/pull/134618 was merged.",
+   "created_at": "2021-12-16T16:21:15Z",
+   "id": 995970813,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2021-12-16T16:21:15Z",
+   "user": {
+    "id": 4323933,
+    "login": "ncfavier",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/agenix-encrypted-plaintext-passwords-and-builtins-readfile/18425/8\n",
+   "created_at": "2022-04-03T11:47:35Z",
+   "id": 1086847999,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2022-04-03T11:47:35Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Some boxes can be checked (✅ done, 🙅 module removed, ❓ option doesn't seem to exist anymore):\r\n- `basicAuth` ✅ \r\n- `services.almir.director_password` 🙅\r\n- `services.btsync.httpPass` 🙅\r\n- `services.buildbot-worker.workerPass` ✅\r\n- `services.cassandra.keyStorePassword` ❓\r\n- `services.cassandra.trustStorePassword` ❓\r\n- `services.cfdyndns.apikey` ✅\r\n- `services.coturn.cli-password` ✅ (can be stored as a hash)\r\n- `services.coturn.static-auth-secret` ✅\r\n- `services.crowd.openidPassword` ✅\r\n- `services.dd-agent.api_key` ✅ (now `services.datadog-agent.apiKeyFile`)\r\n- `services.ddclient.password` ✅\r\n- `services.frab.secretKeyBas` 🙅\r\n- `services.grafana.database.password` ✅ (grafana-specific alternative pointed in option's doc)\r\n- `services.grafana.security.adminPassword` ✅ (grafana-specific alternative pointed in option's doc)\r\n- `services.grafana.security.secretKey` ✅ (grafana-specific alternative pointed in option's doc)\r\n- `services.httpd.extraSubservices.*` ❓ (maybe I'm missing something)\r\n- `services.panamax.secretKey` 🙅\r\n- `services.prometheus.*.consul_sd_config.password` ✅ (now `services.prometheus.scrapeConfigs.*.consul_sd_configs.*.basic_auth.password_file`)\r\n- `services.prometheus.*.scrape_config.basic_auth.password` ✅ (now `services.prometheus.scrapeConfigs.*.consul_sd_configs.*.basic_auth.password_file`)\r\n- `services.redis.requirePass` ✅ (now `services.redis.servers.<name>.requirePassFile`)\r\n- `services.tor.torsocks.socks5Password` ✅ (although it should maybe first be better documented that using `systemd.services.tor.serviceConfig.EnvironmentFile` is possible)\r\n- `services.tt-rss.database.password` ✅\r\n- `services.wakeonlan.interfaces.*.password` 🙅\r\n\r\nMaybe some unsecure options appeared in new modules since then!",
+   "created_at": "2023-11-23T10:31:12Z",
+   "id": 1824152861,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 2,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2023-11-23T10:40:33Z",
+   "user": {
+    "id": 38916722,
+    "login": "ppom0",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Is there a conclusion to this issue that specifies exactly what behaviour is?",
+   "created_at": "2023-11-24T00:06:40Z",
+   "id": 1825009899,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-11-24T00:06:40Z",
+   "user": {
+    "id": 640797,
+    "login": "CMCDragonkai",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Can someone edit the issue? @basvandijk maybe :)",
+   "created_at": "2023-12-12T11:16:29Z",
+   "id": 1851836999,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-12-12T11:16:29Z",
+   "user": {
+    "id": 38916722,
+    "login": "ppom0",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "### 2026 audit: which modules still force secrets into the store\n\nI ran a fresh sweep of `nixos/modules` to see how far this tracking issue has come since 2017. Snapshot at nixpkgs `141f212` (2026-07-20).\n\n**Method:** grep for every option that declares or points at a real secret (password, passphrase, token, api key, private key, credential, `environmentFile`), then hand verified the ambiguous tail to drop false positives (boolean toggles like `wheelNeedsPassword`, hashes like `passwordHMAC`) and to catch file based options a regex misses. Counting is per module file, so multi file services count once per file.\n\n**Result:**\n\n* **445** modules handle a real secret.\n* **413 (93%)** already offer a secure path: a `*File` / `*Path` option (252), a systemd `EnvironmentFile` (145), or systemd `LoadCredential` (106). Categories overlap.\n* **32 (7%)** still have **no secure NixOS option at all** and bake the plaintext secret into the world readable `/nix/store`.\n\nThe good news is that the original proposal here (add a `passwordFile` style option) is now the norm. What remains is the long tail below. Each item lists the leaking option and how the value reaches the store. Fixing one means adding a `*File` option, an `EnvironmentFile`, or a `LoadCredential`, and reading the secret at runtime.\n\n#### Remaining offenders\n\n- [ ] `services/audio/hqplayerd.nix` `auth.password`: interpolated into the preStart script\n- [ ] `services/audio/icecast.nix` `admin.password`: written into `icecast.xml` via `writeText`\n- [ ] `services/databases/mysql.nix` `replication.masterPassword`, `galeraCluster.clusterPassword`: baked into postStart SQL\n- [ ] `services/development/blackfire.nix` `settings.server-token`: written into the config via `toINI`\n- [ ] `services/games/terraria.nix` `password`: passed as a `-password` CLI flag in `ExecStart`\n- [ ] `services/home-automation/deye-dummycloud.nix` `mqttPassword`: placed in `Environment=MQTT_PASSWORD`\n- [ ] `services/home-automation/ebusd.nix` `mqtt.password`: passed as `--mqttpass` in `ExecStart`\n- [ ] `services/logging/graylog.nix` `passwordSecret`: written into `graylog.conf` via `writeText`\n- [ ] `services/misc/docker-registry.nix` `redisPassword`: merged into the registry config JSON via `writeText`\n- [ ] `services/misc/gammu-smsd.nix` `backend.sql.password`, `device.pin`: written into `gammu-smsd.conf` in preStart\n- [ ] `services/misc/rkvm.nix` `server/client.settings.password`: written into the generated TOML via `toml.generate`\n- [ ] `services/misc/zoneminder.nix` `database.password`: written as `ZM_DB_PASS` into a defaults config via `writeText`\n- [x] `services/monitoring/grafana.nix` `settings.security.admin_password`, `database.password`, `secret_key`, `smtp.password`: inlined into `config.ini`. The dedicated `*File` options were removed in favour of Grafana's own `$__file{}` provider, so the NixOS options themselves still leak (see note)\n- [ ] `services/monitoring/kapacitor.nix` `defaultDatabase.password`, `alerta.token`: written into `kapacitord.conf`\n- [ ] `services/monitoring/prometheus/exporters/artifactory.nix` `artiPassword`, `artiAccessToken`: placed in `Environment=`\n- [ ] `services/monitoring/prometheus/exporters/klipper.nix` `moonrakerApiKey`: interpolated into `ExecStart`\n- [ ] `services/monitoring/prometheus/exporters/pihole.nix` `apiToken`, `password`: interpolated into `ExecStart`\n- [ ] `services/network-filesystems/yandex-disk.nix` `password`: description already warns it is world readable\n- [ ] `services/networking/cjdns.nix` `authorizedPasswords`, `connectTo.*.password`: embedded in the `cjdroute` JSON in the systemd script\n- [ ] `services/networking/cntlm.nix` `password`: inlined as `Password` into `cntlm.conf`\n- [ ] `services/networking/namecoind.nix` `rpc.password`: inlined as `rpcpassword=` into `namecoin.conf`\n- [ ] `services/networking/nntp-proxy.nix` `upstreamPassword`: written into `nntp-proxy.conf`\n- [ ] `services/networking/redsocks.nix` `redsocks.*.password`: description already warns it is world readable\n- [ ] `services/networking/strongswan-swanctl/swanctl-params.nix` `secrets.*.secret`: inline values rendered into `swanctl.conf`. Only escape is swanctl's own `include` directive (see note)\n- [ ] `services/networking/umurmur.nix` `settings.password`: inlined into the generated `umurmur.conf`\n- [ ] `services/networking/znc/options.nix` `confOptions.networks.*.password`: rendered into the ZNC config via `writeText`\n- [ ] `services/security/hologram-server.nix` `ldapBindPassword`: serialized into `hologram-server.json` via `writeText`\n- [ ] `services/torrent/bitmagnet.nix` `settings.postgres.password`, `tmdb.api_key`: written to `config.yml` via `environment.etc`\n- [ ] `services/web-apps/flarum.nix` `initialAdminPassword`, `database.password`: baked into `config.json` via `writeText`\n- [ ] `services/web-apps/icingaweb2/module-monitoring.nix` `transports.*.password`: written into `commandtransports.ini` when `mutableTransports = false`\n- [ ] `services/web-apps/kasmweb/default.nix` `defaultAdminPassword`, `redisPassword`, tokens: substituted into a store script via `replaceVarsWith`\n- [ ] `services/web-apps/selfoss.nix` `database.password`: written into `selfoss-config.ini` via `writeText`\n\n**Note on the two marked cases:** `grafana` and `strongswan-swanctl` do have an upstream application level file mechanism (Grafana's `$__file{}` provider, swanctl's `include`), but the NixOS options as declared still put the value in the store, so they are listed here.\n\n**Caveats:** the count is a per file heuristic plus manual verification, not exhaustive. Modules that only accept user supplied secrets through a freeform `settings` blob with no dedicated option are not counted, so 445 is a floor. Happy to share the full per module classification of all 445 if useful, or to open PRs for any of the above.\n\n<sub>This audit was assisted by Claude Opus 4.8.</sub>\n",
+   "created_at": "2026-07-20T15:29:05Z",
+   "id": 5024009774,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 15,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 15
+   },
+   "updated_at": "2026-07-22T10:50:54Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/secrets-don-t-belong-in-config/79078/6\n",
+   "created_at": "2026-07-21T07:08:56Z",
+   "id": 5031127882,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-21T07:08:56Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@domenkozar as maintainer of Grafana I checked the box for the grafana module.\n\nYou hinted at the rationale already, it has a builtin mechanism to read from a file (or env-variable).\n\nMy understandingf was that we need to provide easy-to-use primitives in modules to allow people to read secrets from files outside the store, not to prevent in-store secrets all-together (which isn't really realistic since every other VM-test rightfully does `my-super-secret = pkgs.writeText \"foo\" \"bar\"`).\n\nIMHO Grafana is actually the best-case: it's written in accordance to RFC 42 and upstream provided a way to inject secrets (whether that's `$__file` or a `*File`-setting, I don't care too much) on its own.\n\nI kinda view this as todo-list that people should check once they addressed something. I believe that Grafana is a false-positive (and this comment should document sufficiently why that's the case) and thus can be checked already. Hope that's OK :) ",
+   "created_at": "2026-07-22T10:50:42Z",
+   "id": 5044908223,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-22T10:50:42Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think it might be a good idea to include mosquitto, bridging may require credentials, I did this https://github.com/NixOS/nixpkgs/pull/514184",
+   "created_at": "2026-08-19T22:30:51Z",
+   "id": 5348778983,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-19T22:30:51Z",
+   "user": {
+    "id": 747362,
+    "login": "corpix",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "https://github.com/NixOS/nixpkgs/pull/503858 will help maintainers of modules. It lets the user pass any option as a \"secret\" whose value should not be stored in the nix store. It works with freeform option type and with any generator to accommodate for any config file format.",
+   "created_at": "2026-08-26T14:35:38Z",
+   "id": 5426909171,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 3,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2026-08-26T21:10:11Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@corpix glad to see your PR, I've just been configuring a mosquitto bridge and was surprised to see no such option. Was able to try to write a PR myself and glad I searched first!",
+   "created_at": "2026-08-29T23:01:00Z",
+   "id": 5465383234,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-29T23:01:00Z",
+   "user": {
+    "id": 1234956,
+    "login": "n8henrie",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/24288",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "## Introduction\r\n\r\nDear module authors and maintainers,\r\n\r\nWe currently have many modules that force users to store their secrets in the world-readble Nix store. This is bad for security. We should give users the option of specifying their secrets in individual files which can be stored outside the Nix store with suitable ownership and permissions. Users could then also use `nixops` to [manage their secret files](https://nixos.org/nixops/manual/#idm140737318306400). \r\n\r\nThere's still the convenient but unsafe option of storing the secret file in the Nix store using `pkgs.writeTextFile`. If https://github.com/NixOS/nix/issues/8 gets resolved these files can be encrypted / made private. Also see: https://github.com/NixOS/rfcs/pull/5.\r\n\r\n## Proposal\r\n\r\nThe list below contains all the options that force a secret being stored in the Nix store. I propose the following:\r\n\r\n1. Each option should get a warning in the documentation of the form: \"Warning: this secret is stored in the world-readable Nix store!\"\r\n\r\n2. Each option should get an alternative `passwordFile` option.\r\n\r\n3. For backwards compatibility the `passwordFile` option should get a default based on the `password` option:\r\n\r\n```nix\r\n{ config = {\r\n    passwordFile = mkDefault (toString (pkgs.writeTextFile {\r\n      name = \"password-file\";\r\n      text = cfg.password;\r\n    }));\r\n  };\r\n}\r\n```\r\n\r\n4. Some upstream programs don't support setting a password using a file. In that case an issue should be created in the upstream issue-tracker asking for that feature. (See https://github.com/namecoin/namecoin-core/issues/148 for example). A URL to the issue should be placed in the list below and in the documentation of the `password` option so that it's easier to track when it gets resolved.\r\n\r\n5. If after some time (lets use September 2017 for now) the upstream developers have not provided the feature to specify the password by file, the NixOS module should be changed such that the config file that contains the password is written to `/run` before the service starts up. So something like the following:\r\n\r\n```nix\r\n{\r\n  systemd.services.my-service = {  \r\n    preStart = ''\r\n      cat > /run/my-service/config << EOF\r\n      ...\r\n      password = $(cat \"${cfg.passwordFile}\")\r\n      ...\r\n      EOF\r\n    '';\r\n    script = \"${pkgs.myService}/bin/my-service --config=/run/my-service/config\";\r\n  };\r\n}\r\n```\r\n\r\n6. Lets use this issue for planning and to track progress. Please mention in the comments if you have provided a `passwordFile` option for one of the options below. Then I check the box to indicate it has been resolved. See PR https://github.com/NixOS/nixpkgs/pull/24146 for reference.\r\n\r\n7. If we make sure the new options are backwards compatible we could consider cherry-picking them onto `release-17.03` making sure users get these security fixes ASAP.\r\n\r\n## Secret options\r\n\r\n- [x] `basicAuth`\r\n[nixos/modules/services/web-servers/nginx/vhost-options.nix#L118](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-servers/nginx/vhost-options.nix#L118)\r\n@globin\r\n\r\n- [x] `networking.defaultMailServer.authPass`\r\n[nixos/modules/programs/ssmtp.nix#L92](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/ssmtp.nix#L92)\r\nPR: https://github.com/NixOS/nixpkgs/pull/24331\r\n\r\n- [x] `networking.wireless.networks.*.psk`\r\n[nixos/modules/services/networking/wpa_supplicant.nix#L49](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/wpa_supplicant.nix#L49)\r\n@edolstra\r\n\r\n- [x] `security.duosec.skey`\r\n[nixos/modules/security/duosec.nix#L59](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/security/duosec.nix#L59)\r\n@thoughtpolice\r\n\r\n- [x] ~~`services.aiccu.password`~~\r\n~~[nixos/modules/services/networking/aiccu.nix#L48](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/aiccu.nix#L48)~~\r\n@edwtjo mentions: [SixXS is closing down its IPv6 tunnel in June](https://www.sixxs.net/news/2017/#sunsettingsixxs20170606-201703) so it doesn't seem worth the effort to create a patch for aiccu to support password files. Lets just remove the service in 0606.\r\n\r\n- [ ] `services.almir.director_password`\r\n[nixos/modules/services/backup/almir.nix#L129](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/backup/almir.nix#L129)\r\n@domenkozar \r\n\r\n- [ ] `services.bacula-dir.password`\r\n[nixos/modules/services/backup/bacula.nix#L313](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/backup/bacula.nix#L313)\r\n@domenkozar\r\n[Feature request for a PasswordFile parameter](http://bugs.bacula.org/view.php?id=2275)\r\n\r\n- [ ] `services.bacula-[fd|sd].director.*.password`\r\n[nixos/modules/services/backup/bacula.nix#L114](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/backup/bacula.nix#L114)\r\n@domenkozar\r\nSee the feature request above.\r\n\r\n- [x] `services.bepasty.servers.*.secretKey`\r\n[nixos/modules/services/misc/bepasty.nix#L72](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/bepasty.nix#L72)\r\n@makefu\r\nPR: https://github.com/NixOS/nixpkgs/pull/24755\r\n\r\n- [ ] `services.btsync.httpPass`\r\n[nixos/modules/services/networking/btsync.nix#L175](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/btsync.nix#L175)\r\n@thoughtpolice\r\n\r\n- [x] `services.buildbot-worker.workerPass`\r\n[nixos/modules/services/continuous-integration/buildbot/worker.nix#L56](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/continuous-integration/buildbot/worker.nix#L56)\r\n@nand0p\r\n\r\n- [x] `services.cadvisor.storageDriverPassword`\r\n[nixos/modules/services/monitoring/cadvisor.nix#L54](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/monitoring/cadvisor.nix#L54)\r\n@offlinehacker\r\nPR: https://github.com/NixOS/nixpkgs/pull/24341\r\n\r\n- [ ] `services.cassandra.keyStorePassword`\r\n[nixos/modules/services/databases/cassandra.nix#L236](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/databases/cassandra.nix#L236)\r\n@cransom\r\nSee: https://issues.apache.org/jira/browse/CASSANDRA-13428\r\n\r\n- [ ] `services.cassandra.trustStorePassword`\r\n[nixos/modules/services/databases/cassandra.nix#L241](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/databases/cassandra.nix#L241)\r\n@cransom\r\nSee: https://issues.apache.org/jira/browse/CASSANDRA-13428\r\n\r\n- [ ] `services.cgminer.pools.*.password`\r\n[nixos/modules/services/misc/cgminer.nix#L60](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/cgminer.nix#L60)\r\n@offlinehacker\r\n\r\n- [ ] `services.cjdns.authorizedPasswords`\r\n[nixos/modules/services/networking/cjdns.nix#L103](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/cjdns.nix#L103)\r\n@ehmry\r\n\r\n- [x] `services.cfdyndns.apikey`\r\n[nixos/modules/services/misc/cfdyndns.nix#L20](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/cfdyndns.nix#L20)\r\n@colemickens \r\n\r\n- [x] `services.coturn.cli-password`\r\n[nixos/modules/services/networking/coturn.nix#L249](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/coturn.nix#L249)\r\n@Ralith\r\n\r\n- [x] `services.coturn.static-auth-secret`\r\n[nixos/modules/services/networking/coturn.nix#L174](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/coturn.nix#L174)\r\n@Ralith\r\n\r\n- [ ] `services.cpuminer-cryptonight.pass`\r\n[nixos/modules/services/misc/cpuminer-cryptonight.nix#L38](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/cpuminer-cryptonight.nix#L38)\r\n@ehmry\r\n\r\n- [x] `services.crowd.openidPassword`\r\n[nixos/modules/services/web-apps/atlassian/crowd.nix#L53](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/atlassian/crowd.nix#L53)\r\n@fpletz @globin\r\n\r\n- [x] `services.dd-agent.api_key`\r\n[nixos/modules/services/monitoring/dd-agent.nix#L112](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/monitoring/dd-agent.nix#L112)\r\n@shlevy \r\n\r\n- [ ] `services.ddclient.password`\r\n[nixos/modules/services/networking/ddclient.nix#L47](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/ddclient.nix#L47)\r\n@rbvermaa\r\n\r\n- [ ] `services.factorio.game-password`\r\n[nixos/modules/services/games/factorio.nix#L144](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/games/factorio.nix#L144)\r\n@elitak\r\n\r\n- [ ] `services.factorio.password`\r\n[nixos/modules/services/games/factorio.nix#L130](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/games/factorio.nix#L130)\r\n@elitak\r\n\r\n- [ ] `services.frab.secretKeyBas`\r\n[nixos/modules/services/web-apps/frab.nix#L118](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/frab.nix#L118)\r\n@fpletz\r\n\r\n- [ ] `services.gammu-smsd.backend.sql.password`\r\n[nixos/modules/services/misc/gammu-smsd.nix#L192](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/gammu-smsd.nix#L192)\r\n@zohl\r\n\r\n- [x] `services.gitlab.databasePassword`\r\n[nixos/modules/services/misc/gitlab.nix#L203](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/gitlab.nix#L203)\r\n@fpletz  @offlinehacker\r\nPR: #31358\r\n\r\n- [x] `services.gitlab.secrets.secret`\r\n[nixos/modules/services/misc/gitlab.nix#L326](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/gitlab.nix#L326)\r\n@fpletz @offlinehacker\r\nPR: #31358\r\n\r\n- [x] `services.gitlab.smtp.password`\r\n[nixos/modules/services/misc/gitlab.nix#L295](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/gitlab.nix#L295)\r\n@fpletz @offlinehacker\r\n\r\n- [x] `services.gogs.database.password`\r\n[nixos/modules/services/misc/gogs.nix#L102](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/gogs.nix#L102)\r\n@schneefux\r\nPR: https://github.com/NixOS/nixpkgs/pull/25116\r\n\r\n- [x] `services.grafana.database.password`\r\n[nixos/modules/services/monitoring/grafana.nix#L137](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/monitoring/grafana.nix#L137)\r\n@offlinehacker\r\n\r\n- [x] `services.grafana.security.adminPassword`\r\n[nixos/modules/services/monitoring/grafana.nix#L157](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/monitoring/grafana.nix#L157)\r\n@offlinehacker\r\n\r\n- [x] `services.grafana.security.secretKey`\r\n[nixos/modules/services/monitoring/grafana.nix#L163](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/monitoring/grafana.nix#L163)\r\n@offlinehacker\r\n\r\n- [ ] `services.graylog.passwordSecret`\r\n[nixos/modules/services/logging/graylog.nix#L68](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/logging/graylog.nix#L68)\r\n@fadenb\r\n\r\n- [ ] `services.graylog.rootPasswordSha2`\r\n[nixos/modules/services/logging/graylog.nix#L82](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/logging/graylog.nix#L82)\r\n@fadenb\r\n\r\n- [ ] `services.hologram-server.ldapBindPassword`\r\n[nixos/modules/services/security/hologram-server.nix#L68](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/security/hologram-server.nix#L68)\r\n@nand0p\r\n\r\n- [x] `services.hostapd.wpaPassphrase`\r\n[nixos/modules/services/networking/hostapd.nix#L124](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/hostapd.nix#L124)\r\n\r\n\r\n- [x] `services.httpd.extraSubservices...\"limesurvey\"...adminPassword`\r\n[nixos/modules/services/web-servers/apache-httpd/limesurvey.nix#L143](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-servers/apache-httpd/limesurvey.nix#L143)\r\n@offlinehacker\r\n\r\n- [x] `services.httpd.extraSubservices...\"limesurvey\"...dbPassword`\r\n[nixos/modules/services/web-servers/apache-httpd/limesurvey.nix#L131](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-servers/apache-httpd/limesurvey.nix#L131)\r\n@offlinehacker\r\n\r\n- [x] `services.httpd.extraSubservices...\"mediawiki\"...dbPassword`\r\n[nixos/modules/services/web-servers/apache-httpd/mediawiki.nix#L207](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-servers/apache-httpd/mediawiki.nix#L207)\r\n@shlevy @ip1981\r\n\r\n- [x] `services.httpd.extraSubservices...\"owncloud\"...adminPassword`\r\n[nixos/modules/services/web-servers/apache-httpd/owncloud.nix#L403](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-servers/apache-httpd/owncloud.nix#L403)\r\n@matejc\r\n\r\n- [x] `services.httpd.extraSubservices...\"owncloud\"...dbPassword`\r\n[nixos/modules/services/web-servers/apache-httpd/owncloud.nix#L429](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-servers/apache-httpd/owncloud.nix#L429)\r\n@matejc\r\n\r\n- [x] `services.httpd.extraSubservices...\"owncloud\"...SMTPPass`\r\n[nixos/modules/services/web-servers/apache-httpd/owncloud.nix#L527](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-servers/apache-httpd/owncloud.nix#L527)\r\n@matejc\r\n\r\n- [x] `services.httpd.extraSubservices...\"wordpress\"...dbPassword`\r\n[nixos/modules/services/web-servers/apache-httpd/wordpress.nix#L138](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-servers/apache-httpd/wordpress.nix#L138)\r\n@qknight\r\nPR: https://github.com/NixOS/nixpkgs/pull/24146\r\n\r\n- [ ] `services.i2pd.proto.http.pass`\r\n[nixos/modules/services/networking/i2pd.nix#L351](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/i2pd.nix#L351)\r\n@edwtjo\r\n\r\n- [ ] `services.icecast.admin.password`\r\n[nixos/modules/services/audio/icecast.nix#L62](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/audio/icecast.nix#L62)\r\n@k0ral\r\n\r\n- [x] `services.longview.mysqlPassword`\r\n[nixos/modules/services/monitoring/longview.nix#L78](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/monitoring/longview.nix#L78)\r\n@rvl\r\nPR: https://github.com/NixOS/nixpkgs/pull/24366\r\n\r\n- [x] `services.matrix-synapse.macaroon_secret_key`\r\n[nixos/modules/services/misc/matrix-synapse.nix#L545](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/matrix-synapse.nix#L545)\r\n@roblabla\r\n\r\n- [x] `services.matrix-synapse.registration_shared_secret`\r\n[nixos/modules/services/misc/matrix-synapse.nix#L453](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/matrix-synapse.nix#L453)\r\n@roblabla\r\n\r\n- [x] `services.matrix-synapse.turn_shared_secret`\r\n[nixos/modules/services/misc/matrix-synapse.nix#L434](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/matrix-synapse.nix#L434)\r\n@roblabla\r\n\r\n- [x] `services.matrix-synapse.recaptcha_private_key`\r\n[nixos/modules/services/misc/matrix-synapse.nix#L404](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/matrix-synapse.nix#L404)\r\n@roblabla\r\n\r\n- [ ] `services.mattermost.localDatabasePassword`\r\n[nixos/modules/services/web-apps/mattermost.nix#L108](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/mattermost.nix#L108)\r\n@fpletz\r\n\r\n- [x] `services.murmur.password`\r\n[nixos/modules/services/networking/murmur.nix#L105](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/murmur.nix#L105)\r\n@thoughtpolice\r\n\r\n- [ ] `services.mysql.replication.masterPassword`\r\n[nixos/modules/services/databases/mysql.nix#L149](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/databases/mysql.nix#L149)\r\n@edolstra\r\n\r\n- [ ] `services.namecoind.rpc.password`\r\n[nixos/modules/services/networking/namecoind.nix#L90](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/namecoind.nix#L90)\r\n@rnhmjoj\r\nSee: https://github.com/namecoin/namecoin-core/issues/148\r\n\r\n- [ ] `services.nntp-proxy.upstreamPassword`\r\n[nixos/modules/services/networking/nntp-proxy.nix#L99](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/nntp-proxy.nix#L99)\r\n@fadenb\r\n\r\n- [ ] `services.oauth2_proxy.cookie.secret`\r\n[nixos/modules/services/security/oauth2_proxy.nix#L371](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/security/oauth2_proxy.nix#L371)\r\n@jml\r\n\r\n- [ ] `services.panamax.secretKey`\r\n[nixos/modules/services/cluster/panamax.nix#L63](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/cluster/panamax.nix#L63)\r\n@matejc\r\n\r\n- [x] `services.prometheus.*.consul_sd_config.password`\r\n[nixos/modules/services/monitoring/prometheus/default.nix#L243](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/monitoring/prometheus/default.nix#L243)\r\n@fpletz @doshitan\r\n\r\n- [ ] `services.prometheus.*.scrape_config.basic_auth.password`\r\n[nixos/modules/services/monitoring/prometheus/default.nix#L128](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/monitoring/prometheus/default.nix#L128)\r\n@fpletz @doshitan\r\n\r\n- [ ] `services.prometheus.unifiExporter.unifiPassword`\r\n[nixos/modules/services/monitoring/prometheus/unifi-exporter.nix#L45](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/monitoring/prometheus/unifi-exporter.nix#L45)\r\n@fpletz @doshitan\r\n\r\n- [x] `services.redis.requirePass`\r\n[nixos/modules/services/databases/redis.nix#L160](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/databases/redis.nix#L160)\r\n@offlinehacker\r\n\r\n- [x] `services.redmine.databasePassword`\r\n[nixos/modules/services/misc/redmine.nix#L103](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/redmine.nix#L103)\r\n@domenkozar\r\n\r\n- [ ] `services.redsocks.redsocks.password`\r\n[nixos/modules/services/networking/redsocks.nix#L109](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/redsocks.nix#L109)\r\n@Ekleog\r\n\r\n- [ ] `services.rippleDataApi.couchdb.pass`\r\n[nixos/modules/services/misc/ripple-data-api.nix#L109](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/ripple-data-api.nix#L109)\r\n@offlinehacker\r\n\r\n- [ ] `services.rippled.ports.*.password`\r\n[nixos/modules/services/misc/rippled.nix#L114](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/misc/rippled.nix#L114)\r\n@ehmry\r\n\r\n- [ ] `services.selfoss.database.password`\r\n[nixos/modules/services/web-apps/selfoss.nix#L89](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/selfoss.nix#L89)\r\n@regnat\r\n\r\n- [ ] `services.terraria..password`\r\n[nixos/modules/services/games/terraria.nix#L50](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/games/terraria.nix#L50)\r\n@pshendry @garbas\r\n\r\n- [ ] `services.tor.torsocks.socks5Password`\r\n[nixos/modules/services/security/torsocks.nix#L89](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/security/torsocks.nix#L89)\r\n@thoughtpolice\r\n\r\n- [x] `services.tt-rss.database.password`\r\n[nixos/modules/services/web-apps/tt-rss.nix#L163](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/tt-rss.nix#L163)\r\n@zohl\r\n\r\n- [x] `services.tt-rss.email.password`\r\n[nixos/modules/services/web-apps/tt-rss.nix#L291](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/tt-rss.nix#L291)\r\n@zohl\r\n\r\n- [ ] `services.wakeonlan.interfaces.*.password`\r\n[nixos/modules/services/networking/wakeonlan.nix#L32](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/wakeonlan.nix#L32)\r\n\r\n- [ ] `services.yandex-disk.password`\r\n[nixos/modules/services/network-filesystems/yandex-disk.nix#L38](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/network-filesystems/yandex-disk.nix#L38)\r\n@grwlf @7c6f434c\r\n\r\n- [x] `services.zabbixServer.dbPassword`\r\n[nixos/modules/services/monitoring/zabbix-server.nix#L66](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/monitoring/zabbix-server.nix#L66)\r\n@robberer\r\n\r\nThis list was compiled by running the following in `<nixpkgs>` and manually inspecting and processing the result:\r\n\r\n```bash\r\nfind . -type f -exec grep --color -nH -i -E -e '(secret|pass|key)' {} +`\r\n```",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 76,
+  "created_at": "2017-03-24T13:43:55Z",
+  "id": 216789475,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "e11d21",
+    "default": false,
+    "description": "Issues which raise a security issue, or PRs that fix one",
+    "id": 126506420,
+    "name": "1.severity: security"
+   },
+   {
+    "color": "efefef",
+    "default": false,
+    "description": "Long-lived issue tracking long-term fixes or multiple sub-problems",
+    "id": 6858435354,
+    "name": "5.scope: tracking"
+   }
+  ],
+  "locked": false,
+  "milestone": {
+   "closed_at": null,
+   "closed_issues": 9,
+   "created_at": "2026-04-27T19:44:57Z",
+   "creator": {
+    "id": 131599,
+    "login": "mweinelt",
+    "site_admin": false,
+    "type": "User"
+   },
+   "description": "",
+   "due_on": "2026-11-30T00:00:00Z",
+   "id": 15706636,
+   "number": 33,
+   "open_issues": 27,
+   "state": "open",
+   "title": "26.11",
+   "updated_at": "2026-08-11T07:47:52Z"
+  },
+  "number": 24288,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 58,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 1,
+   "heart": 22,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 81
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": "reopened",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Provide options for storing secrets outside the Nix store",
+  "type": null,
+  "updated_at": "2026-08-29T23:01:00Z",
+  "user": {
+   "id": 576355,
+   "login": "basvandijk",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#24288",
+ "sources": [
+  "nixpkgs-secrets-outside-store"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2017-03-24T22:34:14Z",
+   "event": "renamed",
+   "id": 1015088847,
+   "rename": {
+    "from": "Provide options of storing secrets outside the Nix store",
+    "to": "Provide options for storing secrets outside the Nix store"
+   }
+  },
+  {
+   "actor": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "6ab282e6c2fa998f54b2cc3ee3f6ae80101629e9",
+   "commit_url": "https://api.github.com/repos/LumiGuide/nixpkgs/commits/6ab282e6c2fa998f54b2cc3ee3f6ae80101629e9",
+   "created_at": "2017-03-25T01:49:20Z",
+   "event": "referenced",
+   "id": 1015199361
+  },
+  {
+   "actor": {
+    "id": 576355,
+    "login": "basvandijk",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "7501c40029feebf00060c9fa5ecf19c279a153c5",
+   "commit_url": "https://api.github.com/repos/LumiGuide/nixpkgs/commits/7501c40029feebf00060c9fa5ecf19c279a153c5",
+   "created_at": "2017-03-25T02:02:01Z",
+   "event": "referenced",
+   "id": 1015203130
+  },
+  {
+   "actor": {
+    "id": 1019641,
+    "login": "rvl",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "db14ea39261d8f70c2006e9eac021614ecad19df",
+   "commit_url": "https://api.github.com/repos/rvl/nixpkgs/commits/db14ea39261d8f70c2006e9eac021614ecad19df",
+   "created_at": "2017-03-26T22:07:33Z",
+   "event": "referenced",
+   "id": 1015839664
+  },
+  {
+   "actor": {
+    "id": 1019641,
+    "login": "rvl",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "79d52bc26cda44ea0e7d947cdc032b7eed9ee959",
+   "commit_url": "https://api.github.com/repos/rvl/nixpkgs/commits/79d52bc26cda44ea0e7d947cdc032b7eed9ee959",
+   "created_at": "2017-04-22T16:09:26Z",
+   "event": "referenced",
+   "id": 1053469410
+  },
+  {
+   "actor": {
+    "id": 15379000,
+    "login": "schneefux",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "0e676c848ebcc9b06460e2e5c064169d21b9645f",
+   "commit_url": "https://api.github.com/repos/schneefux/nixpkgs/commits/0e676c848ebcc9b06460e2e5c064169d21b9645f",
+   "created_at": "2017-10-21T17:08:13Z",
+   "event": "referenced",
+   "id": 1304238020
+  },
+  {
+   "actor": {
+    "id": 15379000,
+    "login": "schneefux",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "62f51a2115c0acff58ded92881e020c895301962",
+   "commit_url": "https://api.github.com/repos/schneefux/nixpkgs/commits/62f51a2115c0acff58ded92881e020c895301962",
+   "created_at": "2017-10-21T17:16:33Z",
+   "event": "referenced",
+   "id": 1304240917
+  },
+  {
+   "actor": {
+    "id": 15379000,
+    "login": "schneefux",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "7cb5f1ab3d1eb58acd17169194106906db195559",
+   "commit_url": "https://api.github.com/repos/schneefux/nixpkgs/commits/7cb5f1ab3d1eb58acd17169194106906db195559",
+   "created_at": "2017-10-21T17:23:32Z",
+   "event": "referenced",
+   "id": 1304243424
+  },
+  {
+   "actor": {
+    "id": 15379000,
+    "login": "schneefux",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "deb7c568bc834bbb5e71b262e03ce17abaa775e8",
+   "commit_url": "https://api.github.com/repos/schneefux/nixpkgs/commits/deb7c568bc834bbb5e71b262e03ce17abaa775e8",
+   "created_at": "2017-10-22T10:17:07Z",
+   "event": "referenced",
+   "id": 1304472780
+  },
+  {
+   "actor": {
+    "id": 15379000,
+    "login": "schneefux",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "4fecf6d0c29ca047837858d5653dc3a50047d6de",
+   "commit_url": "https://api.github.com/repos/schneefux/nixpkgs/commits/4fecf6d0c29ca047837858d5653dc3a50047d6de",
+   "created_at": "2017-10-22T10:22:43Z",
+   "event": "referenced",
+   "id": 1304474683
+  },
+  {
+   "actor": {
+    "id": 15379000,
+    "login": "schneefux",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "268325ee89e16fb6e0c48a443e91dd0b46807df5",
+   "commit_url": "https://api.github.com/repos/schneefux/nixpkgs/commits/268325ee89e16fb6e0c48a443e91dd0b46807df5",
+   "created_at": "2017-10-22T10:37:45Z",
+   "event": "referenced",
+   "id": 1304477944
+  },
+  {
+   "actor": {
+    "id": 15379000,
+    "login": "schneefux",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "8948e0afe49799902a593d6c6bb0b4ae40bdee04",
+   "commit_url": "https://api.github.com/repos/schneefux/nixpkgs/commits/8948e0afe49799902a593d6c6bb0b4ae40bdee04",
+   "created_at": "2018-01-04T11:06:35Z",
+   "event": "referenced",
+   "id": 1409332538
+  },
+  {
+   "actor": {
+    "id": 15379000,
+    "login": "schneefux",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "a8b24a848599054ec97cdf069690e80f53f0664f",
+   "commit_url": "https://api.github.com/repos/schneefux/nixpkgs/commits/a8b24a848599054ec97cdf069690e80f53f0664f",
+   "created_at": "2018-01-04T11:07:07Z",
+   "event": "referenced",
+   "id": 1409333290
+  },
+  {
+   "actor": {
+    "id": 1983821,
+    "login": "typetetris",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "bdaa51733012e4ddf0ea458e6abacb3005d742eb",
+   "commit_url": "https://api.github.com/repos/typetetris/nixpkgs/commits/bdaa51733012e4ddf0ea458e6abacb3005d742eb",
+   "created_at": "2018-04-23T19:30:31Z",
+   "event": "referenced",
+   "id": 1589981297
+  },
+  {
+   "actor": {
+    "id": 1983821,
+    "login": "typetetris",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "c3b91a13c3ce6d3b82156bec8211096554b575f8",
+   "commit_url": "https://api.github.com/repos/typetetris/nixpkgs/commits/c3b91a13c3ce6d3b82156bec8211096554b575f8",
+   "created_at": "2018-04-23T19:30:31Z",
+   "event": "referenced",
+   "id": 1589981298
+  },
+  {
+   "actor": {
+    "id": 1118859,
+    "login": "chkno",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "cbec18503aaf22e6c360fdffac46886d2db1645b",
+   "commit_url": "https://api.github.com/repos/chkno/nixpkgs/commits/cbec18503aaf22e6c360fdffac46886d2db1645b",
+   "created_at": "2020-09-21T20:35:50Z",
+   "event": "referenced",
+   "id": 3790476632
+  },
+  {
+   "actor": {
+    "id": 1525551,
+    "login": "jwoudenberg",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "5b17e0c3331fa55334d1657e73a0539253772d39",
+   "commit_url": "https://api.github.com/repos/jwoudenberg/nixpkgs/commits/5b17e0c3331fa55334d1657e73a0539253772d39",
+   "created_at": "2021-06-05T14:38:10Z",
+   "event": "referenced",
+   "id": 4846776575
+  },
+  {
+   "actor": {
+    "id": 1525551,
+    "login": "jwoudenberg",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "3d396546e2613ebcc046e234e13550c822df2cc2",
+   "commit_url": "https://api.github.com/repos/jwoudenberg/nixpkgs/commits/3d396546e2613ebcc046e234e13550c822df2cc2",
+   "created_at": "2021-06-05T14:46:14Z",
+   "event": "referenced",
+   "id": 4846786351
+  },
+  {
+   "actor": {
+    "id": 1525551,
+    "login": "jwoudenberg",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "69c6161312ddf4dd4a4a64826d2d7952887dab72",
+   "commit_url": "https://api.github.com/repos/jwoudenberg/nixpkgs/commits/69c6161312ddf4dd4a4a64826d2d7952887dab72",
+   "created_at": "2021-09-25T10:43:10Z",
+   "event": "referenced",
+   "id": 5359534784
+  },
+  {
+   "actor": {
+    "id": 1525551,
+    "login": "jwoudenberg",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "614a70af973d4790a043baa2bc2f8432bb7ce9ba",
+   "commit_url": "https://api.github.com/repos/jwoudenberg/nixpkgs/commits/614a70af973d4790a043baa2bc2f8432bb7ce9ba",
+   "created_at": "2021-10-31T18:56:08Z",
+   "event": "referenced",
+   "id": 5545595667
+  },
+  {
+   "actor": {
+    "id": 1525551,
+    "login": "jwoudenberg",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "76e39cb9b4885f83965e58b8970f897763b8f5ff",
+   "commit_url": "https://api.github.com/repos/jwoudenberg/nixpkgs/commits/76e39cb9b4885f83965e58b8970f897763b8f5ff",
+   "created_at": "2021-10-31T18:59:45Z",
+   "event": "referenced",
+   "id": 5545599250
+  },
+  {
+   "actor": {
+    "id": 1525551,
+    "login": "jwoudenberg",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "1eb3ce4fb9adb0600dbad50e56ac6ccd5c5f5310",
+   "commit_url": "https://api.github.com/repos/jwoudenberg/nixpkgs/commits/1eb3ce4fb9adb0600dbad50e56ac6ccd5c5f5310",
+   "created_at": "2021-10-31T19:06:54Z",
+   "event": "referenced",
+   "id": 5545606216
+  },
+  {
+   "actor": {
+    "id": 3416,
+    "login": "thoughtpolice",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "c8f9d170d460fbbc971b8885a0ada3d3d61739b3",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/c8f9d170d460fbbc971b8885a0ada3d3d61739b3",
+   "created_at": "2022-12-02T18:08:36Z",
+   "event": "referenced",
+   "id": 7942803681
+  },
+  {
+   "actor": {
+    "id": 41898282,
+    "login": "github-actions[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   },
+   "commit_id": "1eda85d60e61301bf312902790ff0be82e272efd",
+   "commit_url": "https://api.github.com/repos/Mic92/nixpkgs/commits/1eda85d60e61301bf312902790ff0be82e272efd",
+   "created_at": "2022-12-04T03:06:10Z",
+   "event": "referenced",
+   "id": 7947449785
+  },
+  {
+   "actor": {
+    "id": 248016,
+    "login": "rapenne-s",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "d8a817120f67234f32451b9b16c4aef174f4dec6",
+   "commit_url": "https://api.github.com/repos/rapenne-s/nixpkgs/commits/d8a817120f67234f32451b9b16c4aef174f4dec6",
+   "created_at": "2022-12-04T18:43:40Z",
+   "event": "referenced",
+   "id": 7948979078
+  },
+  {
+   "actor": {
+    "id": 31919558,
+    "login": "oddlama",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "f04d1af352c6d3d70c088d2e49ec0c10ce7134ed",
+   "commit_url": "https://api.github.com/repos/oddlama/nixpkgs/commits/f04d1af352c6d3d70c088d2e49ec0c10ce7134ed",
+   "created_at": "2023-03-22T00:06:56Z",
+   "event": "referenced",
+   "id": 8811235742
+  },
+  {
+   "actor": {
+    "id": 31919558,
+    "login": "oddlama",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "0ac716fee58bda87122e20c38cfda27dc52913ea",
+   "commit_url": "https://api.github.com/repos/oddlama/nixpkgs/commits/0ac716fee58bda87122e20c38cfda27dc52913ea",
+   "created_at": "2023-03-22T00:12:10Z",
+   "event": "referenced",
+   "id": 8811257597
+  },
+  {
+   "actor": {
+    "id": 31919558,
+    "login": "oddlama",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "6f84dd31b5e88c539aea0e881120336f27aa53dd",
+   "commit_url": "https://api.github.com/repos/oddlama/nixpkgs/commits/6f84dd31b5e88c539aea0e881120336f27aa53dd",
+   "created_at": "2023-03-22T00:24:49Z",
+   "event": "referenced",
+   "id": 8811305685
+  },
+  {
+   "actor": {
+    "id": 31919558,
+    "login": "oddlama",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "b3c0b0bd5119bc0be3279c47f2a3430e127b581e",
+   "commit_url": "https://api.github.com/repos/oddlama/nixpkgs/commits/b3c0b0bd5119bc0be3279c47f2a3430e127b581e",
+   "created_at": "2023-03-22T00:45:01Z",
+   "event": "referenced",
+   "id": 8811379121
+  },
+  {
+   "actor": {
+    "id": 31919558,
+    "login": "oddlama",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "99e461b0aafd37e3dde3340261c15ff440c9aad5",
+   "commit_url": "https://api.github.com/repos/oddlama/nixpkgs/commits/99e461b0aafd37e3dde3340261c15ff440c9aad5",
+   "created_at": "2023-03-22T12:44:12Z",
+   "event": "referenced",
+   "id": 8816387240
+  },
+  {
+   "actor": {
+    "id": 31919558,
+    "login": "oddlama",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "a6c708f715d584ef11195a2dd6433fc786c34815",
+   "commit_url": "https://api.github.com/repos/oddlama/nixpkgs/commits/a6c708f715d584ef11195a2dd6433fc786c34815",
+   "created_at": "2023-03-22T12:44:57Z",
+   "event": "referenced",
+   "id": 8816394139
+  },
+  {
+   "actor": {
+    "id": 31919558,
+    "login": "oddlama",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "04ec6beedd4a0ecd1d54d3cef8e37efb4c6c0e9b",
+   "commit_url": "https://api.github.com/repos/oddlama/nixpkgs/commits/04ec6beedd4a0ecd1d54d3cef8e37efb4c6c0e9b",
+   "created_at": "2023-03-22T12:54:27Z",
+   "event": "referenced",
+   "id": 8816477179
+  },
+  {
+   "actor": {
+    "id": 31919558,
+    "login": "oddlama",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "331f1eda505a81c7da9d4b6265e7f6fc76c03e6b",
+   "commit_url": "https://api.github.com/repos/oddlama/nixpkgs/commits/331f1eda505a81c7da9d4b6265e7f6fc76c03e6b",
+   "created_at": "2023-03-22T13:32:38Z",
+   "event": "referenced",
+   "id": 8816858834
+  },
+  {
+   "actor": {
+    "id": 314564,
+    "login": "RaitoBezarius",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2023-07-08T12:36:20Z",
+   "event": "closed",
+   "id": 9763974294,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 705123,
+    "login": "jtojnar",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2023-07-08T12:45:33Z",
+   "event": "reopened",
+   "id": 9764011354,
+   "state_reason": "reopened"
+  }
+ ]
+}

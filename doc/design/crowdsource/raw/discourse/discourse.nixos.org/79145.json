@@ -1,0 +1,93 @@
+{
+ "archetype": "regular",
+ "archived": false,
+ "category_id": 14,
+ "closed": false,
+ "created_at": "2026-07-24T17:52:02.680Z",
+ "host": "discourse.nixos.org",
+ "id": 79145,
+ "last_posted_at": "2026-07-24T17:52:02.795Z",
+ "like_count": 5,
+ "posts": [
+  {
+   "accepted_answer": false,
+   "badges_granted": [],
+   "can_accept_answer": false,
+   "can_unaccept_answer": false,
+   "can_vote": false,
+   "created_at": "2026-07-24T17:52:02.795Z",
+   "deleted_at": null,
+   "event": null,
+   "flair_name": null,
+   "id": 266276,
+   "incoming_link_count": 19,
+   "link_counts": [
+    {
+     "clicks": 7,
+     "internal": false,
+     "reflection": false,
+     "title": "[modular services] User creation/specification · Issue #545287 · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/issues/545287"
+    },
+    {
+     "clicks": 6,
+     "internal": false,
+     "reflection": false,
+     "title": "Issues · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/issues?q=label%3A%226.topic%3A%20package%20configuration%20modules%22"
+    },
+    {
+     "clicks": 4,
+     "internal": false,
+     "reflection": false,
+     "url": "https://github.com/orgs/NixOS/projects/116/views/1"
+    },
+    {
+     "clicks": 1,
+     "internal": false,
+     "reflection": false,
+     "title": "nixos/redlib: Make into modular service by Ericson2314 · Pull Request #475372 · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/pull/475372"
+    },
+    {
+     "clicks": 0,
+     "internal": false,
+     "reflection": false,
+     "title": "modular services: porting legacy modules consisting of multiple services · Issue #490688 · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/issues/490688"
+    }
+   ],
+   "name": "Robert Hensing",
+   "post_number": 1,
+   "post_type": 1,
+   "posts_count": 1,
+   "primary_group_name": null,
+   "quote_count": 0,
+   "raw": "# modular services meeting 2026-07-24\n\nAttendees: @aanderse @KiaraGrouwstra @Eveeifyeve @roberth\n\n* @KiaraGrouwstra: should we be using upstream files?\n\n  * @aanderse: NixOS should do this, it does, which is good, but generally we ship a lot of opinion on top of those\n  * @Kiara: emilazy was interested in this argument for nix-darwin\n  * @roberth: this approach wouldn’t support multi-instance modularity\n\n* @Eveeifyeve: tmpfiles. Multiple implementations exist. I’d like to make that portable. Not sure about implementation detail\n\n  * @roberth (prior on matrix): not a fan of the syntax\n  * @aanderse: it seems that the open source world has agreed that doing this through some files is more robust than shell scripts. Worth discussion. Alternatives exist\n  * @roberth: very helpful if we could pass a file name to the tool, because a system-wide tmpfiles doesn’t run right before switch, when it needs to\n  * @aanderse: RuntimeDir is obviously tied to lifecycle, but state directories traditionally not necessarily, but I think there’s value in it\n  * @aanderse: To a critic who doesn’t want tmpfiles, what do we tell them?\n  * @Eveeifyeve: They don’t have to use it, like you wouldn’t use a non-portable C function\n  * @aanderse: Then perhaps we don’t need to cover it in the modular service interface, and an implementation can choose to provide/use tmpfiles or not\n  * @evee: What should the interaction with user permissions look like?\n  * @aanderse: I wouldn’t mind systemd’s API\n  * @roberth: User management is somewhat of a prerequisite for file system stuff\n\n* @KiaraGrouwstra: what do we think of the approach of platform-specific modules?\n\n  * @roberth: makes composition harder\n  * @KiaraGrouwstra: new `modularServices` option can solve that\n  * @roberth: agreed, reminds of overlays\n  * @KiaraGrouwstra: how do we build this out\n  * @roberth: maybe call it registry? Kind of like a package set, but of modules.\n  * @roberth: could reuse the by-name infrastructure?\n  * @KiaraGrouwstra: no strong opinion on file location, pkgs/by-name would be a layer violation\n  * @roberth: claim a top-level dir? The portable parts are between the packages layer and NixOS layer\n  * @roberth: so portable parts go into pkgs, possibly by-name, NixOS parts go into nixos/\n  * @Eveeifyeve: I think we should still focus on building out the portability through options\n  * @roberth: agree, but the registry is simple and has value of its own\n  * \n\n* @KiaraGrouwstra: on sub-services, I’d like to have something like contracts\n\n  * @roberth: absolutely, can do both, and multi-service package should be a two-layer activity: contract-based first, modules that compose those on top. Users can choose.\n\n* ## @KiaraGrouwstra: what do we prioritize. E.g. people are creating services. Maybe we need to focus on our capabilities first. Some PRs have been open for a while. How do we prioritize? What are values based on which to review and decide?\n\n* Pr Reviews\n\n  * https://github.com/NixOS/nixpkgs/pull/475372\n    * still prototype stage\n    * @roberth: liability could be a problem at this stage, modular services becomes load bearing for NixOS (first time)\n\n* @KiaraGrouwstra: what are our priorities and shape of roadmap\n\n* @KiaraGrouwstra: maybe one for me would be outstanding question marks\n\n  * e.g. around [child services and contracts](https://github.com/NixOS/nixpkgs/issues/490688)\n\n* @aanderse: i’m just here to advise from the perspective of an external existing system\n\n  * few services, i doubt anyone is depending on this already\n\n* @roberth:\n\n  * Need to solve a number of pain points before significantly expanding set of services, let alone allowing NixOS to depend on them\n    Perhaps:\n    * Stage 1:\n      * do not merge more than 20 modular services, require maintainer buy-in, no usage in NixOS modules (ie need duplication)\n      * add more portable options\n      * make it reasonably secure on NixOS: user support\n      * add the registry\n    * Stage 2:\n      * allow more services, allow different person than package/NixOS maintainer to maintain modular service\n      * keep building out portable options\n      * solve other pain points\n      * contracts\n    * Stage 3:\n      * allow use by NixOS modules\n      * experimental → stabilizing\n    * Stage 4: profit\n\n* @Eveeifyeve: put growing NixOS services on hold until this gets more mature (in terms of portability APIs), now trying to make a modular service for a database\n\n* @KiaraGrouwstra: if we got ideas on TODOs let’s file them in the issue tracker for the kanban\n\n  * @roberth: ok i’ll file one on service users\n\n* @roberth: opened https://github.com/NixOS/nixpkgs/issues/545287\n\nWe did a bit of work session after the meeting.\nWe have a [label](https://github.com/NixOS/nixpkgs/issues?q=label%3A%226.topic%3A%20package%20configuration%20modules%22) and a [board](https://github.com/orgs/NixOS/projects/116/views/1) now :tada:",
+   "reads": 96,
+   "reply_count": 0,
+   "reply_to_post_number": null,
+   "title_is_group": false,
+   "topic_accepted_answer": null,
+   "topic_id": 79145,
+   "updated_at": "2026-07-25T11:07:52.701Z",
+   "user_id": 6,
+   "user_title": "Great contributor",
+   "username": "roberth",
+   "version": 2,
+   "wiki": false
+  }
+ ],
+ "posts_count": 1,
+ "posts_fetched": 1,
+ "reply_count": 0,
+ "slug": "modular-services-meeting-5-2026-07-24",
+ "sources": [
+  "discourse-meetings"
+ ],
+ "tags": null,
+ "title": "Modular services meeting #5 2026-07-24",
+ "url": "https://discourse.nixos.org/t/modular-services-meeting-5-2026-07-24/79145",
+ "views": 216,
+ "word_count": 754
+}

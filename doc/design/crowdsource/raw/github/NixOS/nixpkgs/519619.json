@@ -1,0 +1,443 @@
+{
+ "comments": [
+  {
+   "body": "Hi @SigmaSquadron,\r\n\r\nThanks for the catch and for calling out the policy violation. You're right—I relied too heavily on an LLM to bootstrap this, and I messed up by replacing the PR template and not disclosing it. That's on me, and I apologize.\r\n\r\nI'm actually very interested in getting this backend-agnostic interface right. I'm going to take a step back, dig into the NixOS module system properly, and rewrite/fix the broken parts myself.\r\n\r\nI’ll restore and update the PR description template right now to be transparent about the tools used, and I won't ask for another review until I've thoroughly tested everything locally and made sure the implementation is solid.\r\n\r\nAppreciate your patience and feedback.",
+   "created_at": "2026-06-21T13:43:37Z",
+   "id": 4762168482,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-21T13:43:37Z",
+   "user": {
+    "id": 140179052,
+    "login": "Mutasem-mk4",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/519619",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "This PR introduces \\security.artifacts\\, a backend-agnostic abstraction layer for managing secrets in NixOS. It decouples NixOS service modules from specific secret providers like sops-nix, agenix, or systemd-creds.\n\n## Motivation\nCurrently, NixOS modules often hardcode support for specific secret managers or leave users to manually pass paths. This forces users into vendor lock-in or fragile configuration.\n\n## Implementation\n- Introduces \\security.artifacts.secrets.<name>\\ options.\n- Includes provider backends: \\sops-nix\\, \\^Ggenix\\, \\systemd-creds\\, and a \\dummy\\ backend for CI/CD environments.\n- Implements strict evaluation-time assertions ensuring secrets never leak into the Nix store.\n- Adds comprehensive \\\nixosTest\\ coverage validating permissions, target ordering, and dummy provisioners.",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 1,
+  "created_at": "2026-05-13T02:20:51Z",
+  "draft": true,
+  "id": 4434154968,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Discuss policies to work in and around Nixpkgs",
+    "id": 335672980,
+    "name": "6.topic: policy discussion"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR is the author's first one; please be gentle!",
+    "id": 5609547489,
+    "name": "12.first-time contribution"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Affects continuous integration (CI) in Nixpkgs, including Ofborg and GitHub Actions",
+    "id": 7697667119,
+    "name": "6.topic: continuous integration"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 519619,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/519619.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/519619.patch"
+  },
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "nixos/artifacts: backend-agnostic secret management interface",
+  "type": null,
+  "updated_at": "2026-07-01T11:30:33Z",
+  "user": {
+   "id": 140179052,
+   "login": "Mutasem-mk4",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 935,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:31:00Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "54402b393940b01e061a866ac1448bd209425501",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "This PR introduces \\security.artifacts\\, a backend-agnostic abstraction layer for managing secrets in NixOS. It decouples NixOS service modules from specific secret providers like sops-nix, agenix, or systemd-creds.\n\n## Motivation\nCurrently, NixOS modules often hardcode support for specific secret managers or leave users to manually pass paths. This forces users into vendor lock-in or fragile configuration.\n\n## Implementation\n- Introduces \\security.artifacts.secrets.<name>\\ options.\n- Includes provider backends: \\sops-nix\\, \\^Ggenix\\, \\systemd-creds\\, and a \\dummy\\ backend for CI/CD environments.\n- Implements strict evaluation-time assertions ensuring secrets never leak into the Nix store.\n- Adds comprehensive \\\nixosTest\\ coverage validating permissions, target ordering, and dummy provisioners.",
+  "changed_files": 22,
+  "closed_at": null,
+  "comments": 1,
+  "commits": 8,
+  "created_at": "2026-05-13T02:20:51Z",
+  "deletions": 4,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/519619.diff",
+  "draft": true,
+  "head": {
+   "label": "Mutasem-mk4:feature/nixos-artifacts",
+   "ref": "feature/nixos-artifacts",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2026-05-13T02:16:20Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "Mutasem-mk4/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/Mutasem-mk4/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 1237239247,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/Mutasem-mk4/nixpkgs/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/Mutasem-mk4/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 140179052,
+     "login": "Mutasem-mk4",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/Mutasem-mk4/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-05-13T22:55:33Z",
+    "size": 3067386,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/Mutasem-mk4/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/Mutasem-mk4/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-05-13T02:16:20Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "2c051f6948a5ef664d620e8e4f28702310453c36",
+   "user": {
+    "id": 140179052,
+    "login": "Mutasem-mk4",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3672964889,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Discuss policies to work in and around Nixpkgs",
+    "id": 335672980,
+    "name": "6.topic: policy discussion"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR is the author's first one; please be gentle!",
+    "id": 5609547489,
+    "name": "12.first-time contribution"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Affects continuous integration (CI) in Nixpkgs, including Ofborg and GitHub Actions",
+    "id": 7697667119,
+    "name": "6.topic: continuous integration"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 519619,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/519619.patch",
+  "rebaseable": false,
+  "requested_reviewers": [],
+  "requested_teams": [
+   {
+    "description": "Maintain Nixpkgs' in-tree Continuous Integration, including GitHub Actions",
+    "id": 13362067,
+    "members_url": "https://api.github.com/organizations/487568/team/13362067/members{/member}",
+    "name": "Nixpkgs CI",
+    "notification_setting": "notifications_enabled",
+    "organization_id": 487568,
+    "parent": {
+     "description": "Nixpkgs package maintainers. See: https://discourse.nixos.org/t/join-the-package-maintainer-team/3751",
+     "id": 3345117,
+     "members_url": "https://api.github.com/organizations/487568/team/3345117/members{/member}",
+     "name": "Nixpkgs Maintainers",
+     "notification_setting": "notifications_disabled",
+     "organization_id": 487568,
+     "permission": "pull",
+     "privacy": "closed",
+     "repositories_url": "https://api.github.com/organizations/487568/team/3345117/repos",
+     "slug": "nixpkgs-maintainers",
+     "type": "organization"
+    },
+    "permission": "pull",
+    "privacy": "closed",
+    "repositories_url": "https://api.github.com/organizations/487568/team/13362067/repos",
+    "slug": "nixpkgs-ci",
+    "type": "organization"
+   }
+  ],
+  "review_comments": 0,
+  "state": "open",
+  "title": "nixos/artifacts: backend-agnostic secret management interface",
+  "updated_at": "2026-07-01T11:30:33Z",
+  "user": {
+   "id": 140179052,
+   "login": "Mutasem-mk4",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#519619",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "I don't think anyone was planning on merging this, but I'm blocking this just in case:\r\n\r\nThis is AI slop. Although NixOS allows LLM-generated contributions into the tree, our automation policy clearly states that LLMs are only to be used as a way to hasten human programming, not do the entirety of the development. We need a capable human in the loop whenever an LLM makes changes, and it's clear from your commits that you are not the one developing this, and neither you nor your AI model really know how to make a working NixOS module. You must also disclose LLM usage whenever it is required by the automation policy, which your commits and PR description fail to do.\r\n\r\nFinally, please do not replace the PR description template.",
+   "commit_id": "2c051f6948a5ef664d620e8e4f28702310453c36",
+   "id": 4539754559,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-06-21T13:24:07Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-artifacts-interface"
+ ],
+ "timeline": []
+}

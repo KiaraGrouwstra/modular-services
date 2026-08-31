@@ -1,0 +1,753 @@
+{
+ "comments": [
+  {
+   "body": "[x] NixOS independanant user services(that also work on osx) similar to\nhttps://github.com/kiberpipa/nix-rehash/tree/master/nix-services\n\nOn Sun, Oct 19, 2014 at 7:50 PM, Nicolas B. Pierron <\nnotifications@github.com> wrote:\n\n> This pull request is made to bootstrap a variant of NixOS, which is\n> dedicated at managing the home directory of users. This new project is\n> called NixUP (Nix User Profile), and the goals are the following:\n> - [✓] Generate an activation script.\n> - [✗] Abstract for the creation of resource files. (similar to\n>   environment.etc)\n> - [✗] Option to list installed packages. (similar to system.packages)\n> - [✗] Command line tool to manage profiles generations and updates.\n>   (similar to nixos-rebuild)\n> - [✗] Command line tool to write / read option definition without\n>   using an editor. (no legacy yet)\n> - [✗] Mock compatibility modules to use some NixOS modules in NixUP.\n> - [✗] Include NixUP modules as submodules of NixOS option\n>   users.extraUser.<name?>\n> \n> ---\n> \n> You can merge this Pull Request by running\n> \n>   git pull https://github.com/nbp/nixpkgs-2 nixup\n> \n> Or view, comment on, or merge it at:\n> \n>   https://github.com/NixOS/nixpkgs/pull/4594\n> Commit Summary\n> - Start a configuration management tool based on Nix to manage User\n>   Profiles.\n> \n> File Changes\n> - _A_ nixup/default.nix\n>   https://github.com/NixOS/nixpkgs/pull/4594/files#diff-0 (17)\n> - _A_ nixup/lib/eval-config.nix\n>   https://github.com/NixOS/nixpkgs/pull/4594/files#diff-1 (24)\n> - _A_ nixup/lib/from-env.nix\n>   https://github.com/NixOS/nixpkgs/pull/4594/files#diff-2 (4)\n> - _A_ nixup/modules/module-list.nix\n>   https://github.com/NixOS/nixpkgs/pull/4594/files#diff-3 (4)\n> - _A_ nixup/modules/nixpkgs.nix\n>   https://github.com/NixOS/nixpkgs/pull/4594/files#diff-4 (96)\n> - _A_ nixup/modules/user/activation.nix\n>   https://github.com/NixOS/nixpkgs/pull/4594/files#diff-5 (102)\n> - _A_ nixup/modules/user/build.nix\n>   https://github.com/NixOS/nixpkgs/pull/4594/files#diff-6 (50)\n> \n> Patch Links:\n> - https://github.com/NixOS/nixpkgs/pull/4594.patch\n> - https://github.com/NixOS/nixpkgs/pull/4594.diff\n> \n> —\n> Reply to this email directly or view it on GitHub\n> https://github.com/NixOS/nixpkgs/pull/4594.\n\n## \n\n-----BEGIN PGP PUBLIC KEY BLOCK-----\nVersion: GnuPG v1.4.11 (GNU/Linux)\n\nmQENBFEY1PEBCADPOfERF2wo4qeoq9L1m2z4pKfWqNd4B6BsoFUWPNd7BXmY+9JG\njJddSkmYobWec7XjAFTBL0Xbttt+rK9SIED2dCOmU1FYMQElhGlM3PNA3kaiQFeV\nijgH318GCfZzDd0dWa5TN/IshVeWXwgngsIEmZTVf1VSeb3eO3B8Fxe3zsSLUq0b\n71MmU5eLVP9pMkm5V5BTYp+lV70FIekKygkKq+uTDo1csWUatbs4Qvgv37Bymy2t\noTwOBXGoinQk5N/6asR1jWs3vKv0L0SruoZy/kEG/jXb4l2OZUP85EVMganYKouE\nOchVmcmhBdWV+t3HK4r2ATfyEcMRzvzSflA1ABEBAAG0Jkpha2EgSHVkb2tsaW4g\nPGpha2FodWRva2xpbkBnbWFpbC5jb20+iQE+BBMBAgAoBQJRGNTxAhsDBQkB4TOA\nBgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRD6Zxi5hZclKnXNCACLOKa8abQp\neTWv9SXUwC7LVM5pP2mXcgn+Ipqr6YWBdLx4Iij0YlvUok9VeKvwTpUlT+cx++o3\nwCM3AYrUyJE+zrtw49lInUmutz9seqJLU895oq+D+UuGoORrLBpEZrYR5f83uUmQ\nE3Z1ZmWrNGXYtITWDtVZD/KauMF2nkPcmy/XaYXhd4WHD81DGNlKtGAHig6A3Phc\n8Mr0A4yLDeRQJm8lCFEsxMJUNTupgY+ybbsMfVGx1gQvvGOTioV8CLCoRchUCCcm\nYPArFg40KzIDSNjwdo9EVZDnlPx1hbOppfQydxP+JVnZsqoYmVY4UhIWi/NfOl3V\nUMjl338INW1zuQENBFEY1PEBCADRSIfelOMjaTH7IfpMFFUc5Gys//njFnW9QAUg\nwyfs2AFxUp6vKQ7nxXQiJXVhKTwe9iqo+oGxaHp4AeTjC7vXsfMuF5g5lfttbAo3\nYEobEe6OG5so41nbwan6SyeIIQ2AmQqJBw8TKKMSec2qUN0Pw7iZRs0o9uJM/obG\nDPsAsMOQgNLxJyMCP7X2jBtDXxkMFVHMmk50Tl3h3Fi9qWuNxgTXjs0tUvKkXiu2\nPco952jnm7HpCIKBek2pqR/UJXXb5qxy5G6Lc0qaMWZ5GKnSMTJmTY6Xl44EnaLK\nzh0rqgF9qpoWck470ZbiGASMtB008hy2l0cyxUfvDaS3tY4hABEBAAGJASUEGAEC\nAA8FAlEY1PECGwwFCQHhM4AACgkQ+mcYuYWXJSoT6AgAkvzvC0EGmeCR3cn9O3Gf\nyG00Kqk9/1gJvlphis7AAce8iUgU+4xd94Vp0u8rghpdy88xKN5lF1W2YZQmmBaf\nAVe6b7TOg6kxc3GKkVsWDxNyQKkpB46BwefIGaSljH7502X9aEWosrqWyJJNYCtt\nQDit4BysX0Ww3Ka5Rx6ZFhC9ybPKoW2i8JwpyBaXDt7R2k+PC/ClBf9qzL+sb2es\nzh/zCMVKNdm8KUITHU/5lgn2qZpUFZwiASPCMGGFP9u8g6UKeUTYTPD+GWaHIW63\nRAgNIAffxx0M1r3P/2ipkAdI3NX/1iBKDQNG8Odsf+BswFKrNCnyUDdLPvJAhODS\ngw==\n=tmrm\n-----END PGP PUBLIC KEY BLOCK-----\n",
+   "created_at": "2014-10-19T17:54:06Z",
+   "id": 59658103,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-19T17:54:06Z",
+   "user": {
+    "id": 585547,
+    "login": "offlinehacker",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@offlinehacker \n\n> [x] NixOS independanant user services(that also work on osx)\n\nThis is what is implied by mocking NixOS / NixUp in the other, such as a module can work for both.  If a module is really modular, and all the needed dependencies are implemented, then this should not be a problem.\n\nI am trying to make NixUP modules as modular as possible, by avoiding the mistake I made in NixOS.\nI have an idea to enforce one aspect of the modularity, but I am not completely sure that this is desirable.\n",
+   "created_at": "2014-10-20T21:03:16Z",
+   "id": 59839322,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-20T21:03:16Z",
+   "user": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@nbp that sounds really cool and i would really really like to have nixos services modular. Currently i'm trying to use nixos services in docker, but there's currently really no usefull and modular way to use them with docker's model of one service per container. Is there any way i can help you out with that?\n",
+   "created_at": "2014-10-20T23:36:02Z",
+   "id": 59857360,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-20T23:36:02Z",
+   "user": {
+    "id": 585547,
+    "login": "offlinehacker",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@offlinehacker , as soon as the mock is in place on both sides, the best way would be to add a NixUP back-end to program / services which can support it.  One easy way to contribute would be to add a user.resourceFiles where we have environment.etc definitions.\n",
+   "created_at": "2014-10-21T09:17:57Z",
+   "id": 59900376,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-21T09:17:57Z",
+   "user": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This is great! It will require some documentation though.\n",
+   "created_at": "2014-10-21T09:34:43Z",
+   "id": 59902178,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-21T09:34:43Z",
+   "user": {
+    "id": 109141,
+    "login": "madjar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@nbp I will do this asoap for modules, when schema will be defined, i need this support especially for docker containers and also user services. Are you planning to place all config files from etc to users home, i assume there should be some other folder for etc files.\n",
+   "created_at": "2014-10-21T14:54:16Z",
+   "id": 59940320,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-21T14:54:16Z",
+   "user": {
+    "id": 585547,
+    "login": "offlinehacker",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Are you planning to place all config files from etc to users home, i assume there should be some other folder for etc files.\n\nI do not intend to share a common option declaration between the 2, as it does not make sense the use \"environment.etc\" for the resource files of the user.\n\nI think that such factorization makes sense once we noticed it in multiple modules, and then we can discuss about a proper name for it.\n\nI do not exclude the fact that we would see emerge a common abstraction layer above NixUP & NixOS, typically for services.  I just prefer to ignore it for the time being and focus on making good bases for NixUP.  The module system gives us a lot of flexibility to build abstractions, so I am not worried about working this way.\n",
+   "created_at": "2014-10-21T21:19:16Z",
+   "id": 60000574,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-21T21:19:16Z",
+   "user": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Seems reasonable and I don't see problematic writing modules for both\nimplementations.\nOn Oct 21, 2014 11:19 PM, \"Nicolas B. Pierron\" notifications@github.com\nwrote:\n\n> Are you planning to place all config files from etc to users home, i\n> assume there should be some other folder for etc files.\n> \n> I do not intend to share a common option declaration between the 2, as it\n> does not make sense the use \"environment.etc\" for the resource files of the\n> user.\n> \n> I think that such factorization makes sense once we noticed it in multiple\n> modules, and then we can discuss about a proper name for it.\n> \n> I do not exclude the fact that we would see emerge a common abstraction\n> layer above NixUP & NixOS, typically for services. I just prefer to ignore\n> it for the time being and focus on making good bases for NixUP. The module\n> system gives us a lot of flexibility to build abstractions, so I am not\n> worried about working this way.\n> \n> —\n> Reply to this email directly or view it on GitHub\n> https://github.com/NixOS/nixpkgs/pull/4594#issuecomment-60000574.\n",
+   "created_at": "2014-10-21T21:53:09Z",
+   "id": 60005237,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-21T21:53:09Z",
+   "user": {
+    "id": 585547,
+    "login": "offlinehacker",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "- [ ] Some documentation would be nice too\n\nI love the name and I think I love the concept but I'm not sure yet what the concept is :grin:.\n\nWhat I do wonder though, is if this is even remotely ready for inclusion into the tree. There are a couple of proposals for declarative user spaces, like #4493 and http://lists.science.uu.nl/pipermail/nix-dev/2014-October/014659.html (which I really like, basically modules are instantiated into services and grouped into environments and then NixOS or NixUP (or Docker or whatever) are responsible for running the environment).\n\nPerhaps it would be better to flesh out NixUP some more in a separate repo that users can clone? I for one will try NixUP out-of-tree right now :beers:.\n",
+   "created_at": "2014-11-04T17:48:39Z",
+   "id": 61682927,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-12-07T12:18:51Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Another proposal is embedded in comments: https://github.com/NixOS/nixpkgs/pull/4493#issuecomment-59171921\n\nIt sounds somewhat similar to the boxes.\n\nIn general, I think it's really cool to think of system configuration as a collection of environments to be run.\n",
+   "created_at": "2014-11-04T17:59:28Z",
+   "id": 61684728,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-11-04T17:59:28Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "When talk with @civodul about 'user services' for Guix today[0],\nI finally catch the same idea with you  ;-)\n\nNixUP is a modules-powered derivation having the activate script!\nAny process?\n\n[0] https://lists.gnu.org/archive/html/guix-devel/2014-11/msg00698.html\n",
+   "created_at": "2014-11-30T13:50:42Z",
+   "id": 64985902,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-11-30T13:50:42Z",
+   "user": {
+    "id": 10137,
+    "login": "ghost",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> NixUP is a modules-powered derivation having the activate script!\n\nYes, this is exactly the same idea as behind NixOS, and Guix (I guess).\n\n> Any process?\n\nExcept the login shell, and the activation script, I would not expect any.\nAny progress?  I had some other activities lately, I will have to get back to it.\n",
+   "created_at": "2014-11-30T15:37:33Z",
+   "id": 64988964,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-11-30T15:37:33Z",
+   "user": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I will make service abstraction layer on nixup, that nixos systemd will be able to reuse. Do you think this is a good way to go? I really need service abstraction layer for user services and docker services, everything else are just hacks to adapt systemd interface for other process managers(docker, supervisord). The idea is to port all relevant services from nixos to nixup and then reuse these in nixos.\n",
+   "created_at": "2014-12-05T20:36:34Z",
+   "id": 65850561,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-12-05T20:36:34Z",
+   "user": {
+    "id": 585547,
+    "login": "offlinehacker",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Btw, nixup kinda has two menings, Nix User Profiles and Nix Upstart :D\n",
+   "created_at": "2014-12-05T20:40:41Z",
+   "id": 65851075,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-12-05T20:40:41Z",
+   "user": {
+    "id": 585547,
+    "login": "offlinehacker",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Ping? :)\n",
+   "created_at": "2015-03-26T09:08:31Z",
+   "id": 86416102,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-26T09:08:31Z",
+   "user": {
+    "id": 2179419,
+    "login": "jagajaga",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I am currently doing some clean-up on NixOS, mostly as a way to try a way to include similar work as this one in NixOS (such as within extraUsers).\n\nSo far you can already use this branch, but the commands might be a bit raw as you would have to basically type manually what is done by nixos-rebuild — without the nix update.\n\nI will have to get back to it, and think more on how to make a command line tool which is both similar to `nix-env` and also compatible with the module system.  The idea would be to have something like:\n\n```\n$ nixup extend config ssh.authorizedKeys ./id.pub\n```\n",
+   "created_at": "2015-03-26T20:07:54Z",
+   "id": 86694709,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-26T20:07:54Z",
+   "user": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": ":+1: \n",
+   "created_at": "2015-03-28T18:52:58Z",
+   "id": 87282690,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-28T18:52:58Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Does this actually need NixOS? It seems like anything that can run Nix could have its user profiles managed this way.\n",
+   "created_at": "2015-03-28T18:55:04Z",
+   "id": 87283254,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-28T18:55:04Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@copumpkin good point\n",
+   "created_at": "2015-03-28T21:00:55Z",
+   "id": 87302255,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-28T21:00:55Z",
+   "user": {
+    "id": 2179419,
+    "login": "jagajaga",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Closing: This work is taken over by @ts468 in #9250.\n",
+   "created_at": "2015-11-20T21:43:58Z",
+   "id": 158532954,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-11-20T21:43:58Z",
+   "user": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/4594",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "This pull request is made to bootstrap a variant of NixOS, which is dedicated at managing the home directory of users.  This new project is called NixUP (Nix User Profile), and the goals are the following:\n- [✓] Generate an activation script.\n- [✓] Abstract the creation of resource files. (similar to environment.etc)\n- [✓] Option to list installed packages. (similar to system.packages)\n- [✗] Command line tool to manage profiles generations and updates.  (similar to nixos-rebuild)\n- [✗] Command line tool to write / read option definition without using an editor.  (no legacy yet)\n- [✗] Mock compatibility modules to use some NixOS modules in NixUP.\n- [✗] Include NixUP modules as submodules of NixOS option `users.extraUser.<name?>`\n",
+  "closed_at": "2015-11-20T21:43:58Z",
+  "closed_by": {
+   "id": 1179566,
+   "login": "nbp",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 20,
+  "created_at": "2014-10-19T17:50:57Z",
+  "draft": false,
+  "id": 46211864,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Add something new or improve an existing system.",
+    "id": 6314752,
+    "name": "0.kind: enhancement"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 4594,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/4594.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/4594.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "Make a configuration management tool based on Nix to manage User Profiles.",
+  "type": null,
+  "updated_at": "2015-11-20T21:43:58Z",
+  "user": {
+   "id": 1179566,
+   "login": "nbp",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 449,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:38:34Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "9395a4c645530d17e21b76f46384954d2417a668",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "This pull request is made to bootstrap a variant of NixOS, which is dedicated at managing the home directory of users.  This new project is called NixUP (Nix User Profile), and the goals are the following:\n- [✓] Generate an activation script.\n- [✓] Abstract the creation of resource files. (similar to environment.etc)\n- [✓] Option to list installed packages. (similar to system.packages)\n- [✗] Command line tool to manage profiles generations and updates.  (similar to nixos-rebuild)\n- [✗] Command line tool to write / read option definition without using an editor.  (no legacy yet)\n- [✗] Mock compatibility modules to use some NixOS modules in NixUP.\n- [✗] Include NixUP modules as submodules of NixOS option `users.extraUser.<name?>`\n",
+  "changed_files": 9,
+  "closed_at": "2015-11-20T21:43:58Z",
+  "comments": 20,
+  "commits": 3,
+  "created_at": "2014-10-19T17:50:57Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/4594.diff",
+  "draft": false,
+  "head": {
+   "label": "nbp:nixup",
+   "ref": "nixup",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-08T03:23:01Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "nbp/nixpkgs-2",
+    "git_commits_url": "https://api.github.com/repos/nbp/nixpkgs-2/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": null,
+    "id": 4593147,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/nbp/nixpkgs-2/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/nbp/nixpkgs-2/milestones{/number}",
+    "name": "nixpkgs-2",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 1179566,
+     "login": "nbp",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/nbp/nixpkgs-2/pulls{/number}",
+    "pushed_at": "2025-07-20T18:44:00Z",
+    "size": 5062107,
+    "stargazers_count": 2,
+    "subscription_url": "https://api.github.com/repos/nbp/nixpkgs-2/subscription",
+    "tags_url": "https://api.github.com/repos/nbp/nixpkgs-2/tags",
+    "topics": [],
+    "updated_at": "2026-03-14T13:03:17Z",
+    "visibility": "public",
+    "watchers": 2,
+    "watchers_count": 2,
+    "web_commit_signoff_required": false
+   },
+   "sha": "1e50b2adebc998327fe9b8d1c18c7eeaa503d2c5",
+   "user": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 22983300,
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Add something new or improve an existing system.",
+    "id": 6314752,
+    "name": "0.kind: enhancement"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "cae0e501c2d1593a852b93199544f12eb82b7bf1",
+  "mergeable": true,
+  "mergeable_state": "blocked",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 4594,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/4594.patch",
+  "rebaseable": true,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "Make a configuration management tool based on Nix to manage User Profiles.",
+  "updated_at": "2015-11-20T21:43:58Z",
+  "user": {
+   "id": 1179566,
+   "login": "nbp",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#4594",
+ "review_comments": [],
+ "reviews": [],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2015-11-20T21:43:58Z",
+   "event": "closed",
+   "id": 470891269,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

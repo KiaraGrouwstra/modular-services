@@ -1,0 +1,221 @@
+{
+ "comments": [
+  {
+   "body": "while the mentioned example was about setting a NixOS-specific option, we may similarly need to look into instances of reading NixOS configuration (`config.<...>`).",
+   "created_at": "2026-02-19T13:39:56Z",
+   "id": 3927381778,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-02-19T14:10:16Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/nixifying-kubernetes-with-nix-csi-easykubenix-and-dinix/70899/33\n",
+   "created_at": "2026-02-24T00:50:55Z",
+   "id": 3948228295,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-24T00:50:55Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "to get a bit more of a sense of the scale of the challenge here, i went over configuration options set over the few dozen services (in top-level nix files) from categories:\n\n- [`web-servers`](https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/services/web-servers)\n- [`matrix`](https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/services/matrix)\n\ngoing by this, i'm feeling somewhat optimistic.\nanecdotally, configuration options set i felt seemed fairly sensible in the service context. these included:\n\n- requested sibling services (see #490688)\n- loading relevant packages into the environment\n- ensuring availability of used users/groups\n- setting permissions on related temp files (`systemd.tmpfiles.rules`)\n- creating used configuration files\n\nwhile modular services may further facilitate module reuse in the desktop context, while i focused more on this server setting, if this might be taken as any indication, i feel like the prospects of porting more things to modular services are looking pretty bright.\n\nto get a better sense of this, we might want to further look into:\n\n- desktop-oriented service modules\n- configuration options read (`config.<...>`) rather than set (`config = { ... }`)\n",
+   "created_at": "2026-02-24T11:57:54Z",
+   "id": 3951229722,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-24T11:59:23Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "related:\n\n- [info used by kubernetes](https://github.com/NixOS/nixpkgs/issues/26067#issuecomment-303847103)\n- health check endpoints for use in e.g. [nomad](https://developer.hashicorp.com/nomad/docs/job-specification/check#type)\n",
+   "created_at": "2026-03-04T09:38:31Z",
+   "id": 3996360513,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-19T02:53:49Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@imincik if you're using modular services to target OCI, feel free to suggest metadata you would like for modular services to expose to facilitate that use-case!",
+   "created_at": "2026-03-19T02:49:02Z",
+   "id": 4087298366,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-19T02:49:02Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "[sloppy attempt](https://github.com/KiaraGrouwstra/nixpkgs/pull/new/modular-metadata) attempt at some basic info",
+   "created_at": "2026-04-04T20:58:19Z",
+   "id": 4187737861,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-04T20:58:19Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/490813",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "splitting out from https://github.com/NixOS/nixpkgs/pull/475372#pullrequestreview-3620863694, our compatibility layer PR ran into an existing option `services.redlib.openFirewall` that turned out non-trivial to port over to its modular service, in the sense that it [set a NixOS configuration option](https://github.com/NixOS/nixpkgs/pull/475372/changes#diff-7ecf0f8885e716e6265e543813b9d5088492fe793c83dba9f6616b9f02ef75ddL159-L161) rather than simply being part of the (in NixOS: systemd) service.\n\ngiven that we could not just invoke this in other (non-NixOS) contexts, we should look into what cases we might run into there, and perhaps consider offering options on the modular services interface (maybe not unlike the existing `process.argv`) for such existing NixOS-specific bits, so that different execution contexts could then handle these appropriately, not unlike how systemd configuration is only set conditionally when they actually apply.\ngiven we couldn't so much wrap all NixOS options, we'll have to figure out the scope of the problem to get a sense of what we can do here.\n\n~~note that `openFirewall` option specifically should also need info on ports (see #490640)~~ - services probably expose port info thru an option already\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 6,
+  "created_at": "2026-02-15T20:04:36Z",
+  "id": 3944805534,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 490813,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "modular services: offer semantic interfaces to handle NixOS-specific parts",
+  "type": null,
+  "updated_at": "2026-07-23T17:20:08Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#490813",
+ "sources": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": []
+}

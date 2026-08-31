@@ -1,0 +1,365 @@
+{
+ "comments": [
+  {
+   "body": "I've tested this by booting Windows 11 (UEFI + TPM), Nixos Plasma (UEFI), and Rocky Linux (BIOS). Networking and everything works as expected. I also tested creating a new image using Nixos Plasma and it worked as expected.",
+   "created_at": "2025-04-02T22:10:24Z",
+   "id": 2773844936,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-04-02T22:30:37Z",
+   "user": {
+    "id": 6035884,
+    "login": "codebam",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/393051",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "- Modified the configuration to, instead of enabling the monolithic daemon, enable the sockets for each individual libvirt component as outlined [here](https://libvirt.org/daemons.html)\r\n- Modified the package itself to remove postInstall step that deleted some of the libvirt modular daemon service files\r\n\r\n\r\n## Things done\r\n\r\n- Built on platform(s)\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [ ] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#linking-nixos-module-tests-to-a-package) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [x] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [25.05 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) (or backporting [24.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2411.section.md) and [25.05](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) Release notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#reviewing-contributions\r\n-->\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 1,
+  "created_at": "2025-03-25T11:09:47Z",
+  "draft": false,
+  "id": 2946162447,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "fbca04",
+    "default": false,
+    "description": "This PR causes between 11 and 100 packages to rebuild on Linux.",
+    "id": 731734101,
+    "name": "10.rebuild-linux: 11-100"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 393051,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/393051.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/393051.patch"
+  },
+  "reactions": {
+   "+1": 3,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 3
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "libvirt: switch to socket based daemons",
+  "type": null,
+  "updated_at": "2025-09-30T12:18:47Z",
+  "user": {
+   "id": 6035884,
+   "login": "codebam",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 141,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:35:41Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "39feb5ab8b6eba1619ad2c5ec8184d55ddd40c0f",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "- Modified the configuration to, instead of enabling the monolithic daemon, enable the sockets for each individual libvirt component as outlined [here](https://libvirt.org/daemons.html)\r\n- Modified the package itself to remove postInstall step that deleted some of the libvirt modular daemon service files\r\n\r\n\r\n## Things done\r\n\r\n- Built on platform(s)\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [ ] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#linking-nixos-module-tests-to-a-package) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [x] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [25.05 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) (or backporting [24.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2411.section.md) and [25.05](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) Release notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#reviewing-contributions\r\n-->\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 2,
+  "closed_at": null,
+  "comments": 1,
+  "commits": 1,
+  "created_at": "2025-03-25T11:09:47Z",
+  "deletions": 144,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/393051.diff",
+  "draft": false,
+  "head": {
+   "label": "codebam:libvirt-sockets",
+   "ref": "libvirt-sockets",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-04-16T00:30:38Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "codebam/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/codebam/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 787135524,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/codebam/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/codebam/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 6035884,
+     "login": "codebam",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/codebam/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-06T17:03:16Z",
+    "size": 3131628,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/codebam/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/codebam/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-05-27T19:07:54Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "292ec793e1bb322648ca474fea5e3d1eae15a21e",
+   "user": {
+    "id": 6035884,
+    "login": "codebam",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 2416329300,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "fbca04",
+    "default": false,
+    "description": "This PR causes between 11 and 100 packages to rebuild on Linux.",
+    "id": 731734101,
+    "name": "10.rebuild-linux: 11-100"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 393051,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/393051.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 114159,
+    "login": "fpletz",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 1447245,
+    "login": "globin",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 7243783,
+    "login": "lovesegfault",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "open",
+  "title": "libvirt: switch to socket based daemons",
+  "updated_at": "2025-09-30T12:18:47Z",
+  "user": {
+   "id": 6035884,
+   "login": "codebam",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#393051",
+ "review_comments": [],
+ "reviews": [],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": []
+}

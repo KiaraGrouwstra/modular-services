@@ -1,0 +1,783 @@
+{
+ "comments": [
+  {
+   "body": "Not sure if this should go into `lib/`, as it's not even really connected to `lib` proper.\r\n\r\nMaybe we should actually carry out the division into multiple \"libs\" that better reflects the purposes and maintenance models for these things.\r\n- Something like https://github.com/NixOS/nixpkgs/pull/413205\r\n  where it would be naturally separate from the core `lib`\r\n\r\nStill inclined to merge as that could be figured out and agreed upon later.\r\n",
+   "created_at": "2026-04-04T09:29:41Z",
+   "id": 4186836360,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-04T09:29:41Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/prs-already-reviewed/2617/2913\n",
+   "created_at": "2026-04-04T11:59:46Z",
+   "id": 4187008915,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-04T11:59:46Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It would also be nice if we have a proper attribute to reference for `portable-lib` instead of a file path we have to manually import, something like `lib.portable` or the `lib` division @roberth was talking about, since this change won't be backwards compatible (mind you this only effects a grand total of ~2 non nixpkgs repositories based on a quick github search, so it's not a huge concern) ",
+   "created_at": "2026-04-05T17:38:04Z",
+   "id": 4189247629,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-05T17:38:04Z",
+   "user": {
+    "id": 156000062,
+    "login": "baileylu121",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> It would also be nice if we have a proper attribute to reference for `portable-lib` instead of a file path we have to manually import, something like `lib.portable` or the `lib` division @roberth was talking about, since this change won't be backwards compatible (mind you this only effects a grand total of ~2 non nixpkgs repositories based on a quick github search, so it's not a huge concern)\r\n\r\nThis is probably best done in a followup pr, as this seems to be a nitpick more than of a merge blocker.",
+   "created_at": "2026-04-05T18:10:14Z",
+   "id": 4189292329,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-05T18:11:55Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> It would also be nice if we have a proper attribute to reference for `portable-lib` instead of a file path we have to manually import, something like `lib.portable` or the `lib` division @roberth was talking about, since this change won't be backwards compatible (mind you this only effects a grand total of ~2 non nixpkgs repositories based on a quick github search, so it's not a huge concern)\r\n\r\nopened #507052 now for this.\r\ni'm hoping `lib.services` might help alleviate confusion from the internal 'portable' vs external 'modular' naming, but feedback welcome there...\r\n",
+   "created_at": "2026-04-05T20:19:28Z",
+   "id": 4189468559,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-05T20:19:28Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/506519",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Move the portable modular service base from `nixos/modules/system/service/portable/` to `lib/services/`, making it importable by any module system (home-manager, nix-darwin, ...) without reaching into the nixos/ tree, given this should not actually depend on NixOS.\r\n\r\nNo functional changes - only import paths differ.\r\n\r\nPrecursor to #506343.\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-04-05T19:22:52Z",
+  "closed_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 5,
+  "created_at": "2026-04-04T06:48:18Z",
+  "draft": false,
+  "id": 4203908413,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 506519,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/506519.diff",
+   "merged_at": "2026-04-05T19:22:52Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/506519.patch"
+  },
+  "reactions": {
+   "+1": 2,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 1,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 3
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "lib/services: move portable service infrastructure out of nixos/",
+  "type": null,
+  "updated_at": "2026-04-05T20:19:28Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 16,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "7546f1350760636562e200596f2a3d5ec341bd66",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Move the portable modular service base from `nixos/modules/system/service/portable/` to `lib/services/`, making it importable by any module system (home-manager, nix-darwin, ...) without reaching into the nixos/ tree, given this should not actually depend on NixOS.\r\n\r\nNo functional changes - only import paths differ.\r\n\r\nPrecursor to #506343.\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 10,
+  "closed_at": "2026-04-05T19:22:52Z",
+  "comments": 5,
+  "commits": 2,
+  "created_at": "2026-04-04T06:48:18Z",
+  "deletions": 13,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/506519.diff",
+  "draft": false,
+  "head": {
+   "label": "KiaraGrouwstra:modular-services-portable-move",
+   "ref": "modular-services-portable-move",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2018-06-10T10:36:34Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 136799825,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 1,
+    "open_issues_count": 1,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-30T19:20:59Z",
+    "size": 3035282,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2024-06-23T17:05:42Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "1baf57f3a0a12a99c1f1e74134e3df09c6ef7bfb",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3488500919,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "f303cb404b46481e7720bbaa6c821e6151e9254d",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-04-05T19:22:52Z",
+  "merged_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 506519,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/506519.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "lib/services: move portable service infrastructure out of nixos/",
+  "updated_at": "2026-04-05T20:19:28Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#506519",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "1baf57f3a0a12a99c1f1e74134e3df09c6ef7bfb",
+   "id": 4058372632,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-04T09:30:19Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I agree with @roberth, However this can be argued later. Apart from that, the rest LGTM/SGTM.",
+   "commit_id": "1baf57f3a0a12a99c1f1e74134e3df09c6ef7bfb",
+   "id": 4059584173,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-05T15:43:35Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs",
+  "nixpkgs-lib-services-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "f303cb404b46481e7720bbaa6c821e6151e9254d",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/f303cb404b46481e7720bbaa6c821e6151e9254d",
+   "created_at": "2026-04-05T19:22:52Z",
+   "event": "merged",
+   "id": 24209255449
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-05T19:22:52Z",
+   "event": "closed",
+   "id": 24209255470,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "41e4049df53094ee50333b968d830cd95bd4f41f",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/41e4049df53094ee50333b968d830cd95bd4f41f",
+   "created_at": "2026-04-05T20:16:23Z",
+   "event": "referenced",
+   "id": 24209657718
+  },
+  {
+   "actor": {
+    "id": 10098207,
+    "login": "ilai-deutel",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "318a37d2e0b5f7be1d1ebc112c4dfe4d83c4eaf1",
+   "commit_url": "https://api.github.com/repos/ilai-deutel/nixpkgs/commits/318a37d2e0b5f7be1d1ebc112c4dfe4d83c4eaf1",
+   "created_at": "2026-04-06T02:35:53Z",
+   "event": "referenced",
+   "id": 24212935544
+  },
+  {
+   "actor": {
+    "id": 21160136,
+    "login": "ju1m",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "09cdfdd55c25169bc6d53d91ec8d1b04eb21cb6c",
+   "commit_url": "https://api.github.com/repos/ju1m/app-store/commits/09cdfdd55c25169bc6d53d91ec8d1b04eb21cb6c",
+   "created_at": "2026-04-07T00:13:42Z",
+   "event": "referenced",
+   "id": 24240126029
+  },
+  {
+   "actor": {
+    "id": 21160136,
+    "login": "ju1m",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fcb47007737c0407072117006967aadf9c6ac892",
+   "commit_url": "https://api.github.com/repos/ju1m/app-store/commits/fcb47007737c0407072117006967aadf9c6ac892",
+   "created_at": "2026-04-07T01:10:49Z",
+   "event": "referenced",
+   "id": 24241053072
+  },
+  {
+   "actor": {
+    "id": 21160136,
+    "login": "ju1m",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "df5c934333a85e0daacc73a297f5b9d8f5286fcb",
+   "commit_url": "https://api.github.com/repos/ju1m/app-store/commits/df5c934333a85e0daacc73a297f5b9d8f5286fcb",
+   "created_at": "2026-04-07T01:16:06Z",
+   "event": "referenced",
+   "id": 24241142823
+  },
+  {
+   "actor": {
+    "id": 21160136,
+    "login": "ju1m",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "b6e3b5919d21c685702ba4968b7fb56b1c515d27",
+   "commit_url": "https://api.github.com/repos/ju1m/app-store/commits/b6e3b5919d21c685702ba4968b7fb56b1c515d27",
+   "created_at": "2026-04-07T01:22:14Z",
+   "event": "referenced",
+   "id": 24241230982
+  },
+  {
+   "actor": {
+    "id": 21160136,
+    "login": "ju1m",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "781aa30fb76d8de131db45da2c7e5fbe1d26da19",
+   "commit_url": "https://api.github.com/repos/ju1m/app-store/commits/781aa30fb76d8de131db45da2c7e5fbe1d26da19",
+   "created_at": "2026-04-07T06:24:00Z",
+   "event": "referenced",
+   "id": 24246315227
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "6a632d4d5f195a7d2aaa2b6059116e66b521e8df",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nimi/commits/6a632d4d5f195a7d2aaa2b6059116e66b521e8df",
+   "created_at": "2026-04-09T04:40:14Z",
+   "event": "referenced",
+   "id": 24322073098
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "130de40b83fe5daba1b00e3fb85188595456c62b",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nimi/commits/130de40b83fe5daba1b00e3fb85188595456c62b",
+   "created_at": "2026-04-09T14:41:11Z",
+   "event": "referenced",
+   "id": 24340036687
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fa7a21ef89e07895e12c58c2f5447345a9158fc8",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nimi/commits/fa7a21ef89e07895e12c58c2f5447345a9158fc8",
+   "created_at": "2026-04-09T14:42:47Z",
+   "event": "referenced",
+   "id": 24340093651
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "b6e3122018efa85dc931a89adf2fe29533dcd7ab",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nimi/commits/b6e3122018efa85dc931a89adf2fe29533dcd7ab",
+   "created_at": "2026-04-09T15:39:39Z",
+   "event": "referenced",
+   "id": 24342154141
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "5a9f54f4e84c64121ce7d5c8fffa409992774d71",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nimi/commits/5a9f54f4e84c64121ce7d5c8fffa409992774d71",
+   "created_at": "2026-04-09T15:40:56Z",
+   "event": "referenced",
+   "id": 24342199373
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "52819c147f88088c53739b64415c4ed9e5565737",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nimi/commits/52819c147f88088c53739b64415c4ed9e5565737",
+   "created_at": "2026-04-09T15:42:57Z",
+   "event": "referenced",
+   "id": 24342265130
+  },
+  {
+   "actor": {
+    "id": 476346,
+    "login": "imincik",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "68e2a43c984e77e74d2f005fab9c1ff01e9478c4",
+   "commit_url": "https://api.github.com/repos/ngi-nix/nimi/commits/68e2a43c984e77e74d2f005fab9c1ff01e9478c4",
+   "created_at": "2026-04-14T09:35:36Z",
+   "event": "referenced",
+   "id": 24481507609
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "e2bbab5616f448e6664557481540adb1c47a8af9",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/e2bbab5616f448e6664557481540adb1c47a8af9",
+   "created_at": "2026-07-24T18:16:05Z",
+   "event": "referenced",
+   "id": 28450611672
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "ad60dad8ce818d7dc072aa1f45ec088703bc8727",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/ad60dad8ce818d7dc072aa1f45ec088703bc8727",
+   "created_at": "2026-07-25T14:21:02Z",
+   "event": "referenced",
+   "id": 28476648902
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "3a1df2ea5ad7d7e654ada5f6930691b098b8ef55",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/3a1df2ea5ad7d7e654ada5f6930691b098b8ef55",
+   "created_at": "2026-07-25T14:55:55Z",
+   "event": "referenced",
+   "id": 28477269664
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "6ca7f903a09499a837bc11be143f3819ebec9996",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/6ca7f903a09499a837bc11be143f3819ebec9996",
+   "created_at": "2026-08-07T17:39:32Z",
+   "event": "referenced",
+   "id": 29132592943
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "cef423b966e554c55ba3cde598305f0513d2fd61",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/cef423b966e554c55ba3cde598305f0513d2fd61",
+   "created_at": "2026-08-30T19:18:19Z",
+   "event": "referenced",
+   "id": 30244499528
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "37bc26ef24347d5a99916cdef3de590f6dd49f63",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/37bc26ef24347d5a99916cdef3de590f6dd49f63",
+   "created_at": "2026-08-30T19:21:02Z",
+   "event": "referenced",
+   "id": 30244555522
+  }
+ ]
+}

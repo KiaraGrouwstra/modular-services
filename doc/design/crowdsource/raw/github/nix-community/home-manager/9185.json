@@ -1,0 +1,228 @@
+{
+ "comments": [
+  {
+   "body": "The PR adding the option is ~4 months old so some other change must be the cause. https://github.com/NixOS/nixpkgs/pull/475107",
+   "created_at": "2026-04-26T09:59:07Z",
+   "id": 4321772262,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-26T09:59:07Z",
+   "user": {
+    "id": 1087544,
+    "login": "anund",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes, it is 4 months old, though it was only merged last week, and only present in nixos-unstable for a few days. So it is likely the cause of this issue.",
+   "created_at": "2026-04-27T04:57:54Z",
+   "id": 4324263698,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2026-04-27T04:57:54Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think you have to disable the nixos option, as it actually conflicts with itself due to this line:\nhttps://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/desktops/blueman.nix#L32\n(the package contains a user unit with the same name)",
+   "created_at": "2026-04-29T17:40:13Z",
+   "id": 4346095462,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-29T17:50:47Z",
+   "user": {
+    "id": 42455524,
+    "login": "BulbaWarrior",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@BulbaWarrior is correct about the error, issue updated and closing here. The bug is entirely in nixpkgs.",
+   "created_at": "2026-04-30T01:03:04Z",
+   "id": 4348731998,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-30T01:04:09Z",
+   "user": {
+    "id": 1087544,
+    "login": "anund",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-community/home-manager/issues/9185",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Are you following the right branch?\n\n- [x] My Nixpkgs and Home Manager versions are in sync\n\n### Is there an existing issue for this?\n\n- [x] I have searched the existing issues\n\n### Issue description\n\nEnabling `services.blueman` in nixos now adds a default `true` option to add the applet in nixos unstable; see [services.blueman.withApplet](https://search.nixos.org/options?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=blueman&show=option:services.blueman.withApplet). This creates logs like the following\n\n```\nsystemd[8262]: blueman-applet.service: Service has more than one ExecStart= setting, which is only allowed for Type=oneshot services. Refusing.\nsystemd[8262]: blueman-applet.service: Cannot add dependency job, ignoring: Unit blueman-applet.service has a bad unit file setting.\n```\n\nManually setting `services.blueman.withApplet` in nixos to false resolves the error.\n\n### Maintainer CC\n\n_No response_\n\n### System information\n\n```markdown\n- system: `\"x86_64-linux\"`\n - host os: `Linux 6.18.24, NixOS, 26.05 (Yarara), 26.05pre985613.0726a0ecb6d4`\n - multi-user?: `yes`\n - sandbox: `yes`\n - version: `nix-env (Nix) 2.34.6`\n - channels(root): `\"home-manager, nixos\"`\n - nixpkgs: `/nix/store/p6lqiyz07sm8qkxi2nwdfxwhb47i37ad-nixos/nixos`\n```",
+  "closed_at": "2026-04-30T01:03:04Z",
+  "closed_by": {
+   "id": 1087544,
+   "login": "anund",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 4,
+  "created_at": "2026-04-26T09:50:58Z",
+  "id": 4330562281,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "ee0701",
+    "default": true,
+    "description": null,
+    "id": 518121614,
+    "name": "bug"
+   },
+   {
+    "color": "006b75",
+    "default": false,
+    "description": "Issues or feature request that have not been triaged yet",
+    "id": 3183407014,
+    "name": "triage"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 9185,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 8,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 8
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "bug: `services.blueman.withApplet` is currently broken",
+  "type": null,
+  "updated_at": "2026-04-30T01:04:09Z",
+  "user": {
+   "id": 1087544,
+   "login": "anund",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "nix-community/home-manager#9185",
+ "sources": [
+  "home-manager-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 33132401,
+    "login": "kylosus",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "70ca0623f7f44ef8a063cf207e8bce785cd3007e",
+   "commit_url": "https://api.github.com/repos/kylosus/nixdoots/commits/70ca0623f7f44ef8a063cf207e8bce785cd3007e",
+   "created_at": "2026-04-27T13:10:38Z",
+   "event": "referenced",
+   "id": 24906781107
+  },
+  {
+   "actor": {
+    "id": 1087544,
+    "login": "anund",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-30T00:59:53Z",
+   "event": "renamed",
+   "id": 25014530100,
+   "rename": {
+    "from": "bug: `services.blueman-applet` conflicts with default nixos setting `services.blueman.withApplet`",
+    "to": "bug: `services.blueman.withApplet` is currently broken"
+   }
+  },
+  {
+   "actor": {
+    "id": 1087544,
+    "login": "anund",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-30T01:03:04Z",
+   "event": "closed",
+   "id": 25014594678,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

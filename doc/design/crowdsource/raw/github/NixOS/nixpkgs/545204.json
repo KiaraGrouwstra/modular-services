@@ -1,0 +1,171 @@
+{
+ "comments": [
+  {
+   "body": "We had previously also discussed this in connection to the separate topic of having ad hoc per-platform conditionals in modules.\nThat's something we'd wish to avoid in Nixpkgs, but I think is perfectly valid for third-party modules that are distributed through separate repos. Those would presumably be difficult to integrate into a pattern like #540863, so maybe we should document this is a necessary difference between how third-party services and third-party service manager integrations are written.\n- service manager distributions: #540863\n- individual module projects: `// optionalAttrs (options?...)` etc (we could still make that more accurate and ergonomic)",
+   "created_at": "2026-07-25T13:01:51Z",
+   "id": 5078576532,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-25T13:01:51Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "if modular service implementations for NixOS were to not need `pkgs/`, why would others?\n\ni presume this is about the earlier discussion w.r.t. versioning / testing?\n",
+   "created_at": "2026-07-25T15:06:23Z",
+   "id": 5078979815,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-25T15:06:23Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "NixOS/nixos-search#1464 seems a working PoC on this based on #540863",
+   "created_at": "2026-07-26T20:35:48Z",
+   "id": 5085286093,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-26T20:35:48Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "maybe an open question here is how to express that a service is not supported on a given environment (`meta.unsupported = \"this is why not\";`?)",
+   "created_at": "2026-07-28T16:01:46Z",
+   "id": 5106574416,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-28T16:01:46Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/545204",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "modular services (#428084) expose info that facilitates running on (so far) e.g. Home Manager, finix, nimi, and NixOS - in the future potentially also including user services, see #524517.\n\na nix user looking to use given software on the platform of their choosing might thus wonder:\n\n> is this service supported in the way I wanted to consume it?\n\nanswers could include:\n\n- yes\n- no (+ reason? which could maybe be inferred from our info on the service + consuming platform)\n- untested\n\nsuch a user might want to be able to find the answer to their question online.\nright now, that would involve browsing source code, but given structured data, it should get easier to answer this, so that the answers could also be published thru say <https://search.nixos.org/>.\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 4,
+  "created_at": "2026-07-24T11:21:28Z",
+  "id": 4967944952,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 545204,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "discoverability on which modular services are supported where",
+  "type": null,
+  "updated_at": "2026-07-28T16:01:46Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#545204",
+ "sources": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": []
+}

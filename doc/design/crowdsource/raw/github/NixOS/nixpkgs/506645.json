@@ -1,0 +1,493 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/506645",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "build upon #475372 to answer a few further questions in making compatibility layers for porting NixOS services to modular services:\r\n\r\n- how to handle 1:n relations between a NixOS service option space (here: `services.easytier`) yielding multiple (systemd/modular) services\r\n- handling NixOS options shared across such corresponding modular services in this above case\r\n\r\nas with #475372, i know little of this particular package, i just picked one that seemed to fit this particular proof of concept.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 0,
+  "created_at": "2026-04-04T14:49:28Z",
+  "draft": false,
+  "id": 4205099639,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 506645,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/506645.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/506645.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "easyturn: convert to modular service",
+  "type": null,
+  "updated_at": "2026-07-23T20:21:02Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 424,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "a1b8933f91bf18cf4b61c477f776bb6c8fb0dd35",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "build upon #475372 to answer a few further questions in making compatibility layers for porting NixOS services to modular services:\r\n\r\n- how to handle 1:n relations between a NixOS service option space (here: `services.easytier`) yielding multiple (systemd/modular) services\r\n- handling NixOS options shared across such corresponding modular services in this above case\r\n\r\nas with #475372, i know little of this particular package, i just picked one that seemed to fit this particular proof of concept.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 4,
+  "closed_at": null,
+  "comments": 0,
+  "commits": 1,
+  "created_at": "2026-04-04T14:49:28Z",
+  "deletions": 251,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/506645.diff",
+  "draft": false,
+  "head": {
+   "label": "KiaraGrouwstra:modular-easytier",
+   "ref": "modular-easytier",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2018-06-10T10:36:34Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 136799825,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 1,
+    "open_issues_count": 1,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-30T19:20:59Z",
+    "size": 3035282,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2024-06-23T17:05:42Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "019037c33297e0fc8adeb143ed2dbfe7d45ac415",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3489048287,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 506645,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/506645.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 37738631,
+    "login": "L-Trump",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 3,
+  "state": "open",
+  "title": "easyturn: convert to modular service",
+  "updated_at": "2026-07-23T20:21:02Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#506645",
+ "review_comments": [
+  {
+   "body": "is global `with lib` now accepted again?",
+   "commit_id": "2888a875467683789fb788415287e5694a56ea56",
+   "created_at": "2026-04-04T15:09:12Z",
+   "diff_hunk": "@@ -0,0 +1,148 @@\n+# Shared per-instance option definitions for easytier.\n+# Used by both the modular service module and the NixOS module.\n+{\n+  lib,\n+  name,\n+  settingsFormat,\n+}:\n+\n+with lib;",
+   "id": 3035682018,
+   "line": null,
+   "original_commit_id": "2888a875467683789fb788415287e5694a56ea56",
+   "original_line": 9,
+   "original_position": 9,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ea/easytier/instance-options.nix",
+   "position": 1,
+   "pull_request_review_id": 4058583822,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-04T15:09:20Z",
+   "user": {
+    "id": 131599,
+    "login": "mweinelt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "with lib; also present here",
+   "commit_id": "4308b3c9dad715b8559ca0ae1f0e4082ae8c1f0a",
+   "created_at": "2026-04-04T15:55:23Z",
+   "diff_hunk": "",
+   "id": 3035728688,
+   "line": null,
+   "original_commit_id": "4308b3c9dad715b8559ca0ae1f0e4082ae8c1f0a",
+   "original_line": 8,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "nixos/modules/services/networking/easytier.nix",
+   "position": 1,
+   "pull_request_review_id": 4058617956,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-04T15:55:24Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "and here",
+   "commit_id": "4308b3c9dad715b8559ca0ae1f0e4082ae8c1f0a",
+   "created_at": "2026-04-04T15:55:31Z",
+   "diff_hunk": "@@ -0,0 +1,111 @@\n+# Non-module dependencies (`importApply`)\n+{ settingsFormat }:\n+\n+# Service module\n+{\n+  lib,\n+  config,\n+  options,\n+  name,\n+  ...\n+}:\n+\n+with lib;",
+   "id": 3035728858,
+   "line": null,
+   "original_commit_id": "4308b3c9dad715b8559ca0ae1f0e4082ae8c1f0a",
+   "original_line": 13,
+   "original_position": 13,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ea/easytier/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4058618054,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-04T15:55:31Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "2888a875467683789fb788415287e5694a56ea56",
+   "id": 4058583822,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-04T15:09:12Z",
+   "user": {
+    "id": 131599,
+    "login": "mweinelt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "4308b3c9dad715b8559ca0ae1f0e4082ae8c1f0a",
+   "id": 4058617956,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-04T15:55:23Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "4308b3c9dad715b8559ca0ae1f0e4082ae8c1f0a",
+   "id": 4058618054,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-04T15:55:31Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": []
+}

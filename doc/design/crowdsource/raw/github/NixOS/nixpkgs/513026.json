@@ -1,0 +1,61 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/513026",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "## status quo\n\n`virtualisation.memorySize` works before switching to nspawn, not after\n\n## desired alternative\n\nhaving an option that is valid to set regardless of the active test driver, e.g. `testing.qemu.virtualisation.memorySize`\n\n## rationale\n\nwhile i previously hoped the nspawn container test driver (#478109) could retain functionality of the QEMU driver surrounding seeing its display (#510228), it looks like they would not be able to offer that.\n\nthat makes porting over tests with visual components to them (e.g. headless navigation of web pages, whose structure may change by software version) a bit dicier: for the happy path, the nspawn containers would offer lower overhead (RAM, start-up time), whereas the QEMU VMs might be useful for debugging when this happy path fails.\n\nnow, whereas the nspawn container test driver might have been advertised as offering a somewhat drop-in migration from `nodes` to `containers`, configuration options differ between the test drivers: [`virtualisation.memorySize`](https://search.nixos.org/options?channel=25.11&include_modular_service_options=1&include_nixos_options=1&query=virtualisation.memorySize), for one, is accepted by the QEMU-based driver, yet not by the nspawn one.\n\nas such, this migration might currently then involve commenting such configuration, to ensure their values would not be forgotten in the event the happy path would fail.\n\nin a sense, that feels hacky to me tho. it feels like it would be nicer to have a configuration option one could set to configure a specific test driver, regardless of the currently active test driver.\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 0,
+  "created_at": "2026-04-24T08:52:26Z",
+  "id": 4321773068,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 513026,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "allow configuring test drivers regardless of test driver currently used",
+  "type": null,
+  "updated_at": "2026-04-24T08:52:26Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#513026",
+ "sources": [
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": []
+}

@@ -1,0 +1,556 @@
+{
+ "comments": [
+  {
+   "body": "Indeed contracts enable this. Let's take an imaginary database contract:\n\n(in pseudo code)\n\n```nix\n{\n  options = {\n    output = {\n      endpoint = mkOption { type = str; };\n    };\n  };\n}\n```\n\nUsually one would ask the Postgres database provider module to create a database for a consumer:\n\n```nix\n{\n  postgres.databases.mydatabase = {};\n  consumer.database = postgres.databases.mydatabase;\n}\n```\n\nBut nothing stops us from hardcoding it:\n\n```nix\n{\n  consumer.database = {\n    output.endpoint = \"postgres://node2/mydatabase\";\n  };\n}\n```\n\nThis takes care of enabling any module using contracts to be node agnostic. But we still have the issue of how to actually coordinate values across nodes.",
+   "created_at": "2025-09-24T23:25:32Z",
+   "id": 3331000627,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-09-24T23:25:32Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> But we still have the issue of how to actually coordinate values across nodes.\n\nRight, thanks for bringing that up.\n\nI feel like the answer there may depend on at what point the relevant information could be computed.\nAs in, for in as far as we might already have the answers up-front (i.e. computed within Nix, e.g. within a `let` to `outputs.nixosConfigurations`), then I would imagine we could just kind of route to nodes their respectively relevant info.\n\nSo then I wonder, would you maybe have an example of info we might only have available later?\n\nIf we do, I guess the solution could still depend a bit on whether the info is static (for a given build). If static (and not sensitive?), which I expect to be more likely if we originally had the info in Nix, I wonder if it could be propagated through e.g. Terraform inter-dependencies. If dynamic (and/or sensitive?) maybe through e.g. OpenBao.\n",
+   "created_at": "2025-09-25T08:20:46Z",
+   "id": 3332779852,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-25T08:20:46Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I cannot think of any system where nothing is harcoded. Two such systems spring to mind.\n\nOne example is with IPs. We could hardcode an IP but we usually don’t and use a DNS server. But then we hardcode the hostname we want to talk to as well as the address and port of the DNS server. And the DNS server hardcodes the translation from name to IP.\n\nAnother example is the .well-known URL convention. Sure we can discover some endpoints with it but we do hardcode the schema of the response and then also the .well-known path itself.\n\nI guess all that to say we can be as sophisticated as we want and discover everything through one endpoint but we must still hardcode some information about that endpoint. It then all depends on where you want to put the slider.\n\nA problem I will face soon at work is how to manage a dynamically scalable pool of NixOS machines. The IP and count of those is not known in advance and ideally a new instance would pick up its config from some central location. Also when deploying a new config, I don’t necessarily want to update all instances at once. Not sure how to handle that and I suppose this use case is related to what you had in mind?",
+   "created_at": "2025-09-25T15:48:10Z",
+   "id": 3334824365,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-09-25T15:50:01Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "yeah, having static bits helps, at least those we can just handle in nix.\n\nthat definitely sounds similar. for what it's worth, [here's my WIP](https://git.fediversity.eu/fediversity/fediversity/pulls/510/files) on a pipeline for that.\nthe idea would be that when an end-user presses a button, we'd trigger an opentofu pipeline deploying (and ideally, on subsequent triggers synchronizing) their machine(s) - with state specific to that user.\n\nmy intent is to regard the machine IPs as state to obtain from the provisioning step, to then be stored in the opentofu state, as that would be where it's needed - for now to push new configurations, in distributed set-ups maybe further to distribute relevant info across machines.\n",
+   "created_at": "2025-09-25T19:00:00Z",
+   "id": 3335555422,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-25T19:00:00Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "in my use-case (proxmox VMs) there'd actually be a non-IP reference (VM id) I might store for subsequent deployments as well.\n\noutside proxmox/terraform tho, there's been other avenues around deployment i haven't explored as much so far outside the traditional 'access over ssh by IP':\n\n- pull-based updates like [nits](https://github.com/numtide/nits)\n- centralized pushing of updates thru [`nixless-agent`](https://github.com/DanielSidhion/nixless-agent)\n- [UKIs](https://nixos.org/manual/nixos/stable/#sec-image-repart-appliance) (with [updates](https://x86.lol/generic/2024/08/28/systemd-sysupdate.html)?)\n- [kubernetes](https://github.com/DeterminateSystems/nix-to-kubernetes/)\n",
+   "created_at": "2025-09-25T19:26:32Z",
+   "id": 3335637100,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-25T19:27:24Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "just realized portable services took the form `<PACKAGE>.services.default`, implying room for distinct services per package as well. i'm not sure there have been any portable service implementations aside from just `pkgs.ghostunnel.services.default` so far, but it looks like separating services like that might be another step in facilitating distributed services.\nnot sure yet that affects opportunities for use of contracts there, but yeah.\n",
+   "created_at": "2025-10-22T09:56:18Z",
+   "id": 3431471946,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-10-22T09:56:18Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "to add another example, i guess a file backup contract could add an input indicating on what host to find the files to be backed up, defaulting to localhost.\n\nthat example seems fairly simple, in the sense not much contract info would need to be juggled around: even if a nextcloud module were instantiated on a different host, the configuration of the host taking the backup could nevertheless be pointed at such a module to check what files it should look for - see my attempt at [the PR thread at nixpkgs](https://github.com/NixOS/nixpkgs/pull/432529).\n\nnow, in case such info were to depend on how a module were instantiated, one would need to juggle info around.\nin a test setup, that could be done by say introspecting `nodes`, while across multiple configurations within the same flake one could instead introspect through `self`, for one.\n\nedit: that could maybe look like accessing `self.nixosConfigurations.${system}.config.system.contracts.database.requests`, then filtering by some host attribute.\n",
+   "created_at": "2025-12-20T01:26:11Z",
+   "id": 3677180284,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-23T14:45:59Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "clan's [`exports`](https://docs.clan.lol/guides/services/exports/) seem prior art on exposing info across nodes.\ncontracts' information needs tho may be a more complex in the sense of involving the information round-trip, technically inducing circular dependencies among nodes' nixos configurations.",
+   "created_at": "2025-12-30T10:06:22Z",
+   "id": 3698902216,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-12-30T10:06:22Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Re-reading this thread makes me realize there's a boundary between one node and multiple nodes. We get out of the module world (evalModules function) at that point. Maybe the answer is modular services. If we could define multiple full trees of nixosConfigurations inside the same module namespace (evalModules function), managing those circular dependencies defined by contract (well, made explicit by contracts, they do exist already) would be trivial. Anyway this won't happen soon.",
+   "created_at": "2026-03-03T21:22:29Z",
+   "id": 3993615377,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-03T21:22:29Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "to be fair, i guess the eval boundary seems soft, in the sense they may share info, be it through common imports or `let` binds",
+   "created_at": "2026-03-04T09:08:57Z",
+   "id": 3996213925,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-04T09:08:57Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That's true but threading the contract values across boundaries could be more difficult, no?",
+   "created_at": "2026-03-04T09:18:26Z",
+   "id": 3996258812,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-04T09:18:26Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i believe contracts served as to pass information around and allow generating config from that info.\ni think communication across nodes by shared code be it through imports or let bindings could both facilitate that.\n",
+   "created_at": "2026-03-06T17:35:32Z",
+   "id": 4013068433,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-06T17:35:32Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i'm maybe getting less confident on that assertion, so trying things out should help.\nthat raises the question which contract should be good to try this with, given file secrets seem fairly local.\nso maybe a better option would be [one of the others](https://github.com/NixOS/nixpkgs/pull/432529#issuecomment-3686663833) then - mostly i think still to be implemented so far.",
+   "created_at": "2026-03-08T16:23:04Z",
+   "id": 4019392730,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-08T16:23:04Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i now understand contracts to be a fairly low-level construct, and should not at the design level need a way to deal with this - tho having an (at least over here) documented way to pull this off would seem nice.\n\nso, `fileSecrets` for one i guess would not so much have use for cross-node stuff, which i think also helped me realize that cross-node info is kinda domain-specific: one domain might just need for one side of the contract to learn about the other side's IP or fully-qualified domain name, while in a different domain one might further need to know say SSH info on accessing the other side.\n\nall in all, that's probably the type of info that one would incorporate into individual contracts.\n",
+   "created_at": "2026-03-17T18:01:42Z",
+   "id": 4076935707,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-17T18:01:42Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "DISCLAIMER: I haven't used SelfHostBlocks yet, but I'm planning to migrate from Clan, depending on multi-node deployments. I've just read a lot of documentation.\n\nReading the ideas for contracts, they seem to be, as @KiaraGrouwstra says, quite low-level constructs. Instead of making cross-node sharing part of contracts, to me it seems like it would be a layer on top of SelfHostBlocks. The contracts allow ultimate configuration, and they themselves could be managed by another layer/service/etc. This kinda aligns with Clans design with the exports. They build exports, based on the services each node/machine has been assigned, and after that builds the nixosConfiguration based on the services and the exports they import. Of course each service can declare which type of export they consume and export, but this isn't necessary. In the recent commits of clan, this is only implemented with their UI they're currently implementing in mind, so services can autoconnect. This is not needed when using a declarative approach like SelfHostBlocks does.\n\nWhat I see is that skarabox maybe could implement this, as the layer on top. Again, I haven't used neither Skarabox or SelfHostBlocks yet, but to me it looks like that would be the project to implement this functionality in.",
+   "created_at": "2026-03-25T11:25:10Z",
+   "id": 4125797609,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-25T11:25:10Z",
+   "user": {
+    "id": 28702998,
+    "login": "Nerglej",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@Nerglej I agree this should be a layer on top of contracts. I'm not sure about Skarabox being where that layer should live. It's initial goal is to be a NixOS installer with a lot of features. It could be a module inside SelfHostBlocks. Although TBH I didn't think much about where this should live.",
+   "created_at": "2026-03-31T20:13:32Z",
+   "id": 4165209587,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-31T20:13:32Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i made a VM test demonstrating this now, i published a branch but PR wip",
+   "created_at": "2026-03-31T20:52:48Z",
+   "id": 4165440879,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 1,
+    "laugh": 0,
+    "rocket": 1,
+    "total_count": 2
+   },
+   "updated_at": "2026-03-31T20:52:48Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "approach demonstrated at [`‎nixos/tests/contracts/cross-node.nix`](https://github.com/NixOS/nixpkgs/pull/506343/changes#diff-bafe056e53b4281cb5c15c3688a528623ff3cf15c3675ff23192e01ea3b7e444).",
+   "created_at": "2026-04-03T17:57:27Z",
+   "id": 4184530470,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 1,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-03T17:57:27Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "for the record, i have since been using this concept over at [fediversity](https://git.fediversity.eu/fediversity/fediversity/search/branch/main?path=&q=cross-node&mode=exact) - tho it'll look more complex there than the above contrived example due to our data model focused on distinguishing which options are exposed to whom.",
+   "created_at": "2026-08-29T11:49:59Z",
+   "id": 5462256092,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 1,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-29T11:54:21Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/ibizaman/selfhostblocks/issues/541",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "as far as i recall, contracts implemented so far had mainly focused on handling node's own state, handling how to deal with secrets and backups.\n\nnow, in practice patterns like the micro-services architecture have encouraged formulating concrete expectations across nodes - a basic one for example being setup of a needed database for a given service running on a different node.\n\nin the nix world, we can have a computation produce configurations for multiple nodes, such as flakes' `nixosConfigurations`, which one could use to handle such expectations across nodes.\n\nthis then raises the question if selfhostblocks' contracts could be used in such cross-node settings so as to take care of such cases as having a service on one node communicate things it would like to have created that such a separate database node might then, given such info, deliver on.\n\nedit: prior art on documenting dependencies across services seem:\n\n- [disnix](https://github.com/svanderburg/disnix)\n- [clan services](https://git.clan.lol/clan/clan-core)\n",
+  "closed_at": "2026-04-03T17:57:27Z",
+  "closed_by": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 19,
+  "created_at": "2025-09-21T22:58:02Z",
+  "id": 3438689875,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 541,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/ibizaman/selfhostblocks",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "use of contracts across nodes?",
+  "updated_at": "2026-08-29T11:54:21Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "ibizaman/selfhostblocks#541",
+ "sources": [
+  "selfhostblocks-contracts-across-nodes"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-03T17:57:27Z",
+   "event": "closed",
+   "id": 24182661197,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

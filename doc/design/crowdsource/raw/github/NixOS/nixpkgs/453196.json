@@ -1,0 +1,843 @@
+{
+ "comments": [
+  {
+   "body": "## `nixpkgs-review` result\r\n\r\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha)\r\n\r\nCommand: `nixpkgs-review pr 453196`\r\nCommit: [`6316b883f1f4633cb96d3890406869b23e8047cb`](https://github.com/NixOS/nixpkgs/commit/6316b883f1f4633cb96d3890406869b23e8047cb) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/6316b883f1f4633cb96d3890406869b23e8047cb..pull/453196/head))\r\nMerge: [`00efbc098017d46f4f2174e7c1dded9718c31521`](https://github.com/NixOS/nixpkgs/commit/00efbc098017d46f4f2174e7c1dded9718c31521)\r\n\r\nLogs: https://github.com/eljamm/nixpkgs-review-gha/actions/runs/18615025690\r\n\r\n\r\n---\r\n### `x86_64-linux`\r\n<details>\r\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\r\n  <ul>\r\n    <li>nixos-install-tools</li>\r\n    <li>tests.nixos-functions.nixos-test</li>\r\n  </ul>\r\n</details>\r\n\r\n\r\n---\r\n### `aarch64-linux`\r\n<details>\r\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\r\n  <ul>\r\n    <li>nixos-install-tools</li>\r\n    <li>tests.nixos-functions.nixos-test</li>\r\n  </ul>\r\n</details>\r\n\r\n\r\n---\r\n### `x86_64-darwin`\r\n:white_check_mark: *No rebuilds*\r\n\r\n\r\n---\r\n### `aarch64-darwin`\r\n:white_check_mark: *No rebuilds*",
+   "created_at": "2025-10-18T12:10:49Z",
+   "id": 3418369787,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-10-18T12:10:49Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/does-the-nixos-scx-service-ignore-usual-scx-environment-variables/59304/2\n",
+   "created_at": "2025-10-19T06:53:43Z",
+   "id": 3419267464,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-10-19T06:53:43Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha)\n\nCommand: `nixpkgs-review pr 453196`\n\nLogs: https://github.com/JohnRTitor/nixpkgs-review-gha/actions/runs/18630036020\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 3 packages built:</summary>\n  <ul>\n    <li>scx.full</li>\n    <li>scx.full.bin (scx.full.bin.bin)</li>\n    <li>scx.full.passthru.tests.basic</li>\n  </ul>\n</details>\n\n",
+   "created_at": "2025-10-19T12:02:30Z",
+   "id": 3419610666,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-10-19T12:02:30Z",
+   "user": {
+    "id": 50095635,
+    "login": "JohnRTitor",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/453196",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "One of the nicest perks of using scx is the ability to easily switch between schedulers at run-time, but this is currently not possible in NixOS, given that the scx service only uses the scheduler from the config file.\r\n\r\nIt's possible, however, to override the scheduler and its flags using the `SCX_SCHEDULER_OVERRIDE` and `SCX_FLAGS_OVERRIDE` environment variables, respectively (see [more details](https://en.opensuse.org/Pluggable_CPU_schedulers#Temporarily_switch_to_a_different_scheduler)).\r\n\r\nSo the solution here is to change the scx service executable and pass those env vars to the service at run-time falling back to the values from the module config as defaults.\r\n\r\nAfter this change, it would be possible to override schedulers like so:\r\n\r\n```shellSession\r\n$ sudo systemctl set-environment SCX_SCHEDULER_OVERRIDE='scx_lavd'\r\n$ sudo systemctl set-environment SCX_FLAGS_OVERRIDE='--performance'\r\n$ sudo systemctl restart scx.service\r\n```\r\n```shellSession\r\n$ journalctl -u scx.service -b 0 -e\r\nOct 18 13:09:25 nixos systemd[1]: Started SCX scheduler daemon.\r\nOct 18 13:09:25 nixos bash[1829848]: 13:09:25 [INFO] Performance mode is enabled.\r\nOct 18 13:09:25 nixos bash[1829848]: 13:09:25 [INFO] Energy model won't be used for CPU preference order.\r\n# ...\r\nOct 18 13:09:26 nixos bash[1829848]: 13:09:26 [WARN] libbpf: map 'lavd_ops': BPF map skeleton link is uninitialized\r\nOct 18 13:09:26 nixos bash[1829848]: 13:09:26 [INFO] scx_lavd scheduler is initialized (build ID: 1.0.16 x86_64-unknown-linux-gnu)\r\nOct 18 13:09:26 nixos bash[1829848]: 13:09:26 [INFO] scx_lavd scheduler starts running.\r\n```\r\n\r\nAnd also restore to the module defaults:\r\n\r\n```shellSession\r\n$ sudo systemctl unset-environment SCX_SCHEDULER_OVERRIDE\r\n$ sudo systemctl unset-environment SCX_FLAGS_OVERRIDE\r\n$ sudo systemctl restart scx.service\r\n```\r\n```shellSession\r\n$ journalctl -u scx.service -b 0 -e\r\nOct 18 13:12:56 nixos systemd[1]: Stopped SCX scheduler daemon.\r\nOct 18 13:12:56 nixos systemd[1]: Started SCX scheduler daemon.\r\nOct 18 13:12:56 nixos bash[1833220]: 13:12:56 [INFO] NUMA nodes: 1\r\nOct 18 13:12:56 nixos bash[1833220]: 13:12:56 [INFO] Disabling NUMA optimizations\r\nOct 18 13:12:56 nixos bash[1833220]: 13:12:56 [INFO] scx_bpfland 1.0.16 x86_64-unknown-linux-gnu SMT on\r\n```\r\n\r\nI've been running this on my system for a while, and I haven't had any issues so far.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": "2025-10-19T12:14:35Z",
+  "closed_by": {
+   "id": 50095635,
+   "login": "JohnRTitor",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 3,
+  "created_at": "2025-10-18T11:19:32Z",
+  "draft": false,
+  "id": 3528670010,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 453196,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/453196.diff",
+   "merged_at": "2025-10-19T12:14:35Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/453196.patch"
+  },
+  "reactions": {
+   "+1": 3,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 3
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "nixos/scx: support temporarily overriding scheduler",
+  "type": null,
+  "updated_at": "2026-01-07T22:00:38Z",
+  "user": {
+   "id": 83901271,
+   "login": "eljamm",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 7,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21132,
+    "open_issues_count": 21132,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:37:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "fca28085e0c84ce368bd008d66acc3434c692228",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "One of the nicest perks of using scx is the ability to easily switch between schedulers at run-time, but this is currently not possible in NixOS, given that the scx service only uses the scheduler from the config file.\r\n\r\nIt's possible, however, to override the scheduler and its flags using the `SCX_SCHEDULER_OVERRIDE` and `SCX_FLAGS_OVERRIDE` environment variables, respectively (see [more details](https://en.opensuse.org/Pluggable_CPU_schedulers#Temporarily_switch_to_a_different_scheduler)).\r\n\r\nSo the solution here is to change the scx service executable and pass those env vars to the service at run-time falling back to the values from the module config as defaults.\r\n\r\nAfter this change, it would be possible to override schedulers like so:\r\n\r\n```shellSession\r\n$ sudo systemctl set-environment SCX_SCHEDULER_OVERRIDE='scx_lavd'\r\n$ sudo systemctl set-environment SCX_FLAGS_OVERRIDE='--performance'\r\n$ sudo systemctl restart scx.service\r\n```\r\n```shellSession\r\n$ journalctl -u scx.service -b 0 -e\r\nOct 18 13:09:25 nixos systemd[1]: Started SCX scheduler daemon.\r\nOct 18 13:09:25 nixos bash[1829848]: 13:09:25 [INFO] Performance mode is enabled.\r\nOct 18 13:09:25 nixos bash[1829848]: 13:09:25 [INFO] Energy model won't be used for CPU preference order.\r\n# ...\r\nOct 18 13:09:26 nixos bash[1829848]: 13:09:26 [WARN] libbpf: map 'lavd_ops': BPF map skeleton link is uninitialized\r\nOct 18 13:09:26 nixos bash[1829848]: 13:09:26 [INFO] scx_lavd scheduler is initialized (build ID: 1.0.16 x86_64-unknown-linux-gnu)\r\nOct 18 13:09:26 nixos bash[1829848]: 13:09:26 [INFO] scx_lavd scheduler starts running.\r\n```\r\n\r\nAnd also restore to the module defaults:\r\n\r\n```shellSession\r\n$ sudo systemctl unset-environment SCX_SCHEDULER_OVERRIDE\r\n$ sudo systemctl unset-environment SCX_FLAGS_OVERRIDE\r\n$ sudo systemctl restart scx.service\r\n```\r\n```shellSession\r\n$ journalctl -u scx.service -b 0 -e\r\nOct 18 13:12:56 nixos systemd[1]: Stopped SCX scheduler daemon.\r\nOct 18 13:12:56 nixos systemd[1]: Started SCX scheduler daemon.\r\nOct 18 13:12:56 nixos bash[1833220]: 13:12:56 [INFO] NUMA nodes: 1\r\nOct 18 13:12:56 nixos bash[1833220]: 13:12:56 [INFO] Disabling NUMA optimizations\r\nOct 18 13:12:56 nixos bash[1833220]: 13:12:56 [INFO] scx_bpfland 1.0.16 x86_64-unknown-linux-gnu SMT on\r\n```\r\n\r\nI've been running this on my system for a while, and I haven't had any issues so far.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 1,
+  "closed_at": "2025-10-19T12:14:35Z",
+  "comments": 3,
+  "commits": 1,
+  "created_at": "2025-10-18T11:19:32Z",
+  "deletions": 6,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/453196.diff",
+  "draft": false,
+  "head": {
+   "label": "eljamm:scx-override-scheduler",
+   "ref": "scx-override-scheduler",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-03-03T15:58:43Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "eljamm/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/eljamm/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 766562557,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/eljamm/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/eljamm/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 83901271,
+     "login": "eljamm",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/eljamm/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T15:39:15Z",
+    "size": 2908908,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/eljamm/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/eljamm/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-08-31T14:15:18Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 2926655553,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "5ec10ce58f8014fb3d44fc679486f5193bfc782c",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2025-10-19T12:14:35Z",
+  "merged_by": {
+   "id": 50095635,
+   "login": "JohnRTitor",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 453196,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/453196.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 8,
+  "state": "closed",
+  "title": "nixos/scx: support temporarily overriding scheduler",
+  "updated_at": "2026-01-07T22:00:38Z",
+  "user": {
+   "id": 83901271,
+   "login": "eljamm",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#453196",
+ "review_comments": [
+  {
+   "body": "```suggestion\n          ${pkgs.bash} -c 'exec ${cfg.package}/bin/''${SCX_SCHEDULER_OVERRIDE:-$SCX_SCHEDULER} ''${SCX_FLAGS_OVERRIDE:-$SCX_FLAGS}'\n```\n\nI would just use bash for consistency and reproducibility of issues. ",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "created_at": "2025-10-19T10:23:57Z",
+   "diff_hunk": "@@ -101,14 +101,15 @@ in\n \n       serviceConfig = {\n         Type = \"simple\";\n-        ExecStart = utils.escapeSystemdExecArgs (\n-          [\n-            (lib.getExe' cfg.package cfg.scheduler)\n-          ]\n-          ++ cfg.extraArgs\n-        );\n+        ExecStart = ''\n+          ${pkgs.runtimeShell} -c 'exec ${cfg.package}/bin/''${SCX_SCHEDULER_OVERRIDE:-$SCX_SCHEDULER} ''${SCX_FLAGS_OVERRIDE:-$SCX_FLAGS}'",
+   "id": 2443239541,
+   "line": 105,
+   "original_commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "original_line": 105,
+   "original_position": 11,
+   "original_start_line": null,
+   "path": "nixos/modules/services/scheduling/scx.nix",
+   "position": 11,
+   "pull_request_review_id": 3354464217,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-10-19T10:23:57Z",
+   "user": {
+    "id": 50095635,
+    "login": "JohnRTitor",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't have any issues setting bash explicitly, but I see that the [documentation uses `runtimeshell`](https://github.com/NixOS/nixpkgs/blob/3afacfcb4edee886a6737f37beadd2ddb75d92f6/nixos/doc/manual/development/writing-modules.chapter.md?plain=1#L188) and it's apparently [used for modular services](https://github.com/NixOS/nixpkgs/blob/6f4b98990584800e37a839f3c7ad5ff6cd626375/nixos/modules/system/service/README.md?plain=1#L139) as well. So I'm wondering, would not using `runtimeshell` present issues?\r\n\r\nAlso, don't know under which circumstances this would be different, but [`runtimeShell` defaults to bash](https://github.com/NixOS/nixpkgs/blob/6f4b98990584800e37a839f3c7ad5ff6cd626375/pkgs/top-level/all-packages.nix#L4381-L4382).",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "created_at": "2025-10-19T11:07:30Z",
+   "diff_hunk": "@@ -101,14 +101,15 @@ in\n \n       serviceConfig = {\n         Type = \"simple\";\n-        ExecStart = utils.escapeSystemdExecArgs (\n-          [\n-            (lib.getExe' cfg.package cfg.scheduler)\n-          ]\n-          ++ cfg.extraArgs\n-        );\n+        ExecStart = ''\n+          ${pkgs.runtimeShell} -c 'exec ${cfg.package}/bin/''${SCX_SCHEDULER_OVERRIDE:-$SCX_SCHEDULER} ''${SCX_FLAGS_OVERRIDE:-$SCX_FLAGS}'",
+   "id": 2443255263,
+   "in_reply_to_id": 2443239541,
+   "line": 105,
+   "original_commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "original_line": 105,
+   "original_position": 11,
+   "original_start_line": null,
+   "path": "nixos/modules/services/scheduling/scx.nix",
+   "position": 11,
+   "pull_request_review_id": 3354477726,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-10-19T11:07:30Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "For some reason I thought this would change to \"user shell\" which could have some issues with shell expansion (like if zsh is used).",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "created_at": "2025-10-19T11:47:49Z",
+   "diff_hunk": "@@ -101,14 +101,15 @@ in\n \n       serviceConfig = {\n         Type = \"simple\";\n-        ExecStart = utils.escapeSystemdExecArgs (\n-          [\n-            (lib.getExe' cfg.package cfg.scheduler)\n-          ]\n-          ++ cfg.extraArgs\n-        );\n+        ExecStart = ''\n+          ${pkgs.runtimeShell} -c 'exec ${cfg.package}/bin/''${SCX_SCHEDULER_OVERRIDE:-$SCX_SCHEDULER} ''${SCX_FLAGS_OVERRIDE:-$SCX_FLAGS}'",
+   "id": 2443270170,
+   "in_reply_to_id": 2443239541,
+   "line": 105,
+   "original_commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "original_line": 105,
+   "original_position": 11,
+   "original_start_line": null,
+   "path": "nixos/modules/services/scheduling/scx.nix",
+   "position": 11,
+   "pull_request_review_id": 3354490497,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-10-19T11:47:49Z",
+   "user": {
+    "id": 50095635,
+    "login": "JohnRTitor",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yeah, that's understandable given the name.",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "created_at": "2025-10-19T13:11:18Z",
+   "diff_hunk": "@@ -101,14 +101,15 @@ in\n \n       serviceConfig = {\n         Type = \"simple\";\n-        ExecStart = utils.escapeSystemdExecArgs (\n-          [\n-            (lib.getExe' cfg.package cfg.scheduler)\n-          ]\n-          ++ cfg.extraArgs\n-        );\n+        ExecStart = ''\n+          ${pkgs.runtimeShell} -c 'exec ${cfg.package}/bin/''${SCX_SCHEDULER_OVERRIDE:-$SCX_SCHEDULER} ''${SCX_FLAGS_OVERRIDE:-$SCX_FLAGS}'",
+   "id": 2443306644,
+   "in_reply_to_id": 2443239541,
+   "line": 105,
+   "original_commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "original_line": 105,
+   "original_position": 11,
+   "original_start_line": null,
+   "path": "nixos/modules/services/scheduling/scx.nix",
+   "position": 11,
+   "pull_request_review_id": 3354521659,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-10-19T13:11:18Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`lib.escapeShellArgs`\r\n\r\nThis breaks the configurable argument, e.g. `--foobar 123`\r\n\r\n`SCX_FLAGS = \"'--foobar 123'\"`\r\n\r\n> error: unexpected argument ''--foobar' found\r\n> Usage: scx_flash [OPTIONS]\r\n> For more information, try '--help'.",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "created_at": "2026-01-03T14:15:57Z",
+   "diff_hunk": "@@ -101,14 +101,15 @@ in\n \n       serviceConfig = {\n         Type = \"simple\";\n-        ExecStart = utils.escapeSystemdExecArgs (\n-          [\n-            (lib.getExe' cfg.package cfg.scheduler)\n-          ]\n-          ++ cfg.extraArgs\n-        );\n+        ExecStart = ''\n+          ${pkgs.runtimeShell} -c 'exec ${cfg.package}/bin/''${SCX_SCHEDULER_OVERRIDE:-$SCX_SCHEDULER} ''${SCX_FLAGS_OVERRIDE:-$SCX_FLAGS}'\n+        '';\n         Restart = \"on-failure\";\n       };\n+      environment = {\n+        SCX_SCHEDULER = cfg.scheduler;\n+        SCX_FLAGS = lib.escapeShellArgs cfg.extraArgs;",
+   "id": 2658944826,
+   "line": 111,
+   "original_commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "original_line": 111,
+   "original_position": 17,
+   "original_start_line": null,
+   "path": "nixos/modules/services/scheduling/scx.nix",
+   "position": 17,
+   "pull_request_review_id": 3624351668,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-01-03T14:17:49Z",
+   "user": {
+    "id": 19950702,
+    "login": "Stzx",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "You're right, that this breaks `--foobar 123` and therefore the [extraArgs example](https://search.nixos.org/options?channel=unstable&show=services.scx.extraArgs&query=scx), but `[ \"--foobar\" \"123\" ]` still works. Do you think we should modify the example or should we perhaps compose args in a different way?",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "created_at": "2026-01-06T17:38:09Z",
+   "diff_hunk": "@@ -101,14 +101,15 @@ in\n \n       serviceConfig = {\n         Type = \"simple\";\n-        ExecStart = utils.escapeSystemdExecArgs (\n-          [\n-            (lib.getExe' cfg.package cfg.scheduler)\n-          ]\n-          ++ cfg.extraArgs\n-        );\n+        ExecStart = ''\n+          ${pkgs.runtimeShell} -c 'exec ${cfg.package}/bin/''${SCX_SCHEDULER_OVERRIDE:-$SCX_SCHEDULER} ''${SCX_FLAGS_OVERRIDE:-$SCX_FLAGS}'\n+        '';\n         Restart = \"on-failure\";\n       };\n+      environment = {\n+        SCX_SCHEDULER = cfg.scheduler;\n+        SCX_FLAGS = lib.escapeShellArgs cfg.extraArgs;",
+   "id": 2665714932,
+   "in_reply_to_id": 2658944826,
+   "line": 111,
+   "original_commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "original_line": 111,
+   "original_position": 17,
+   "original_start_line": null,
+   "path": "nixos/modules/services/scheduling/scx.nix",
+   "position": 17,
+   "pull_request_review_id": 3631837165,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-01-06T17:38:09Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Based on practices observed in other open-source projects, I believe the example for `extraArgs` should be amended.",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "created_at": "2026-01-07T00:16:18Z",
+   "diff_hunk": "@@ -101,14 +101,15 @@ in\n \n       serviceConfig = {\n         Type = \"simple\";\n-        ExecStart = utils.escapeSystemdExecArgs (\n-          [\n-            (lib.getExe' cfg.package cfg.scheduler)\n-          ]\n-          ++ cfg.extraArgs\n-        );\n+        ExecStart = ''\n+          ${pkgs.runtimeShell} -c 'exec ${cfg.package}/bin/''${SCX_SCHEDULER_OVERRIDE:-$SCX_SCHEDULER} ''${SCX_FLAGS_OVERRIDE:-$SCX_FLAGS}'\n+        '';\n         Restart = \"on-failure\";\n       };\n+      environment = {\n+        SCX_SCHEDULER = cfg.scheduler;\n+        SCX_FLAGS = lib.escapeShellArgs cfg.extraArgs;",
+   "id": 2666662815,
+   "in_reply_to_id": 2658944826,
+   "line": 111,
+   "original_commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "original_line": 111,
+   "original_position": 17,
+   "original_start_line": null,
+   "path": "nixos/modules/services/scheduling/scx.nix",
+   "position": 17,
+   "pull_request_review_id": 3632914114,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-01-07T00:16:18Z",
+   "user": {
+    "id": 19950702,
+    "login": "Stzx",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'd be happy to change the example, but I'm wondering if we can [make do without escaping](https://github.com/NixOS/nixpkgs/pull/477882), altogether. From my tests, it doesn't seem to be necessary.",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "created_at": "2026-01-07T22:00:38Z",
+   "diff_hunk": "@@ -101,14 +101,15 @@ in\n \n       serviceConfig = {\n         Type = \"simple\";\n-        ExecStart = utils.escapeSystemdExecArgs (\n-          [\n-            (lib.getExe' cfg.package cfg.scheduler)\n-          ]\n-          ++ cfg.extraArgs\n-        );\n+        ExecStart = ''\n+          ${pkgs.runtimeShell} -c 'exec ${cfg.package}/bin/''${SCX_SCHEDULER_OVERRIDE:-$SCX_SCHEDULER} ''${SCX_FLAGS_OVERRIDE:-$SCX_FLAGS}'\n+        '';\n         Restart = \"on-failure\";\n       };\n+      environment = {\n+        SCX_SCHEDULER = cfg.scheduler;\n+        SCX_FLAGS = lib.escapeShellArgs cfg.extraArgs;",
+   "id": 2670207189,
+   "in_reply_to_id": 2658944826,
+   "line": 111,
+   "original_commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "original_line": 111,
+   "original_position": 17,
+   "original_start_line": null,
+   "path": "nixos/modules/services/scheduling/scx.nix",
+   "position": 17,
+   "pull_request_review_id": 3636961312,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-01-07T22:00:38Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "id": 3354464217,
+   "state": "COMMENTED",
+   "submitted_at": "2025-10-19T10:23:56Z",
+   "user": {
+    "id": 50095635,
+    "login": "JohnRTitor",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "id": 3354477726,
+   "state": "COMMENTED",
+   "submitted_at": "2025-10-19T11:07:30Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "id": 3354490497,
+   "state": "COMMENTED",
+   "submitted_at": "2025-10-19T11:47:49Z",
+   "user": {
+    "id": 50095635,
+    "login": "JohnRTitor",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "id": 3354521659,
+   "state": "COMMENTED",
+   "submitted_at": "2025-10-19T13:11:18Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "id": 3624351668,
+   "state": "COMMENTED",
+   "submitted_at": "2026-01-03T14:15:57Z",
+   "user": {
+    "id": 19950702,
+    "login": "Stzx",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "id": 3631837165,
+   "state": "COMMENTED",
+   "submitted_at": "2026-01-06T17:38:09Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "id": 3632914114,
+   "state": "COMMENTED",
+   "submitted_at": "2026-01-07T00:16:18Z",
+   "user": {
+    "id": 19950702,
+    "login": "Stzx",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6316b883f1f4633cb96d3890406869b23e8047cb",
+   "id": 3636961312,
+   "state": "COMMENTED",
+   "submitted_at": "2026-01-07T22:00:38Z",
+   "user": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-10-18T11:23:15Z",
+   "event": "renamed",
+   "id": 20359279669,
+   "rename": {
+    "from": "nixos/scx: support temporarily overriding schedular",
+    "to": "nixos/scx: support temporarily overriding scheduler"
+   }
+  },
+  {
+   "actor": {
+    "id": 50095635,
+    "login": "JohnRTitor",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "5ec10ce58f8014fb3d44fc679486f5193bfc782c",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/5ec10ce58f8014fb3d44fc679486f5193bfc782c",
+   "created_at": "2025-10-19T12:14:35Z",
+   "event": "merged",
+   "id": 20366509840
+  },
+  {
+   "actor": {
+    "id": 50095635,
+    "login": "JohnRTitor",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-10-19T12:14:35Z",
+   "event": "closed",
+   "id": 20366509849,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "6e40b6cadc1f552c0476b53b541f12c7293c4eb9",
+   "commit_url": "https://api.github.com/repos/eljamm/nixpkgs/commits/6e40b6cadc1f552c0476b53b541f12c7293c4eb9",
+   "created_at": "2026-01-07T21:45:22Z",
+   "event": "referenced",
+   "id": 21908775813
+  }
+ ]
+}

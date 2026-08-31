@@ -1,0 +1,994 @@
+{
+ "comments": [
+  {
+   "body": "OK I think this is ready!",
+   "created_at": "2026-01-02T20:38:43Z",
+   "id": 3706189670,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 1,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-01-02T20:38:43Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/modular-services-meeting-4-2026-07-10/78847/1\n",
+   "created_at": "2026-07-10T18:12:02Z",
+   "id": 4938221718,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-10T18:12:02Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/modular-services-meeting-5-2026-07-24/79145/1\n",
+   "created_at": "2026-07-24T17:52:03Z",
+   "id": 5072850373,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-24T17:52:03Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/475372",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "assignees": [
+   {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "body": "Trying to understand what is needed to backwards-compatibly retrofit and existing NixOS module.\r\n\r\n(I don't know anything about `redlib` in particular, I picked it basically at random.)\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 3,
+  "created_at": "2025-12-30T18:46:58Z",
+  "draft": false,
+  "id": 3770970567,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "About \"NixOS\" module system internals",
+    "id": 1919438524,
+    "name": "6.topic: module system"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 475372,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/475372.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/475372.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "nixos/redlib: Make into modular service",
+  "type": null,
+  "updated_at": "2026-07-24T17:52:03Z",
+  "user": {
+   "id": 1055245,
+   "login": "Ericson2314",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 191,
+  "assignee": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "assignees": [
+   {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "b312b0e6c8daeb4923a3b45ad5c514e3bbd199d4",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Trying to understand what is needed to backwards-compatibly retrofit and existing NixOS module.\r\n\r\n(I don't know anything about `redlib` in particular, I picked it basically at random.)\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 5,
+  "closed_at": null,
+  "comments": 3,
+  "commits": 2,
+  "created_at": "2025-12-30T18:46:58Z",
+  "deletions": 117,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/475372.diff",
+  "draft": false,
+  "head": {
+   "label": "Ericson2314:redlib-modular",
+   "ref": "redlib-modular",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2014-07-23T06:00:02Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "Ericson2314/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/Ericson2314/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 22133646,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/Ericson2314/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/Ericson2314/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 1055245,
+     "login": "Ericson2314",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/Ericson2314/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-28T05:31:54Z",
+    "size": 2866910,
+    "stargazers_count": 1,
+    "subscription_url": "https://api.github.com/repos/Ericson2314/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/Ericson2314/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2022-11-02T10:28:44Z",
+    "visibility": "public",
+    "watchers": 1,
+    "watchers_count": 1,
+    "web_commit_signoff_required": false
+   },
+   "sha": "b45307bdcf5510d246e5cc974e355d0db66f9aa7",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3137524988,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "About \"NixOS\" module system internals",
+    "id": 1919438524,
+    "name": "6.topic: module system"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 475372,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/475372.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 50398876,
+    "login": "hsjobeki",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 68757440,
+    "login": "Guanran928",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 140968250,
+    "login": "bpeetz",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 10,
+  "state": "open",
+  "title": "nixos/redlib: Make into modular service",
+  "updated_at": "2026-07-24T17:52:03Z",
+  "user": {
+   "id": 1055245,
+   "login": "Ericson2314",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#475372",
+ "review_comments": [
+  {
+   "body": "This looks wrong. ",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "created_at": "2025-12-31T10:38:59Z",
+   "diff_hunk": "@@ -0,0 +1,144 @@\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+\n+let\n+  inherit (lib)\n+    concatStringsSep\n+    isBool\n+    mapAttrs\n+    mkEnableOption\n+    mkOption\n+    mkPackageOption\n+    mkRenamedOptionModule\n+    types\n+    ;\n+\n+  cfg = config.redlib;\n+\n+  args = concatStringsSep \" \" [\n+    \"--port ${toString cfg.port}\"\n+    \"--address ${cfg.address}\"\n+  ];\n+\n+  boolToString' = b: if b then \"on\" else \"off\";\n+in\n+{\n+  _class = \"service\";\n+\n+  options = {\n+    redlib = {\n+      package = lib.options.mkModularPackageOption \"redlib\" { };\n+\n+      address = mkOption {\n+        default = \"0.0.0.0\";\n+        example = \"127.0.0.1\";\n+        type = types.str;\n+        description = \"The address to listen on\";\n+      };\n+\n+      port = mkOption {\n+        default = 8080;\n+        example = 8000;\n+        type = types.port;\n+        description = \"The port to listen on\";\n+      };\n+\n+      settings = lib.mkOption {\n+        type = lib.types.submodule {\n+          freeformType =\n+            with types;\n+            attrsOf (\n+              nullOr (oneOf [\n+                bool\n+                int\n+                str\n+              ])\n+            );\n+          options = { };\n+        };\n+        default = { };\n+        description = ''\n+          See [GitHub](https://github.com/redlib-org/redlib/tree/main?tab=readme-ov-file#configuration) for available settings.\n+        '';\n+      };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      \"\"\n+      \"${lib.getExe cfg.package} ${args}\"",
+   "id": 2655188053,
+   "line": null,
+   "original_commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "original_line": 74,
+   "original_position": 74,
+   "original_start_line": null,
+   "path": "pkgs/by-name/re/redlib/service.nix",
+   "position": 1,
+   "pull_request_review_id": 3620668521,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-31T10:38:59Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "for what it's worth, the existing implementation seemed to use this as well",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "created_at": "2025-12-31T13:07:56Z",
+   "diff_hunk": "@@ -0,0 +1,144 @@\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+\n+let\n+  inherit (lib)\n+    concatStringsSep\n+    isBool\n+    mapAttrs\n+    mkEnableOption\n+    mkOption\n+    mkPackageOption\n+    mkRenamedOptionModule\n+    types\n+    ;\n+\n+  cfg = config.redlib;\n+\n+  args = concatStringsSep \" \" [\n+    \"--port ${toString cfg.port}\"\n+    \"--address ${cfg.address}\"\n+  ];\n+\n+  boolToString' = b: if b then \"on\" else \"off\";\n+in\n+{\n+  _class = \"service\";\n+\n+  options = {\n+    redlib = {\n+      package = lib.options.mkModularPackageOption \"redlib\" { };\n+\n+      address = mkOption {\n+        default = \"0.0.0.0\";\n+        example = \"127.0.0.1\";\n+        type = types.str;\n+        description = \"The address to listen on\";\n+      };\n+\n+      port = mkOption {\n+        default = 8080;\n+        example = 8000;\n+        type = types.port;\n+        description = \"The port to listen on\";\n+      };\n+\n+      settings = lib.mkOption {\n+        type = lib.types.submodule {\n+          freeformType =\n+            with types;\n+            attrsOf (\n+              nullOr (oneOf [\n+                bool\n+                int\n+                str\n+              ])\n+            );\n+          options = { };\n+        };\n+        default = { };\n+        description = ''\n+          See [GitHub](https://github.com/redlib-org/redlib/tree/main?tab=readme-ov-file#configuration) for available settings.\n+        '';\n+      };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      \"\"\n+      \"${lib.getExe cfg.package} ${args}\"",
+   "id": 2655379765,
+   "in_reply_to_id": 2655188053,
+   "line": null,
+   "original_commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "original_line": 74,
+   "original_position": 74,
+   "original_start_line": null,
+   "path": "pkgs/by-name/re/redlib/service.nix",
+   "position": 1,
+   "pull_request_review_id": 3620866203,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-31T13:07:57Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "but.. how?\r\n\r\nWhat does passing the empty string to `argv[1]` and the string `${pkgs.blah}/bin/blah  some-args` as `argv[1]` even mean?\r\n\r\nSomething very funky is going on here no? `\"\"` is not a valid  execcutable and neither is `\"/nix/store-xx/bin/blah args\"` (notice the space).\r\n\r\nI'm not sure how to read this.",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "created_at": "2025-12-31T13:33:32Z",
+   "diff_hunk": "@@ -0,0 +1,144 @@\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+\n+let\n+  inherit (lib)\n+    concatStringsSep\n+    isBool\n+    mapAttrs\n+    mkEnableOption\n+    mkOption\n+    mkPackageOption\n+    mkRenamedOptionModule\n+    types\n+    ;\n+\n+  cfg = config.redlib;\n+\n+  args = concatStringsSep \" \" [\n+    \"--port ${toString cfg.port}\"\n+    \"--address ${cfg.address}\"\n+  ];\n+\n+  boolToString' = b: if b then \"on\" else \"off\";\n+in\n+{\n+  _class = \"service\";\n+\n+  options = {\n+    redlib = {\n+      package = lib.options.mkModularPackageOption \"redlib\" { };\n+\n+      address = mkOption {\n+        default = \"0.0.0.0\";\n+        example = \"127.0.0.1\";\n+        type = types.str;\n+        description = \"The address to listen on\";\n+      };\n+\n+      port = mkOption {\n+        default = 8080;\n+        example = 8000;\n+        type = types.port;\n+        description = \"The port to listen on\";\n+      };\n+\n+      settings = lib.mkOption {\n+        type = lib.types.submodule {\n+          freeformType =\n+            with types;\n+            attrsOf (\n+              nullOr (oneOf [\n+                bool\n+                int\n+                str\n+              ])\n+            );\n+          options = { };\n+        };\n+        default = { };\n+        description = ''\n+          See [GitHub](https://github.com/redlib-org/redlib/tree/main?tab=readme-ov-file#configuration) for available settings.\n+        '';\n+      };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      \"\"\n+      \"${lib.getExe cfg.package} ${args}\"",
+   "id": 2655410670,
+   "in_reply_to_id": 2655188053,
+   "line": null,
+   "original_commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "original_line": 74,
+   "original_position": 74,
+   "original_start_line": null,
+   "path": "pkgs/by-name/re/redlib/service.nix",
+   "position": 1,
+   "pull_request_review_id": 3620907575,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-31T13:33:32Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "fwiw I expected this to be:\r\n\r\n```\r\nprocess.argv = [  (lib.getExe cfg.package) args ];\r\n```",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "created_at": "2025-12-31T13:34:11Z",
+   "diff_hunk": "@@ -0,0 +1,144 @@\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+\n+let\n+  inherit (lib)\n+    concatStringsSep\n+    isBool\n+    mapAttrs\n+    mkEnableOption\n+    mkOption\n+    mkPackageOption\n+    mkRenamedOptionModule\n+    types\n+    ;\n+\n+  cfg = config.redlib;\n+\n+  args = concatStringsSep \" \" [\n+    \"--port ${toString cfg.port}\"\n+    \"--address ${cfg.address}\"\n+  ];\n+\n+  boolToString' = b: if b then \"on\" else \"off\";\n+in\n+{\n+  _class = \"service\";\n+\n+  options = {\n+    redlib = {\n+      package = lib.options.mkModularPackageOption \"redlib\" { };\n+\n+      address = mkOption {\n+        default = \"0.0.0.0\";\n+        example = \"127.0.0.1\";\n+        type = types.str;\n+        description = \"The address to listen on\";\n+      };\n+\n+      port = mkOption {\n+        default = 8080;\n+        example = 8000;\n+        type = types.port;\n+        description = \"The port to listen on\";\n+      };\n+\n+      settings = lib.mkOption {\n+        type = lib.types.submodule {\n+          freeformType =\n+            with types;\n+            attrsOf (\n+              nullOr (oneOf [\n+                bool\n+                int\n+                str\n+              ])\n+            );\n+          options = { };\n+        };\n+        default = { };\n+        description = ''\n+          See [GitHub](https://github.com/redlib-org/redlib/tree/main?tab=readme-ov-file#configuration) for available settings.\n+        '';\n+      };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      \"\"\n+      \"${lib.getExe cfg.package} ${args}\"",
+   "id": 2655411460,
+   "in_reply_to_id": 2655188053,
+   "line": null,
+   "original_commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "original_line": 74,
+   "original_position": 74,
+   "original_start_line": null,
+   "path": "pkgs/by-name/re/redlib/service.nix",
+   "position": 1,
+   "pull_request_review_id": 3620908868,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-31T13:41:41Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Oooooh! We're trying to do:\r\n\r\n```\r\n\r\n        ExecStart = [\r\n          \"\"\r\n          \"${lib.getExe cfg.package} ${args}\"\r\n        ];\r\n```\r\n\r\n\r\nBut that means something different. As  `process.argv` is escaped iirc?\r\n\r\n",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "created_at": "2025-12-31T13:35:11Z",
+   "diff_hunk": "@@ -0,0 +1,144 @@\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+\n+let\n+  inherit (lib)\n+    concatStringsSep\n+    isBool\n+    mapAttrs\n+    mkEnableOption\n+    mkOption\n+    mkPackageOption\n+    mkRenamedOptionModule\n+    types\n+    ;\n+\n+  cfg = config.redlib;\n+\n+  args = concatStringsSep \" \" [\n+    \"--port ${toString cfg.port}\"\n+    \"--address ${cfg.address}\"\n+  ];\n+\n+  boolToString' = b: if b then \"on\" else \"off\";\n+in\n+{\n+  _class = \"service\";\n+\n+  options = {\n+    redlib = {\n+      package = lib.options.mkModularPackageOption \"redlib\" { };\n+\n+      address = mkOption {\n+        default = \"0.0.0.0\";\n+        example = \"127.0.0.1\";\n+        type = types.str;\n+        description = \"The address to listen on\";\n+      };\n+\n+      port = mkOption {\n+        default = 8080;\n+        example = 8000;\n+        type = types.port;\n+        description = \"The port to listen on\";\n+      };\n+\n+      settings = lib.mkOption {\n+        type = lib.types.submodule {\n+          freeformType =\n+            with types;\n+            attrsOf (\n+              nullOr (oneOf [\n+                bool\n+                int\n+                str\n+              ])\n+            );\n+          options = { };\n+        };\n+        default = { };\n+        description = ''\n+          See [GitHub](https://github.com/redlib-org/redlib/tree/main?tab=readme-ov-file#configuration) for available settings.\n+        '';\n+      };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      \"\"\n+      \"${lib.getExe cfg.package} ${args}\"",
+   "id": 2655412774,
+   "in_reply_to_id": 2655188053,
+   "line": null,
+   "original_commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "original_line": 74,
+   "original_position": 74,
+   "original_start_line": null,
+   "path": "pkgs/by-name/re/redlib/service.nix",
+   "position": 1,
+   "pull_request_review_id": 3620910609,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-31T13:35:11Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think this needs to be:\n\n```\n# reset the ExecStart \nsystemd.service.serviceConfig.ExecStart = lib.mkBefore [\"\"];\n# set argv\nprocess.argv = [ (lib.getExe cfg.package) args ];\n```\n\ninstead\n\nThis is because the default value of `ExecStart` is\n\n```\n    ExecStart = [\n          (escapeSystemdExecArgs config.process.argv)\n        ];\n```\n\nwhich would simply expand to\n\n```\n   ExecStart = \"  ''  '/nix/store/xxx-redlib/bin/redlib --arg1 --arg2'\";\n```\n\nwhich is wrong and not equivalent to the original file",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "created_at": "2025-12-31T13:39:09Z",
+   "diff_hunk": "@@ -0,0 +1,144 @@\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+\n+let\n+  inherit (lib)\n+    concatStringsSep\n+    isBool\n+    mapAttrs\n+    mkEnableOption\n+    mkOption\n+    mkPackageOption\n+    mkRenamedOptionModule\n+    types\n+    ;\n+\n+  cfg = config.redlib;\n+\n+  args = concatStringsSep \" \" [\n+    \"--port ${toString cfg.port}\"\n+    \"--address ${cfg.address}\"\n+  ];\n+\n+  boolToString' = b: if b then \"on\" else \"off\";\n+in\n+{\n+  _class = \"service\";\n+\n+  options = {\n+    redlib = {\n+      package = lib.options.mkModularPackageOption \"redlib\" { };\n+\n+      address = mkOption {\n+        default = \"0.0.0.0\";\n+        example = \"127.0.0.1\";\n+        type = types.str;\n+        description = \"The address to listen on\";\n+      };\n+\n+      port = mkOption {\n+        default = 8080;\n+        example = 8000;\n+        type = types.port;\n+        description = \"The port to listen on\";\n+      };\n+\n+      settings = lib.mkOption {\n+        type = lib.types.submodule {\n+          freeformType =\n+            with types;\n+            attrsOf (\n+              nullOr (oneOf [\n+                bool\n+                int\n+                str\n+              ])\n+            );\n+          options = { };\n+        };\n+        default = { };\n+        description = ''\n+          See [GitHub](https://github.com/redlib-org/redlib/tree/main?tab=readme-ov-file#configuration) for available settings.\n+        '';\n+      };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      \"\"\n+      \"${lib.getExe cfg.package} ${args}\"",
+   "id": 2655418061,
+   "in_reply_to_id": 2655188053,
+   "line": null,
+   "original_commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "original_line": 74,
+   "original_position": 74,
+   "original_start_line": null,
+   "path": "pkgs/by-name/re/redlib/service.nix",
+   "position": 1,
+   "pull_request_review_id": 3620917612,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-31T13:42:17Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thank you both, I didn't know what that was about, so I just kept it, hoping someone else would know about it.",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "created_at": "2025-12-31T17:14:45Z",
+   "diff_hunk": "@@ -0,0 +1,144 @@\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+\n+let\n+  inherit (lib)\n+    concatStringsSep\n+    isBool\n+    mapAttrs\n+    mkEnableOption\n+    mkOption\n+    mkPackageOption\n+    mkRenamedOptionModule\n+    types\n+    ;\n+\n+  cfg = config.redlib;\n+\n+  args = concatStringsSep \" \" [\n+    \"--port ${toString cfg.port}\"\n+    \"--address ${cfg.address}\"\n+  ];\n+\n+  boolToString' = b: if b then \"on\" else \"off\";\n+in\n+{\n+  _class = \"service\";\n+\n+  options = {\n+    redlib = {\n+      package = lib.options.mkModularPackageOption \"redlib\" { };\n+\n+      address = mkOption {\n+        default = \"0.0.0.0\";\n+        example = \"127.0.0.1\";\n+        type = types.str;\n+        description = \"The address to listen on\";\n+      };\n+\n+      port = mkOption {\n+        default = 8080;\n+        example = 8000;\n+        type = types.port;\n+        description = \"The port to listen on\";\n+      };\n+\n+      settings = lib.mkOption {\n+        type = lib.types.submodule {\n+          freeformType =\n+            with types;\n+            attrsOf (\n+              nullOr (oneOf [\n+                bool\n+                int\n+                str\n+              ])\n+            );\n+          options = { };\n+        };\n+        default = { };\n+        description = ''\n+          See [GitHub](https://github.com/redlib-org/redlib/tree/main?tab=readme-ov-file#configuration) for available settings.\n+        '';\n+      };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      \"\"\n+      \"${lib.getExe cfg.package} ${args}\"",
+   "id": 2655677428,
+   "in_reply_to_id": 2655188053,
+   "line": null,
+   "original_commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "original_line": 74,
+   "original_position": 74,
+   "original_start_line": null,
+   "path": "pkgs/by-name/re/redlib/service.nix",
+   "position": 1,
+   "pull_request_review_id": 3621190209,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-31T17:14:45Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Maybe just an alias without warnings for now?\n\n```suggestion\n        mkAliasOptionModule\n```",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "created_at": "2026-01-02T18:24:21Z",
+   "diff_hunk": "@@ -39,121 +28,47 @@ in\n         \"redlib\"\n       ]\n     )\n-  ];\n+  ]\n+  ++\n+    map\n+      (\n+        opt:\n+        mkRenamedOptionModule",
+   "id": 2658202477,
+   "line": null,
+   "original_commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "original_line": 36,
+   "original_position": 36,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/redlib.nix",
+   "position": 1,
+   "pull_request_review_id": 3623677444,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-01-02T18:30:33Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Tech debt / missing feature in module system: make this automatic when the path leads to an option tree instead of a single option.\n(no action required here)",
+   "commit_id": "b45307bdcf5510d246e5cc974e355d0db66f9aa7",
+   "created_at": "2026-01-02T18:28:59Z",
+   "diff_hunk": "@@ -39,121 +28,47 @@ in\n         \"redlib\"\n       ]\n     )\n-  ];\n+  ]\n+  ++\n+    map\n+      (\n+        opt:\n+        mkRenamedOptionModule\n+          [\n+            \"services\"\n+            \"redlib\"\n+            opt\n+          ]\n+          [\n+            \"system\"\n+            \"services\"\n+            \"redlib\"\n+            \"redlib\"\n+            opt\n+          ]\n+      )\n+      [\n+        \"package\"\n+        \"address\"\n+        \"port\"\n+        \"settings\"\n+      ];",
+   "id": 2658208130,
+   "line": 56,
+   "original_commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "original_line": 55,
+   "original_position": 55,
+   "original_start_line": 50,
+   "path": "nixos/modules/services/misc/redlib.nix",
+   "position": 56,
+   "pull_request_review_id": 3623677444,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 51,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-01-02T18:30:33Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Do these generated decls copy the docs? We should keep normal docs for the traditional style service.",
+   "commit_id": "b45307bdcf5510d246e5cc974e355d0db66f9aa7",
+   "created_at": "2026-01-12T20:33:18Z",
+   "diff_hunk": "@@ -39,121 +29,47 @@ in\n         \"redlib\"\n       ]\n     )\n-  ];\n+  ]\n+  ++\n+    map\n+      (\n+        opt:\n+        mkAliasOptionModule",
+   "id": 2683822204,
+   "line": 37,
+   "original_commit_id": "9bfcdbad279c516c0de32062f92a4bb3d0903ce7",
+   "original_line": 37,
+   "original_position": 37,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/redlib.nix",
+   "position": 37,
+   "pull_request_review_id": 3652648193,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-01-12T20:35:09Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "id": 3620668521,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-31T10:38:59Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "down the line, we might consider if modular services could offer semantic interfaces for our currently NixOS-specific parts, like `openFirewall` here, but given the PR scope here of sample service compat layer, I think this looks good.",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "id": 3620863694,
+   "state": "APPROVED",
+   "submitted_at": "2025-12-31T13:05:51Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "id": 3620866203,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-31T13:07:57Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "id": 3620907575,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-31T13:33:32Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "id": 3620908868,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-31T13:34:11Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "id": 3620910609,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-31T13:35:11Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "id": 3620917612,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-31T13:39:09Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "id": 3621190209,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-31T17:14:45Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "609ebcb1be57a38afd95d09e7fb6a0c4b809b702",
+   "id": 3623677444,
+   "state": "COMMENTED",
+   "submitted_at": "2026-01-02T18:30:33Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "9bfcdbad279c516c0de32062f92a4bb3d0903ce7",
+   "id": 3652648193,
+   "state": "COMMENTED",
+   "submitted_at": "2026-01-12T20:35:09Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": []
+}

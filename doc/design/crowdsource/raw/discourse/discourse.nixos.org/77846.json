@@ -1,0 +1,80 @@
+{
+ "archetype": "regular",
+ "archived": false,
+ "category_id": 14,
+ "closed": false,
+ "created_at": "2026-05-26T16:42:00.595Z",
+ "host": "discourse.nixos.org",
+ "id": 77846,
+ "last_posted_at": "2026-05-26T16:42:00.789Z",
+ "like_count": 8,
+ "posts": [
+  {
+   "accepted_answer": false,
+   "badges_granted": [],
+   "can_accept_answer": false,
+   "can_unaccept_answer": false,
+   "can_vote": false,
+   "created_at": "2026-05-26T16:42:00.789Z",
+   "deleted_at": null,
+   "event": null,
+   "flair_name": null,
+   "id": 259893,
+   "incoming_link_count": 68,
+   "link_counts": [
+    {
+     "clicks": 8,
+     "internal": false,
+     "reflection": false,
+     "title": "You're invited to talk on Matrix",
+     "url": "https://matrix.to/#/#modular-services:nixos.org"
+    },
+    {
+     "clicks": 6,
+     "internal": false,
+     "reflection": false,
+     "title": "execve(2) - Linux manual page",
+     "url": "https://man7.org/linux/man-pages/man2/execve.2.html"
+    },
+    {
+     "clicks": 0,
+     "internal": true,
+     "reflection": true,
+     "title": "Modular services meeting #2 2026-06-12",
+     "url": "https://discourse.nixos.org/t/modular-services-meeting-2-2026-06-12/78235"
+    }
+   ],
+   "name": "Robert Hensing",
+   "post_number": 1,
+   "post_type": 1,
+   "posts_count": 1,
+   "primary_group_name": null,
+   "quote_count": 0,
+   "raw": "# modular services meeting #1 2026-05-26\n\nHi everyone,\n\nToday we met to sync up on modular services design and development. We’ll meet again in about 2 weeks time; join [#modular-services on the NixOS Matrix](https://matrix.to/#/#modular-services:nixos.org) if you’d like to participate.\n\nThese are not top notch meeting notes as we were all engaged in conversation and thought, but at least they give an impression of the topics discussed.\n\n—–\n\nAttendees today: @aanderse @lassulus @kiara  @Eveeifyeve @roberth \n\n### lassulus ideas (written up before meeting)\n\n* want to expose services (for long running packges)\n* wants to support wrapped packages (for long running and short running packages)\n* wants to map execve as a very small base layer https://man7.org/linux/man-pages/man2/execve.2.html\n  * basically everything uses execve under the hood\n  * we can add additional stuff around it that basically maps to execve later on\n* we should start small and expand later (out of tree experiments are fine)\n  * for the beginning only systemd and wrapper support\n\n### meeting minutes\n\n* status: for now keep things experimental, should find what works rather than get stuck on bad interfaces\n* contracts?\n  * don’t need to abstract over package differences\n* negative feedback at tracking issue, modular services thread\n  * tried to better explain at tracking issue and by reaching out\n  * one concern seemed preventing doing a flakes, tho to get things going we need to attract contributors too\n* how do services relate with e.g. databases?\n  * implicit like in nixos? → default to sub-services\n  * explicit? → contracts, potentially between nodes\n    * e.g. k8s likes to see services separately to know what’s healthy vs what failed and needs to be brought up again\n  *  → status: needs more experimenting\n* manual entry\n  * add link to matrix channel + tracking issue?\n* idea on renaming to package modules\n  * no objections, mostly a documentation thing\n  * wrapper PR rebasing TODO@lassulus\n* how to extract options\n  * maybe don’t\n  * get it from pkg.modules.default etc\n  * `mynginx = { imports = [ nginx.modules.default ]; options.....; }`\n* kiara: should we not separate generic services modules vs system-specific ones (living in the systems’ repos)? cuz these need system-specific options\n  * aanderse: then what’s the value proposition for consuming systems like finix? get the data model correct in nixpkgs, e.g. on reloading.\n  * kiara: would robert’s idea of shims address this concern, adapting to a given system based on the info exposed in a modular service?\n  * aanderse: potentially yes\n* modular services option set:\n  * aanderse: we should expand what we offer, not every implementation needs to use every option\n  * let’s add a reload command as well as a notification protocol\n* meeting cadence:\n  * attendants found this meeting useful\n  * let’s try every 2 weeks\n  * TODO@lassulus make new crabfit\n  * TODO@lassulus add to official calendar (and link it in the matrix)\n* action items\n  * provide more info to other service managers\n  * roberth: finish platform-generic “compliance” test\n  * roberth: review `environment` PR\n  * kiara: continue on docs/user-service/(environment) PRs\n  * roberth: post this to discourse",
+   "reads": 90,
+   "reply_count": 0,
+   "reply_to_post_number": null,
+   "title_is_group": false,
+   "topic_accepted_answer": null,
+   "topic_id": 77846,
+   "updated_at": "2026-05-26T16:42:00.789Z",
+   "user_id": 6,
+   "user_title": "Great contributor",
+   "username": "roberth",
+   "version": 1,
+   "wiki": false
+  }
+ ],
+ "posts_count": 1,
+ "posts_fetched": 1,
+ "reply_count": 0,
+ "slug": "modular-services-meeting-1-2026-05-26",
+ "sources": [
+  "discourse-meetings"
+ ],
+ "tags": null,
+ "title": "Modular services meeting #1 2026-05-26",
+ "url": "https://discourse.nixos.org/t/modular-services-meeting-1-2026-05-26/77846",
+ "views": 265,
+ "word_count": 497
+}

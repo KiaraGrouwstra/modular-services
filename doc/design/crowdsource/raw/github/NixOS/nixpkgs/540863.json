@@ -1,0 +1,811 @@
+{
+ "comments": [
+  {
+   "body": "@zimward: thanks for your question!\r\n\r\ni think this comes down to what modular services _are_. if one were to consider them 'like nixos services, but imported explicitly', then i understand the confusion.\r\n\r\ni however (and i think @aanderse as well) instead see them as an environment-agnostic common denominator describing a service - a definition under which _actually making them run_ is something else entirely - altho i think we had yet to really pick vocabulary facilitating this distinction between the raw vs environment-polished modular services.\r\n\r\nnow, where that distinction becomes relevant is their whole portability aspect, which i think was kind of their point (at least vis-a-vis nixos services). not all downstream environments consuming modular services would have the privilege to be in the upstream list of conditionals, and if we take a step back, we would also expect the list of conditionals to just grow over time. at some point, we might then just admit: we should probably establish best practices to document how we expect for these (raw) modular services to be consumed, and the best way to do it would really just be to stop special-casing nixos, as this mostly makes any other environment wonder: how should _i_ consume these services, if not like that?\r\n\r\nanother problem this solves is the new set of questions surrounding this portability aspect: is modular service X usable in my environment (#545204)? so far we had no answer for that question: one might glean `? systemd` in source code, but that would nevertheless raise the next question: did that already cover the home manager case for nixos? what of home manager on darwin? if my environment had no special block there, was that because it never needed any, or because no-one tested it for that system, while consuming the raw modular service might or might not work out of the box?\r\n\r\nthe answer implied there seems: we need to start making this distinction, and offer environment-specific discoverability such that a https://search.nixos.org/ could in the future per modular service show you for each environment whether it is supported, unsupported, or simply untested.\r\n\r\nthat is what this PR solves.",
+   "created_at": "2026-07-12T07:35:48Z",
+   "id": 4950394116,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-24T11:23:45Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i do think it would be better to have specific system dependent options in the same directory as the main modular service (like a convention to have `<init-system name>.nix` for the specific options next to the `service-<name>.nix`",
+   "created_at": "2026-07-12T07:40:49Z",
+   "id": 4950406306,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-12T07:40:49Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The issues I see with this pr is context switching and sync issues across the ecosystems. Because lets say a modular service was created in a pr and wants let's say set's an option for systemd and finit, how would you do that without upstream that section first? I have to now I have create a pr in finix, merge it first then merge the upstream pr.\r\n\r\nUnless you can find a way to do this without sync/context switching issues, I don't think this is good idea IMHO.",
+   "created_at": "2026-07-12T13:11:25Z",
+   "id": 4951299502,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-12T13:11:25Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@zimward:\r\n> i do think it would be better to have specific system dependent options in the same directory as the main modular service (like a convention to have `<init-system name>.nix` for the specific options next to the `service-<name>.nix`\r\n\r\ni think we need some better discoverability than just file path names, if we want to search.nixos.org to answer which modular services are supported for nixos user services.\r\n\r\nin addition, having nixos/finix stuff in `pkgs/` feels like a layer violation, that additionally raises questions on who does vs does not get to be in there.\r\n\r\n@Eveeifyeve:\r\ncontext switching:\r\n> now I have to create a pr in finix, merge it first then merge the upstream pr.\r\n\r\ni maybe expected you to say 'PR to nixpkgs first then to finix', but your mentioned order seems the other way around. could you maybe explain a bit further what you meant by having to PR to finix first this way?\r\n",
+   "created_at": "2026-07-12T13:51:30Z",
+   "id": 4951420505,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-12T13:51:30Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> @zimward:\r\n> \r\n> > i do think it would be better to have specific system dependent options in the same directory as the main modular service (like a convention to have `<init-system name>.nix` for the specific options next to the `service-<name>.nix`\r\n> \r\n> i think we need some better discoverability than just file path names, if we want to search.nixos.org to answer which modular services are supported for nixos user services.\r\n> \r\n> in addition, having nixos/finix stuff in `pkgs/` feels like a layer violation, that additionally raises questions on who does vs does not get to be in there.\r\n\r\nMy suggestion is take the existing policy for packages, but adjust it to something like:\r\n- Is the service manager ready for general use? We don't want to include projects that are too immature or are going to be abandoned immediately. In case of doubt, check with upstream.\r\n\r\n- How realistic is it that it will be used by other people? It's good that nixpkgs caters to various niches, but if it's a niche of 5 people it's probably too small. A good estimate is checking upstream issues and pull requests, or other software repositories. \r\n\r\n- Is the service manager a fork? If it is a fork make sure that it doesn't have a specific niche to the upstream version like (Eg. a fork of nimi with a different niche to the module system).\r\n\r\n> @Eveeifyeve: context switching:\r\n> \r\n> > now I have to create a pr in finix, merge it first then merge the upstream pr.\r\n> \r\n> i maybe expected you to say 'PR to nixpkgs first then to finix', but your mentioned order seems the other way around. could you maybe explain a bit further what you meant by having to PR to finix first this way?\r\n\r\nI did mean the other around. It does gets really annoying to make sure that everything is synced while making sure the same functionality as the systemd module happens in finix for example. (if there is no portability module for it)",
+   "created_at": "2026-07-12T14:53:19Z",
+   "id": 4951612591,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-12T15:00:04Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> now, where that distinction becomes relevant is their whole portability aspect, which i think was kind of their point (at least vis-a-vis nixos services). not all downstream environments consuming modular services would have the privilege to be in the upstream list of conditionals, and if we take a step back, we would also expect the list of conditionals to just grow over time. at some point, we might then just admit: we should probably establish best practices to document how we expect for these (raw) modular services to be consumed, and the best way to do it would really just be to stop special-casing nixos, as this mostly makes any other environment wonder: how should _i_ consume these services, if not like that?\r\n>\r\n> another problem this solves is the new set of questions surrounding this portability aspect: is modular service X usable in my environment? so far we had no answer for that question: one might glean ? systemd in source code, but that would nevertheless raise the next question: did that already cover the home manager case for nixos? what of home manager on darwin? if my environment had no special block there, was that because it never needed any, or because no-one tested it for that system, while consuming the raw modular service might or might not work out of the box?\r\n\r\n+1. I worried when [writing \"? systemd\" in snid](https://github.com/NixOS/nixpkgs/blob/5ae64c8887d1f35c50c166ed85af81cb5df6a741/pkgs/by-name/sn/snid/service.nix#L161-L171), for example, that modular services might just end up being a slightly more flexible alternative to our existing NixOS services, since already that systemd-specific snid code is an opinionated way of running that daemon. There are many plausible ways to run it (socket activation; degrees of hardening; ...).\r\n\r\nI see a big value of modular services is facilitating reuse of `pkgs/` across its various downstream users, and encouraging more such usecases. It would be too narrow a scope if we just imagined it as a way to address the known issue of running n instances and duplication between systemd/MacOS.\r\n\r\nThis PR helps clarify this relationship between modular services and its downstream usecases: NixOS (nixos/) is just one, and `nixos/` feels like the right place for that.",
+   "created_at": "2026-07-13T01:41:28Z",
+   "id": 4953691431,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T01:47:23Z",
+   "user": {
+    "id": 61303,
+    "login": "tomfitzhenry",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> The issues I see with this pr is context switching and sync issues across the ecosystems\r\n\r\nOn top of that, we lose the ability to express compositions via `.services` that would have been portable.\r\nKind of like having to include different C headers in hello world just because you're using a different implementation of libc.\r\nSo now you'll need conditionals in perfectly portable code.\r\nWouldn't this severely impede usability?\r\n\r\n> having nixos/finix stuff in `pkgs/` feels like a layer violation\r\n\r\nWhat if they're systemd or finit stuff? Those are perfectly fine Nixpkgs packages, and nothing about them has to be heavily opinionated.\r\n\r\n\r\n",
+   "created_at": "2026-07-13T10:12:57Z",
+   "id": 4956857305,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-13T10:12:57Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@roberth:\r\n> we lose the ability to express compositions via .services that would have been portable. [...] Wouldn't this severely impede usability?\r\n\r\nwhat do you mean by usability there?\r\n\r\nif i understand correctly, using the feature in the way you described, one would need to inspect the source code to glean some notion of what support to expect, and it may or may not work depending on what system you're consuming it from - whether due to:\r\n\r\n- the long tail our interface had yet to account for\r\n- inherent incompatibility of the service in question on the selected system\r\n- no-one having bothered to contribute the system-specific workarounds for the system in question yet\r\n\r\ni would be inclined to call that faux portability, and would consider that counter to usability, myself.\r\n\r\n---\r\n\r\n> What if they're systemd or finit stuff? Those are perfectly fine Nixpkgs packages, and nothing about them has to be heavily opinionated.\r\n\r\nThe first issue I see here is that say `options.systemd` cannot be expected to offer the same option trees across all systems - e.g. Home Manager already has its own `options.systemd` distinct from NixOS's, making writing to such a config block to fragile at best.\r\n\r\n---\r\n\r\nwhile we cannot just magically make everything work, i think what we can do is provide structured data to facilitate people to easily get a sense of what they might expect for a given service on their system - tho if they are willing to try the untested combinations, that would always remain an option, of course.\r\n\r\nsetting those proper expectations there tho i think would be quite valuable to make acccessible to more people.\r\n\r\n---\r\n\r\nnote that, under the on matrix suggested idea of further fleshing out modular services' (shared) interface, raised concerns like the context switching (@Eveeifyeve) and code portability (@roberth) would both be alleviated as the interface (with its environment-specific shims) becomes able to handle more services without environment-specific config, allowing importing just `pkgs.<package>.services.<service>` to 'just work'.\r\n\r\nthat doesn't so much go the other way around: what won't just automatically get fixed over time is the question of 'is service X supported on Y' discoverability - where in fact i would expect alternatives like file-parsing conventions to aggravate as we get more services.\r\n",
+   "created_at": "2026-07-13T15:23:01Z",
+   "id": 4959584707,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T15:33:58Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Another idea to solve this problem probably easily and prevents changing a lot of files: There could also just be a compatibility layer that is implemented in home-manager to translate the systemd definitions into something that home-manager uses. Kind of like a shim for systemd (nixos) -> systemd (home-manager)",
+   "created_at": "2026-07-13T20:01:04Z",
+   "id": 4962151072,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T20:02:22Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> a compatibility layer that is implemented in home-manager to translate the systemd definitions into something that home-manager uses\r\n\r\nit has had something hacky like that - then i found that our first modular service, ghostunnel, needs caps a user-level service cannot give, rendering this ostensible portability a treacherous promise.\r\n\r\nand that's one example of the larger picture: the various systems aren't trivially interchangeable, as people have argued at our tracking issue, and we're probably best off setting proper expectations there, rather than telling people to go read the source and pray it works on their system.\r\n",
+   "created_at": "2026-07-14T06:30:56Z",
+   "id": 4966071623,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-14T06:34:13Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Even better: declaring expectations",
+   "created_at": "2026-07-14T10:06:05Z",
+   "id": 4967937223,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-14T10:06:05Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> > we lose the ability to express compositions via .services that would have been portable. [...] Wouldn't this severely impede usability?\r\n> \r\n> what do you mean by usability there?\r\n\r\nWe'd lose the ability to compose services in a platform-agnostic way, even if portability is solved at the leaves.\r\n\r\n> faux portability\r\n\r\nIn e.g. the C world, portability is a spectrum. Would be good to refine our terminology\r\n- inherently portable: simple usages that are not impeded by any platform supported by Nixpkgs\r\n- portable: module that works on many platforms/service managers. I don't like that the unqualified form of the term is weaker, but I don't know what to name this.\r\n- faux portable: module that evaluates and builds but does not meet expectations, e.g. is broken, or insecure on a production platform\r\n\r\n> i would be inclined to call that faux portability, and would consider that counter to usability, myself.\r\n\r\nI agree, but the difference is that the faux portability is solvable by making the expectations explicit, whereas the platform-dependent wiring could be hard to back out of.\r\n\r\n\"usability\" can be argued both ways and holds for both, so the underlying question is one of prioritization.\r\n\r\n> becomes able to handle more services without environment-specific config\r\n\r\nExactly, so what we're looking at is a four-way trade-off between\r\n1. ease of multi-service composition,\r\n2. correctness and security,\r\n3. desire to avoid \"layer violations\",\r\n4. delivering portable modular services with minimal feature set. (shorter path to production-worthiness)\r\n\r\nBuilding out (4) seems like a no brainer, takes work, but I think we're getting better at it.\r\nLayer violation is an argument that I find to be quite weak in the context of a monorepo.\r\nComposition and correctness are least negotiable.\r\n\r\nSo to me the actual tradeoff is between 3 and 4. A design point that approaches this differently would be one where a module can declare on its own which platforms it supports. This still satisfies correctness, but also composition and early delivery.",
+   "created_at": "2026-07-14T10:31:57Z",
+   "id": 4968191965,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-14T10:31:57Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@roberth thanks for further expanding on where you're coming from - i think i understand it a bit better now.\r\n\r\n> the actual tradeoff is between 3 and 4\r\n> 4. delivering portable modular services with minimal feature set. (shorter path to production-worthiness)\r\n\r\nwait, is this one intended to mean 'add stuff to the modular service interface'? (if so, isn't that just additive, rather than bringing any sort of trade-off?)\r\n\r\n> the faux portability is solvable by making the expectations explicit\r\n\r\nwhat did you have in mind here?\r\n",
+   "created_at": "2026-07-15T09:16:49Z",
+   "id": 4978930099,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-15T09:16:49Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i _think_ @roberth's concerns at least could be addressed by having distinct generic references to the raw vs implemented versions of the services.\r\ni'll await #540857 first tho, as it seems blocking for test purposes.",
+   "created_at": "2026-07-15T21:36:52Z",
+   "id": 4985500266,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-15T21:36:52Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/init-system-freedom-on-nixos/78333/90\n",
+   "created_at": "2026-07-23T16:33:53Z",
+   "id": 5060910935,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-23T16:33:53Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "as per NixOS/nixos-search#1464, it looks like the approach here appears to suffice to address #545204.",
+   "created_at": "2026-07-26T20:58:43Z",
+   "id": 5085369207,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 1,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-26T20:58:43Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/540863",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Unprivileges system-specific snippets in current modular services, so as to show by example how other consuming systems might use them.\r\nMakes explicit that current config is for system-level services - see #524517.\r\n\r\nDisclaimer: I used a coding agent in the creation of this patch.\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 16,
+  "created_at": "2026-07-11T21:34:55Z",
+  "draft": false,
+  "id": 4864252095,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "PHP is a general-purpose scripting language geared towards web development.",
+    "id": 6685855770,
+    "name": "6.topic: php"
+   },
+   {
+    "color": "7b845a",
+    "default": false,
+    "description": "Contributions that include code generation with LLMs",
+    "id": 11544961878,
+    "name": "llm-assisted"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 540863,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/540863.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/540863.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "nixos/modular-services: split system-specific config out of `pkgs.<pkg>.services.<service>`",
+  "type": null,
+  "updated_at": "2026-07-28T03:47:04Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 507,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "03b47e1817e3752ffd314cb7f5ced6492b8a9dd0",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Unprivileges system-specific snippets in current modular services, so as to show by example how other consuming systems might use them.\r\nMakes explicit that current config is for system-level services - see #524517.\r\n\r\nDisclaimer: I used a coding agent in the creation of this patch.\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 40,
+  "closed_at": null,
+  "comments": 16,
+  "commits": 4,
+  "created_at": "2026-07-11T21:34:55Z",
+  "deletions": 230,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/540863.diff",
+  "draft": false,
+  "head": {
+   "label": "KiaraGrouwstra:modular-services-unprivilege-nixos",
+   "ref": "modular-services-unprivilege-nixos",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2018-06-10T10:36:34Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 136799825,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 1,
+    "open_issues_count": 1,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-30T19:20:59Z",
+    "size": 3035282,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2024-06-23T17:05:42Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "75e40eff5f11166ba589e56ac74348cde7ef081f",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4036963844,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "PHP is a general-purpose scripting language geared towards web development.",
+    "id": 6685855770,
+    "name": "6.topic: php"
+   },
+   {
+    "color": "7b845a",
+    "default": false,
+    "description": "Contributions that include code generation with LLMs",
+    "id": 11544961878,
+    "name": "llm-assisted"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 540863,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/540863.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 1181,
+    "login": "mjm",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 43863,
+    "login": "philiptaron",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 61303,
+    "login": "tomfitzhenry",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 63433,
+    "login": "talyz",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 705123,
+    "login": "jtojnar",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "open",
+  "title": "nixos/modular-services: split system-specific config out of `pkgs.<pkg>.services.<service>`",
+  "updated_at": "2026-07-28T03:47:04Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#540863",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "hmm, i am not a big fan of having half of the modular service in a separate directory while leaving the other half in `pkgs/by-name`. this just fractures it without a clear gain. having all modular services in their own directory (`services/by-name` or similar?) would be more sensible.",
+   "commit_id": "8c586cc6b00aae193154b7752211030f0ff451f1",
+   "id": 4679595553,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-12T07:06:29Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs",
+  "nixpkgs-portable-service-layer-prs"
+ ],
+ "timeline": []
+}

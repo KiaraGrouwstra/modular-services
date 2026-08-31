@@ -1,0 +1,1153 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/401680",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "This makes the functions available outside the NixOS `utils` context.\r\n\r\nI'd like to have something like this for [modular services](https://github.com/NixOS/nixpkgs/pull/372170#discussion_r1941876900) in order to avoid creating an unnecessarily broad dependency on NixOS specifics.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [ ] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#linking-nixos-module-tests-to-a-package) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [25.05 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) (or backporting [24.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2411.section.md) and [25.05](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) Release notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#reviewing-contributions\r\n-->\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 0,
+  "created_at": "2025-04-25T09:11:54Z",
+  "draft": false,
+  "id": 3019469148,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Software suite that provides an array of system components for Linux operating systems.",
+    "id": 2636554152,
+    "name": "6.topic: systemd"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 401680,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/401680.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/401680.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "systemd: Add functions.escapeSystemdExecArg[s]",
+  "type": null,
+  "updated_at": "2026-07-23T20:21:00Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 90,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "cda03d762aa4d6930f41c2a60b946e0f8a743630",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "This makes the functions available outside the NixOS `utils` context.\r\n\r\nI'd like to have something like this for [modular services](https://github.com/NixOS/nixpkgs/pull/372170#discussion_r1941876900) in order to avoid creating an unnecessarily broad dependency on NixOS specifics.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [ ] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#linking-nixos-module-tests-to-a-package) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [25.05 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) (or backporting [24.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2411.section.md) and [25.05](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) Release notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#reviewing-contributions\r\n-->\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 4,
+  "closed_at": null,
+  "comments": 0,
+  "commits": 1,
+  "created_at": "2025-04-25T09:11:54Z",
+  "deletions": 25,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/401680.diff",
+  "draft": false,
+  "head": {
+   "label": "roberth:systemd-functions",
+   "ref": "systemd-functions",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2016-01-17T16:08:57Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "roberth/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/roberth/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 49824545,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/roberth/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "other",
+     "name": "Other",
+     "spdx_id": "NOASSERTION"
+    },
+    "milestones_url": "https://api.github.com/repos/roberth/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 496447,
+     "login": "roberth",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/roberth/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-17T21:41:24Z",
+    "size": 2904048,
+    "stargazers_count": 1,
+    "subscription_url": "https://api.github.com/repos/roberth/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/roberth/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2021-06-15T20:50:35Z",
+    "visibility": "public",
+    "watchers": 1,
+    "watchers_count": 1,
+    "web_commit_signoff_required": false
+   },
+   "sha": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 2481064937,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Software suite that provides an array of system components for Linux operating systems.",
+    "id": 2636554152,
+    "name": "6.topic: systemd"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 401680,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/401680.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 1365692,
+    "login": "ElvishJerricco",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 16,
+  "state": "open",
+  "title": "systemd: Add functions.escapeSystemdExecArg[s]",
+  "updated_at": "2026-07-23T20:21:00Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#401680",
+ "review_comments": [
+  {
+   "body": "There's nothing pkgs specific here. Should we move this into lib.cli ?",
+   "commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "created_at": "2025-04-25T09:59:32Z",
+   "diff_hunk": "",
+   "id": 2059941930,
+   "line": 1,
+   "original_commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 1,
+   "pull_request_review_id": 2793621004,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-04-25T09:59:37Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I assumed it was placed in `utils` because it may have to depend on `config.systemd.package` if they require more or different escaping in the future, or maybe it didn't feel \"standard library\" enough at the time.\r\n\r\n@infinisil do you think this is in scope for `lib`? I feel don't feel like we should do this for any arbitrary package, but maybe `systemd` isn't any arbitrary package.",
+   "commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "created_at": "2025-04-25T12:44:10Z",
+   "diff_hunk": "",
+   "id": 2060173559,
+   "in_reply_to_id": 2059941930,
+   "line": 1,
+   "original_commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 1,
+   "pull_request_review_id": 2794004669,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-04-25T12:44:10Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'd also prefer this to be in lib. It's small enough, and I doubt it'll change.",
+   "commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "created_at": "2025-04-25T12:50:05Z",
+   "diff_hunk": "",
+   "id": 2060182005,
+   "in_reply_to_id": 2059941930,
+   "line": 1,
+   "original_commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 1,
+   "pull_request_review_id": 2794019063,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-04-25T12:50:05Z",
+   "user": {
+    "id": 183879,
+    "login": "flokli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "there is `systemd-escape` that implements this function as a binary that ships with systemd. But the whole point of these functions was to have a pure alternative to this IIRC.\r\n\r\nPeople can just call the `systemd-escape` binary in a derivation if they need it during build time instead of run time",
+   "commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "created_at": "2025-04-25T13:22:01Z",
+   "diff_hunk": "",
+   "id": 2060235215,
+   "in_reply_to_id": 2059941930,
+   "line": 1,
+   "original_commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 1,
+   "pull_request_review_id": 2794111965,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-04-25T13:23:07Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`systemd-escape` would be nice for a non-VM property test / fuzzing.\r\n\r\nI'll move it to `lib`.\r\n\r\n> > maybe `systemd` isn't any arbitrary package.",
+   "commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "created_at": "2025-04-25T17:07:44Z",
+   "diff_hunk": "",
+   "id": 2060608027,
+   "in_reply_to_id": 2059941930,
+   "line": 1,
+   "original_commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 1,
+   "pull_request_review_id": 2794792919,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-04-25T17:07:44Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Ok, I've [done](https://github.com/NixOS/nixpkgs/compare/master...roberth:nixpkgs:systemd-functions-bad) it, but as a `lib` maintainer I wouldn't accept it. Now the `lib` testing depends on NixOS? Not cool. Also it presents a slippery slope as to what the scope of `lib` even is. Didn't feel right. Wasted my time.",
+   "commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "created_at": "2025-04-27T12:42:11Z",
+   "diff_hunk": "",
+   "id": 2062618602,
+   "in_reply_to_id": 2059941930,
+   "line": 1,
+   "original_commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 1,
+   "pull_request_review_id": 2797629389,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-04-27T12:42:11Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> There's nothing pkgs specific here. Should we move this into lib.cli ?\r\n\r\nThere's also nothing lib specific here.\r\n\r\n> It's small enough,\r\n\r\nSmallness is not a criterium for `lib` additions.\r\n\r\n> and I doubt it'll change.\r\n\r\nFamous last words.\r\n\r\n\r\n------\r\n\r\nSo we're at an apparent impasse.\r\nI might know a place...",
+   "commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "created_at": "2025-04-27T12:45:16Z",
+   "diff_hunk": "",
+   "id": 2062619265,
+   "in_reply_to_id": 2059941930,
+   "line": 1,
+   "original_commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 1,
+   "pull_request_review_id": 2797630217,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-04-27T12:45:16Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Ok, so maybe https://github.com/NixOS/nixpkgs/pull/402298 `.systemd.something`, but I'm starting to [repeat](https://github.com/NixOS/nixpkgs/pull/345459) myself. Am I going crazy?",
+   "commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "created_at": "2025-04-27T14:09:26Z",
+   "diff_hunk": "",
+   "id": 2062638853,
+   "in_reply_to_id": 2059941930,
+   "line": 1,
+   "original_commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 1,
+   "pull_request_review_id": 2797651309,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-04-27T14:09:26Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "We can expose it as a passthru of the `systemd` derivation if that's what you're thinking about. Also works for me.",
+   "commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "created_at": "2025-04-28T09:36:11Z",
+   "diff_hunk": "",
+   "id": 2063295585,
+   "in_reply_to_id": 2059941930,
+   "line": 1,
+   "original_commit_id": "d52c6aab56c0ff718296874cef19b8d5db734513",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 1,
+   "pull_request_review_id": 2798698976,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-04-28T09:36:11Z",
+   "user": {
+    "id": 183879,
+    "login": "flokli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Where is this 2 coming from? Was there a previous version and we now have another interface?",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "created_at": "2025-04-28T09:37:10Z",
+   "diff_hunk": "@@ -0,0 +1,55 @@\n+/**\n+  Build the `systemd.functions` library (where `systemd` is the package)\n+*/\n+{ lib, systemd }:\n+let\n+  inherit (lib)\n+    concatMapStringsSep\n+    isDerivation\n+    isFloat\n+    isInt\n+    isPath\n+    isString\n+    replaceStrings\n+    ;\n+  inherit (builtins)\n+    toJSON\n+    ;\n+\n+  /**\n+    Quotes an argument for use in `Exec*` service lines.\n+    Additionally we escape `%` to disallow expansion of `%` specifiers. Any lone `;`\n+    in the input will be turned into `\";\"` and thus lose its special meaning.\n+    Every `$` is escaped to `$$`, this makes it unnecessary to disable environment\n+    substitution for the directive.\n+  */\n+  escapeSystemdExecArg =\n+    arg:\n+    let\n+      s =\n+        if isPath arg then\n+          \"${arg}\"\n+        else if isString arg then\n+          arg\n+        else if isInt arg || isFloat arg || isDerivation arg then\n+          toString arg\n+        else\n+          throw \"escapeSystemdExecArg only allows strings, paths, numbers and derivations\";\n+    in\n+    # systemd accepts \"-quoted strings with escape sequences, toJSON produces\n+    # a subset of these.\n+    replaceStrings [ \"%\" \"$\" ] [ \"%%\" \"$$\" ] (toJSON s);\n+\n+  /**\n+    Quotes a list of arguments into a single string for use in a Exec* line.\n+  */\n+  escapeSystemdExecArgs = concatMapStringsSep \" \" escapeSystemdExecArg;\n+in\n+# Instead of requiring v2, we can make this library conditional on the version as needed.\n+assert systemd.interfaceVersion == 2;",
+   "id": 2063297243,
+   "line": 49,
+   "original_commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "original_line": 49,
+   "original_position": 49,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 49,
+   "pull_request_review_id": 2798701688,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-04-28T09:37:11Z",
+   "user": {
+    "id": 183879,
+    "login": "flokli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Not sure we absolutely need this:\r\n\r\nI'm not confident escaping will change (at all), and especially not by someone setting `config.systemd.package` explicitly. We can probably just pull this from `pkgs.systemd`.",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "created_at": "2025-04-28T09:39:41Z",
+   "diff_hunk": "@@ -119,31 +119,7 @@ let\n         )\n       );\n \n-    # Quotes an argument for use in Exec* service lines.\n-    # systemd accepts \"-quoted strings with escape sequences, toJSON produces\n-    # a subset of these.\n-    # Additionally we escape % to disallow expansion of % specifiers. Any lone ;\n-    # in the input will be turned it \";\" and thus lose its special meaning.\n-    # Every $ is escaped to $$, this makes it unnecessary to disable environment\n-    # substitution for the directive.\n-    escapeSystemdExecArg =\n-      arg:\n-      let\n-        s =\n-          if isPath arg then\n-            \"${arg}\"\n-          else if isString arg then\n-            arg\n-          else if isInt arg || isFloat arg || isDerivation arg then\n-            toString arg\n-          else\n-            throw \"escapeSystemdExecArg only allows strings, paths, numbers and derivations\";\n-      in\n-      replaceStrings [ \"%\" \"$\" ] [ \"%%\" \"$$\" ] (toJSON s);\n-\n-    # Quotes a list of arguments into a single string for use in a Exec*\n-    # line.\n-    escapeSystemdExecArgs = concatMapStringsSep \" \" escapeSystemdExecArg;\n+    inherit (config.systemd.package.functions) escapeSystemdExecArg escapeSystemdExecArgs;",
+   "id": 2063301271,
+   "line": 122,
+   "original_commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "original_line": 122,
+   "original_position": 29,
+   "original_start_line": null,
+   "path": "nixos/lib/utils.nix",
+   "position": 29,
+   "pull_request_review_id": 2798708173,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-04-28T09:39:41Z",
+   "user": {
+    "id": 183879,
+    "login": "flokli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Maybe somehow point out this is not an explanatory comment but something that's open to discussion?",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "created_at": "2025-05-23T15:35:10Z",
+   "diff_hunk": "@@ -0,0 +1,55 @@\n+/**\n+  Build the `systemd.functions` library (where `systemd` is the package)\n+*/\n+{ lib, systemd }:\n+let\n+  inherit (lib)\n+    concatMapStringsSep\n+    isDerivation\n+    isFloat\n+    isInt\n+    isPath\n+    isString\n+    replaceStrings\n+    ;\n+  inherit (builtins)\n+    toJSON\n+    ;\n+\n+  /**\n+    Quotes an argument for use in `Exec*` service lines.\n+    Additionally we escape `%` to disallow expansion of `%` specifiers. Any lone `;`\n+    in the input will be turned into `\";\"` and thus lose its special meaning.\n+    Every `$` is escaped to `$$`, this makes it unnecessary to disable environment\n+    substitution for the directive.\n+  */\n+  escapeSystemdExecArg =\n+    arg:\n+    let\n+      s =\n+        if isPath arg then\n+          \"${arg}\"\n+        else if isString arg then\n+          arg\n+        else if isInt arg || isFloat arg || isDerivation arg then\n+          toString arg\n+        else\n+          throw \"escapeSystemdExecArg only allows strings, paths, numbers and derivations\";\n+    in\n+    # systemd accepts \"-quoted strings with escape sequences, toJSON produces\n+    # a subset of these.\n+    replaceStrings [ \"%\" \"$\" ] [ \"%%\" \"$$\" ] (toJSON s);\n+\n+  /**\n+    Quotes a list of arguments into a single string for use in a Exec* line.\n+  */\n+  escapeSystemdExecArgs = concatMapStringsSep \" \" escapeSystemdExecArg;\n+in\n+# Instead of requiring v2, we can make this library conditional on the version as needed.",
+   "id": 2104847203,
+   "line": 48,
+   "original_commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "original_line": 48,
+   "original_position": 48,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 48,
+   "pull_request_review_id": 2864849966,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-05-23T15:38:28Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The version stuff is explained here: https://github.com/NixOS/nixpkgs/pull/401680/files#diff-a284772b505bd573f834b58591d380128545257d9e02601dbe112548526c8710R872\r\n\r\nWe may want to refer to that so it's clearer?\r\n\r\n```suggestion\r\n# This is versioned together with systemd itself, to ensure compatibility for all invocations\r\nassert systemd.interfaceVersion == 2;\r\n```",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "created_at": "2025-05-23T15:35:52Z",
+   "diff_hunk": "@@ -0,0 +1,55 @@\n+/**\n+  Build the `systemd.functions` library (where `systemd` is the package)\n+*/\n+{ lib, systemd }:\n+let\n+  inherit (lib)\n+    concatMapStringsSep\n+    isDerivation\n+    isFloat\n+    isInt\n+    isPath\n+    isString\n+    replaceStrings\n+    ;\n+  inherit (builtins)\n+    toJSON\n+    ;\n+\n+  /**\n+    Quotes an argument for use in `Exec*` service lines.\n+    Additionally we escape `%` to disallow expansion of `%` specifiers. Any lone `;`\n+    in the input will be turned into `\";\"` and thus lose its special meaning.\n+    Every `$` is escaped to `$$`, this makes it unnecessary to disable environment\n+    substitution for the directive.\n+  */\n+  escapeSystemdExecArg =\n+    arg:\n+    let\n+      s =\n+        if isPath arg then\n+          \"${arg}\"\n+        else if isString arg then\n+          arg\n+        else if isInt arg || isFloat arg || isDerivation arg then\n+          toString arg\n+        else\n+          throw \"escapeSystemdExecArg only allows strings, paths, numbers and derivations\";\n+    in\n+    # systemd accepts \"-quoted strings with escape sequences, toJSON produces\n+    # a subset of these.\n+    replaceStrings [ \"%\" \"$\" ] [ \"%%\" \"$$\" ] (toJSON s);\n+\n+  /**\n+    Quotes a list of arguments into a single string for use in a Exec* line.\n+  */\n+  escapeSystemdExecArgs = concatMapStringsSep \" \" escapeSystemdExecArg;\n+in\n+# Instead of requiring v2, we can make this library conditional on the version as needed.\n+assert systemd.interfaceVersion == 2;",
+   "id": 2104849293,
+   "in_reply_to_id": 2063297243,
+   "line": 49,
+   "original_commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "original_line": 49,
+   "original_position": 49,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 49,
+   "pull_request_review_id": 2864849966,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-05-23T15:38:28Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This here is not wrong though?",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "created_at": "2025-05-23T15:36:59Z",
+   "diff_hunk": "@@ -119,31 +119,7 @@ let\n         )\n       );\n \n-    # Quotes an argument for use in Exec* service lines.\n-    # systemd accepts \"-quoted strings with escape sequences, toJSON produces\n-    # a subset of these.\n-    # Additionally we escape % to disallow expansion of % specifiers. Any lone ;\n-    # in the input will be turned it \";\" and thus lose its special meaning.\n-    # Every $ is escaped to $$, this makes it unnecessary to disable environment\n-    # substitution for the directive.\n-    escapeSystemdExecArg =\n-      arg:\n-      let\n-        s =\n-          if isPath arg then\n-            \"${arg}\"\n-          else if isString arg then\n-            arg\n-          else if isInt arg || isFloat arg || isDerivation arg then\n-            toString arg\n-          else\n-            throw \"escapeSystemdExecArg only allows strings, paths, numbers and derivations\";\n-      in\n-      replaceStrings [ \"%\" \"$\" ] [ \"%%\" \"$$\" ] (toJSON s);\n-\n-    # Quotes a list of arguments into a single string for use in a Exec*\n-    # line.\n-    escapeSystemdExecArgs = concatMapStringsSep \" \" escapeSystemdExecArg;\n+    inherit (config.systemd.package.functions) escapeSystemdExecArg escapeSystemdExecArgs;",
+   "id": 2104851718,
+   "in_reply_to_id": 2063301271,
+   "line": 122,
+   "original_commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "original_line": 122,
+   "original_position": 29,
+   "original_start_line": null,
+   "path": "nixos/lib/utils.nix",
+   "position": 29,
+   "pull_request_review_id": 2864849966,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-05-23T15:38:28Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "May be worth a bikeshed?\r\n\r\n```suggestion\r\n    utils = import ./utils/default.nix {\r\n```\r\n\r\nAlmost everything is a function around here...",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "created_at": "2025-05-23T15:37:48Z",
+   "diff_hunk": "@@ -876,6 +876,11 @@ stdenv.mkDerivation (finalAttrs: {\n     # needed - and therefore `interfaceVersion` should be incremented.\n     interfaceVersion = 2;\n \n+    functions = import ./functions/default.nix {",
+   "id": 2104853637,
+   "line": 879,
+   "original_commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "original_line": 879,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/default.nix",
+   "position": 4,
+   "pull_request_review_id": 2864849966,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-05-23T15:38:28Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Or maybe `assertMsg` to make it more legible at the CLI layer?",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "created_at": "2025-07-19T00:36:03Z",
+   "diff_hunk": "@@ -0,0 +1,55 @@\n+/**\n+  Build the `systemd.functions` library (where `systemd` is the package)\n+*/\n+{ lib, systemd }:\n+let\n+  inherit (lib)\n+    concatMapStringsSep\n+    isDerivation\n+    isFloat\n+    isInt\n+    isPath\n+    isString\n+    replaceStrings\n+    ;\n+  inherit (builtins)\n+    toJSON\n+    ;\n+\n+  /**\n+    Quotes an argument for use in `Exec*` service lines.\n+    Additionally we escape `%` to disallow expansion of `%` specifiers. Any lone `;`\n+    in the input will be turned into `\";\"` and thus lose its special meaning.\n+    Every `$` is escaped to `$$`, this makes it unnecessary to disable environment\n+    substitution for the directive.\n+  */\n+  escapeSystemdExecArg =\n+    arg:\n+    let\n+      s =\n+        if isPath arg then\n+          \"${arg}\"\n+        else if isString arg then\n+          arg\n+        else if isInt arg || isFloat arg || isDerivation arg then\n+          toString arg\n+        else\n+          throw \"escapeSystemdExecArg only allows strings, paths, numbers and derivations\";\n+    in\n+    # systemd accepts \"-quoted strings with escape sequences, toJSON produces\n+    # a subset of these.\n+    replaceStrings [ \"%\" \"$\" ] [ \"%%\" \"$$\" ] (toJSON s);\n+\n+  /**\n+    Quotes a list of arguments into a single string for use in a Exec* line.\n+  */\n+  escapeSystemdExecArgs = concatMapStringsSep \" \" escapeSystemdExecArg;\n+in\n+# Instead of requiring v2, we can make this library conditional on the version as needed.\n+assert systemd.interfaceVersion == 2;",
+   "id": 2217064051,
+   "in_reply_to_id": 2063297243,
+   "line": 49,
+   "original_commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "original_line": 49,
+   "original_position": 49,
+   "original_start_line": null,
+   "path": "pkgs/os-specific/linux/systemd/functions/default.nix",
+   "position": 49,
+   "pull_request_review_id": 3035022712,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-19T00:36:03Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2793621004,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-25T09:59:37Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2794004669,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-25T12:44:10Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2794019063,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-25T12:50:05Z",
+   "user": {
+    "id": 183879,
+    "login": "flokli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2794111965,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-25T13:22:01Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2794792919,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-25T17:07:44Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2797629389,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-27T12:42:11Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2797630217,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-27T12:45:16Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2797651309,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-27T14:09:26Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "id": 2798698976,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-28T09:36:11Z",
+   "user": {
+    "id": 183879,
+    "login": "flokli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "id": 2798701688,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-28T09:37:11Z",
+   "user": {
+    "id": 183879,
+    "login": "flokli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "id": 2798708173,
+   "state": "COMMENTED",
+   "submitted_at": "2025-04-28T09:39:41Z",
+   "user": {
+    "id": 183879,
+    "login": "flokli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I approve of the general direction, also would really like to get closer to getting https://github.com/NixOS/nixpkgs/pull/372170 merged",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "id": 2864849966,
+   "state": "APPROVED",
+   "submitted_at": "2025-05-23T15:38:28Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6a29cc2ce88478266edd4ec304f78f222081ccb4",
+   "id": 3035022712,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-19T00:36:03Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-07-19T00:30:15Z",
+   "event": "closed",
+   "id": 18708890961,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-07-19T00:37:26Z",
+   "event": "reopened",
+   "id": 18708923645,
+   "state_reason": null
+  }
+ ]
+}

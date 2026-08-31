@@ -1,0 +1,1573 @@
+{
+ "comments": [
+  {
+   "body": "I'm not an expert, but I think this only requires adding `defaultText` to the complaining option to get it to pass the failing checks. \r\n\r\nI stumbled on this MR looking for rosec in nixpkgs (after failing to find it at search.nixpkgs.org). I'd love to see this merged once the changes pass ci builds. It looks like a rather good implementation to my (admittedly pretty green) eyes. Thanks for the implementation. I'll try to test it out here shortly. I'm rebuilding my nix config to change the structure, so it may take a bit of time to get there, but it is in my queue of todos.",
+   "created_at": "2026-05-25T14:26:12Z",
+   "id": 4535000933,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-25T14:26:12Z",
+   "user": {
+    "id": 687376,
+    "login": "bbenne10",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ofborg test rosec",
+   "created_at": "2026-05-25T15:22:39Z",
+   "id": 4535348464,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-25T15:22:39Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ofborg test rosec",
+   "created_at": "2026-05-25T22:25:43Z",
+   "id": 4537651906,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-25T22:25:43Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Login in the nixosTests fails on aarch machines and I have no way to debug that currently. I may rent a arm ec2 or something to test but any help here is appreciated.",
+   "created_at": "2026-05-28T11:43:05Z",
+   "id": 4563650207,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-28T11:43:05Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I have addressed the aarch failure by marking the test as broken and added a little comment as to why. If in the future if it requires test coverage I will adjust the test to behave conditionally based on the platform and perform correct tty login. For now, I don't think it justifies blocking this PR.",
+   "created_at": "2026-06-12T10:11:21Z",
+   "id": 4690045917,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-12T10:11:21Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This should be broken into several commits:\r\n- One adding yourself as a maintainer\r\n- One for **each** package\r\n- One for the new module\r\n- One for the PAM changes",
+   "created_at": "2026-07-10T15:27:50Z",
+   "id": 4936876114,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-07-10T15:27:50Z",
+   "user": {
+    "id": 3129194,
+    "login": "EpicEric",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@EpicEric Out of pure interest and because I'd like to learn: What good would this do in this case? A revert of this entire commit wouldn't affect backwards compatibility in any way, so I wonder what I am not seeing here. Is it easier to review that way?\r\n\r\nThe reason I grouped these things together is that the integration test only make sense with all changes together. I suppose it would make sense to add the packages separately.",
+   "created_at": "2026-07-10T16:11:48Z",
+   "id": 4937256877,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-10T16:11:48Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Per [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#commit-conventions):\r\n\r\n> - Create one commit for each logical unit.\r\n\r\nThis ensures that \"others can later understand why a change was made. While this potentially can be understood by reading code, PR discussion or upstream changes, doing so often requires a lot of work\".",
+   "created_at": "2026-07-10T16:24:03Z",
+   "id": 4937351993,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-10T16:24:03Z",
+   "user": {
+    "id": 3129194,
+    "login": "EpicEric",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I must say that \"logical unit\" is pretty vague, but I will take your advice as reference.\r\n",
+   "created_at": "2026-07-10T20:44:15Z",
+   "id": 4939393426,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-10T20:44:15Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I have split the commit and also rebased solving a small conflict in the PAM module.\r\n\r\nSince I could use my original commit as oracle I ran this task with AI and reviewed it.\r\n\r\nDoes this mean I have to mark every commit as \"Assisted-by: OpenCode\" even though the actual code was mine only or do I leave it that way?",
+   "created_at": "2026-07-10T22:53:12Z",
+   "id": 4940165643,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-10T22:53:12Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## :white_check_mark: `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`0d7e614`](https://github.com/Defelo/nixpkgs-review-gha/commit/0d7e614b5286627eae0066a4f4e6a4a3bd2555f3))\n\nCommand: `nixpkgs-review pr 519494`\nCommit: [`afbf4a3cee66206f9a75e840c5f122245f65677a`](https://github.com/NixOS/nixpkgs/commit/afbf4a3cee66206f9a75e840c5f122245f65677a) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/afbf4a3cee66206f9a75e840c5f122245f65677a..pull/519494/head))\nMerge: [`3a0646542d7eb2a62d9a68229520074481f8a992`](https://github.com/NixOS/nixpkgs/commit/3a0646542d7eb2a62d9a68229520074481f8a992)\n\nLogs: https://github.com/SuperSandro2000/nixpkgs-review-gha/actions/runs/32593934440/attempts/1\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 2 packages built:</summary>\n  <ul>\n    <li>rosec</li>\n    <li>rosecFull</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 2 packages built:</summary>\n  <ul>\n    <li>rosec</li>\n    <li>rosecFull</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-08-22T19:53:43Z",
+   "id": 5382297508,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-22T19:53:43Z",
+   "user": {
+    "id": 52544611,
+    "login": "SuperSandroBot",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/519494",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [x] aarch64-linux\r\n  - [x] x86_64-darwin\r\n  - [x] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [x] [Package tests] at `passthru.tests`.\r\n  - [x] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [x] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [x] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [x] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-08-22T20:39:21Z",
+  "closed_by": {
+   "id": 7258858,
+   "login": "SuperSandro2000",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 11,
+  "created_at": "2026-05-12T17:05:51Z",
+  "draft": false,
+  "id": 4431108332,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a module in `nixos/`",
+    "id": 290122827,
+    "name": "8.has: module (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR has tests",
+    "id": 3998253522,
+    "name": "8.has: tests"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes `maintainers/maintainer-list.nix`",
+    "id": 6879370208,
+    "name": "8.has: maintainer-list (update)"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 519494,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/519494.diff",
+   "merged_at": "2026-08-22T20:39:21Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/519494.patch"
+  },
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "rosec: init at 0.0.28",
+  "type": null,
+  "updated_at": "2026-08-25T07:40:59Z",
+  "user": {
+   "id": 86004375,
+   "login": "Mikilio",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 412,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21132,
+    "open_issues_count": 21132,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:37:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "d83896749df1fb10f497f91b91a7c2e853da1d6e",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [x] aarch64-linux\r\n  - [x] x86_64-darwin\r\n  - [x] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [x] [Package tests] at `passthru.tests`.\r\n  - [x] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [x] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [x] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [x] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 12,
+  "closed_at": "2026-08-22T20:39:21Z",
+  "comments": 11,
+  "commits": 9,
+  "created_at": "2026-05-12T17:05:50Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/519494.diff",
+  "draft": false,
+  "head": {
+   "label": "Mikilio:package/rosec",
+   "ref": "package/rosec",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2022-11-03T05:47:25Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "Mikilio/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/Mikilio/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 561177884,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/Mikilio/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/Mikilio/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 86004375,
+     "login": "Mikilio",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/Mikilio/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-23T15:04:02Z",
+    "size": 2878019,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/Mikilio/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/Mikilio/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-08-23T08:41:43Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "afbf4a3cee66206f9a75e840c5f122245f65677a",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3670402828,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a module in `nixos/`",
+    "id": 290122827,
+    "name": "8.has: module (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR has tests",
+    "id": 3998253522,
+    "name": "8.has: tests"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes `maintainers/maintainer-list.nix`",
+    "id": 6879370208,
+    "name": "8.has: maintainer-list (update)"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "02df88f1b78b8f15697aba312ed37565a7abf2d9",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-08-22T20:39:21Z",
+  "merged_by": {
+   "id": 7258858,
+   "login": "SuperSandro2000",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 519494,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/519494.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 963511,
+    "login": "Majiir",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 20,
+  "state": "closed",
+  "title": "rosec: init at 0.0.28",
+  "updated_at": "2026-08-25T07:40:59Z",
+  "user": {
+   "id": 86004375,
+   "login": "Mikilio",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#519494",
+ "review_comments": [
+  {
+   "body": "nit: For new features, prefer an option format like `rosec.enable` so that new `rosec` options could be added without renaming the enable option. See `failDelay` just below for an example.",
+   "commit_id": "256fe4d49a7e4d5672623c4d43e73af6a8dedb68",
+   "created_at": "2026-05-31T17:51:49Z",
+   "diff_hunk": "@@ -663,6 +663,16 @@ let\n           '';\n         };\n \n+        enableRosec = lib.mkOption {",
+   "id": 3330664827,
+   "line": null,
+   "original_commit_id": "256fe4d49a7e4d5672623c4d43e73af6a8dedb68",
+   "original_line": 666,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/security/pam.nix",
+   "position": 1,
+   "pull_request_review_id": 4397323805,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-31T17:53:53Z",
+   "user": {
+    "id": 963511,
+    "login": "Majiir",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "thanks",
+   "commit_id": "256fe4d49a7e4d5672623c4d43e73af6a8dedb68",
+   "created_at": "2026-06-12T10:07:06Z",
+   "diff_hunk": "@@ -663,6 +663,16 @@ let\n           '';\n         };\n \n+        enableRosec = lib.mkOption {",
+   "id": 3402447491,
+   "in_reply_to_id": 3330664827,
+   "line": null,
+   "original_commit_id": "256fe4d49a7e4d5672623c4d43e73af6a8dedb68",
+   "original_line": 666,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/security/pam.nix",
+   "position": 1,
+   "pull_request_review_id": 4484568525,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-12T10:07:06Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This should be somewhat sorted alphabetically, but definitely not append as that would create merge conflicts all the time",
+   "commit_id": "b4b3eb22d49c56731e0e6bc3d07c80e919afa786",
+   "created_at": "2026-08-19T16:34:48Z",
+   "diff_hunk": "@@ -10910,4 +10910,11 @@ with pkgs;\n   };\n \n   feishin-web = feishin.override { webVersion = true; };\n+  rosecFull = pkgs.rosec.override {",
+   "id": 3814892858,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 10913,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "pkgs/top-level/all-packages.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n      description = \"Secrets daemon implementing the freedesktop.org Secret Service API with modular backend providers\";\r\n```",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:34:54Z",
+   "diff_hunk": "@@ -0,0 +1,118 @@\n+{\n+  lib,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  rustc,\n+  stdenv,\n+  autoPatchelfHook,\n+  symlinkJoin,\n+  pam,\n+  dbus,\n+  wayland,\n+  libxkbcommon,\n+  nixosTests,\n+  nix-update-script,\n+  provider ? [ ],\n+}:\n+symlinkJoin (\n+  finalAttrs:\n+  let\n+    inherit (finalAttrs) version;\n+\n+    src = fetchFromGitHub {\n+      owner = \"jmylchreest\";\n+      repo = \"rosec\";\n+      tag = \"v${version}\";\n+      hash = \"sha256-qs6WjgiK2AFhGlbsl85fEmVaWr/aw5pOIaKw68rsLZ0=\";\n+    };\n+\n+    rosec_pam = stdenv.mkDerivation {\n+      pname = \"pam_rosec\";\n+      inherit version src;\n+      sourceRoot = \"${src.name}/contrib/pam\";\n+\n+      buildInputs = [ pam ];\n+\n+      makeFlags = [\n+        \"PREFIX=$(out)\"\n+        \"ROSEC_PAM_UNLOCK_PATH=${rosec_core}/libexec/rosec/rosec-pam-unlock\"\n+      ];\n+\n+      installPhase = ''\n+        runHook preInstall\n+        install -Dm755 pam_rosec.so \"$out/lib/security/pam_rosec.so\"\n+        runHook postInstall\n+      '';\n+    };\n+\n+    rosec_core = rustPlatform.buildRustPackage {\n+      pname = \"rosec-unwrapped\";\n+      inherit version src;\n+\n+      cargoHash = \"sha256-kE3qpdQGvXtjlospxSeoyPIUNyioLq5Ao5y94yIsjMs=\";\n+\n+      nativeBuildInputs = [\n+        autoPatchelfHook\n+        dbus\n+      ];\n+\n+      runtimeDependencies = [\n+        libxkbcommon\n+        wayland\n+      ];\n+\n+      buildInputs = [\n+        stdenv.cc.cc.lib\n+      ];\n+\n+      preCheck = ''\n+        export $(dbus-launch --config-file=${dbus}/share/dbus-1/session.conf)\n+      '';\n+\n+      postInstall = ''\n+        mkdir -p $out/libexec/rosec\n+        mkdir -p $out/lib/rosec/providers\n+        mkdir -p $out/share/dbus-1/system.d\n+        mkdir -p $out/share/systemd/user\n+\n+        mv $out/bin/rosec-pam-unlock $out/libexec/rosec/\n+\n+        XDG_CONFIG_HOME=$out/lib XDG_DATA_HOME=$out/share $out/bin/rosec enable\n+      '';\n+    };\n+  in\n+  {\n+    pname = \"rosec\";\n+    version = \"0.0.28\";\n+\n+    paths = [\n+      rosec_core\n+      rosec_pam\n+    ]\n+    ++ provider;\n+\n+    strictDeps = true;\n+\n+    passthru = {\n+      tests = { inherit (nixosTests) rosec; };\n+      inherit rosec_core src version;\n+      updateScript = nix-update-script {\n+        extraArgs = [\n+          \"--subpackage\"\n+          \"rosec_core\"\n+        ];\n+      };\n+    };\n+\n+    __structuredAttrs = true;\n+\n+    meta = {\n+      description = \"A secrets daemon implementing the freedesktop.org Secret Service API with modular backend providers\";",
+   "id": 3814893654,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 110,
+   "original_position": 110,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ro/rosec/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n\r\n```",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:35:01Z",
+   "diff_hunk": "@@ -0,0 +1,118 @@\n+{\n+  lib,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  rustc,\n+  stdenv,\n+  autoPatchelfHook,\n+  symlinkJoin,\n+  pam,\n+  dbus,\n+  wayland,\n+  libxkbcommon,\n+  nixosTests,\n+  nix-update-script,\n+  provider ? [ ],\n+}:\n+symlinkJoin (\n+  finalAttrs:\n+  let\n+    inherit (finalAttrs) version;\n+\n+    src = fetchFromGitHub {\n+      owner = \"jmylchreest\";\n+      repo = \"rosec\";\n+      tag = \"v${version}\";\n+      hash = \"sha256-qs6WjgiK2AFhGlbsl85fEmVaWr/aw5pOIaKw68rsLZ0=\";\n+    };\n+\n+    rosec_pam = stdenv.mkDerivation {\n+      pname = \"pam_rosec\";\n+      inherit version src;\n+      sourceRoot = \"${src.name}/contrib/pam\";\n+\n+      buildInputs = [ pam ];\n+\n+      makeFlags = [\n+        \"PREFIX=$(out)\"\n+        \"ROSEC_PAM_UNLOCK_PATH=${rosec_core}/libexec/rosec/rosec-pam-unlock\"\n+      ];\n+\n+      installPhase = ''\n+        runHook preInstall\n+        install -Dm755 pam_rosec.so \"$out/lib/security/pam_rosec.so\"\n+        runHook postInstall\n+      '';\n+    };\n+\n+    rosec_core = rustPlatform.buildRustPackage {\n+      pname = \"rosec-unwrapped\";\n+      inherit version src;\n+\n+      cargoHash = \"sha256-kE3qpdQGvXtjlospxSeoyPIUNyioLq5Ao5y94yIsjMs=\";\n+\n+      nativeBuildInputs = [\n+        autoPatchelfHook\n+        dbus\n+      ];\n+\n+      runtimeDependencies = [\n+        libxkbcommon\n+        wayland\n+      ];\n+\n+      buildInputs = [\n+        stdenv.cc.cc.lib\n+      ];\n+\n+      preCheck = ''\n+        export $(dbus-launch --config-file=${dbus}/share/dbus-1/session.conf)\n+      '';\n+\n+      postInstall = ''\n+        mkdir -p $out/libexec/rosec\n+        mkdir -p $out/lib/rosec/providers\n+        mkdir -p $out/share/dbus-1/system.d\n+        mkdir -p $out/share/systemd/user\n+\n+        mv $out/bin/rosec-pam-unlock $out/libexec/rosec/\n+\n+        XDG_CONFIG_HOME=$out/lib XDG_DATA_HOME=$out/share $out/bin/rosec enable\n+      '';\n+    };\n+  in\n+  {\n+    pname = \"rosec\";\n+    version = \"0.0.28\";\n+\n+    paths = [\n+      rosec_core\n+      rosec_pam\n+    ]\n+    ++ provider;\n+\n+    strictDeps = true;\n+\n+    passthru = {\n+      tests = { inherit (nixosTests) rosec; };\n+      inherit rosec_core src version;\n+      updateScript = nix-update-script {\n+        extraArgs = [\n+          \"--subpackage\"\n+          \"rosec_core\"\n+        ];\n+      };\n+    };\n+\n+    __structuredAttrs = true;\n+",
+   "id": 3814894613,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 108,
+   "original_position": 108,
+   "original_start_line": 106,
+   "path": "pkgs/by-name/ro/rosec/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n    __structuredAttrs = true;\r\n    strictDeps = true;\r\n```",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:35:09Z",
+   "diff_hunk": "@@ -0,0 +1,118 @@\n+{\n+  lib,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  rustc,\n+  stdenv,\n+  autoPatchelfHook,\n+  symlinkJoin,\n+  pam,\n+  dbus,\n+  wayland,\n+  libxkbcommon,\n+  nixosTests,\n+  nix-update-script,\n+  provider ? [ ],\n+}:\n+symlinkJoin (\n+  finalAttrs:\n+  let\n+    inherit (finalAttrs) version;\n+\n+    src = fetchFromGitHub {\n+      owner = \"jmylchreest\";\n+      repo = \"rosec\";\n+      tag = \"v${version}\";\n+      hash = \"sha256-qs6WjgiK2AFhGlbsl85fEmVaWr/aw5pOIaKw68rsLZ0=\";\n+    };\n+\n+    rosec_pam = stdenv.mkDerivation {\n+      pname = \"pam_rosec\";\n+      inherit version src;\n+      sourceRoot = \"${src.name}/contrib/pam\";\n+\n+      buildInputs = [ pam ];\n+\n+      makeFlags = [\n+        \"PREFIX=$(out)\"\n+        \"ROSEC_PAM_UNLOCK_PATH=${rosec_core}/libexec/rosec/rosec-pam-unlock\"\n+      ];\n+\n+      installPhase = ''\n+        runHook preInstall\n+        install -Dm755 pam_rosec.so \"$out/lib/security/pam_rosec.so\"\n+        runHook postInstall\n+      '';\n+    };\n+\n+    rosec_core = rustPlatform.buildRustPackage {\n+      pname = \"rosec-unwrapped\";\n+      inherit version src;\n+\n+      cargoHash = \"sha256-kE3qpdQGvXtjlospxSeoyPIUNyioLq5Ao5y94yIsjMs=\";\n+\n+      nativeBuildInputs = [\n+        autoPatchelfHook\n+        dbus\n+      ];\n+\n+      runtimeDependencies = [\n+        libxkbcommon\n+        wayland\n+      ];\n+\n+      buildInputs = [\n+        stdenv.cc.cc.lib\n+      ];\n+\n+      preCheck = ''\n+        export $(dbus-launch --config-file=${dbus}/share/dbus-1/session.conf)\n+      '';\n+\n+      postInstall = ''\n+        mkdir -p $out/libexec/rosec\n+        mkdir -p $out/lib/rosec/providers\n+        mkdir -p $out/share/dbus-1/system.d\n+        mkdir -p $out/share/systemd/user\n+\n+        mv $out/bin/rosec-pam-unlock $out/libexec/rosec/\n+\n+        XDG_CONFIG_HOME=$out/lib XDG_DATA_HOME=$out/share $out/bin/rosec enable\n+      '';\n+    };\n+  in\n+  {\n+    pname = \"rosec\";\n+    version = \"0.0.28\";\n+\n+    paths = [\n+      rosec_core\n+      rosec_pam\n+    ]\n+    ++ provider;\n+\n+    strictDeps = true;",
+   "id": 3814895540,
+   "line": 97,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 94,
+   "original_position": 94,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ro/rosec/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n  sourceRoot = \"${src.name}/rosec-gnome-keyring\";\r\n```\r\nusing pname like this is an anti pattern",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:35:50Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{\n+  lib,\n+  rustPlatform,\n+  rustc,\n+  rosec,\n+  lld,\n+  nix-update-script,\n+}:\n+rustPlatform.buildRustPackage (finalAttrs: rec {\n+  pname = \"rosec-gnome-keyring\";\n+\n+  inherit (rosec) src version;\n+\n+  sourceRoot = \"${src.name}/${pname}\";",
+   "id": 3814900364,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 14,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ro/rosec-gnome-keyring/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This will not work as the source is inherited",
+   "commit_id": "afbf4a3cee66206f9a75e840c5f122245f65677a",
+   "created_at": "2026-08-19T16:36:15Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{\n+  lib,\n+  rustPlatform,\n+  rustc,\n+  rosec,\n+  lld,\n+  nix-update-script,\n+}:\n+rustPlatform.buildRustPackage (finalAttrs: rec {\n+  pname = \"rosec-gnome-keyring\";\n+\n+  inherit (rosec) src version;\n+\n+  sourceRoot = \"${src.name}/${pname}\";\n+\n+  cargoHash = \"sha256-gkbD1N4veXhETwc5uzL/eq7a6naGq6suqJOAp53suFI=\";\n+\n+  env.RUSTFLAGS = \"-C linker=wasm-ld\";\n+  nativeBuildInputs = [ lld ];\n+\n+  passthru.updateScript = nix-update-script { };",
+   "id": 3814903408,
+   "line": 20,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 21,
+   "original_position": 21,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ro/rosec-gnome-keyring/package.nix",
+   "position": 20,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n    description = \"GNOME keyring provider for rosec\";\r\n```",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:36:20Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{\n+  lib,\n+  rustPlatform,\n+  rustc,\n+  rosec,\n+  lld,\n+  nix-update-script,\n+}:\n+rustPlatform.buildRustPackage (finalAttrs: rec {\n+  pname = \"rosec-gnome-keyring\";\n+\n+  inherit (rosec) src version;\n+\n+  sourceRoot = \"${src.name}/${pname}\";\n+\n+  cargoHash = \"sha256-gkbD1N4veXhETwc5uzL/eq7a6naGq6suqJOAp53suFI=\";\n+\n+  env.RUSTFLAGS = \"-C linker=wasm-ld\";\n+  nativeBuildInputs = [ lld ];\n+\n+  passthru.updateScript = nix-update-script { };\n+\n+  __structuredAttrs = true;\n+\n+  meta = {\n+    description = \"A GNOME keyring provider for rosec\";",
+   "id": 3814904037,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 26,
+   "original_position": 26,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ro/rosec-gnome-keyring/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n```",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:36:26Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{\n+  lib,\n+  rustPlatform,\n+  rustc,\n+  rosec,\n+  lld,\n+  nix-update-script,\n+}:\n+rustPlatform.buildRustPackage (finalAttrs: rec {\n+  pname = \"rosec-bitwarden-sm\";\n+\n+  inherit (rosec) src version;\n+\n+  sourceRoot = \"${src.name}/${pname}\";\n+\n+  cargoHash = \"sha256-E4xxxK+7LEyYh7QtLnN8bHYwb2I9DQ7t4Inxbu72Fq4=\";\n+\n+  env.RUSTFLAGS = \"-C linker=wasm-ld\";\n+  nativeBuildInputs = [ lld ];\n+\n+  passthru.updateScript = nix-update-script { };\n+",
+   "id": 3814904783,
+   "line": 21,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 22,
+   "original_position": 22,
+   "original_start_line": 21,
+   "path": "pkgs/by-name/ro/rosec-bitwarden-sm/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 20,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n  sourceRoot = \"${src.name}/rosec-bitwarden-sm\";\r\n```",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:36:36Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{\n+  lib,\n+  rustPlatform,\n+  rustc,\n+  rosec,\n+  lld,\n+  nix-update-script,\n+}:\n+rustPlatform.buildRustPackage (finalAttrs: rec {\n+  pname = \"rosec-bitwarden-sm\";\n+\n+  inherit (rosec) src version;\n+\n+  sourceRoot = \"${src.name}/${pname}\";",
+   "id": 3814905848,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 14,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ro/rosec-bitwarden-sm/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n    description = \"Bitwarden Sercet Manager provider for rosec\";\r\n```",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:36:41Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{\n+  lib,\n+  rustPlatform,\n+  rustc,\n+  rosec,\n+  lld,\n+  nix-update-script,\n+}:\n+rustPlatform.buildRustPackage (finalAttrs: rec {\n+  pname = \"rosec-bitwarden-sm\";\n+\n+  inherit (rosec) src version;\n+\n+  sourceRoot = \"${src.name}/${pname}\";\n+\n+  cargoHash = \"sha256-E4xxxK+7LEyYh7QtLnN8bHYwb2I9DQ7t4Inxbu72Fq4=\";\n+\n+  env.RUSTFLAGS = \"-C linker=wasm-ld\";\n+  nativeBuildInputs = [ lld ];\n+\n+  passthru.updateScript = nix-update-script { };\n+\n+  __structuredAttrs = true;\n+\n+  meta = {\n+    description = \"A Bitwarden Sercet Manager provider for rosec\";",
+   "id": 3814906433,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 26,
+   "original_position": 26,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ro/rosec-bitwarden-sm/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n    description = \"Bitwarden (Personal) provider for rosec\";\r\n```",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:36:57Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{\n+  lib,\n+  rustPlatform,\n+  rustc,\n+  rosec,\n+  lld,\n+  nix-update-script,\n+}:\n+rustPlatform.buildRustPackage (finalAttrs: rec {\n+  pname = \"rosec-bitwarden-pm\";\n+\n+  inherit (rosec) src version;\n+\n+  sourceRoot = \"${src.name}/${pname}\";\n+\n+  cargoHash = \"sha256-hNeCZPclwz2WMKnHsECBL0TduqkWsYhadEfsw54lGBg=\";\n+\n+  env.RUSTFLAGS = \"-C linker=wasm-ld\";\n+  nativeBuildInputs = [ lld ];\n+\n+  passthru.updateScript = nix-update-script { };\n+\n+  __structuredAttrs = true;\n+\n+  meta = {\n+    description = \"A Bitwarden (Personal) provider for rosec\";",
+   "id": 3814908166,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 26,
+   "original_position": 26,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ro/rosec-bitwarden-pm/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n  __structuredAttrs = true;\r\n```",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:37:04Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{\n+  lib,\n+  rustPlatform,\n+  rustc,\n+  rosec,\n+  lld,\n+  nix-update-script,\n+}:\n+rustPlatform.buildRustPackage (finalAttrs: rec {\n+  pname = \"rosec-bitwarden-pm\";\n+\n+  inherit (rosec) src version;\n+\n+  sourceRoot = \"${src.name}/${pname}\";\n+\n+  cargoHash = \"sha256-hNeCZPclwz2WMKnHsECBL0TduqkWsYhadEfsw54lGBg=\";\n+\n+  env.RUSTFLAGS = \"-C linker=wasm-ld\";\n+  nativeBuildInputs = [ lld ];\n+\n+  passthru.updateScript = nix-update-script { };\n+\n+  __structuredAttrs = true;",
+   "id": 3814909068,
+   "line": 22,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 23,
+   "original_position": 23,
+   "original_start_line": 21,
+   "path": "pkgs/by-name/ro/rosec-bitwarden-pm/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 20,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n  sourceRoot = \"${src.name}/rosec-bitwarden-pm\";\r\n```",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "created_at": "2026-08-19T16:37:14Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{\n+  lib,\n+  rustPlatform,\n+  rustc,\n+  rosec,\n+  lld,\n+  nix-update-script,\n+}:\n+rustPlatform.buildRustPackage (finalAttrs: rec {\n+  pname = \"rosec-bitwarden-pm\";\n+\n+  inherit (rosec) src version;\n+\n+  sourceRoot = \"${src.name}/${pname}\";",
+   "id": 3814910240,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 14,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ro/rosec-bitwarden-pm/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Should the module contain a settings option instead?",
+   "commit_id": "afbf4a3cee66206f9a75e840c5f122245f65677a",
+   "created_at": "2026-08-19T16:37:33Z",
+   "diff_hunk": "@@ -0,0 +1,101 @@\n+{ pkgs, lib, ... }:\n+let\n+  rosec-config = pkgs.writeText \"rosec-config.toml\" ''",
+   "id": 3814912454,
+   "line": 3,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 3,
+   "original_position": 3,
+   "original_start_line": null,
+   "path": "nixos/tests/rosec.nix",
+   "position": 3,
+   "pull_request_review_id": 4974503338,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I did want to do this but when I checked there was no such order. I will just sort it with the best effort, but if you have a specific line in mind I'd like to use that.",
+   "commit_id": "b4b3eb22d49c56731e0e6bc3d07c80e919afa786",
+   "created_at": "2026-08-20T18:32:42Z",
+   "diff_hunk": "@@ -10910,4 +10910,11 @@ with pkgs;\n   };\n \n   feishin-web = feishin.override { webVersion = true; };\n+  rosecFull = pkgs.rosec.override {",
+   "id": 3824318292,
+   "in_reply_to_id": 3814892858,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 10913,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "pkgs/top-level/all-packages.nix",
+   "position": 1,
+   "pull_request_review_id": 4986137801,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-20T18:32:42Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This would be usually home-manager business. Rosec has no such thing as a system-wide setting.",
+   "commit_id": "afbf4a3cee66206f9a75e840c5f122245f65677a",
+   "created_at": "2026-08-20T18:37:12Z",
+   "diff_hunk": "@@ -0,0 +1,101 @@\n+{ pkgs, lib, ... }:\n+let\n+  rosec-config = pkgs.writeText \"rosec-config.toml\" ''",
+   "id": 3824347648,
+   "in_reply_to_id": 3814912454,
+   "line": 3,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 3,
+   "original_position": 3,
+   "original_start_line": null,
+   "path": "nixos/tests/rosec.nix",
+   "position": 3,
+   "pull_request_review_id": 4986172486,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-20T18:37:13Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The ordering right now is just best effort 😅 ",
+   "commit_id": "b4b3eb22d49c56731e0e6bc3d07c80e919afa786",
+   "created_at": "2026-08-22T19:25:00Z",
+   "diff_hunk": "@@ -10910,4 +10910,11 @@ with pkgs;\n   };\n \n   feishin-web = feishin.override { webVersion = true; };\n+  rosecFull = pkgs.rosec.override {",
+   "id": 3836825369,
+   "in_reply_to_id": 3814892858,
+   "line": null,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 10913,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "pkgs/top-level/all-packages.nix",
+   "position": 1,
+   "pull_request_review_id": 5000887155,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-22T19:25:00Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "home-manager is out of tree. Sad that the program has no system wide settings.",
+   "commit_id": "afbf4a3cee66206f9a75e840c5f122245f65677a",
+   "created_at": "2026-08-22T19:25:49Z",
+   "diff_hunk": "@@ -0,0 +1,101 @@\n+{ pkgs, lib, ... }:\n+let\n+  rosec-config = pkgs.writeText \"rosec-config.toml\" ''",
+   "id": 3836826810,
+   "in_reply_to_id": 3814912454,
+   "line": 3,
+   "original_commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "original_line": 3,
+   "original_position": 3,
+   "original_start_line": null,
+   "path": "nixos/tests/rosec.nix",
+   "position": 3,
+   "pull_request_review_id": 5000888459,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-22T19:25:49Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "PAM changes LGTM with one nitpick.",
+   "commit_id": "256fe4d49a7e4d5672623c4d43e73af6a8dedb68",
+   "id": 4397323805,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-31T17:53:53Z",
+   "user": {
+    "id": 963511,
+    "login": "Majiir",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "256fe4d49a7e4d5672623c4d43e73af6a8dedb68",
+   "id": 4484568525,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-12T10:07:06Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The init commits should not contain the v prefix",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "id": 4974503338,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-08-19T16:38:06Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "id": 4986137801,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-20T18:32:42Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "id": 4986172486,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-20T18:37:12Z",
+   "user": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "id": 5000887155,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-22T19:25:00Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "57e16df6cbc93405429ae1883eaf9076f66a270e",
+   "id": 5000888459,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-22T19:25:49Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "afbf4a3cee66206f9a75e840c5f122245f65677a",
+   "id": 5001001632,
+   "state": "APPROVED",
+   "submitted_at": "2026-08-22T20:34:11Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-23T14:27:29Z",
+   "event": "renamed",
+   "id": 25884194820,
+   "rename": {
+    "from": "rosec: init at v0.0.27",
+    "to": "rosec: init at v0.0.28"
+   }
+  },
+  {
+   "actor": {
+    "id": 86004375,
+    "login": "Mikilio",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-08-20T19:01:44Z",
+   "event": "renamed",
+   "id": 29763316725,
+   "rename": {
+    "from": "rosec: init at v0.0.28",
+    "to": "rosec: init at 0.0.28"
+   }
+  },
+  {
+   "actor": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "02df88f1b78b8f15697aba312ed37565a7abf2d9",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/02df88f1b78b8f15697aba312ed37565a7abf2d9",
+   "created_at": "2026-08-22T20:39:21Z",
+   "event": "merged",
+   "id": 29856741375
+  },
+  {
+   "actor": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-08-22T20:39:21Z",
+   "event": "closed",
+   "id": 29856741404,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

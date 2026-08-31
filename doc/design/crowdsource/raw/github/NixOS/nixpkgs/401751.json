@@ -1,0 +1,781 @@
+{
+ "comments": [
+  {
+   "body": "I'm concerned about the process and the seemingly arbitrary nature of the module set here.\r\n\r\nFor instance `nixpkgs/misc.nix` has a smaller alternative in the form of `nixosModules.readOnlyPkgs` in `flake.nix`, and in theory you don't even need a module for it at all.\r\n\r\nI think a more \"decidable\" approach is to begin with the absolute minimum, which is `nixpkgsFlake.lib.nixos.evalModules`, and then only add the smallest common intersection of some very minimal use cases, while also reviewing whether any of the modules that are loaded are actually minimal for their purpose. Rather often, they are not, containing definitions that serve other modules or other use cases that are not relevant. Maybe it's ok to have `system.build.toplevel` even if some use cases don't need it, but I'm only 95% convinced.\r\nAn example of a minimal use case would be to generate a docker image with a NixOS-derived `/etc`, which doesn't need most of the modules listed. (I don't think that code ever made it into master, but you can find it in https://github.com/NixOS/nixpkgs/pull/148456/files#diff-730cb9cd318fb9539b54b5501b42359537f7e3280864257df2e1f73c58848cae)\r\n\r\nWhich goal are you pursuing?\r\nIt could be evaluation performance, in which case #372170 also helps - removing the bulk of `services` modules.\r\nOr is it flexibility? E.g. upstreaming https://github.com/arianvp/server-optimised-nixos?\r\n\r\nIf flexibility is what you're going for, I believe the only viable, sustainable approach is to turn each module or small set of modules into a project of their own, which is to say, having their own tests that are independent of all the other modules except the ones they import, and `meta.maintainers` (which already exists for NixOS modules, but is almost never used).\r\nImagine that, actual modularity!\r\n",
+   "created_at": "2025-04-25T17:03:56Z",
+   "id": 2830956760,
+   "minimized": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2025-04-25T17:05:33Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Awesome that you want to work on this. I hope my comment was useful.",
+   "created_at": "2025-04-25T17:05:05Z",
+   "id": 2830959848,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-04-25T17:05:05Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The idea of this PR is to have a base operating system which can be used for different approaches. For example a more minimal nixos as in server-optimized-nixos or as a base platform for modular services.\r\n\r\nCurrently all nixos modules are automatically imported and we cannot change the default nixosSystem entry point to change that behavior without breaking it for all users. So our approach is to add a new entrypoint which can be used to build a bootable system. For now the list is big and arbitrary but with the changes made here, there is code and infrastructure so people can start asynchronously working on splitting up these modules. For example the pam module, which is uses a lot of other modules, instead of just declaring options and the users would use those options in return.\r\n\r\nA next step would be, to track dependencies between modules with imports inside the modules, so we can show those dependencies explicitly. Hunting down these dependencies would also be easier with the new entrypoint.\r\n\r\nAll in all it's an iterative approach toward a modular services, but the goal here is to reuse as much of the current services we have already in nixos. This is the first minimal change, since minimal changes are easier to review :)\r\n\r\nnext steps would be something like:\r\n- explicitly declare inter module dependencies with explicit imports\r\n- add tests that all modules actually declare all their required imports\r\n- refactor some modules to be more minimal and reduce the dependency list",
+   "created_at": "2025-05-09T09:41:12Z",
+   "id": 2865881958,
+   "minimized": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2025-05-09T09:41:12Z",
+   "user": {
+    "id": 621759,
+    "login": "Lassulus",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@roberth I removed the additional entry point and converted the list to a module. Please check again",
+   "created_at": "2025-05-15T11:58:51Z",
+   "id": 2883564255,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-05-15T11:58:51Z",
+   "user": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "- opened #413892 to make a start on necessary CI tooling",
+   "created_at": "2025-06-04T12:59:52Z",
+   "id": 2939950774,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-06-04T12:59:52Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/a-look-at-nixos-nixpkgs-evaluation-times-over-the-years/65114/32\n",
+   "created_at": "2025-06-11T15:05:32Z",
+   "id": 2963196654,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-06-11T15:05:32Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "one of the larger obstacles in creating a minimal module list is the PAM module, which depends on a large number of modules which wouldn't be desirable in a minimal list\r\n\r\ni wonder if there is any way we can nerd snipe @Majiir into splitting up the PAM module, like mentioned here:\r\n\r\nhttps://github.com/NixOS/nixpkgs/blob/ee930f9755f58096ac6e8ca94a1887e0534e2d81/nixos/modules/security/pam.nix#L716-L718",
+   "created_at": "2025-06-16T23:56:23Z",
+   "id": 2978503674,
+   "minimized": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 2,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2025-06-16T23:56:23Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/401751",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "related: https://github.com/NixOS/nixpkgs/issues/137168\r\n\r\nThis adds:\r\n- a `minimal.nix` file containing a list of 185 modules that are required for building the `toplevel` of an (almost) empty nixos configuration.\r\n- a test that builds a minimal nixos system to ensure that the minimal.nix doesn't miss any modules.\r\n\r\nThis is only the first step and further work is required in order to improve the experience using nixosMinimal, like:\r\n- refactoring existing modules to explicitly import their dependency modules\r\n- adding CI checks to assure modules declare imports correctly\r\n\r\ncc @roberth \r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [ ] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#linking-nixos-module-tests-to-a-package) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [25.05 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) (or backporting [24.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2411.section.md) and [25.05](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) Release notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#reviewing-contributions\r\n-->\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 7,
+  "created_at": "2025-04-25T13:07:38Z",
+  "draft": false,
+  "id": 3020016583,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR has tests",
+    "id": 3998253522,
+    "name": "8.has: tests"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 401751,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/401751.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/401751.patch"
+  },
+  "reactions": {
+   "+1": 29,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 29
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "nixosMinimal: init - nixos with minimal modules",
+  "type": null,
+  "updated_at": "2025-12-14T16:13:54Z",
+  "user": {
+   "id": 42246742,
+   "login": "DavHau",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 225,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "e040dbd58616c3244c046eb9720ffba0aa4b5ccb",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "related: https://github.com/NixOS/nixpkgs/issues/137168\r\n\r\nThis adds:\r\n- a `minimal.nix` file containing a list of 185 modules that are required for building the `toplevel` of an (almost) empty nixos configuration.\r\n- a test that builds a minimal nixos system to ensure that the minimal.nix doesn't miss any modules.\r\n\r\nThis is only the first step and further work is required in order to improve the experience using nixosMinimal, like:\r\n- refactoring existing modules to explicitly import their dependency modules\r\n- adding CI checks to assure modules declare imports correctly\r\n\r\ncc @roberth \r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [ ] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#linking-nixos-module-tests-to-a-package) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [25.05 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) (or backporting [24.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2411.section.md) and [25.05](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) Release notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#reviewing-contributions\r\n-->\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 3,
+  "closed_at": null,
+  "comments": 7,
+  "commits": 1,
+  "created_at": "2025-04-25T13:07:38Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/401751.diff",
+  "draft": false,
+  "head": {
+   "label": "DavHau:minimal",
+   "ref": "minimal",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2019-11-06T12:04:35Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "DavHau/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/DavHau/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 219987441,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/DavHau/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/DavHau/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 42246742,
+     "login": "DavHau",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/DavHau/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-03-19T14:06:18Z",
+    "size": 2594455,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/DavHau/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/DavHau/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2020-01-22T18:18:23Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "user": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 2481553227,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR has tests",
+    "id": 3998253522,
+    "name": "8.has: tests"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 401751,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/401751.patch",
+  "rebaseable": false,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 6,
+  "state": "open",
+  "title": "nixosMinimal: init - nixos with minimal modules",
+  "updated_at": "2025-12-14T16:13:54Z",
+  "user": {
+   "id": 42246742,
+   "login": "DavHau",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#401751",
+ "review_comments": [
+  {
+   "body": "This could be a module instead.\r\n\r\n```suggestion\r\n{ imports = [\r\n```",
+   "commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "created_at": "2025-05-09T13:32:20Z",
+   "diff_hunk": "@@ -0,0 +1,187 @@\n+[",
+   "id": 2081700362,
+   "line": null,
+   "original_commit_id": "c32788c13b857b1cf6751333d9690a85af726812",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "nixos/modules/base-modules.nix",
+   "position": 1,
+   "pull_request_review_id": 2828375144,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-05-09T13:36:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n  # aka `lib.nixos` in the nixpkgs flake\r\n  nixos = import ../lib/default.nix { };\r\n  conf = nixos.lib.evalModules { modules = [ {\r\n```",
+   "commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "created_at": "2025-05-09T13:34:10Z",
+   "diff_hunk": "@@ -0,0 +1,11 @@\n+{\n+  pkgs ? import ../.. { },\n+}:\n+let\n+  nixos = pkgs.nixosMinimal {",
+   "id": 2081706681,
+   "line": null,
+   "original_commit_id": "c32788c13b857b1cf6751333d9690a85af726812",
+   "original_line": 5,
+   "original_position": 5,
+   "original_start_line": null,
+   "path": "nixos/tests/nixos-minimal.nix",
+   "position": 1,
+   "pull_request_review_id": 2828375144,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-05-09T13:36:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Use the existing minimal entrypoint instead.\r\n\r\n```suggestion\r\n```",
+   "commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "created_at": "2025-05-09T13:34:40Z",
+   "diff_hunk": "@@ -18664,6 +18664,30 @@ with pkgs;\n     in\n     c.config.system.build // c;\n \n+  nixosMinimal =\n+    configuration:\n+    let\n+      c = import (path + \"/nixos/lib/eval-config.nix\") {\n+        baseModules = import (path + \"/nixos/modules/base-modules.nix\");\n+        modules = [\n+          (\n+            { lib, ... }:\n+            {\n+              config.nixpkgs.pkgs = lib.mkDefault pkgs;\n+              config.nixpkgs.localSystem = lib.mkDefault stdenv.hostPlatform;\n+              # TODO: fix documentation not building\n+              config.documentation.enable = lib.mkDefault false;\n+            }\n+          )\n+        ] ++ (if builtins.isList configuration then configuration else [ configuration ]);\n+\n+        # The system is inherited from the current pkgs above.\n+        # Set it to null, to remove the \"legacy\" entrypoint's non-hermetic default.\n+        system = null;\n+      };\n+    in\n+    lib.warn \"nixosMinimal is experimental and subject to change\" c.config.system.build // c;\n+",
+   "id": 2081708442,
+   "line": null,
+   "original_commit_id": "c32788c13b857b1cf6751333d9690a85af726812",
+   "original_line": 18690,
+   "original_position": 27,
+   "original_start_line": 18667,
+   "path": "pkgs/top-level/all-packages.nix",
+   "position": 1,
+   "pull_request_review_id": 2828375144,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2025-05-09T13:37:01Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Is there a better location for this file?",
+   "commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "created_at": "2025-05-19T03:45:44Z",
+   "diff_hunk": "",
+   "id": 2094787919,
+   "line": 1,
+   "original_commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "nixos/modules/minimal.nix",
+   "position": 1,
+   "pull_request_review_id": 2849307728,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-05-19T03:45:45Z",
+   "user": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "\"a minimal\" is still contradictory, unless we have multiple minimal sets of the same size. I don't believe that's the case.\r\n\r\nI'd go with something less absolute and more vague like \"core\" or \"sea level\" or something, for the name.",
+   "commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "created_at": "2025-05-19T07:31:45Z",
+   "diff_hunk": "@@ -0,0 +1,205 @@\n+/*\n+  This is a minimal list of nixos modules.",
+   "id": 2095035418,
+   "line": 2,
+   "original_commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "original_line": 2,
+   "original_position": 2,
+   "original_start_line": null,
+   "path": "nixos/modules/minimal.nix",
+   "position": 2,
+   "pull_request_review_id": 2849702400,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-05-19T07:39:25Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It's like a profile, an actually good one. Maybe `modules/profiles/minimal/baseline.nix` or something?",
+   "commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "created_at": "2025-05-19T07:40:45Z",
+   "diff_hunk": "",
+   "id": 2095053358,
+   "in_reply_to_id": 2094787919,
+   "line": 1,
+   "original_commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "nixos/modules/minimal.nix",
+   "position": 1,
+   "pull_request_review_id": 2849737222,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2025-05-19T07:40:45Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "This should be done with less new stuff by leveraging the existing minimal entrypoint.\r\n\r\nIt'd be good to have a separation between the entrypoint and the module set (profile), so that we don't end up maintaining a ton of subtly distinct entrypoints. We already have too many.",
+   "commit_id": null,
+   "id": 2828375144,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2025-05-09T13:36:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "id": 2849307728,
+   "state": "COMMENTED",
+   "submitted_at": "2025-05-19T03:45:45Z",
+   "user": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Much better in terms of accidental complexity. Only remaining issue: how do we prevent this from bitrotting frequently?\r\nIs this best-effort with async fixes, or is the plan to add CI for it?",
+   "commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "id": 2849702400,
+   "state": "COMMENTED",
+   "submitted_at": "2025-05-19T07:39:25Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "id": 2849737222,
+   "state": "COMMENTED",
+   "submitted_at": "2025-05-19T07:40:45Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": []
+}

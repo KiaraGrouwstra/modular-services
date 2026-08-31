@@ -1,0 +1,275 @@
+{
+ "comments": [
+  {
+   "body": "Seems to be caused by https://github.com/NixOS/nixpkgs/pull/372170",
+   "created_at": "2025-08-10T15:27:00Z",
+   "id": 3172711312,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-10T15:27:00Z",
+   "user": {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'll agree that it looks weird, but this is intentional. Do I understand correctly that this only affects how the manual looks, but does not cause any other issues? Otherwise we can revert immediately.\nThe `<imports ...>` syntax is meant to convey that the option is available only when imported.\n\nWe could change the `< >` to `[ ]`, borrowing from XQuery conditions, but I don't think that changes the overall picture that much.",
+   "created_at": "2025-08-10T16:11:58Z",
+   "id": 3172742051,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-10T16:11:58Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "A more proper solution would be to have parallel docs infrastructure for these kinds of modules, or a more general framework for this kind of thing, but in https://github.com/NixOS/nixpkgs/pull/430876 I've opted for a simpler implementation for the purpose of agility as we develop the Modular Service feature before deciding whether to keep it.\nApologies for the disruption here.",
+   "created_at": "2025-08-10T16:15:53Z",
+   "id": 3172744216,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-10T16:15:53Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Do I understand correctly that this only affects how the manual looks, but does not cause any other issues?\n\nIt breaks assumption how the options are structured. Before there where only options like `abc.def.enable`. Now we have potentially duplicated options that do not really fit the scheme of the existing options.\n\n> The `<imports ...>` syntax is meant to convey that the option is available only when imported.\n\nWe should borrow the syntax from https://nixos.org/manual/nixos/unstable/#modular-services as anything else is a little confusing as if the namespace is being shared which it isn't.\n\nSo \n\n```\nsystem.services.<name>.imports = [ pkgs.ghostunnel.services.default ];\n```\n\nor \n\n```\nsystem.services.<name>.ghostunnel.package = <package>;\n```\n\nwould fit better in my opinion.\n\nAlso I am wondering why the default behind services is required. We could just default to that ",
+   "created_at": "2025-11-11T15:12:43Z",
+   "id": 3517376399,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-11-11T15:12:43Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> system.services.<name>.ghostunnel.package = <package>;\n\nI quite like this, certainly in the context of the searchable options. It's crucial that it clearly displays the import that's required, but then it works well.\n\nIt does make the rule to have a prefix something like `ghostunnel` a hard requirement rather than a convention.\nOtherwise we can't tell from the \"path\" what it is, and we'd get ambiguities.\nThat's significant, but I think it's ok.\n\nShould we then duplicate these for users services though?\n\nMaybe the real answer is: this is a different module class that's not NixOS, and we create a separate page and search.nixos.org tab for it.\n\nCreating a new page in the manual seems easy enough; have done that before.",
+   "created_at": "2025-11-11T16:06:08Z",
+   "id": 3517636577,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-11-11T16:06:08Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> this is a different module class that's not NixOS, and we create a separate page and search.nixos.org tab for it.\n\nI don't want to decide that alone but it might be the best solution here so that it is clear that those options are handled slightly different 🤔 ",
+   "created_at": "2025-11-11T16:29:44Z",
+   "id": 3517761350,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 4,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2025-11-11T16:29:44Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> this is a different module class that's not NixOS, and we create a separate page and search.nixos.org tab for it.\n\nI feel like it should be a separate section in the nixpkgs manual like Modules, Options or Services (probably Services is the best) then the nixos, nix-darwin, etc manual links back to the nixpkgs manual, [However with search I feel like it's fine to stay where it is.](https://github.com/NixOS/nixos-search/pull/1192) Because it feels like it's in the correct place to define the documentation, because it's not exactly nixos.\n\n",
+   "created_at": "2026-04-15T20:07:16Z",
+   "id": 4255111511,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-15T20:39:40Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/432550",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Nixpkgs version\n\n- Unstable (25.11)\n\n### Describe the bug\n\n```\n$ man configuration.nix\nOPTIONS\n       You can use the following options in configuration.nix.\n\n       <imports = [ pkgs.ghostunnel.services.default ]>\n           This is a modular service[1], which can be imported into a NixOS configuration using the ‘system.services’[2] option.\n\n           Type: submodule\n\n           Declared by:\n               <nixpkgs/nixos/modules/misc/documentation/modular-services.nix:21>\n\n            1. https://nixos.org/manual/nixos/unstable/#modular-services\n            2. https://search.nixos.org/options?channel=unstable&show=system.services&query=modular+service\n\n       <imports = [ pkgs.ghostunnel.services.default ]>.ghostunnel.package\n           Package to use for ghostunnel\n\n           Type: package\n\n           Declared by:\n               <nixpkgs/pkgs/by-name/gh/ghostunnel/service.nix>\n```\n\n### Steps to reproduce\n\n```\nman configuration.nix\n```\n\n### Expected behaviour\n\nIsn't broken\n\n### Screenshots\n\n_No response_\n\n### Relevant log output\n\n```console\n\n```\n\n### Additional context\n\n_No response_\n\n### System metadata\n\nNixOS\n\n### Notify maintainers\n\n\n@roberth \n---\n\n**Note for maintainers:** Please tag this issue in your pull request description. (i.e. `Resolves #ISSUE`.)\n\n\n### I assert that this issue is relevant for Nixpkgs\n\n- [x] I assert that this is a bug and not a support request.\n- [x] I assert that this is not a [duplicate of an existing issue](https://github.com/NixOS/nixpkgs/issues?q=is%3Aopen+is%3Aissue+label%3A%220.kind%3A+bug%22+label%3A%226.topic%3A+nixos%22). \n- [x] I assert that I have read the [NixOS Code of Conduct](https://github.com/NixOS/.github/blob/master/CODE_OF_CONDUCT.md) and agree to abide by it.\n\n### Is this issue important to you?\n\nAdd a :+1: [reaction] to [issues you find important].\n\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\n[issues you find important]: https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 7,
+  "created_at": "2025-08-10T15:25:31Z",
+  "id": 3307677836,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Something is broken",
+    "id": 6314750,
+    "name": "0.kind: bug"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 432550,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 2,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 2
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "nixos/ghostunnel: Documentation rendering bug",
+  "type": null,
+  "updated_at": "2026-07-23T17:16:50Z",
+  "user": {
+   "id": 628387,
+   "login": "arianvp",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#432550",
+ "sources": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues",
+  "nixpkgs-system-services-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "f32464e0a147e2ba2c14ae0f68b7251e550c6da3",
+   "commit_url": "https://api.github.com/repos/NuschtOS/ixx/commits/f32464e0a147e2ba2c14ae0f68b7251e550c6da3",
+   "created_at": "2025-08-10T21:11:11Z",
+   "event": "referenced",
+   "id": 19077669983
+  }
+ ]
+}

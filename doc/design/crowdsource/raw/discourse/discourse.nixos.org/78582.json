@@ -1,0 +1,87 @@
+{
+ "archetype": "regular",
+ "archived": false,
+ "category_id": 14,
+ "closed": false,
+ "created_at": "2026-06-26T15:26:51.090Z",
+ "host": "discourse.nixos.org",
+ "id": 78582,
+ "last_posted_at": "2026-06-26T15:26:51.242Z",
+ "like_count": 4,
+ "posts": [
+  {
+   "accepted_answer": false,
+   "badges_granted": [],
+   "can_accept_answer": false,
+   "can_unaccept_answer": false,
+   "can_vote": false,
+   "created_at": "2026-06-26T15:26:51.242Z",
+   "deleted_at": null,
+   "event": null,
+   "flair_name": null,
+   "id": 263271,
+   "incoming_link_count": 23,
+   "link_counts": [
+    {
+     "clicks": 5,
+     "internal": false,
+     "reflection": false,
+     "title": "lib/services: add some generalization options by Eveeifyeve · Pull Request #535695 · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/pull/535695"
+    },
+    {
+     "clicks": 4,
+     "internal": false,
+     "reflection": false,
+     "title": "Comparing NixOS:master...DigitalBrewStudios:modular-service-generalization-service-api · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/compare/master...DigitalBrewStudios:nixpkgs:modular-service-generalization-service-api"
+    },
+    {
+     "clicks": 2,
+     "internal": false,
+     "reflection": false,
+     "title": "lib/services/service: add flags, flagFormat by Lassulus · Pull Request #509595 · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/pull/509595"
+    },
+    {
+     "clicks": 2,
+     "internal": false,
+     "reflection": false,
+     "title": "testers.modularServiceCompliance: init by roberth · Pull Request #531062 · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/pull/531062"
+    }
+   ],
+   "name": "Robert Hensing",
+   "post_number": 1,
+   "post_type": 1,
+   "posts_count": 1,
+   "primary_group_name": null,
+   "quote_count": 0,
+   "raw": "# modular services meeting #3 2026-06-26\n\nAttendees: @EveeifyiEve, @lassulus, @roberth, @aanderse\n\n## Sync\n\n* @EveeifyiEve has worked on [code changes](https://github.com/NixOS/nixpkgs/compare/master...DigitalBrewStudios:nixpkgs:modular-service-generalization-service-api) from previous meeting, @aanderse likes and thinks this is the right direction\n* @roberth has done some work on a generic test suite to be used with modular services\n  * ready for merge https://github.com/NixOS/nixpkgs/pull/531062\n* @lassulus finished work on PR adding flags\n  * https://github.com/NixOS/nixpkgs/pull/509595\n* @Evee: what’s the community working on?\n  * @aanderse: @ehmry was doing some work on a platform that would be solely modular services based, s6 / runit style stuff. Lower level so not sure if I would recommend looking at that\n  * @aanderse: we could create a repo in nix-community, lower stakes where people can contribute easily. Having a lot of them in nixpkgs is not quite right yet\n  * @aanderse: @artemist has started work on a BSD implementation :tada:\n\n## Review https://github.com/NixOS/nixpkgs/pull/535695\n\nAdds generalization support for reloading, readiness and runtime directory.\n\nNew options\n\n* `reloadSignal`\n  * @aanderse: seems unused\n  * @evee: not sure what @roberth wanted\n  * @roberth: reloadCommand defaulting to signal should be fine\n  * @roberth: we should specify what happens when both are specified. I’d lean towards forbidding by means of assertion\n    * something with `options.reloadCommand.highestPrio == optionDefaultPrio`\n* `reloadCommand`\n* `runtimeDirectory`\n  * @roberth: It’s not clear to me who is supposed to set this, e.g. systemd vs user (probably not module author)\n  * @aanderse: We had this idea where options are about declaring the intent of a module\n  * @aanderse: Only systemd supports this out of the box. Other service managers \\[integrations\\] can fill the gap if they need to\n* `runtimePermission`\n* `serviceManager.notificationProtocol`\n  * @roberth: I would expect this option path to say \"the service manager supports this protocol (/ maybe *these* protocols)\n  * @aanderse: with finit we *might* want to expose what we support\n  * @aanderse: I’d move it to top level because it’s about the service itself. I’d punt on the service manager introspection until we have a real need\n  * @roberth: I agree\n* `serviceManager.preserveRuntimeDirectory`\n\nImplementation\n\n* @aanderse: setting `Type` there is nice\n* @roberth: `mainExecReload` is analogous to `mainExecStart`, allowing `systemd`-specific escape hatch for `%n` interpolation support\n\nPlease split out `runtimeDirectory` so we can settle the reload options sooner\n\n## Action items\n\n* [ ] roberth: review `environment` PR\n* [ ] lassulus: flags\n* [ ] aanderse: will port new options to finit when done\n* [ ] evee: implement review feedback",
+   "reads": 67,
+   "reply_count": 0,
+   "reply_to_post_number": null,
+   "title_is_group": false,
+   "topic_accepted_answer": null,
+   "topic_id": 78582,
+   "updated_at": "2026-06-26T15:26:51.242Z",
+   "user_id": 6,
+   "user_title": "Great contributor",
+   "username": "roberth",
+   "version": 1,
+   "wiki": false
+  }
+ ],
+ "posts_count": 1,
+ "posts_fetched": 1,
+ "reply_count": 0,
+ "slug": "modular-services-meeting-3-2026-06-26",
+ "sources": [
+  "discourse-meetings"
+ ],
+ "tags": null,
+ "title": "Modular services meeting #3 2026-06-26",
+ "url": "https://discourse.nixos.org/t/modular-services-meeting-3-2026-06-26/78582",
+ "views": 164,
+ "word_count": 405
+}

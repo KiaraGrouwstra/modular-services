@@ -1,0 +1,348 @@
+{
+ "comments": [
+  {
+   "body": "> It would still be nice to link to https://nixos.org/manual/nixos/unstable/#modular-services somewhere.\r\n\r\nWe do this today! It has been linked at options details' entry:\r\n\r\n> **About**: [What are modular services?](https://nixos.org/manual/nixos/stable/#modular-services)\r\n\r\n> (also shouldn't that be in the nixpkgs manual rather than the nixos-manual? I thought kinda the point of modular services was that they're not NixOS-specific :)\r\n\r\nIndeed! This point was raised earlier at https://github.com/NixOS/nixpkgs/issues/432550#issuecomment-4255111511, and I've worked on this a bit at NixOS/nixpkgs#519015.\r\n\r\n> I could also see only showing this category when the 'unstable' channel is selected.\r\n\r\nTo be fair, the feature has been available on stable, tho it's maybe unfortunate that the name might give the impression it's already in the ballpark of usefulness as NixOS services, of which we have various orders of magnitude more today.\r\n\r\nI feel like a way to communicate that would be to have its limited set of options eagerly loaded such that people would already see there's very little there yet today. (I'd see #1262 as the first step toward achieving that.)\r\n",
+   "created_at": "2026-05-26T12:02:40Z",
+   "id": 4543942415,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-26T12:02:40Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> > It would still be nice to link to https://nixos.org/manual/nixos/unstable/#modular-services somewhere.\r\n> \r\n> We do this today! It has been linked at options details' entry:\r\n> \r\n> > **About**: [What are modular services?](https://nixos.org/manual/nixos/stable/#modular-services)\r\n\r\nYeah that's already good. I think it might make sense to have it above rather than 'inside' the search results at some point.\r\n \r\n> > (also shouldn't that be in the nixpkgs manual rather than the nixos-manual? I thought kinda the point of modular services was that they're not NixOS-specific :)\r\n> \r\n> Indeed! This point was raised earlier at [NixOS/nixpkgs#432550 (comment)](https://github.com/NixOS/nixpkgs/issues/432550#issuecomment-4255111511), and I've worked on this a bit at [NixOS/nixpkgs#519015](https://github.com/NixOS/nixpkgs/pull/519015).\r\n\r\n:+1: \r\n\r\n",
+   "created_at": "2026-05-26T14:04:09Z",
+   "id": 4544809254,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-26T14:04:09Z",
+   "user": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixos-search/pull/1289",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Mark modular services in the options tab as experimental, as suggested in #1281.\r\n\r\nDisclaimer: I used a coding agent in the creation of this patch.\r\n",
+  "closed_at": "2026-05-26T11:43:55Z",
+  "closed_by": {
+   "id": 131856,
+   "login": "raboof",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 2,
+  "created_at": "2026-05-26T11:37:17Z",
+  "draft": false,
+  "id": 4523851786,
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 1289,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixos-search/pull/1289.diff",
+   "merged_at": "2026-05-26T11:43:55Z",
+   "patch_url": "https://github.com/NixOS/nixos-search/pull/1289.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixos-search",
+  "state": "closed",
+  "state_reason": null,
+  "title": "mark modular services as experimental",
+  "type": null,
+  "updated_at": "2026-05-26T14:04:09Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 24,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:main",
+   "ref": "main",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2020-03-28T04:16:53Z",
+    "default_branch": "main",
+    "description": "Search NixOS packages and options",
+    "disabled": false,
+    "fork": false,
+    "forks": 180,
+    "forks_count": 180,
+    "full_name": "NixOS/nixos-search",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixos-search/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "https://search.nixos.org",
+    "id": 250712577,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixos-search/issues{/number}",
+    "language": "Elm",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixos-search/milestones{/number}",
+    "name": "nixos-search",
+    "open_issues": 187,
+    "open_issues_count": 187,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixos-search/pulls{/number}",
+    "pushed_at": "2026-08-30T12:54:55Z",
+    "size": 2505,
+    "stargazers_count": 594,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixos-search/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixos-search/tags",
+    "topics": [
+     "elasticsearch",
+     "elm",
+     "search"
+    ],
+    "updated_at": "2026-08-30T12:55:02Z",
+    "visibility": "public",
+    "watchers": 594,
+    "watchers_count": 594,
+    "web_commit_signoff_required": false
+   },
+   "sha": "c11ef4b336a444ba61277507c5c772d5fc3033fa",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Mark modular services in the options tab as experimental, as suggested in #1281.\r\n\r\nDisclaimer: I used a coding agent in the creation of this patch.\r\n",
+  "changed_files": 2,
+  "closed_at": "2026-05-26T11:43:55Z",
+  "comments": 2,
+  "commits": 1,
+  "created_at": "2026-05-26T11:37:17Z",
+  "deletions": 1,
+  "diff_url": "https://github.com/NixOS/nixos-search/pull/1289.diff",
+  "draft": false,
+  "head": {
+   "label": "KiaraGrouwstra:experimental-modular-services",
+   "ref": "experimental-modular-services",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2025-05-31T18:03:11Z",
+    "default_branch": "main",
+    "description": "Search NixOS packages and options",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/nixos-search",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "https://search.nixos.org",
+    "id": 993877724,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/milestones{/number}",
+    "name": "nixos-search",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/pulls{/number}",
+    "pushed_at": "2026-08-30T14:56:47Z",
+    "size": 2610,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/tags",
+    "topics": [],
+    "updated_at": "2025-05-31T18:03:11Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "a991749e2abff49dc249e349a861c2d005ee56cc",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3747864131,
+  "labels": [],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "b4e7211093ffd8e53e0bc4b82dcac12609b25003",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-05-26T11:43:55Z",
+  "merged_by": {
+   "id": 131856,
+   "login": "raboof",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 1289,
+  "patch_url": "https://github.com/NixOS/nixos-search/pull/1289.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "mark modular services as experimental",
+  "updated_at": "2026-05-26T14:04:09Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixos-search#1289",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "Sounds good.\n\nI could also see only showing this category when the 'unstable' channel is selected.\n\nIt would still be nice to link to https://nixos.org/manual/nixos/unstable/#modular-services somewhere. (also shouldn't that be in the nixpkgs manual rather than the nixos-manual? I thought kinda the point of modular services was that they're not NixOS-specific :)",
+   "commit_id": "a991749e2abff49dc249e349a861c2d005ee56cc",
+   "id": 4363333280,
+   "state": "APPROVED",
+   "submitted_at": "2026-05-26T11:43:39Z",
+   "user": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixos-search-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "b4e7211093ffd8e53e0bc4b82dcac12609b25003",
+   "commit_url": "https://api.github.com/repos/NixOS/nixos-search/commits/b4e7211093ffd8e53e0bc4b82dcac12609b25003",
+   "created_at": "2026-05-26T11:43:55Z",
+   "event": "merged",
+   "id": 25965350451
+  },
+  {
+   "actor": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-26T11:43:56Z",
+   "event": "closed",
+   "id": 25965350487,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "d94b093ed7ba2113271fea93603b5681143f2726",
+   "commit_url": "https://api.github.com/repos/Malix-Labs/nixos-search/commits/d94b093ed7ba2113271fea93603b5681143f2726",
+   "created_at": "2026-05-30T10:28:29Z",
+   "event": "referenced",
+   "id": 26140321186
+  }
+ ]
+}

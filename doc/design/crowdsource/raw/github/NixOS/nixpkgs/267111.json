@@ -1,0 +1,697 @@
+{
+ "comments": [
+  {
+   "body": "# Rendered docs\r\n\r\n(with broken links)\r\n\r\n <dl class=\"variablelist\">\r\n<dt>\r\n <span class=\"term\">\r\n <a id=\"opt-services.abstract\"></a><a class=\"term\" href=\"options.html#opt-services.abstract\"><code class=\"option\">services.abstract</code>\r\n  </a>\r\n </span>\r\n</dt>\r\n<dd>\r\n<p>All services that are configured on the system.</p>\r\n\r\n<p><span class=\"emphasis\"><em>Type:</em></span>\r\nlazy attribute set of (submodule)</p>\r\n\r\n<p><span class=\"emphasis\"><em>Default:</em></span>\r\n<code class=\"literal\">{ }</code></p>\r\n\r\n<p><span class=\"emphasis\"><em>Declared by:</em></span></p>\r\n<table border=\"0\" summary=\"Simple list\" class=\"simplelist\">\r\n<tr><td>\r\n<code class=\"filename\"><a class=\"filename\"  href=\"https://github.com/NixOS/nixpkgs/blob/release-23.11/nixos/modules/services/abstract/systemd.nix\" target=\"_top\">\r\n&lt;nixpkgs/nixos/modules/services/abstract/systemd.nix&gt;\r\n</a></code>\r\n</td></tr>\r\n<tr><td>\r\n<code class=\"filename\"><a class=\"filename\"  href=\"https://github.com/NixOS/nixpkgs/blob/release-23.11/nixos/modules/services/abstract/generic.nix\" target=\"_top\">\r\n&lt;nixpkgs/nixos/modules/services/abstract/generic.nix&gt;\r\n</a></code>\r\n</td></tr>\r\n</table>\r\n</dd>\r\n<dt>\r\n <span class=\"term\">\r\n <a id=\"opt-services.abstract._name_.enable\"></a><a class=\"term\" href=\"options.html#opt-services.abstract._name_.enable\"><code class=\"option\">services.abstract.&lt;name&gt;.enable</code>\r\n  </a>\r\n </span>\r\n</dt>\r\n<dd>\r\n<p>Whether to enable the service. A service is enabled by default, because you took the effort to define its attribute.</p>\r\n\r\n<p><span class=\"emphasis\"><em>Type:</em></span>\r\nboolean</p>\r\n\r\n<p><span class=\"emphasis\"><em>Default:</em></span>\r\n<code class=\"literal\">true</code></p>\r\n\r\n<p><span class=\"emphasis\"><em>Declared by:</em></span></p>\r\n<table border=\"0\" summary=\"Simple list\" class=\"simplelist\">\r\n<tr><td>\r\n<code class=\"filename\"><a class=\"filename\"  href=\"https://github.com/NixOS/nixpkgs/blob/release-23.11/nixos/modules/services/abstract/instance/generic.nix\" target=\"_top\">\r\n&lt;nixpkgs/nixos/modules/services/abstract/instance/generic.nix&gt;\r\n</a></code>\r\n</td></tr>\r\n</table>\r\n</dd>\r\n<dt>\r\n <span class=\"term\">\r\n <a id=\"opt-services.abstract._name_.args\"></a><a class=\"term\" href=\"options.html#opt-services.abstract._name_.args\"><code class=\"option\">services.abstract.&lt;name&gt;.args</code>\r\n  </a>\r\n </span>\r\n</dt>\r\n<dd>\r\n<p>Arguments to pass to the <code class=\"literal\">foreground.process</code> or <code class=\"literal\">daemon.process</code>. In other words, these arguments are passed regardless of process manager choice.</p>\r\n\r\n<p><span class=\"emphasis\"><em>Type:</em></span>\r\nlist of (string or path convertible to it)</p>\r\n\r\n<p><span class=\"emphasis\"><em>Default:</em></span>\r\n<code class=\"literal\">[ ]</code></p>\r\n\r\n<p><span class=\"emphasis\"><em>Declared by:</em></span></p>\r\n<table border=\"0\" summary=\"Simple list\" class=\"simplelist\">\r\n<tr><td>\r\n<code class=\"filename\"><a class=\"filename\"  href=\"https://github.com/NixOS/nixpkgs/blob/release-23.11/nixos/modules/services/abstract/instance/generic.nix\" target=\"_top\">\r\n&lt;nixpkgs/nixos/modules/services/abstract/instance/generic.nix&gt;\r\n</a></code>\r\n</td></tr>\r\n</table>\r\n</dd>\r\n<dt>\r\n <span class=\"term\">\r\n <a id=\"opt-services.abstract._name_.daemon.args\"></a><a class=\"term\" href=\"options.html#opt-services.abstract._name_.daemon.args\"><code class=\"option\">services.abstract.&lt;name&gt;.daemon.args</code>\r\n  </a>\r\n </span>\r\n</dt>\r\n<dd>\r\n<p>Arguments to pass to the <code class=\"option\">daemon.process</code>.</p>\r\n\r\n<p><span class=\"emphasis\"><em>Type:</em></span>\r\nlist of (string or path convertible to it)</p>\r\n\r\n<p><span class=\"emphasis\"><em>Default:</em></span>\r\n<code class=\"literal\">config.args</code></p>\r\n\r\n<p><span class=\"emphasis\"><em>Declared by:</em></span></p>\r\n<table border=\"0\" summary=\"Simple list\" class=\"simplelist\">\r\n<tr><td>\r\n<code class=\"filename\"><a class=\"filename\"  href=\"https://github.com/NixOS/nixpkgs/blob/release-23.11/nixos/modules/services/abstract/instance/generic.nix\" target=\"_top\">\r\n&lt;nixpkgs/nixos/modules/services/abstract/instance/generic.nix&gt;\r\n</a></code>\r\n</td></tr>\r\n</table>\r\n</dd>\r\n<dt>\r\n <span class=\"term\">\r\n <a id=\"opt-services.abstract._name_.daemon.process\"></a><a class=\"term\" href=\"options.html#opt-services.abstract._name_.daemon.process\"><code class=\"option\">services.abstract.&lt;name&gt;.daemon.process</code>\r\n  </a>\r\n </span>\r\n</dt>\r\n<dd>\r\n<p>Path to an executable that launches a process in daemon mode.</p>\r\n\r\n<p><span class=\"emphasis\"><em>Type:</em></span>\r\nstring or path convertible to it</p>\r\n\r\n<p><span class=\"emphasis\"><em>Default:</em></span>\r\n<code class=\"literal\">config.process</code></p>\r\n\r\n<p><span class=\"emphasis\"><em>Declared by:</em></span></p>\r\n<table border=\"0\" summary=\"Simple list\" class=\"simplelist\">\r\n<tr><td>\r\n<code class=\"filename\"><a class=\"filename\"  href=\"https://github.com/NixOS/nixpkgs/blob/release-23.11/nixos/modules/services/abstract/instance/generic.nix\" target=\"_top\">\r\n&lt;nixpkgs/nixos/modules/services/abstract/instance/generic.nix&gt;\r\n</a></code>\r\n</td></tr>\r\n</table>\r\n</dd>\r\n<dt>\r\n <span class=\"term\">\r\n <a id=\"opt-services.abstract._name_.foreground.args\"></a><a class=\"term\" href=\"options.html#opt-services.abstract._name_.foreground.args\"><code class=\"option\">services.abstract.&lt;name&gt;.foreground.args</code>\r\n  </a>\r\n </span>\r\n</dt>\r\n<dd>\r\n<p>Arguments to pass to the <code class=\"option\">foreground.process</code>.</p>\r\n\r\n<p><span class=\"emphasis\"><em>Type:</em></span>\r\nlist of (string or path convertible to it)</p>\r\n\r\n<p><span class=\"emphasis\"><em>Default:</em></span>\r\n<code class=\"literal\">config.args</code></p>\r\n\r\n<p><span class=\"emphasis\"><em>Declared by:</em></span></p>\r\n<table border=\"0\" summary=\"Simple list\" class=\"simplelist\">\r\n<tr><td>\r\n<code class=\"filename\"><a class=\"filename\"  href=\"https://github.com/NixOS/nixpkgs/blob/release-23.11/nixos/modules/services/abstract/instance/generic.nix\" target=\"_top\">\r\n&lt;nixpkgs/nixos/modules/services/abstract/instance/generic.nix&gt;\r\n</a></code>\r\n</td></tr>\r\n</table>\r\n</dd>\r\n<dt>\r\n <span class=\"term\">\r\n <a id=\"opt-services.abstract._name_.foreground.process\"></a><a class=\"term\" href=\"options.html#opt-services.abstract._name_.foreground.process\"><code class=\"option\">services.abstract.&lt;name&gt;.foreground.process</code>\r\n  </a>\r\n </span>\r\n</dt>\r\n<dd>\r\n<p>Path to an executable that launches a process in foreground mode.</p>\r\n\r\n<p><span class=\"emphasis\"><em>Type:</em></span>\r\nstring or path convertible to it</p>\r\n\r\n<p><span class=\"emphasis\"><em>Default:</em></span>\r\n<code class=\"literal\">config.process</code></p>\r\n\r\n<p><span class=\"emphasis\"><em>Declared by:</em></span></p>\r\n<table border=\"0\" summary=\"Simple list\" class=\"simplelist\">\r\n<tr><td>\r\n<code class=\"filename\"><a class=\"filename\"  href=\"https://github.com/NixOS/nixpkgs/blob/release-23.11/nixos/modules/services/abstract/instance/generic.nix\" target=\"_top\">\r\n&lt;nixpkgs/nixos/modules/services/abstract/instance/generic.nix&gt;\r\n</a></code>\r\n</td></tr>\r\n</table>\r\n</dd>\r\n<dt>\r\n <span class=\"term\">\r\n <a id=\"opt-services.abstract._name_.process\"></a><a class=\"term\" href=\"options.html#opt-services.abstract._name_.process\"><code class=\"option\">services.abstract.&lt;name&gt;.process</code>\r\n  </a>\r\n </span>\r\n</dt>\r\n<dd>\r\n<p>When this property is specified, it translates both to: <code class=\"option\">foreground.process</code> and <code class=\"option\">daemon.process</code>.</p>\r\n\r\n<p><span class=\"emphasis\"><em>Type:</em></span>\r\nstring or path convertible to it</p>\r\n\r\n<p><span class=\"emphasis\"><em>Declared by:</em></span></p>\r\n<table border=\"0\" summary=\"Simple list\" class=\"simplelist\">\r\n<tr><td>\r\n<code class=\"filename\"><a class=\"filename\"  href=\"https://github.com/NixOS/nixpkgs/blob/release-23.11/nixos/modules/services/abstract/instance/generic.nix\" target=\"_top\">\r\n&lt;nixpkgs/nixos/modules/services/abstract/instance/generic.nix&gt;\r\n</a></code>\r\n</td></tr>\r\n</table>\r\n</dd>\r\n<dt>\r\n <span class=\"term\">\r\n <a id=\"opt-services.abstract._name_.systemd.services\"></a><a class=\"term\" href=\"options.html#opt-services.abstract._name_.systemd.services\"><code class=\"option\">services.abstract.&lt;name&gt;.systemd.services</code>\r\n  </a>\r\n </span>\r\n</dt>\r\n<dd>\r\n<p>This module configures systemd services, with the notable difference that their unit names will be prefixed with the abstract service name.</p><p>This option’s value is not suitable for reading, but you can define a module here that interacts with just the unit configuration in the host system configuration.</p>\r\n\r\n<p><span class=\"emphasis\"><em>Type:</em></span>\r\nlazy attribute set of module</p>\r\n\r\n<p><span class=\"emphasis\"><em>Declared by:</em></span></p>\r\n<table border=\"0\" summary=\"Simple list\" class=\"simplelist\">\r\n<tr><td>\r\n<code class=\"filename\"><a class=\"filename\"  href=\"https://github.com/NixOS/nixpkgs/blob/release-23.11/nixos/modules/services/abstract/instance/systemd.nix\" target=\"_top\">\r\n&lt;nixpkgs/nixos/modules/services/abstract/instance/systemd.nix&gt;\r\n</a></code>\r\n</td></tr>\r\n</table>\r\n</dd>\r\n </dl>",
+   "created_at": "2023-11-12T22:09:05Z",
+   "id": 1807258089,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-11-12T22:09:18Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I can't spend much time on this at all\r\n\r\nUnfortunately the devil really is in the details on these things; until you've built and booted a complete example it's impossible to know that you've solved (or even encountered!) all the hard problems.",
+   "created_at": "2023-11-13T04:30:01Z",
+   "id": 1807460692,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-11-13T04:30:01Z",
+   "user": {
+    "id": 10137,
+    "login": "ghost",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes, it's only a proof of concept at this stage.\r\n\r\nSome next steps could be\r\n\r\n- add more of the service properties\r\n- write a module for a process manager that isn't the NixOS systemd module\r\n- port a few services\r\n\r\nWould you be interested to collaborate on this?\r\n\r\nEDIT: I've removed the quoted text about time from the PR description, because I can make time for some collaboration. It'd be stupid not to.",
+   "created_at": "2023-11-13T09:12:26Z",
+   "id": 1807734092,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-11-13T09:30:40Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Renamed the pr: Abstract -> Portable.\r\nIt matches the RFC and is more accurate. These services are *not* abstract.\r\nLayer feels a bit redundant to me. We don't need to think of parts of the NixOS option tree as layers, but it's not entirely wrong, in the sense that an evaluation order is implicit in the dependencies created by various option definitions (ie the expressions that are merged into the option value, and cause ordering by referencing `config`).\r\n`services.abstract` also needs a rename. Not sure which\r\n - `service` (top level, singular): nice and simple, but perhaps easy to forget or mistype the `s`\r\n - `services.portable`: wrong in the sense that once the definitions have ended up there, they're not portable anymore; also part of the reason why `abstract` was wrong\r\n - `serviceGroups`: leaning into the fact that in this proof of concept, a Portable Service can define multiple daemons, units, etc.\r\n",
+   "created_at": "2023-11-20T09:38:53Z",
+   "id": 1818636798,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-11-20T09:38:53Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/community-calendar/18589/99\n",
+   "created_at": "2023-11-20T11:48:56Z",
+   "id": 1818903090,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-11-20T11:48:56Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/announcing-services-flake/41338/13\n",
+   "created_at": "2024-08-29T20:04:55Z",
+   "id": 2318850916,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-08-29T20:04:55Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/portable-submodules/54109/5\n",
+   "created_at": "2024-10-08T23:39:46Z",
+   "id": 2400995595,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-10-08T23:39:46Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've used this to make a more minimal version incorporating feedback, with docs and tests, over at\r\n- https://github.com/NixOS/nixpkgs/pull/372170",
+   "created_at": "2025-01-08T22:27:38Z",
+   "id": 2578795292,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 3,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2025-01-08T22:27:38Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/267111",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "## Description of changes\r\n\r\n- A proof of concept to hopefully illustrate what I [had in mind](https://github.com/NixOS/rfcs/pull/163#discussion_r1347854623) for https://github.com/NixOS/rfcs/pull/163\r\n\r\nIt implements a bit more than necessary, allowing an abstract service to potentially create multiple systemd services, if it seeks out `options?systemd` to figure out the kind of process manager it's loaded into.\r\nI think that's nice functionality, but the proof of concept could be changed to something more restrictive if that's the direction you want to take. (ie don't define process-manager specific options; only read the data from the abstract service)\r\n\r\nI hope this gives some insight into what's possible with the module system.\r\nOr maybe you can learn some useful techniques. This kind of module based infrastructure doesn't exist in NixOS yet. Closest thing would be flake-parts, for which I originally wrote `types.deferredModule`.\r\n\r\nAnyway, a good starting point is the `example` directory. It's the closest thing to actual documentation.\r\n(Again, sorry, proof of concept status, time, etc etc)\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [ ] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://nixos.org/manual/nixpkgs/unstable/#sec-package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://nixos.org/manual/nixpkgs/unstable/#ssec-nixos-tests-linking) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [23.11 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2311.section.md) (or backporting [23.05 Release notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2305.section.md))\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://nixos.org/manual/nixpkgs/unstable/#chap-reviewing-contributions\r\n-->\r\n\r\n",
+  "closed_at": "2025-01-08T22:27:38Z",
+  "closed_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 8,
+  "created_at": "2023-11-12T21:46:36Z",
+  "draft": true,
+  "id": 1989593798,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 267111,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/267111.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/267111.patch"
+  },
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 6,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 7
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "init Modular Portable Service Layer, proof of concept",
+  "type": null,
+  "updated_at": "2025-03-25T12:59:14Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 274,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:31:00Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "b50c5b945131b274f18d0a94c1c2b8acb5efeb51",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "## Description of changes\r\n\r\n- A proof of concept to hopefully illustrate what I [had in mind](https://github.com/NixOS/rfcs/pull/163#discussion_r1347854623) for https://github.com/NixOS/rfcs/pull/163\r\n\r\nIt implements a bit more than necessary, allowing an abstract service to potentially create multiple systemd services, if it seeks out `options?systemd` to figure out the kind of process manager it's loaded into.\r\nI think that's nice functionality, but the proof of concept could be changed to something more restrictive if that's the direction you want to take. (ie don't define process-manager specific options; only read the data from the abstract service)\r\n\r\nI hope this gives some insight into what's possible with the module system.\r\nOr maybe you can learn some useful techniques. This kind of module based infrastructure doesn't exist in NixOS yet. Closest thing would be flake-parts, for which I originally wrote `types.deferredModule`.\r\n\r\nAnyway, a good starting point is the `example` directory. It's the closest thing to actual documentation.\r\n(Again, sorry, proof of concept status, time, etc etc)\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [ ] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://nixos.org/manual/nixpkgs/unstable/#sec-package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://nixos.org/manual/nixpkgs/unstable/#ssec-nixos-tests-linking) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [23.11 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2311.section.md) (or backporting [23.05 Release notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2305.section.md))\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://nixos.org/manual/nixpkgs/unstable/#chap-reviewing-contributions\r\n-->\r\n\r\n",
+  "changed_files": 9,
+  "closed_at": "2025-01-08T22:27:38Z",
+  "comments": 8,
+  "commits": 2,
+  "created_at": "2023-11-12T21:46:36Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/267111.diff",
+  "draft": true,
+  "head": {
+   "label": "hercules-ci:service-abstraction-layer",
+   "ref": "service-abstraction-layer",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2020-02-23T23:16:39Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "hercules-ci/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/hercules-ci/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 242606644,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/hercules-ci/nixpkgs/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/hercules-ci/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 23378925,
+     "login": "hercules-ci",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/hercules-ci/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-01-10T13:23:42Z",
+    "size": 2135138,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/hercules-ci/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/hercules-ci/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2023-01-31T17:56:02Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "85b69f3f567d84d8057bd782a696c801bf419b3b",
+   "user": {
+    "id": 23378925,
+    "login": "hercules-ci",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "id": 1597920523,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 267111,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/267111.patch",
+  "rebaseable": false,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 3,
+  "state": "closed",
+  "title": "init Modular Portable Service Layer, proof of concept",
+  "updated_at": "2025-03-25T12:59:14Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#267111",
+ "review_comments": [
+  {
+   "body": "This hardcodes the generic options, but that's not actually necessary and creates some confusion about what the actually used interface really is, in a way that isn't forward compatible.\r\n\r\nIt should be up to the actual service to decide in which format it wants to be loaded, and process managers can decide which formats they support.\r\n\r\nThis could be negotiated through specialArgs and may look like:\r\n\r\n```nix\r\n# postgresql.nix\r\n{ serviceInterface, ... }: {\r\n  imports = [\r\n    serviceInterface.generic_1_0\r\n    serviceInterface.systemd_nixos_23_11 or { }\r\n  ];\r\n  options = {\r\n    # ...\r\n  };\r\n}\r\n```\r\n\r\nThis says that a postgresql service expects the process manager to support the `generic_1_0` interface and load that.\r\nThe `systemd_1_0` interface is optional and is only loaded if the process manager supports it.\r\n\r\n`imports` can of course only depend on `specialArgs` arguments, but that is sufficient for this purpose.\r\n\r\nNote that services can already introspect e.g. `options?systemd` to figure out in which kind of process manager they are loaded. So the addition of such a mechanism is primarily important for forward compatibility as we'll inevitably evolve the taxonomy of services.\r\n\r\nThis also allows the creation of helper modules that for instance provide polyfills, emulate one process manager's features on top of another, etc. These could be distributed independently, or as part of the suite of modules and interfaces that are built in to the process manager integrations.\r\n\r\nEven just within the NixOS context, such versions let use eat the cake and have it too:\r\n - NixOS/systemd can make breaking changes in new versions\r\n - third party service modules (e.g. flakes, etc) have stable targets that they can support\r\n\r\nArguably there's a non-zero cost to having a compatibility layer or keeping old code around, but at least it becomes a solvable problem, and the old solution doesn't come with the expectation of parity with the new solution.",
+   "commit_id": "85b69f3f567d84d8057bd782a696c801bf419b3b",
+   "created_at": "2023-11-15T12:36:51Z",
+   "diff_hunk": "@@ -0,0 +1,23 @@\n+# This module is valid for all implementations of the service abstraction layer,\n+# and might even be vendored from another repo or moved outside of nixpkgs/nixos/\n+# into nixpkgs/something.\n+\n+{ lib, config, options, pkgs, ... }:\n+let\n+  inherit (lib) mkOption types;\n+in\n+{\n+  options = {\n+    services.abstract = mkOption {\n+      type = types.lazyAttrsOf (types.submoduleWith {\n+        modules = [\n+          ./instance/generic.nix",
+   "id": 1394142501,
+   "line": 14,
+   "original_commit_id": "85b69f3f567d84d8057bd782a696c801bf419b3b",
+   "original_line": 14,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "nixos/modules/services/abstract/generic.nix",
+   "position": 14,
+   "pull_request_review_id": 1731941334,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2023-11-15T12:49:53Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think allowing programs to daemonize themselves will be a trap for this. Foremost new programs don't implement this anymore and a generally discouraged to do so. Old programs implement this in completely varying degrees ranging from full signal handling, creating pid files and being their own process manager to basically doing `program &` and running or anything in between. Also sometimes config options are involved.\r\n\r\nIMO we should only take foreground programs and let the service manager handle all of the \"daemon\" parts. If the service manager doesn't support this, then IMO it is unsuitable. ",
+   "commit_id": "85b69f3f567d84d8057bd782a696c801bf419b3b",
+   "created_at": "2024-08-20T12:12:33Z",
+   "diff_hunk": "@@ -0,0 +1,67 @@\n+# This corresponds to the arguments of createManagedProcess in svanderburg's proposal\n+{ lib, config, options, ... }:\n+let\n+  inherit (lib) literalExpression mkOption types;\n+  pathOrStr = types.coercedTo types.path (x: \"${x}\") types.str;\n+in\n+{\n+  options = {\n+    enable = mkOption {\n+      type = types.bool;\n+      default = true;\n+      description = ''\n+        Whether to enable the service. A service is enabled by default, because you took the effort to define its attribute.\n+      '';\n+    };\n+    process = mkOption {\n+      type = pathOrStr;\n+      description = ''\n+        When this property is specified, it translates both to: {option}`foreground.process` and {option}`daemon.process`.\n+      '';\n+    };\n+    foreground = {\n+      process = lib.mkOption {\n+        type  = pathOrStr;\n+        description = ''\n+          Path to an executable that launches a process in foreground mode.\n+        '';\n+        default = config.process;\n+        defaultText = literalExpression \"config.process\";\n+      };\n+      args = lib.mkOption {\n+        type = types.listOf pathOrStr;\n+        description = ''\n+          Arguments to pass to the {option}`foreground.process`.\n+        '';\n+        default = config.args;\n+        defaultText = literalExpression \"config.args\";\n+      };\n+    };\n+    daemon = {\n+      process = lib.mkOption {\n+        type = pathOrStr;\n+        description = ''\n+          Path to an executable that launches a process in daemon mode.\n+        '';\n+        default = config.process;\n+        defaultText = literalExpression \"config.process\";\n+      };\n+      args = lib.mkOption {\n+        type = types.listOf pathOrStr;\n+        description = ''\n+          Arguments to pass to the {option}`daemon.process`.\n+        '';\n+        default = config.args;\n+        defaultText = literalExpression \"config.args\";\n+      };\n+    };",
+   "id": 1723206521,
+   "line": 57,
+   "original_commit_id": "85b69f3f567d84d8057bd782a696c801bf419b3b",
+   "original_line": 57,
+   "original_position": 57,
+   "original_start_line": 40,
+   "path": "nixos/modules/services/abstract/instance/generic.nix",
+   "position": 57,
+   "pull_request_review_id": 2247819885,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": 40,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2024-08-20T12:12:34Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Right. We have the `undaemonize` package to deal with the old stuff.",
+   "commit_id": "85b69f3f567d84d8057bd782a696c801bf419b3b",
+   "created_at": "2025-03-25T12:59:14Z",
+   "diff_hunk": "@@ -0,0 +1,67 @@\n+# This corresponds to the arguments of createManagedProcess in svanderburg's proposal\n+{ lib, config, options, ... }:\n+let\n+  inherit (lib) literalExpression mkOption types;\n+  pathOrStr = types.coercedTo types.path (x: \"${x}\") types.str;\n+in\n+{\n+  options = {\n+    enable = mkOption {\n+      type = types.bool;\n+      default = true;\n+      description = ''\n+        Whether to enable the service. A service is enabled by default, because you took the effort to define its attribute.\n+      '';\n+    };\n+    process = mkOption {\n+      type = pathOrStr;\n+      description = ''\n+        When this property is specified, it translates both to: {option}`foreground.process` and {option}`daemon.process`.\n+      '';\n+    };\n+    foreground = {\n+      process = lib.mkOption {\n+        type  = pathOrStr;\n+        description = ''\n+          Path to an executable that launches a process in foreground mode.\n+        '';\n+        default = config.process;\n+        defaultText = literalExpression \"config.process\";\n+      };\n+      args = lib.mkOption {\n+        type = types.listOf pathOrStr;\n+        description = ''\n+          Arguments to pass to the {option}`foreground.process`.\n+        '';\n+        default = config.args;\n+        defaultText = literalExpression \"config.args\";\n+      };\n+    };\n+    daemon = {\n+      process = lib.mkOption {\n+        type = pathOrStr;\n+        description = ''\n+          Path to an executable that launches a process in daemon mode.\n+        '';\n+        default = config.process;\n+        defaultText = literalExpression \"config.process\";\n+      };\n+      args = lib.mkOption {\n+        type = types.listOf pathOrStr;\n+        description = ''\n+          Arguments to pass to the {option}`daemon.process`.\n+        '';\n+        default = config.args;\n+        defaultText = literalExpression \"config.args\";\n+      };\n+    };",
+   "id": 2012039391,
+   "in_reply_to_id": 1723206521,
+   "line": 57,
+   "original_commit_id": "85b69f3f567d84d8057bd782a696c801bf419b3b",
+   "original_line": 57,
+   "original_position": 57,
+   "original_start_line": 40,
+   "path": "nixos/modules/services/abstract/instance/generic.nix",
+   "position": 57,
+   "pull_request_review_id": 2713643332,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 40,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2025-03-25T12:59:14Z",
+   "user": null
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "85b69f3f567d84d8057bd782a696c801bf419b3b",
+   "id": 1731941334,
+   "state": "COMMENTED",
+   "submitted_at": "2023-11-15T12:49:53Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "85b69f3f567d84d8057bd782a696c801bf419b3b",
+   "id": 2247819885,
+   "state": "COMMENTED",
+   "submitted_at": "2024-08-20T12:12:34Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "85b69f3f567d84d8057bd782a696c801bf419b3b",
+   "id": 2713643332,
+   "state": "COMMENTED",
+   "submitted_at": "2025-03-25T12:59:14Z",
+   "user": null
+  }
+ ],
+ "sources": [
+  "nixpkgs-poc",
+  "nixpkgs-phrase-prs",
+  "nixpkgs-portable-service-layer-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2023-11-20T09:30:33Z",
+   "event": "renamed",
+   "id": 11009007507,
+   "rename": {
+    "from": "init Modular Service Abstraction Layer, proof of concept",
+    "to": "init Modular Portable Service Layer, proof of concept"
+   }
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-01-08T22:27:38Z",
+   "event": "closed",
+   "id": 15860686706,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

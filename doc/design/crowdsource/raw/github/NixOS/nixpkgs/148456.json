@@ -1,0 +1,651 @@
+{
+ "comments": [
+  {
+   "body": "@ofborg test docker-tools etc nixpkgs openssh postgresql.postgresql_12 postgresql-container",
+   "created_at": "2021-12-03T16:10:03Z",
+   "id": 985643348,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-12-09T11:56:34Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "interesting! we've been trying to get to a faster nixos another way, by marking most modules as \"optional\" and having the module system not evaluate them after the initial import of their nix file unless a configurable path in `config` has values (in our plan this path would usually be a module enable option). the docs work we've been doing is part of this, since docs currently evaluate all modules anyway and users probably will not be very happy if most of the configuration.nix manpage disappears because they've selected only a subset of modules for their system :<",
+   "created_at": "2021-12-03T16:46:33Z",
+   "id": 985669583,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-12-03T16:46:33Z",
+   "user": {
+    "id": 82953136,
+    "login": "pennae",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@pennae That's also a good approach; a bit more pragmatic, but seems to need a more complicated module system and does not necessarily stimulate improvements towards RFC78 for example. Could you show what changes you had to make?",
+   "created_at": "2021-12-03T17:03:11Z",
+   "id": 985681364,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-12-03T17:03:11Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@roberth we don't have anything for this yet since we're concentrating on doing the docs bit first (which in itself yields about a 40% improvement in system build time on this machine). this being a highly experimental endeavour we just haven't yet had the energy to spend on doing things that might end up rejected.\r\n\r\nthe idea was to tag each module that isn't essential with an extra toplevel key that describes properties of the modules, leading to eg\r\n```\r\n{ lib, config, ... }:\r\n\r\n{\r\n  module.enabledBy = [ \"services\" \"theThing\" \"enable\" ];\r\n\r\n  options.services.theThing.enable = mkEnableOption \"the thing\";\r\n\r\n  # ...\r\n}\r\n```\r\n\r\nthe module system imports all modules as before, but does not evaluate such optional modules except for their `enabledBy`. it then checks the resulting `options` (not `config`!) for enabler paths and adds those to the evaluation. repeat until fixed point is reached. for modules that enable other modules we'd go ahead and allow dependency declarations, eg `module.requires` to avoid unnecessary iterations. our testing has shown that module parse time is about 5% of the total instantiation time for our configuration, and if nixos modules declare their dependencies correctly we'd only have to do a single iteration to enable all necessary modules. as a test we had minimized `module-list.nix` for our config and (with the current docs build enabled) also arrived at a ~40% build time reduction.",
+   "created_at": "2021-12-03T17:17:19Z",
+   "id": 985691421,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-12-03T17:20:40Z",
+   "user": {
+    "id": 82953136,
+    "login": "pennae",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> ~40% build time reduction.\r\n\r\nYou should be able to get about 3× faster, which is your reduction applied _twice_. That discrepancy can be explained by the choice of test and I was quite radical with my pruning, even going into some modules to set values to sensible defaults in order to remove more modules. It doubt whether those wins are feasible without refactoring those modules.",
+   "created_at": "2021-12-03T17:31:55Z",
+   "id": 985701590,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-12-03T17:31:55Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "oh yes, a lot of the remaining time was most likely due to a large `environment.systemPackages` from our config. we had also pruned the config itself for a different test and got a 4x improvement with the pruned config. there's clearly a lot of improvement still possible!",
+   "created_at": "2021-12-03T17:34:41Z",
+   "id": 985703327,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2021-12-03T17:34:41Z",
+   "user": {
+    "id": 82953136,
+    "login": "pennae",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@roberth awesome! I'm looking forward to seeing more examples so I can better wrap my mind around this.\r\n@pennae also awesome! I hope to hear more about that coming up.\r\n\r\nI thought I would include [this](https://gist.github.com/edolstra/29ce9d8ea399b703a7023073b0dbc00d#nixos-services) link here as well because it is relevant.",
+   "created_at": "2021-12-07T01:20:19Z",
+   "id": 987475383,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-12-08T13:07:31Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/a-faster-dockertools-buildimage-prototype/16922/4\n",
+   "created_at": "2022-01-02T12:37:30Z",
+   "id": 1003709320,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2022-01-02T12:37:30Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Idea: migrate the implementations of `nixos/modules/profiles` to new `nixos/modules/archetypes`, so we have a better name and a new namespace to rethink the profiles.",
+   "created_at": "2022-01-10T12:19:43Z",
+   "id": 1008821630,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2022-01-10T12:19:43Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm closing this because the work now happens in other PRs, which tend to be linked here.",
+   "created_at": "2022-01-27T21:34:54Z",
+   "id": 1023659833,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2022-01-27T21:34:54Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "**Tracking which changes have been cleaned up and merged**\r\n\r\nNote to self: might want to bundle up some of the similar and simple changes, like module extractions and adding `imports`.\r\n\r\nThings not to do:\r\n - Create an attribute set of NixOS modules. This would be premature as the set of relevant modules is yet to be determined.\r\n - Create more modules than necessary.\r\n - Blindly rebase. Make sure the refactors are clean.\r\n\r\nThe commits of this PR and their relation to derived PRs or vice versa:\r\n\r\n- #153211\r\n  - [x] 18672bf2751bbae1d7eeec59f5f82229b79b8873 lib.nixos: init\r\n  - [x] 62e7f0eda1c5acf0beb13a00a23f577912a6b8eb nixos/nixpkgs.nix: Make independent\r\n- https://github.com/NixOS/nixpkgs/pull/155892 (`pkgsModule`)\r\n   - [x] dd6d8e3f0c38370ac8fb082ea7a3be06c949deed pkgs.nixosModule: init\r\n   - [x] 56c283e5c8dfd4d8d5daa15dfa3896beef2ac012 nixos/etc.nix: Make independent\r\n- [x] 7f129e32362b0eeb439c811ba286c2bbc79b151c nixos/build.nix: Make independent\r\n- [x] 9b2af8673be82d48ce76c8c152de85ad921d26ba dockerTools: Add example of using NixOS' etc\r\n- #199595\r\n  - [x] 4ec415cff9bcbaef08e0d900406a5c7181e71881 nixos/top-level.nix: Make extensible\r\n  - [x] 2bf147c7c798e7df033c0cd7af18e46eb9155f8b nixos/specialisation.nix: Extract module\r\n  - [x] db05855521be357be0058e8318e7fba3d720b194 nixos/top-level.nix: Move configurationName to grub.nix\r\n- [ ] https://github.com/NixOS/nixpkgs/pull/237040\r\n  - [ ] baa96b8b592092af7700fe40700d3e12eb4f3a74 nixos/system-with-activation.nix: Extract module\r\n- [ ] 8da928c46b6b8f0035d03939b6ff0eaa3b31ce08 nixos/bootable.nix: Extract module\r\n- [ ] c78d41a3ead8fda3f7230d63f0d72fba77891a3f nixos: Move top-level stage2 def to stage-2.nix\r\n- [ ] c8da2d49cffd9ba004f095afe12a8b8df30cc195 nixos: Move system.name logic to network-interfaces.nix\r\n- [ ] c6ea188fb9ebaa5622f8976616549787b03c246c nixos/system-path-core.nix: Extract module\r\n- [ ] dc2b3962c3de7d8f264d5a8b583f74c7dce3359a nixos/users-groups.nix: Make independent\r\n- [ ] 42b59e3fa23d3b4c9831e4da8de3ddd462034b78 nixos/update-users-groups.pl: Fall back to root group for shadow\r\n- [ ] b9cb1828875635c04c264653e2275b5bef2454f2 nixos: Move specialfs activation script to filesystems.nix\r\n- [ ] 8313fd36f4e71da13ff516ba109862f7afa3fa83 nixos/top-level.nix: Make independent of systemd.package\r\n- [ ] 87724859d07b45c35bb8e56dadc67c69eb9dbd3b nixos/user-profiles.nix: Extract module\r\n- [ ] f2cd71449b87035f98ea7883e2e07b0a879627bf nixos/systemd-user-activation.nix: Extract module\r\n- [ ] a7a1438c1539aef4f4b7ba4046be010359415565 nixos/top-level.nix: Make independent of boot modules\r\n- [ ] 7c0c2e2842d1b7929ddca6bd8a3b015f58475da7 nixos: Add system.activation.externalActivationScript\r\n- [ ] 413be2c77e68fde0476a9154387b2f14e18a2ba2 nixos/top-level.nix: Declare dependencies\r\n- [ ] b692a9239abb5ff197835388b36dc2245530d864 nixos/users-groups.nix: Declare dependencies\r\n- [ ] cc748856af6ce75af0ab802451f9980e4d327eca nixos/activation-script: Declare dependencies\r\n- [ ] 226d20e3e775047aeb9dc2b91a298f9f2aedcd82 lib.nixos: Add users module\r\n- [ ] 77e8c73303aa3a087f957893db3714540f7dd129 dockerTools.streamLayeredImage: Make robust against cd in fakeRootCommands\r\n- [ ] bc6808e8987efceea6a0d0933a5083f6b351281d nixos/nixos-core.nix: Add etcActivation module\r\n- [ ] eb3fc9a07da1eec35c6974a66eded9623136e6a7 dockerTools: Update etc example\r\n- [x] 6adab4ce541a282d5a2a5bcc21c0e625d7b5ff20 nixos/top-level.nix: Add system.checks https://github.com/NixOS/nixpkgs/pull/231316\r\n- [ ] 25093d76c8a283f56779cdbf82c51475f2dc2b40 nixos/binsh.nix: Extract module\r\n- [ ] 2f3e9f4dde8d95254e9e2cfe08857dcde8356384 nixos/environment-variables.nix: Extract module\r\n- [ ] d9e94baeec65057cb67d8ee023490a042dd8ce82 (hercules-ci/nixos-a-la-carte-poc-2) nixos/postgresql.nix: Split module, create container, test it\r\n\r\n------\r\n\r\nrelated changes\r\n  - #156533\r\n  - #156503\r\n ",
+   "created_at": "2022-05-16T22:23:37Z",
+   "id": 1128195918,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-07-01T14:43:04Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/genodepkgs-extending-nixpkgs-nixos-to-genode/8779/7\n",
+   "created_at": "2022-10-04T22:07:37Z",
+   "id": 1267632596,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2022-10-04T22:07:37Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Latest PR is for having a separate activation script, that can run _during_ the build of an image\r\n - https://github.com/NixOS/nixpkgs/pull/237040\r\n \r\n EDIT: review appreciated.",
+   "created_at": "2023-07-01T14:38:00Z",
+   "id": 1615943103,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-07-01T14:38:20Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "More progress is blocked on having better CI and unit tests to make sure that modular usage and basic properties don't regress.\r\n\r\nThis involves making CI (ofborg or GHA) find the right test cases to run for the module(s) that are changed in a given PR.\r\nIt'd have to be more file based because evaluating all tests is too resource intensive for PR testing.",
+   "created_at": "2025-01-20T18:40:42Z",
+   "id": 2603056725,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-01-20T18:40:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/148456",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://nixos.org/manual/nixpkgs/unstable/#chap-reviewing-contributions\r\n-->\r\n\r\n###### Motivation for this change\r\n\r\n - RFC22: a minimal NixOS module list to improve performance. A 3× eval performance improvement is realistic [based on](https://github.com/NixOS/nixpkgs/issues/137168#issue-991981735) earlier experimentation on the postgresql test.\r\n - RFC78: independent modules that can be composed (almost) like functions, for use outside of conventional NixOS.\r\n - Allow alternative implementations to coexist\r\n\r\nThese are big goals that this PR does not achieve by itself, but works towards. The actual goal for this PR is to provide an example of the kinds of refactoring that can be done to make NixOS more modular.\r\n\r\nWhat it does already achieve, is an example of how to build a `dockerTools` image using the NixOS `/etc` code:\r\n\r\n```nix\r\n    let\r\n      nixosCore = (lib.nixos.core ({ config, modules, ... }: {\r\n        imports = [ pkgs.nixosModule modules.etc ];\r\n        environment.etc.\"hosts\" = {\r\n          text = ''\r\n            127.0.0.1 localhost\r\n            ::1 localhost\r\n          '';\r\n          mode = \"0444\";\r\n        };\r\n      }));\r\n    in pkgs.dockerTools.streamLayeredImage {\r\n      name = \"poc\";\r\n      tag = \"latest\";\r\n      fakeRootCommands = ''\r\n        mkdir -p /etc\r\n        ${nixosCore.config.system.build.etcActivationCommands}\r\n      '';\r\n      config.Cmd = pkgs.writeScript \"poc-cmd\" ''\r\n        #!${pkgs.busybox}/bin/sh\r\n        ${pkgs.busybox}/bin/cat /etc/hosts\r\n      '';\r\n    }\r\n```\r\n\r\nSo there you have it, reusing a bit of NixOS with great evaluation performance. When more modules are refactored this way, it becomes actually useful, solving a real problem in practical `dockerTools` use such as https://github.com/NixOS/nixpkgs/issues/94636) and replacing incomplete solutions like #105685.\r\n\r\nI've found that the best workflow for this refactoring is test driven development.\r\n\r\n###### Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- [ ] For non-Linux: Is `sandbox = true` set in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n- [x] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://nixos.org/manual/nixpkgs/unstable/#sec-package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://nixos.org/manual/nixpkgs/unstable/#ssec-nixos-tests-linking) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [22.05 Release Notes (or backporting 21.11 Release notes)](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#generating-2205-release-notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n  - [ ] (Release notes changes) Ran `nixos/doc/manual/md-to-db.sh` to update generated release notes\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n",
+  "closed_at": "2022-01-27T21:34:54Z",
+  "closed_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 14,
+  "created_at": "2021-12-03T16:06:24Z",
+  "draft": true,
+  "id": 1070739843,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 148456,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/148456.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/148456.patch"
+  },
+  "reactions": {
+   "+1": 7,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 2,
+   "heart": 6,
+   "hooray": 6,
+   "laugh": 0,
+   "rocket": 3,
+   "total_count": 24
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "[RFC22, RFC78] NixOS a la carte (proof of concept)",
+  "type": null,
+  "updated_at": "2025-01-20T18:40:43Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 989,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "cbf9da7256366f15f48b2822b8afd0bd1e1f7119",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://nixos.org/manual/nixpkgs/unstable/#chap-reviewing-contributions\r\n-->\r\n\r\n###### Motivation for this change\r\n\r\n - RFC22: a minimal NixOS module list to improve performance. A 3× eval performance improvement is realistic [based on](https://github.com/NixOS/nixpkgs/issues/137168#issue-991981735) earlier experimentation on the postgresql test.\r\n - RFC78: independent modules that can be composed (almost) like functions, for use outside of conventional NixOS.\r\n - Allow alternative implementations to coexist\r\n\r\nThese are big goals that this PR does not achieve by itself, but works towards. The actual goal for this PR is to provide an example of the kinds of refactoring that can be done to make NixOS more modular.\r\n\r\nWhat it does already achieve, is an example of how to build a `dockerTools` image using the NixOS `/etc` code:\r\n\r\n```nix\r\n    let\r\n      nixosCore = (lib.nixos.core ({ config, modules, ... }: {\r\n        imports = [ pkgs.nixosModule modules.etc ];\r\n        environment.etc.\"hosts\" = {\r\n          text = ''\r\n            127.0.0.1 localhost\r\n            ::1 localhost\r\n          '';\r\n          mode = \"0444\";\r\n        };\r\n      }));\r\n    in pkgs.dockerTools.streamLayeredImage {\r\n      name = \"poc\";\r\n      tag = \"latest\";\r\n      fakeRootCommands = ''\r\n        mkdir -p /etc\r\n        ${nixosCore.config.system.build.etcActivationCommands}\r\n      '';\r\n      config.Cmd = pkgs.writeScript \"poc-cmd\" ''\r\n        #!${pkgs.busybox}/bin/sh\r\n        ${pkgs.busybox}/bin/cat /etc/hosts\r\n      '';\r\n    }\r\n```\r\n\r\nSo there you have it, reusing a bit of NixOS with great evaluation performance. When more modules are refactored this way, it becomes actually useful, solving a real problem in practical `dockerTools` use such as https://github.com/NixOS/nixpkgs/issues/94636) and replacing incomplete solutions like #105685.\r\n\r\nI've found that the best workflow for this refactoring is test driven development.\r\n\r\n###### Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- [ ] For non-Linux: Is `sandbox = true` set in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n- [x] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://nixos.org/manual/nixpkgs/unstable/#sec-package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://nixos.org/manual/nixpkgs/unstable/#ssec-nixos-tests-linking) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [22.05 Release Notes (or backporting 21.11 Release notes)](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#generating-2205-release-notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n  - [ ] (Release notes changes) Ran `nixos/doc/manual/md-to-db.sh` to update generated release notes\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n",
+  "changed_files": 37,
+  "closed_at": "2022-01-27T21:34:54Z",
+  "comments": 14,
+  "commits": 33,
+  "created_at": "2021-12-03T16:06:24Z",
+  "deletions": 431,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/148456.diff",
+  "draft": true,
+  "head": {
+   "label": "hercules-ci:nixos-a-la-carte-poc-2",
+   "ref": "nixos-a-la-carte-poc-2",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2020-02-23T23:16:39Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "hercules-ci/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/hercules-ci/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 242606644,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/hercules-ci/nixpkgs/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/hercules-ci/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 23378925,
+     "login": "hercules-ci",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/hercules-ci/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-01-10T13:23:42Z",
+    "size": 2135138,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/hercules-ci/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/hercules-ci/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2023-01-31T17:56:02Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "d9e94baeec65057cb67d8ee023490a042dd8ce82",
+   "user": {
+    "id": 23378925,
+    "login": "hercules-ci",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "id": 794720399,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "1834c46b8a4290d6741cdc22cf6be026d3816ab1",
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 148456,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/148456.patch",
+  "rebaseable": false,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "[RFC22, RFC78] NixOS a la carte (proof of concept)",
+  "updated_at": "2025-01-20T18:40:43Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#148456",
+ "review_comments": [],
+ "reviews": [],
+ "sources": [
+  "nixpkgs-a-la-carte"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2022-01-27T21:34:54Z",
+   "event": "closed",
+   "id": 5966863826,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

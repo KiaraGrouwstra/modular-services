@@ -1,0 +1,548 @@
+{
+ "comments": [
+  {
+   "body": "fyi https://github.com/NixOS/nixpkgs/pull/507875#issuecomment-4216047512",
+   "created_at": "2026-04-10T07:45:49Z",
+   "id": 4222017788,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-10T07:45:49Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Looks like CI failed.",
+   "created_at": "2026-04-10T10:58:45Z",
+   "id": 4223093784,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-10T10:58:45Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ofborg test tlshd",
+   "created_at": "2026-04-10T13:57:55Z",
+   "id": 4224258610,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-10T13:57:55Z",
+   "user": {
+    "id": 61303,
+    "login": "tomfitzhenry",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The VM test failed on aarch64-linux. Possibly some non-determinism in the test. Moving back to draft.",
+   "created_at": "2026-04-10T23:35:28Z",
+   "id": 4227334502,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-10T23:35:28Z",
+   "user": {
+    "id": 61303,
+    "login": "tomfitzhenry",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "nixosTests.nfs4 (and various other tests that rely on networking) are failing on master, which is why this PR's tests are failing. Tracked in https://github.com/NixOS/nixpkgs/issues/509254. I will rebase on the fix https://github.com/NixOS/nixpkgs/pull/509378 when it's merged.",
+   "created_at": "2026-04-12T21:23:53Z",
+   "id": 4232774974,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-12T21:23:53Z",
+   "user": {
+    "id": 61303,
+    "login": "tomfitzhenry",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> nixosTests.nfs4 (and various other tests that rely on networking) are failing on master, which is why this PR's tests are failing. Tracked in #509254. I will rebase on the fix #509378 when it's merged.\r\n\r\nhttps://github.com/NixOS/nixpkgs/pull/509378 is now in master. I've rebased this PR, and its testing is now passing.",
+   "created_at": "2026-04-13T01:31:13Z",
+   "id": 4233245198,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-13T01:31:13Z",
+   "user": {
+    "id": 61303,
+    "login": "tomfitzhenry",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "nice. can you mark it ready for review?",
+   "created_at": "2026-04-13T06:36:29Z",
+   "id": 4234329457,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-13T06:36:29Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/508462",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "This adds a [modular service](https://github.com/NixOS/nixpkgs/blob/master/nixos/README-modular-services.md) for [`tlshd`](https://github.com/oracle/ktls-utils): \" The tlshd program implements a user agent that services TLS handshake requests on behalf of kernel TLS consumers.\".\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-04-17T00:48:55Z",
+  "closed_by": {
+   "id": 61303,
+   "login": "tomfitzhenry",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 7,
+  "created_at": "2026-04-09T23:08:38Z",
+  "draft": false,
+  "id": 4235422419,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 508462,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/508462.diff",
+   "merged_at": "2026-04-17T00:48:55Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/508462.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "tlshd: add modular service and test",
+  "type": null,
+  "updated_at": "2026-04-17T00:48:57Z",
+  "user": {
+   "id": 61303,
+   "login": "tomfitzhenry",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 179,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "24557f6aa37d96a8c8f066d80dc0210f319ae58b",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "This adds a [modular service](https://github.com/NixOS/nixpkgs/blob/master/nixos/README-modular-services.md) for [`tlshd`](https://github.com/oracle/ktls-utils): \" The tlshd program implements a user agent that services TLS handshake requests on behalf of kernel TLS consumers.\".\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 5,
+  "closed_at": "2026-04-17T00:48:55Z",
+  "comments": 7,
+  "commits": 1,
+  "created_at": "2026-04-09T23:08:38Z",
+  "deletions": 1,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/508462.diff",
+  "draft": false,
+  "head": {
+   "label": "tomfitzhenry:tlshd-modular",
+   "ref": "tlshd-modular",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2021-04-10T09:08:47Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "tomfitzhenry/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/tomfitzhenry/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 356529086,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/tomfitzhenry/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/tomfitzhenry/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 61303,
+     "login": "tomfitzhenry",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/tomfitzhenry/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-28T12:35:15Z",
+    "size": 3064376,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/tomfitzhenry/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/tomfitzhenry/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-04-13T23:58:51Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "55efd0620a6b90217d204c384a9e1e3ef385f420",
+   "user": {
+    "id": 61303,
+    "login": "tomfitzhenry",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3511189500,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "730e4a1868b3c2edeeba6f7d6b4ba8e951d40614",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-04-17T00:48:55Z",
+  "merged_by": {
+   "id": 61303,
+   "login": "tomfitzhenry",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 508462,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/508462.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 628387,
+    "login": "arianvp",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 150680976,
+    "login": "arthsmn",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "tlshd: add modular service and test",
+  "updated_at": "2026-04-17T00:48:57Z",
+  "user": {
+   "id": 61303,
+   "login": "tomfitzhenry",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#508462",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "fcc3a0cdf28fe98df8a4a3b68e016a032f8a9e99",
+   "id": 4088188523,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-10T07:53:01Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 61303,
+    "login": "tomfitzhenry",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "730e4a1868b3c2edeeba6f7d6b4ba8e951d40614",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/730e4a1868b3c2edeeba6f7d6b4ba8e951d40614",
+   "created_at": "2026-04-17T00:48:55Z",
+   "event": "merged",
+   "id": 24588848535
+  },
+  {
+   "actor": {
+    "id": 61303,
+    "login": "tomfitzhenry",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-17T00:48:56Z",
+   "event": "closed",
+   "id": 24588848581,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

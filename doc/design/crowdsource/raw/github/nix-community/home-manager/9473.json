@@ -1,0 +1,81 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/nix-community/home-manager/issues/9473",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": {
+   "id": 1778670,
+   "login": "khaneliman",
+   "site_admin": false,
+   "type": "User"
+  },
+  "assignees": [
+   {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "body": "Part of #9471.\n\n### Module Name\n\n`lib.hm.services`\n\n### Requested Feature\n\nAdd small, opt-in helpers for common service wiring patterns.\n\nPotential helpers:\n\n- cross-platform service helper for modules that emit both\n  `systemd.user.services.<name>` and `launchd.agents.<name>` from same command\n  and environment\n- graphical-session unit helper for Linux services that repeat\n  `After`/`PartOf`/`WantedBy` target wiring\n- restart-trigger helper that ties generated config files to\n  `X-Restart-Triggers` with correct guards\n\nSketch:\n\n```nix\n# configFile = generated settings file (e.g. iniFormat.generate ...)\nlib.hm.services.mkCrossPlatformService {\n  name = \"flameshot\";\n  description = \"Flameshot screenshot tool\";\n  command = lib.getExe cfg.package;\n  restartOnFailure = true;   # systemd Restart=on-abort / launchd KeepAlive.Crashed\n  graphical = true;          # systemd graphical-session plumbing /\n                             # launchd ProcessType = \"Interactive\"\n  environment = { ... };\n  restartTriggers = [ configFile.source ];\n  # per-platform overrides for semantics that don't map 1:1:\n  systemd = { ... };\n  launchd = { ... };\n}\n```\n\nExact API should stay open. Split helpers may be better than one large helper:\ngraphical-session wiring, restart triggers, and systemd/launchd parity have\ndifferent risk profiles.\n\nExpected behavior:\n\n- cross-platform helper emits systemd units on Linux and launchd agents on\n  Darwin, with explicit per-platform override attrs\n- Linux-only usage can still share graphical-session and restart-trigger\n  helpers without pretending launchd support exists\n- `graphical = true` or equivalent covers common `After`/`PartOf`/`WantedBy`\n  bundle and supports configurable targets\n- `restartTriggers` accepts generated file sources and keeps guards aligned\n  with generated config files\n- helpers remain compatible with existing `modules/services-modular`\n  direction\n\nExplicit `systemd`/`launchd` overrides should be required for anything that\ndoes not map cleanly. Helper must not imply false parity.\n\n### Current Limitations\n\nThree repeated patterns show up across service modules:\n\n1. Cross-platform duplication\n\n19 modules currently define both `systemd.user.services` and `launchd.agents`.\nThis includes at least these service modules: `colima`, `emacs`, `espanso`,\n`exo`, `flameshot`, `git-sync`, `glance`, `imapnotify`, `nix-gc`, `ollama`,\n`proton-pass-agent`, `ssh-agent`, `syncthing`, `tldr-update`, and\n`yubikey-agent`.\n\nThese branches often duplicate command construction, environment handling,\nrestart/keepalive behavior, and generated config references.\n\n2. Graphical-session boilerplate\n\nLocal grep survey found:\n\n- 60 files set `PartOf = [ \"graphical-session.target\" ]`\n- 46 files set `After = [ \"graphical-session.target\" ]`\n- 72 files set `WantedBy = [ \"graphical-session.target\" ]`\n\n(file counts for the exact single-element pattern under `modules/`; looser\npatterns and multi-element lists find more)\n\nSome modules expose a target option, some hard-code `graphical-session.target`,\nand some hand-roll `config.wayland.systemd.target` support.\n\n3. Restart-trigger drift\n\n26 program/service modules define `X-Restart-Triggers`. Generated config files\nand restart triggers are usually wired separately, so later settings additions\ncan miss restart behavior.\n\n### Additional Context\n\nAcceptance criteria:\n\n- [ ] Helper(s) implemented in `modules/lib/`, exposed via\n      `lib.hm.services`\n- [ ] 2-3 cross-platform services migrated as proof (for example\n      `flameshot`, `git-sync`, `imapnotify`),\n      zero diff in generated units/agents\n- [ ] 3-5 Linux graphical services migrated via the preset\n- [ ] Platform-gated tests per AGENTS.md conventions\n      (`lib.optionalAttrs` in test `default.nix`, darwinScrublist entries\n      where needed)\n- [ ] News entry\n\nRelated upstream issues:\n\n- #3703: some service modules do not expose a `systemdTarget` option\n- #5506: `swayosd` should expose `systemdTarget`\n- #8034: systemd user services sometimes start without expected environment\n\nThese are adjacent target/environment issues, not direct duplicates of a\nshared helper proposal.\n\nRisks:\n\n- One broad service factory can become too magical. Prefer small helpers where\n  possible.\n- systemd and launchd semantics differ. Per-platform overrides are mandatory.\n- Existing `home.services` modular-service work may already cover part of this\n  problem; new helpers should reuse or align with it.\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 0,
+  "created_at": "2026-06-12T17:00:53Z",
+  "id": 4651118671,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "3D690B",
+    "default": false,
+    "description": "",
+    "id": 2649370186,
+    "name": "feature request"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 9473,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "[Feature Request] Add lib.hm.services helpers for repeated service wiring",
+  "type": null,
+  "updated_at": "2026-06-12T17:13:45Z",
+  "user": {
+   "id": 1778670,
+   "login": "khaneliman",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "nix-community/home-manager#9473",
+ "sources": [
+  "home-manager-issues"
+ ],
+ "timeline": []
+}

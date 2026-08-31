@@ -1,0 +1,153 @@
+{
+ "comments": [
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/modular-services-meeting-5-2026-07-24/79145/1\n",
+   "created_at": "2026-07-24T17:52:05Z",
+   "id": 5072850555,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-24T17:52:05Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/modular-services-meeting-6-2026-08-07/79408/1\n",
+   "created_at": "2026-08-07T18:40:05Z",
+   "id": 5220771417,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-07T18:40:05Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/modular-services-meeting-7-2026-08-21/79684/1\n",
+   "created_at": "2026-08-21T17:23:48Z",
+   "id": 5373083437,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-21T17:23:48Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/545287",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "User creation is currently only possible outside the modular service system, and definitely only outside the portable part.\n\nConsiderations\n- Not all service managers support user creation. E.g. supervisord, process-compose\n- Ideally users don't have to specify names or worry too much about collisions\n- NixOS can allocate ids dynamically, nix-darwin cannot\n\nProposal:\n\nBy default, each service gets its own user, on platforms that support users.\nPlatforms that don't support users set the option values to `null`.\n\nNew hybrid service-or-service-manager-defined options in mutually exclusive-ish groups\n- Inherit\n  - `identity.inherit` type: `nullOr <service reference>`, tbd\n- Numeric\n  - `identity.uid`: `nullOr int`\n  - `identity.gid`: `nullOr int`\n  - `identity.gids`: `nullOr (listOf int)`\n- Named\n  - `identity.user`:  `nullOr str`\n  - `identity.group`:  `nullOr str`\n  - `identity.groups`:  `nullOr (listOf str)`\n\nNumeric and named *might* not be mutually exclusive on some platforms.\n\nService manager module must use `apply` to override option values so that they have the real value or `null`.\n(not `mkForce` because that would be infinite recursion)\n\nNot sure if we can make do with so relatively few options and apply. Alternatively, make the source of the information explicit, e.g: `platform.identity` vs `request.identity` or something along those lines.",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 3,
+  "created_at": "2026-07-24T16:35:46Z",
+  "id": 4970304293,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Add something new or improve an existing system.",
+    "id": 6314752,
+    "name": "0.kind: enhancement"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 545287,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 2,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 2
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "[modular services] User creation/specification",
+  "type": null,
+  "updated_at": "2026-08-21T17:23:48Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#545287",
+ "sources": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": []
+}

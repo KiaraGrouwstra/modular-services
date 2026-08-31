@@ -1,0 +1,120 @@
+{
+ "comments": [
+  {
+   "body": "Interesting usecase, and makes sense to me. /etc/ssh is used by multiple things including both the SSH client and server.",
+   "created_at": "2026-04-20T19:29:31Z",
+   "id": 4283689906,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-20T19:31:17Z",
+   "user": {
+    "id": 369111,
+    "login": "numinit",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Not sure if we should use `security.pam.services.sudo.sshAgentAuth` or [security.pam.sshAgentAuth.enable](https://search.nixos.org/options?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=sshagentauth&show=option:security.pam.sshAgentAuth.enable). Also we may want to check that the paths in [security.pam.sshAgentAuth.authorizedKeysFiles](https://search.nixos.org/options?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=sshagentauth&show=option:security.pam.sshAgentAuth.authorizedKeysFiles) overlap with the authorized_keys.d directories.\n\nI am a fan of something like the second option you proposed, though:\n\n>Alternatively create the /etc/ssh/authorized_keys.d/* files only if at least one of security.pam.services.sudo.sshAgentAuth or services.openssh.enable is true.\n\nNotably, it would not be a breaking change.\n\nAny opinions @philiptaron?",
+   "created_at": "2026-04-26T22:42:08Z",
+   "id": 4323220167,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-26T22:46:51Z",
+   "user": {
+    "id": 369111,
+    "login": "numinit",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/511741",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Nixpkgs version\n\n- Stable (25.11)\n\n### Describe the bug\n\nI am using SSH agent auth for passwordless sudo.\n\nMy config looks like this:\n```\n{\n  users.users.\"myuser\".openssh.authorizedKeys.keys = [\n  \"ssh-rsa AAAAB3..... mykey\"\n  ];\n\n  security.pam.sshAgentAuth.enable = true;\n  security.pam.services.sudo.sshAgentAuth = true;\n}\n```\n\nThis works great in combination with `services.openssh.enable = true`,\nbut on the machines where i don't need a listening openssh daemon and have\n```\n  environment.systemPackages = with pkgs; [openssh];\n  services.openssh.enable = false;\n```\n\n the `/etc/ssh/authorized_keys.d/` directory remains empty, which interfers with the operation of ssh agent auth.\n\nA workaround on those hosts is to create the file manually:\n\n```\n  # probably because of a bug (?) on this host you manually have to create this file for\n  # security.pam.sshAgentAuth to work\n  environment.etc.\"ssh/authorized_keys.d/myuser\" = {\n    mode = \"0444\";\n    text = \"ssh-rsa AAAAB3..... mykey\"\n  };\n```\nbut now the configuration is redundant and an ugly hack.\n\nAnother workaround would be to leave the sshd service enabled but block all incoming connections or block it at the nixos-firewall. But this is also ugly.\n\n\n\n### Steps to reproduce\n\nUse the above setting. SSH agent auth based sudo should work. As soon as you disable the SSHD service, which should be independent of the ssh client, the auth stops working.\n\n### Expected behaviour\n\nThe file `/etc/ssh/authorized_keys.d/myuser` should be created as long as `users.users.\"myuser\".openssh.authorizedKeys.keys` is set, regardless of the setting of `services.openssh.enable`.\n\nAlternatively create the `/etc/ssh/authorized_keys.d/*` files only if at least one of `security.pam.services.sudo.sshAgentAuth` or `services.openssh.enable` is `true`.\n\n### Screenshots\n\n_No response_\n\n### Relevant log output\n\n```console\n\n```\n\n### Additional context\n\n_No response_\n\n### System metadata\n\nnix-shell -p nix-info --run \"nix-info -m\"\n - system: `\"x86_64-linux\"`\n - host os: `Linux 6.18.21, NixOS, 25.11 (Xantusia), 25.11.20260407.4e92bbc`\n - multi-user?: `yes`\n - sandbox: `yes`\n - version: `nix-env (Nix) 2.31.4`\n - nixpkgs: `/nix/store/85f9midijl8vwcf3qs9pmf3s5n13s5nc-source`\n\n\n### Notify maintainers\n\n@philiptaron @numinit @dasJ @Conni2461 @helsinki-Jo \n\n---\n\n**Note for maintainers:** Please tag this issue in your pull request description. (i.e. `Resolves #ISSUE`.)\n\n\n### I assert that this issue is relevant for Nixpkgs\n\n- [x] I assert that this is a bug and not a support request.\n- [x] I assert that this is not a [duplicate of an existing issue](https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+label%3A%220.kind%3A+bug%22+-label%3A%226.topic%3A+darwin%22+-label%3A%226.topic%3A+nixos%22). \n- [x] I assert that I have read the [NixOS Code of Conduct](https://github.com/NixOS/.github/blob/master/CODE_OF_CONDUCT.md) and agree to abide by it.\n\n### Is this issue important to you?\n\nAdd a :+1: [reaction] to [issues you find important].\n\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\n[issues you find important]: https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 2,
+  "created_at": "2026-04-20T13:48:32Z",
+  "id": 4296174779,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Something is broken",
+    "id": 6314750,
+    "name": "0.kind: bug"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 511741,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 1,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "openssh: /etc/ssh/authorized_keys.d/%u should be created even if services.openssh.enable = false",
+  "type": null,
+  "updated_at": "2026-04-26T22:46:51Z",
+  "user": {
+   "id": 588533,
+   "login": "kwinz",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#511741",
+ "sources": [
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": []
+}

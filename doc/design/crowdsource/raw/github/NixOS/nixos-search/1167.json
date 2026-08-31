@@ -1,0 +1,191 @@
+{
+ "comments": [
+  {
+   "body": "Cool!\n\nI'm wrestling with the UI a bit: as a NixOS user, I don't really care if something is a 'NixOS option' or a 'modular service', right? They're both things I can just `(system.)services.foo.enable`. As such it'd make more sense to have them both on the same tab. On the other hand, the NixOS options are useless to nix-darwin users.\n\nPerhaps we should have a 'Services' tab that combines the Modular Services, and has the option to also add NixOS `service.` options? WDYT?",
+   "created_at": "2026-04-10T13:54:11Z",
+   "id": 4224236267,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-10T13:54:11Z",
+   "user": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I'm wrestling with the UI a bit: as a NixOS user, I don't really care if something is a 'NixOS option' or a 'modular service', right?\n\ngood point.\n\n> On the other hand, the NixOS options are useless to nix-darwin users.\n\nWhat if we had NixOS options vs Modular Services, with both sides exposing modular services (as relevant to both NixOS and non-NixOS consumers)?\n\n> Perhaps we should have a 'Services' tab that combines the Modular Services, and has the option to also add NixOS `service.` options? WDYT?\n\n`services.foo` and `service.foo` sound maybe a bit similar, but you're probably right NixOS users should not have to go out of their way to find things.\n\ncould you maybe elaborate a bit tho on looking for (nixos) services yet not other nixos options? as in, why out-scope arbitrary options, yet at the same time preferring to maybe not separate modular services (which _should_ have an audience of their own as well)?\n",
+   "created_at": "2026-04-10T14:53:54Z",
+   "id": 4224645611,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-10T14:53:54Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> could you maybe elaborate a bit tho on looking for (nixos) services yet not other nixos options? as in, why out-scope arbitrary options, yet at the same time preferring to maybe not separate modular services (which _should_ have an audience of their own as well)?\n\nNo strong reason, I was mainly just brainstorming. Indeed maybe the split between 'service options' and 'other options' is arbitrary.\n\nMaybe we should have one 'Options' tab which always shows the modular service options, and can also optionally (haha) show all the other NixOS options? (then in the future we could add 'home-manager options', 'nix-darwin options' and '3rd party flake options' to that page)?",
+   "created_at": "2026-04-10T16:25:38Z",
+   "id": 4225226809,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-10T16:25:38Z",
+   "user": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "implemented at #1186",
+   "created_at": "2026-04-10T19:47:45Z",
+   "id": 4226350307,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-10T19:47:45Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixos-search/issues/1167",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "the recently added [modular services](https://nixos.org/manual/nixos/stable/#modular-services) has options that are [already reflected](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/misc/documentation/modular-services.nix) in the [manual's `options.html`](https://nixos.org/manual/nixos/stable/options#opt-_imports_=___pkgs.ghostunnel.services.default___).\nin nixos-search however, such options currently [cannot be found](https://search.nixos.org/options?channel=unstable&query=ghostunnel) yet.\n\nas this feature is likely to find support among more services in the future, one potential enhancement here would be to ensure such options will show up in the search as well.\n\nedit: it has been argued these [should be handled from a separate page](https://github.com/NixOS/nixpkgs/issues/432550#issuecomment-3517636577)\n",
+  "closed_at": "2026-04-12T19:57:02Z",
+  "closed_by": {
+   "id": 131856,
+   "login": "raboof",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 4,
+  "created_at": "2026-03-26T21:25:17Z",
+  "id": 4147426089,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "a2eeef",
+    "default": true,
+    "description": "New feature or request",
+    "id": 1940417084,
+    "name": "enhancement"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 1167,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixos-search",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "allow searching options of modular services",
+  "type": null,
+  "updated_at": "2026-04-12T19:57:02Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixos-search#1167",
+ "sources": [
+  "nixos-search-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-12T19:57:02Z",
+   "event": "closed",
+   "id": 24425408586,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

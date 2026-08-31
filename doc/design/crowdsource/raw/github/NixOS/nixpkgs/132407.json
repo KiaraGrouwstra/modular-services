@@ -1,0 +1,1532 @@
+{
+ "comments": [
+  {
+   "body": "First contribution to Nix/Nixos, hope everything follows the conventions and it is at least decent quality. Couple of notes:\r\n\r\n- building the man pages requires two pip packages that are not in nixpkgs, and they are currently built in a let expression surrounding the derivation. The proper way to do it is probably to package these two dependencies properly, but I'm unsure if I should open other PRs for them or do it here.\r\n- I'm not sure what to put in the \"maintainer\" field, i.e. if I should add myself to one of the maintainer groups or someone should \"adopt\" the package.\r\n\r\nFeedback is appreciated :+1: ",
+   "created_at": "2021-08-02T11:45:51Z",
+   "id": 890959742,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-08-02T11:45:51Z",
+   "user": {
+    "id": 17784802,
+    "login": "maggicl",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Unfortunately, this [package](https://github.com/NixOS/nixpkgs/tree/master/pkgs/os-specific/linux/autosuspend) has been already merged into nixpkgs.\r\n\r\nI see you created a module for it, if you want, we can try to merge your module.",
+   "created_at": "2022-03-26T17:11:45Z",
+   "id": 1079735373,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2022-03-26T17:11:45Z",
+   "user": {
+    "id": 8378365,
+    "login": "WolfangAukang",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "modules is in https://github.com/NixOS/nixpkgs/pull/210666",
+   "created_at": "2023-01-26T00:35:15Z",
+   "id": 1404407905,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-01-26T00:35:15Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/132407",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://nixos.org/manual/nixpkgs/unstable/#chap-reviewing-contributions\r\n-->\r\n\r\n###### Motivation for this change\r\nThe [autosuspend](https://github.com/NixOS/nixpkgs/issues/132392) package is missing from nixpkgs and this PR includes an appropriate derivation and module to use it.\r\nResolves #132392 \r\n\r\n###### Things done\r\nWriting a basic derivation and module definition for autosuspend.\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- [x] Tested using sandboxing ([nix.useSandbox](https://nixos.org/nixos/manual/options.html#opt-nix.useSandbox) on NixOS, or option `sandbox` in [`nix.conf`](https://nixos.org/nix/manual/#sec-conf-file) on non-NixOS linux)\r\n- Built on platform(s)\r\n   - [x] NixOS\r\n   - [ ] macOS (package not compatible)\r\n   - [ ] other Linux distributions\r\n- [ ] Tested via one or more NixOS test(s) if existing and applicable for the change (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n- [x] Tested compilation of all pkgs that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review wip\"`\r\n- [x] Tested execution of all binary files (usually in `./result/bin/`)\r\n- [21.11 Release Notes (or backporting 21.05 Relase notes)](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#generating-2111-release-notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking (not a package update)\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant (not a module update)\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) (misses valid maintainer).\r\n",
+  "closed_at": "2023-01-26T00:35:15Z",
+  "closed_by": {
+   "id": 15247171,
+   "login": "NickCao",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 3,
+  "created_at": "2021-08-02T11:15:34Z",
+  "draft": false,
+  "id": 958035930,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Python is a high-level, general-purpose programming language.",
+    "id": 9820195,
+    "name": "6.topic: python"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR removes packages or removes other cruft",
+    "id": 290122988,
+    "name": "8.has: clean-up"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "ddeecc",
+    "default": false,
+    "description": "This PR was created by a maintainer of all the package it changes.",
+    "id": 740714914,
+    "name": "11.by: package-maintainer"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR is the author's first one; please be gentle!",
+    "id": 5609547489,
+    "name": "12.first-time contribution"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 132407,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/132407.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/132407.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "autosuspend: init at 3.1.3",
+  "type": null,
+  "updated_at": "2023-06-12T18:54:15Z",
+  "user": {
+   "id": 17784802,
+   "login": "maggicl",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 186,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:38:34Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "3091daa5208a904c7f12f2141a8a0e6dde49662a",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://nixos.org/manual/nixpkgs/unstable/#chap-reviewing-contributions\r\n-->\r\n\r\n###### Motivation for this change\r\nThe [autosuspend](https://github.com/NixOS/nixpkgs/issues/132392) package is missing from nixpkgs and this PR includes an appropriate derivation and module to use it.\r\nResolves #132392 \r\n\r\n###### Things done\r\nWriting a basic derivation and module definition for autosuspend.\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- [x] Tested using sandboxing ([nix.useSandbox](https://nixos.org/nixos/manual/options.html#opt-nix.useSandbox) on NixOS, or option `sandbox` in [`nix.conf`](https://nixos.org/nix/manual/#sec-conf-file) on non-NixOS linux)\r\n- Built on platform(s)\r\n   - [x] NixOS\r\n   - [ ] macOS (package not compatible)\r\n   - [ ] other Linux distributions\r\n- [ ] Tested via one or more NixOS test(s) if existing and applicable for the change (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n- [x] Tested compilation of all pkgs that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review wip\"`\r\n- [x] Tested execution of all binary files (usually in `./result/bin/`)\r\n- [21.11 Release Notes (or backporting 21.05 Relase notes)](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#generating-2111-release-notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking (not a package update)\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant (not a module update)\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md) (misses valid maintainer).\r\n",
+  "changed_files": 7,
+  "closed_at": "2023-01-26T00:35:15Z",
+  "comments": 3,
+  "commits": 4,
+  "created_at": "2021-08-02T11:15:34Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/132407.diff",
+  "draft": false,
+  "head": {
+   "label": "maggicl:init-autosuspend",
+   "ref": "init-autosuspend",
+   "repo": null,
+   "sha": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "user": {
+    "id": 17784802,
+    "login": "maggicl",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 701372262,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Python is a high-level, general-purpose programming language.",
+    "id": 9820195,
+    "name": "6.topic: python"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR removes packages or removes other cruft",
+    "id": 290122988,
+    "name": "8.has: clean-up"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "ddeecc",
+    "default": false,
+    "description": "This PR was created by a maintainer of all the package it changes.",
+    "id": 740714914,
+    "name": "11.by: package-maintainer"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR is the author's first one; please be gentle!",
+    "id": 5609547489,
+    "name": "12.first-time contribution"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "c921a518003b79158e179ccde72165a60e23ecce",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 132407,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/132407.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 2129135,
+    "login": "FRidh",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 24,
+  "state": "closed",
+  "title": "autosuspend: init at 3.1.3",
+  "updated_at": "2023-06-12T18:54:15Z",
+  "user": {
+   "id": 17784802,
+   "login": "maggicl",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#132407",
+ "review_comments": [
+  {
+   "body": "What are the practical differences between your unit and the [upstream unit](https://github.com/languitar/autosuspend/blob/9eeebdb960b45d1ca6c44c7a782f89c1630637b7/data/autosuspend-detect-suspend.service)?",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T12:58:14Z",
+   "diff_hunk": "@@ -0,0 +1,54 @@\n+{ config, lib, pkgs, ... }:\n+\n+with lib;\n+\n+let\n+  cfg = config.services.autosuspend;\n+  settingsFormat = pkgs.formats.ini {};\n+in {\n+  options.services.autosuspend = {\n+    enable = mkOption {\n+      type = types.bool;\n+      default = false;\n+      description = ''\n+        If enabled, NixOS will start the autosuspend service.\n+      '';\n+    };\n+\n+    settings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+\n+    loggingSettings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend logs, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+  };\n+\n+  config = mkIf cfg.enable {\n+    environment.etc.\"autosuspend.conf\".source =\n+      settingsFormat.generate \"autosuspend-conf.ini\" cfg.settings;\n+\n+    environment.etc.\"autosuspend-logging.conf\".source =\n+      settingsFormat.generate \"autosuspend-logging-conf.ini\" cfg.loggingSettings;\n+\n+    systemd.services.autosuspend = {",
+   "id": 680948550,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 40,
+   "original_position": 46,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/autosuspend.nix",
+   "position": 1,
+   "pull_request_review_id": 720172306,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T13:11:01Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n      settingsFormat.generate \"autosuspend.conf\" cfg.settings;\r\n```\r\n?",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T12:59:17Z",
+   "diff_hunk": "@@ -0,0 +1,54 @@\n+{ config, lib, pkgs, ... }:\n+\n+with lib;\n+\n+let\n+  cfg = config.services.autosuspend;\n+  settingsFormat = pkgs.formats.ini {};\n+in {\n+  options.services.autosuspend = {\n+    enable = mkOption {\n+      type = types.bool;\n+      default = false;\n+      description = ''\n+        If enabled, NixOS will start the autosuspend service.\n+      '';\n+    };\n+\n+    settings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+\n+    loggingSettings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend logs, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+  };\n+\n+  config = mkIf cfg.enable {\n+    environment.etc.\"autosuspend.conf\".source =\n+      settingsFormat.generate \"autosuspend-conf.ini\" cfg.settings;",
+   "id": 680949285,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 41,
+   "original_position": 41,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/autosuspend.nix",
+   "position": 1,
+   "pull_request_review_id": 720172306,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T13:11:01Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n      settingsFormat.generate \"autosuspend-logging.conf\" cfg.loggingSettings;\r\n```\r\n?",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T12:59:43Z",
+   "diff_hunk": "@@ -0,0 +1,54 @@\n+{ config, lib, pkgs, ... }:\n+\n+with lib;\n+\n+let\n+  cfg = config.services.autosuspend;\n+  settingsFormat = pkgs.formats.ini {};\n+in {\n+  options.services.autosuspend = {\n+    enable = mkOption {\n+      type = types.bool;\n+      default = false;\n+      description = ''\n+        If enabled, NixOS will start the autosuspend service.\n+      '';\n+    };\n+\n+    settings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+\n+    loggingSettings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend logs, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+  };\n+\n+  config = mkIf cfg.enable {\n+    environment.etc.\"autosuspend.conf\".source =\n+      settingsFormat.generate \"autosuspend-conf.ini\" cfg.settings;\n+\n+    environment.etc.\"autosuspend-logging.conf\".source =\n+      settingsFormat.generate \"autosuspend-logging-conf.ini\" cfg.loggingSettings;",
+   "id": 680949597,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 44,
+   "original_position": 44,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/autosuspend.nix",
+   "position": 1,
+   "pull_request_review_id": 720172306,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T13:11:01Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n      rev = \"v${version}\";\r\n```",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T13:01:33Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"1wq9yp66xq9scazzc05vgh1n84cyf0gl64vgf2fc1i3sdirr8ll4\";\n+    };\n+  };\n+in\n+  with python3.pkgs; buildPythonApplication rec {\n+    pname = \"autosuspend\";\n+    version = \"3.1.3\";\n+\n+    src = fetchFromGitHub {\n+      owner = \"languitar\";\n+      repo = \"autosuspend\";\n+      rev = \"6adc8f812ebcaeae83d2b0725ca37d7b433b7f4a\";",
+   "id": 680950823,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 43,
+   "original_position": 43,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720172306,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T13:11:01Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Are you familiar with `mkEnableOption` at all?",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T13:02:34Z",
+   "diff_hunk": "@@ -0,0 +1,54 @@\n+{ config, lib, pkgs, ... }:\n+\n+with lib;\n+\n+let\n+  cfg = config.services.autosuspend;\n+  settingsFormat = pkgs.formats.ini {};\n+in {\n+  options.services.autosuspend = {\n+    enable = mkOption {",
+   "id": 680951541,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 10,
+   "original_position": 10,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/autosuspend.nix",
+   "position": 1,
+   "pull_request_review_id": 720172306,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T13:11:01Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Please move the two packages into pythonPackages.",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T14:22:30Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"1wq9yp66xq9scazzc05vgh1n84cyf0gl64vgf2fc1i3sdirr8ll4\";\n+    };\n+  };",
+   "id": 681014297,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 18,
+   "original_position": 34,
+   "original_start_line": 9,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720260911,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2021-08-02T14:23:46Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n    nativeBuildInputs = [ setuptools-scm ];\r\n    buildInputs = [ setuptools ];\r\n```",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T14:22:43Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];",
+   "id": 681014459,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 14,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720260911,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T14:23:46Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n    nativeBuildInputs = [ setuptools-scm ];\r\n    buildInputs = [ setuptools ];\r\n```",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T14:22:52Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];",
+   "id": 681014600,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 27,
+   "original_position": 27,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720260911,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T14:23:46Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n      pytestCheckHook\r\n```",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T14:23:10Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"1wq9yp66xq9scazzc05vgh1n84cyf0gl64vgf2fc1i3sdirr8ll4\";\n+    };\n+  };\n+in\n+  with python3.pkgs; buildPythonApplication rec {\n+    pname = \"autosuspend\";\n+    version = \"3.1.3\";\n+\n+    src = fetchFromGitHub {\n+      owner = \"languitar\";\n+      repo = \"autosuspend\";\n+      rev = \"6adc8f812ebcaeae83d2b0725ca37d7b433b7f4a\";\n+      sha256 = \"0lms0q5nmywlxph3qqh7vp13pcj49l1fh0yxl23ljfnl5v9lwhjl\";\n+    };\n+\n+    propagatedBuildInputs = [\n+      dbus-python\n+      mpd2\n+      requests\n+      lxml\n+      icalendar\n+      dateutil\n+      tzlocal\n+      freezegun\n+      jsonpath-ng\n+      portalocker\n+      psutil\n+    ];\n+\n+    buildInputs = [\n+      pytest",
+   "id": 681014842,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 64,
+   "original_position": 62,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720260911,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T14:23:46Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "You need to add this.",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T14:23:23Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"1wq9yp66xq9scazzc05vgh1n84cyf0gl64vgf2fc1i3sdirr8ll4\";\n+    };\n+  };\n+in\n+  with python3.pkgs; buildPythonApplication rec {\n+    pname = \"autosuspend\";\n+    version = \"3.1.3\";\n+\n+    src = fetchFromGitHub {\n+      owner = \"languitar\";\n+      repo = \"autosuspend\";\n+      rev = \"6adc8f812ebcaeae83d2b0725ca37d7b433b7f4a\";\n+      sha256 = \"0lms0q5nmywlxph3qqh7vp13pcj49l1fh0yxl23ljfnl5v9lwhjl\";\n+    };\n+\n+    propagatedBuildInputs = [\n+      dbus-python\n+      mpd2\n+      requests\n+      lxml\n+      icalendar\n+      dateutil\n+      tzlocal\n+      freezegun\n+      jsonpath-ng\n+      portalocker\n+      psutil\n+    ];\n+\n+    buildInputs = [\n+      pytest\n+      pytest-mock\n+      pytest-httpserver\n+      python-dbusmock\n+      sphinx\n+      sphinx-issues\n+      sphinx-autodoc-typehints\n+      sphinxcontrib_plantuml\n+      recommonmark\n+    ];\n+\n+    postInstall = ''\n+      python3 setup.py build_sphinx -a -b man\n+      mkdir -p $out/share/man/{man1,man5}\n+      cp doc/build/man/autosuspend.1 $out/share/man/man1\n+      cp doc/build/man/autosuspend.conf.5 $out/share/man/man5\n+    '';\n+\n+    meta = with lib; {\n+      homepage = \"https://autosuspend.readthedocs.io\";\n+      description = \"Python daemon that suspends a system if certain conditions are met, or not met\";\n+      license = licenses.gpl2;\n+      platforms = platforms.linux;\n+      # maintainers = with maintainers; [ ];",
+   "id": 681015022,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 98,
+   "original_position": 85,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720260911,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T14:23:46Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Use installManPage.",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T14:23:31Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"1wq9yp66xq9scazzc05vgh1n84cyf0gl64vgf2fc1i3sdirr8ll4\";\n+    };\n+  };\n+in\n+  with python3.pkgs; buildPythonApplication rec {\n+    pname = \"autosuspend\";\n+    version = \"3.1.3\";\n+\n+    src = fetchFromGitHub {\n+      owner = \"languitar\";\n+      repo = \"autosuspend\";\n+      rev = \"6adc8f812ebcaeae83d2b0725ca37d7b433b7f4a\";\n+      sha256 = \"0lms0q5nmywlxph3qqh7vp13pcj49l1fh0yxl23ljfnl5v9lwhjl\";\n+    };\n+\n+    propagatedBuildInputs = [\n+      dbus-python\n+      mpd2\n+      requests\n+      lxml\n+      icalendar\n+      dateutil\n+      tzlocal\n+      freezegun\n+      jsonpath-ng\n+      portalocker\n+      psutil\n+    ];\n+\n+    buildInputs = [\n+      pytest\n+      pytest-mock\n+      pytest-httpserver\n+      python-dbusmock\n+      sphinx\n+      sphinx-issues\n+      sphinx-autodoc-typehints\n+      sphinxcontrib_plantuml\n+      recommonmark\n+    ];\n+\n+    postInstall = ''\n+      python3 setup.py build_sphinx -a -b man\n+      mkdir -p $out/share/man/{man1,man5}\n+      cp doc/build/man/autosuspend.1 $out/share/man/man1\n+      cp doc/build/man/autosuspend.conf.5 $out/share/man/man5",
+   "id": 681015159,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 79,
+   "original_position": 77,
+   "original_start_line": 75,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720260911,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2021-08-02T14:23:46Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n      ${python3.interpreter} setup.py build_sphinx -a -b man\r\n```",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T14:23:43Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"1wq9yp66xq9scazzc05vgh1n84cyf0gl64vgf2fc1i3sdirr8ll4\";\n+    };\n+  };\n+in\n+  with python3.pkgs; buildPythonApplication rec {\n+    pname = \"autosuspend\";\n+    version = \"3.1.3\";\n+\n+    src = fetchFromGitHub {\n+      owner = \"languitar\";\n+      repo = \"autosuspend\";\n+      rev = \"6adc8f812ebcaeae83d2b0725ca37d7b433b7f4a\";\n+      sha256 = \"0lms0q5nmywlxph3qqh7vp13pcj49l1fh0yxl23ljfnl5v9lwhjl\";\n+    };\n+\n+    propagatedBuildInputs = [\n+      dbus-python\n+      mpd2\n+      requests\n+      lxml\n+      icalendar\n+      dateutil\n+      tzlocal\n+      freezegun\n+      jsonpath-ng\n+      portalocker\n+      psutil\n+    ];\n+\n+    buildInputs = [\n+      pytest\n+      pytest-mock\n+      pytest-httpserver\n+      python-dbusmock\n+      sphinx\n+      sphinx-issues\n+      sphinx-autodoc-typehints\n+      sphinxcontrib_plantuml\n+      recommonmark\n+    ];\n+\n+    postInstall = ''\n+      python3 setup.py build_sphinx -a -b man",
+   "id": 681015323,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 76,
+   "original_position": 74,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720260911,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T14:23:46Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n      sphinxcontrib-plantuml\r\n```",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T14:25:27Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"1wq9yp66xq9scazzc05vgh1n84cyf0gl64vgf2fc1i3sdirr8ll4\";\n+    };\n+  };\n+in\n+  with python3.pkgs; buildPythonApplication rec {\n+    pname = \"autosuspend\";\n+    version = \"3.1.3\";\n+\n+    src = fetchFromGitHub {\n+      owner = \"languitar\";\n+      repo = \"autosuspend\";\n+      rev = \"6adc8f812ebcaeae83d2b0725ca37d7b433b7f4a\";\n+      sha256 = \"0lms0q5nmywlxph3qqh7vp13pcj49l1fh0yxl23ljfnl5v9lwhjl\";\n+    };\n+\n+    propagatedBuildInputs = [\n+      dbus-python\n+      mpd2\n+      requests\n+      lxml\n+      icalendar\n+      dateutil\n+      tzlocal\n+      freezegun\n+      jsonpath-ng\n+      portalocker\n+      psutil\n+    ];\n+\n+    buildInputs = [\n+      pytest\n+      pytest-mock\n+      pytest-httpserver\n+      python-dbusmock\n+      sphinx\n+      sphinx-issues\n+      sphinx-autodoc-typehints\n+      sphinxcontrib_plantuml",
+   "id": 681016756,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 70,
+   "original_position": 69,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720264247,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T14:25:27Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "also, the pytest related packages can probably go into checkInputs",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T15:07:03Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"1wq9yp66xq9scazzc05vgh1n84cyf0gl64vgf2fc1i3sdirr8ll4\";\n+    };\n+  };\n+in\n+  with python3.pkgs; buildPythonApplication rec {\n+    pname = \"autosuspend\";\n+    version = \"3.1.3\";\n+\n+    src = fetchFromGitHub {\n+      owner = \"languitar\";\n+      repo = \"autosuspend\";\n+      rev = \"6adc8f812ebcaeae83d2b0725ca37d7b433b7f4a\";\n+      sha256 = \"0lms0q5nmywlxph3qqh7vp13pcj49l1fh0yxl23ljfnl5v9lwhjl\";\n+    };\n+\n+    propagatedBuildInputs = [\n+      dbus-python\n+      mpd2\n+      requests\n+      lxml\n+      icalendar\n+      dateutil\n+      tzlocal\n+      freezegun\n+      jsonpath-ng\n+      portalocker\n+      psutil\n+    ];\n+\n+    buildInputs = [\n+      pytest",
+   "id": 681051100,
+   "in_reply_to_id": 681014842,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 64,
+   "original_position": 62,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720310345,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T15:07:08Z",
+   "user": {
+    "id": 56650223,
+    "login": "Artturin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Absolutely none. I thought using system.services would have been more appropriate than using the original file. I wouldn't know how to simply import the upstream unit file, though I'm definitely a newbie at this.",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T18:26:35Z",
+   "diff_hunk": "@@ -0,0 +1,54 @@\n+{ config, lib, pkgs, ... }:\n+\n+with lib;\n+\n+let\n+  cfg = config.services.autosuspend;\n+  settingsFormat = pkgs.formats.ini {};\n+in {\n+  options.services.autosuspend = {\n+    enable = mkOption {\n+      type = types.bool;\n+      default = false;\n+      description = ''\n+        If enabled, NixOS will start the autosuspend service.\n+      '';\n+    };\n+\n+    settings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+\n+    loggingSettings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend logs, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+  };\n+\n+  config = mkIf cfg.enable {\n+    environment.etc.\"autosuspend.conf\".source =\n+      settingsFormat.generate \"autosuspend-conf.ini\" cfg.settings;\n+\n+    environment.etc.\"autosuspend-logging.conf\".source =\n+      settingsFormat.generate \"autosuspend-logging-conf.ini\" cfg.loggingSettings;\n+\n+    systemd.services.autosuspend = {",
+   "id": 681182474,
+   "in_reply_to_id": 680948550,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 40,
+   "original_position": 46,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/autosuspend.nix",
+   "position": 1,
+   "pull_request_review_id": 720480968,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T18:26:35Z",
+   "user": {
+    "id": 17784802,
+    "login": "maggicl",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I wasn't. To be honest I just followed an example from Nix Pills on how to create a basic module, and mkEnableOption wasn't covered there",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T18:36:51Z",
+   "diff_hunk": "@@ -0,0 +1,54 @@\n+{ config, lib, pkgs, ... }:\n+\n+with lib;\n+\n+let\n+  cfg = config.services.autosuspend;\n+  settingsFormat = pkgs.formats.ini {};\n+in {\n+  options.services.autosuspend = {\n+    enable = mkOption {",
+   "id": 681188499,
+   "in_reply_to_id": 680951541,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 10,
+   "original_position": 10,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/autosuspend.nix",
+   "position": 1,
+   "pull_request_review_id": 720488682,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T18:36:51Z",
+   "user": {
+    "id": 17784802,
+    "login": "maggicl",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```\r\nsystemd = {\r\n  packages = [ pkgs.autosuspend ];\r\n  # https://github.com/NixOS/nixpkgs/issues/81138\r\n  services.autosuspend.wantedBy = [ \"multi-user.target\" ];\r\n};\r\n```",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T19:07:01Z",
+   "diff_hunk": "@@ -0,0 +1,54 @@\n+{ config, lib, pkgs, ... }:\n+\n+with lib;\n+\n+let\n+  cfg = config.services.autosuspend;\n+  settingsFormat = pkgs.formats.ini {};\n+in {\n+  options.services.autosuspend = {\n+    enable = mkOption {\n+      type = types.bool;\n+      default = false;\n+      description = ''\n+        If enabled, NixOS will start the autosuspend service.\n+      '';\n+    };\n+\n+    settings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+\n+    loggingSettings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend logs, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+  };\n+\n+  config = mkIf cfg.enable {\n+    environment.etc.\"autosuspend.conf\".source =\n+      settingsFormat.generate \"autosuspend-conf.ini\" cfg.settings;\n+\n+    environment.etc.\"autosuspend-logging.conf\".source =\n+      settingsFormat.generate \"autosuspend-logging-conf.ini\" cfg.loggingSettings;\n+\n+    systemd.services.autosuspend = {",
+   "id": 681205679,
+   "in_reply_to_id": 680948550,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 40,
+   "original_position": 46,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/autosuspend.nix",
+   "position": 1,
+   "pull_request_review_id": 720510923,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T19:07:26Z",
+   "user": {
+    "id": 56650223,
+    "login": "Artturin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I had to edit the entry in `pkgs/top-level/python-packages.nix` and change the underscore in a hyphen there in order to make it work. Running a quick `git grep` shows that no other package in nixpkgs depends on `sphinxcontrib-plantuml`, but still I renamed a package and I would like to make sure it's alright",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T19:26:40Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"1wq9yp66xq9scazzc05vgh1n84cyf0gl64vgf2fc1i3sdirr8ll4\";\n+    };\n+  };\n+in\n+  with python3.pkgs; buildPythonApplication rec {\n+    pname = \"autosuspend\";\n+    version = \"3.1.3\";\n+\n+    src = fetchFromGitHub {\n+      owner = \"languitar\";\n+      repo = \"autosuspend\";\n+      rev = \"6adc8f812ebcaeae83d2b0725ca37d7b433b7f4a\";\n+      sha256 = \"0lms0q5nmywlxph3qqh7vp13pcj49l1fh0yxl23ljfnl5v9lwhjl\";\n+    };\n+\n+    propagatedBuildInputs = [\n+      dbus-python\n+      mpd2\n+      requests\n+      lxml\n+      icalendar\n+      dateutil\n+      tzlocal\n+      freezegun\n+      jsonpath-ng\n+      portalocker\n+      psutil\n+    ];\n+\n+    buildInputs = [\n+      pytest\n+      pytest-mock\n+      pytest-httpserver\n+      python-dbusmock\n+      sphinx\n+      sphinx-issues\n+      sphinx-autodoc-typehints\n+      sphinxcontrib_plantuml",
+   "id": 681216481,
+   "in_reply_to_id": 681016756,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 70,
+   "original_position": 69,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 720524583,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T19:26:40Z",
+   "user": {
+    "id": 17784802,
+    "login": "maggicl",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I mostly meant they run different commands... but yeah @Artturin has a great point there :+1:",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T20:34:03Z",
+   "diff_hunk": "@@ -0,0 +1,54 @@\n+{ config, lib, pkgs, ... }:\n+\n+with lib;\n+\n+let\n+  cfg = config.services.autosuspend;\n+  settingsFormat = pkgs.formats.ini {};\n+in {\n+  options.services.autosuspend = {\n+    enable = mkOption {\n+      type = types.bool;\n+      default = false;\n+      description = ''\n+        If enabled, NixOS will start the autosuspend service.\n+      '';\n+    };\n+\n+    settings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+\n+    loggingSettings = mkOption {\n+      type = settingsFormat.type;\n+      default = {};\n+      description = ''\n+        Configuration for autosuspend logs, see\n+        <link xlink:href=\"https://autosuspend.readthedocs.io/en/latest/configuration_file.html\"/>\n+        for supported settings.\n+      '';\n+    };\n+  };\n+\n+  config = mkIf cfg.enable {\n+    environment.etc.\"autosuspend.conf\".source =\n+      settingsFormat.generate \"autosuspend-conf.ini\" cfg.settings;\n+\n+    environment.etc.\"autosuspend-logging.conf\".source =\n+      settingsFormat.generate \"autosuspend-logging-conf.ini\" cfg.loggingSettings;\n+\n+    systemd.services.autosuspend = {",
+   "id": 681253105,
+   "in_reply_to_id": 680948550,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 40,
+   "original_position": 46,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/autosuspend.nix",
+   "position": 1,
+   "pull_request_review_id": 720571158,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T20:34:03Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It's just a convenience function, not required.",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T20:34:37Z",
+   "diff_hunk": "@@ -0,0 +1,54 @@\n+{ config, lib, pkgs, ... }:\n+\n+with lib;\n+\n+let\n+  cfg = config.services.autosuspend;\n+  settingsFormat = pkgs.formats.ini {};\n+in {\n+  options.services.autosuspend = {\n+    enable = mkOption {",
+   "id": 681253430,
+   "in_reply_to_id": 680951541,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 10,
+   "original_position": 10,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/autosuspend.nix",
+   "position": 1,
+   "pull_request_review_id": 720571570,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T20:34:37Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n    enable = mkEnableOption \"the autosuspend service\";\r\n```\r\n\r\nThis function adds a period to the end and sets up a nice prefix.",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-02T20:36:13Z",
+   "diff_hunk": "@@ -0,0 +1,46 @@\n+{ config, lib, pkgs, ... }:\n+\n+with lib;\n+\n+let\n+  cfg = config.services.autosuspend;\n+  settingsFormat = pkgs.formats.ini {};\n+in {\n+  options.services.autosuspend = {\n+    enable = mkEnableOption \"If enabled, NixOS will start the autosuspend service.\";",
+   "id": 681254365,
+   "line": null,
+   "original_commit_id": "816cd03f4a718f0fe35757f9f254fc0e626a3318",
+   "original_line": 10,
+   "original_position": 10,
+   "original_start_line": null,
+   "path": "nixos/modules/services/misc/autosuspend.nix",
+   "position": 1,
+   "pull_request_review_id": 720572690,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-02T20:36:14Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It was added with #132421",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-03T11:38:27Z",
+   "diff_hunk": "@@ -0,0 +1,87 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, fetchFromGitHub\n+}:\n+\n+let\n+  sphinx-autodoc-typehints = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-autodoc-typehints\";\n+    version = \"1.12.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"0llzia8clzq7vvpwf0ifr1cxjk73fjg3d79rn60p5170vgcifdhr\";\n+    };\n+  };\n+  sphinx-issues = with python3.pkgs; buildPythonPackage rec {\n+    pname = \"sphinx-issues\";\n+    version = \"1.2.0\";\n+    disabled = pythonOlder \"3.6\";\n+\n+    buildInputs = [ setuptools-scm setuptools ];\n+    propagatedBuildInputs = [ sphinx ];\n+\n+    src = fetchPypi {\n+      inherit pname version;\n+      sha256 = \"1wq9yp66xq9scazzc05vgh1n84cyf0gl64vgf2fc1i3sdirr8ll4\";\n+    };\n+  };\n+in\n+  with python3.pkgs; buildPythonApplication rec {\n+    pname = \"autosuspend\";\n+    version = \"3.1.3\";\n+\n+    src = fetchFromGitHub {\n+      owner = \"languitar\";\n+      repo = \"autosuspend\";\n+      rev = \"6adc8f812ebcaeae83d2b0725ca37d7b433b7f4a\";\n+      sha256 = \"0lms0q5nmywlxph3qqh7vp13pcj49l1fh0yxl23ljfnl5v9lwhjl\";\n+    };\n+\n+    propagatedBuildInputs = [\n+      dbus-python\n+      mpd2\n+      requests\n+      lxml\n+      icalendar\n+      dateutil\n+      tzlocal\n+      freezegun\n+      jsonpath-ng\n+      portalocker\n+      psutil\n+    ];\n+\n+    buildInputs = [\n+      pytest\n+      pytest-mock\n+      pytest-httpserver\n+      python-dbusmock\n+      sphinx\n+      sphinx-issues\n+      sphinx-autodoc-typehints\n+      sphinxcontrib_plantuml",
+   "id": 681677634,
+   "in_reply_to_id": 681016756,
+   "line": null,
+   "original_commit_id": "1fba4fa6f46f4c5fa3b84b97997857bbcaf71ffe",
+   "original_line": 70,
+   "original_position": 69,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 1,
+   "pull_request_review_id": 721091755,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-03T11:38:27Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Please sort this alphabetically. ",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-03T11:38:53Z",
+   "diff_hunk": "@@ -12234,4 +12234,10 @@\n     github = \"zupo\";\n     githubId = 311580;\n   };\n+  maggicl = {",
+   "id": 681677879,
+   "line": 12319,
+   "original_commit_id": "9f55694722e8dbed7489c2a58f659d16bb506274",
+   "original_line": 12319,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "maintainers/maintainer-list.nix",
+   "position": 4,
+   "pull_request_review_id": 721092065,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-03T11:38:53Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n```\r\nplease patch out the usage of cov.",
+   "commit_id": "05d2e7954597dd64d5b2e476263b085fb67afd19",
+   "created_at": "2021-08-03T11:39:13Z",
+   "diff_hunk": "@@ -0,0 +1,70 @@\n+{ lib\n+, stdenv\n+, pkgs\n+, python3\n+, installShellFiles\n+, fetchFromGitHub\n+}:\n+\n+with python3.pkgs; buildPythonApplication rec {\n+  pname = \"autosuspend\";\n+  version = \"3.1.3\";\n+\n+  src = fetchFromGitHub {\n+    owner = \"languitar\";\n+    repo = \"autosuspend\";\n+    rev = \"v${version}\";\n+    sha256 = \"0lms0q5nmywlxph3qqh7vp13pcj49l1fh0yxl23ljfnl5v9lwhjl\";\n+  };\n+\n+  propagatedBuildInputs = [\n+    dbus-python\n+    mpd2\n+    requests\n+    lxml\n+    icalendar\n+    dateutil\n+    tzlocal\n+    freezegun\n+    jsonpath-ng\n+    portalocker\n+    psutil\n+  ];\n+\n+  nativeBuildInputs = [ installShellFiles ];\n+\n+  buildInputs = [\n+    sphinx\n+    sphinx-issues\n+    sphinx-autodoc-typehints\n+    sphinxcontrib-plantuml\n+    recommonmark\n+  ];\n+\n+  checkInputs = [\n+    pytestCheckHook\n+    pytest-cov",
+   "id": 681678100,
+   "line": 46,
+   "original_commit_id": "9f55694722e8dbed7489c2a58f659d16bb506274",
+   "original_line": 46,
+   "original_position": 46,
+   "original_start_line": null,
+   "path": "pkgs/tools/misc/autosuspend/default.nix",
+   "position": 46,
+   "pull_request_review_id": 721092305,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2021-08-03T11:39:14Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "Hi there! Welcome, and thanks for choosing to contribute to the project.\r\n\r\n> First contribution to Nix/Nixos\r\n\r\nWoo! 🚀 \r\n\r\n> The proper way to do it is probably to package these two dependencies properly, but I'm unsure if I should open other PRs for them or do it here.\r\n\r\n> Here seems reasonable.\r\n\r\nIf you're willing to become a maintainer that is awesome. You can add yourself to the maintainer list. Please do that in a separate commit and have that commit come first.\r\n\r\nI don't generally review packages, just modules, but don't worry... someone will be along shortly to review the packages I'm sure.\r\n\r\nI have left a few comments for discussion. Don't hesitate to ask for any advice/help/etc...",
+   "commit_id": null,
+   "id": 720172306,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-02T13:11:01Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 720260911,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2021-08-02T14:23:46Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 720264247,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-02T14:25:27Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 720310345,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-02T15:07:03Z",
+   "user": {
+    "id": 56650223,
+    "login": "Artturin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 720480968,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-02T18:26:35Z",
+   "user": {
+    "id": 17784802,
+    "login": "maggicl",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 720488682,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-02T18:36:51Z",
+   "user": {
+    "id": 17784802,
+    "login": "maggicl",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 720510923,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-02T19:07:01Z",
+   "user": {
+    "id": 56650223,
+    "login": "Artturin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 720524583,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-02T19:26:40Z",
+   "user": {
+    "id": 17784802,
+    "login": "maggicl",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 720571158,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-02T20:34:03Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 720571570,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-02T20:34:37Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 720572690,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-02T20:36:14Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "To comply with [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/.github/CONTRIBUTING.md#submitting-changes) please have the commit message name be of the format\r\n```\r\n<pkg-name>: <subject-line>\r\n```\r\nfor more examples, please look at https://github.com/NixOS/nixpkgs/blob/master/.github/CONTRIBUTING.md#submitting-changes\r\n\r\nin your case, you should have a commit per package and module added.",
+   "commit_id": null,
+   "id": 720772293,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-03T04:40:48Z",
+   "user": {
+    "id": 7673602,
+    "login": "jonringer",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 721091755,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-03T11:38:27Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 721092065,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-03T11:38:53Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 721092305,
+   "state": "COMMENTED",
+   "submitted_at": "2021-08-03T11:39:14Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-system-services-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2023-01-26T00:35:15Z",
+   "event": "closed",
+   "id": 8359961690,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

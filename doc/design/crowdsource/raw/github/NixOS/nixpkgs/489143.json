@@ -1,0 +1,782 @@
+{
+ "comments": [
+  {
+   "body": "Module maintainer ping:\r\n@happysalada\r\n@pacien\r\n@jonnynightingale\r\n@norpl",
+   "created_at": "2026-02-10T17:08:13Z",
+   "id": 3879463758,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-10T17:08:13Z",
+   "user": {
+    "id": 120189068,
+    "login": "axelkar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This looks good, leaving this open to give others a chance to review ",
+   "created_at": "2026-02-14T01:20:45Z",
+   "id": 3900379333,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-14T01:20:45Z",
+   "user": {
+    "id": 5317234,
+    "login": "happysalada",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'd like to include an example like \"the current NixOS version\" in this error message.\n\nhttps://github.com/NixOS/nixpkgs/blob/dfcc8a7bfb5b581331aeb110204076188636c7a2/lib/modules.nix#L1212",
+   "created_at": "2026-02-20T06:30:50Z",
+   "id": 3931949742,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-20T06:30:50Z",
+   "user": {
+    "id": 120189068,
+    "login": "axelkar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I dont have any qualms with this PR. I'm just noticing this would be breaking for existing users if they dont have the state version set. So if we merge this, we should do this earlier Rather than before we enter the freeze period for 26.05",
+   "created_at": "2026-04-04T07:11:30Z",
+   "id": 4186644131,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-04T07:11:30Z",
+   "user": {
+    "id": 5317234,
+    "login": "happysalada",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I'd like to include an example like \"the current NixOS version\" in this error message.\r\n\r\nThis would require changing option value merging; not viable for this PR.",
+   "created_at": "2026-04-04T17:16:13Z",
+   "id": 4187435314,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-04T17:16:13Z",
+   "user": {
+    "id": 120189068,
+    "login": "axelkar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm not sure why the stalwart module has its own `stateVersion`, no other module does this and it is very bizarre to have users set this manually. I ran into this and was quite lost, especially so seeing that [this is the only module to have this](https://search.nixos.org/options?channel=unstable&query=stateVersion).\r\n\r\nUsers shouldn't be changing their `stateVersion` at all, and the module should track the system one instead. Updating the `stateVersion` can be done manually but typically the user needs to be very careful & thorough in ensuring that nothing breaks once they do so (e.g. they've performed any necessary db migrations).\r\n\r\nFrankly I think [75742d2](https://github.com/NixOS/nixpkgs/pull/489143/commits/75742d265e66b37fa9b12b60900f53f0860c09d2) should be reverted or reworked.",
+   "created_at": "2026-04-09T02:09:22Z",
+   "id": 4210988047,
+   "minimized": null,
+   "reactions": {
+    "+1": 4,
+    "-1": 0,
+    "confused": 1,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2026-04-09T02:09:22Z",
+   "user": {
+    "id": 29718261,
+    "login": "amaanq",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thank you for the feedback. I agree that users shouldn't be updating their `stateVersion`, and this PR addresses exactly that by providing Stalwart with its own independent state version option so that it can be enabled on its own, separately from NixOS's state version. For example, one of my servers has the NixOS state version set to 24.05, but I'd want to use the latest Stalwart storage format without having to manually disable the 24.05 configuration applied by the module. The changes here begin a pattern where individual modules can have their own state versions, which provides NixOS users (and possibly users of other OSs with modular services) with more flexibility.\n\nAn easy change we could do to possibly improve UX would be to make this opt-in and have the option default to `system.stateVersion`. It'd still be discoverable even if it didn't have the error. It's important enough to be in the release notes but maybe it indeed should be opt-in?",
+   "created_at": "2026-04-09T05:50:21Z",
+   "id": 4211745297,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-09T08:01:51Z",
+   "user": {
+    "id": 120189068,
+    "login": "axelkar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@amaanq yes there is no prior example of this, but what is the fundamental problem with having this ? What do you propose instead ?\n\nThis is is just versioning the module in the end. The fact that there is no default is painful, but I dont see how this can be avoided.",
+   "created_at": "2026-04-09T11:04:12Z",
+   "id": 4213640769,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-09T11:04:12Z",
+   "user": {
+    "id": 5317234,
+    "login": "happysalada",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "If you haven't seen it, I'm campaigning for a different per-module `stateVersion` pattern as introduced [here](https://github.com/NixOS/nixpkgs/pull/509450). Since as of this PR, it seems you don't depend at all on `system.stateVersion`, there's no actual conflict between the two patterns — I'm only going to try to migrate modules that use `system.stateVersion`. But since you're talking about how no other modules do this and considering using `system.stateVersion` to produce a default here, you might want to keep an eye on this.",
+   "created_at": "2026-04-19T23:26:58Z",
+   "id": 4277065525,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-19T23:26:58Z",
+   "user": {
+    "id": 1570964,
+    "login": "rhendric",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This change definitely didn't get enough testing: https://github.com/NixOS/nixpkgs/pull/525587\r\n\r\nNobody seems to have noticed, that the changes to the logging configuration are completely broken.",
+   "created_at": "2026-05-29T14:02:38Z",
+   "id": 4576051347,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-29T14:02:38Z",
+   "user": {
+    "id": 26026535,
+    "login": "provokateurin",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/489143",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\nSorry for a PR with multiple changes... Title basically says it.\r\n\r\n> journald's centralized logging has many advantages:\r\n> - External centralized logging can simply source from journald\r\n> - journald's auto-vacuum options (e.g. SystemMaxUse) can make sure logs don't take up too much space\r\n> - Logs are in a single timeline, which is useful for analysis\r\n\r\nThis is also the first module-specific `stateVersion` in Nixpkgs. [It has been planned before](https://github.com/NixOS/rfcs/pull/155#pullrequestreview-1522580985) (ping @infinisil @KFearsoff). Basically it makes migrating easier/possible and also makes possible using newer state versions with an old `system.stateVersion`. The `stateVersion` doesn't have defaults (not just set to follow `config.system.stateVersion` by the module) so the user explicitly sets it to the version they first installed Stalwart on or the current NixOS version for new installs.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [x] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-04-05T14:13:57Z",
+  "closed_by": {
+   "id": 5317234,
+   "login": "happysalada",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 10,
+  "created_at": "2026-02-10T17:05:23Z",
+  "draft": false,
+  "id": 3922576598,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 489143,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/489143.diff",
+   "merged_at": "2026-04-05T14:13:57Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/489143.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "nixos/stalwart: add module-specific `stateVersion`, clean up and switch logging from stdout to journal",
+  "type": null,
+  "updated_at": "2026-05-29T14:02:38Z",
+  "user": {
+   "id": 120189068,
+   "login": "axelkar",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 52,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21132,
+    "open_issues_count": 21132,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:37:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "bdab6d6d27074f1ca86a4923279c1b606f391f88",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\nSorry for a PR with multiple changes... Title basically says it.\r\n\r\n> journald's centralized logging has many advantages:\r\n> - External centralized logging can simply source from journald\r\n> - journald's auto-vacuum options (e.g. SystemMaxUse) can make sure logs don't take up too much space\r\n> - Logs are in a single timeline, which is useful for analysis\r\n\r\nThis is also the first module-specific `stateVersion` in Nixpkgs. [It has been planned before](https://github.com/NixOS/rfcs/pull/155#pullrequestreview-1522580985) (ping @infinisil @KFearsoff). Basically it makes migrating easier/possible and also makes possible using newer state versions with an old `system.stateVersion`. The `stateVersion` doesn't have defaults (not just set to follow `config.system.stateVersion` by the module) so the user explicitly sets it to the version they first installed Stalwart on or the current NixOS version for new installs.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [x] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 3,
+  "closed_at": "2026-04-05T14:13:57Z",
+  "comments": 10,
+  "commits": 3,
+  "created_at": "2026-02-10T17:05:23Z",
+  "deletions": 19,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/489143.diff",
+  "draft": false,
+  "head": {
+   "label": "axelkar:push-ylyrtstlxrnv",
+   "ref": "push-ylyrtstlxrnv",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2023-03-13T22:55:13Z",
+    "default_branch": "master",
+    "description": "My Nixpkgs fork for contributions",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "axelkar/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/axelkar/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 613607859,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/axelkar/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/axelkar/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 120189068,
+     "login": "axelkar",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/axelkar/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-19T21:43:09Z",
+    "size": 2473543,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/axelkar/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/axelkar/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-01-22T20:53:56Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "28a9274f560b33bd05365c4c47c6c0248b68a4bc",
+   "user": {
+    "id": 120189068,
+    "login": "axelkar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3268197143,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "a38303ef13909fba0ee0d1d3f6c611d335782856",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-04-05T14:13:57Z",
+  "merged_by": {
+   "id": 5317234,
+   "login": "happysalada",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 489143,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/489143.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 757752,
+    "login": "onny",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 1449319,
+    "login": "pacien",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 2,
+  "state": "closed",
+  "title": "nixos/stalwart: add module-specific `stateVersion`, clean up and switch logging from stdout to journal",
+  "updated_at": "2026-05-29T14:02:38Z",
+  "user": {
+   "id": 120189068,
+   "login": "axelkar",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#489143",
+ "review_comments": [
+  {
+   "body": "I guess we _could_ have three tests for each functionally different state version but currently the changes are pretty trivial.",
+   "commit_id": "28a9274f560b33bd05365c4c47c6c0248b68a4bc",
+   "created_at": "2026-02-20T06:34:04Z",
+   "diff_hunk": "@@ -9,6 +9,9 @@ in\n \n   services.stalwart = {\n     enable = true;\n+\n+    stateVersion = lib.trivial.release; # Only for the test; please don't do in production",
+   "id": 2831626415,
+   "line": 13,
+   "original_commit_id": "aa43df6cbd2608256d0c868c8a724fb893473511",
+   "original_line": 13,
+   "original_position": 11,
+   "original_start_line": null,
+   "path": "nixos/tests/stalwart/stalwart-config.nix",
+   "position": 11,
+   "pull_request_review_id": 3830258813,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-02-20T06:41:35Z",
+   "user": {
+    "id": 120189068,
+    "login": "axelkar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Maybe\n\n```suggestion\n      '';\n      example = lib.literalMD \"current NixOS release version in use (use the latest **release** version on the unstable channel), of the format AA.BB\";\n```\n",
+   "commit_id": "28a9274f560b33bd05365c4c47c6c0248b68a4bc",
+   "created_at": "2026-02-20T06:40:55Z",
+   "diff_hunk": "@@ -31,6 +32,15 @@ in\n   options.services.stalwart = {\n     enable = lib.mkEnableOption \"the all-in-one collaboration and mail server, Stalwart\";\n \n+    stateVersion = lib.mkOption {\n+      type = lib.types.str;\n+      description = ''\n+        The version of this module (=version of NixOS) when this module was first enabled on this particular machine, used to maintain compatibility with application data created on older versions of this module.\n+\n+        See {option}`system.stateVersion` for details on the NixOS-global equivalent to this option.\n+      '';",
+   "id": 2831644340,
+   "line": 41,
+   "original_commit_id": "aa43df6cbd2608256d0c868c8a724fb893473511",
+   "original_line": 41,
+   "original_position": 24,
+   "original_start_line": null,
+   "path": "nixos/modules/services/mail/stalwart.nix",
+   "position": 24,
+   "pull_request_review_id": 3830258813,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-02-20T06:41:35Z",
+   "user": {
+    "id": 120189068,
+    "login": "axelkar",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "aa43df6cbd2608256d0c868c8a724fb893473511",
+   "id": 3830258813,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-20T06:41:35Z",
+   "user": {
+    "id": 120189068,
+    "login": "axelkar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "28a9274f560b33bd05365c4c47c6c0248b68a4bc",
+   "id": 4058237700,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-04T07:10:08Z",
+   "user": {
+    "id": 5317234,
+    "login": "happysalada",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 5317234,
+    "login": "happysalada",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "a38303ef13909fba0ee0d1d3f6c611d335782856",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/a38303ef13909fba0ee0d1d3f6c611d335782856",
+   "created_at": "2026-04-05T14:13:57Z",
+   "event": "merged",
+   "id": 24206858736
+  },
+  {
+   "actor": {
+    "id": 5317234,
+    "login": "happysalada",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-05T14:13:57Z",
+   "event": "closed",
+   "id": 24206858762,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 10098207,
+    "login": "ilai-deutel",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "19f7406f8075f0126b26c9f5c46fd1a7f27e6afb",
+   "commit_url": "https://api.github.com/repos/ilai-deutel/nixpkgs/commits/19f7406f8075f0126b26c9f5c46fd1a7f27e6afb",
+   "created_at": "2026-04-06T02:35:46Z",
+   "event": "referenced",
+   "id": 24212934315
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "381ced853680ae886dc5d6cf7c0261e918e64fad",
+   "commit_url": "https://api.github.com/repos/ngi-nix/ngipkgs/commits/381ced853680ae886dc5d6cf7c0261e918e64fad",
+   "created_at": "2026-04-06T07:00:06Z",
+   "event": "referenced",
+   "id": 24216633790
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "e8c481d625441da4f057d1336777ce74012cfac6",
+   "commit_url": "https://api.github.com/repos/ngi-nix/ngipkgs/commits/e8c481d625441da4f057d1336777ce74012cfac6",
+   "created_at": "2026-04-06T07:15:01Z",
+   "event": "referenced",
+   "id": 24216917774
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "e3719588b3786d8d2c7a3e2419a229ed3856ea31",
+   "commit_url": "https://api.github.com/repos/ngi-nix/ngipkgs/commits/e3719588b3786d8d2c7a3e2419a229ed3856ea31",
+   "created_at": "2026-04-20T09:28:47Z",
+   "event": "referenced",
+   "id": 24670649582
+  }
+ ]
+}

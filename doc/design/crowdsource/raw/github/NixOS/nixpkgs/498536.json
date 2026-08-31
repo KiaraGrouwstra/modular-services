@@ -1,0 +1,675 @@
+{
+ "comments": [
+  {
+   "body": "@roberth \r\nIf this looks good, can we have it merged?",
+   "created_at": "2026-04-16T18:09:54Z",
+   "id": 4262369341,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T18:09:54Z",
+   "user": {
+    "id": 84702057,
+    "login": "themadbit",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ofborg build nixosTests.holo-daemon-modular-service",
+   "created_at": "2026-06-17T12:25:22Z",
+   "id": 4730029765,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 1,
+    "total_count": 1
+   },
+   "updated_at": "2026-06-17T12:25:22Z",
+   "user": {
+    "id": 9713184,
+    "login": "wegank",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Successfully created backport PR for `release-26.05`:\n- #533562",
+   "created_at": "2026-06-20T09:49:34Z",
+   "id": 4757223109,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-20T09:49:34Z",
+   "user": {
+    "id": 190413589,
+    "login": "nixpkgs-ci[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/498536",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\nHi @roberth \r\nI have started learning and working with modular services, and have given life to this one. I have migrated a module I had previously worked on at ngipkgs. See: https://github.com/ngi-nix/ngipkgs/tree/main/projects/holo/services/holo\r\n\r\nStill understanding the workflow, and details of modular services. The documentation in the manual, and the examples thus far, have been really helpful. I look forward to your review for my learning, and I will pick more services to migrate:)",
+  "closed_at": "2026-06-17T12:42:49Z",
+  "closed_by": {
+   "id": 9713184,
+   "login": "wegank",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 3,
+  "created_at": "2026-03-10T13:16:03Z",
+  "draft": false,
+  "id": 4051747434,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR already has a backport to the stable release.",
+    "id": 682545212,
+    "name": "8.has: port to stable"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Linux.",
+    "id": 737642408,
+    "name": "10.rebuild-linux: 0"
+   },
+   {
+    "color": "ddeecc",
+    "default": false,
+    "description": "This PR was created by a maintainer of all the package it changes.",
+    "id": 740714914,
+    "name": "11.by: package-maintainer"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The project is part of the NGI funding grant. https://nlnet.nl/NGI/",
+    "id": 1361647463,
+    "name": "6.topic: NLNet / NGI"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "0fafaa",
+    "default": false,
+    "description": "Backport PR automatically",
+    "id": 11039388330,
+    "name": "backport release-26.05"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 498536,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/498536.diff",
+   "merged_at": "2026-06-17T12:42:49Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/498536.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 1,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "holo-daemon: 0.8.0 -> 0.9.0; init modular service",
+  "type": null,
+  "updated_at": "2026-06-20T09:49:35Z",
+  "user": {
+   "id": 84702057,
+   "login": "themadbit",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 213,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "1df414d5e6fb538df74239b89cd0142ab520ce3f",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\nHi @roberth \r\nI have started learning and working with modular services, and have given life to this one. I have migrated a module I had previously worked on at ngipkgs. See: https://github.com/ngi-nix/ngipkgs/tree/main/projects/holo/services/holo\r\n\r\nStill understanding the workflow, and details of modular services. The documentation in the manual, and the examples thus far, have been really helpful. I look forward to your review for my learning, and I will pick more services to migrate:)",
+  "changed_files": 4,
+  "closed_at": "2026-06-17T12:42:49Z",
+  "comments": 3,
+  "commits": 2,
+  "created_at": "2026-03-10T13:16:03Z",
+  "deletions": 2,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/498536.diff",
+  "draft": false,
+  "head": {
+   "label": "themadbit:holo-daemon/modular-service",
+   "ref": "holo-daemon/modular-service",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2025-03-20T05:06:09Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "themadbit/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/themadbit/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 951693721,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/themadbit/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/themadbit/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 84702057,
+     "login": "themadbit",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/themadbit/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-06-17T12:02:25Z",
+    "size": 2701181,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/themadbit/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/themadbit/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-03-10T12:43:30Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "1a35a413ac3af3711546761d05a9484f9262f4c9",
+   "user": {
+    "id": 84702057,
+    "login": "themadbit",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3378642439,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR already has a backport to the stable release.",
+    "id": 682545212,
+    "name": "8.has: port to stable"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Linux.",
+    "id": 737642408,
+    "name": "10.rebuild-linux: 0"
+   },
+   {
+    "color": "ddeecc",
+    "default": false,
+    "description": "This PR was created by a maintainer of all the package it changes.",
+    "id": 740714914,
+    "name": "11.by: package-maintainer"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The project is part of the NGI funding grant. https://nlnet.nl/NGI/",
+    "id": 1361647463,
+    "name": "6.topic: NLNet / NGI"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "0fafaa",
+    "default": false,
+    "description": "Backport PR automatically",
+    "id": 11039388330,
+    "name": "backport release-26.05"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "a4eb2da89c0651f2e8a130a4ca98c323595dad9a",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-06-17T12:42:49Z",
+  "merged_by": {
+   "id": 9713184,
+   "login": "wegank",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 498536,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/498536.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 9713184,
+    "login": "wegank",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 60861925,
+    "login": "ethancedwards8",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 3,
+  "state": "closed",
+  "title": "holo-daemon: 0.8.0 -> 0.9.0; init modular service",
+  "updated_at": "2026-06-20T09:49:35Z",
+  "user": {
+   "id": 84702057,
+   "login": "themadbit",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#498536",
+ "review_comments": [
+  {
+   "body": "You've already created one by setting `system.services.holo-daemon`.\n\nIf needed you can adjust systemd-specific stuff using `systemd.service.*` where you can define the usual NixOS systemd service options.",
+   "commit_id": "2d7c329d86f55a7c974136728bd1d7fe8535d3d9",
+   "created_at": "2026-03-10T14:05:11Z",
+   "diff_hunk": "@@ -0,0 +1,67 @@\n+{ ... }:\n+{\n+  _class = \"nixosTest\";\n+  name = \"holo-daemon-modular-service-test\";\n+\n+  nodes = {\n+    machine =\n+      { pkgs, ... }:\n+      {\n+        environment.systemPackages = [\n+          pkgs.holo-daemon\n+          pkgs.holo-cli\n+        ];\n+        system.services.holo-daemon = {\n+          imports = [ pkgs.holo-daemon.services.default ];\n+        };\n+        users.users.holo = {\n+          isSystemUser = true;\n+          group = \"holo\";\n+          home = \"/var/lib/holo\";\n+          createHome = true;\n+        };\n+        users.groups.holo = { };\n+        services.getty.autologinUser = \"root\";\n+      };\n+  };\n+\n+  testScript =\n+    { nodes, ... }:\n+    ''\n+      import time\n+\n+      start_all()\n+\n+      # holo-cli connects to the daemon at startup\n+      # features a bash-like editing functionality for interactive use\n+      # uses -c option to execute arguments as commands\n+\n+      machine.wait_for_unit(\"multi-user.target\")\n+\n+      # TODO: Add systemd service to modular service\n+      # machine.wait_for_unit(\"holo-daemon.service\")",
+   "id": 2911990620,
+   "line": null,
+   "original_commit_id": "4d26e54ff69af205369edb19476f9abfc584b657",
+   "original_line": 42,
+   "original_position": 42,
+   "original_start_line": 41,
+   "path": "nixos/tests/holo-daemon-modular.nix",
+   "position": 1,
+   "pull_request_review_id": 3922676504,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-10T14:06:23Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Shouldn't be necessary as a option default is already set.",
+   "commit_id": "2d7c329d86f55a7c974136728bd1d7fe8535d3d9",
+   "created_at": "2026-03-10T14:23:37Z",
+   "diff_hunk": "@@ -0,0 +1,138 @@\n+# Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  config,\n+  lib,\n+  ...\n+}:\n+let\n+  inherit (lib)\n+    mkPackageOption\n+    mkOption\n+    types\n+    ;\n+  cfg = config.holo-daemon;\n+  format = pkgs.formats.toml { };\n+  configFile = format.generate \"holod.toml\" cfg.settings;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.holo-daemon = {\n+    package = mkPackageOption pkgs \"holo-daemon\" { };\n+    settings = mkOption {\n+      type = types.submodule {\n+        freeformType = format.type;\n+        options = {\n+          user = mkOption {\n+            type = types.str;\n+            description = \"User for the holo daemon\";\n+            default = \"holo\";\n+          };\n+          group = mkOption {\n+            type = types.str;\n+            description = \"Group for the holo daemon\";\n+            default = \"holo\";\n+          };\n+          # Needs to be writable by @user or @group\n+          database_path = mkOption {\n+            type = types.str;\n+            description = \"Path to the holo database\";\n+            default = \"/var/run/holod/holod.db\";\n+          };\n+          logging = mkOption {\n+            type = types.submodule {\n+              freeformType = format.type;\n+              options = {\n+                journald = mkOption {\n+                  type = types.submodule {\n+                    options = {\n+                      enabled = mkOption {\n+                        type = types.bool;\n+                        description = \"Enable or disable journald logging\";\n+                        default = true;\n+                      };\n+                    };\n+                  };\n+                  description = \"Journald logging configuration\";\n+                  default = { };\n+                };\n+                file = mkOption {\n+                  type = types.submodule {\n+                    options = {\n+                      enabled = mkOption {\n+                        type = types.bool;\n+                        description = \"Enable or disable file logging\";\n+                        default = true;\n+                      };\n+                      dir = mkOption {\n+                        type = types.str;\n+                        description = \"Directory for log files\";\n+                        default = \"/var/log/\";\n+                      };\n+                      name = mkOption {\n+                        type = types.str;\n+                        description = \"Name of the log file\";\n+                        default = \"holod.log\";\n+                      };\n+                    };\n+                  };\n+                  description = \"File logging configuration\";\n+                  default = { };\n+                };\n+              };\n+            };\n+            description = \"Logging configuration for the holo daemon\";\n+            default = { };\n+          };\n+          plugins = mkOption {\n+            type = types.submodule {\n+              freeformType = format.type;\n+              options = {\n+                grpc = mkOption {\n+                  type = types.submodule {\n+                    options = {\n+                      enabled = mkOption {\n+                        type = types.bool;\n+                        description = \"Enable or disable gRPC plugin\";\n+                        default = true;\n+                      };\n+                      address = mkOption {\n+                        type = types.str;\n+                        description = \"gRPC server listening address\";\n+                        default = \"[::]:50051\";\n+                      };\n+                    };\n+                  };\n+                  description = \"gRPC plugin configuration\";\n+                  default = { };\n+                };\n+              };\n+            };\n+            description = \"Plugin configuration for the holo daemon\";\n+            default = { };\n+          };\n+        };\n+      };\n+      description = \"Configuration for the holo daemon\";\n+      default = { };\n+    };\n+  };\n+\n+  config = {\n+    holo-daemon = {\n+      settings = {\n+        user = \"holo\";\n+      };\n+    };",
+   "id": 2912119107,
+   "line": null,
+   "original_commit_id": "4d26e54ff69af205369edb19476f9abfc584b657",
+   "original_line": 129,
+   "original_position": 129,
+   "original_start_line": 125,
+   "path": "pkgs/by-name/ho/holo-daemon/service.nix",
+   "position": 1,
+   "pull_request_review_id": 3922828438,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-10T14:25:22Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes. For a clean, prod-level version, this shouldn't be here.\r\nI'll remove it during cleanup.",
+   "commit_id": "2d7c329d86f55a7c974136728bd1d7fe8535d3d9",
+   "created_at": "2026-03-10T14:44:31Z",
+   "diff_hunk": "@@ -0,0 +1,138 @@\n+# Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  config,\n+  lib,\n+  ...\n+}:\n+let\n+  inherit (lib)\n+    mkPackageOption\n+    mkOption\n+    types\n+    ;\n+  cfg = config.holo-daemon;\n+  format = pkgs.formats.toml { };\n+  configFile = format.generate \"holod.toml\" cfg.settings;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.holo-daemon = {\n+    package = mkPackageOption pkgs \"holo-daemon\" { };\n+    settings = mkOption {\n+      type = types.submodule {\n+        freeformType = format.type;\n+        options = {\n+          user = mkOption {\n+            type = types.str;\n+            description = \"User for the holo daemon\";\n+            default = \"holo\";\n+          };\n+          group = mkOption {\n+            type = types.str;\n+            description = \"Group for the holo daemon\";\n+            default = \"holo\";\n+          };\n+          # Needs to be writable by @user or @group\n+          database_path = mkOption {\n+            type = types.str;\n+            description = \"Path to the holo database\";\n+            default = \"/var/run/holod/holod.db\";\n+          };\n+          logging = mkOption {\n+            type = types.submodule {\n+              freeformType = format.type;\n+              options = {\n+                journald = mkOption {\n+                  type = types.submodule {\n+                    options = {\n+                      enabled = mkOption {\n+                        type = types.bool;\n+                        description = \"Enable or disable journald logging\";\n+                        default = true;\n+                      };\n+                    };\n+                  };\n+                  description = \"Journald logging configuration\";\n+                  default = { };\n+                };\n+                file = mkOption {\n+                  type = types.submodule {\n+                    options = {\n+                      enabled = mkOption {\n+                        type = types.bool;\n+                        description = \"Enable or disable file logging\";\n+                        default = true;\n+                      };\n+                      dir = mkOption {\n+                        type = types.str;\n+                        description = \"Directory for log files\";\n+                        default = \"/var/log/\";\n+                      };\n+                      name = mkOption {\n+                        type = types.str;\n+                        description = \"Name of the log file\";\n+                        default = \"holod.log\";\n+                      };\n+                    };\n+                  };\n+                  description = \"File logging configuration\";\n+                  default = { };\n+                };\n+              };\n+            };\n+            description = \"Logging configuration for the holo daemon\";\n+            default = { };\n+          };\n+          plugins = mkOption {\n+            type = types.submodule {\n+              freeformType = format.type;\n+              options = {\n+                grpc = mkOption {\n+                  type = types.submodule {\n+                    options = {\n+                      enabled = mkOption {\n+                        type = types.bool;\n+                        description = \"Enable or disable gRPC plugin\";\n+                        default = true;\n+                      };\n+                      address = mkOption {\n+                        type = types.str;\n+                        description = \"gRPC server listening address\";\n+                        default = \"[::]:50051\";\n+                      };\n+                    };\n+                  };\n+                  description = \"gRPC plugin configuration\";\n+                  default = { };\n+                };\n+              };\n+            };\n+            description = \"Plugin configuration for the holo daemon\";\n+            default = { };\n+          };\n+        };\n+      };\n+      description = \"Configuration for the holo daemon\";\n+      default = { };\n+    };\n+  };\n+\n+  config = {\n+    holo-daemon = {\n+      settings = {\n+        user = \"holo\";\n+      };\n+    };",
+   "id": 2912295867,
+   "in_reply_to_id": 2912119107,
+   "line": null,
+   "original_commit_id": "4d26e54ff69af205369edb19476f9abfc584b657",
+   "original_line": 129,
+   "original_position": 129,
+   "original_start_line": 125,
+   "path": "pkgs/by-name/ho/holo-daemon/service.nix",
+   "position": 1,
+   "pull_request_review_id": 3923016921,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-10T14:44:31Z",
+   "user": {
+    "id": 84702057,
+    "login": "themadbit",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "The modular service usage looks good to me",
+   "commit_id": "4d26e54ff69af205369edb19476f9abfc584b657",
+   "id": 3922676504,
+   "state": "APPROVED",
+   "submitted_at": "2026-03-10T14:06:22Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "4d26e54ff69af205369edb19476f9abfc584b657",
+   "id": 3922828438,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-10T14:25:22Z",
+   "user": {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "4d26e54ff69af205369edb19476f9abfc584b657",
+   "id": 3923016921,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-10T14:44:31Z",
+   "user": {
+    "id": 84702057,
+    "login": "themadbit",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 84702057,
+    "login": "themadbit",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-03-11T19:23:10Z",
+   "event": "renamed",
+   "id": 23482167921,
+   "rename": {
+    "from": "Holo daemon/modular service",
+    "to": "holo-daemon: 0.8.0 -> 0.9.0; init modular service"
+   }
+  },
+  {
+   "actor": {
+    "id": 9713184,
+    "login": "wegank",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "a4eb2da89c0651f2e8a130a4ca98c323595dad9a",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/a4eb2da89c0651f2e8a130a4ca98c323595dad9a",
+   "created_at": "2026-06-17T12:42:49Z",
+   "event": "merged",
+   "id": 26860554551
+  },
+  {
+   "actor": {
+    "id": 9713184,
+    "login": "wegank",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-06-17T12:42:49Z",
+   "event": "closed",
+   "id": 26860554622,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 4622652,
+    "login": "pjrm",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "f185a44a181c5db3bb55bffdb47ff00ce110636a",
+   "commit_url": "https://api.github.com/repos/pjrm/nixpkgs/commits/f185a44a181c5db3bb55bffdb47ff00ce110636a",
+   "created_at": "2026-06-18T14:58:24Z",
+   "event": "referenced",
+   "id": 26917538675
+  }
+ ]
+}

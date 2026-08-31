@@ -1,0 +1,1520 @@
+{
+ "comments": [
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/self-host-blocks-building-blocks-for-self-hosting-with-best-practices/26963/39\n",
+   "created_at": "2026-01-30T20:25:54Z",
+   "id": 3825588897,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-01-30T20:25:54Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "thanks for getting this out!\r\ni might be tending a bit toward full module system to facilitate overrides, tho for splitting out bits not requiring the round-trip at least, that distinction should not apply i think. ideally, by then, we may have found further feedback here on the implementation differences as well.\r\n",
+   "created_at": "2026-02-02T13:45:17Z",
+   "id": 3835213176,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-02T13:45:17Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That's a fair point although TBH I don't know how much we'll need to override in practice. Also, this implementation is less prone to infinite recursion and works with the documentation which IMO makes it already better.",
+   "created_at": "2026-02-02T16:57:15Z",
+   "id": 3836482335,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-02T16:57:15Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I updated the description here to show what this PR does better than the first one.",
+   "created_at": "2026-02-04T17:01:47Z",
+   "id": 3848636970,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-02-04T17:01:47Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "given the tasks listed are all marked as done, is there anything that would need to be done here before this PR can be switched from being listed as draft to ready for review?",
+   "created_at": "2026-02-06T10:52:20Z",
+   "id": 3859676726,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 1,
+    "total_count": 1
+   },
+   "updated_at": "2026-02-06T10:52:20Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@KiaraGrouwstra I don’t see anything but I don’t know how it works for RFCs. I still set it as ready.",
+   "created_at": "2026-02-06T16:32:11Z",
+   "id": 3861370628,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-02-06T16:32:11Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ThinkChaos thank you for the review.\r\n\r\n> multiple people landing on the same design is a good sign it\r\n\r\nI cannot agree more! I like the other implementation but the shortcomings feel to me like show stoppers. If they can be solved, that would be great. I tried at the time when creating the other PR but I got to the point where I needed to modify the module system itself. But I didn't know its inner workings enough to even know what I was looking for.\r\n\r\nTo be bluntly honest, I don't particularly care about a specific implementation. I care much more about getting the idea through with some properties I find important and also getting momentum going in the community.\r\n\r\n>  In general I think it makes sense to have the contracts promise the least possible\r\n\r\nFully agreed too. From my experience writing Golang, that was one of the best properties of interfaces and the reason why I didn't want to introduce too many options in contracts either.\r\n\r\n> Are these APIs going to be frozen as soon as this PR is merged?\r\n\r\nI would discourage freezing them. At least not until we have a handful of contracts with a handful of consumer and provider modules each.\r\n\r\n> Also high level, since contracts are for NixOS behavior, maye only the generic code should be in lib, and the contracts themselves all be defined in NixOS modules?\r\n\r\nSure, that makes sense.",
+   "created_at": "2026-02-06T19:08:30Z",
+   "id": 3862116921,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-06T19:08:30Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "on the secrets contract, i'm also sort of wondering still if that might go well with say `systemd`'s `LoadCredential` (also used in e.g. [`systemd-vaultd`](https://github.com/numtide/systemd-vaultd) / [`systemd-openbaod`](https://git.lix.systems/the-distro/systemd-openbao))",
+   "created_at": "2026-02-06T19:13:09Z",
+   "id": 3862136410,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-06T19:13:09Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "having compared the further with the original PR, i no longer so much feel so reluctant on this approach anymore.\r\n\r\nfor documentation purposes though, it would be good to get an example of the type of cases where this approach is more robust to user errors than the original, and what kind of error messages one might get here for those issues compared to in the original.\r\n",
+   "created_at": "2026-03-03T14:41:42Z",
+   "id": 3991529482,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-03T14:41:59Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This PR is replaced by https://github.com/NixOS/nixpkgs/pull/522054\r\n\r\nSee that PR’s description for why it is better than this one.",
+   "created_at": "2026-05-20T21:29:14Z",
+   "id": 4502796412,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-20T21:29:14Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/485453",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Second draft PR for showing implementation of the https://github.com/NixOS/rfcs/pull/189 as well as 2 contracts example. I did not implement here the streaming backup service because it felt redundant and I rather had this PR published ASAP.\r\n\r\nThis PR is a sibling to the earlier #432529 PR. It is also incompatible with that PR. I personally prefer this implementation which is much closer to what I have in my SelfHostBlocks project. It is simpler to understand, does not lead to infinite recursions at the slightest mistake and the documentation just fine. I actually followed how modular services did it.\r\n\r\nI purposely split the PR into similar commits as the #432529 one to allow easier apples to apples comparison.\r\n\r\nWhat it does better than the first PR is:\r\n- Documentation can be built just fine. I copied screenshots here under so you can have a look.\r\n- When the user messes up, the error message is _not_ an infinite recursion. It’s not to say the error message is great but it’s better than infinite recursion.\r\n- The default values set from a consumer can be accessed from within the global config. This was not the case is the first PR.\r\n\r\n   For example take this commit in the first PR https://github.com/NixOS/nixpkgs/pull/432529/changes/80ec05ca39cadf3ea9da10afcf64205b35e7828d where we are required to define the default values from within the config of the submodule. The reason is that otherwise the values of the input attrset are not accessible. It is not at all the style used in nixpkgs so it feels awkward.\r\n\r\n   Vs the same commit in this PR https://github.com/NixOS/nixpkgs/pull/485453/changes/c6776a6f2ae90b3ece047b9a071071d9f04b2c86?w=1 which is in the normal style of nixpkgs.\r\n\r\nCommands that work in the PR are:\r\n\r\n- [x] build manual: (cd nixos/; nix-build release.nix -A manual.x86_64-linux)\r\n- [x] nix-build -A nixosTests.contracts-filebackup-restic\r\n- [x] nix-build -A nixosTests.contracts-secrets-hardcoded-secret\r\n- [x] nix-build -A nixosTests.restic\r\n- [x] nix-build -A nixosTests.stash\r\n\r\n<details>\r\n<summary>Here are screenshots from the manual</summary>\r\n\r\n**contracts**\r\n<img width=\"1194\" height=\"1146\" alt=\"image\" src=\"https://github.com/user-attachments/assets/497818f7-d935-4101-9201-9bff1a51d1c4\" />\r\n<img width=\"1179\" height=\"1073\" alt=\"image\" src=\"https://github.com/user-attachments/assets/4a79f51f-b02e-4a44-a51f-4eefd41a1d72\" />\r\n<img width=\"1092\" height=\"966\" alt=\"image\" src=\"https://github.com/user-attachments/assets/fba13712-c76d-4ae6-8e1b-72a739d42d9b\" />\r\n<img width=\"1189\" height=\"1142\" alt=\"image\" src=\"https://github.com/user-attachments/assets/ab9fe54f-5a77-42b6-85c0-b42a60fe6b3e\" />\r\n**services.restic.fileBackups**\r\n<img width=\"1194\" height=\"1204\" alt=\"image\" src=\"https://github.com/user-attachments/assets/b017675a-5a72-4cf4-87c4-4a426c7dedf6\" />\r\n<img width=\"1191\" height=\"729\" alt=\"image\" src=\"https://github.com/user-attachments/assets/4e49ff5a-d587-4c69-a5ef-4dc869c1866e\" />\r\n**services.nextcloud.fileBackup**\r\n<img width=\"1195\" height=\"1001\" alt=\"image\" src=\"https://github.com/user-attachments/assets/067cb7e1-0e92-4392-91a0-4fcb4e33c211\" />\r\n<img width=\"1179\" height=\"1086\" alt=\"image\" src=\"https://github.com/user-attachments/assets/86fe508e-6e84-4632-8557-3c124a0d7b4a\" />\r\n<img width=\"1010\" height=\"547\" alt=\"image\" src=\"https://github.com/user-attachments/assets/a7d33e64-10cf-4765-9a8c-55e15f6c6b79\" />\r\n\r\n</details>\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-05-20T21:29:17Z",
+  "closed_by": {
+   "id": 1044950,
+   "login": "ibizaman",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 10,
+  "created_at": "2026-01-30T20:04:46Z",
+  "draft": false,
+  "id": 3877182809,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Darwin.",
+    "id": 1955058051,
+    "name": "10.rebuild-darwin: 1"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 485453,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/485453.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/485453.patch"
+  },
+  "reactions": {
+   "+1": 10,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 1,
+   "heart": 4,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 4,
+   "total_count": 19
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "Contracts rfc functions",
+  "type": null,
+  "updated_at": "2026-05-20T21:29:30Z",
+  "user": {
+   "id": 1044950,
+   "login": "ibizaman",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 1171,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21132,
+    "open_issues_count": 21132,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:37:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "038e18f1bd7300cd438a04749dd88d3bc47ad8ca",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Second draft PR for showing implementation of the https://github.com/NixOS/rfcs/pull/189 as well as 2 contracts example. I did not implement here the streaming backup service because it felt redundant and I rather had this PR published ASAP.\r\n\r\nThis PR is a sibling to the earlier #432529 PR. It is also incompatible with that PR. I personally prefer this implementation which is much closer to what I have in my SelfHostBlocks project. It is simpler to understand, does not lead to infinite recursions at the slightest mistake and the documentation just fine. I actually followed how modular services did it.\r\n\r\nI purposely split the PR into similar commits as the #432529 one to allow easier apples to apples comparison.\r\n\r\nWhat it does better than the first PR is:\r\n- Documentation can be built just fine. I copied screenshots here under so you can have a look.\r\n- When the user messes up, the error message is _not_ an infinite recursion. It’s not to say the error message is great but it’s better than infinite recursion.\r\n- The default values set from a consumer can be accessed from within the global config. This was not the case is the first PR.\r\n\r\n   For example take this commit in the first PR https://github.com/NixOS/nixpkgs/pull/432529/changes/80ec05ca39cadf3ea9da10afcf64205b35e7828d where we are required to define the default values from within the config of the submodule. The reason is that otherwise the values of the input attrset are not accessible. It is not at all the style used in nixpkgs so it feels awkward.\r\n\r\n   Vs the same commit in this PR https://github.com/NixOS/nixpkgs/pull/485453/changes/c6776a6f2ae90b3ece047b9a071071d9f04b2c86?w=1 which is in the normal style of nixpkgs.\r\n\r\nCommands that work in the PR are:\r\n\r\n- [x] build manual: (cd nixos/; nix-build release.nix -A manual.x86_64-linux)\r\n- [x] nix-build -A nixosTests.contracts-filebackup-restic\r\n- [x] nix-build -A nixosTests.contracts-secrets-hardcoded-secret\r\n- [x] nix-build -A nixosTests.restic\r\n- [x] nix-build -A nixosTests.stash\r\n\r\n<details>\r\n<summary>Here are screenshots from the manual</summary>\r\n\r\n**contracts**\r\n<img width=\"1194\" height=\"1146\" alt=\"image\" src=\"https://github.com/user-attachments/assets/497818f7-d935-4101-9201-9bff1a51d1c4\" />\r\n<img width=\"1179\" height=\"1073\" alt=\"image\" src=\"https://github.com/user-attachments/assets/4a79f51f-b02e-4a44-a51f-4eefd41a1d72\" />\r\n<img width=\"1092\" height=\"966\" alt=\"image\" src=\"https://github.com/user-attachments/assets/fba13712-c76d-4ae6-8e1b-72a739d42d9b\" />\r\n<img width=\"1189\" height=\"1142\" alt=\"image\" src=\"https://github.com/user-attachments/assets/ab9fe54f-5a77-42b6-85c0-b42a60fe6b3e\" />\r\n**services.restic.fileBackups**\r\n<img width=\"1194\" height=\"1204\" alt=\"image\" src=\"https://github.com/user-attachments/assets/b017675a-5a72-4cf4-87c4-4a426c7dedf6\" />\r\n<img width=\"1191\" height=\"729\" alt=\"image\" src=\"https://github.com/user-attachments/assets/4e49ff5a-d587-4c69-a5ef-4dc869c1866e\" />\r\n**services.nextcloud.fileBackup**\r\n<img width=\"1195\" height=\"1001\" alt=\"image\" src=\"https://github.com/user-attachments/assets/067cb7e1-0e92-4392-91a0-4fcb4e33c211\" />\r\n<img width=\"1179\" height=\"1086\" alt=\"image\" src=\"https://github.com/user-attachments/assets/86fe508e-6e84-4632-8557-3c124a0d7b4a\" />\r\n<img width=\"1010\" height=\"547\" alt=\"image\" src=\"https://github.com/user-attachments/assets/a7d33e64-10cf-4765-9a8c-55e15f6c6b79\" />\r\n\r\n</details>\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 17,
+  "closed_at": "2026-05-20T21:29:17Z",
+  "comments": 10,
+  "commits": 13,
+  "created_at": "2026-01-30T20:04:46Z",
+  "deletions": 222,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/485453.diff",
+  "draft": false,
+  "head": {
+   "label": "ibizaman:contracts-rfc-functions",
+   "ref": "contracts-rfc-functions",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2022-05-23T06:55:50Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "ibizaman/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/ibizaman/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 495292405,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/ibizaman/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/ibizaman/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 1044950,
+     "login": "ibizaman",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/ibizaman/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-20T17:42:06Z",
+    "size": 3103279,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/ibizaman/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/ibizaman/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2024-02-06T12:57:14Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3229136722,
+  "labels": [
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Darwin.",
+    "id": 1955058051,
+    "name": "10.rebuild-darwin: 1"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 485453,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/485453.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 610962,
+    "login": "aforemny",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 50398876,
+    "login": "hsjobeki",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 20,
+  "state": "closed",
+  "title": "Contracts rfc functions",
+  "updated_at": "2026-05-20T21:29:30Z",
+  "user": {
+   "id": 1044950,
+   "login": "ibizaman",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#485453",
+ "review_comments": [
+  {
+   "body": "just noticed this looks different from the original.\nwithout having checked the content too much yet, could you comment on this difference maybe?\nlike, is there a reason this would work here yet not in the original?\n",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "created_at": "2026-02-02T17:39:38Z",
+   "diff_hunk": "@@ -0,0 +1,100 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+let\n+  cfg = config.testing.hardcoded-secret;\n+\n+  inherit (lib) mapAttrs' mkOption nameValuePair;\n+  inherit (lib.types)\n+    attrsOf\n+    nullOr\n+    str\n+    submodule\n+    ;\n+  inherit (pkgs) writeText;\n+in\n+{\n+  options.testing.hardcoded-secret = mkOption {\n+    default = { };\n+    description = ''\n+      Hardcoded secrets. These should only be used in tests.\n+    '';\n+    example = lib.literalExpression ''\n+      {\n+        mySecret = {\n+          input = {\n+            user = \"me\";\n+            mode = \"0400\";\n+            restartUnits = [ \"myservice.service\" ];\n+          };\n+          settings.content = \"My Secret\";\n+        };\n+      }\n+    '';\n+    type = attrsOf (\n+      submodule (\n+        { name, ... }:\n+        {\n+          options = lib.contracts.secrets.mkProvider {\n+            providerOptions = mkOption {\n+              description = ''\n+                Settings specific to the hardcoded secrets module.\n+\n+                Define either `content` or `source`.\n+              '';\n+\n+              type = submodule {\n+                options = {\n+                  content = mkOption {\n+                    type = nullOr str;",
+   "id": 2755513677,
+   "line": null,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 52,
+   "original_position": 52,
+   "original_start_line": null,
+   "path": "nixos/modules/testing/hardcoded-secret.nix",
+   "position": 1,
+   "pull_request_review_id": 3740967034,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-02-02T17:39:38Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Ah I think that's because in the previous PR, I stripped down the module to avoid adding unnecessary details. I just forgot to do it here 😅 ",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "created_at": "2026-02-02T19:46:59Z",
+   "diff_hunk": "@@ -0,0 +1,100 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+let\n+  cfg = config.testing.hardcoded-secret;\n+\n+  inherit (lib) mapAttrs' mkOption nameValuePair;\n+  inherit (lib.types)\n+    attrsOf\n+    nullOr\n+    str\n+    submodule\n+    ;\n+  inherit (pkgs) writeText;\n+in\n+{\n+  options.testing.hardcoded-secret = mkOption {\n+    default = { };\n+    description = ''\n+      Hardcoded secrets. These should only be used in tests.\n+    '';\n+    example = lib.literalExpression ''\n+      {\n+        mySecret = {\n+          input = {\n+            user = \"me\";\n+            mode = \"0400\";\n+            restartUnits = [ \"myservice.service\" ];\n+          };\n+          settings.content = \"My Secret\";\n+        };\n+      }\n+    '';\n+    type = attrsOf (\n+      submodule (\n+        { name, ... }:\n+        {\n+          options = lib.contracts.secrets.mkProvider {\n+            providerOptions = mkOption {\n+              description = ''\n+                Settings specific to the hardcoded secrets module.\n+\n+                Define either `content` or `source`.\n+              '';\n+\n+              type = submodule {\n+                options = {\n+                  content = mkOption {\n+                    type = nullOr str;",
+   "id": 2755924202,
+   "in_reply_to_id": 2755513677,
+   "line": null,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 52,
+   "original_position": 52,
+   "original_start_line": null,
+   "path": "nixos/modules/testing/hardcoded-secret.nix",
+   "position": 1,
+   "pull_request_review_id": 3741470283,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-02-02T19:46:59Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "ah, guess i got maybe the wrong one - i'd wondered about equivalents here of challenge sub-thread https://github.com/NixOS/nixpkgs/pull/432529/changes#r2328714550",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "created_at": "2026-02-02T19:56:54Z",
+   "diff_hunk": "@@ -0,0 +1,100 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+let\n+  cfg = config.testing.hardcoded-secret;\n+\n+  inherit (lib) mapAttrs' mkOption nameValuePair;\n+  inherit (lib.types)\n+    attrsOf\n+    nullOr\n+    str\n+    submodule\n+    ;\n+  inherit (pkgs) writeText;\n+in\n+{\n+  options.testing.hardcoded-secret = mkOption {\n+    default = { };\n+    description = ''\n+      Hardcoded secrets. These should only be used in tests.\n+    '';\n+    example = lib.literalExpression ''\n+      {\n+        mySecret = {\n+          input = {\n+            user = \"me\";\n+            mode = \"0400\";\n+            restartUnits = [ \"myservice.service\" ];\n+          };\n+          settings.content = \"My Secret\";\n+        };\n+      }\n+    '';\n+    type = attrsOf (\n+      submodule (\n+        { name, ... }:\n+        {\n+          options = lib.contracts.secrets.mkProvider {\n+            providerOptions = mkOption {\n+              description = ''\n+                Settings specific to the hardcoded secrets module.\n+\n+                Define either `content` or `source`.\n+              '';\n+\n+              type = submodule {\n+                options = {\n+                  content = mkOption {\n+                    type = nullOr str;",
+   "id": 2755950901,
+   "in_reply_to_id": 2755513677,
+   "line": null,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 52,
+   "original_position": 52,
+   "original_start_line": null,
+   "path": "nixos/modules/testing/hardcoded-secret.nix",
+   "position": 1,
+   "pull_request_review_id": 3741500886,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-02-02T19:56:54Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think it'd be easier to use, if `mkConsumer` and `mkProvider` returned a module directly:\n```nix\nlib.types.submodule (lib.contracts.<contracts>.mkConsumer { ... })\n```\n\nIt'll also make it natural to do things like `imports = [ (mkConsumer { ... }) ]`, to extend it with additional options.",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "created_at": "2026-02-05T02:40:45Z",
+   "diff_hunk": "@@ -0,0 +1,82 @@\n+/**\n+  Renders documentation for contracts.\n+  For inclusion into documentation.nixos.extraModules.\n+*/\n+{ lib, pkgs, ... }:\n+let\n+  /**\n+    Causes a contracts docs to be rendered.\n+    This is an intermediate solution until we have \"native\" contracts docs in some nicer form.\n+  */\n+  fakeSubmodule =\n+    module:\n+    lib.mkOption {\n+      type = lib.types.submodule {\n+        options = module.allOptions;\n+      };\n+      inherit (module) description;\n+    };\n+\n+  contractsModule = {\n+    _file = \"${__curPos.file}:${toString __curPos.line}\";\n+    options = {\n+      contracts = lib.mkOption {\n+        description = ''\n+          All [contracts](https://nixos.org/manual/nixos/unstable/#contracts) are found here.\n+\n+          Create a consumer for a contract `<contract>` with:\n+\n+          ```nix\n+          {\n+            options.<consumer>.<option> = lib.mkOption {\n+              type = lib.types.submodule {\n+                options = lib.contracts.<contracts>.mkConsumer {\n+                  // Fill out consumer option definitions\n+                };\n+              };",
+   "id": 2766797650,
+   "line": null,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 36,
+   "original_position": 36,
+   "original_start_line": 32,
+   "path": "nixos/modules/misc/documentation/contracts.nix",
+   "position": 1,
+   "pull_request_review_id": 3754220205,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T17:51:09Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This loses the module's filepath, which'll lead to confusing messages for errors generated from within the contract's code.\n\nAlong with my other suggestion of changing `mkConsumer` & `mkProvider` to return modules, you could use `lib.setDefaultModuleLocation` to let the module system know where the code is from, which will then be used for error messages.",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-02-05T02:44:06Z",
+   "diff_hunk": "@@ -0,0 +1,58 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs;\n+\n+  mkContractFunctions =\n+    {\n+      mkConsumerOptions,\n+      mkProviderOptions,\n+    }:\n+    {\n+      mkConsumer = inputDefaults: {\n+        input = mkConsumerOptions inputDefaults;\n+\n+        output = mkProviderOptions { } // {\n+          visible = \"shallow\";\n+        };\n+      };\n+\n+      mkProvider =\n+        {\n+          outputDefaults ? { },\n+          providerOptions ? { },\n+        }:\n+        {\n+          input = mkConsumerOptions { } // {\n+            visible = \"shallow\";\n+          };\n+        }\n+        // optionalAttrs (outputDefaults != { }) {\n+          output = mkProviderOptions outputDefaults;\n+        }\n+        // optionalAttrs (providerOptions != { }) {\n+          inherit providerOptions;\n+        };\n+\n+      # Used for documentation\n+      allOptions = {\n+        input = mkConsumerOptions { };\n+        output = mkProviderOptions { };\n+      };\n+    };\n+\n+  importContract =\n+    module:\n+    let\n+      importedModule = import module { inherit lib; };\n+    in\n+    mkContractFunctions {\n+      inherit (importedModule) mkConsumerOptions mkProviderOptions;\n+    }\n+    // {\n+      inherit (importedModule) description behaviorTest;\n+    };",
+   "id": 2766803121,
+   "line": 57,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 53,
+   "original_position": 53,
+   "original_start_line": 43,
+   "path": "lib/contracts/default.nix",
+   "position": 57,
+   "pull_request_review_id": 3754220205,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 47,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T17:51:09Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "You should be able to just do `default = { };` and it'll work because it uses each sub-option's default!",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "created_at": "2026-02-05T02:50:53Z",
+   "diff_hunk": "@@ -0,0 +1,104 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs mkOption;\n+  inherit (lib.types) listOf submodule str;\n+in\n+{\n+  mkConsumerOptions =\n+    {\n+      mode ? \"0400\",\n+      owner ? \"root\",\n+      group ? \"root\",\n+      restartUnits ? [ ],\n+    }:\n+    mkOption {\n+      description = ''\n+        Consumer part of the contract for secrets.\n+      '';\n+\n+      default = {\n+        inherit\n+          mode\n+          owner\n+          group\n+          restartUnits\n+          ;\n+      };",
+   "id": 2766817849,
+   "line": null,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 26,
+   "original_position": 26,
+   "original_start_line": 19,
+   "path": "lib/contracts/secrets.nix",
+   "position": 1,
+   "pull_request_review_id": 3754220205,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T17:51:09Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I have a custom secrets solution, and it only decrypts secrets when the unit using them is actually running, so \"restart\" doesn't really make sense in that context.  \nI'd propose a more generic name like \"dependentUnits\" or something along those lines. ",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-02-06T17:44:31Z",
+   "diff_hunk": "@@ -0,0 +1,104 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs mkOption;\n+  inherit (lib.types) listOf submodule str;\n+in\n+{\n+  mkConsumerOptions =\n+    {\n+      mode ? \"0400\",\n+      owner ? \"root\",\n+      group ? \"root\",\n+      restartUnits ? [ ],\n+    }:\n+    mkOption {\n+      description = ''\n+        Consumer part of the contract for secrets.\n+      '';\n+\n+      default = {\n+        inherit\n+          mode\n+          owner\n+          group\n+          restartUnits\n+          ;\n+      };\n+\n+      type = submodule {\n+        options = {\n+          mode = mkOption {\n+            description = ''\n+              Mode the secret file must have.\n+            '';\n+            type = str;\n+            default = mode;\n+          };\n+\n+          owner = mkOption {\n+            description = ''\n+              Linux user that must own the secret file.\n+            '';\n+            type = str;\n+            default = owner;\n+          };\n+\n+          group = mkOption {\n+            description = ''\n+              Linux group that must own the secret file.\n+            '';\n+            type = str;\n+            default = group;\n+          };\n+\n+          restartUnits = mkOption {\n+            description = ''\n+              Systemd units to restart after the secret is updated.\n+            '';\n+            type = listOf str;\n+            default = restartUnits;\n+          };",
+   "id": 2775317597,
+   "line": 53,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 60,
+   "original_position": 60,
+   "original_start_line": 54,
+   "path": "lib/contracts/secrets.nix",
+   "position": 53,
+   "pull_request_review_id": 3754220205,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": 47,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T17:51:09Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Same here, \"This path will exist after deploying to a target host\" sounds like to large of a guarantee. I think we should constrain it to something like \"will exist when the dependent units run\".",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-02-06T17:46:05Z",
+   "diff_hunk": "@@ -0,0 +1,104 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs mkOption;\n+  inherit (lib.types) listOf submodule str;\n+in\n+{\n+  mkConsumerOptions =\n+    {\n+      mode ? \"0400\",\n+      owner ? \"root\",\n+      group ? \"root\",\n+      restartUnits ? [ ],\n+    }:\n+    mkOption {\n+      description = ''\n+        Consumer part of the contract for secrets.\n+      '';\n+\n+      default = {\n+        inherit\n+          mode\n+          owner\n+          group\n+          restartUnits\n+          ;\n+      };\n+\n+      type = submodule {\n+        options = {\n+          mode = mkOption {\n+            description = ''\n+              Mode the secret file must have.\n+            '';\n+            type = str;\n+            default = mode;\n+          };\n+\n+          owner = mkOption {\n+            description = ''\n+              Linux user that must own the secret file.\n+            '';\n+            type = str;\n+            default = owner;\n+          };\n+\n+          group = mkOption {\n+            description = ''\n+              Linux group that must own the secret file.\n+            '';\n+            type = str;\n+            default = group;\n+          };\n+\n+          restartUnits = mkOption {\n+            description = ''\n+              Systemd units to restart after the secret is updated.\n+            '';\n+            type = listOf str;\n+            default = restartUnits;\n+          };\n+        };\n+      };\n+    };\n+\n+  mkProviderOptions =\n+    {\n+      path ? null,\n+    }:\n+    mkOption {\n+      description = ''\n+        Providers part of the contract for secrets.\n+      '';\n+      default = optionalAttrs (path != null) {\n+        inherit path;\n+      };\n+      type = submodule {\n+        options = {\n+          path = mkOption (\n+            {\n+              type = lib.types.path;\n+              description = ''\n+                Path to the file containing the secret generated out of band.\n+\n+                This path will exist after deploying to a target host,\n+                it is not available through the nix store.",
+   "id": 2775322870,
+   "line": 78,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 85,
+   "original_position": 85,
+   "original_start_line": 84,
+   "path": "lib/contracts/secrets.nix",
+   "position": 78,
+   "pull_request_review_id": 3754220205,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 77,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T17:51:09Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Actually, I think we should be more generic. Maybe something that doesn't use systemd units depend on the secret. This should probably list a series of commands.\r\n\r\nOr could this be a good use case for overriding contracts? There could be a plain contract without this option, another one for systemd units and another one with a list of commands to run?",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-02-06T19:36:16Z",
+   "diff_hunk": "@@ -0,0 +1,104 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs mkOption;\n+  inherit (lib.types) listOf submodule str;\n+in\n+{\n+  mkConsumerOptions =\n+    {\n+      mode ? \"0400\",\n+      owner ? \"root\",\n+      group ? \"root\",\n+      restartUnits ? [ ],\n+    }:\n+    mkOption {\n+      description = ''\n+        Consumer part of the contract for secrets.\n+      '';\n+\n+      default = {\n+        inherit\n+          mode\n+          owner\n+          group\n+          restartUnits\n+          ;\n+      };\n+\n+      type = submodule {\n+        options = {\n+          mode = mkOption {\n+            description = ''\n+              Mode the secret file must have.\n+            '';\n+            type = str;\n+            default = mode;\n+          };\n+\n+          owner = mkOption {\n+            description = ''\n+              Linux user that must own the secret file.\n+            '';\n+            type = str;\n+            default = owner;\n+          };\n+\n+          group = mkOption {\n+            description = ''\n+              Linux group that must own the secret file.\n+            '';\n+            type = str;\n+            default = group;\n+          };\n+\n+          restartUnits = mkOption {\n+            description = ''\n+              Systemd units to restart after the secret is updated.\n+            '';\n+            type = listOf str;\n+            default = restartUnits;\n+          };\n+        };\n+      };\n+    };\n+\n+  mkProviderOptions =\n+    {\n+      path ? null,\n+    }:\n+    mkOption {\n+      description = ''\n+        Providers part of the contract for secrets.\n+      '';\n+      default = optionalAttrs (path != null) {\n+        inherit path;\n+      };\n+      type = submodule {\n+        options = {\n+          path = mkOption (\n+            {\n+              type = lib.types.path;\n+              description = ''\n+                Path to the file containing the secret generated out of band.\n+\n+                This path will exist after deploying to a target host,\n+                it is not available through the nix store.",
+   "id": 2775709498,
+   "in_reply_to_id": 2775322870,
+   "line": 78,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 85,
+   "original_position": 85,
+   "original_start_line": 84,
+   "path": "lib/contracts/secrets.nix",
+   "position": 78,
+   "pull_request_review_id": 3764808507,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 77,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T19:36:17Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I tried setting an option wrong, specifically setting [this one](https://github.com/NixOS/nixpkgs/pull/485453/changes/45bcadf48203f122e04be3a2ae54da66d78b2d61#diff-ef033c3c9dfe634dd4478a7eba6ca454fc5ef267a83475c85489eba321fb3f4aR73) to `true` instead of a path to a file and got:\r\n\r\n```\r\n       … while evaluating the option `nodes.machine.testing.hardcoded-secret.mysecret.output.path':\r\n\r\n       (stack trace truncated; use '--show-trace' to show the full, detailed trace)\r\n\r\n       error: A definition for option `nodes.machine.testing.hardcoded-secret.mysecret.output.path' is not of type `string'. Definition values:\r\n       - In `nixpkgs/nixos/modules/testing/hardcoded-secret.nix': true\r\n```\r\n\r\nIt doesn't seem too bad to me. TBH after checking in nixpkgs I still have no idea how to use `setDefaultModuleLocation`.",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-02-06T20:17:41Z",
+   "diff_hunk": "@@ -0,0 +1,58 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs;\n+\n+  mkContractFunctions =\n+    {\n+      mkConsumerOptions,\n+      mkProviderOptions,\n+    }:\n+    {\n+      mkConsumer = inputDefaults: {\n+        input = mkConsumerOptions inputDefaults;\n+\n+        output = mkProviderOptions { } // {\n+          visible = \"shallow\";\n+        };\n+      };\n+\n+      mkProvider =\n+        {\n+          outputDefaults ? { },\n+          providerOptions ? { },\n+        }:\n+        {\n+          input = mkConsumerOptions { } // {\n+            visible = \"shallow\";\n+          };\n+        }\n+        // optionalAttrs (outputDefaults != { }) {\n+          output = mkProviderOptions outputDefaults;\n+        }\n+        // optionalAttrs (providerOptions != { }) {\n+          inherit providerOptions;\n+        };\n+\n+      # Used for documentation\n+      allOptions = {\n+        input = mkConsumerOptions { };\n+        output = mkProviderOptions { };\n+      };\n+    };\n+\n+  importContract =\n+    module:\n+    let\n+      importedModule = import module { inherit lib; };\n+    in\n+    mkContractFunctions {\n+      inherit (importedModule) mkConsumerOptions mkProviderOptions;\n+    }\n+    // {\n+      inherit (importedModule) description behaviorTest;\n+    };",
+   "id": 2775855907,
+   "in_reply_to_id": 2766803121,
+   "line": 57,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 53,
+   "original_position": 53,
+   "original_start_line": 43,
+   "path": "lib/contracts/default.nix",
+   "position": 57,
+   "pull_request_review_id": 3764959825,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 47,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T20:17:42Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Agreed, I did that in the [latest commit](https://github.com/NixOS/nixpkgs/compare/0f2e463b3eef46c609b67fa08d383ea5b6be7971..3fb7107833d554c3884c449b040f245b5d0aa10b).",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "created_at": "2026-02-06T20:18:25Z",
+   "diff_hunk": "@@ -0,0 +1,82 @@\n+/**\n+  Renders documentation for contracts.\n+  For inclusion into documentation.nixos.extraModules.\n+*/\n+{ lib, pkgs, ... }:\n+let\n+  /**\n+    Causes a contracts docs to be rendered.\n+    This is an intermediate solution until we have \"native\" contracts docs in some nicer form.\n+  */\n+  fakeSubmodule =\n+    module:\n+    lib.mkOption {\n+      type = lib.types.submodule {\n+        options = module.allOptions;\n+      };\n+      inherit (module) description;\n+    };\n+\n+  contractsModule = {\n+    _file = \"${__curPos.file}:${toString __curPos.line}\";\n+    options = {\n+      contracts = lib.mkOption {\n+        description = ''\n+          All [contracts](https://nixos.org/manual/nixos/unstable/#contracts) are found here.\n+\n+          Create a consumer for a contract `<contract>` with:\n+\n+          ```nix\n+          {\n+            options.<consumer>.<option> = lib.mkOption {\n+              type = lib.types.submodule {\n+                options = lib.contracts.<contracts>.mkConsumer {\n+                  // Fill out consumer option definitions\n+                };\n+              };",
+   "id": 2775858096,
+   "in_reply_to_id": 2766797650,
+   "line": null,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 36,
+   "original_position": 36,
+   "original_start_line": 32,
+   "path": "nixos/modules/misc/documentation/contracts.nix",
+   "position": 1,
+   "pull_request_review_id": 3764962364,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T20:18:26Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Indeed. I even had done that for the fileBackup contract already. I changed that in the [last commit](https://github.com/NixOS/nixpkgs/compare/0f2e463b3eef46c609b67fa08d383ea5b6be7971..3fb7107833d554c3884c449b040f245b5d0aa10b).",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "created_at": "2026-02-06T20:19:34Z",
+   "diff_hunk": "@@ -0,0 +1,104 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs mkOption;\n+  inherit (lib.types) listOf submodule str;\n+in\n+{\n+  mkConsumerOptions =\n+    {\n+      mode ? \"0400\",\n+      owner ? \"root\",\n+      group ? \"root\",\n+      restartUnits ? [ ],\n+    }:\n+    mkOption {\n+      description = ''\n+        Consumer part of the contract for secrets.\n+      '';\n+\n+      default = {\n+        inherit\n+          mode\n+          owner\n+          group\n+          restartUnits\n+          ;\n+      };",
+   "id": 2775862974,
+   "in_reply_to_id": 2766817849,
+   "line": null,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 26,
+   "original_position": 26,
+   "original_start_line": 19,
+   "path": "lib/contracts/secrets.nix",
+   "position": 1,
+   "pull_request_review_id": 3764967674,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T20:19:34Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I mean if the contract itself has a bug, say during development. Not the user code.  \r\nSo for instance I added `config.dummy = \"plz-fail\";` to the secret contract's `mkConsumerOptions` submodule type ([here](https://github.com/ibizaman/nixpkgs/blob/3fb7107833d554c3884c449b040f245b5d0aa10b/lib/contracts/secrets.nix#L22)), and got this error:\r\n```plain\r\nerror: The option `nodes.machine.testing.hardcoded-secret.mysecret.input.dummy' does not exist. Definition values:\r\n- In `/nix/store/pcsb7z45hwi5y5yhl91slz1443p3i78f-source/nixos/modules/testing/hardcoded-secret.nix': \"plz-fail\"\r\n```\r\n\r\nIt confusingly points to `nixos/modules/testing/hardcoded-secret.nix` since that's what the closest `_file` attr contains. When the error was actually in `lib/contracts/secrets.nix`.",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-02-06T21:53:47Z",
+   "diff_hunk": "@@ -0,0 +1,58 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs;\n+\n+  mkContractFunctions =\n+    {\n+      mkConsumerOptions,\n+      mkProviderOptions,\n+    }:\n+    {\n+      mkConsumer = inputDefaults: {\n+        input = mkConsumerOptions inputDefaults;\n+\n+        output = mkProviderOptions { } // {\n+          visible = \"shallow\";\n+        };\n+      };\n+\n+      mkProvider =\n+        {\n+          outputDefaults ? { },\n+          providerOptions ? { },\n+        }:\n+        {\n+          input = mkConsumerOptions { } // {\n+            visible = \"shallow\";\n+          };\n+        }\n+        // optionalAttrs (outputDefaults != { }) {\n+          output = mkProviderOptions outputDefaults;\n+        }\n+        // optionalAttrs (providerOptions != { }) {\n+          inherit providerOptions;\n+        };\n+\n+      # Used for documentation\n+      allOptions = {\n+        input = mkConsumerOptions { };\n+        output = mkProviderOptions { };\n+      };\n+    };\n+\n+  importContract =\n+    module:\n+    let\n+      importedModule = import module { inherit lib; };\n+    in\n+    mkContractFunctions {\n+      inherit (importedModule) mkConsumerOptions mkProviderOptions;\n+    }\n+    // {\n+      inherit (importedModule) description behaviorTest;\n+    };",
+   "id": 2776157201,
+   "in_reply_to_id": 2766803121,
+   "line": 57,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 53,
+   "original_position": 53,
+   "original_start_line": 43,
+   "path": "lib/contracts/default.nix",
+   "position": 57,
+   "pull_request_review_id": 3765264917,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 47,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T21:53:47Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n      modulePath = module;\n      inherit (importedModule) mkConsumerOptions mkProviderOptions;\n```",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-02-06T22:02:54Z",
+   "diff_hunk": "@@ -0,0 +1,62 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs;\n+\n+  mkContractFunctions =\n+    {\n+      mkConsumerOptions,\n+      mkProviderOptions,\n+    }:\n+    {\n+      mkConsumer = inputDefaults: {\n+        options = {\n+          input = mkConsumerOptions inputDefaults;\n+\n+          output = mkProviderOptions { } // {\n+            visible = \"shallow\";\n+          };\n+        };\n+      };\n+\n+      mkProvider =\n+        {\n+          outputDefaults ? { },\n+          providerOptions ? { },\n+        }:\n+        {\n+          options = {\n+            input = mkConsumerOptions { } // {\n+              visible = \"shallow\";\n+            };\n+          }\n+          // optionalAttrs (outputDefaults != { }) {\n+            output = mkProviderOptions outputDefaults;\n+          }\n+          // optionalAttrs (providerOptions != { }) {\n+            inherit providerOptions;\n+          };\n+        };\n+\n+      # Used for documentation\n+      allOptions = {\n+        input = mkConsumerOptions { };\n+        output = mkProviderOptions { };\n+      };\n+    };\n+\n+  importContract =\n+    module:\n+    let\n+      importedModule = import module { inherit lib; };\n+    in\n+    mkContractFunctions {\n+      inherit (importedModule) mkConsumerOptions mkProviderOptions;",
+   "id": 2776188560,
+   "line": 53,
+   "original_commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "original_line": 53,
+   "original_position": 53,
+   "original_start_line": null,
+   "path": "lib/contracts/default.nix",
+   "position": 53,
+   "pull_request_review_id": 3765305183,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-02-06T22:21:54Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n      modulePath,\n      mkConsumerOptions,\n```",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-02-06T22:03:20Z",
+   "diff_hunk": "@@ -0,0 +1,62 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs;\n+\n+  mkContractFunctions =\n+    {\n+      mkConsumerOptions,",
+   "id": 2776190101,
+   "line": 7,
+   "original_commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "original_line": 7,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "lib/contracts/default.nix",
+   "position": 7,
+   "pull_request_review_id": 3765305183,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-02-06T22:21:54Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```nix\n      mkConsumer = inputDefaults:\n        lib.setDefaultModuleLocation modulePath {\n          input = mkConsumerOptions inputDefaults;\n\n          output = mkProviderOptions { } // {\n            visible = \"shallow\";\n          };\n        };\n```",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-02-06T22:17:33Z",
+   "diff_hunk": "@@ -0,0 +1,62 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs;\n+\n+  mkContractFunctions =\n+    {\n+      mkConsumerOptions,\n+      mkProviderOptions,\n+    }:\n+    {\n+      mkConsumer = inputDefaults: {\n+        options = {\n+          input = mkConsumerOptions inputDefaults;\n+\n+          output = mkProviderOptions { } // {\n+            visible = \"shallow\";\n+          };\n+        };\n+      };",
+   "id": 2776235774,
+   "line": 19,
+   "original_commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "original_line": 19,
+   "original_position": 19,
+   "original_start_line": 11,
+   "path": "lib/contracts/default.nix",
+   "position": 19,
+   "pull_request_review_id": 3765305183,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 11,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T22:21:54Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "See [my other review](https://github.com/NixOS/nixpkgs/pull/485453#pullrequestreview-3765305183) for a partial fix.",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-02-06T22:23:27Z",
+   "diff_hunk": "@@ -0,0 +1,58 @@\n+{ lib }:\n+let\n+  inherit (lib) optionalAttrs;\n+\n+  mkContractFunctions =\n+    {\n+      mkConsumerOptions,\n+      mkProviderOptions,\n+    }:\n+    {\n+      mkConsumer = inputDefaults: {\n+        input = mkConsumerOptions inputDefaults;\n+\n+        output = mkProviderOptions { } // {\n+          visible = \"shallow\";\n+        };\n+      };\n+\n+      mkProvider =\n+        {\n+          outputDefaults ? { },\n+          providerOptions ? { },\n+        }:\n+        {\n+          input = mkConsumerOptions { } // {\n+            visible = \"shallow\";\n+          };\n+        }\n+        // optionalAttrs (outputDefaults != { }) {\n+          output = mkProviderOptions outputDefaults;\n+        }\n+        // optionalAttrs (providerOptions != { }) {\n+          inherit providerOptions;\n+        };\n+\n+      # Used for documentation\n+      allOptions = {\n+        input = mkConsumerOptions { };\n+        output = mkProviderOptions { };\n+      };\n+    };\n+\n+  importContract =\n+    module:\n+    let\n+      importedModule = import module { inherit lib; };\n+    in\n+    mkContractFunctions {\n+      inherit (importedModule) mkConsumerOptions mkProviderOptions;\n+    }\n+    // {\n+      inherit (importedModule) description behaviorTest;\n+    };",
+   "id": 2776257746,
+   "in_reply_to_id": 2766803121,
+   "line": 57,
+   "original_commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "original_line": 53,
+   "original_position": 53,
+   "original_start_line": 43,
+   "path": "lib/contracts/default.nix",
+   "position": 57,
+   "pull_request_review_id": 3765385871,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 47,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-06T22:23:27Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "these `mk*Options` functions seem like a clunky way of merging option types.\nas an additional data point in this space, i [tried an approach to this](https://github.com/ibizaman/nixpkgs/compare/contract-secrets...KiaraGrouwstra:contracts-secret-generated) that abstracts over (potentially nested) attributes as well as over types of info to put in (`default`, `defaultText`, ...).\ni suppose ideally, since using and perhaps declaring options for secrets are fairly common operations, it might make sense to try and look for a somewhat terse approach to this.\ni dunno if this is the right way, but maybe it'll help give some ideas at least.",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-03-14T23:09:20Z",
+   "diff_hunk": "@@ -0,0 +1,97 @@\n+{ lib }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) listOf submodule str;\n+in\n+{\n+  mkConsumerOptions =",
+   "id": 2935956763,
+   "line": 7,
+   "original_commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "original_line": 7,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "lib/contracts/secrets.nix",
+   "position": 7,
+   "pull_request_review_id": 3949409234,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-14T23:09:20Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I really like this approach. It even works when building the docs! Seems like we’re in to something now.",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-03-15T12:18:06Z",
+   "diff_hunk": "@@ -0,0 +1,97 @@\n+{ lib }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) listOf submodule str;\n+in\n+{\n+  mkConsumerOptions =",
+   "id": 2936667938,
+   "in_reply_to_id": 2935956763,
+   "line": 7,
+   "original_commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "original_line": 7,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "lib/contracts/secrets.nix",
+   "position": 7,
+   "pull_request_review_id": 3950109209,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-15T12:18:06Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "filed at #500287 for feedback",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "created_at": "2026-03-16T03:53:34Z",
+   "diff_hunk": "@@ -0,0 +1,97 @@\n+{ lib }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) listOf submodule str;\n+in\n+{\n+  mkConsumerOptions =",
+   "id": 2938009169,
+   "in_reply_to_id": 2935956763,
+   "line": 7,
+   "original_commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "original_line": 7,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "lib/contracts/secrets.nix",
+   "position": 7,
+   "pull_request_review_id": 3951290952,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-16T03:53:34Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "id": 3740967034,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-02T17:39:37Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "id": 3741470283,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-02T19:46:59Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "id": 3741500886,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-02T19:56:54Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks for your work on this. I would really like a standard pattern for configuring secrets in NixOS!\n\nMy initial reaction was that it would make sense to use the module system more. I hacked up a quick demo then. Then today read the RFC again (last time was a long time ago). I realized independently landed on almost exactly the same thing as [modules-interface](https://github.com/fricklerhandwerk/module-interfaces)! I've now also read the previous PR which seems closer to that.  \nI think doing that way has nice benefits because the module system takes care of some things for you, like propagating `_file` so errors point to the right place. It also seems more idiomatic to parametrize modules via `config._module.args` & `config` directly instead of using functors.\nBasically my gut feeling is \"I like the other version better\". I'm not saying that as opposition to this implementation, just think multiple people landing on the same design is a good sign it. I might play with it more to get an idea of the issues you raise for myself.\n\nAnyways, with this implementation, I think it's still possible to use modules in a more idiomatic way and left comments about that.  \nI also have opinions about the secrets contract. In general I think it makes sense to have the contracts promise the least possible, so providers have more flexibility in how they're implemented.\n\nAre these APIs going to be frozen as soon as this PR is merged?\nIf not it could be nice to add a warning when accessing them to say they're still experimental.\n\nAlso high level, since contracts are for NixOS behavior, maye only the generic code should be in `lib`, and the contracts themselves all be defined in NixOS modules?",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "id": 3754220205,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-06T17:51:09Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "id": 3764808507,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-06T19:36:16Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "id": 3764959825,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-06T20:17:41Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "id": 3764962364,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-06T20:18:25Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "id": 3764967674,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-06T20:19:34Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "id": 3765264917,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-06T21:53:47Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Just a basic example of what's needed to set the generated module's `_file` to get errors to point to the implementation's file.\n\n`lib.setDefaultModuleLocation` is the main part: it basically sets `_file` in the module, which is a special attr the module system uses to know where the module was originally defined.\n\nThis isn't perfect though:\n- `_file = modulePath` should only apply to the result of `mkConsumerOptions` & `mkProviderOptions`, whereas here it also applies to user code via `inputDefaults`\n- the module defined in this file itself, i.e. the return value of `mkConsumer`, is reported being part of `modulePath`, not `lib/contracts/default.nix`. In this case the module is trivial, but over time that might no longer be true and lead to confusion again.\n- `mkProvider` needs a similar adjustment\n\n(Using `deferredModule` gives us this for free by propagating `_file` from where the option was set in the original config)",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "id": 3765305183,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-06T22:21:54Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0f2e463b3eef46c609b67fa08d383ea5b6be7971",
+   "id": 3765385871,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-06T22:23:27Z",
+   "user": {
+    "id": 4761135,
+    "login": "ThinkChaos",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "id": 3949409234,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-14T23:09:19Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "id": 3950109209,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-15T12:18:06Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "3fb7107833d554c3884c449b040f245b5d0aa10b",
+   "id": 3951290952,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-16T03:53:34Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-20T21:29:17Z",
+   "event": "closed",
+   "id": 25778091263,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

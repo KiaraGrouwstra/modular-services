@@ -1,0 +1,217 @@
+{
+ "comments": [
+  {
+   "body": "This is probably related to #258853\r\n\r\nOtherwise please create a PR, I am not planning to work on support for new things.",
+   "created_at": "2023-10-20T00:21:52Z",
+   "id": 1771878802,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-10-20T00:21:52Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Hmmm. I think that might fix the NAMESPACE error. But not the postgresql errors.\r\n\r\nNot sure how to fix the postgresql errors. These are the lines that cause the problems:\r\n\r\n```\r\nsystemd.services.dex = {\r\n    after = [ \"networking.target\" ] ++ (optional (cfg.settings.storage.type == \"postgres\") \"postgresql.service\");\r\n    BindPaths = optional (cfg.settings.storage.type == \"postgres\") \"/var/run/postgresql\";\r\n}\r\n```\r\n\r\nMaybe just make `systemd.services.dex.after` and `systemd.services.dex.BindPaths` configurable settings?\r\n\r\nAnd add a `local_postgres` setting that sets the defaults?\r\n\r\nOr maybe just add a check for `config.host == \"/var/run/postgres\"` - but this one seems a little bit yucky.",
+   "created_at": "2023-10-20T03:41:01Z",
+   "id": 1772028863,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-10-20T03:41:01Z",
+   "user": {
+    "id": 112729,
+    "login": "brianmay",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Maybe just make `systemd.services.dex.after` and `systemd.services.dex.BindPaths` configurable settings?\r\n\r\nYou can overwrite them with system.services....\r\n\r\n> And add a `local_postgres` setting that sets the defaults?\r\n\r\nYeah, that would also be an option.",
+   "created_at": "2023-10-20T23:01:32Z",
+   "id": 1773489798,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-10-20T23:01:32Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Done: https://github.com/NixOS/nixpkgs/pull/263900",
+   "created_at": "2023-10-28T06:53:35Z",
+   "id": 1783725795,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-10-28T06:53:35Z",
+   "user": {
+    "id": 112729,
+    "login": "brianmay",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/262151",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Describe the bug\r\nSet\r\n\r\n```\r\nsettings.storage = {\r\n  type = \"postgres\";\r\n  config = {\r\n     host = \"postgresql.some.domain\";\r\n     ...\r\n  };\r\n};\r\n```\r\n\r\nError:\r\n\r\n```\r\nOct 20 08:34:07 servers2 (install)[30685]: dex.service: Failed to set up mount namespacing: /run/systemd/unit-root/run/postgresql: No such file or directory\r\n```\r\n\r\nBut I never said I wanted to connect to postgresql on the local box. This is a remote postgresql server I am connecting to.\r\n\r\nLooking at the nix code there is the clear assumption that if `cfg.settings.storage.type == \"postgres\"` then postgres is a local instance. Which is clearly incorrect.\r\n\r\n### Steps To Reproduce\r\nSteps to reproduce the behavior:\r\n1. As above.\r\n\r\n### Expected behavior\r\nThere should not be any error.\r\n\r\n### Screenshots\r\nAs above.\r\n\r\n### Additional context\r\nThis is not the only error, also seeing:\r\n\r\n```\r\nOct 20 08:34:07 servers2 (install)[30685]: dex.service: Failed at step NAMESPACE spawning /nix/store/j4fwy5gi1rdlrlbk2c0vnbs7fmlm60a7-coreutils-9.1/bin/install: No such file or directory\r\n```\r\n\r\nWhich is something I don't really understand. Suspect it might be something to do with configuring the systemd service to use a chroot maybe?\r\n\r\n\r\n### Notify maintainers\r\n\r\n@SuperSandro2000\r\n\r\n### Metadata\r\nPlease run `nix-shell -p nix-info --run \"nix-info -m\"` and paste the result.\r\n\r\n```console\r\nnix-shell -p nix-info --run \"nix-info -m\"\r\nthis path will be fetched (0.00 MiB download, 0.00 MiB unpacked):\r\n  /nix/store/l20acklwzc2ppm9qpx7p5xldqwv98a19-nix-info\r\ncopying path '/nix/store/l20acklwzc2ppm9qpx7p5xldqwv98a19-nix-info' from 'https://cache.nixos.org'...\r\n - system: `\"x86_64-linux\"`\r\n - host os: `Linux 6.1.55, NixOS, 23.05 (Stoat), 23.05.20231003.8a4c174`\r\n - multi-user?: `yes`\r\n - sandbox: `yes`\r\n - version: `nix-env (Nix) 2.13.5`\r\n - channels(brian): `\"\"`\r\n - channels(root): `\"nixos-22.11\"`\r\n - nixpkgs: `/nix/var/nix/profiles/per-user/root/channels/nixos`\r\n```\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 4,
+  "created_at": "2023-10-19T21:56:09Z",
+  "id": 1953118794,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Something is broken",
+    "id": 6314750,
+    "name": "0.kind: bug"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 262151,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "dex module assumes local postgresql",
+  "type": null,
+  "updated_at": "2025-07-03T22:51:15Z",
+  "user": {
+   "id": 112729,
+   "login": "brianmay",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#262151",
+ "sources": [
+  "nixpkgs-system-services-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 112729,
+    "login": "brianmay",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "5ba02b8d120c4635a464a21b53ed8746d5e785a7",
+   "commit_url": "https://api.github.com/repos/brianmay/nixpkgs/commits/5ba02b8d120c4635a464a21b53ed8746d5e785a7",
+   "created_at": "2023-10-28T06:39:59Z",
+   "event": "referenced",
+   "id": 10797205160
+  },
+  {
+   "actor": {
+    "id": 112729,
+    "login": "brianmay",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "45ebfa40d916082e8a29a0d25f5112f2a62db59c",
+   "commit_url": "https://api.github.com/repos/brianmay/nixpkgs/commits/45ebfa40d916082e8a29a0d25f5112f2a62db59c",
+   "created_at": "2023-10-29T00:47:52Z",
+   "event": "referenced",
+   "id": 10798791640
+  },
+  {
+   "actor": {
+    "id": 112729,
+    "login": "brianmay",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "86dd074daf8610ed63670d8440b1a94ae483da77",
+   "commit_url": "https://api.github.com/repos/brianmay/nixpkgs/commits/86dd074daf8610ed63670d8440b1a94ae483da77",
+   "created_at": "2023-10-29T00:52:02Z",
+   "event": "referenced",
+   "id": 10798795429
+  }
+ ]
+}

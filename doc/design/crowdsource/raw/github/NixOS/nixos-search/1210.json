@@ -1,0 +1,234 @@
+{
+ "comments": [
+  {
+   "body": "planning to look into this after #1202 so as to reduce rebasing",
+   "created_at": "2026-04-28T13:07:42Z",
+   "id": 4335518715,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-28T13:07:42Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> It is also a bit inconsistent that when unchecking Modular services on the left, the NixOS labels just vanish.\n\nthe reasoning there was i agree clutter isn't too nice, but when multiple categories are searched one may well need some kind of way to figure out which of the categories your hit actually applies to. when a single category is searched no such distinction would be needed.\n\n> I would just remove [The NixOS labels] and only add them for modular services. This would also reduce visual noise on the page.\n\nso, these should have further relevance now that home-manager options have been added.\n\nthis isn't so much to say i'm not sympathetic to the concern here, but i'd be open to suggestions on nicer ways to handle this.\n",
+   "created_at": "2026-04-28T15:44:34Z",
+   "id": 4336847786,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-28T15:44:34Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I would say there is still active issues with how options are wrapped in the frontend one example is here: \n<img width=\"1854\" height=\"137\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/65605cff-4abb-4eb7-8195-120f8fa52d23\" />",
+   "created_at": "2026-04-28T20:13:24Z",
+   "id": 4338716561,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-28T20:13:24Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "closed in #1239 + #1246",
+   "created_at": "2026-05-10T12:04:42Z",
+   "id": 4415238692,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-10T12:04:42Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixos-search/issues/1210",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  },
+  "assignees": [
+   {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "body": "Recently the Options Search page has seen some changes and my monk immediately found this unordered list of findings. Due to me not having any idea about Elm I am unable to contribute any fixes for those things, unfortunately.\n\n- The checkboxes are unaligned \n\n<img width=\"351\" height=\"186\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/823c781e-c6e7-4eb4-9466-c98615bdf921\" />\n\n- When changing the checkboxes the border becomes wider and immediately jumping back\n\n<img width=\"524\" height=\"193\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/83990556-61c0-474c-8ef1-7a7656c3dad7\" />\n\n- The NixOS labels exist on all options except 18. I would just remove them and only add them for modular services. This would also reduce visual noise on the page.\n\n<img width=\"460\" height=\"342\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/954ba221-994f-406c-9703-e009afffc706\" />\n\n- It is also a bit inconsistent that when unchecking Modular services on the left, the NixOS labels just vanish.\n\n- The hint to search more precise is not very noticeable. In fact I only noticed it because the option listed is being shifted down and I wondered why that was the case\n\n<img width=\"1320\" height=\"418\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/d6da84e4-9a4e-40e0-b99f-ba3f7af1ab3c\" />\n\n- Clicking on unstable again and again causes a refresh of the search result and also causes the border getting bigger and jumping back I described above\n\n<img width=\"692\" height=\"396\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/f78f998b-4655-461d-b49f-c1eaa1bbe42d\" />\n\n- Linkifying the options is a good idea in itself but now copying them is really hard\n\n<img width=\"493\" height=\"181\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c1c17ded-cbfd-4752-ba2e-ef331b97e999\" />\n\n- Clicking on the highlighted preStart causes the filter on the left to be reset (everything is checked again) \n\n<img width=\"747\" height=\"593\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c9ea30e3-e4cb-419c-b243-f2b84b533a2d\" />",
+  "closed_at": "2026-05-10T12:04:42Z",
+  "closed_by": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 4,
+  "created_at": "2026-04-16T23:21:02Z",
+  "id": 4279077815,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 1210,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 2,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 2
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixos-search",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Feedback on recent UI changes for the options search",
+  "type": null,
+  "updated_at": "2026-05-10T12:04:42Z",
+  "user": {
+   "id": 7258858,
+   "login": "SuperSandro2000",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixos-search#1210",
+ "sources": [
+  "nixos-search-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "8aae5ee58c894c1186b08a2580d311d0e0bfebb6",
+   "commit_url": "https://api.github.com/repos/NixOS/nixos-search/commits/8aae5ee58c894c1186b08a2580d311d0e0bfebb6",
+   "created_at": "2026-04-28T20:51:52Z",
+   "event": "referenced",
+   "id": 24965150121
+  },
+  {
+   "actor": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "40a66eaf6b1c57fe525ef1324e8eb20d47a9d24f",
+   "commit_url": "https://api.github.com/repos/NixOS/nixos-search/commits/40a66eaf6b1c57fe525ef1324e8eb20d47a9d24f",
+   "created_at": "2026-04-29T06:29:05Z",
+   "event": "referenced",
+   "id": 24977441012
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-10T12:04:42Z",
+   "event": "closed",
+   "id": 25352912042,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "a683e141482dd7a2d2fa5c05f6f20d08bfd8a0b6",
+   "commit_url": "https://api.github.com/repos/Malix-Labs/nixos-search/commits/a683e141482dd7a2d2fa5c05f6f20d08bfd8a0b6",
+   "created_at": "2026-05-30T10:28:23Z",
+   "event": "referenced",
+   "id": 26140320368
+  }
+ ]
+}

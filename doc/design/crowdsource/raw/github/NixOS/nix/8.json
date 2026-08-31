@@ -1,0 +1,2546 @@
+{
+ "comments": [
+  {
+   "body": "A few questions:\n- Does this potentially break `nixos-rebuild build` as non-root?\n- Is there any way to tell as a user that I've attempted to register an already-valid file? For example, if root and I both use the same password file for a particular program, will I be able to tell when I add that file to the store that root has the same one?\n- Would there be a reasonable way for a NixOS-managed service to know how to find per-user private files?\n",
+   "created_at": "2012-05-10T18:05:09Z",
+   "id": 5632245,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2012-05-10T18:05:09Z",
+   "user": {
+    "id": 487050,
+    "login": "shlevy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "- It shouldn't break non-root nixos-rebuilds since any private files would be owned by (or accessible to) the calling user.\n- If a user attempts to register an already-valid file, he would be added to the ACL to the file. So he could conclude from this that root needed the same file.\n- What kind of service, and why would it need to do that?\n",
+   "created_at": "2012-05-16T17:32:01Z",
+   "id": 5746771,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2012-05-16T17:32:01Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "What about the build users? Should they be in the ACLs?\n",
+   "created_at": "2012-05-31T19:03:30Z",
+   "id": 6044560,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2012-05-31T19:03:30Z",
+   "user": {
+    "id": 66664,
+    "login": "viric",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Being able to tell that somebody else generated the same private file sounds like a no-go for me.\n\nWhat do you think about including the user the file is private to, i.e. the one who created it, to be included in the hashing (for example an empty file with the user's name in the output)? So even if root, Alice and Charon all want a file with the same content, they would end up with 3 different files.\n",
+   "created_at": "2012-07-26T15:11:30Z",
+   "id": 7280333,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 5,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2012-07-26T15:11:30Z",
+   "user": {
+    "id": 89596,
+    "login": "chaoflow",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The problem with including the user in the hashing is you may eventually share stores, but it's better than nothing. Maybe a wrapper function in nixpkgs that hashed in a GUID read from some personal file? So I have ~/.nixpkgs/guid and when I run pkgs.lib.privateFile 'mypass' \"passw0rd\" it creates a file whose first line is passw0rd and the second line is the guid?\n",
+   "created_at": "2012-07-26T18:19:25Z",
+   "id": 7285856,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2012-07-26T18:19:25Z",
+   "user": {
+    "id": 487050,
+    "login": "shlevy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Why is this a problem? If the secret stored in the file is sufficiently secure (i.e. random), then this won't happen. I mean, if your login password is \"foobar\", then other people may be able to find out. So just don't do that.\n",
+   "created_at": "2012-07-26T18:26:49Z",
+   "id": 7286093,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2012-07-26T18:26:49Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Eh, it's not really a problem, at least not for nix itself. The security-paranoid folk can just make sure all of their private files have some unique identifier included.\n",
+   "created_at": "2012-07-26T18:39:11Z",
+   "id": 7286420,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 1,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2012-07-26T18:39:11Z",
+   "user": {
+    "id": 487050,
+    "login": "shlevy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Unless I am mistaken, private files in the store are sensitive to offline dictionary attacks, since you can learn the hash and you have a procedure to check your guesses. It is also conceivable, that a rainbow attack could be mounted against a particular version of nixpkgs. It would be advisable that any such private files contain significant salting, regardless of the \"learn a secret by random collision\" problem. A hypothetical lib.privateFile could then enforce that salting by taking a template string and substituting in the salt (which makes it possible to hide that salt in comments or other such convenient places).\n",
+   "created_at": "2013-03-31T15:23:18Z",
+   "id": 15692730,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 6,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 6
+   },
+   "updated_at": "2013-03-31T15:23:18Z",
+   "user": {
+    "id": 454952,
+    "login": "mornfall",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes, the sysadmin could care storing the salt somewhere only readable by the root user.\n",
+   "created_at": "2013-03-31T15:26:58Z",
+   "id": 15692783,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2013-03-31T15:26:58Z",
+   "user": {
+    "id": 66664,
+    "login": "viric",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "There is a use case for `pkgs.bacula` that `bacula` user needs access to a configuration file with passwords (so non-root).\n",
+   "created_at": "2013-05-27T20:22:10Z",
+   "id": 18513393,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2013-05-27T20:22:10Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Alternative quick & dirty solution which may be useful for some use cases: https://github.com/MarcWeber/nix/blob/experimental/write-file-hashed/.topmsg\n",
+   "created_at": "2013-11-30T14:51:40Z",
+   "id": 29553620,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2013-11-30T14:51:40Z",
+   "user": {
+    "id": 34086,
+    "login": "MarcWeber",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Better link to see @MarcWeber diff: https://github.com/MarcWeber/nix/compare/experimental;write-file-hashed\n\nWhat's the current workaround for this if a config file includes a password?\n",
+   "created_at": "2014-02-22T23:45:08Z",
+   "id": 35819044,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-02-22T23:45:08Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "My version allows storing passwords in config, but instead of writing it to the store a path to a file containing it will be written to the store. The containing file can be read only by root. The complicated piece is that you have to write code which has to be run as root (eg when preparing config files for services) - but its very easy to review (eg in contrast to patching nix store allowing paths to be readable by some users only requires to think about many issues such as copying store paths - preserving privileges thereby etc). State is \"I don't use my patch but it should be working\".\n",
+   "created_at": "2014-02-23T00:14:07Z",
+   "id": 35819633,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-02-23T00:14:07Z",
+   "user": {
+    "id": 34086,
+    "login": "MarcWeber",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "What about a function with signature:\n\n```\npkgs.lib.privateFile \"my.conf\" \"user\" \"secret content\";\n```\n\nAnd only `user` would have read permissions to that file? That solves the use cases I've been seeing on daily basis. Many services require to specify an user and thus we can pass that user to `privateFile` function.\n\nNo idea how that would work with `nix-copy-closure`, but we could just preserve the uid/gid.\n",
+   "created_at": "2014-03-09T19:12:46Z",
+   "id": 37135614,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2014-03-09T19:12:46Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "One problem with that is that `user` may not exist yet, since it might be created at activation time.\n\nHowever, for the most common case (`root`), it would be fine. And if the service needs to be readable by a non-root service, you could always copy it to some private location in /run in the service's preStart script.\n",
+   "created_at": "2014-03-10T09:10:19Z",
+   "id": 37163595,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2014-03-10T09:10:19Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Now that our users require an `uid`, we could use that instead of the username. That would work then right?\n",
+   "created_at": "2014-03-10T09:43:55Z",
+   "id": 37165863,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-03-10T09:43:55Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@edolstra , with the test cases I made in #329, I am confident that the current proposal is secure enough to handle secret files for the owner of the nix store.  When would you be able to review it?\n\nThis branch does not use ACL, it only remove the read/execute access for the group and others.  Still, the implementation is made such as we can extend it with ACL later.  I think it would be good to have a first iteration of NixOS with this branch before adding ACL.\n",
+   "created_at": "2014-10-18T22:09:23Z",
+   "id": 59631455,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-18T22:09:23Z",
+   "user": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I just thought of another use-case of @MarcWeber's patch: setuid binaries.\n\nAs a reminder, https://github.com/MarcWeber/nix/compare/master...experimental/write-file-hashed shows how nix can write content with special permissions outside of the store. It's a very minimal patch compared to https://github.com/NixOS/nix/pull/329. (what it is missing is that the hash needs to include the permissions and ownership as well for security)\n\nUsing this, you can either sideload secret files, generated them from an expression or have them be copied on package install from a specific directory under /nix-support.\n\nFiles can be secrets or simply regular files that need special permissions, like setuid binaries.\n\n@edolstra @nbp?\n",
+   "created_at": "2015-01-05T19:13:52Z",
+   "id": 68759438,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-01-05T19:13:52Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "How can I help make this happen? NixOS is getting used more and more and this may lead to bad PR in the future since it's indeed a big issue (the biggest?).\n",
+   "created_at": "2015-03-10T09:56:20Z",
+   "id": 78023950,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-10T09:56:20Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Personally I overcome this problem by providing files as strings instead of a nix store path. Yes that means the configuration is not deployable/reproducible, but perhaps I don't want my passwords to be deployable/reproducible?\n",
+   "created_at": "2015-03-10T09:59:51Z",
+   "id": 78024446,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-10T09:59:51Z",
+   "user": {
+    "id": 480920,
+    "login": "lucabrunox",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@lethalman can you give an example? I don't understand what you're doing when providing a private file as a string.\n",
+   "created_at": "2015-03-11T10:55:06Z",
+   "id": 78242158,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-11T10:55:06Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That nix will not store the file in the nix store, instead will use the absolute path on your system. E.g. `somepath = \"/foo\";` instead of `somepath = /foo;` .\n",
+   "created_at": "2015-03-11T10:56:35Z",
+   "id": 78242352,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-11T10:56:35Z",
+   "user": {
+    "id": 480920,
+    "login": "lucabrunox",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Oh very cool, I didn't realize that! That's basically the solution I\nproposed above minus the hashing and permissions checking, but it works now.\n\nOn Wed, Mar 11, 2015 at 11:56 AM lethalman notifications@github.com wrote:\n\n> That nix will not store the file in the nix store, instead will use the\n> absolute path on your system. E.g. somepath = \"/foo\"; instead of somepath\n> = /foo; .\n> \n> —\n> Reply to this email directly or view it on GitHub\n> https://github.com/NixOS/nix/issues/8#issuecomment-78242352.\n",
+   "created_at": "2015-03-11T12:12:16Z",
+   "id": 78251539,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-11T12:12:16Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Using double quote as a source of security is extremely weak, and it is easy to miss that when writing a configuration.  I suggested to @edolstra that we should just add a different mode to the nix evaluation loop which prevents reading any file which is not already world readable.\n\nAnother solution, is to enforce that the system cannot be build by root but only as a user, and then make the system use this configuration.  This way, the user which is building the configuration can only read the public files and if it attempts to load a private file, then the process will crash.  We could add an extra option to allow root execution of nixos-rebuild.\n\nIdeally we should be able to specify this with the type of the option.  For example, we would have a scoped evaluation which prevent us from reading a private file, in a similar way as the `addErrorContext` builtin function.  Thus a privateFile type will use merge function to do a strict evaluation of the merged values within a `forbidPrivateFilesContext`.\n",
+   "created_at": "2015-03-15T14:42:40Z",
+   "id": 81050679,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-15T14:42:40Z",
+   "user": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@nbp +1\n",
+   "created_at": "2015-03-16T12:39:41Z",
+   "id": 81629098,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-03-16T12:39:41Z",
+   "user": {
+    "id": 89596,
+    "login": "chaoflow",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This is probably too radical to really be practical, but I was just ruminating on a Nix security model based on \"you don't get access to a store path unless you have a Nix expression that [produces a derivation that] hashes to that path\".\n\nIn this model, your `/nix/store` would be inaccessible by default. To gain access to a store path, you would run your program through a \"store broker\" that would stick your process in a filesystem namespace that has access to the things you've provided (mechanism TBD) suitable Nix expressions for. `nix-env` and so on would handle this for you, and wrapper script generators would have to do something similar.\n\nThen as long as whatever process generated my private files and put them into the store is itself kept private, the goal of this ticket is achieved. And if the process isn't private, then protecting the store output doesn't seem very useful anyway.\n\nAny thoughts?\n",
+   "created_at": "2015-10-06T16:04:01Z",
+   "id": 145911503,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 5,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2015-10-06T16:04:01Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "As a data point, around a year ago I had a similar idea to @copumpkin's to use nix expressions that are evaluated in the \"ephemeral\" nix store without `stdenv` and subsequently stored in the big store in the encrypted form.\n\nImplementing this only needs some language primitive that allows referencing paths from a different nix store.\n\nSee the gist at https://gist.github.com/proger/3563bc77184a12654fee\n",
+   "created_at": "2015-10-06T17:42:58Z",
+   "id": 145942145,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-10-06T17:43:26Z",
+   "user": {
+    "id": 66214,
+    "login": "proger",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "As this is mostly a NixOS issue, I am currently working on a prototype for NixOS which basically consist into building private files in a \"trusted\" nix store (ephemeral or not), and rely on one unique impurity to decode the files.\n",
+   "created_at": "2015-10-06T21:12:49Z",
+   "id": 146003265,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2015-10-06T21:12:49Z",
+   "user": {
+    "id": 1179566,
+    "login": "nbp",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Is there any progress on this?\n",
+   "created_at": "2016-11-04T09:41:57Z",
+   "id": 258384161,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-11-04T09:41:57Z",
+   "user": {
+    "id": 1940652,
+    "login": "spacekitteh",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> This is probably too radical to really be practical, but I was just ruminating on a Nix security model based on \"you don't get access to a store path unless you have a Nix expression that [produces a derivation that] hashes to that path\".\n\n@copumpkin The most straightforward method would be with LXC I think.\n",
+   "created_at": "2016-11-06T09:34:26Z",
+   "id": 258669669,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-11-06T09:34:26Z",
+   "user": {
+    "id": 1940652,
+    "login": "spacekitteh",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Actually the most straightforward way would be to remove read (but not execute) permission from the Nix store, i.e. `rwx--x--x`. That way, unless you already know a store path, you can't access it. However, this would also require that nothing inadvertently \"leaks\" store paths (e.g. via `nix-store -qR /run/current-system`).\n",
+   "created_at": "2016-11-09T12:11:50Z",
+   "id": 259400831,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-11-09T12:11:50Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@edolstra Surely that will break a significant portion of builders (for dumb reasons, but still)\n",
+   "created_at": "2016-11-09T12:17:39Z",
+   "id": 259401854,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-11-09T12:17:39Z",
+   "user": {
+    "id": 487050,
+    "login": "shlevy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I guess it would need to be `rwx-wx--x` to let `nixbld` add paths to the store. Or use a sandbox. However, I don't think it's a feasible option due to the path leakage risk.\n",
+   "created_at": "2016-11-09T12:26:49Z",
+   "id": 259403393,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-11-09T12:26:49Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@edolstra I don't think removing `r` from the store is sufficent. For example on NixOS you know where the bootloader is which knows where stage one is...\n\nBasically you are going to want to know where services are from a public place otherwise you can't do much with your system unless you boot it by typing the path to the kernel.\n\nOne not terrible solution would add a file in each derivation that contains the ACLs that should be applied to it when it is installed. I think we already have a `.nix-something` directory in each derivation that could be used for something like this.\n",
+   "created_at": "2016-11-09T12:55:17Z",
+   "id": 259408242,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2016-11-09T12:55:17Z",
+   "user": {
+    "id": 494012,
+    "login": "kevincox",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I have been tracking this issue. Assuming the problem this is attempting to solve is about providing secrets to a service at runtime, wouldn't using something like keywhiz be a much better fit?\n",
+   "created_at": "2016-11-09T13:11:42Z",
+   "id": 259411226,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-11-09T13:11:42Z",
+   "user": {
+    "id": 851757,
+    "login": "Azulinho",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think the problem is exactly the opposite. On NixOS since everything is in the store and the store is public there is no safe place to store secrets. So currently if you don't want any process running on your machine to read something you have to get those secrets at runtime. \n\nI think this thread is about a way to have secrets that \"permanently\" live on the server but are only accessible to the entities (probably users or groups) that you specify. For example I can reference my SSL key in my nginx config and it will \"just work\" without giving all users access to my private key. \n",
+   "created_at": "2016-11-09T13:20:25Z",
+   "id": 259412803,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-11-09T13:20:25Z",
+   "user": {
+    "id": 494012,
+    "login": "kevincox",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "likewise, i don't want any process to even see what i have installed other than the process and it's direct requirements, like a chroot.\n\nMACs are basically what is required, I think. SELinux is perfect for this.\n",
+   "created_at": "2016-11-09T13:24:18Z",
+   "id": 259413542,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-11-09T13:28:16Z",
+   "user": {
+    "id": 1940652,
+    "login": "spacekitteh",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I implemented an `encryptString` builtin function a while ago to encrypt secrets at evaluation time: https://github.com/edolstra/nix/commit/6b7003672ff8d73d2a1f3b6709b216b3d0a7ad9c. The resulting encrypted strings can be decrypted at runtime (e.g. by the preStart script of a systemd service) by calling `nix-store --decrypt` (which decrypts the encrypted parts of a file read from stdin). Since the encryption happens at evaluation time, no keys end up in the Nix store.\n\nExample usage for the generation/use of a `wpa_supplicant.conf` in NixOS: https://github.com/edolstra/nixpkgs/commit/4c8212069429bf9fb959e00ce8d9345ac7cb7ff0. Note that only  the passphrases in `wpa_supplicant.conf` are encrypted, the rest of the file is not.\n",
+   "created_at": "2016-11-09T15:11:57Z",
+   "id": 259437177,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 1,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2016-11-09T15:11:57Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "On Wed, Nov 9, 2016 at 4:11 PM Eelco Dolstra notifications@github.com\nwrote:\n\n> I implemented an encryptString builtin function a while ago to encrypt\n> secrets at evaluation time: edolstra@6b70036\n> https://github.com/edolstra/nix/commit/6b7003672ff8d73d2a1f3b6709b216b3d0a7ad9c.\n> The resulting encrypted strings can be decrypted at runtime (e.g. by the\n> preStart script of a systemd service) by calling nix-store --decrypt (which\n> decrypts the encrypted parts of a file read from stdin). Since the\n> encryption happens at evaluation time, no keys end up in the Nix store.\n\nFinally something that seems like a good basis for a proper solution!\nBigger files could just have their contents encrypted with a key that is\nencrypted by this.\n\nI wonder if this also needs something like the os x keychain, so that you\ncan change the store key and re-encrypt the encrypted keys. Probably not,\nsince you could just regenerate the configuration with the new store key?\n\nAnd to limit access to keys for daemon users, you could use sudo with\nforced commands so they can only decrypt their own files.\n",
+   "created_at": "2016-11-10T07:47:57Z",
+   "id": 259622922,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-11-10T07:47:57Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This may be a stupid question, but is there any reason these commits are not pushed yet? Even if it's not perfect it still seems way better than what there is currently (except that we'll have to keep track of exactly which services are safe to give passwords to and which are not until all migrate), and the commits dating back to Feb. 2015 make me think it would be useful to have a starting point for other people to build up on it?",
+   "created_at": "2016-12-05T23:41:27Z",
+   "id": 265014449,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-12-05T23:41:27Z",
+   "user": {
+    "id": 411447,
+    "login": "Ekleog",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "FWIW I'm not totally convinced that this is the best solution.\r\n\r\nPros:\r\n- Nix store is still just data.\r\n- Access can be controlled by access to the keyfile.\r\n- Punts on the access control problem.\r\n\r\nCons:\r\n- Performance overhead (decrypted file is buffered in memory as well as the overhead of calling the decryption in the first place)\r\n- More complex for apps to work with.\r\n- Apps become more nix-specific (or you have to write a decryption-to-tmp wrapper which is spreading the security responsibilities around)\r\n- Punts on the access control problem.\r\n\r\nI don't know if there is a good solution. What @edolstra has implemented is a trade off between simplicity and effectiveness which is a pretty reasonable approach. However I think it is worth debating this more before shipping something.\r\n\r\nI am still in favour of shipping an ACL with each store path. This has much higher complexity and makes store paths less portable across machines (what if that user doesn't exist) however that seems like a minor issue to me. Of course ACLs have other problems for example they either require changing the nix archive format (which might be a non-starter although it could be done) or standardizing a directory inside a NAR that will be read when it is \"installed\" and the permissions set up appropriately.",
+   "created_at": "2016-12-06T19:58:51Z",
+   "id": 265256236,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2016-12-06T19:58:51Z",
+   "user": {
+    "id": 494012,
+    "login": "kevincox",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "On Tue, Dec 6, 2016 at 8:58 PM Kevin Cox <notifications@github.com> wrote:\n\n> FWIW I'm not totally convinced that this is the best solution.\n>\n> Cons:\n>\n>    - Performance overhead (decrypted file is buffered in memory as well\n>    as the overhead of calling the decryption in the first place)\n>\n> That is a red herring, you will never notice this overhead. Very large\nfiles should not be stored in this way to begin with.\n\n\n>\n>    - More complex for apps to work with.\n>\n> This is not for apps, this is for NixOS configuration. The apps will never\nnotice anything, their wrappers will give them what they need.\n\n\n>\n>    - Apps become more nix-specific (or you have to write a\n>    decryption-to-tmp wrapper which is spreading the security responsibilities\n>    around)\n>\n> Same argument, same response.\n\n\n>\n>    - Punts on the access control problem.\n>\n> Do you mean authorization? There are already many excellent ways to handle\nthat, so the less nix does, the better, since it is then easier to\nintegrate.\nAuthentication is definitely not nix's responsibility.\n\n\n>\n> I am still in favour of shipping an ACL with each store path. This has\n> much higher complexity and makes store paths less portable across machines\n> (what if that user doesn't exist) however that seems like a minor issue to\n> me.\n>\nUhm, you complain about the tiny overhead of encryption on some files, and\nthen you propose adding a serious overhead on all accesses to the store? :)\n\nNot to mention, how to implement these ACLs on non-NixOS…\n\n>\n",
+   "created_at": "2016-12-07T10:36:50Z",
+   "id": 265413521,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-12-07T10:36:50Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Maybe I would take it farther then most but I would make many of my store paths private to a specific user and I would like to protect everything in them by default. It's not critical, you are right, but I like to keep my processes as separate as possible.\r\n\r\n> Uhm, you complain about the tiny overhead of encryption on some files, and then you propose adding a serious overhead on all accesses to the store? :)\r\n>\r\n> Not to mention, how to implement these ACLs on non-NixOS…\r\n\r\nI think you understand what I mean by this. I am proposing that posix ACLs get set on the store paths when they get unpacked. Not some sort of proxy that does ACL checking. The overhead of posix ACLs is incredibly low. As an alternative if you are worried about this is that user and group permission control could be use, which is of course less flexible but almost zero overhead. (as this check is already being done)",
+   "created_at": "2016-12-07T10:47:04Z",
+   "id": 265415806,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-12-07T10:47:04Z",
+   "user": {
+    "id": 494012,
+    "login": "kevincox",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "On Wed, Dec 7, 2016 at 11:47 AM Kevin Cox <notifications@github.com> wrote:\n\n> I am proposing that posix ACLs get set on the store paths when they get\n> unpacked. Not some sort of proxy that does ACL checking. The overhead of\n> posix ACLs is incredibly low. As an alternative if you are worried about\n> this is that user and group permission control could be use, which is of\n> course less flexible but almost zero overhead. (as this check is already\n> being done)\n>\n\nWell, if you have a 500-user shared host, it probably is a bit problematic,\nbut indeed this is feasible. It does not work on single-user installs and\nNFS-mounted stores though, and adds code to nix-store for managing the ACLs\n(not sure how much).\n\nWith encryption, it works everywhere, all the time.\n",
+   "created_at": "2016-12-07T10:58:27Z",
+   "id": 265418094,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-12-07T10:58:27Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Bottom of line, someone should collect use cases (there are many already in nixpkgs) and see what method solves them or not.",
+   "created_at": "2016-12-07T11:00:40Z",
+   "id": 265418578,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 4,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2016-12-07T11:00:40Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Well, if you have a 500-user shared host, it probably is a bit problematic,\r\n\r\nI don't see how this is problematic. If you want to share with a lot of people you are going to have a long ACL (or add them to a group) but you would have the same problem with other methods. Somehow you have to give people access.\r\n\r\n> adds code to nix-store for managing the ACLs (not sure how much).\r\n\r\nActually setting the ACL is a couple of lines. The parsing would be more and there would need to be code to support it in nixpkgs.\r\n\r\n> Bottom of line, someone should collect use cases (there are many already in nixpkgs) and see what method solves them or not.\r\n\r\n+:100: ",
+   "created_at": "2016-12-07T11:14:29Z",
+   "id": 265421275,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-12-07T11:14:29Z",
+   "user": {
+    "id": 494012,
+    "login": "kevincox",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Honestly, both ACLs *and* encryption should be used.",
+   "created_at": "2016-12-07T11:22:09Z",
+   "id": 265422734,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 5,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2016-12-07T11:22:09Z",
+   "user": {
+    "id": 1940652,
+    "login": "spacekitteh",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "On Wed, Dec 7, 2016 at 12:14 PM Kevin Cox <notifications@github.com> wrote:\n\n> Well, if you have a 500-user shared host, it probably is a bit problematic,\n>\n> I don't see how this is problematic. If you want to share with a lot of\n> people you are going to have a long ACL (or add them to a group) but you\n> would have the same problem with other methods. Somehow you have to give\n> people access.\n>\nD'oh, forgot about groups, of course.\n\n\n> Bottom of line, someone should collect use cases (there are many already\n> in nixpkgs) and see what method solves them or not.\n>\n> +💯\n>\n\nThe only use cases I saw so far involved key files or passwords that needed\nto be provided to daemons at runtime. For that, I would prefer having the\ndata encrypted at rest.\n\nIn any case, both approaches are orthogonal, so they can both be\nimplemented and even used simultaneously.\n",
+   "created_at": "2016-12-07T11:27:41Z",
+   "id": 265423826,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-12-07T11:27:41Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "FWIW there's another use case that I'd like to be supported. Currently we can enable SSH in initrd, which allows one to e.g. enter LUKS passwords remotely. However, for this private SSH server keys need to be written to initrd. We can read-protect `/boot` so that they cannot be read from there but they are still in `/nix/store`, globally accessible.\r\n\r\ntl;dr: a way to protect all intermediate build products, and for bootloader installation scripts (i.e. some things ran as part of `nixos-rebuild` with root access rights) to have protected access to those products.",
+   "created_at": "2016-12-07T11:38:52Z",
+   "id": 265425843,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 4,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2016-12-07T11:38:52Z",
+   "user": {
+    "id": 1174810,
+    "login": "abbradar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm thinking a content-addressed store could cause similar breakage, so it might make sense to stage them together.",
+   "created_at": "2016-12-07T20:46:58Z",
+   "id": 265568443,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-12-07T20:46:58Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Here's another usecase: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/security/prey.nix It requires API keys specified as text options in the service.",
+   "created_at": "2017-01-27T05:15:22Z",
+   "id": 275590831,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-01-27T05:15:22Z",
+   "user": {
+    "id": 640797,
+    "login": "CMCDragonkai",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Nice, i didn't know about `encryptString`",
+   "created_at": "2017-03-24T20:39:26Z",
+   "id": 289137089,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-24T20:39:26Z",
+   "user": {
+    "id": 585547,
+    "login": "offlinehacker",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "RFC for this issue is up: https://github.com/NixOS/rfcs/pull/5",
+   "created_at": "2017-04-03T14:11:45Z",
+   "id": 291155174,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-04-03T14:11:45Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm no expert, but it seems to me that the store needs to be broken up between a global store and several user stores. There must be tons of problems with this approach; what are they?\r\nEdit. I dont think this is the right solution, which probably lays at the filesystem layer. Nix is a bit ahead of its time. A different approach to ownership/permission perhaps. I'v seen the mention of plan9 namespace. I'll delve into it at some point, hopefully.",
+   "created_at": "2017-04-11T09:23:42Z",
+   "id": 293201438,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2017-04-12T08:54:16Z",
+   "user": {
+    "id": 10137,
+    "login": "ghost",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@edolstra That doesn't seem right?",
+   "created_at": "2017-04-25T17:08:51Z",
+   "id": 297099262,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-04-25T17:08:51Z",
+   "user": {
+    "id": 347965,
+    "login": "jgillich",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Certainly a mistake, but probably worth closing this and follow up on the RFC ?",
+   "created_at": "2017-04-25T17:17:19Z",
+   "id": 297102146,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-04-25T17:17:19Z",
+   "user": {
+    "id": 851757,
+    "login": "Azulinho",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Doh. This was a side-effect of merging the nix-repl repo.",
+   "created_at": "2017-04-25T17:21:00Z",
+   "id": 297103184,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-04-25T17:21:00Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Ohh, and I was so happy for a moment :)\n\nOn Tue, 25 Apr 2017, 19:21 Eelco Dolstra, <notifications@github.com> wrote:\n\n> Doh. This was a side-effect of merging the nix-repl repo.\n>\n> —\n> You are receiving this because you commented.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/NixOS/nix/issues/8#issuecomment-297103184>, or mute\n> the thread\n> <https://github.com/notifications/unsubscribe-auth/AAjvS8jWZ4PQQ0fIUnbZi_YOSM5IuWC2ks5rziuBgaJpZM4AA4a7>\n> .\n>\n",
+   "created_at": "2017-04-25T22:21:59Z",
+   "id": 297182422,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-04-25T22:21:59Z",
+   "user": {
+    "id": 585547,
+    "login": "offlinehacker",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Nix store is the code, secrets are the data. Let's do not make it more complicated :)\r\nCode needs less protection if needs at all.",
+   "created_at": "2017-05-09T21:05:06Z",
+   "id": 300301130,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 6,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 6
+   },
+   "updated_at": "2017-05-09T21:08:32Z",
+   "user": {
+    "id": 131844,
+    "login": "ip1981",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Has anyone looked seriously at a model based on can-only-read-if-you-have-the-hash? As said above, that could be trivially implemented by removing read but not execute permissions from the store. This seems like the most principled way to do it, and would immediately open up a lot of interesting applications.\r\n\r\nWhat would be required to fix the hash leakage? We would need to prevent there from being any globally-readable references to store objects which might transitively mention secrets. That doesn't seem absolutely impossible. It kind of parallels similar efforts to prevent address leakage from the Linux kernel, and other information leakage from trusted code to untrusted code.\r\n\r\nDo any tools themselves leak paths? nix-daemon?",
+   "created_at": "2017-06-12T21:49:55Z",
+   "id": 307940894,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-06-12T21:49:55Z",
+   "user": {
+    "id": 5394722,
+    "login": "catern",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Trying to erase all leakage is just like trying to erase all security flaws in a program: it's doomed to failure, and is way better to add hardening (and erase all security flaws we encounter, also, of course).\r\n\r\nFor example of path leaks out of the top of my head, the grub command line leaks paths, the kernel, the initrd, /etc/systemd/services... basically the entire NixOS system has not been thought so as to erase all references to hashes. The only case I could think of for avoiding hash leaks is in the context of containers, where the entire filesystem is restricted to a specific host-independent configuration, which allows to be “sure” (as much as one can be) that no hash will leak. But that doesn't solve the broader problem of hash leaks.\r\n\r\nBasically, all the nix and nixpkgs ecosystem would have to be fixed to account for this new “no hash leak” rule, so that isn't really possible in my opinion.\r\n\r\n(Then, I wonder where the encryption implementation currently lies, I seem to remember it was (almost?) ready in nix1.12?)",
+   "created_at": "2017-06-12T22:59:54Z",
+   "id": 307958783,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-06-12T22:59:54Z",
+   "user": {
+    "id": 411447,
+    "login": "Ekleog",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> can-only-read-if-you-have-the-hash\r\n\r\nIt seems like the `setuid` bit. There is at least one problem: interpreters like Python or Bash (who owns a hash: a script or an interpreter?).\r\n",
+   "created_at": "2017-06-13T07:51:34Z",
+   "id": 308036431,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-06-13T07:51:34Z",
+   "user": {
+    "id": 131844,
+    "login": "ip1981",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": ">Trying to erase all leakage is just like trying to erase all security flaws in a program: it's doomed to failure, and is way better to add hardening (and erase all security flaws we encounter, also, of course).\r\n\r\nThat is probably true. Even if the whole ecosystem was fixed to avoid leaking hashes, we would still need some kind of hardening to avoid problems resulting from hash leaks.\r\n\r\nIs it possible to do such hardening? Maybe if there's some clever and elegant way to harden against path leaks, we can have a solution for secrets that is fundamentally based on paths-as-capabilities, plus hardening.\r\n\r\nMaybe the desired property for such hardening would be that even if someone is able to get access to a hash, they won't necessarily be able to access the underlying data, because of additional checks which validate their access. Not sure if that's a correct formulation of the problem, or how to approach solving it in an elegant way.\r\n\r\nMaybe we want revocability, in some sense? Lots of revocability techniques out there, maybe something could work without losing our existing advantages.",
+   "created_at": "2017-06-13T15:42:54Z",
+   "id": 308159448,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-06-13T15:42:54Z",
+   "user": {
+    "id": 5394722,
+    "login": "catern",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The way I was proposing a while ago was a \"can-only-read-if-you-have-the-hash-preimage\", but you'd likely need a fancy protocol for gaining access to the filesystem entry that way.",
+   "created_at": "2017-06-20T21:06:45Z",
+   "id": 309891577,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2017-06-20T21:06:45Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I wanted to experiment with a non-world-enmuratable Nix store and see if there are any drawbacks/unexpected problems, but apparently the local store constructor enforces the `0o1775` mode (and I wanted to use mainline Nix). Is there a specific well-known reason for that?",
+   "created_at": "2018-04-23T15:13:50Z",
+   "id": 383611525,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2018-04-23T15:13:50Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I marked this as stale due to inactivity. &rarr; [More info](https://github.com/NixOS/nix/blob/master/.github/STALE-BOT.md)\n",
+   "created_at": "2021-02-16T01:49:05Z",
+   "id": 779530634,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 16,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 16
+   },
+   "updated_at": "2021-02-16T01:49:05Z",
+   "user": {
+    "id": 26384082,
+    "login": "stale[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  },
+  {
+   "body": "I marked this as stale due to inactivity. &rarr; [More info](https://github.com/NixOS/nix/blob/master/.github/STALE-BOT.md)\n",
+   "created_at": "2022-01-03T20:43:58Z",
+   "id": 1004347333,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 5,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2022-01-03T20:43:58Z",
+   "user": {
+    "id": 26384082,
+    "login": "stale[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  },
+  {
+   "body": "Any progress on this in the last 10 years since it was opened?",
+   "created_at": "2022-01-04T21:02:42Z",
+   "id": 1005168089,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 5,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2022-01-04T21:02:42Z",
+   "user": {
+    "id": 1719781,
+    "login": "pinpox",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@pinpox well there's no real consensus, there's more discussion in https://github.com/NixOS/rfcs/pull/5, but unless someone comes up with a compelling generic approach, the current way is userspace approaches like sops-nix and agenix.\r\n\r\nIt would be better to close this issue I think.",
+   "created_at": "2022-01-06T10:48:26Z",
+   "id": 1006469427,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2022-01-06T10:48:26Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "oh and actually a nixos-only approach via systemd seems to be working, see https://github.com/NixOS/nixpkgs/issues/102397\r\n\r\nnixos+systemd-only is not really a problem since that is where most of the solutions are required and ACL management would require multi-user anyway.",
+   "created_at": "2022-01-06T10:51:09Z",
+   "id": 1006471735,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2022-01-06T10:51:09Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm currently working on ACL support (described [here](https://gist.github.com/edolstra/afa5a41d4acbc0d6c8cccfede7fd4792)).",
+   "created_at": "2022-01-06T12:04:47Z",
+   "id": 1006527619,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 36,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 36
+   },
+   "updated_at": "2022-01-06T12:04:47Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/idiomatic-nixos/17079/2\n",
+   "created_at": "2022-01-11T18:16:08Z",
+   "id": 1010234072,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2022-01-11T18:16:08Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I marked this as stale due to inactivity. &rarr; [More info](https://github.com/NixOS/nix/blob/master/.github/STALE-BOT.md)\n",
+   "created_at": "2022-07-11T00:54:58Z",
+   "id": 1179844350,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 4,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2022-07-11T00:54:58Z",
+   "user": {
+    "id": 26384082,
+    "login": "stale[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  },
+  {
+   "body": ".",
+   "created_at": "2022-07-11T06:53:24Z",
+   "id": 1180032394,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2022-07-11T06:53:24Z",
+   "user": {
+    "id": 3893828,
+    "login": "winny-",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/how-to-effectively-manage-secrets/25793/14\n",
+   "created_at": "2023-03-05T16:05:46Z",
+   "id": 1455132705,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-03-05T16:05:46Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Related RFC: NixOS/rfcs/pull/143",
+   "created_at": "2023-03-17T18:31:30Z",
+   "id": 1474245552,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 3,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2023-03-17T18:31:30Z",
+   "user": {
+    "id": 22211000,
+    "login": "azahi",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Closing as stale. Re-open if needed.",
+   "created_at": "2026-08-13T21:16:47Z",
+   "id": 5286486942,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 3,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2026-08-13T21:16:47Z",
+   "user": {
+    "id": 178444,
+    "login": "tomberek",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nix/issues/8",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Sometimes it's desirable to have files in the Nix store that are not world-readable, such as configuration files containing passwords. This could be implemented as follows:\n- Private files are marked as such by giving them a certain magic prefix to the name, e.g. `p:`. When these are registered, Nix should make them readable only to root (permission 0700) and the calling user (using an ACL). (The Nix daemon knows the uid of the caller.)\n- The permissions on a derivation should be propagated to the output paths. Also, private derivations should be run with a umask of 0077.\n- If another user attempts to register an already valid private file, then its uid should be added to the ACL of the file.  If it's a derivation, then the uid should also be added to the ACLs of any valid outputs.\n- Store operations that read files from the store (such as `exportPath()`) should check that the caller is in the ACL of the file.\n\nSo, for instance, if the root user builds a NixOS configuration containing some private files, then those files are only readable as root.  If Alice builds the same configuration, then those files will be readable by root and Alice. If Alice then uses Charon to copy the configuration to a remote machine (i.e. `nix-copy-closure --to root@remote ...`), then the files on the remote machine will only be readable by root.\n\nThis model only allows files that are private to the instantiating user and root. So it doesn't support specifying a file that is readable only to the `sshd` user.  But that's probably not necessary.\n",
+  "closed_at": "2026-08-13T21:16:48Z",
+  "closed_by": {
+   "id": 178444,
+   "login": "tomberek",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 77,
+  "created_at": "2012-04-23T11:03:45Z",
+  "id": 4238218,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "0b02e1",
+    "default": false,
+    "description": "Feature request or proposal",
+    "id": 3709171,
+    "name": "feature"
+   },
+   {
+    "color": "5419e8",
+    "default": false,
+    "description": "Novel ideas, large API changes, notable refactorings, issues with RFC potential, etc.",
+    "id": 5574665833,
+    "name": "significant"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 8,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 126,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 4,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 130
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nix",
+  "state": "closed",
+  "state_reason": "not_planned",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Support private files in the Nix store",
+  "type": null,
+  "updated_at": "2026-08-13T21:16:48Z",
+  "user": {
+   "id": 1148549,
+   "login": "edolstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nix#8",
+ "sources": [
+  "nix-private-files"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 192147,
+    "login": "aszlig",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "1a3b226231d85e4fe3dc55d071e8f42dc74fded3",
+   "commit_url": "https://api.github.com/repos/aszlig/nixops/commits/1a3b226231d85e4fe3dc55d071e8f42dc74fded3",
+   "created_at": "2014-06-24T12:58:12Z",
+   "event": "referenced",
+   "id": 134534170
+  },
+  {
+   "actor": {
+    "id": 192147,
+    "login": "aszlig",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "b9a49b7042bca63a4c2e6fc11b49f14f802bdf0d",
+   "commit_url": "https://api.github.com/repos/aszlig/nixops/commits/b9a49b7042bca63a4c2e6fc11b49f14f802bdf0d",
+   "created_at": "2014-07-04T10:31:37Z",
+   "event": "referenced",
+   "id": 138263667
+  },
+  {
+   "actor": {
+    "id": 5073472,
+    "login": "atsukotakahashi",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "40c1f5d25da6c288270a6524cb899248ec1167fe",
+   "commit_url": "https://api.github.com/repos/atsukotakahashi/ops/commits/40c1f5d25da6c288270a6524cb899248ec1167fe",
+   "created_at": "2014-11-01T01:04:28Z",
+   "event": "referenced",
+   "id": 186882053
+  },
+  {
+   "actor": {
+    "id": 1174810,
+    "login": "abbradar",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "e202744ba69b88dbd270d044bb7e08c482579a93",
+   "commit_url": "https://api.github.com/repos/afranchuk/nixpkgs/commits/e202744ba69b88dbd270d044bb7e08c482579a93",
+   "created_at": "2016-02-26T15:51:14Z",
+   "event": "referenced",
+   "id": 567713362
+  },
+  {
+   "actor": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "45c6405a30bd1b2cb8ad6a94b23be8b10cf52069",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/45c6405a30bd1b2cb8ad6a94b23be8b10cf52069",
+   "created_at": "2017-04-25T17:00:41Z",
+   "event": "closed",
+   "id": 1057048931,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2017-04-25T17:20:42Z",
+   "event": "reopened",
+   "id": 1057083521,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 192147,
+    "login": "aszlig",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "9ac8876e5beb824018b9a09d4640f7efc2fbc8ae",
+   "commit_url": "https://api.github.com/repos/aszlig/nix/commits/9ac8876e5beb824018b9a09d4640f7efc2fbc8ae",
+   "created_at": "2018-08-18T02:45:19Z",
+   "event": "referenced",
+   "id": 1795815922
+  },
+  {
+   "actor": {
+    "id": 39752197,
+    "login": "johnalotoski",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "2984ffd78bcdbd59092378b1c2acb02d61e1e496",
+   "commit_url": "https://api.github.com/repos/input-output-hk/nixops-aws/commits/2984ffd78bcdbd59092378b1c2acb02d61e1e496",
+   "created_at": "2019-07-12T00:49:12Z",
+   "event": "referenced",
+   "id": 2477620633
+  },
+  {
+   "actor": {
+    "id": 39752197,
+    "login": "johnalotoski",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fa9c56537edc4db5c15736bda723121f16bb98c5",
+   "commit_url": "https://api.github.com/repos/input-output-hk/nixops-hetzner/commits/fa9c56537edc4db5c15736bda723121f16bb98c5",
+   "created_at": "2019-07-13T06:08:06Z",
+   "event": "referenced",
+   "id": 2480589442
+  },
+  {
+   "actor": {
+    "id": 39752197,
+    "login": "johnalotoski",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "4c74ba5d66c4e41a1876243f0db2ec8024fada21",
+   "commit_url": "https://api.github.com/repos/input-output-hk/nixops-hetzner/commits/4c74ba5d66c4e41a1876243f0db2ec8024fada21",
+   "created_at": "2019-08-07T13:08:21Z",
+   "event": "referenced",
+   "id": 2540009600
+  },
+  {
+   "actor": {
+    "id": 39752197,
+    "login": "johnalotoski",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "ebe4d7924997cc3fc0e5e6de0f71f422a339cbfd",
+   "commit_url": "https://api.github.com/repos/input-output-hk/nixops-aws/commits/ebe4d7924997cc3fc0e5e6de0f71f422a339cbfd",
+   "created_at": "2019-08-07T13:14:46Z",
+   "event": "referenced",
+   "id": 2540029221
+  },
+  {
+   "actor": {
+    "id": 4641445,
+    "login": "meditans",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "8a91cdd2e443525028a8ea994a7685f649708ed8",
+   "commit_url": "https://api.github.com/repos/Ericson2314/nix/commits/8a91cdd2e443525028a8ea994a7685f649708ed8",
+   "created_at": "2020-08-28T18:19:33Z",
+   "event": "referenced",
+   "id": 3705156724
+  },
+  {
+   "actor": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "724b7f4fb660212a97ba6482208c299158720c5b",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/724b7f4fb660212a97ba6482208c299158720c5b",
+   "created_at": "2020-12-22T10:18:47Z",
+   "event": "referenced",
+   "id": 4139516533
+  },
+  {
+   "actor": {
+    "id": 4804,
+    "login": "ryantm",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "ae0eb7424f006a071d4b6c9b9cc1a48a330314f5",
+   "commit_url": "https://api.github.com/repos/ryantm/nix/commits/ae0eb7424f006a071d4b6c9b9cc1a48a330314f5",
+   "created_at": "2023-09-10T11:37:16Z",
+   "event": "referenced",
+   "id": 10326200411
+  },
+  {
+   "actor": {
+    "id": 39656359,
+    "login": "zolodev",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "2122e9a5f5977829faa840b997c5067a1ce7735e",
+   "commit_url": "https://api.github.com/repos/zolodev/nix/commits/2122e9a5f5977829faa840b997c5067a1ce7735e",
+   "created_at": "2024-01-01T15:43:22Z",
+   "event": "referenced",
+   "id": 11365420755
+  },
+  {
+   "actor": {
+    "id": 3144357,
+    "login": "tebowy",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "ffbad9b76279e23c70bd2df8ba5f3259180e192a",
+   "commit_url": "https://api.github.com/repos/tebowy/nix/commits/ffbad9b76279e23c70bd2df8ba5f3259180e192a",
+   "created_at": "2024-07-11T15:47:13Z",
+   "event": "referenced",
+   "id": 13473918683
+  },
+  {
+   "actor": {
+    "id": 96200,
+    "login": "Mic92",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "2790f5f9aeac7cb4179918fac26f4fb74fe4f53d",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/2790f5f9aeac7cb4179918fac26f4fb74fe4f53d",
+   "created_at": "2025-03-19T21:46:08Z",
+   "event": "referenced",
+   "id": 16880957623
+  },
+  {
+   "actor": {
+    "id": 37929162,
+    "login": "mergify[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   },
+   "commit_id": "32ab3ef598a18c6257badb17ecd53c67e7c35689",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/32ab3ef598a18c6257badb17ecd53c67e7c35689",
+   "created_at": "2025-03-19T21:46:23Z",
+   "event": "referenced",
+   "id": 16880961354
+  },
+  {
+   "actor": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "9590167290ffbe712e87386e8981b04f9b07b348",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/9590167290ffbe712e87386e8981b04f9b07b348",
+   "created_at": "2025-03-29T00:01:13Z",
+   "event": "referenced",
+   "id": 17040695243
+  },
+  {
+   "actor": {
+    "id": 37929162,
+    "login": "mergify[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   },
+   "commit_id": "e6aad00570ebea2f621fb37c640b76c5f0a47549",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/e6aad00570ebea2f621fb37c640b76c5f0a47549",
+   "created_at": "2025-03-29T00:02:41Z",
+   "event": "referenced",
+   "id": 17040706645
+  },
+  {
+   "actor": {
+    "id": 37929162,
+    "login": "mergify[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   },
+   "commit_id": "84a25dc84662bcaadac07ad2b8d2e7ae45cdcc06",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/84a25dc84662bcaadac07ad2b8d2e7ae45cdcc06",
+   "created_at": "2025-03-29T00:02:52Z",
+   "event": "referenced",
+   "id": 17040708364
+  },
+  {
+   "actor": {
+    "id": 3880346,
+    "login": "ConnorBaker",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "1a5c4d49e4eeb2081e5d87aef4b4c64a5de5a034",
+   "commit_url": "https://api.github.com/repos/ConnorBaker/nix/commits/1a5c4d49e4eeb2081e5d87aef4b4c64a5de5a034",
+   "created_at": "2025-07-25T08:47:57Z",
+   "event": "referenced",
+   "id": 18810508680
+  },
+  {
+   "actor": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "3ba103865d4273c07b4bea702ea594f67fc14e89",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/3ba103865d4273c07b4bea702ea594f67fc14e89",
+   "created_at": "2025-08-07T10:45:00Z",
+   "event": "referenced",
+   "id": 19032556823
+  },
+  {
+   "actor": {
+    "id": 6235312,
+    "login": "CertainLach",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "80c113919a9af6a037a2497fdb52d96b8d825d92",
+   "commit_url": "https://api.github.com/repos/deltarocks/nix/commits/80c113919a9af6a037a2497fdb52d96b8d825d92",
+   "created_at": "2025-09-04T15:38:46Z",
+   "event": "referenced",
+   "id": 19508107759
+  },
+  {
+   "actor": {
+    "id": 145775305,
+    "login": "xokdvium",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "dce1a893d0206083cbab19b9211ddb01eaa53f70",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/dce1a893d0206083cbab19b9211ddb01eaa53f70",
+   "created_at": "2025-10-04T23:37:21Z",
+   "event": "referenced",
+   "id": 20098769860
+  },
+  {
+   "actor": {
+    "id": 41898282,
+    "login": "github-actions[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   },
+   "commit_id": "64dbb6f812a63d9976def727c9047d0436fd1be4",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/64dbb6f812a63d9976def727c9047d0436fd1be4",
+   "created_at": "2025-10-07T21:39:15Z",
+   "event": "referenced",
+   "id": 20150370792
+  },
+  {
+   "actor": {
+    "id": 234676,
+    "login": "joshuaspence",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "b852ca472544cd992313128d4d0a6b4c69346279",
+   "commit_url": "https://api.github.com/repos/joshuaspence/nix/commits/b852ca472544cd992313128d4d0a6b4c69346279",
+   "created_at": "2025-12-04T22:50:50Z",
+   "event": "referenced",
+   "id": 21372395879
+  },
+  {
+   "actor": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "b4c6bfd72a8652031c166ac4c71f2c1f1a7bc3c7",
+   "commit_url": "https://api.github.com/repos/Ma27/nix/commits/b4c6bfd72a8652031c166ac4c71f2c1f1a7bc3c7",
+   "created_at": "2026-03-08T19:27:56Z",
+   "event": "referenced",
+   "id": 23376223705
+  },
+  {
+   "actor": {
+    "id": 3880346,
+    "login": "ConnorBaker",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "02db36374d2982765d29545e880827a53797ee27",
+   "commit_url": "https://api.github.com/repos/ConnorBaker/nix/commits/02db36374d2982765d29545e880827a53797ee27",
+   "created_at": "2026-06-01T03:13:44Z",
+   "event": "referenced",
+   "id": 26169421577
+  },
+  {
+   "actor": {
+    "id": 3880346,
+    "login": "ConnorBaker",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "facb5ee11d6c36efe7458263e22fa214d035d268",
+   "commit_url": "https://api.github.com/repos/ConnorBaker/nix/commits/facb5ee11d6c36efe7458263e22fa214d035d268",
+   "created_at": "2026-06-01T03:13:44Z",
+   "event": "referenced",
+   "id": 26169421660
+  },
+  {
+   "actor": {
+    "id": 3880346,
+    "login": "ConnorBaker",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "003ec3335c1a900bf88edf75c10db85041707ade",
+   "commit_url": "https://api.github.com/repos/ConnorBaker/nix/commits/003ec3335c1a900bf88edf75c10db85041707ade",
+   "created_at": "2026-06-01T03:13:45Z",
+   "event": "referenced",
+   "id": 26169421770
+  },
+  {
+   "actor": {
+    "id": 3880346,
+    "login": "ConnorBaker",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "5c0cc55303878d7c87d4332b4f1f1f71de5de84a",
+   "commit_url": "https://api.github.com/repos/ConnorBaker/nix/commits/5c0cc55303878d7c87d4332b4f1f1f71de5de84a",
+   "created_at": "2026-06-01T03:13:46Z",
+   "event": "referenced",
+   "id": 26169422063
+  },
+  {
+   "actor": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "d44773c9cd0c64fd00405029f48a1c4d273c74ab",
+   "commit_url": "https://api.github.com/repos/NixOS/nix/commits/d44773c9cd0c64fd00405029f48a1c4d273c74ab",
+   "created_at": "2026-06-16T16:40:54Z",
+   "event": "referenced",
+   "id": 26819479327
+  },
+  {
+   "actor": {
+    "id": 40449,
+    "login": "angerman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "a431e5f4c480d347f369c91aaf4cdb6104d780d9",
+   "commit_url": "https://api.github.com/repos/angerman/nix/commits/a431e5f4c480d347f369c91aaf4cdb6104d780d9",
+   "created_at": "2026-08-05T02:34:56Z",
+   "event": "referenced",
+   "id": 28984927199
+  },
+  {
+   "actor": {
+    "id": 40449,
+    "login": "angerman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "642dac2482dbf9140c20f47da1a421e681423222",
+   "commit_url": "https://api.github.com/repos/angerman/nix/commits/642dac2482dbf9140c20f47da1a421e681423222",
+   "created_at": "2026-08-05T02:34:56Z",
+   "event": "referenced",
+   "id": 28984927248
+  },
+  {
+   "actor": {
+    "id": 40449,
+    "login": "angerman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "02871bc3bf73bfb986c49911c08d349b50da4fa5",
+   "commit_url": "https://api.github.com/repos/angerman/nix/commits/02871bc3bf73bfb986c49911c08d349b50da4fa5",
+   "created_at": "2026-08-05T02:34:56Z",
+   "event": "referenced",
+   "id": 28984927306
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "6d6a16b32defd2c12078ecf50dbdd04ffa46beb5",
+   "commit_url": "https://api.github.com/repos/roberth/nix/commits/6d6a16b32defd2c12078ecf50dbdd04ffa46beb5",
+   "created_at": "2026-08-09T12:11:13Z",
+   "event": "referenced",
+   "id": 29181953807
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "e963d6fddf9c45e313de4e4bb73f71ea4fe9fa1d",
+   "commit_url": "https://api.github.com/repos/roberth/nix/commits/e963d6fddf9c45e313de4e4bb73f71ea4fe9fa1d",
+   "created_at": "2026-08-09T12:11:13Z",
+   "event": "referenced",
+   "id": 29181953885
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "72ce6b1419cff528cb381a240de728016856c855",
+   "commit_url": "https://api.github.com/repos/roberth/nix/commits/72ce6b1419cff528cb381a240de728016856c855",
+   "created_at": "2026-08-09T12:11:16Z",
+   "event": "referenced",
+   "id": 29181954620
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "c77a6258c9befc3e2996e02b6e5c00137d392680",
+   "commit_url": "https://api.github.com/repos/roberth/nix/commits/c77a6258c9befc3e2996e02b6e5c00137d392680",
+   "created_at": "2026-08-09T12:11:16Z",
+   "event": "referenced",
+   "id": 29181954644
+  },
+  {
+   "actor": {
+    "id": 178444,
+    "login": "tomberek",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-08-13T21:16:48Z",
+   "event": "closed",
+   "id": 29425561205,
+   "intent": null,
+   "state_reason": "not_planned"
+  }
+ ]
+}

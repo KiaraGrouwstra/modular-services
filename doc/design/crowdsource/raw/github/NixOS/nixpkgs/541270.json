@@ -1,0 +1,780 @@
+{
+ "comments": [
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`5f60c00`](https://github.com/Defelo/nixpkgs-review-gha/commit/5f60c005cbf4fa124091567bfe7aa21cedc453a6))\n\nCommand: `nixpkgs-review pr 541270`\nCommit: [`6b43ef5161987ab468fc7d9cabcd53e6420ad5f4`](https://github.com/NixOS/nixpkgs/commit/6b43ef5161987ab468fc7d9cabcd53e6420ad5f4) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/6b43ef5161987ab468fc7d9cabcd53e6420ad5f4..pull/541270/head))\nMerge: [`d176c31e940357816fab3516eca8122362c7ad73`](https://github.com/NixOS/nixpkgs/commit/d176c31e940357816fab3516eca8122362c7ad73)\n\nLogs: https://github.com/phanirithvij/nixpkgs-review-gha/actions/runs/29235940007/attempts/1\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 7 packages built:</summary>\n  <ul>\n    <li>cai</li>\n    <li>python313Packages.courlan</li>\n    <li>python313Packages.riscof</li>\n    <li>python313Packages.trafilatura</li>\n    <li>python314Packages.courlan</li>\n    <li>python314Packages.riscof</li>\n    <li>python314Packages.trafilatura</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 7 packages built:</summary>\n  <ul>\n    <li>cai</li>\n    <li>python313Packages.courlan</li>\n    <li>python313Packages.riscof</li>\n    <li>python313Packages.trafilatura</li>\n    <li>python314Packages.courlan</li>\n    <li>python314Packages.riscof</li>\n    <li>python314Packages.trafilatura</li>\n  </ul>\n</details>\n\n---\n### `aarch64-darwin` (sandbox = true)\n<details>\n  <summary>:white_check_mark: 7 packages built:</summary>\n  <ul>\n    <li>cai</li>\n    <li>python313Packages.courlan</li>\n    <li>python313Packages.riscof</li>\n    <li>python313Packages.trafilatura</li>\n    <li>python314Packages.courlan</li>\n    <li>python314Packages.riscof</li>\n    <li>python314Packages.trafilatura</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-07-13T08:41:33Z",
+   "id": 4956060910,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T08:41:33Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I approved this because I assume you tested the update command at least with one package, otherwise I can run a test later when I get home",
+   "created_at": "2026-07-13T09:03:32Z",
+   "id": 4956238832,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T09:03:32Z",
+   "user": {
+    "id": 25060097,
+    "login": "Daholli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`5f60c00`](https://github.com/Defelo/nixpkgs-review-gha/commit/5f60c005cbf4fa124091567bfe7aa21cedc453a6))\n\nCommand: `nixpkgs-review pr 541270 -p nixosTests.limine -p nixosTests.ghostunnel -p nixosTests.haproxy -p nixosTests.ec2-image -p nixosTests.boot.biosCdrom -p nixosTests.boot.biosNetboot -p nixosTests.boot.biosUsb -p nixosTests.boot.uefiCdrom -p nixosTests.boot.uefiNetboot -p nixosTests.boot.uefiUsb --build-args \"-j 1\"`\nCommit: [`6b43ef5161987ab468fc7d9cabcd53e6420ad5f4`](https://github.com/NixOS/nixpkgs/commit/6b43ef5161987ab468fc7d9cabcd53e6420ad5f4) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/6b43ef5161987ab468fc7d9cabcd53e6420ad5f4..pull/541270/head))\nMerge: [`d176c31e940357816fab3516eca8122362c7ad73`](https://github.com/NixOS/nixpkgs/commit/d176c31e940357816fab3516eca8122362c7ad73)\n\nLogs: https://github.com/phanirithvij/nixpkgs-review-gha/actions/runs/29236394487/attempts/1\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 16 tests built:</summary>\n  <ul>\n    <li>nixosTests.boot.biosCdrom</li>\n    <li>nixosTests.boot.biosNetboot</li>\n    <li>nixosTests.boot.biosUsb</li>\n    <li>nixosTests.boot.uefiCdrom</li>\n    <li>nixosTests.boot.uefiNetboot</li>\n    <li>nixosTests.boot.uefiUsb</li>\n    <li>nixosTests.ec2-image</li>\n    <li>nixosTests.ghostunnel</li>\n    <li>nixosTests.haproxy</li>\n    <li>nixosTests.limine.additionalFiles</li>\n    <li>nixosTests.limine.bios</li>\n    <li>nixosTests.limine.checksum</li>\n    <li>nixosTests.limine.distroName</li>\n    <li>nixosTests.limine.secureBoot</li>\n    <li>nixosTests.limine.specialisations</li>\n    <li>nixosTests.limine.uefi</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-07-13T09:14:17Z",
+   "id": 4956334726,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T09:14:17Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`5f60c00`](https://github.com/Defelo/nixpkgs-review-gha/commit/5f60c005cbf4fa124091567bfe7aa21cedc453a6))\n\nCommand: `nixpkgs-review pr 541270 -p nixosTests.limine --build-args=\"-j 1\"`\nCommit: [`4abe0c81a77a07d8bb6f20ef8c6653334ea07548`](https://github.com/NixOS/nixpkgs/commit/4abe0c81a77a07d8bb6f20ef8c6653334ea07548) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/4abe0c81a77a07d8bb6f20ef8c6653334ea07548..pull/541270/head))\nMerge: [`474126969e46f7960be26ae42ff2da74278e7c5b`](https://github.com/NixOS/nixpkgs/commit/474126969e46f7960be26ae42ff2da74278e7c5b)\n\nLogs: https://github.com/phanirithvij/nixpkgs-review-gha/actions/runs/29247171565/attempts/1\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:x: 7 packages failed to build:</summary>\n  <ul>\n    <li>nixosTests.limine.additionalFiles</li>\n    <li>nixosTests.limine.bios</li>\n    <li>nixosTests.limine.checksum</li>\n    <li>nixosTests.limine.distroName</li>\n    <li>nixosTests.limine.secureBoot</li>\n    <li>nixosTests.limine.specialisations</li>\n    <li>nixosTests.limine.uefi</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-07-13T11:45:30Z",
+   "id": 4957585699,
+   "minimized": {
+    "reason": "resolved"
+   },
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T12:24:27Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> ## `nixpkgs-review` result\r\n> \r\n> Generated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`5f60c00`](https://github.com/Defelo/nixpkgs-review-gha/commit/5f60c005cbf4fa124091567bfe7aa21cedc453a6))\r\n> \r\n> Command: `nixpkgs-review pr 541270 -p nixosTests.limine --build-args=\"-j 1\"` Commit: [`4abe0c81a77a07d8bb6f20ef8c6653334ea07548`](https://github.com/NixOS/nixpkgs/commit/4abe0c81a77a07d8bb6f20ef8c6653334ea07548) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/4abe0c81a77a07d8bb6f20ef8c6653334ea07548..pull/541270/head)) Merge: [`474126969e46f7960be26ae42ff2da74278e7c5b`](https://github.com/NixOS/nixpkgs/commit/474126969e46f7960be26ae42ff2da74278e7c5b)\r\n> \r\n> Logs: https://github.com/phanirithvij/nixpkgs-review-gha/actions/runs/29247171565/attempts/1\r\n> ### `x86_64-linux`\r\n> ❌ 7 packages failed to build:\r\n\r\nIn the logs it seems to failed due to misconfigured nix...",
+   "created_at": "2026-07-13T12:21:34Z",
+   "id": 4957881201,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-13T12:21:34Z",
+   "user": {
+    "id": 60185691,
+    "login": "programmerlexi",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yeah, I ran\r\n\r\n```bash\r\ngh workflow run review.yml -R phanirithvij/nixpkgs-review-gha -f pr=\"541270\" -f push-to-cache=false -f x86_64-darwin=\"no\" -f aarch64-darwin=\"no\" -f post-result=true -f aarch64-linux=false -f extra-args=\"-p nixosTests.limine --build-args=\\\"-j 1\\\"\"\r\n```\r\n\r\nthe issue was `--build-args=\\\"-j 1\\\"` the `=` should instead be a space.",
+   "created_at": "2026-07-13T12:26:02Z",
+   "id": 4957917617,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T12:26:02Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`5f60c00`](https://github.com/Defelo/nixpkgs-review-gha/commit/5f60c005cbf4fa124091567bfe7aa21cedc453a6))\n\nCommand: `nixpkgs-review pr 541270 -p nixosTests.limine --build-args \"-j 1\"`\nCommit: [`4abe0c81a77a07d8bb6f20ef8c6653334ea07548`](https://github.com/NixOS/nixpkgs/commit/4abe0c81a77a07d8bb6f20ef8c6653334ea07548) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/4abe0c81a77a07d8bb6f20ef8c6653334ea07548..pull/541270/head))\nMerge: [`474126969e46f7960be26ae42ff2da74278e7c5b`](https://github.com/NixOS/nixpkgs/commit/474126969e46f7960be26ae42ff2da74278e7c5b)\n\nLogs: https://github.com/phanirithvij/nixpkgs-review-gha/actions/runs/29249715077/attempts/1\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 7 tests built:</summary>\n  <ul>\n    <li>nixosTests.limine.additionalFiles</li>\n    <li>nixosTests.limine.bios</li>\n    <li>nixosTests.limine.checksum</li>\n    <li>nixosTests.limine.distroName</li>\n    <li>nixosTests.limine.secureBoot</li>\n    <li>nixosTests.limine.specialisations</li>\n    <li>nixosTests.limine.uefi</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-07-13T12:34:00Z",
+   "id": 4957984121,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T12:34:00Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/541270",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Recent update to python 3.14 has caused some nixos tests using `os.system` to fail.\r\n\r\nI've replaced the failing items, internal usage, as well as patches we introduce in nixpkgs.\r\n\r\nTested all of the nixos tests, except `usbrelay` because I don't have such a hardware.\r\n\r\nKnown failure `nixosTests.ghostunnel-modular` fixed in https://github.com/NixOS/nixpkgs/pull/541269\r\nKnown failures for modular services fix is here https://github.com/NixOS/nixpkgs/pull/540857\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [x] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n  - no llms were used\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-07-13T17:18:42Z",
+  "closed_by": {
+   "id": 50095635,
+   "login": "JohnRTitor",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 7,
+  "created_at": "2026-07-13T01:06:23Z",
+  "draft": false,
+  "id": 4869539246,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Python is a high-level, general-purpose programming language.",
+    "id": 9820195,
+    "name": "6.topic: python"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "24DD1A",
+    "default": false,
+    "description": "This PR was reviewed and approved by three or more persons.",
+    "id": 4022795151,
+    "name": "12.approvals: 3+"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by a maintainer listed in any of the changed packages.",
+    "id": 4061482046,
+    "name": "12.approved-by: package-maintainer"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 541270,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/541270.diff",
+   "merged_at": "2026-07-13T17:18:42Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/541270.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "various: replace os.system with subprocess.run",
+  "type": null,
+  "updated_at": "2026-07-13T17:26:59Z",
+  "user": {
+   "id": 29627898,
+   "login": "phanirithvij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 59,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "ada2706fb8be0f4c8360344a2de0ec791f339d86",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Recent update to python 3.14 has caused some nixos tests using `os.system` to fail.\r\n\r\nI've replaced the failing items, internal usage, as well as patches we introduce in nixpkgs.\r\n\r\nTested all of the nixos tests, except `usbrelay` because I don't have such a hardware.\r\n\r\nKnown failure `nixosTests.ghostunnel-modular` fixed in https://github.com/NixOS/nixpkgs/pull/541269\r\nKnown failures for modular services fix is here https://github.com/NixOS/nixpkgs/pull/540857\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [x] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n  - no llms were used\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 11,
+  "closed_at": "2026-07-13T17:18:42Z",
+  "comments": 7,
+  "commits": 2,
+  "created_at": "2026-07-13T01:06:23Z",
+  "deletions": 24,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/541270.diff",
+  "draft": false,
+  "head": {
+   "label": "phanirithvij:ghostunnel-fix-tests",
+   "ref": "ghostunnel-fix-tests",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-08-12T15:42:02Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "phanirithvij/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/phanirithvij/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 841533886,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/phanirithvij/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/phanirithvij/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 29627898,
+     "login": "phanirithvij",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/phanirithvij/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:00:58Z",
+    "size": 2910843,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/phanirithvij/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/phanirithvij/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-08-31T16:21:48Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "4abe0c81a77a07d8bb6f20ef8c6653334ea07548",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4040917602,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Python is a high-level, general-purpose programming language.",
+    "id": 9820195,
+    "name": "6.topic: python"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "24DD1A",
+    "default": false,
+    "description": "This PR was reviewed and approved by three or more persons.",
+    "id": 4022795151,
+    "name": "12.approvals: 3+"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by a maintainer listed in any of the changed packages.",
+    "id": 4061482046,
+    "name": "12.approved-by: package-maintainer"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "f1b7e257eb23b13209859a9afa37e3e441d8ba6c",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-07-13T17:18:42Z",
+  "merged_by": {
+   "id": 50095635,
+   "login": "JohnRTitor",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 541270,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/541270.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 29044,
+    "login": "tfc",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 60272,
+    "login": "iedame",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 660911,
+    "login": "jonhermansen",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 1607770,
+    "login": "ulrikstrid",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 38541651,
+    "login": "maeve-oake",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 46931073,
+    "login": "jokatzke",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 50095635,
+    "login": "JohnRTitor",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 3,
+  "state": "closed",
+  "title": "various: replace os.system with subprocess.run",
+  "updated_at": "2026-07-13T17:26:59Z",
+  "user": {
+   "id": 29627898,
+   "login": "phanirithvij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#541270",
+ "review_comments": [
+  {
+   "body": "Tested this update script. ",
+   "commit_id": "4abe0c81a77a07d8bb6f20ef8c6653334ea07548",
+   "created_at": "2026-07-13T09:06:21Z",
+   "diff_hunk": "@@ -39,8 +39,8 @@ def write_expression():\n     version = Version.re_valid_version.match(latest[\"stable\"][\"Version\"]).group(\n         \"upstream_version\"\n     )\n-    os.system(f'update-source-version microsoft-edge \"{version}\"')\n-    os.system(f'update-source-version msedgedriver \"{version}\"')\n+    subprocess.run([\"update-source-version\", \"microsoft-edge\", version])\n+    subprocess.run([\"update-source-version\", \"msedgedriver\", version])",
+   "id": 3569352214,
+   "line": 43,
+   "original_commit_id": "6b43ef5161987ab468fc7d9cabcd53e6420ad5f4",
+   "original_line": 43,
+   "original_position": 16,
+   "original_start_line": null,
+   "path": "pkgs/by-name/mi/microsoft-edge/update.py",
+   "position": 16,
+   "pull_request_review_id": 4683258492,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-13T09:06:21Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Please use a list instead of a string (removing the `+ \" \" +`) for this and set shell to False.",
+   "commit_id": "4abe0c81a77a07d8bb6f20ef8c6653334ea07548",
+   "created_at": "2026-07-13T10:50:24Z",
+   "diff_hunk": "",
+   "id": 3570011065,
+   "line": 1,
+   "original_commit_id": "6b43ef5161987ab468fc7d9cabcd53e6420ad5f4",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "nixos/modules/system/boot/loader/limine/limine-install.py",
+   "position": 1,
+   "pull_request_review_id": 4684001318,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2026-07-13T10:50:42Z",
+   "user": {
+    "id": 60185691,
+    "login": "programmerlexi",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Done.",
+   "commit_id": "4abe0c81a77a07d8bb6f20ef8c6653334ea07548",
+   "created_at": "2026-07-13T10:57:25Z",
+   "diff_hunk": "",
+   "id": 3570056233,
+   "in_reply_to_id": 3570011065,
+   "line": 1,
+   "original_commit_id": "6b43ef5161987ab468fc7d9cabcd53e6420ad5f4",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "nixos/modules/system/boot/loader/limine/limine-install.py",
+   "position": 1,
+   "pull_request_review_id": 4684050215,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2026-07-13T10:57:26Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "6b43ef5161987ab468fc7d9cabcd53e6420ad5f4",
+   "id": 4683226590,
+   "state": "APPROVED",
+   "submitted_at": "2026-07-13T09:01:36Z",
+   "user": {
+    "id": 25060097,
+    "login": "Daholli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6b43ef5161987ab468fc7d9cabcd53e6420ad5f4",
+   "id": 4683258492,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-13T09:06:20Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6b43ef5161987ab468fc7d9cabcd53e6420ad5f4",
+   "id": 4684001318,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-07-13T10:50:42Z",
+   "user": {
+    "id": 60185691,
+    "login": "programmerlexi",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6b43ef5161987ab468fc7d9cabcd53e6420ad5f4",
+   "id": 4684050215,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-13T10:57:26Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "4abe0c81a77a07d8bb6f20ef8c6653334ea07548",
+   "id": 4684293427,
+   "state": "APPROVED",
+   "submitted_at": "2026-07-13T11:32:58Z",
+   "user": {
+    "id": 60185691,
+    "login": "programmerlexi",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "approving the limine install script",
+   "commit_id": "4abe0c81a77a07d8bb6f20ef8c6653334ea07548",
+   "id": 4684363415,
+   "state": "APPROVED",
+   "submitted_at": "2026-07-13T11:43:32Z",
+   "user": {
+    "id": 40492846,
+    "login": "lzcunt",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 50095635,
+    "login": "JohnRTitor",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "f1b7e257eb23b13209859a9afa37e3e441d8ba6c",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/f1b7e257eb23b13209859a9afa37e3e441d8ba6c",
+   "created_at": "2026-07-13T17:18:42Z",
+   "event": "merged",
+   "id": 27921528688
+  },
+  {
+   "actor": {
+    "id": 50095635,
+    "login": "JohnRTitor",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-13T17:18:42Z",
+   "event": "closed",
+   "id": 27921528766,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

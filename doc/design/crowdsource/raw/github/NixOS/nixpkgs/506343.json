@@ -1,0 +1,933 @@
+{
+ "comments": [
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/self-host-blocks-building-blocks-for-self-hosting-with-best-practices/26963/43\n",
+   "created_at": "2026-04-03T17:32:03Z",
+   "id": 4184411242,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-03T17:32:03Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review`](https://github.com/Mic92/nixpkgs-review).\n\nCommand: `nixpkgs-review pr 506343`\nCommit: `1c0ed60bc297e2b47d301aa64a401dcf55ea4c37`\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 4 packages built:</summary>\n  <ul>\n    <li>extra-container</li>\n    <li>nixos-container</li>\n    <li>nixpkgs-manual</li>\n    <li>tests.lib-tests</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-04-03T18:06:47Z",
+   "id": 4184577885,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-03T18:06:47Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/prs-ready-for-review/3032/6705\n",
+   "created_at": "2026-04-08T13:00:45Z",
+   "id": 4206407479,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-08T13:00:45Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/pre-rfc-decouple-services-using-structured-typing/58257/45\n",
+   "created_at": "2026-04-26T18:56:54Z",
+   "id": 4322757016,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-26T18:56:54Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "marking as draft again, as having aligned with @ibizaman, having gained confidence on direction here we feel that for reviewing purposes we should go for more manageable chunks such as #495303",
+   "created_at": "2026-05-19T06:22:52Z",
+   "id": 4484975687,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-19T06:22:52Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "On the latest change related to hardcoded secrets and systemd, although technically correct to rely on systemd, the usefulness is limited because the harcoded secret module is only intended to be used in tests, which can probably all be written acceptably using the system activation script.",
+   "created_at": "2026-05-19T12:45:52Z",
+   "id": 4487857865,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-19T12:50:12Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/506343",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Implements contracts (https://github.com/NixOS/rfcs/pull/189) by building on the work by @ibizaman (and [earlier work](https://github.com/fricklerhandwerk/module-interfaces) by @fricklerhandwerk).\r\n\r\nCloses https://github.com/NixOS/rfcs/pull/189.\r\n\r\nFor more info, see the [manual entry](https://github.com/KiaraGrouwstra/nixpkgs/blob/contracts-automated/nixos/doc/manual/development/contracts.md) or [options reference](https://kiaragrouwstra.github.io/contracts/options.html#opt-contractTypes).\r\n\r\nSupersedes: #432529, #485453, #495303, #500287.\r\n\r\nDisclaimer: I have made use of a coding agent to get things to this state.\r\n\r\n## Use-cases\r\n\r\n- [abstracting over alternate providers](https://shb.skarabox.com/contracts.html#contracts-why)\r\n- modular services: porting legacy modules consisting of multiple services (#490688)\r\n\r\n## Differences from the RFC\r\n\r\n1. **Topology: point-to-point vs aggregated:** The RFC has each consumer directly link to one provider (consumer.provider = config.services.restic...), with bidirectional references (provider.consumer = config.services.nextcloud...). We use centralized aggregation - consumers register into `contracts.<type>.want`, providers register into `contracts.<type>.providers`, and a `defaultProvider`/`defaultProviderName` selects which provider fulfills all requests. This avoids the 'dual-link' problem the RFC mentioned.\r\n1. **[Modular service](https://nixos.org/manual/nixos/stable/#modular-services) support:** The RFC doesn't address modular services. We implement  a bridge pattern to give modular services the same API for using contracts as NixOS modules.\r\n1. **Cross-system support:** The RFC is NixOS-only. Our `lib/contracts/module.nix` and `lib/services/` are system-agnostic, designed to pave the way for contracts support from other systems managing nix (modular) services, e.g. home-manager, nimi, nix-darwin, finix, NixBSD, etc.\r\n1. **Contract type registration:** The RFC defines contracts inline as `contracts.<name>` with `deferredModule` types. We separate type definitions (`contractTypes`) from instances (`contracts`), with types shipped in `lib.contracts` (usable from the sandbox for docs builds) and extensible from outside nixpkgs via `config.contractTypes` (without such docs).\r\n1. **Naming: input/output vs request/result:** The RFC uses input/output. We use request/result. This is more specific about the directionality (a consumer requests, a provider produces results), and more consistent with [SelfHostBlocks](https://github.com/ibizaman/selfhostblocks).\r\n\r\n## Tests to run on changes\r\n\r\n- `bash lib/tests/modules.sh`\r\n- `nix-instantiate --eval lib/services/test.nix`\r\n- `nix-build -A nixosTests.contracts`\r\n- `nix-build -A stash.passthru.tests.stash`\r\n- `nix-build nixos/release.nix -A manual.x86_64-linux`\r\n\r\n## Next steps\r\n\r\nNone of these are breaking changes necessarily, so may not need to be in-scope for the initial PR:\r\n\r\n- [ ] [optional feature support within a contract](https://github.com/KiaraGrouwstra/nixpkgs/compare/contracts-automated...KiaraGrouwstra:nixpkgs:contracts-tags) as suggested [on discourse](https://discourse.nixos.org/t/pre-rfc-decouple-services-using-structured-typing/58257/43) (still wanna think this over, not sure how i feel about it yet)\r\n- [ ] add support for more systems ([home-manager](https://github.com/nix-community/home-manager/compare/master...KiaraGrouwstra:home-manager:contracts), ...)\r\n- [ ] add more contracts (e.g. [draft](https://github.com/KiaraGrouwstra/nixpkgs/compare/contracts-automated...contracts-new-types))\r\n- [ ] validate the implementation thru further real-life experience\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [x] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [x] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 6,
+  "created_at": "2026-04-03T16:53:27Z",
+  "draft": true,
+  "id": 4201356375,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "About \"NixOS\" module system internals",
+    "id": 1919438524,
+    "name": "6.topic: module system"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   },
+   {
+    "color": "7b845a",
+    "default": false,
+    "description": "Contributions that include code generation with LLMs",
+    "id": 11544961878,
+    "name": "llm-assisted"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 506343,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/506343.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/506343.patch"
+  },
+  "reactions": {
+   "+1": 13,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 5,
+   "total_count": 18
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "contracts: init",
+  "type": null,
+  "updated_at": "2026-08-08T16:33:13Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 4609,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "b2373737aa22ce030ab9f89b41d70cbc31a4010c",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Implements contracts (https://github.com/NixOS/rfcs/pull/189) by building on the work by @ibizaman (and [earlier work](https://github.com/fricklerhandwerk/module-interfaces) by @fricklerhandwerk).\r\n\r\nCloses https://github.com/NixOS/rfcs/pull/189.\r\n\r\nFor more info, see the [manual entry](https://github.com/KiaraGrouwstra/nixpkgs/blob/contracts-automated/nixos/doc/manual/development/contracts.md) or [options reference](https://kiaragrouwstra.github.io/contracts/options.html#opt-contractTypes).\r\n\r\nSupersedes: #432529, #485453, #495303, #500287.\r\n\r\nDisclaimer: I have made use of a coding agent to get things to this state.\r\n\r\n## Use-cases\r\n\r\n- [abstracting over alternate providers](https://shb.skarabox.com/contracts.html#contracts-why)\r\n- modular services: porting legacy modules consisting of multiple services (#490688)\r\n\r\n## Differences from the RFC\r\n\r\n1. **Topology: point-to-point vs aggregated:** The RFC has each consumer directly link to one provider (consumer.provider = config.services.restic...), with bidirectional references (provider.consumer = config.services.nextcloud...). We use centralized aggregation - consumers register into `contracts.<type>.want`, providers register into `contracts.<type>.providers`, and a `defaultProvider`/`defaultProviderName` selects which provider fulfills all requests. This avoids the 'dual-link' problem the RFC mentioned.\r\n1. **[Modular service](https://nixos.org/manual/nixos/stable/#modular-services) support:** The RFC doesn't address modular services. We implement  a bridge pattern to give modular services the same API for using contracts as NixOS modules.\r\n1. **Cross-system support:** The RFC is NixOS-only. Our `lib/contracts/module.nix` and `lib/services/` are system-agnostic, designed to pave the way for contracts support from other systems managing nix (modular) services, e.g. home-manager, nimi, nix-darwin, finix, NixBSD, etc.\r\n1. **Contract type registration:** The RFC defines contracts inline as `contracts.<name>` with `deferredModule` types. We separate type definitions (`contractTypes`) from instances (`contracts`), with types shipped in `lib.contracts` (usable from the sandbox for docs builds) and extensible from outside nixpkgs via `config.contractTypes` (without such docs).\r\n1. **Naming: input/output vs request/result:** The RFC uses input/output. We use request/result. This is more specific about the directionality (a consumer requests, a provider produces results), and more consistent with [SelfHostBlocks](https://github.com/ibizaman/selfhostblocks).\r\n\r\n## Tests to run on changes\r\n\r\n- `bash lib/tests/modules.sh`\r\n- `nix-instantiate --eval lib/services/test.nix`\r\n- `nix-build -A nixosTests.contracts`\r\n- `nix-build -A stash.passthru.tests.stash`\r\n- `nix-build nixos/release.nix -A manual.x86_64-linux`\r\n\r\n## Next steps\r\n\r\nNone of these are breaking changes necessarily, so may not need to be in-scope for the initial PR:\r\n\r\n- [ ] [optional feature support within a contract](https://github.com/KiaraGrouwstra/nixpkgs/compare/contracts-automated...KiaraGrouwstra:nixpkgs:contracts-tags) as suggested [on discourse](https://discourse.nixos.org/t/pre-rfc-decouple-services-using-structured-typing/58257/43) (still wanna think this over, not sure how i feel about it yet)\r\n- [ ] add support for more systems ([home-manager](https://github.com/nix-community/home-manager/compare/master...KiaraGrouwstra:home-manager:contracts), ...)\r\n- [ ] add more contracts (e.g. [draft](https://github.com/KiaraGrouwstra/nixpkgs/compare/contracts-automated...contracts-new-types))\r\n- [ ] validate the implementation thru further real-life experience\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [x] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [x] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 51,
+  "closed_at": null,
+  "comments": 6,
+  "commits": 19,
+  "created_at": "2026-04-03T16:53:27Z",
+  "deletions": 63,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/506343.diff",
+  "draft": true,
+  "head": {
+   "label": "KiaraGrouwstra:contracts-automated",
+   "ref": "contracts-automated",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2018-06-10T10:36:34Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 136799825,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 1,
+    "open_issues_count": 1,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-30T19:20:59Z",
+    "size": 3035282,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2024-06-23T17:05:42Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "67e9410e867e856ad40f5b9702d56a4908c5e965",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3486896122,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "About \"NixOS\" module system internals",
+    "id": 1919438524,
+    "name": "6.topic: module system"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   },
+   {
+    "color": "7b845a",
+    "default": false,
+    "description": "Contributions that include code generation with LLMs",
+    "id": 11544961878,
+    "name": "llm-assisted"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 506343,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/506343.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 22124013,
+    "login": "DrakeTDL",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 43472218,
+    "login": "GetPsyched",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 50398876,
+    "login": "hsjobeki",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 156000062,
+    "login": "baileylu121",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 8,
+  "state": "open",
+  "title": "contracts: init",
+  "updated_at": "2026-08-08T16:33:13Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#506343",
+ "review_comments": [
+  {
+   "body": "I find this more readable, espacially when seeing the wiring in the other direction, right after.\n\n```\ncontracts.databaseConnection.want.webapp.db = config.services.webapp.db;\n```",
+   "commit_id": "cfe1213b3b04fcd7ee091bb4776e5cf8cbb6b3bc",
+   "created_at": "2026-04-24T20:37:30Z",
+   "diff_hunk": "@@ -0,0 +1,141 @@\n+# Tests contract chaining: a provider that is also a consumer.\n+#\n+# Chain: webapp <- databaseConnection <- fileSecrets\n+#\n+# - `webapp` (consumer): requests a database connection via the\n+#   `databaseConnection` contract and reads `result.connectionString`.\n+# - `pgProvider` (provider + consumer): fulfills `databaseConnection`\n+#   requests, but itself consumes `fileSecrets` to get a credential file.\n+#   The connection string embeds the credential path from `fileSecrets`.\n+# - `hardcoded-secret` (provider): fulfills `fileSecrets` requests by\n+#   writing secret content to files with the requested permissions.\n+#\n+# Nix lazy evaluation resolves the chain automatically -- no explicit\n+# ordering is needed. The test verifies both the eval-time plumbing\n+# (assertions) and the runtime result (credential file exists with\n+# correct content).\n+{ lib, pkgs, ... }:\n+let\n+  inherit (lib) mkOption types;\n+\n+  # Database connection contract, defined inline for the test.\n+  dbContractDef = {\n+    meta = {\n+      description = ''\n+        Contract for database connections where a consumer requests a named\n+        database and a provider returns a connection string.\n+      '';\n+      maintainers = [ ];\n+    };\n+    interface = {\n+      request.dbName = mkOption {\n+        description = \"Name of the database to connect to.\";\n+        type = types.str;\n+      };\n+      result.connectionString = mkOption {\n+        description = \"Connection string for the database.\";\n+        type = types.str;\n+      };\n+    };\n+  };\n+\n+  dbContract = lib.evalOption (mkOption { type = lib.contract.templateType; }) dbContractDef;\n+in\n+{\n+  name = \"contracts-chaining\";\n+\n+  containers.machine =\n+    {\n+      config,\n+      pkgs,\n+      lib,\n+      ...\n+    }:\n+    let\n+      inherit (dbContract) mkContract;\n+      credentialPath = config.contracts.fileSecrets.results.pgProvider.credential.path;\n+      expectedConnectionString = \"postgresql:///webappdb?password_file=${credentialPath}\";\n+    in\n+    {\n+      imports = [\n+        # Provides the hardcoded-secret fileSecrets provider.\n+        ../../modules/testing/hardcoded-secret.nix\n+      ];\n+\n+      # --- WEBAPP: consumer of databaseConnection ---\n+\n+      options.services.webapp.db = mkOption {\n+        description = \"Database connection for the webapp.\";\n+        type = mkContract {\n+          request.dbName.default = \"webappdb\";\n+        };\n+      };\n+\n+      # --- PGPROVIDER: provides databaseConnection, consumes fileSecrets ---\n+\n+      options.services.pgProvider.databaseConnection = mkOption {\n+        description = \"Database connection instances fulfilled by this provider.\";\n+        type = dbContract.mkProviderType {\n+          fulfill =\n+            { request, ... }:\n+            {\n+              connectionString = \"postgresql:///${request.dbName}?password_file=${credentialPath}\";\n+            };\n+        };\n+      };\n+\n+      config = {\n+        contractTypes.databaseConnection = dbContractDef;\n+\n+        # Consumer wiring: register want, read result.\n+        contracts.databaseConnection.want.webapp = {",
+   "id": 3140172258,
+   "line": null,
+   "original_commit_id": "627f88a71d6f2b817f7c1095135e2a16fae42a5c",
+   "original_line": 91,
+   "original_position": 91,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/chaining.nix",
+   "position": 1,
+   "pull_request_review_id": 4173265230,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-24T21:11:50Z",
+   "user": {
+    "id": 839693,
+    "login": "mrVanDalo",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "What does this do? up there I have to wire providers and consumers. what does a default do here?",
+   "commit_id": "67e9410e867e856ad40f5b9702d56a4908c5e965",
+   "created_at": "2026-04-24T20:43:06Z",
+   "diff_hunk": "@@ -0,0 +1,141 @@\n+# Tests contract chaining: a provider that is also a consumer.\n+#\n+# Chain: webapp <- databaseConnection <- fileSecrets\n+#\n+# - `webapp` (consumer): requests a database connection via the\n+#   `databaseConnection` contract and reads `result.connectionString`.\n+# - `pgProvider` (provider + consumer): fulfills `databaseConnection`\n+#   requests, but itself consumes `fileSecrets` to get a credential file.\n+#   The connection string embeds the credential path from `fileSecrets`.\n+# - `hardcoded-secret` (provider): fulfills `fileSecrets` requests by\n+#   writing secret content to files with the requested permissions.\n+#\n+# Nix lazy evaluation resolves the chain automatically -- no explicit\n+# ordering is needed. The test verifies both the eval-time plumbing\n+# (assertions) and the runtime result (credential file exists with\n+# correct content).\n+{ lib, pkgs, ... }:\n+let\n+  inherit (lib) mkOption types;\n+\n+  # Database connection contract, defined inline for the test.\n+  dbContractDef = {\n+    meta = {\n+      description = ''\n+        Contract for database connections where a consumer requests a named\n+        database and a provider returns a connection string.\n+      '';\n+      maintainers = [ ];\n+    };\n+    interface = {\n+      request.dbName = mkOption {\n+        description = \"Name of the database to connect to.\";\n+        type = types.str;\n+      };\n+      result.connectionString = mkOption {\n+        description = \"Connection string for the database.\";\n+        type = types.str;\n+      };\n+    };\n+  };\n+\n+  dbContract = lib.evalOption (mkOption { type = lib.contract.templateType; }) dbContractDef;\n+in\n+{\n+  name = \"contracts-chaining\";\n+\n+  containers.machine =\n+    {\n+      config,\n+      pkgs,\n+      lib,\n+      ...\n+    }:\n+    let\n+      inherit (dbContract) mkContract;\n+      credentialPath = config.contracts.fileSecrets.results.pgProvider.credential.path;\n+      expectedConnectionString = \"postgresql:///webappdb?password_file=${credentialPath}\";\n+    in\n+    {\n+      imports = [\n+        # Provides the hardcoded-secret fileSecrets provider.\n+        ../../modules/testing/hardcoded-secret.nix\n+      ];\n+\n+      # --- WEBAPP: consumer of databaseConnection ---\n+\n+      options.services.webapp.db = mkOption {\n+        description = \"Database connection for the webapp.\";\n+        type = mkContract {\n+          request.dbName.default = \"webappdb\";\n+        };\n+      };\n+\n+      # --- PGPROVIDER: provides databaseConnection, consumes fileSecrets ---\n+\n+      options.services.pgProvider.databaseConnection = mkOption {\n+        description = \"Database connection instances fulfilled by this provider.\";\n+        type = dbContract.mkProviderType {\n+          fulfill =\n+            { request, ... }:\n+            {\n+              connectionString = \"postgresql:///${request.dbName}?password_file=${credentialPath}\";\n+            };\n+        };\n+      };\n+\n+      config = {\n+        contractTypes.databaseConnection = dbContractDef;\n+\n+        # Consumer wiring: register want, read result.\n+        contracts.databaseConnection.want.webapp = {\n+          inherit (config.services.webapp) db;\n+        };\n+        services.webapp.db.result = config.contracts.databaseConnection.results.webapp.db;\n+\n+        # Provider wiring: read requests, register provider.\n+        services.pgProvider.databaseConnection = config.contracts.databaseConnection.requests;\n+        contracts.databaseConnection.providers.pgProvider = config.services.pgProvider.databaseConnection;\n+\n+        # Chain: the database provider also consumes fileSecrets for credentials.\n+        contracts.fileSecrets.want.pgProvider.credential = {\n+          request = {\n+            owner = \"root\";\n+            group = \"root\";\n+          };\n+        };\n+\n+        # Set up credential content for the hardcoded-secret provider.\n+        testing.hardcoded-secret.fileSecrets.pgProvider.credential.content = \"s3cret-db-password\";\n+\n+        # Default providers.",
+   "id": 3140194675,
+   "line": 108,
+   "original_commit_id": "627f88a71d6f2b817f7c1095135e2a16fae42a5c",
+   "original_line": 111,
+   "original_position": 111,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/chaining.nix",
+   "position": 108,
+   "pull_request_review_id": 4173265230,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-24T21:11:50Z",
+   "user": {
+    "id": 839693,
+    "login": "mrVanDalo",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Maybe the diagram shadows a bit, the information in the next paragraph are very informative, but kinda miss in the diagram. I understand your test setup like this.\n\n```\nwebapp <-[databaseConnection]-- pgProvider <--[fileSecret]-- hardcoded-secret\n```",
+   "commit_id": "cfe1213b3b04fcd7ee091bb4776e5cf8cbb6b3bc",
+   "created_at": "2026-04-24T20:52:23Z",
+   "diff_hunk": "@@ -0,0 +1,141 @@\n+# Tests contract chaining: a provider that is also a consumer.\n+#\n+# Chain: webapp <- databaseConnection <- fileSecrets",
+   "id": 3140232003,
+   "line": null,
+   "original_commit_id": "627f88a71d6f2b817f7c1095135e2a16fae42a5c",
+   "original_line": 3,
+   "original_position": 3,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/chaining.nix",
+   "position": 1,
+   "pull_request_review_id": 4173265230,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-24T21:11:50Z",
+   "user": {
+    "id": 839693,
+    "login": "mrVanDalo",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "is the `databaseConnection` contract tied to webapp? meaning would `webapp` use the same contract?\n\nCould I for example add this service wiring, next to the wiring up there, on the same machine?\n\n```\nanotherWebapp <-[databaseConnection]-- pgProvider <--[fileSecret]-- another-hardcoded-secret\nyetanotherWebapp <-[databaseConnection]-- localhostpgProvider\n```\n",
+   "commit_id": "67e9410e867e856ad40f5b9702d56a4908c5e965",
+   "created_at": "2026-04-24T20:58:57Z",
+   "diff_hunk": "@@ -0,0 +1,141 @@\n+# Tests contract chaining: a provider that is also a consumer.\n+#\n+# Chain: webapp <- databaseConnection <- fileSecrets\n+#\n+# - `webapp` (consumer): requests a database connection via the\n+#   `databaseConnection` contract and reads `result.connectionString`.",
+   "id": 3140258127,
+   "line": 6,
+   "original_commit_id": "627f88a71d6f2b817f7c1095135e2a16fae42a5c",
+   "original_line": 6,
+   "original_position": 6,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/chaining.nix",
+   "position": 6,
+   "pull_request_review_id": 4173265230,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-24T21:11:50Z",
+   "user": {
+    "id": 839693,
+    "login": "mrVanDalo",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't understand what happens here. \nIs there any situation where, this option (which is of contract type databaseConnection) has another value as the one you set here?\nMaybe the parameter should be default to this, and be `readonly = true` (https://noogle.dev/f/lib/mkOption/) ",
+   "commit_id": "73a1fc4e3c702558a5592ad0fe7e6080b366e740",
+   "created_at": "2026-04-24T21:09:23Z",
+   "diff_hunk": "@@ -0,0 +1,141 @@\n+# Tests contract chaining: a provider that is also a consumer.\n+#\n+# Chain: webapp <- databaseConnection <- fileSecrets\n+#\n+# - `webapp` (consumer): requests a database connection via the\n+#   `databaseConnection` contract and reads `result.connectionString`.\n+# - `pgProvider` (provider + consumer): fulfills `databaseConnection`\n+#   requests, but itself consumes `fileSecrets` to get a credential file.\n+#   The connection string embeds the credential path from `fileSecrets`.\n+# - `hardcoded-secret` (provider): fulfills `fileSecrets` requests by\n+#   writing secret content to files with the requested permissions.\n+#\n+# Nix lazy evaluation resolves the chain automatically -- no explicit\n+# ordering is needed. The test verifies both the eval-time plumbing\n+# (assertions) and the runtime result (credential file exists with\n+# correct content).\n+{ lib, pkgs, ... }:\n+let\n+  inherit (lib) mkOption types;\n+\n+  # Database connection contract, defined inline for the test.\n+  dbContractDef = {\n+    meta = {\n+      description = ''\n+        Contract for database connections where a consumer requests a named\n+        database and a provider returns a connection string.\n+      '';\n+      maintainers = [ ];\n+    };\n+    interface = {\n+      request.dbName = mkOption {\n+        description = \"Name of the database to connect to.\";\n+        type = types.str;\n+      };\n+      result.connectionString = mkOption {\n+        description = \"Connection string for the database.\";\n+        type = types.str;\n+      };\n+    };\n+  };\n+\n+  dbContract = lib.evalOption (mkOption { type = lib.contract.templateType; }) dbContractDef;\n+in\n+{\n+  name = \"contracts-chaining\";\n+\n+  containers.machine =\n+    {\n+      config,\n+      pkgs,\n+      lib,\n+      ...\n+    }:\n+    let\n+      inherit (dbContract) mkContract;\n+      credentialPath = config.contracts.fileSecrets.results.pgProvider.credential.path;\n+      expectedConnectionString = \"postgresql:///webappdb?password_file=${credentialPath}\";\n+    in\n+    {\n+      imports = [\n+        # Provides the hardcoded-secret fileSecrets provider.\n+        ../../modules/testing/hardcoded-secret.nix\n+      ];\n+\n+      # --- WEBAPP: consumer of databaseConnection ---\n+\n+      options.services.webapp.db = mkOption {\n+        description = \"Database connection for the webapp.\";\n+        type = mkContract {\n+          request.dbName.default = \"webappdb\";\n+        };\n+      };\n+\n+      # --- PGPROVIDER: provides databaseConnection, consumes fileSecrets ---\n+\n+      options.services.pgProvider.databaseConnection = mkOption {\n+        description = \"Database connection instances fulfilled by this provider.\";\n+        type = dbContract.mkProviderType {\n+          fulfill =\n+            { request, ... }:\n+            {\n+              connectionString = \"postgresql:///${request.dbName}?password_file=${credentialPath}\";\n+            };\n+        };\n+      };\n+\n+      config = {\n+        contractTypes.databaseConnection = dbContractDef;\n+\n+        # Consumer wiring: register want, read result.\n+        contracts.databaseConnection.want.webapp = {\n+          inherit (config.services.webapp) db;\n+        };\n+        services.webapp.db.result = config.contracts.databaseConnection.results.webapp.db;\n+\n+        # Provider wiring: read requests, register provider.\n+        services.pgProvider.databaseConnection = config.contracts.databaseConnection.requests;",
+   "id": 3140303040,
+   "line": null,
+   "original_commit_id": "627f88a71d6f2b817f7c1095135e2a16fae42a5c",
+   "original_line": 97,
+   "original_position": 97,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/chaining.nix",
+   "position": 1,
+   "pull_request_review_id": 4173265230,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-24T21:11:50Z",
+   "user": {
+    "id": 839693,
+    "login": "mrVanDalo",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "you can, yes",
+   "commit_id": "67e9410e867e856ad40f5b9702d56a4908c5e965",
+   "created_at": "2026-04-26T12:56:23Z",
+   "diff_hunk": "@@ -0,0 +1,141 @@\n+# Tests contract chaining: a provider that is also a consumer.\n+#\n+# Chain: webapp <- databaseConnection <- fileSecrets\n+#\n+# - `webapp` (consumer): requests a database connection via the\n+#   `databaseConnection` contract and reads `result.connectionString`.",
+   "id": 3143506195,
+   "in_reply_to_id": 3140258127,
+   "line": 6,
+   "original_commit_id": "627f88a71d6f2b817f7c1095135e2a16fae42a5c",
+   "original_line": 6,
+   "original_position": 6,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/chaining.nix",
+   "position": 6,
+   "pull_request_review_id": 4176940971,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-26T12:56:23Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "contract requests may be fulfilled by any provider matching the contract.\nthe defaults make for an easy way to say you want any requests for a given contract handled by a given type of provider, so as to prevent having to wire each one manually - tho such overrides are still possible, in case you don't want them all handled the same way.",
+   "commit_id": "67e9410e867e856ad40f5b9702d56a4908c5e965",
+   "created_at": "2026-04-26T12:56:56Z",
+   "diff_hunk": "@@ -0,0 +1,141 @@\n+# Tests contract chaining: a provider that is also a consumer.\n+#\n+# Chain: webapp <- databaseConnection <- fileSecrets\n+#\n+# - `webapp` (consumer): requests a database connection via the\n+#   `databaseConnection` contract and reads `result.connectionString`.\n+# - `pgProvider` (provider + consumer): fulfills `databaseConnection`\n+#   requests, but itself consumes `fileSecrets` to get a credential file.\n+#   The connection string embeds the credential path from `fileSecrets`.\n+# - `hardcoded-secret` (provider): fulfills `fileSecrets` requests by\n+#   writing secret content to files with the requested permissions.\n+#\n+# Nix lazy evaluation resolves the chain automatically -- no explicit\n+# ordering is needed. The test verifies both the eval-time plumbing\n+# (assertions) and the runtime result (credential file exists with\n+# correct content).\n+{ lib, pkgs, ... }:\n+let\n+  inherit (lib) mkOption types;\n+\n+  # Database connection contract, defined inline for the test.\n+  dbContractDef = {\n+    meta = {\n+      description = ''\n+        Contract for database connections where a consumer requests a named\n+        database and a provider returns a connection string.\n+      '';\n+      maintainers = [ ];\n+    };\n+    interface = {\n+      request.dbName = mkOption {\n+        description = \"Name of the database to connect to.\";\n+        type = types.str;\n+      };\n+      result.connectionString = mkOption {\n+        description = \"Connection string for the database.\";\n+        type = types.str;\n+      };\n+    };\n+  };\n+\n+  dbContract = lib.evalOption (mkOption { type = lib.contract.templateType; }) dbContractDef;\n+in\n+{\n+  name = \"contracts-chaining\";\n+\n+  containers.machine =\n+    {\n+      config,\n+      pkgs,\n+      lib,\n+      ...\n+    }:\n+    let\n+      inherit (dbContract) mkContract;\n+      credentialPath = config.contracts.fileSecrets.results.pgProvider.credential.path;\n+      expectedConnectionString = \"postgresql:///webappdb?password_file=${credentialPath}\";\n+    in\n+    {\n+      imports = [\n+        # Provides the hardcoded-secret fileSecrets provider.\n+        ../../modules/testing/hardcoded-secret.nix\n+      ];\n+\n+      # --- WEBAPP: consumer of databaseConnection ---\n+\n+      options.services.webapp.db = mkOption {\n+        description = \"Database connection for the webapp.\";\n+        type = mkContract {\n+          request.dbName.default = \"webappdb\";\n+        };\n+      };\n+\n+      # --- PGPROVIDER: provides databaseConnection, consumes fileSecrets ---\n+\n+      options.services.pgProvider.databaseConnection = mkOption {\n+        description = \"Database connection instances fulfilled by this provider.\";\n+        type = dbContract.mkProviderType {\n+          fulfill =\n+            { request, ... }:\n+            {\n+              connectionString = \"postgresql:///${request.dbName}?password_file=${credentialPath}\";\n+            };\n+        };\n+      };\n+\n+      config = {\n+        contractTypes.databaseConnection = dbContractDef;\n+\n+        # Consumer wiring: register want, read result.\n+        contracts.databaseConnection.want.webapp = {\n+          inherit (config.services.webapp) db;\n+        };\n+        services.webapp.db.result = config.contracts.databaseConnection.results.webapp.db;\n+\n+        # Provider wiring: read requests, register provider.\n+        services.pgProvider.databaseConnection = config.contracts.databaseConnection.requests;\n+        contracts.databaseConnection.providers.pgProvider = config.services.pgProvider.databaseConnection;\n+\n+        # Chain: the database provider also consumes fileSecrets for credentials.\n+        contracts.fileSecrets.want.pgProvider.credential = {\n+          request = {\n+            owner = \"root\";\n+            group = \"root\";\n+          };\n+        };\n+\n+        # Set up credential content for the hardcoded-secret provider.\n+        testing.hardcoded-secret.fileSecrets.pgProvider.credential.content = \"s3cret-db-password\";\n+\n+        # Default providers.",
+   "id": 3143506893,
+   "in_reply_to_id": 3140194675,
+   "line": 108,
+   "original_commit_id": "627f88a71d6f2b817f7c1095135e2a16fae42a5c",
+   "original_line": 111,
+   "original_position": 111,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/chaining.nix",
+   "position": 108,
+   "pull_request_review_id": 4176941463,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-26T12:56:56Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "they're boilerplate.\ni managed to move the first line to `default` now, as you suggested.\n`readOnly = true` i unfortunately didn't get to work yet, somehow triggering 'option set twice' type of errors.",
+   "commit_id": "73a1fc4e3c702558a5592ad0fe7e6080b366e740",
+   "created_at": "2026-04-26T13:18:34Z",
+   "diff_hunk": "@@ -0,0 +1,141 @@\n+# Tests contract chaining: a provider that is also a consumer.\n+#\n+# Chain: webapp <- databaseConnection <- fileSecrets\n+#\n+# - `webapp` (consumer): requests a database connection via the\n+#   `databaseConnection` contract and reads `result.connectionString`.\n+# - `pgProvider` (provider + consumer): fulfills `databaseConnection`\n+#   requests, but itself consumes `fileSecrets` to get a credential file.\n+#   The connection string embeds the credential path from `fileSecrets`.\n+# - `hardcoded-secret` (provider): fulfills `fileSecrets` requests by\n+#   writing secret content to files with the requested permissions.\n+#\n+# Nix lazy evaluation resolves the chain automatically -- no explicit\n+# ordering is needed. The test verifies both the eval-time plumbing\n+# (assertions) and the runtime result (credential file exists with\n+# correct content).\n+{ lib, pkgs, ... }:\n+let\n+  inherit (lib) mkOption types;\n+\n+  # Database connection contract, defined inline for the test.\n+  dbContractDef = {\n+    meta = {\n+      description = ''\n+        Contract for database connections where a consumer requests a named\n+        database and a provider returns a connection string.\n+      '';\n+      maintainers = [ ];\n+    };\n+    interface = {\n+      request.dbName = mkOption {\n+        description = \"Name of the database to connect to.\";\n+        type = types.str;\n+      };\n+      result.connectionString = mkOption {\n+        description = \"Connection string for the database.\";\n+        type = types.str;\n+      };\n+    };\n+  };\n+\n+  dbContract = lib.evalOption (mkOption { type = lib.contract.templateType; }) dbContractDef;\n+in\n+{\n+  name = \"contracts-chaining\";\n+\n+  containers.machine =\n+    {\n+      config,\n+      pkgs,\n+      lib,\n+      ...\n+    }:\n+    let\n+      inherit (dbContract) mkContract;\n+      credentialPath = config.contracts.fileSecrets.results.pgProvider.credential.path;\n+      expectedConnectionString = \"postgresql:///webappdb?password_file=${credentialPath}\";\n+    in\n+    {\n+      imports = [\n+        # Provides the hardcoded-secret fileSecrets provider.\n+        ../../modules/testing/hardcoded-secret.nix\n+      ];\n+\n+      # --- WEBAPP: consumer of databaseConnection ---\n+\n+      options.services.webapp.db = mkOption {\n+        description = \"Database connection for the webapp.\";\n+        type = mkContract {\n+          request.dbName.default = \"webappdb\";\n+        };\n+      };\n+\n+      # --- PGPROVIDER: provides databaseConnection, consumes fileSecrets ---\n+\n+      options.services.pgProvider.databaseConnection = mkOption {\n+        description = \"Database connection instances fulfilled by this provider.\";\n+        type = dbContract.mkProviderType {\n+          fulfill =\n+            { request, ... }:\n+            {\n+              connectionString = \"postgresql:///${request.dbName}?password_file=${credentialPath}\";\n+            };\n+        };\n+      };\n+\n+      config = {\n+        contractTypes.databaseConnection = dbContractDef;\n+\n+        # Consumer wiring: register want, read result.\n+        contracts.databaseConnection.want.webapp = {\n+          inherit (config.services.webapp) db;\n+        };\n+        services.webapp.db.result = config.contracts.databaseConnection.results.webapp.db;\n+\n+        # Provider wiring: read requests, register provider.\n+        services.pgProvider.databaseConnection = config.contracts.databaseConnection.requests;",
+   "id": 3143533480,
+   "in_reply_to_id": 3140303040,
+   "line": null,
+   "original_commit_id": "627f88a71d6f2b817f7c1095135e2a16fae42a5c",
+   "original_line": 97,
+   "original_position": 97,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/chaining.nix",
+   "position": 1,
+   "pull_request_review_id": 4176962370,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-26T13:18:35Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "627f88a71d6f2b817f7c1095135e2a16fae42a5c",
+   "id": 4173265230,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-24T21:11:50Z",
+   "user": {
+    "id": 839693,
+    "login": "mrVanDalo",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "1935424c01d1d32d0f6080b1d263d408e164bc0a",
+   "id": 4176940971,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-26T12:56:23Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "1935424c01d1d32d0f6080b1d263d408e164bc0a",
+   "id": 4176941463,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-26T12:56:56Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6b8f2dee08a3e75d48508be555a5948de85732a2",
+   "id": 4176962370,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-26T13:18:35Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": []
+}

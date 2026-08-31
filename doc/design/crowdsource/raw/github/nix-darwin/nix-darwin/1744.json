@@ -1,0 +1,1122 @@
+{
+ "comments": [
+  {
+   "body": "Would you consider merging all the ideas and feedback from #942? Sadly that other person didn't want to continue the work.",
+   "created_at": "2026-04-05T18:21:03Z",
+   "id": 4189307053,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-05T18:21:22Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@dwt I've cross-referenced both the home-manager and nixos modules to add all the those fields, as well as your `LowPriorityIO` options (I also don't know if they're effective) from [here](https://github.com/nix-darwin/nix-darwin/pull/942#issuecomment-3674354226). I left out the log fields though, not sure if we'd want an extra option for it.",
+   "created_at": "2026-04-06T21:48:15Z",
+   "id": 4195197975,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-06T21:48:15Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@rajanmaghera Nice! I did add the log because I initially had some trouble with the service where it didn't work - though I never found out why, I guess it was because of some bugs in lix perhaps? Anyway, that's why I added the logs to debug that.\r\n\r\nSince logging on darwin is so hard, I would not fault this module for not writing logs - that can always be a followup pull request by someone who knows how to do that.",
+   "created_at": "2026-04-07T19:04:41Z",
+   "id": 4201521390,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-07T19:04:41Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-darwin/nix-darwin/pull/1744",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Adds a new module `programs.nh` based on the NixOS equivalent. `programs.nh.clean` can be used instead of `nix.gc` as a periodic garbage collection sweep with more options.",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 3,
+  "created_at": "2026-04-02T19:54:03Z",
+  "draft": false,
+  "id": 4196658082,
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 1744,
+  "pull_request": {
+   "diff_url": "https://github.com/nix-darwin/nix-darwin/pull/1744.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/nix-darwin/nix-darwin/pull/1744.patch"
+  },
+  "reactions": {
+   "+1": 5,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 5
+  },
+  "repository_url": "https://api.github.com/repos/nix-darwin/nix-darwin",
+  "state": "open",
+  "state_reason": null,
+  "title": "programs/nh: new module",
+  "type": null,
+  "updated_at": "2026-08-17T20:44:44Z",
+  "user": {
+   "id": 16507599,
+   "login": "rajanmaghera",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 166,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "nix-darwin:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2016-10-16T14:26:46Z",
+    "default_branch": "master",
+    "description": "Manage your macOS using Nix",
+    "disabled": false,
+    "fork": false,
+    "forks": 659,
+    "forks_count": 659,
+    "full_name": "nix-darwin/nix-darwin",
+    "git_commits_url": "https://api.github.com/repos/nix-darwin/nix-darwin/git/commits{/sha}",
+    "has_discussions": true,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": true,
+    "has_projects": false,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-darwin.org",
+    "id": 71055474,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/nix-darwin/nix-darwin/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/nix-darwin/nix-darwin/milestones{/number}",
+    "name": "nix-darwin",
+    "open_issues": 474,
+    "open_issues_count": 474,
+    "owner": {
+     "id": 203339767,
+     "login": "nix-darwin",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/nix-darwin/nix-darwin/pulls{/number}",
+    "pushed_at": "2026-08-16T02:32:30Z",
+    "size": 8212,
+    "stargazers_count": 5891,
+    "subscription_url": "https://api.github.com/repos/nix-darwin/nix-darwin/subscription",
+    "tags_url": "https://api.github.com/repos/nix-darwin/nix-darwin/tags",
+    "topics": [
+     "darwin",
+     "dotfiles",
+     "launchd",
+     "nix"
+    ],
+    "updated_at": "2026-08-31T10:09:15Z",
+    "visibility": "public",
+    "watchers": 5891,
+    "watchers_count": 5891,
+    "web_commit_signoff_required": false
+   },
+   "sha": "06648f4902343228ce2de79f291dd5a58ee12146",
+   "user": {
+    "id": 203339767,
+    "login": "nix-darwin",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Adds a new module `programs.nh` based on the NixOS equivalent. `programs.nh.clean` can be used instead of `nix.gc` as a periodic garbage collection sweep with more options.",
+  "changed_files": 4,
+  "closed_at": null,
+  "comments": 3,
+  "commits": 1,
+  "created_at": "2026-04-02T19:54:03Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/nix-darwin/nix-darwin/pull/1744.diff",
+  "draft": false,
+  "head": {
+   "label": "rajanmaghera:module-nh",
+   "ref": "module-nh",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2026-04-02T18:58:14Z",
+    "default_branch": "master",
+    "description": "Manage your macOS using Nix",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "rajanmaghera/nix-darwin",
+    "git_commits_url": "https://api.github.com/repos/rajanmaghera/nix-darwin/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-darwin.org",
+    "id": 1199834801,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/rajanmaghera/nix-darwin/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/rajanmaghera/nix-darwin/milestones{/number}",
+    "name": "nix-darwin",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 16507599,
+     "login": "rajanmaghera",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/rajanmaghera/nix-darwin/pulls{/number}",
+    "pushed_at": "2026-04-14T21:28:06Z",
+    "size": 2711,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/rajanmaghera/nix-darwin/subscription",
+    "tags_url": "https://api.github.com/repos/rajanmaghera/nix-darwin/tags",
+    "topics": [],
+    "updated_at": "2026-04-02T18:58:14Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3483907845,
+  "labels": [],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 1744,
+  "patch_url": "https://github.com/nix-darwin/nix-darwin/pull/1744.patch",
+  "rebaseable": false,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 15,
+  "state": "open",
+  "title": "programs/nh: new module",
+  "updated_at": "2026-08-17T20:44:44Z",
+  "user": {
+   "id": 16507599,
+   "login": "rajanmaghera",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "nix-darwin/nix-darwin#1744",
+ "review_comments": [
+  {
+   "body": "NixOS uses [dates instead of interval](https://search.nixos.org/options?channel=unstable&query=programs.nh&show=programs.nh.clean.dates) as they use a systemd time definition, I'm pretty sure we cannot reuse it in it's entirety.\n\nIs that the reason why you did go with `interval`? Because the supported type is different anyway?",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "created_at": "2026-04-07T19:01:44Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      clean = {\n+        enable = lib.mkEnableOption \"periodic garbage collection with nh clean all\";\n+\n+        interval = lib.mkOption {",
+   "id": 3047252022,
+   "line": 61,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 90,
+   "original_position": 90,
+   "original_start_line": null,
+   "path": "modules/programs/nh.nix",
+   "position": 61,
+   "pull_request_review_id": 4070586203,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-07T19:01:44Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't get what these are for, isn't the only reason for nh.clean to .... clean? I am probably missing something here.",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "created_at": "2026-04-07T19:06:04Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };",
+   "id": 3047274378,
+   "line": null,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 85,
+   "original_position": 85,
+   "original_start_line": 51,
+   "path": "modules/programs/nh.nix",
+   "position": 1,
+   "pull_request_review_id": 4070611192,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-04-07T19:06:04Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This was discussed here #746 and this is what `nix.gc` does. Home-manager uses `dates` on darwin, but they map some specific systemd keywords to intervals via `mkCalendarInterval` [here](https://github.com/nix-community/home-manager/blob/9cc761169a1bbf1d9787cdbe9abf07f4bae213a1/modules/lib/darwin.nix#L12) and is used [here](https://github.com/nix-community/home-manager/blob/9cc761169a1bbf1d9787cdbe9abf07f4bae213a1/modules/programs/nh.nix#L161), which is a less than ideal solution IMHO.",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "created_at": "2026-04-07T20:30:16Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      clean = {\n+        enable = lib.mkEnableOption \"periodic garbage collection with nh clean all\";\n+\n+        interval = lib.mkOption {",
+   "id": 3047699023,
+   "in_reply_to_id": 3047252022,
+   "line": 61,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 90,
+   "original_position": 90,
+   "original_start_line": null,
+   "path": "modules/programs/nh.nix",
+   "position": 61,
+   "pull_request_review_id": 4071105830,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-07T20:30:17Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The `nh` tool has some additional commands outside of cleaning and they use these env vars to define a \"system\" flake.\r\n\r\nThese don't affect `nh.clean` though, they're mainly here to be equivalent to the home-manager and nixos modules.",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "created_at": "2026-04-07T20:32:22Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };",
+   "id": 3047708571,
+   "in_reply_to_id": 3047274378,
+   "line": null,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 85,
+   "original_position": 85,
+   "original_start_line": 51,
+   "path": "modules/programs/nh.nix",
+   "position": 1,
+   "pull_request_review_id": 4071116058,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-04-07T20:32:23Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That makes quite some sense. Would it make sense to perhaps support \"dates\" with a very limited set of values (like home-manager seems to do) for option compatibility, and assert if the chosen option is not one of the compatible ones?",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "created_at": "2026-04-08T08:27:20Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      clean = {\n+        enable = lib.mkEnableOption \"periodic garbage collection with nh clean all\";\n+\n+        interval = lib.mkOption {",
+   "id": 3050090987,
+   "in_reply_to_id": 3047252022,
+   "line": 61,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 90,
+   "original_position": 90,
+   "original_start_line": null,
+   "path": "modules/programs/nh.nix",
+   "position": 61,
+   "pull_request_review_id": 4073777990,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-08T08:27:20Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`weekly` or `monthly` seem like very sensible values here, so maybe just a very limited subset?",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "created_at": "2026-04-08T08:28:41Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      clean = {\n+        enable = lib.mkEnableOption \"periodic garbage collection with nh clean all\";\n+\n+        interval = lib.mkOption {",
+   "id": 3050098045,
+   "in_reply_to_id": 3047252022,
+   "line": 61,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 90,
+   "original_position": 90,
+   "original_start_line": null,
+   "path": "modules/programs/nh.nix",
+   "position": 61,
+   "pull_request_review_id": 4073785320,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-08T08:28:42Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Do you suggest that we just import hm's logic for this?\n\nMaybe that could be another PR doing a repo-wide sweep of it?",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "created_at": "2026-04-08T14:52:15Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      clean = {\n+        enable = lib.mkEnableOption \"periodic garbage collection with nh clean all\";\n+\n+        interval = lib.mkOption {",
+   "id": 3052180597,
+   "in_reply_to_id": 3047252022,
+   "line": 61,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 90,
+   "original_position": 90,
+   "original_start_line": null,
+   "path": "modules/programs/nh.nix",
+   "position": 61,
+   "pull_request_review_id": 4076028245,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-08T14:52:15Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "A repo wide sweet in a separate pull request is probably a good idea. HomeManager basically just supports very few values too, if I see that correctly they support: `hourly`, `daily`, `weekly`, `monthly`, `semiannually`, `annually` - that is not much, and could be a great way to increase nixos and nix-darwin compatibility.",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "created_at": "2026-04-08T16:11:23Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      clean = {\n+        enable = lib.mkEnableOption \"periodic garbage collection with nh clean all\";\n+\n+        interval = lib.mkOption {",
+   "id": 3052668520,
+   "in_reply_to_id": 3047252022,
+   "line": 61,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 90,
+   "original_position": 90,
+   "original_start_line": null,
+   "path": "modules/programs/nh.nix",
+   "position": 61,
+   "pull_request_review_id": 4076555883,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-08T16:11:24Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "No need for this as both stable and unstable are currently at version 4.3.0",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "created_at": "2026-04-14T19:36:55Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      clean = {\n+        enable = lib.mkEnableOption \"periodic garbage collection with nh clean all\";\n+\n+        interval = lib.mkOption {\n+          type = launchdTypes.StartCalendarInterval;\n+          default = [\n+            {\n+              Weekday = 7;\n+              Hour = 3;\n+              Minute = 15;\n+            }\n+          ];\n+          description = ''\n+            The calendar interval at which the garbage collector will run.\n+            See the {option}`serviceConfig.StartCalendarInterval` option of\n+            the {option}`launchd` module for more info.\n+          '';\n+        };\n+\n+        extraArgs = lib.mkOption {\n+          type = lib.types.singleLineStr;\n+          default = \"\";\n+          example = \"--keep 5 --keep-since 3d\";\n+          description = ''\n+            Options given to nh clean when the service is run automatically.\n+\n+            See `nh clean all --help` for more information.\n+          '';\n+        };\n+      };\n+    };\n+  };\n+\n+  ###### implementation\n+\n+  config = {\n+\n+    warnings =\n+      if (!(cfg.clean.enable -> !config.nix.gc.automatic)) then\n+        [\n+          \"programs.nh.clean.enable and nix.gc.automatic are both enabled. Please use one or the other to avoid conflict.\"\n+        ]\n+      else\n+        [ ];\n+\n+    assertions = [\n+      # Not strictly required but probably a good assertion to have\n+      {\n+        assertion = cfg.clean.enable -> cfg.enable;\n+        message = \"programs.nh.clean.enable requires programs.nh.enable\";\n+      }\n+\n+      {\n+        assertion = (cfg.flake != null) -> !(lib.hasSuffix \".nix\" cfg.flake);\n+        message = \"nh.flake must be a directory, not a nix file\";\n+      }\n+      {\n+        assertion = cfg.clean.enable -> config.nix.enable;\n+        message = \"programs.nh.clean.enable requires nix.enable\";\n+      }\n+    ];\n+\n+    environment = lib.mkIf cfg.enable {\n+      systemPackages = [ cfg.package ];\n+      variables = lib.mkMerge [\n+        (lib.mkIf (cfg.flake != null) (\n+          let\n+            packageVersion = lib.getVersion cfg.package;\n+            isVersion4OrHigher = lib.versionAtLeast packageVersion \"4.0.0\";\n+          in\n+          if isVersion4OrHigher then { NH_FLAKE = cfg.flake; } else { FLAKE = cfg.flake; }\n+        ))",
+   "id": 3081933876,
+   "line": null,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 158,
+   "original_position": 158,
+   "original_start_line": 152,
+   "path": "modules/programs/nh.nix",
+   "position": 1,
+   "pull_request_review_id": 4108630279,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-04-14T19:36:55Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "We should still follow upstream nixos options to the best of the ability. [Upstream defines it as `programs.nh.flake`](https://search.nixos.org/options?channel=25.11&include_modular_service_options=1&include_nixos_options=1&query=nh&show=programs.nh.flake). I feel we should follow it.",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "created_at": "2026-04-14T20:08:04Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };",
+   "id": 3082086202,
+   "in_reply_to_id": 3047274378,
+   "line": null,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 85,
+   "original_position": 85,
+   "original_start_line": 51,
+   "path": "modules/programs/nh.nix",
+   "position": 1,
+   "pull_request_review_id": 4108791584,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-04-14T20:08:30Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Upstream nixpkgs has `flake`. [Upstream home-manager](https://github.com/nix-community/home-manager/blob/3c7524c68348ef79ce48308e0978611a050089b2/modules/programs/nh.nix#L21-L66) has `flake`, `darwinFlake`, `osFlake` and `homeFlake`. This commit also defines `flake` right above where this comment is made.\r\n\r\nI don't mind reverting the home-manager changes to make it match nixpkgs upstream as close as possible. ",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "created_at": "2026-04-14T21:21:06Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };",
+   "id": 3082583275,
+   "in_reply_to_id": 3047274378,
+   "line": null,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 85,
+   "original_position": 85,
+   "original_start_line": 51,
+   "path": "modules/programs/nh.nix",
+   "position": 1,
+   "pull_request_review_id": 4109285799,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-04-14T21:21:06Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've updated it to match nixpkgs.",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "created_at": "2026-04-14T21:28:30Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };",
+   "id": 3082614838,
+   "in_reply_to_id": 3047274378,
+   "line": null,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 85,
+   "original_position": 85,
+   "original_start_line": 51,
+   "path": "modules/programs/nh.nix",
+   "position": 1,
+   "pull_request_review_id": 4109321203,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-04-14T21:28:30Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Removed and updated to match upstream nixpkgs.",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "created_at": "2026-04-14T21:28:46Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      clean = {\n+        enable = lib.mkEnableOption \"periodic garbage collection with nh clean all\";\n+\n+        interval = lib.mkOption {\n+          type = launchdTypes.StartCalendarInterval;\n+          default = [\n+            {\n+              Weekday = 7;\n+              Hour = 3;\n+              Minute = 15;\n+            }\n+          ];\n+          description = ''\n+            The calendar interval at which the garbage collector will run.\n+            See the {option}`serviceConfig.StartCalendarInterval` option of\n+            the {option}`launchd` module for more info.\n+          '';\n+        };\n+\n+        extraArgs = lib.mkOption {\n+          type = lib.types.singleLineStr;\n+          default = \"\";\n+          example = \"--keep 5 --keep-since 3d\";\n+          description = ''\n+            Options given to nh clean when the service is run automatically.\n+\n+            See `nh clean all --help` for more information.\n+          '';\n+        };\n+      };\n+    };\n+  };\n+\n+  ###### implementation\n+\n+  config = {\n+\n+    warnings =\n+      if (!(cfg.clean.enable -> !config.nix.gc.automatic)) then\n+        [\n+          \"programs.nh.clean.enable and nix.gc.automatic are both enabled. Please use one or the other to avoid conflict.\"\n+        ]\n+      else\n+        [ ];\n+\n+    assertions = [\n+      # Not strictly required but probably a good assertion to have\n+      {\n+        assertion = cfg.clean.enable -> cfg.enable;\n+        message = \"programs.nh.clean.enable requires programs.nh.enable\";\n+      }\n+\n+      {\n+        assertion = (cfg.flake != null) -> !(lib.hasSuffix \".nix\" cfg.flake);\n+        message = \"nh.flake must be a directory, not a nix file\";\n+      }\n+      {\n+        assertion = cfg.clean.enable -> config.nix.enable;\n+        message = \"programs.nh.clean.enable requires nix.enable\";\n+      }\n+    ];\n+\n+    environment = lib.mkIf cfg.enable {\n+      systemPackages = [ cfg.package ];\n+      variables = lib.mkMerge [\n+        (lib.mkIf (cfg.flake != null) (\n+          let\n+            packageVersion = lib.getVersion cfg.package;\n+            isVersion4OrHigher = lib.versionAtLeast packageVersion \"4.0.0\";\n+          in\n+          if isVersion4OrHigher then { NH_FLAKE = cfg.flake; } else { FLAKE = cfg.flake; }\n+        ))",
+   "id": 3082615924,
+   "in_reply_to_id": 3081933876,
+   "line": null,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 158,
+   "original_position": 158,
+   "original_start_line": 152,
+   "path": "modules/programs/nh.nix",
+   "position": 1,
+   "pull_request_review_id": 4109322155,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-04-14T21:28:47Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I would say do another pr to fix this, it shouldn't really block this pr from being merged.",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "created_at": "2026-04-15T08:05:19Z",
+   "diff_hunk": "@@ -0,0 +1,190 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# Based off: https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The path that will be used for the {env}`FLAKE` environment variable.\n+\n+          {env}`FLAKE` is used by nh as the default flake for performing actions,\n+          like {command}`nh os switch`.\n+        '';\n+      };\n+\n+      osFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_OS_FLAKE` environment variable.\n+\n+          {env}`NH_OS_FLAKE` is used by nh as the default flake for performing {command}`nh os`\n+          actions, such as {command}`nh os switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      homeFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_HOME_FLAKE` environment variable.\n+\n+          {env}`NH_HOME_FLAKE` is used by nh as the default flake for performing {command}`nh home`\n+          actions, such as {command}`nh home switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      darwinFlake = lib.mkOption {\n+        type = with lib.types; nullOr (either singleLineStr path);\n+        default = null;\n+        description = ''\n+          The string that will be used for the {env}`NH_DARWIN_FLAKE` environment variable.\n+\n+          {env}`NH_DARWIN_FLAKE` is used by nh as the default flake for performing\n+          {command}`nh darwin` actions, such as {command}`nh darwin switch`.\n+          Setting this will take priority over the `flake` option.\n+        '';\n+      };\n+\n+      clean = {\n+        enable = lib.mkEnableOption \"periodic garbage collection with nh clean all\";\n+\n+        interval = lib.mkOption {",
+   "id": 3084908157,
+   "in_reply_to_id": 3047252022,
+   "line": 61,
+   "original_commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "original_line": 90,
+   "original_position": 90,
+   "original_start_line": null,
+   "path": "modules/programs/nh.nix",
+   "position": 61,
+   "pull_request_review_id": 4111816552,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-15T08:05:19Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Nixpkgs dropped this recently. NixOS/nixpkgs#513757",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "created_at": "2026-05-04T15:54:49Z",
+   "diff_hunk": "@@ -0,0 +1,141 @@\n+# Based off: https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nh.nix\n+# When making changes please try to keep it in sync.\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.programs.nh;\n+  launchdTypes = import ../launchd/types.nix { inherit config lib; };\n+in\n+\n+{\n+\n+  meta.maintainers = [\n+    lib.maintainers.rajanmaghera or \"rajanmaghera\"\n+  ];\n+\n+  imports = [\n+    (lib.mkRemovedOptionModule [\n+      \"programs\"\n+      \"nh\"\n+      \"clean\"\n+      \"dates\"\n+    ] \"Use `programs.nh.clean.interval` instead.\")\n+  ];\n+\n+  ###### interface\n+\n+  options = {\n+\n+    programs.nh = {\n+      enable = lib.mkEnableOption \"nh, yet another Nix CLI helper\";\n+\n+      package = lib.mkPackageOption pkgs \"nh\" { };\n+\n+      flake = lib.mkOption {\n+        type = lib.types.nullOr lib.types.str;\n+        default = null;\n+        description = ''\n+          The string that will be used for the `NH_FLAKE` environment variable.\n+\n+          `NH_FLAKE` is used by nh as the default flake for performing actions, such as\n+          `nh os switch`. This behaviour can be overriden per-command with environment\n+          variables that will take priority.\n+\n+          - `NH_OS_FLAKE`: will take priority for `nh os` commands.\n+          - `NH_HOME_FLAKE`: will take priority for `nh home` commands.\n+          - `NH_DARWIN_FLAKE`: will take priority for `nh darwin` commands.\n+\n+          The formerly valid `FLAKE` is now deprecated by nh, and will cause hard errors\n+          in future releases if `NH_FLAKE` is not set.\n+        '';\n+      };\n+\n+      clean = {\n+        enable = lib.mkEnableOption \"periodic garbage collection with nh clean all\";\n+\n+        interval = lib.mkOption {\n+          type = launchdTypes.StartCalendarInterval;\n+          default = [\n+            {\n+              Weekday = 7;\n+              Hour = 3;\n+              Minute = 15;\n+            }\n+          ];\n+          description = ''\n+            The calendar interval at which the garbage collector will run.\n+            See the {option}`serviceConfig.StartCalendarInterval` option of\n+            the {option}`launchd` module for more info.\n+          '';\n+        };\n+\n+        extraArgs = lib.mkOption {\n+          type = lib.types.singleLineStr;\n+          default = \"\";\n+          example = \"--keep 5 --keep-since 3d\";\n+          description = ''\n+            Options given to nh clean when the service is run automatically.\n+\n+            See `nh clean all --help` for more information.\n+          '';\n+        };\n+      };\n+    };\n+  };\n+\n+  ###### implementation\n+\n+  config = {\n+\n+    warnings =\n+      if (!(cfg.clean.enable -> !config.nix.gc.automatic)) then\n+        [\n+          \"programs.nh.clean.enable and nix.gc.automatic are both enabled. Please use one or the other to avoid conflict.\"\n+        ]\n+      else\n+        [ ];\n+\n+    assertions = [\n+      # Not strictly required but probably a good assertion to have",
+   "id": 3182781678,
+   "line": 104,
+   "original_commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "original_line": 104,
+   "original_position": 104,
+   "original_start_line": null,
+   "path": "modules/programs/nh.nix",
+   "position": 104,
+   "pull_request_review_id": 4221512281,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-04T15:54:49Z",
+   "user": {
+    "id": 108196023,
+    "login": "catuhana",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4070586203,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-07T19:01:44Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4070611192,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-07T19:06:04Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I really like this, and would like to help get this merged. We will probably need to attract the attention of either @emilazy, @Enzime or @Samasaur1 ",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4070625904,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-07T19:08:17Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4071105830,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-07T20:30:17Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4071116058,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-07T20:32:22Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4073777990,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-08T08:27:20Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4073785320,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-08T08:28:41Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4076028245,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-08T14:52:15Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4076555883,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-08T16:11:23Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4108630279,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-14T19:36:55Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4108791584,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-14T20:08:04Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4109285799,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-14T21:21:06Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4109321203,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-14T21:28:30Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0778651f8afc8ab8847fd1986b3f039f3a5ece91",
+   "id": 4109322155,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-14T21:28:46Z",
+   "user": {
+    "id": 16507599,
+    "login": "rajanmaghera",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "id": 4109363611,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-14T21:37:40Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "id": 4111816552,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-15T08:05:19Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "id": 4221512281,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-04T15:54:48Z",
+   "user": {
+    "id": 108196023,
+    "login": "catuhana",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "id": 4250986760,
+   "state": "APPROVED",
+   "submitted_at": "2026-05-08T09:06:52Z",
+   "user": {
+    "id": 57199,
+    "login": "dwt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Can any committers get this PR merged? I don't think we should block on the comments that have been made here. Those improvements can be made in a follow-up PR",
+   "commit_id": "6bd5190096d6d64fb354cac3ba688fb1ad69a197",
+   "id": 4954420279,
+   "state": "APPROVED",
+   "submitted_at": "2026-08-17T20:44:44Z",
+   "user": {
+    "id": 3789764,
+    "login": "skykanin",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nix-darwin-prs"
+ ],
+ "timeline": []
+}

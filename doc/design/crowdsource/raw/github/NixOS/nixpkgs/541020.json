@@ -1,0 +1,681 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/541020",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "I have been using this with home-manager and nimi for a few months.\r\n\r\n```nix\r\n  imports = [\r\n    flake-inputs.nimi.homeModules.default\r\n  ];\r\n\r\n  nimi.backrest = {\r\n    services.backrest = {\r\n      imports = [ pkgs.backrest.services.default ];\r\n      backrest.dataDir = \"${config.home.homeDirectory}/.local/share/backrest\";\r\n      backrest.configPath = \"${config.home.homeDirectory}/.config/backrest/config.json\";\r\n    };\r\n    settings.restart.mode = \"up-to-count\";\r\n    settings.restart.time = 2000;\r\n  };\r\n```\r\n\r\nThere is an open PR which adds it for regular nixos module https://github.com/NixOS/nixpkgs/pull/422093, the pr is halted a bit, so I am opening this.\r\n\r\nCurrently I use `DyanmicUser = true;` and give the backrest service no capabilities, so it is not going to backup root or other user owned directories.\r\nI will take some time to incorporate that PR's contributions into this and add @M0ustach3 as co author.\r\n\r\n## TODO\r\n\r\n- [x] `additionalPaths` from nixos module pr, now `extraPackages`\r\n- [x] systemd hardening\r\n- [x] basic nixos test\r\n- [ ] other changes from nixos module pr\r\n- [ ] more things noted in comments below\r\n- [ ] home-manager module based on top of this modular service (in home-manager repo)\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 0,
+  "created_at": "2026-07-12T11:33:21Z",
+  "draft": true,
+  "id": 4866856587,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "ddeecc",
+    "default": false,
+    "description": "This PR was created by a maintainer of all the package it changes.",
+    "id": 740714914,
+    "name": "11.by: package-maintainer"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 541020,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/541020.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/541020.patch"
+  },
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "backrest.services.default: init",
+  "type": null,
+  "updated_at": "2026-08-27T02:46:12Z",
+  "user": {
+   "id": 29627898,
+   "login": "phanirithvij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 225,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "376c95ec3676fa527e55047a35bbae880e4450ae",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "I have been using this with home-manager and nimi for a few months.\r\n\r\n```nix\r\n  imports = [\r\n    flake-inputs.nimi.homeModules.default\r\n  ];\r\n\r\n  nimi.backrest = {\r\n    services.backrest = {\r\n      imports = [ pkgs.backrest.services.default ];\r\n      backrest.dataDir = \"${config.home.homeDirectory}/.local/share/backrest\";\r\n      backrest.configPath = \"${config.home.homeDirectory}/.config/backrest/config.json\";\r\n    };\r\n    settings.restart.mode = \"up-to-count\";\r\n    settings.restart.time = 2000;\r\n  };\r\n```\r\n\r\nThere is an open PR which adds it for regular nixos module https://github.com/NixOS/nixpkgs/pull/422093, the pr is halted a bit, so I am opening this.\r\n\r\nCurrently I use `DyanmicUser = true;` and give the backrest service no capabilities, so it is not going to backup root or other user owned directories.\r\nI will take some time to incorporate that PR's contributions into this and add @M0ustach3 as co author.\r\n\r\n## TODO\r\n\r\n- [x] `additionalPaths` from nixos module pr, now `extraPackages`\r\n- [x] systemd hardening\r\n- [x] basic nixos test\r\n- [ ] other changes from nixos module pr\r\n- [ ] more things noted in comments below\r\n- [ ] home-manager module based on top of this modular service (in home-manager repo)\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 6,
+  "closed_at": null,
+  "comments": 0,
+  "commits": 5,
+  "created_at": "2026-07-12T11:33:21Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/541020.diff",
+  "draft": true,
+  "head": {
+   "label": "phanirithvij:backrest-modular",
+   "ref": "backrest-modular",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-08-12T15:42:02Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "phanirithvij/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/phanirithvij/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 841533886,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/phanirithvij/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/phanirithvij/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 29627898,
+     "login": "phanirithvij",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/phanirithvij/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:00:58Z",
+    "size": 2910843,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/phanirithvij/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/phanirithvij/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-08-31T16:21:48Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "a2a65e2cb1977e84f5a2be3f54542c5268ce109e",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4038794475,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "ddeecc",
+    "default": false,
+    "description": "This PR was created by a maintainer of all the package it changes.",
+    "id": 740714914,
+    "name": "11.by: package-maintainer"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": "2e368f2ca110be6be3f015ffa62497f1b8fb938b",
+  "mergeable": true,
+  "mergeable_state": "unstable",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 541020,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/541020.patch",
+  "rebaseable": true,
+  "requested_reviewers": [
+   {
+    "id": 45104896,
+    "login": "alexandru0-dev",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 7,
+  "state": "open",
+  "title": "backrest.services.default: init",
+  "updated_at": "2026-08-27T02:46:12Z",
+  "user": {
+   "id": 29627898,
+   "login": "phanirithvij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#541020",
+ "review_comments": [
+  {
+   "body": "This could be fragile, maybe an update script can auto generate this. ",
+   "commit_id": "a2a65e2cb1977e84f5a2be3f54542c5268ce109e",
+   "created_at": "2026-07-12T17:01:10Z",
+   "diff_hunk": "@@ -0,0 +1,22 @@\n+{\n+    \"version\": 6,",
+   "id": 3566726983,
+   "line": 2,
+   "original_commit_id": "b69e791c7d7404b16f0a5a84f39cba11d47b6131",
+   "original_line": 2,
+   "original_position": 2,
+   "original_start_line": null,
+   "path": "nixos/tests/backrest/config.json",
+   "position": 2,
+   "pull_request_review_id": 4680422472,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-12T17:01:10Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "We can test backrest e2e. will be a follow-up pr if it is troublesome to get it working soon.",
+   "commit_id": "a2a65e2cb1977e84f5a2be3f54542c5268ce109e",
+   "created_at": "2026-07-13T00:45:21Z",
+   "diff_hunk": "@@ -0,0 +1,49 @@\n+{ lib, hostPkgs, ... }:\n+{\n+  _class = \"nixosTest\";\n+  name = \"backrest-modular\";\n+  nodes.machine =\n+    { pkgs, ... }:\n+    {\n+      system.services.backrest = {\n+        imports = [ pkgs.backrest.services.default ];\n+        backrest = {\n+          address = \"0.0.0.0\";\n+          configPath = \"/var/lib/backrest/config.json\";\n+        };\n+      };\n+\n+      systemd.services.backrest.preStart = ''\n+        mkdir -p /var/lib/backrest\n+        cp ${./config.json} /var/lib/backrest/config.json\n+        chmod 644 /var/lib/backrest/config.json\n+      '';\n+      networking.firewall.allowedTCPPorts = [ 9898 ];\n+    };\n+",
+   "id": 3567483065,
+   "line": 23,
+   "original_commit_id": "b7c3625e4b75203e754f049705660b194e547c05",
+   "original_line": 23,
+   "original_position": 23,
+   "original_start_line": null,
+   "path": "nixos/tests/backrest/modular-service.nix",
+   "position": 23,
+   "pull_request_review_id": 4681126242,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-13T00:50:25Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "If the command is not running on host then we should use `pkgs` of the machine config. so I might move restic to `environment.systemPackages`. (`hostPkgs` when running using `subprocess.run` or `os.system`)",
+   "commit_id": "a2a65e2cb1977e84f5a2be3f54542c5268ce109e",
+   "created_at": "2026-07-13T00:46:14Z",
+   "diff_hunk": "@@ -0,0 +1,49 @@\n+{ lib, hostPkgs, ... }:\n+{\n+  _class = \"nixosTest\";\n+  name = \"backrest-modular\";\n+  nodes.machine =\n+    { pkgs, ... }:\n+    {\n+      system.services.backrest = {\n+        imports = [ pkgs.backrest.services.default ];\n+        backrest = {\n+          address = \"0.0.0.0\";\n+          configPath = \"/var/lib/backrest/config.json\";\n+        };\n+      };\n+\n+      systemd.services.backrest.preStart = ''\n+        mkdir -p /var/lib/backrest\n+        cp ${./config.json} /var/lib/backrest/config.json\n+        chmod 644 /var/lib/backrest/config.json\n+      '';\n+      networking.firewall.allowedTCPPorts = [ 9898 ];\n+    };\n+\n+  testScript = /* py */ ''\n+    machine.succeed(\"mkdir -p /srv/backup-source\")\n+    machine.succeed(\"echo 'important backup data' > /srv/backup-source/data.txt\")\n+\n+    machine.succeed(\"echo 'root owned data' > /srv/backup-source/root.txt\")\n+    machine.succeed(\"chown root:root /srv/backup-source/root.txt\")\n+    machine.succeed(\"chmod 600 /srv/backup-source/root.txt\")\n+\n+    machine.succeed(\"echo 'testpass' > /srv/restic-password\")\n+\n+    machine.start_job(\"backrest.service\")\n+    machine.wait_for_unit(\"backrest.service\")\n+    machine.wait_for_open_port(9898)\n+\n+    machine.succeed(\"curl -fsS http://localhost:9898\")\n+\n+    # Trigger a backup manually via the API and wait for it to complete\n+    machine.succeed(\"\"\"curl -fsS -X POST -H 'Content-Type: application/json' -d '{\"value\": \"test-backup\"}' http://localhost:9898/v1.Backrest/Backup\"\"\")\n+\n+    restic_cmd = \"${hostPkgs.restic}/bin/restic -r /var/lib/backrest/restic-repo --password-file /srv/restic-password\"",
+   "id": 3567484730,
+   "line": 43,
+   "original_commit_id": "b7c3625e4b75203e754f049705660b194e547c05",
+   "original_line": 43,
+   "original_position": 43,
+   "original_start_line": null,
+   "path": "nixos/tests/backrest/modular-service.nix",
+   "position": 43,
+   "pull_request_review_id": 4681128133,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-13T00:49:44Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "We could have a vm template like https://github.com/NixOS/nixpkgs/pull/330708 does, to test backrest without having to test it during the development of this module on a real host.",
+   "commit_id": "a2a65e2cb1977e84f5a2be3f54542c5268ce109e",
+   "created_at": "2026-07-13T00:48:57Z",
+   "diff_hunk": "@@ -0,0 +1,49 @@\n+{ lib, hostPkgs, ... }:\n+{\n+  _class = \"nixosTest\";\n+  name = \"backrest-modular\";\n+  nodes.machine =\n+    { pkgs, ... }:\n+    {\n+      system.services.backrest = {\n+        imports = [ pkgs.backrest.services.default ];\n+        backrest = {\n+          address = \"0.0.0.0\";\n+          configPath = \"/var/lib/backrest/config.json\";\n+        };\n+      };\n+\n+      systemd.services.backrest.preStart = ''\n+        mkdir -p /var/lib/backrest\n+        cp ${./config.json} /var/lib/backrest/config.json\n+        chmod 644 /var/lib/backrest/config.json\n+      '';\n+      networking.firewall.allowedTCPPorts = [ 9898 ];\n+    };\n+\n+  testScript = /* py */ ''\n+    machine.succeed(\"mkdir -p /srv/backup-source\")\n+    machine.succeed(\"echo 'important backup data' > /srv/backup-source/data.txt\")\n+\n+    machine.succeed(\"echo 'root owned data' > /srv/backup-source/root.txt\")\n+    machine.succeed(\"chown root:root /srv/backup-source/root.txt\")\n+    machine.succeed(\"chmod 600 /srv/backup-source/root.txt\")\n+\n+    machine.succeed(\"echo 'testpass' > /srv/restic-password\")\n+\n+    machine.start_job(\"backrest.service\")\n+    machine.wait_for_unit(\"backrest.service\")\n+    machine.wait_for_open_port(9898)\n+\n+    machine.succeed(\"curl -fsS http://localhost:9898\")\n+\n+    # Trigger a backup manually via the API and wait for it to complete\n+    machine.succeed(\"\"\"curl -fsS -X POST -H 'Content-Type: application/json' -d '{\"value\": \"test-backup\"}' http://localhost:9898/v1.Backrest/Backup\"\"\")\n+\n+    restic_cmd = \"${hostPkgs.restic}/bin/restic -r /var/lib/backrest/restic-repo --password-file /srv/restic-password\"\n+    machine.succeed(f\"{restic_cmd} ls latest | grep -q data.txt\")\n+    machine.succeed(f\"{restic_cmd} ls latest | grep -q root.txt\")\n+  '';",
+   "id": 3567490662,
+   "line": 46,
+   "original_commit_id": "b7c3625e4b75203e754f049705660b194e547c05",
+   "original_line": 46,
+   "original_position": 46,
+   "original_start_line": null,
+   "path": "nixos/tests/backrest/modular-service.nix",
+   "position": 46,
+   "pull_request_review_id": 4681134898,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-13T00:58:54Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Could belong in `backrestWrapped`. And some of the args passed as env vars. (modular services doesn't have environment variables support yet, this module could be refactored later on when it gets implemented)",
+   "commit_id": "b7c3625e4b75203e754f049705660b194e547c05",
+   "created_at": "2026-07-13T00:54:39Z",
+   "diff_hunk": "@@ -0,0 +1,145 @@\n+# Non-module dependencies (`importApply`)\n+{\n+  bash,\n+  symlinkJoin,\n+  makeBinaryWrapper,\n+}:\n+\n+# Service module\n+{\n+  lib,\n+  config,\n+  options,\n+  ...\n+}:\n+let\n+  inherit (lib)\n+    getExe\n+    literalExpression\n+    mkOption\n+    types\n+    ;\n+  cfg = config.backrest;\n+\n+  backrestWrapped =\n+    if cfg.extraPackages == [ ] then\n+      cfg.package\n+    else\n+      symlinkJoin {\n+        name = \"backrest-wrapped\";\n+        paths = [ cfg.package ];\n+        nativeBuildInputs = [ makeBinaryWrapper ];\n+        postBuild = ''\n+          wrapProgram $out/bin/backrest \\\n+            --prefix PATH : ${lib.makeBinPath cfg.extraPackages}\n+        '';\n+        meta.mainProgram = \"backrest\";\n+      };\n+in\n+{\n+  # https://nixos.org/manual/nixos/unstable/#modular-services\n+  _class = \"service\";\n+\n+  options = {\n+    backrest = {\n+      package = mkOption {\n+        description = \"Package to use for backrest.\";\n+        defaultText = \"The backrest package that provided this module.\";\n+        type = types.package;\n+      };\n+\n+      address = mkOption {\n+        description = \"Address to listen on.\";\n+        type = types.str;\n+        default = \"127.0.0.1\";\n+      };\n+\n+      port = mkOption {\n+        description = \"Port to listen on.\";\n+        type = types.port;\n+        default = 9898;\n+      };\n+\n+      dataDir = mkOption {\n+        description = \"Directory for internal data.\";\n+        type = types.str;\n+        default = \"/var/lib/backrest\";\n+      };\n+\n+      configPath = mkOption {\n+        description = \"Path to config.json.\";\n+        type = types.nullOr types.str;\n+        default = null;\n+      };\n+\n+      extraArgs = mkOption {\n+        description = \"Extra arguments to pass to backrest.\";\n+        type = types.listOf types.str;\n+        default = [ ];\n+      };\n+\n+      extraPackages = mkOption {\n+        description = \"Extra packages to add make available to backrest's PATH, useful for backrest hooks.\";\n+        type = types.listOf types.package;\n+        defaultText = literalExpression \"[ pkgs.bash ]\"; ## TODO: can I use pkgs in modular services?\n+        default = [ bash ];\n+      };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      (getExe backrestWrapped)\n+      \"-bind-address\"\n+      \"${cfg.address}:${toString cfg.port}\"\n+      \"-data-dir\"\n+      cfg.dataDir\n+    ]\n+    ++ lib.optionals (cfg.configPath != null) [\n+      \"-config-file\"\n+      cfg.configPath\n+    ]\n+    ++ cfg.extraArgs;",
+   "id": 3567501968,
+   "line": null,
+   "original_commit_id": "b7c3625e4b75203e754f049705660b194e547c05",
+   "original_line": 102,
+   "original_position": 102,
+   "original_start_line": 93,
+   "path": "pkgs/by-name/ba/backrest/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4681146481,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-13T00:59:34Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Test that `extraPackages` work with a simple hook in the nixos test.",
+   "commit_id": "a2a65e2cb1977e84f5a2be3f54542c5268ce109e",
+   "created_at": "2026-07-13T13:23:31Z",
+   "diff_hunk": "@@ -0,0 +1,138 @@\n+# Non-module dependencies (`importApply`)\n+{\n+  bash,\n+  symlinkJoin,\n+  makeBinaryWrapper,\n+}:\n+\n+# Service module\n+{\n+  lib,\n+  config,\n+  options,\n+  ...\n+}:\n+let\n+  inherit (lib)\n+    getExe\n+    literalExpression\n+    mkOption\n+    types\n+    ;\n+  cfg = config.backrest;\n+\n+  backrestWrapped = symlinkJoin {\n+    name = \"backrest-wrapped\";\n+    paths = [ cfg.package ];\n+    nativeBuildInputs = [ makeBinaryWrapper ];\n+    postBuild = ''\n+      wrapProgram $out/bin/backrest \\\n+        ${\n+          lib.optionalString (cfg.extraPackages != [ ]) \"--prefix PATH : ${lib.makeBinPath cfg.extraPackages}\"",
+   "id": 3570973439,
+   "line": 31,
+   "original_commit_id": "f12dab5f9fc890786ab76fd68efab2f63ea27e78",
+   "original_line": 31,
+   "original_position": 31,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ba/backrest/service.nix",
+   "position": 31,
+   "pull_request_review_id": 4685087885,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-13T13:23:31Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Test more than one backrest on the same host.",
+   "commit_id": "a2a65e2cb1977e84f5a2be3f54542c5268ce109e",
+   "created_at": "2026-07-13T13:23:52Z",
+   "diff_hunk": "@@ -0,0 +1,49 @@\n+{ lib, hostPkgs, ... }:\n+{\n+  _class = \"nixosTest\";\n+  name = \"backrest-modular\";\n+  nodes.machine =\n+    { pkgs, ... }:\n+    {\n+      system.services.backrest = {\n+        imports = [ pkgs.backrest.services.default ];\n+        backrest = {\n+          address = \"0.0.0.0\";\n+          configPath = \"/var/lib/backrest/config.json\";\n+        };\n+      };\n+",
+   "id": 3570975864,
+   "line": 15,
+   "original_commit_id": "f12dab5f9fc890786ab76fd68efab2f63ea27e78",
+   "original_line": 15,
+   "original_position": 15,
+   "original_start_line": null,
+   "path": "nixos/tests/backrest/modular-service.nix",
+   "position": 15,
+   "pull_request_review_id": 4685090715,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-13T13:23:52Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "b69e791c7d7404b16f0a5a84f39cba11d47b6131",
+   "id": 4680422472,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-12T17:01:09Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "b7c3625e4b75203e754f049705660b194e547c05",
+   "id": 4681126242,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-13T00:45:21Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "b7c3625e4b75203e754f049705660b194e547c05",
+   "id": 4681128133,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-13T00:46:13Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "b7c3625e4b75203e754f049705660b194e547c05",
+   "id": 4681134898,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-13T00:48:57Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "b7c3625e4b75203e754f049705660b194e547c05",
+   "id": 4681146481,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-13T00:54:38Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "f12dab5f9fc890786ab76fd68efab2f63ea27e78",
+   "id": 4685087885,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-13T13:23:31Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "f12dab5f9fc890786ab76fd68efab2f63ea27e78",
+   "id": 4685090715,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-13T13:23:52Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": []
+}

@@ -1,0 +1,1094 @@
+{
+ "comments": [
+  {
+   "body": "Which are the ugly hacks you pointed out?\n",
+   "created_at": "2014-06-13T11:52:34Z",
+   "id": 46002473,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-06-13T11:52:34Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@iElectric no hacks included here\n",
+   "created_at": "2014-06-13T23:06:13Z",
+   "id": 46069351,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-06-13T23:06:13Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've cherry-picked de39787357c0621c943c8a7a1ce8aff671bf865b, although other changes seem to be fine. Would be nice if someone tries to boot NixOS with PXE boot.\n\n@oxij could you provide some instructions?\n",
+   "created_at": "2014-06-25T15:08:41Z",
+   "id": 47113970,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-06-25T15:08:41Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@iElectric currently it needs a bit hacky kernel configuration and a huge nonmodular blob of nix code I'm not quite ready to share yet. But I'm working on it.\n",
+   "created_at": "2014-06-25T21:02:56Z",
+   "id": 47158364,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-06-25T21:02:56Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Also, @iElectric, could you then please cherry-pick 5e4d0f565ceeb3de09f08c40c61f0a75ac688ba2 too? Isn't it minor enough?\n",
+   "created_at": "2014-06-25T21:06:48Z",
+   "id": 47158827,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-06-25T21:06:48Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I have been booting nixos with pxe and it works ok, you need to use tarball\nelease and do NFS and then configure pxeconfig. It's standard procedure.\n\nOn Wed, Jun 25, 2014 at 11:06 PM, Jan Malakhovski notifications@github.com\nwrote:\n\n> Also, @iElectric https://github.com/iElectric, could you then please\n> cherry-pick 5e4d0f5\n> https://github.com/NixOS/nixpkgs/commit/5e4d0f565ceeb3de09f08c40c61f0a75ac688ba2\n> too? Isn't it minor enough?\n> \n> —\n> Reply to this email directly or view it on GitHub\n> https://github.com/NixOS/nixpkgs/pull/2920#issuecomment-47158827.\n\n## \n\n-----BEGIN PGP PUBLIC KEY BLOCK-----\nVersion: GnuPG v1.4.11 (GNU/Linux)\n\nmQENBFEY1PEBCADPOfERF2wo4qeoq9L1m2z4pKfWqNd4B6BsoFUWPNd7BXmY+9JG\njJddSkmYobWec7XjAFTBL0Xbttt+rK9SIED2dCOmU1FYMQElhGlM3PNA3kaiQFeV\nijgH318GCfZzDd0dWa5TN/IshVeWXwgngsIEmZTVf1VSeb3eO3B8Fxe3zsSLUq0b\n71MmU5eLVP9pMkm5V5BTYp+lV70FIekKygkKq+uTDo1csWUatbs4Qvgv37Bymy2t\noTwOBXGoinQk5N/6asR1jWs3vKv0L0SruoZy/kEG/jXb4l2OZUP85EVMganYKouE\nOchVmcmhBdWV+t3HK4r2ATfyEcMRzvzSflA1ABEBAAG0Jkpha2EgSHVkb2tsaW4g\nPGpha2FodWRva2xpbkBnbWFpbC5jb20+iQE+BBMBAgAoBQJRGNTxAhsDBQkB4TOA\nBgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRD6Zxi5hZclKnXNCACLOKa8abQp\neTWv9SXUwC7LVM5pP2mXcgn+Ipqr6YWBdLx4Iij0YlvUok9VeKvwTpUlT+cx++o3\nwCM3AYrUyJE+zrtw49lInUmutz9seqJLU895oq+D+UuGoORrLBpEZrYR5f83uUmQ\nE3Z1ZmWrNGXYtITWDtVZD/KauMF2nkPcmy/XaYXhd4WHD81DGNlKtGAHig6A3Phc\n8Mr0A4yLDeRQJm8lCFEsxMJUNTupgY+ybbsMfVGx1gQvvGOTioV8CLCoRchUCCcm\nYPArFg40KzIDSNjwdo9EVZDnlPx1hbOppfQydxP+JVnZsqoYmVY4UhIWi/NfOl3V\nUMjl338INW1zuQENBFEY1PEBCADRSIfelOMjaTH7IfpMFFUc5Gys//njFnW9QAUg\nwyfs2AFxUp6vKQ7nxXQiJXVhKTwe9iqo+oGxaHp4AeTjC7vXsfMuF5g5lfttbAo3\nYEobEe6OG5so41nbwan6SyeIIQ2AmQqJBw8TKKMSec2qUN0Pw7iZRs0o9uJM/obG\nDPsAsMOQgNLxJyMCP7X2jBtDXxkMFVHMmk50Tl3h3Fi9qWuNxgTXjs0tUvKkXiu2\nPco952jnm7HpCIKBek2pqR/UJXXb5qxy5G6Lc0qaMWZ5GKnSMTJmTY6Xl44EnaLK\nzh0rqgF9qpoWck470ZbiGASMtB008hy2l0cyxUfvDaS3tY4hABEBAAGJASUEGAEC\nAA8FAlEY1PECGwwFCQHhM4AACgkQ+mcYuYWXJSoT6AgAkvzvC0EGmeCR3cn9O3Gf\nyG00Kqk9/1gJvlphis7AAce8iUgU+4xd94Vp0u8rghpdy88xKN5lF1W2YZQmmBaf\nAVe6b7TOg6kxc3GKkVsWDxNyQKkpB46BwefIGaSljH7502X9aEWosrqWyJJNYCtt\nQDit4BysX0Ww3Ka5Rx6ZFhC9ybPKoW2i8JwpyBaXDt7R2k+PC/ClBf9qzL+sb2es\nzh/zCMVKNdm8KUITHU/5lgn2qZpUFZwiASPCMGGFP9u8g6UKeUTYTPD+GWaHIW63\nRAgNIAffxx0M1r3P/2ipkAdI3NX/1iBKDQNG8Odsf+BswFKrNCnyUDdLPvJAhODS\ngw==\n=tmrm\n-----END PGP PUBLIC KEY BLOCK-----\n",
+   "created_at": "2014-06-25T22:07:40Z",
+   "id": 47165363,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-06-25T22:07:40Z",
+   "user": {
+    "id": 585547,
+    "login": "offlinehacker",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@offlinehacker Yep, but the goal here is a bit more ambitious (cf. see the first line in the opening comment of the thread).\n",
+   "created_at": "2014-06-25T22:43:52Z",
+   "id": 47168596,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-06-25T22:43:52Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@oxij cherry-picked, thanks!\n",
+   "created_at": "2014-06-26T09:13:42Z",
+   "id": 47203922,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-06-26T09:13:42Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I guess we should cherry-pick the rest of non-obsolete changes and close…\n\nDoes anyone know what changes are still relevant?\n",
+   "created_at": "2014-08-30T10:06:38Z",
+   "id": 53954334,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-08-30T10:06:38Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@7c6f434c my humble opinion is than every non-applied change from this PR is still relevant\n",
+   "created_at": "2014-08-31T18:18:12Z",
+   "id": 53996458,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-08-31T18:18:12Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "What do we need from the Debian atftp patch?\n",
+   "created_at": "2014-09-01T06:17:53Z",
+   "id": 54021353,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-09-01T06:17:53Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "And what do we still need now? I tried to edit and commit most of the patches left…\n",
+   "created_at": "2014-09-01T06:28:36Z",
+   "id": 54022538,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-09-01T06:28:36Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@7c6f434c debian pretty much maintains atftpd with their patch, I'd say we need less bugs and IPv6 support. Everything else looks merged in.\n",
+   "created_at": "2014-09-01T14:07:51Z",
+   "id": 54062493,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-09-01T14:07:51Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Please verify that everything is now applied into master and if so, close the pull request.\n",
+   "created_at": "2014-09-01T20:49:23Z",
+   "id": 54090923,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-09-01T20:49:23Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@oxij forgot to put Cc mark and no idea how GitHub handles this\n",
+   "created_at": "2014-09-03T07:47:32Z",
+   "id": 54262621,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-09-03T07:47:32Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@7c6f434c Thanks. To do a proper testing I need to rebase a hefty branch that uses all these changes on top of current master, and that needs (much) more time (than expected) which I won't have at least till the end of the week. So, note that I will eventually reply and do not close this yet.\n",
+   "created_at": "2014-09-09T20:26:03Z",
+   "id": 55028973,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-09-09T20:26:03Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@oxij Any news? \n\nMy theory is that I have merged everything from this pull request and that you will have more fixes (not included here yet) once you test.\n\nMaybe close _this_ instance and open a new request when you have more improvements?\n",
+   "created_at": "2014-10-09T07:38:22Z",
+   "id": 58473511,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-09T07:38:22Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@7c6f434c three weeks ago I wasn't able to build this, but current master seems to compile and even netboot.\nThanks again. Closing.\n",
+   "created_at": "2014-10-12T19:17:37Z",
+   "id": 58817657,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-12T19:17:37Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Now we need a wiki page describing how to set this up :) \n",
+   "created_at": "2014-10-13T04:58:47Z",
+   "id": 58845288,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-10-13T04:58:47Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@oxij Can you shortly describe how to set this up? We'll create a wiki page after that. Or you can do it yourself.\n",
+   "created_at": "2014-11-13T19:29:24Z",
+   "id": 62951064,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-11-13T19:29:24Z",
+   "user": {
+    "id": 2179419,
+    "login": "jagajaga",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'd add this to NixOS manual to have information less fragmented.\n",
+   "created_at": "2014-11-13T20:17:35Z",
+   "id": 62958781,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-11-13T20:17:35Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": ":beers:\n",
+   "created_at": "2014-11-13T20:36:59Z",
+   "id": 62961680,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-11-13T20:36:59Z",
+   "user": {
+    "id": 2179419,
+    "login": "jagajaga",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@oxij if you could just post a configuration file for the server and client\nI could document it.\n\nOn Thu Nov 13 2014 at 9:37:06 PM Arseniy Seroka notifications@github.com\nwrote:\n\n> :beers:\n> \n> —\n> Reply to this email directly or view it on GitHub\n> https://github.com/NixOS/nixpkgs/pull/2920#issuecomment-62961680.\n",
+   "created_at": "2014-11-13T22:19:17Z",
+   "id": 62977168,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-11-13T22:19:17Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@wmertens @jagajaga @iElectric a) it doesn't work perfectly; b) it's so ugly I'm embarrassed.\n\nWhat I do is I generate a pxelinux and/or iPXE configuration files referencing a set of system profiles and nixos expressions for dhcp/atftp/lighttp daemons from `types.loaOf types.attrs` where each element contains nixos-config and some PXE settings.\n\nPXE and nixos daemon configurations are more or less okay, but the main part that evaluates nixos-configs into netbootable system profiles is so abhorrent I'm seriously surprised that it works. The problem is that netbooting with network-mounted root needs an early network, which I currently provide by a custom kernel config (with all the networking drivers and nfs builtin and \"ip=dhcp\" parameter), initrd (fs root mounting hack similar to live-cd profile) and some minor hacks (like persistent dhcpcd). Even after all that this doesn't ensure a successful boot, because some network card drivers need firmware blobs which are to be supplied by userspace, but \"ip=dhcp\" forces the kernel to mount/run initrd only after the network is up.\n\nIn a way, I'm waiting for someone to make initrd configuration somewhat more modular so that one could generate a proper initrd with a service which would set the network up before /nix/store is mounted. Starting an init daemon from initrd would be perfect, but even a modular initrd/init script with an easy way to place packages onto initrd would be nice. I tried to implement this in a proper way myself, but after two weeks of non-stop hacking it turned out to be much more work than I was prepared to commit. Currently, I have a setup that has something like 80% chance of working, with 20% of effort (and I'm not happy with that).\n\nWhat I can probably do with a clear conscience is to transform the PXE part into nixos service, and put everything else into an example configuration profile. Will that be okay?\n",
+   "created_at": "2014-11-15T00:28:47Z",
+   "id": 63150490,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-11-15T00:28:47Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "About an init in the initrd, you may be interested in my systemd in initrd\nbranch: https://github.com/lethalman/nixpkgs/commits/systemd\n\nOn Sat, Nov 15, 2014 at 1:28 AM, Jan Malakhovski notifications@github.com\nwrote:\n\n> @wmertens https://github.com/wmertens @jagajaga\n> https://github.com/jagajaga @iElectric https://github.com/iElectric\n> a) it doesn't work perfectly; b) it's so ugly I'm embarrassed.\n> \n> What I do is I generate a pxelinux and/or iPXE configuration files\n> referencing a set of system profiles and nixos expressions for\n> dhcp/atftp/lighttp daemons from types.loaOf types.attrs where each\n> element contains nixos-config and some PXE settings.\n> \n> PXE and nixos daemon configurations are more or less okay, but the main\n> part that evaluates nixos-configs into netbootable system profiles is so\n> abhorrent I'm seriously surprised that it works. The problem is that\n> netbooting with network-mounted root needs an early network, which I\n> currently provide by a custom kernel config (with all the networking\n> drivers and nfs builtin and \"ip=dhcp\" parameter), initrd (fs root mounting\n> hack similar to live-cd profile) and some minor hacks (like persistent\n> dhcpcd). Even after all that this doesn't ensure a successful boot, because\n> some network card drivers need firmware blobs which are to be supplied by\n> userspace, but \"ip=dhcp\" forces the kernel to mount/run initrd only after\n> the network is up.\n> \n> In a way, I'm waiting for someone to make initrd configuration somewhat\n> more modular so that one could generate a proper initrd with a service\n> which would set the network up before /nix/store is mounted. Starting an\n> init daemon from initrd would be perfect, but even a modular initrd/init\n> script with an easy way to place packages onto initrd would be nice. I\n> tried to implement this in a proper way myself, but after two weeks of\n> non-stop hacking it turned out to be much more work than I was prepared to\n> commit. Currently, I have a setup that has something like 80% chance of\n> working, with 20% of effort (and I'm not happy with that).\n> \n> What I can probably do with a clear conscience is to transform the PXE\n> part into nixos service, and put everything else into an example\n> configuration profile. Will that be okay?\n> \n> —\n> Reply to this email directly or view it on GitHub\n> https://github.com/NixOS/nixpkgs/pull/2920#issuecomment-63150490.\n\n## \n\nwww.debian.org - The Universal Operating System\n",
+   "created_at": "2014-11-15T00:58:05Z",
+   "id": 63152286,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2014-11-15T00:58:05Z",
+   "user": {
+    "id": 480920,
+    "login": "lucabrunox",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@oxij did you get PXE boot working with NixOS? Note there is https://github.com/sleinen/nixos-pxe-installer\n",
+   "created_at": "2016-01-18T12:22:32Z",
+   "id": 172513942,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-01-18T12:22:32Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yep. Like two years ago.\n\nYou'd be surprised, but the biggest problem with my approach is that for\ngeneric usability (installer is trivial) it needs a series of patches to\nnixos most of which are either applied very slowly (#10996, e.g. that\none seems to be about GRUB, but I actually invented it to generate\npretty PXELINUX menus), need help to become backward compatible and are\nstalled (#11529, this seems to be about simple refactoring, but the\nactual point of that is that it allows one to easily duplicate\n`options.networking` expressions so that one could define networking for\na whole cluster in a single pretty config), pretty much rejected\n(#11484, I can't boot anything useful (except the installer and trivial\nconfigs) without that) or actually rejected (#6969, I use\n`nixpkgs.config` a lot, overrides are overrated). Considering the facts\nthat my branch has ~80 patches more (1/2 of those are actually pretty\nuseful to massive farming via PXE) and flaming in issues about my\nchanges actually takes more time that implementing those changes, you'd\nunderstand why I'm not thrilled about pushing them. Hopefully, most of\nthe stuff I need gets merged a little by little or reimplemented by\nsomeone else in a couple years, and then my `services.netboot.menu`\n(which immediately needs at least 10, if not more, of those patches to\nbe barely functional) thing will be usable on vanilla nixos.\n\n(Yep, I actually though about forking nixpkgs on this point, but I hate\nmerging, and git can't handle upstream rebases, so my hypothetical users\nwould need to checkout new branches, which isn't nice.)\n\nI understand why @sleinen implemented his thing, installing via PXE is\nawesome, but I wanted a generic thing, I implemented it and now I just\nrebase it on top of upstream/master once in a while.\n\nAlso, my approach is somewhat more verbose than I'd like, e.g.:\n\n```\n  networking.firewall = {\n    enable = true;\n    allowPing = true;\n    checkReversePath = false;\n    allowedTCPPorts = [ 80 ] ++ [ 53 69 ] ++ [ 111 832 2049 ] ++ [ 389 ];\n    allowedUDPPorts =           [ 53 69 ] ++ [ 111 832 2049 ];\n    extraCommands = ''\n      iptables -A nixos-fw -j nixos-fw-accept -p tcp -m multiport --dports 30000:64000\n      iptables -A nixos-fw -j nixos-fw-accept -p udp -m multiport --dports 30000:64000\n    '';\n  };\n\n  services.dnsmasq = {\n    enable = true;\n    resolveLocalQueries = true;\n    extraConfig = ''\n      domain = lan\n      dhcp-fqdn\n      dhcp-range = 192.168.1.100,192.168.1.254,255.255.255.0,192.168.1.255,6h\n      dhcp-boot = lpxelinux.0,alice.lan,192.168.1.2\n    '';\n  };\n\n  services.nfs.server = {\n    enable = true;\n    exports = ''\n      /nix/store 192.168.1.0/255.255.255.0(ro,all_squash,async)\n      /home/tv 192.168.1.0/255.255.255.0(rw,no_root_squash)\n    '';\n  };\n\n  services.atftpd = {\n    enable = true;\n    root = \"${config.services.netboot.menu.output}\";\n  };\n\n  services.netboot.menu = {\n    prefix = \"http://192.168.1.1/boot/\";\n\n    default.entries = {\n      \"atv\" = {\n        label = \"TV\";\n        key = \"t\";\n        isDefault = true;\n        config = {\n          require = [ ./tv.nix ];\n          services.netboot.client.nfsServer = \"192.168.1.1\";\n        };\n      };\n      \"dumb\" = {\n        label = \"Cluster node\";\n        key = \"h\";\n        config = {\n          nixpkgs.system = \"x86_64-linux\";\n          require = [\n            ./node.nix\n            ./localization/dvorak.nix\n          ];\n          services.netboot.client.nfsServer = \"192.168.1.1\";\n        };\n      };\n    };\n  };\n```\n\nMost of that crap is just the nature of PXE booting, but e.g. those\nrepeating\n\n```\nservices.netboot.client.nfsServer = \"192.168.1.1\";\n```\n\nlines drive my crazy, especially when there's a ton of entries there,\nbut I can handle it, yes.\n",
+   "created_at": "2016-01-18T13:20:56Z",
+   "id": 172525930,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-01-18T13:20:56Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@oxij thank you. I'll review this in detail once I'm onto PXE boot and check on the level of effort.\n",
+   "created_at": "2016-01-18T15:29:09Z",
+   "id": 172561444,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-01-18T15:29:09Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/2920",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "by serving NixOS images from a NixOS machine to anything supporting PXE.\n\nThe described concept works alright, but the main piece of code is far from being ready for the general public (ugly hacks), but I got tired of rebasing and stashing these changes.\n",
+  "closed_at": "2014-10-12T19:17:37Z",
+  "closed_by": {
+   "id": 391919,
+   "login": "oxij",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 28,
+  "created_at": "2014-06-13T00:22:28Z",
+  "draft": false,
+  "id": 35635409,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "eb6420",
+    "default": false,
+    "description": "This issue needs the person who filed it to respond",
+    "id": 84668464,
+    "name": "9.needs: reporter feedback"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 2920,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/2920.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/2920.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "Various changes and fixes with the general aim to support netbooting NixOS",
+  "type": null,
+  "updated_at": "2017-08-29T11:17:53Z",
+  "user": {
+   "id": 391919,
+   "login": "oxij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 123,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:38:34Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "0e9741df81063ba6c007023ee7295f6dcd409170",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "by serving NixOS images from a NixOS machine to anything supporting PXE.\n\nThe described concept works alright, but the main piece of code is far from being ready for the general public (ugly hacks), but I got tired of rebasing and stashing these changes.\n",
+  "changed_files": 8,
+  "closed_at": "2014-10-12T19:17:37Z",
+  "comments": 28,
+  "commits": 7,
+  "created_at": "2014-06-13T00:22:28Z",
+  "deletions": 51,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/2920.diff",
+  "draft": false,
+  "head": {
+   "label": "oxij:various-changes",
+   "ref": "various-changes",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-07-06T22:22:29Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "oxij/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/oxij/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 4931866,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/oxij/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/oxij/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 391919,
+     "login": "oxij",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/oxij/nixpkgs/pulls{/number}",
+    "pushed_at": "2025-06-23T15:47:22Z",
+    "size": 4894452,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/oxij/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/oxij/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2023-08-22T18:03:00Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "386134976acac4b57375a5a9f68bfd21d0d025b0",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 17087697,
+  "labels": [
+   {
+    "color": "eb6420",
+    "default": false,
+    "description": "This issue needs the person who filed it to respond",
+    "id": 84668464,
+    "name": "9.needs: reporter feedback"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "632593215dc7cd981717bde29800ec12aaef1c1b",
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 2920,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/2920.patch",
+  "rebaseable": false,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 4,
+  "state": "closed",
+  "title": "Various changes and fixes with the general aim to support netbooting NixOS",
+  "updated_at": "2017-08-29T11:17:53Z",
+  "user": {
+   "id": 391919,
+   "login": "oxij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#2920",
+ "review_comments": [
+  {
+   "body": "Isn't this in RPATH anyway? Maybe it should be fixed by patchelf, not by wrapping?\n",
+   "commit_id": "386134976acac4b57375a5a9f68bfd21d0d025b0",
+   "created_at": "2014-06-13T06:19:27Z",
+   "diff_hunk": "@@ -1,55 +1,47 @@\n-x@{builderDefsPackage\n-  , readline, tcp_wrappers, pcre\n-  , ...}:\n-builderDefsPackage\n-(a :  \n-let \n-  helperArgNames = [\"stdenv\" \"fetchurl\" \"builderDefsPackage\"] ++ \n-    [];\n-\n-  buildInputs = map (n: builtins.getAttr n x)\n-    (builtins.attrNames (builtins.removeAttrs x helperArgNames));\n-  sourceInfo = rec {\n-    baseName=\"atftp\";\n-    version=\"0.7\";\n-    name=\"${baseName}-${version}\";\n-    url=\"mirror://debian/pool/main/a/atftp/atftp_${version}.dfsg.orig.tar.gz\";\n-    hash=\"0nd5dl14d6z5abgcbxcn41rfn3syza6s57bbgh4aq3r9cxdmz08q\";\n+{ lib, stdenv, fetchurl, readline, tcp_wrappers, pcre, makeWrapper }:\n+\n+assert stdenv.isLinux;\n+assert stdenv.gcc.gcc != null;\n+\n+let\n+\n+  version = \"0.7\";\n+\n+  debianPatch = fetchurl {\n+    url = \"mirror://debian/pool/main/a/atftp/atftp_${version}.dfsg-11.diff.gz\";\n+    sha256 = \"07g4qbmp0lnscg2dkj6nsj657jaghibvfysdm1cdxcn215n3zwqd\";\n   };\n+\n in\n-rec {\n-  src = a.fetchurl {\n-    url = sourceInfo.url;\n-    sha256 = sourceInfo.hash;\n-  };\n \n-  inherit (sourceInfo) name version;\n-  inherit buildInputs;\n+stdenv.mkDerivation {\n+\n+  name = \"atftp\";\n+  inherit version;\n \n-  /* doConfigure should be removed if not needed */\n-  phaseNames = [\"doPatch\" \"doConfigure\" \"doMakeInstall\"];\n-      \n-  debianPatch = a.fetchurl {\n-    url = http://patch-tracker.debian.org/patch/nondebian/dl/atftp/0.7.dfsg-10;\n-    sha256 = \"0vannjp0wxvk10xxlr3hirgf0g57n9dr4vhmsyfd8x4cwgxwfgsa\";\n+  src = fetchurl {\n+    url = \"mirror://debian/pool/main/a/atftp/atftp_${version}.dfsg.orig.tar.gz\";\n+    sha256 = \"0nd5dl14d6z5abgcbxcn41rfn3syza6s57bbgh4aq3r9cxdmz08q\";\n   };\n \n-  patches = [debianPatch];\n+  buildInputs = [ readline tcp_wrappers pcre makeWrapper ];\n+\n+  patches = [ debianPatch ];\n+\n+  postInstall = ''\n+    wrapProgram $out/sbin/atftpd --prefix LD_LIBRARY_PATH : ${stdenv.gcc.gcc}/lib${if stdenv.system == \"x86_64-linux\" then \"64\" else \"\"}",
+   "id": 13739449,
+   "line": 32,
+   "original_commit_id": "386134976acac4b57375a5a9f68bfd21d0d025b0",
+   "original_line": null,
+   "original_position": 63,
+   "original_start_line": null,
+   "path": "pkgs/tools/networking/atftp/default.nix",
+   "position": 63,
+   "pull_request_review_id": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2014-06-13T06:19:27Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This is irrelevant, no?\n",
+   "commit_id": "386134976acac4b57375a5a9f68bfd21d0d025b0",
+   "created_at": "2014-06-13T11:51:42Z",
+   "diff_hunk": "@@ -19,8 +19,8 @@ in\n     environment.variables =\n       { LOCATE_PATH = \"/var/cache/locatedb\";\n         NIXPKGS_CONFIG = \"/etc/nix/nixpkgs-config.nix\";\n-        PAGER = \"less -R\";\n-        EDITOR = \"nano\";\n+        PAGER = mkDefault \"less -R\";\n+        EDITOR = mkDefault \"nano\";",
+   "id": 13747146,
+   "line": 23,
+   "original_commit_id": "386134976acac4b57375a5a9f68bfd21d0d025b0",
+   "original_line": null,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "nixos/modules/programs/environment.nix",
+   "position": 7,
+   "pull_request_review_id": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2014-06-13T11:51:42Z",
+   "user": {
+    "id": 126339,
+    "login": "domenkozar",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It should be, I suppose, but for some reason it is not. Expression for wine in nixpkgs has the same problem.\n",
+   "commit_id": "386134976acac4b57375a5a9f68bfd21d0d025b0",
+   "created_at": "2014-06-13T23:00:52Z",
+   "diff_hunk": "@@ -1,55 +1,47 @@\n-x@{builderDefsPackage\n-  , readline, tcp_wrappers, pcre\n-  , ...}:\n-builderDefsPackage\n-(a :  \n-let \n-  helperArgNames = [\"stdenv\" \"fetchurl\" \"builderDefsPackage\"] ++ \n-    [];\n-\n-  buildInputs = map (n: builtins.getAttr n x)\n-    (builtins.attrNames (builtins.removeAttrs x helperArgNames));\n-  sourceInfo = rec {\n-    baseName=\"atftp\";\n-    version=\"0.7\";\n-    name=\"${baseName}-${version}\";\n-    url=\"mirror://debian/pool/main/a/atftp/atftp_${version}.dfsg.orig.tar.gz\";\n-    hash=\"0nd5dl14d6z5abgcbxcn41rfn3syza6s57bbgh4aq3r9cxdmz08q\";\n+{ lib, stdenv, fetchurl, readline, tcp_wrappers, pcre, makeWrapper }:\n+\n+assert stdenv.isLinux;\n+assert stdenv.gcc.gcc != null;\n+\n+let\n+\n+  version = \"0.7\";\n+\n+  debianPatch = fetchurl {\n+    url = \"mirror://debian/pool/main/a/atftp/atftp_${version}.dfsg-11.diff.gz\";\n+    sha256 = \"07g4qbmp0lnscg2dkj6nsj657jaghibvfysdm1cdxcn215n3zwqd\";\n   };\n+\n in\n-rec {\n-  src = a.fetchurl {\n-    url = sourceInfo.url;\n-    sha256 = sourceInfo.hash;\n-  };\n \n-  inherit (sourceInfo) name version;\n-  inherit buildInputs;\n+stdenv.mkDerivation {\n+\n+  name = \"atftp\";\n+  inherit version;\n \n-  /* doConfigure should be removed if not needed */\n-  phaseNames = [\"doPatch\" \"doConfigure\" \"doMakeInstall\"];\n-      \n-  debianPatch = a.fetchurl {\n-    url = http://patch-tracker.debian.org/patch/nondebian/dl/atftp/0.7.dfsg-10;\n-    sha256 = \"0vannjp0wxvk10xxlr3hirgf0g57n9dr4vhmsyfd8x4cwgxwfgsa\";\n+  src = fetchurl {\n+    url = \"mirror://debian/pool/main/a/atftp/atftp_${version}.dfsg.orig.tar.gz\";\n+    sha256 = \"0nd5dl14d6z5abgcbxcn41rfn3syza6s57bbgh4aq3r9cxdmz08q\";\n   };\n \n-  patches = [debianPatch];\n+  buildInputs = [ readline tcp_wrappers pcre makeWrapper ];\n+\n+  patches = [ debianPatch ];\n+\n+  postInstall = ''\n+    wrapProgram $out/sbin/atftpd --prefix LD_LIBRARY_PATH : ${stdenv.gcc.gcc}/lib${if stdenv.system == \"x86_64-linux\" then \"64\" else \"\"}",
+   "id": 13775677,
+   "line": 32,
+   "original_commit_id": "386134976acac4b57375a5a9f68bfd21d0d025b0",
+   "original_line": null,
+   "original_position": 63,
+   "original_start_line": null,
+   "path": "pkgs/tools/networking/atftp/default.nix",
+   "position": 63,
+   "pull_request_review_id": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2014-06-13T23:00:52Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yep. Most of these changes are irrelevant w.r.t. each other. They are related by being by-products of an effort to boot NixOS in a classroom with PXE.\n",
+   "commit_id": "386134976acac4b57375a5a9f68bfd21d0d025b0",
+   "created_at": "2014-06-13T23:03:42Z",
+   "diff_hunk": "@@ -19,8 +19,8 @@ in\n     environment.variables =\n       { LOCATE_PATH = \"/var/cache/locatedb\";\n         NIXPKGS_CONFIG = \"/etc/nix/nixpkgs-config.nix\";\n-        PAGER = \"less -R\";\n-        EDITOR = \"nano\";\n+        PAGER = mkDefault \"less -R\";\n+        EDITOR = mkDefault \"nano\";",
+   "id": 13775767,
+   "line": 23,
+   "original_commit_id": "386134976acac4b57375a5a9f68bfd21d0d025b0",
+   "original_line": null,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "nixos/modules/programs/environment.nix",
+   "position": 7,
+   "pull_request_review_id": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2014-06-13T23:03:42Z",
+   "user": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 391919,
+    "login": "oxij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2014-10-12T19:17:37Z",
+   "event": "closed",
+   "id": 177410862,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

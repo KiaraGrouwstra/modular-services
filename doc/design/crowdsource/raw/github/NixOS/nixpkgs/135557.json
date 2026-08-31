@@ -1,0 +1,405 @@
+{
+ "comments": [
+  {
+   "body": "Further, I added another service like:\r\n\r\n```nix\r\n{\r\n  systemd.services.\"several-foos\" = {\r\n      requires = [ \"foo@fizz\" \"foo@buzz\" ]; \r\n      wantedBy = [ \"default.target\" ];\r\n      script = ''\r\n      \r\n      '';\r\n }\r\n```\r\n\r\nand `several-foos` starts but `foo@fizz` and `foo@buzz` do not get started.",
+   "created_at": "2021-08-24T14:13:15Z",
+   "id": 904680065,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-08-24T14:13:15Z",
+   "user": {
+    "id": 76716,
+    "login": "grahamc",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've been successfully generating a target.  Re-tested now on 21.05:\r\n```nix\r\n{\r\n    systemd.targets.kresd = { # configure units started by default\r\n      wantedBy = [ \"multi-user.target\" ];\r\n      wants = [ \"kres-cache-gc.service\" ]\r\n        ++ map (i: \"kresd@${toString i}.service\") (range 1 cfg.instances);\r\n    };\r\n }\r\n```",
+   "created_at": "2021-08-24T14:15:18Z",
+   "id": 904681912,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-08-24T14:15:18Z",
+   "user": {
+    "id": 1785925,
+    "login": "vcunat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Is the `kresd@.service` unit file provided by kresd the package, or by a NixOS service?",
+   "created_at": "2021-08-24T14:15:50Z",
+   "id": 904682389,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-08-24T14:15:50Z",
+   "user": {
+    "id": 76716,
+    "login": "grahamc",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Provided by package and modified by service.",
+   "created_at": "2021-08-24T14:16:04Z",
+   "id": 904682616,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2021-08-24T14:16:04Z",
+   "user": {
+    "id": 1785925,
+    "login": "vcunat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I _think_ the issue is unique to units which are created totally by the module system.",
+   "created_at": "2021-08-24T14:16:32Z",
+   "id": 904683016,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-08-24T14:16:32Z",
+   "user": {
+    "id": 76716,
+    "login": "grahamc",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "As a workaround you should be able to define a pseudo-package that defines the service (i.e. creates the unit file \"manually\").",
+   "created_at": "2021-08-24T14:16:45Z",
+   "id": 904683195,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-08-24T14:17:16Z",
+   "user": {
+    "id": 1785925,
+    "login": "vcunat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Duplicate of https://github.com/NixOS/nixpkgs/issues/80933?",
+   "created_at": "2021-08-25T07:31:05Z",
+   "id": 905255080,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-08-25T07:31:05Z",
+   "user": {
+    "id": 2817565,
+    "login": "rnhmjoj",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "using instances of systemd services create by the module system in `OnFailure=` clauses *does* work on recent nixos-unstable (c21ba4f7bb4a3d621eb1d187e6b5e816bb85380c), as does the snippet from https://github.com/NixOS/nixpkgs/issues/135557#issuecomment-904680065 after suffixing `.service` to each required unit.\r\n\r\nthis does feel like it's behaving correctly: referencing templated units with parameters elsewhere invokes them as expected, and defining them through the module system defines them as though they hadn't existed before. maybe we should have a `systemd.dropIn.<name>` to explicitly configure overrides?",
+   "created_at": "2021-10-05T16:29:19Z",
+   "id": 934568003,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-10-05T16:41:04Z",
+   "user": {
+    "id": 82953136,
+    "login": "pennae",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think we should first model Exec* correctly before we revise are replace `.script`. https://github.com/NixOS/nixpkgs/issues/154123",
+   "created_at": "2022-01-09T10:09:37Z",
+   "id": 1008267831,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2022-01-09T10:09:37Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "PR #186314 is now merged into master, which fixes this issue. A working example:\r\n```\r\n{\r\n  systemd.services.\"foo@\" = {\r\n    scriptArgs = \"%i\";\r\n    script = ''\r\n      echo \"$1\"\r\n    '';\r\n  };\r\n\r\n  systemd.services.\"foo@example\" = {\r\n    overrideStrategy = \"asDropin\";\r\n  };\r\n}\r\n```\r\n",
+   "created_at": "2022-10-28T19:42:08Z",
+   "id": 1295392470,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 4,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 6
+   },
+   "updated_at": "2022-10-28T19:42:08Z",
+   "user": {
+    "id": 25088352,
+    "login": "ck3d",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't think that example works anymore and we might be looking at a regression here. As in if I copy&paste this the `foo@example` job is not started on system boot but rather displayed in `systemctl status foo@example.service` as `dead`. The corresponding service file does not have an exec line or anything other than environment definitions:\r\n\r\n```shell\r\n$ cat /etc/systemd/system/foo@example.service.d/overrides.conf \r\n[Unit]\r\n\r\n[Service]\r\nEnvironment=\"LOCALE_ARCHIVE=/nix/store/9dij3pl4dkdxmxhasjw1pa9hzqv4rjlp-glibc-locales-2.39-52/lib/locale/locale-archive\"\r\nEnvironment=\"PATH=/nix/store/ysqx2xfzygv2rxl7nxnw48276z5ckppn-coreutils-9.5/bin:/nix/store/36rvynxwln7iz0qq3k1v3r1mna8bma8s-fi\"\r\nEnvironment=\"TZDIR=/nix/store/jyh52p2cxrjn8r4ywdv2am5pjkj1xcqa-tzdata-2024a/share/zoneinfo\"\r\n```\r\n\r\n---\r\n\r\nReproduction:\r\n![image](https://github.com/user-attachments/assets/5b120888-7c7a-4cc1-8cbf-791f4a8991bc)\r\n\r\n```nix\r\n# build with: nix-build <this file>\r\n# then run: result/bin/run-nixos-vm\r\nlet\r\n  configuration = \r\n    { pkgs, lib, config, ... }:\r\n    {\r\n      systemd.services.\"foo@\" = {\r\n        scriptArgs = \"%i\";\r\n        script = ''\r\n          echo \"$1\"\r\n        '';\r\n      };\r\n\r\n      systemd.services.\"foo@example\" = {\r\n        overrideStrategy = \"asDropin\";\r\n      };\r\n\r\n      services.getty.autologinUser = \"root\";\r\n\r\n      system.stateVersion = config.system.nixos.release;\r\n\r\n      virtualisation.vmVariant = {\r\n        virtualisation = {\r\n          qemu.options = [ \"-vga virtio\" ];\r\n          diskImage = null; # \"./nixos.qcow2\";\r\n          mountHostNixStore = true;\r\n          writableStoreUseTmpfs = false;\r\n        };\r\n      };\r\n\r\n      boot.loader.grub.device = \"nodev\";\r\n      fileSystems.\"/\" = { };\r\n    }\r\n  ;\r\n\r\n  commit = \"a046c1202e11b62cbede5385ba64908feb7bfac4\";\r\n  source = builtins.fetchTarball {\r\n    url = \"https://github.com/NixOS/nixpkgs/archive/${commit}.tar.gz\";\r\n  };\r\nin\r\n(import \"${source}/nixos/lib/eval-config.nix\" {\r\n  system = \"x86_64-linux\";\r\n  modules = [ configuration ];\r\n}).config.virtualisation.vmVariant.system.build.vm\r\n```\r\n\r\n@ck3d @grahamc ",
+   "created_at": "2024-07-13T22:48:08Z",
+   "id": 2227123422,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-07-13T23:56:16Z",
+   "user": {
+    "id": 11145016,
+    "login": "con-f-use",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The override.conf should not have an exec setting, the the template service defines exec. Also the status dead looks as expected.\r\nI see no degradation.",
+   "created_at": "2024-07-28T06:01:34Z",
+   "id": 2254355615,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-07-28T06:01:34Z",
+   "user": {
+    "id": 25088352,
+    "login": "ck3d",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/135557",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Describe the bug\r\nA clear and concise description of what the bug is.\r\n\r\n### Steps To Reproduce\r\nSteps to reproduce the behavior:\r\n\r\nCreate a template unit, like:\r\n\r\n```nix\r\n{\r\n  systemd.services.\"foo@\" = {\r\n    scriptArgs = \"%i\";\r\n    script = ''\r\n      echo \"$1\"\r\n    '';\r\n  };\r\n\r\n  systemd.services.\"foo@example\" = {};\r\n}\r\n```\r\n\r\n### Expected behavior\r\n\r\nStarting `foo@example` should run the `foo@example` template service.\r\n\r\n### Actual behavior\r\n\r\nStarting a template unit which is not defined by NixOS works fine:\r\n\r\n```console\r\n# systemctl start foo@bar\r\n# journalctl -fu foo@bar\r\n-- Journal begins at Wed 2021-08-11 22:25:17 EDT. --\r\nAug 24 10:01:35 scruffy systemd[1]: Started foo@bar.service.\r\nAug 24 10:01:35 scruffy foo_-start[3297689]: bar\r\nAug 24 10:01:35 scruffy systemd[1]: foo@bar.service: Succeeded.\r\n```\r\n\r\nHowever, starting the `foo@example` service, defined by NixOS fails:\r\n\r\n```console\r\n# systemctl status foo@example\r\n● foo@example.service\r\n     Loaded: bad-setting (Reason: Unit foo@example.service has a bad unit file setting.)\r\n     Active: inactive (dead)\r\n\r\nAug 24 10:01:41 scruffy systemd[1]: foo@example.service: Service has no ExecStart=, ExecStop=, or SuccessAction=. Refusing.\r\n```\r\n\r\n### Notify maintainers\r\n<!--\r\nPlease @ people who are in the `meta.maintainers` list of the offending package or module.\r\nIf in doubt, check `git blame` for whoever last touched something.\r\n-->\r\n\r\n### Metadata\r\nPlease run `nix-shell -p nix-info --run \"nix-info -m\"` and paste the result.\r\n\r\n - system: `\"x86_64-linux\"`\r\n - host os: `Linux 5.10.52, NixOS, 21.11.20210810.6f6ade6 (Porcupine)`\r\n - multi-user?: `yes`\r\n - sandbox: `yes`\r\n - version: `nix-env (Nix) 2.4pre20210813_d581129`\r\n - nixpkgs: `/nix/var/nix/profiles/per-user/root/channels/nixos`\r\n\r\nMaintainer information:\r\n```yaml\r\n# a list of nixpkgs attributes affected by the problem\r\nattribute:\r\n# a list of nixos modules affected by the problem\r\nmodule:\r\n```\r\n",
+  "closed_at": "2022-10-28T19:42:08Z",
+  "closed_by": {
+   "id": 25088352,
+   "login": "ck3d",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 12,
+  "created_at": "2021-08-24T14:03:45Z",
+  "id": 978136719,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Something is broken",
+    "id": 6314750,
+    "name": "0.kind: bug"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 135557,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 1,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "NixOS's systemd abstraction doesn't work with systemd template units",
+  "type": null,
+  "updated_at": "2024-07-28T06:01:35Z",
+  "user": {
+   "id": 76716,
+   "login": "grahamc",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#135557",
+ "sources": [
+  "nixpkgs-systemd-template-units"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 25088352,
+    "login": "ck3d",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2022-10-28T19:42:08Z",
+   "event": "closed",
+   "id": 7694331997,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

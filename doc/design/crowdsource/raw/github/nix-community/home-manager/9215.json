@@ -1,0 +1,1076 @@
+{
+ "comments": [
+  {
+   "body": "> smart folks at nixpkgs seem to like it and contrary to flake-parts, at least I can understand some of the possible positives. So ok for letting in the experiment, would be cool to share service definitions across nixpkgs/HM (which this makes possible right xD ?!)\r\n\r\nthis is the intent, yes - but i do wanna manage expectations there for now.\r\n\r\nwe have just a few modular services in nixpkgs right now, all simple services (not say composed of multiple services), and the reason they work for NixOS right now is that loads of stuff there (anything not fitting the small current API surface of modular services) is hard-coded still for the NixOS use-case, with anything in those services' blocks [conditional on NixOS's `systemd`](https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/gh/ghostunnel/service.nix#L207) - so how much of them would work with home-manager's user services we're going to have to try out.\r\n\r\nso enabling modular services on home-manager now would on the one hand help figure out how we could make things there work better over here, while on the other hand shining more of a light on those current limitations, to hopefully (particularly once we get more non-NixOS consumers able to tinker with them) kick-start some more of that conversation on moving forward on its current limitations.\r\n\r\non a related note, NixOS/nixpkgs/pull/509595 aims to allow the parent feature of modular services ('package modules') to also handle what [wrappers](https://github.com/Lassulus/wrappers) does, i.e. hopefully allow handling more of what home-manager does straight from nixpkgs.\r\n",
+   "created_at": "2026-05-04T14:36:46Z",
+   "id": 4371924844,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-04T14:36:46Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "ofc I dont expect it tomorrow but glad you confirmed. I am curious to see how this pans out. You can ping me if you have a PR migrating or using this.",
+   "created_at": "2026-05-04T15:22:09Z",
+   "id": 4372255833,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 2,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-05-04T15:22:09Z",
+   "user": {
+    "id": 886074,
+    "login": "teto",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks for the PR, I think it is quite nice in general and the idea of modular services are very welcome. I had to travel for a few days so I didn't have a change to look until after the merge. I realize it is bad form to bring up new things on an already resolved PR but I hope you don't mind me adding a few comments anyway.",
+   "created_at": "2026-05-04T20:42:25Z",
+   "id": 4374334369,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-05-04T20:42:25Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "dont apologize because of my hasty merge :) Seemed like we agreed on direction and it was a big PR, I find it easier to contribute once the bulk of changes is merged. I trust @KiaraGrouwstra to follow up on the big boss comments ;)",
+   "created_at": "2026-05-04T20:56:22Z",
+   "id": 4374424728,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-04T20:56:22Z",
+   "user": {
+    "id": 886074,
+    "login": "teto",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@rycee: apologies, i hadn't really foreseen a merge preceding your feedback - I've opened #9264 to address your suggestions.",
+   "created_at": "2026-05-05T15:37:04Z",
+   "id": 4380774642,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-05T15:37:04Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-community/home-manager/pull/9215",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Adds `home.services`, the home-manager analog to NixOS `system.services` for [modular services](https://nixos.org/manual/nixos/unstable/#modular-services).\r\n\r\nEach entry is a `_class = \"service\"` submodule sourced from nixpkgs' `lib/services/lib.nix`, extended with the upstream portable systemd module (`nixos/modules/system/service/systemd/service.nix`). That means service modules already shipped with packages, e.g. `pkgs.ghostunnel.passthru.services.default`, drop in unchanged with the same `process.argv`, `systemd.service`, `systemd.mainExecStart`, etc. that NixOS sees. This service portability across module systems is the point of modular services, which their support in home-manager may help validate.\r\n\r\nLifted units are translated from NixOS-style attrs (`wantedBy`, `serviceConfig`, `unitConfig`, `environment`, ...) into the section-based INI shape (`{ Unit; Service; Install; }`) home-manager's `systemd.user.services` already consumes. Only common keys are mapped explicitly; uncommon options remain reachable via `unitConfig` / `serviceConfig` / `socketConfig`. Sub-services and their units are dashed under the parent service name; `process.argv` becomes the default `ExecStart` for the primary unit, which defaults to `WantedBy=default.target`.\r\n\r\n`configData.<name>` entries are materialized under `$XDG_CONFIG_HOME/system-services/<service-prefix>/<name>` (mirroring how NixOS lifts `configData` to `environment.etc`), with the absolute path injected back into `configData.<name>.path` so services can refer to their files at a stable location.\r\n\r\n### Example\r\n\r\n```nix\r\nhome.services.\"tunnel\" = {\r\n  imports = [ pkgs.ghostunnel.passthru.services.default ];\r\n  ghostunnel = {\r\n    listen = \"127.0.0.1:8443\";\r\n    target = \"127.0.0.1:8080\";\r\n    cert = \"/run/secrets/cert.pem\";\r\n    key = \"/run/secrets/key.pem\";\r\n    allowAll = true;\r\n  };\r\n};\r\n```\r\n\r\nProduces `~/.config/systemd/user/tunnel.service` with the expected `ExecStart`, `LoadCredential`, and `WantedBy=default.target`.\r\n\r\nThis change mirrors the surface of nixpkgs' portable systemd module (services + sockets only). Other unit kinds home-manager supports natively (timers, paths, mounts) are omitted in favor of staying on par with support on the nixpkgs side.\r\n\r\nDisclaimer: i used a coding agent in the creation of this patch.\r\n\r\n### Tested\r\n\r\nThree nmt tests (`nix run .#tests -- home-services`):\r\n- `home-services-basic`: `process.argv`-only service produces a unit with the expected `ExecStart` and install target.\r\n- `home-services-configdata`: `configData` entry is materialized at the expected XDG path.\r\n- `home-services-ghostunnel`: `pkgs.ghostunnel.passthru.services.default` drops in and produces a unit with the expected ghostunnel flags and `LoadCredential` entries.\r\n\r\n## Checklist\r\n\r\n- [x] Change is backwards compatible.\r\n- [x] Code formatted with `nix fmt` or `nix-shell -A dev --run treefmt`.\r\n- [x] Code tested through `nix run .#tests -- test-all` or `nix-shell --pure tests -A run.all`.\r\n- [x] Test cases updated/added. See [example](https://github.com/nix-community/home-manager/commit/f3fbb50b68df20da47f9b0def5607857fcc0d021#diff-b61a6d542f9036550ba9c401c80f00ef).\r\n- [x] Commit messages are formatted like\r\n\r\n  ```\r\n  {component}: {description}\r\n\r\n  {long description}\r\n  ```\r\n\r\n  See [CONTRIBUTING](https://nix-community.github.io/home-manager/#sec-commit-style) for more information and [recent commit messages](https://github.com/nix-community/home-manager/commits/master) for examples.\r\n\r\n- If this PR adds a new module\r\n\r\n  - [x] Added myself as module maintainer. See [example](https://github.com/nix-community/home-manager/blob/a51598236f23c89e59ee77eb8e0614358b0e896c/modules/programs/lesspipe.nix#L11).\r\n  - [x] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n  - [x] Basic tests added. See [Tests](https://nix-community.github.io/home-manager/index.xhtml#sec-tests)\r\n\r\n- If this PR adds an exciting new feature or contains a breaking change.\r\n  - [x] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n\r\n- [ ] optional: await NixOS/nixpkgs#507052, which could ensure a stable entry-point (to prevent a future breaking change over this)\r\n",
+  "closed_at": "2026-05-04T15:22:17Z",
+  "closed_by": {
+   "id": 886074,
+   "login": "teto",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 5,
+  "created_at": "2026-04-29T15:45:02Z",
+  "draft": false,
+  "id": 4351847772,
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 9215,
+  "pull_request": {
+   "diff_url": "https://github.com/nix-community/home-manager/pull/9215.diff",
+   "merged_at": "2026-05-04T15:22:17Z",
+   "patch_url": "https://github.com/nix-community/home-manager/pull/9215.patch"
+  },
+  "reactions": {
+   "+1": 2,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 2,
+   "hooray": 1,
+   "laugh": 0,
+   "rocket": 2,
+   "total_count": 7
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "closed",
+  "state_reason": null,
+  "title": "modules: add modular services support",
+  "type": null,
+  "updated_at": "2026-07-27T09:18:03Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 404,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "nix-community:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2017-01-14T12:11:06Z",
+    "default_branch": "master",
+    "description": "Manage a user environment using Nix  [maintainer=@khaneliman, @rycee] ",
+    "disabled": false,
+    "fork": false,
+    "forks": 2465,
+    "forks_count": 2465,
+    "full_name": "nix-community/home-manager",
+    "git_commits_url": "https://api.github.com/repos/nix-community/home-manager/git/commits{/sha}",
+    "has_discussions": true,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": true,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-community.github.io/home-manager/",
+    "id": 78938149,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/nix-community/home-manager/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/nix-community/home-manager/milestones{/number}",
+    "name": "home-manager",
+    "open_issues": 1011,
+    "open_issues_count": 1011,
+    "owner": {
+     "id": 33221035,
+     "login": "nix-community",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/nix-community/home-manager/pulls{/number}",
+    "pushed_at": "2026-08-31T03:26:44Z",
+    "size": 355203,
+    "stargazers_count": 10299,
+    "subscription_url": "https://api.github.com/repos/nix-community/home-manager/subscription",
+    "tags_url": "https://api.github.com/repos/nix-community/home-manager/tags",
+    "topics": [
+     "dotfiles",
+     "nix",
+     "nix-dotfiles",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T07:33:23Z",
+    "visibility": "public",
+    "watchers": 10299,
+    "watchers_count": 10299,
+    "web_commit_signoff_required": false
+   },
+   "sha": "9c6f1307e1d76a2285d8001e1b8bc281bfe15dac",
+   "user": {
+    "id": 33221035,
+    "login": "nix-community",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Adds `home.services`, the home-manager analog to NixOS `system.services` for [modular services](https://nixos.org/manual/nixos/unstable/#modular-services).\r\n\r\nEach entry is a `_class = \"service\"` submodule sourced from nixpkgs' `lib/services/lib.nix`, extended with the upstream portable systemd module (`nixos/modules/system/service/systemd/service.nix`). That means service modules already shipped with packages, e.g. `pkgs.ghostunnel.passthru.services.default`, drop in unchanged with the same `process.argv`, `systemd.service`, `systemd.mainExecStart`, etc. that NixOS sees. This service portability across module systems is the point of modular services, which their support in home-manager may help validate.\r\n\r\nLifted units are translated from NixOS-style attrs (`wantedBy`, `serviceConfig`, `unitConfig`, `environment`, ...) into the section-based INI shape (`{ Unit; Service; Install; }`) home-manager's `systemd.user.services` already consumes. Only common keys are mapped explicitly; uncommon options remain reachable via `unitConfig` / `serviceConfig` / `socketConfig`. Sub-services and their units are dashed under the parent service name; `process.argv` becomes the default `ExecStart` for the primary unit, which defaults to `WantedBy=default.target`.\r\n\r\n`configData.<name>` entries are materialized under `$XDG_CONFIG_HOME/system-services/<service-prefix>/<name>` (mirroring how NixOS lifts `configData` to `environment.etc`), with the absolute path injected back into `configData.<name>.path` so services can refer to their files at a stable location.\r\n\r\n### Example\r\n\r\n```nix\r\nhome.services.\"tunnel\" = {\r\n  imports = [ pkgs.ghostunnel.passthru.services.default ];\r\n  ghostunnel = {\r\n    listen = \"127.0.0.1:8443\";\r\n    target = \"127.0.0.1:8080\";\r\n    cert = \"/run/secrets/cert.pem\";\r\n    key = \"/run/secrets/key.pem\";\r\n    allowAll = true;\r\n  };\r\n};\r\n```\r\n\r\nProduces `~/.config/systemd/user/tunnel.service` with the expected `ExecStart`, `LoadCredential`, and `WantedBy=default.target`.\r\n\r\nThis change mirrors the surface of nixpkgs' portable systemd module (services + sockets only). Other unit kinds home-manager supports natively (timers, paths, mounts) are omitted in favor of staying on par with support on the nixpkgs side.\r\n\r\nDisclaimer: i used a coding agent in the creation of this patch.\r\n\r\n### Tested\r\n\r\nThree nmt tests (`nix run .#tests -- home-services`):\r\n- `home-services-basic`: `process.argv`-only service produces a unit with the expected `ExecStart` and install target.\r\n- `home-services-configdata`: `configData` entry is materialized at the expected XDG path.\r\n- `home-services-ghostunnel`: `pkgs.ghostunnel.passthru.services.default` drops in and produces a unit with the expected ghostunnel flags and `LoadCredential` entries.\r\n\r\n## Checklist\r\n\r\n- [x] Change is backwards compatible.\r\n- [x] Code formatted with `nix fmt` or `nix-shell -A dev --run treefmt`.\r\n- [x] Code tested through `nix run .#tests -- test-all` or `nix-shell --pure tests -A run.all`.\r\n- [x] Test cases updated/added. See [example](https://github.com/nix-community/home-manager/commit/f3fbb50b68df20da47f9b0def5607857fcc0d021#diff-b61a6d542f9036550ba9c401c80f00ef).\r\n- [x] Commit messages are formatted like\r\n\r\n  ```\r\n  {component}: {description}\r\n\r\n  {long description}\r\n  ```\r\n\r\n  See [CONTRIBUTING](https://nix-community.github.io/home-manager/#sec-commit-style) for more information and [recent commit messages](https://github.com/nix-community/home-manager/commits/master) for examples.\r\n\r\n- If this PR adds a new module\r\n\r\n  - [x] Added myself as module maintainer. See [example](https://github.com/nix-community/home-manager/blob/a51598236f23c89e59ee77eb8e0614358b0e896c/modules/programs/lesspipe.nix#L11).\r\n  - [x] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n  - [x] Basic tests added. See [Tests](https://nix-community.github.io/home-manager/index.xhtml#sec-tests)\r\n\r\n- If this PR adds an exciting new feature or contains a breaking change.\r\n  - [x] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n\r\n- [ ] optional: await NixOS/nixpkgs#507052, which could ensure a stable entry-point (to prevent a future breaking change over this)\r\n",
+  "changed_files": 13,
+  "closed_at": "2026-05-04T15:22:17Z",
+  "comments": 5,
+  "commits": 1,
+  "created_at": "2026-04-29T15:45:02Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/nix-community/home-manager/pull/9215.diff",
+  "draft": false,
+  "head": {
+   "label": "KiaraGrouwstra:modular-services",
+   "ref": "modular-services",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-12-27T17:40:18Z",
+    "default_branch": "master",
+    "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/home-manager",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-community.github.io/home-manager/",
+    "id": 909087867,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/milestones{/number}",
+    "name": "home-manager",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/pulls{/number}",
+    "pushed_at": "2026-07-28T18:23:41Z",
+    "size": 15912,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/tags",
+    "topics": [],
+    "updated_at": "2024-12-27T17:40:19Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3603415094,
+  "labels": [],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "fb6a0c6d398179f746ac6636d1acdf757e19eded",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-05-04T15:22:17Z",
+  "merged_by": {
+   "id": 886074,
+   "login": "teto",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 9215,
+  "patch_url": "https://github.com/nix-community/home-manager/pull/9215.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 12,
+  "state": "closed",
+  "title": "modules: add modular services support",
+  "updated_at": "2026-07-27T09:18:03Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "nix-community/home-manager#9215",
+ "review_comments": [
+  {
+   "body": "Using `mkForce` makes this `WantedBy` value harder to override, even though the docs describe it as a default. Consider `mkOverride` with a priority stronger than nixpkgs `mkDefault`, so HM replaces `multi-user.target` while still letting service modules/users choose another target without `mkForce`.",
+   "commit_id": "d0420950e4775c2b0de0f27a3ef44aa967826a20",
+   "created_at": "2026-05-02T01:35:55Z",
+   "diff_hunk": "@@ -0,0 +1,22 @@\n+# Per-service extension module loaded into every `home.services` entry.\n+#\n+# Re-exports the nixpkgs portable systemd service module so HM modular\n+# services accept the same NixOS-style schema (`systemd.lib`,\n+# `systemd.mainExecStart`, `systemd.service`, `systemd.services`,\n+# `systemd.sockets`) as their NixOS counterparts. This is what lets\n+# upstream service modules (e.g. `pkgs.<name>.passthru.services.default`)\n+# drop in unchanged. Then overrides the primary unit's `wantedBy` default\n+# to `default.target`, since user units typically attach to that instead\n+# of `multi-user.target`.\n+{ lib, nixpkgsPath, ... }:\n+{\n+  imports = [\n+    (nixpkgsPath + \"/nixos/modules/system/service/systemd/service.nix\")\n+  ];\n+\n+  # The empty key `\"\"` is the modular service's *primary* unit (see\n+  # `dashed` in `default.nix`).\n+  config.systemd.services.\"\" = {\n+    wantedBy = lib.mkForce [ \"default.target\" ];",
+   "id": 3175808949,
+   "line": null,
+   "original_commit_id": "d0420950e4775c2b0de0f27a3ef44aa967826a20",
+   "original_line": 20,
+   "original_position": 20,
+   "original_start_line": null,
+   "path": "modules/services-modular/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4214065077,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-02T01:36:41Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Is `aliases` intended to work here? This maps `u.aliases` to `[Install] Aliases=...`, but the HM systemd builder only creates the main unit plus `WantedBy`/`RequiredBy` symlinks: https://github.com/nix-community/home-manager/blob/9cb587ade2aa1b4a7257f0238d41072690b0ca4f/modules/systemd.nix#L76-L85. NixOS implements `systemd.services.<name>.aliases` by generating alias symlinks here: https://github.com/NixOS/nixpkgs/blob/1cad9ada6da0658a588196ddcb2836004caa2293/nixos/lib/systemd-lib.nix#L506-L514. Should this either generate alias `xdg.configFile` entries or add a test proving the generated alias is actually installed?",
+   "commit_id": "d0420950e4775c2b0de0f27a3ef44aa967826a20",
+   "created_at": "2026-05-02T01:43:03Z",
+   "diff_hunk": "@@ -0,0 +1,189 @@\n+{\n+  lib,\n+  config,\n+  pkgs,\n+  ...\n+}:\n+let\n+  inherit (lib) concatMapAttrs mkOption types;\n+\n+  portable-lib = import (pkgs.path + \"/lib/services/lib.nix\") { inherit lib; };\n+\n+  # Combine a service-name prefix with a unit name. The empty unit name\n+  # `\"\"` is the convention from nixpkgs' portable services for the\n+  # service's *primary* unit (e.g. `services.foo.systemd.user.services.\"\"`\n+  # is the unit named `foo.service`). Sub-units use a hyphenated suffix.\n+  dashed =\n+    before: after:\n+    if after == \"\" then\n+      before\n+    else if before == \"\" then\n+      after\n+    else\n+      \"${before}-${after}\";\n+\n+  # Translate a NixOS-style systemd unit attrset (wantedBy, serviceConfig,\n+  # unitConfig, environment, ...) into the section-based INI shape that\n+  # home-manager's `systemd.user.<unitType>` expects (Unit/Service/Install).\n+  # Only the common keys are mapped; uncommon options can still be set\n+  # explicitly via `unitConfig` / `serviceConfig` / `socketConfig`.\n+  unitAttrKeys = [\n+    \"description\"\n+    \"documentation\"\n+    \"requires\"\n+    \"wants\"\n+    \"upholds\"\n+    \"after\"\n+    \"before\"\n+    \"bindsTo\"\n+    \"partOf\"\n+    \"conflicts\"\n+    \"requisite\"\n+    \"onFailure\"\n+    \"onSuccess\"\n+  ];\n+  capitalize = s: lib.toUpper (builtins.substring 0 1 s) + builtins.substring 1 (-1) s;\n+  pickSection =\n+    keys: src:\n+    lib.listToAttrs (\n+      lib.concatMap (\n+        k:\n+        lib.optional (src ? ${k} && src.${k} != null && src.${k} != [ ]) {\n+          name = capitalize k;\n+          value = src.${k};\n+        }\n+      ) keys\n+    );\n+  envToList =\n+    env: lib.mapAttrsToList (k: v: \"${k}=${toString v}\") (lib.filterAttrs (_: v: v != null) env);\n+  installSection =\n+    u:\n+    lib.filterAttrs (_: v: v != [ ]) {\n+      WantedBy = u.wantedBy or [ ];\n+      RequiredBy = u.requiredBy or [ ];\n+      Aliases = u.aliases or [ ];",
+   "id": 3175816858,
+   "line": null,
+   "original_commit_id": "d0420950e4775c2b0de0f27a3ef44aa967826a20",
+   "original_line": 64,
+   "original_position": 64,
+   "original_start_line": null,
+   "path": "modules/services-modular/default.nix",
+   "position": 1,
+   "pull_request_review_id": 4214073696,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-02T01:44:51Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n{config, ...}: {\n  home.services.demo = {\n    process.argv = [ \"/bin/myapp\" \"--config\" config.home.services.demo.configData.\"app.toml\".path ];\n    configData.\"app.toml\".text = ''\n```\n\nReferences `config` without it as an input. ",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "created_at": "2026-05-02T14:38:42Z",
+   "diff_hunk": "@@ -0,0 +1,76 @@\n+# Modular Services {#sec-usage-modular-services}\n+\n+Home Manager supports nixpkgs\n+[modular services](https://nixos.org/manual/nixos/unstable/#modular-services)\n+under [](#opt-home.services). This is the home-manager analog to the\n+NixOS `system.services` namespace: each entry is an abstract service\n+sourced from `<nixpkgs/lib/services/lib.nix>` with the upstream portable\n+systemd module loaded into it, so service modules shipped with packages\n+(e.g. `pkgs.<name>.passthru.services.default`) drop in unchanged --\n+the same module evaluates on NixOS and on Home Manager.\n+\n+A minimal example -- run a one-shot user service from a package's\n+modular service definition:\n+\n+```nix\n+{ pkgs, ... }: {\n+  home.services.tunnel = {\n+    imports = [ pkgs.ghostunnel.passthru.services.default ];\n+    ghostunnel = {\n+      listen = \"127.0.0.1:8443\";\n+      target = \"127.0.0.1:8080\";\n+      cert = \"/run/secrets/cert.pem\";\n+      key = \"/run/secrets/key.pem\";\n+      allowAll = true;\n+    };\n+  };\n+}\n+```\n+\n+This produces `~/.config/systemd/user/tunnel.service` with the expected\n+`ExecStart`, `LoadCredential`, and `WantedBy=default.target`.\n+\n+Each service exposes the upstream NixOS-style schema: [`process.argv`],\n+`systemd.lib`, `systemd.mainExecStart`, `systemd.service`,\n+`systemd.services`, `systemd.sockets`. Lifted units are translated from\n+NixOS-style attrs (`wantedBy`, `serviceConfig`, `unitConfig`,\n+`environment`, ...) into the section-based INI shape\n+(`{ Unit; Service; Install; }`) that home-manager's\n+[](#opt-systemd.user.services) consumes. Only common keys are mapped\n+explicitly; uncommon options remain reachable via `unitConfig`,\n+`serviceConfig`, or `socketConfig`.\n+\n+Sub-services (nested `services.<sub>` inside another service) and their\n+units are dashed under the parent service name. The empty unit key\n+`\"\"` denotes the service's *primary* unit (lifted to a unit named\n+after the service itself); [`process.argv`] becomes the default\n+`ExecStart` for that unit, which defaults to `WantedBy=default.target`.\n+\n+## Configuration data {#sec-usage-modular-services-configdata}\n+\n+Each service can declare configuration files via `configData.<name>`.\n+These are materialized at `$XDG_CONFIG_HOME/system-services/<service>/<name>`\n+(mirroring how NixOS lifts `configData` to `environment.etc`), with the\n+absolute path injected back into `configData.<name>.path` so the service\n+can refer to its files at a stable location:\n+\n+```nix\n+{\n+  home.services.demo = {\n+    process.argv = [ \"/bin/myapp\" \"--config\" config.home.services.demo.configData.\"app.toml\".path ];\n+    configData.\"app.toml\".text = ''",
+   "id": 3176770835,
+   "line": 62,
+   "original_commit_id": "0dcc023200f9283bbb4fa403592b9b5352171b8c",
+   "original_line": 61,
+   "original_position": 61,
+   "original_start_line": 58,
+   "path": "docs/manual/usage/modular-services.md",
+   "position": 62,
+   "pull_request_review_id": 4215123841,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "side": "RIGHT",
+   "start_line": 59,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-05-02T14:38:42Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "when does this happen ? is it for compatibility with existing modules ? I believe nixos is migrating (or planning to) migrate this systemd API to RFC42, similar to HM's. Supporting these old keys might hinder that migration ? as opposed to only support HM current API.\n\n",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "created_at": "2026-05-04T11:55:07Z",
+   "diff_hunk": "@@ -0,0 +1,188 @@\n+{\n+  lib,\n+  config,\n+  pkgs,\n+  ...\n+}:\n+let\n+  inherit (lib) concatMapAttrs mkOption types;\n+\n+  portable-lib = import (pkgs.path + \"/lib/services/lib.nix\") { inherit lib; };\n+\n+  # Combine a service-name prefix with a unit name. The empty unit name\n+  # `\"\"` is the convention from nixpkgs' portable services for the\n+  # service's *primary* unit (e.g. `services.foo.systemd.user.services.\"\"`\n+  # is the unit named `foo.service`). Sub-units use a hyphenated suffix.\n+  dashed =\n+    before: after:\n+    if after == \"\" then\n+      before\n+    else if before == \"\" then\n+      after\n+    else\n+      \"${before}-${after}\";\n+\n+  # Translate a NixOS-style systemd unit attrset (wantedBy, serviceConfig,",
+   "id": 3181327092,
+   "line": 25,
+   "original_commit_id": "4a5b7a6dc3ac23dd2cea2c50a0307eb656e3797a",
+   "original_line": 25,
+   "original_position": 25,
+   "original_start_line": null,
+   "path": "modules/services-modular/default.nix",
+   "position": 25,
+   "pull_request_review_id": 4219781007,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-04T11:55:07Z",
+   "user": {
+    "id": 886074,
+    "login": "teto",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Nit: `lib.toSentenceCase`?",
+   "commit_id": "4a5b7a6dc3ac23dd2cea2c50a0307eb656e3797a",
+   "created_at": "2026-05-04T13:02:43Z",
+   "diff_hunk": "@@ -0,0 +1,188 @@\n+{\n+  lib,\n+  config,\n+  pkgs,\n+  ...\n+}:\n+let\n+  inherit (lib) concatMapAttrs mkOption types;\n+\n+  portable-lib = import (pkgs.path + \"/lib/services/lib.nix\") { inherit lib; };\n+\n+  # Combine a service-name prefix with a unit name. The empty unit name\n+  # `\"\"` is the convention from nixpkgs' portable services for the\n+  # service's *primary* unit (e.g. `services.foo.systemd.user.services.\"\"`\n+  # is the unit named `foo.service`). Sub-units use a hyphenated suffix.\n+  dashed =\n+    before: after:\n+    if after == \"\" then\n+      before\n+    else if before == \"\" then\n+      after\n+    else\n+      \"${before}-${after}\";\n+\n+  # Translate a NixOS-style systemd unit attrset (wantedBy, serviceConfig,\n+  # unitConfig, environment, ...) into the section-based INI shape that\n+  # home-manager's `systemd.user.<unitType>` expects (Unit/Service/Install).\n+  # Only the common keys are mapped; uncommon options can still be set\n+  # explicitly via `unitConfig` / `serviceConfig` / `socketConfig`.\n+  unitAttrKeys = [\n+    \"description\"\n+    \"documentation\"\n+    \"requires\"\n+    \"wants\"\n+    \"upholds\"\n+    \"after\"\n+    \"before\"\n+    \"bindsTo\"\n+    \"partOf\"\n+    \"conflicts\"\n+    \"requisite\"\n+    \"onFailure\"\n+    \"onSuccess\"\n+  ];\n+  capitalize = s: lib.toUpper (builtins.substring 0 1 s) + builtins.substring 1 (-1) s;",
+   "id": 3181711565,
+   "line": null,
+   "original_commit_id": "4a5b7a6dc3ac23dd2cea2c50a0307eb656e3797a",
+   "original_line": 45,
+   "original_position": 45,
+   "original_start_line": null,
+   "path": "modules/services-modular/default.nix",
+   "position": 1,
+   "pull_request_review_id": 4220260411,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-04T13:13:51Z",
+   "user": {
+    "id": 12465195,
+    "login": "ambroisie",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "this mapping is used a bit later in that file to set `systemd.user.services` from `config.home.services`.\r\n`tests/modules/services-modular/ghostunnel.nix` for one imports a package's modular service into `home.services`, and thus gets the resulting service (as tested there).",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "created_at": "2026-05-04T16:34:37Z",
+   "diff_hunk": "@@ -0,0 +1,188 @@\n+{\n+  lib,\n+  config,\n+  pkgs,\n+  ...\n+}:\n+let\n+  inherit (lib) concatMapAttrs mkOption types;\n+\n+  portable-lib = import (pkgs.path + \"/lib/services/lib.nix\") { inherit lib; };\n+\n+  # Combine a service-name prefix with a unit name. The empty unit name\n+  # `\"\"` is the convention from nixpkgs' portable services for the\n+  # service's *primary* unit (e.g. `services.foo.systemd.user.services.\"\"`\n+  # is the unit named `foo.service`). Sub-units use a hyphenated suffix.\n+  dashed =\n+    before: after:\n+    if after == \"\" then\n+      before\n+    else if before == \"\" then\n+      after\n+    else\n+      \"${before}-${after}\";\n+\n+  # Translate a NixOS-style systemd unit attrset (wantedBy, serviceConfig,",
+   "id": 3182978492,
+   "in_reply_to_id": 3181327092,
+   "line": 25,
+   "original_commit_id": "4a5b7a6dc3ac23dd2cea2c50a0307eb656e3797a",
+   "original_line": 25,
+   "original_position": 25,
+   "original_start_line": null,
+   "path": "modules/services-modular/default.nix",
+   "position": 25,
+   "pull_request_review_id": 4221723644,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-04T16:34:38Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Why system-services? If one wants to follow the style of NixOS, wouldn't it be `home-services` or possibly `user-services`?",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "created_at": "2026-05-04T19:52:58Z",
+   "diff_hunk": "@@ -0,0 +1,187 @@\n+{\n+  lib,\n+  config,\n+  pkgs,\n+  ...\n+}:\n+let\n+  inherit (lib) concatMapAttrs mkOption types;\n+\n+  portable-lib = import (pkgs.path + \"/lib/services/lib.nix\") { inherit lib; };\n+\n+  # Combine a service-name prefix with a unit name. The empty unit name\n+  # `\"\"` is the convention from nixpkgs' portable services for the\n+  # service's *primary* unit (e.g. `services.foo.systemd.user.services.\"\"`\n+  # is the unit named `foo.service`). Sub-units use a hyphenated suffix.\n+  dashed =\n+    before: after:\n+    if after == \"\" then\n+      before\n+    else if before == \"\" then\n+      after\n+    else\n+      \"${before}-${after}\";\n+\n+  # Translate a NixOS-style systemd unit attrset (wantedBy, serviceConfig,\n+  # unitConfig, environment, ...) into the section-based INI shape that\n+  # home-manager's `systemd.user.<unitType>` expects (Unit/Service/Install).\n+  # Only the common keys are mapped; uncommon options can still be set\n+  # explicitly via `unitConfig` / `serviceConfig` / `socketConfig`.\n+  unitAttrKeys = [\n+    \"description\"\n+    \"documentation\"\n+    \"requires\"\n+    \"wants\"\n+    \"upholds\"\n+    \"after\"\n+    \"before\"\n+    \"bindsTo\"\n+    \"partOf\"\n+    \"conflicts\"\n+    \"requisite\"\n+    \"onFailure\"\n+    \"onSuccess\"\n+  ];\n+  pickSection =\n+    keys: src:\n+    lib.listToAttrs (\n+      lib.concatMap (\n+        k:\n+        lib.optional (src ? ${k} && src.${k} != null && src.${k} != [ ]) {\n+          name = lib.toSentenceCase k;\n+          value = src.${k};\n+        }\n+      ) keys\n+    );\n+  envToList =\n+    env: lib.mapAttrsToList (k: v: \"${k}=${toString v}\") (lib.filterAttrs (_: v: v != null) env);\n+  installSection =\n+    u:\n+    lib.filterAttrs (_: v: v != [ ]) {\n+      WantedBy = u.wantedBy or [ ];\n+      RequiredBy = u.requiredBy or [ ];\n+    };\n+  toHmIni = unit: {\n+    Unit = pickSection unitAttrKeys unit // (unit.unitConfig or { });\n+    Service =\n+      (unit.serviceConfig or { })\n+      // lib.optionalAttrs (unit ? environment && unit.environment != { }) {\n+        Environment = envToList unit.environment;\n+      };\n+    Install = installSection unit;\n+  };\n+  toHmIniSocket = sock: {\n+    Unit = pickSection unitAttrKeys sock // (sock.unitConfig or { });\n+    Socket =\n+      (sock.socketConfig or { })\n+      // lib.optionalAttrs (sock ? listenStreams && sock.listenStreams != [ ]) {\n+        ListenStream = sock.listenStreams;\n+      }\n+      // lib.optionalAttrs (sock ? listenDatagrams && sock.listenDatagrams != [ ]) {\n+        ListenDatagram = sock.listenDatagrams;\n+      };\n+    Install = installSection sock;\n+  };\n+\n+  # Evaluate a deferredModule into attrs, then translate.\n+  evalDeferred =\n+    translator: unitModule:\n+    translator\n+      (lib.evalModules {\n+        modules = [\n+          (_: {\n+            # Loose schema: NixOS-style unit attrs include nested sub-attrsets\n+            # (e.g. `serviceConfig`) that need to merge across definitions.\n+            freeformType =\n+              with types;\n+              attrsOf (oneOf [\n+                (attrsOf raw)\n+                (listOf raw)\n+                raw\n+              ]);\n+          })\n+          unitModule\n+        ];\n+      }).config;\n+\n+  makeUnits =\n+    translator: unitType: prefix: service:\n+    concatMapAttrs (unitName: unitModule: {\n+      \"${dashed prefix unitName}\" = evalDeferred translator unitModule;\n+    }) service.systemd.${unitType}\n+    // concatMapAttrs (\n+      subName: subService: makeUnits translator unitType (dashed prefix subName) subService\n+    ) service.services;\n+\n+  # Lift each service's `configData` entries into `xdg.configFile` paths.\n+  # Mirrors how `nixos/modules/system/service/systemd/system.nix` lifts\n+  # `configData` to `environment.etc`.\n+  makeConfigFiles =\n+    prefix: service:\n+    lib.mapAttrs' (_: cfg: {\n+      name = \"system-services/${prefix}/${cfg.name}\";",
+   "id": 3184105981,
+   "line": 122,
+   "original_commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "original_line": 122,
+   "original_position": 122,
+   "original_start_line": null,
+   "path": "modules/services-modular/default.nix",
+   "position": 122,
+   "pull_request_review_id": 4223024827,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-04T19:52:58Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The PR uses the names Home Manager, home-manager, and Home-Manager in various places. For the record, I always use Home Manager for the project and home-manager when I explicitly refer to the name of the tool or repository so I would suggest following that for consistency.",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "created_at": "2026-05-04T19:55:23Z",
+   "diff_hunk": "@@ -0,0 +1,77 @@\n+# Modular Services {#sec-usage-modular-services}\n+\n+Home Manager supports nixpkgs\n+[modular services](https://nixos.org/manual/nixos/unstable/#modular-services)\n+under [](#opt-home.services). This is the home-manager analog to the\n+NixOS `system.services` namespace: each entry is an abstract service\n+sourced from `<nixpkgs/lib/services/lib.nix>` with the upstream portable\n+systemd module loaded into it, so service modules shipped with packages\n+(e.g. `pkgs.<name>.passthru.services.default`) drop in unchanged --\n+the same module evaluates on NixOS and on Home Manager.\n+\n+A minimal example -- run a one-shot user service from a package's\n+modular service definition:\n+\n+```nix\n+{ pkgs, ... }: {\n+  home.services.tunnel = {\n+    imports = [ pkgs.ghostunnel.passthru.services.default ];\n+    ghostunnel = {\n+      listen = \"127.0.0.1:8443\";\n+      target = \"127.0.0.1:8080\";\n+      cert = \"/run/secrets/cert.pem\";\n+      key = \"/run/secrets/key.pem\";\n+      allowAll = true;\n+    };\n+  };\n+}\n+```\n+\n+This produces `~/.config/systemd/user/tunnel.service` with the expected\n+`ExecStart`, `LoadCredential`, and `WantedBy=default.target`.\n+\n+Each service exposes the upstream NixOS-style schema: [`process.argv`],\n+`systemd.lib`, `systemd.mainExecStart`, `systemd.service`,\n+`systemd.services`, `systemd.sockets`. Lifted units are translated from\n+NixOS-style attrs (`wantedBy`, `serviceConfig`, `unitConfig`,\n+`environment`, ...) into the section-based INI shape\n+(`{ Unit; Service; Install; }`) that home-manager's",
+   "id": 3184121176,
+   "line": 38,
+   "original_commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "original_line": 38,
+   "original_position": 38,
+   "original_start_line": null,
+   "path": "docs/manual/usage/modular-services.md",
+   "position": 38,
+   "pull_request_review_id": 4223042104,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-04T19:55:23Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think it would be better to use `assertFileContent` and assert the whole file content. Instead of echo, use some command that is stubbed out, such as mpd, so you can use `@mpd@/bin/mpd` in the file.",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "created_at": "2026-05-04T20:12:53Z",
+   "diff_hunk": "@@ -0,0 +1,15 @@\n+{ pkgs, ... }:\n+{\n+  home.services.demo = {\n+    process.argv = [\n+      \"${pkgs.coreutils}/bin/echo\"\n+      \"hello\"\n+    ];\n+  };\n+\n+  nmt.script = ''\n+    assertFileExists home-files/.config/systemd/user/demo.service\n+    assertFileContains home-files/.config/systemd/user/demo.service '/bin/echo'\n+    assertFileContains home-files/.config/systemd/user/demo.service 'WantedBy=default.target'",
+   "id": 3184220153,
+   "line": 13,
+   "original_commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "original_line": 13,
+   "original_position": 13,
+   "original_start_line": 11,
+   "path": "tests/modules/services-modular/basic.nix",
+   "position": 13,
+   "pull_request_review_id": 4223158146,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": 11,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-05-04T20:12:53Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I had a look at the actually generated service file and it contains some things that do not make sense for a user service:\n\n``` ini\n[Install]\nWantedBy=multi-user.target\n\n[Service]\nAmbientCapabilities=CAP_NET_BIND_SERVICE\nDynamicUser=true\nExecStart=\"@ghostunnel@/bin/ghostunnel\" \"server\" \"--listen\" \"127.0.0.1:8443\" \"--target\" \"127.0.0.1:8080\" \"--allow-all\" --cert=${CREDENTIALS_DIRECTORY}/cert --key=${CREDENTIALS_DIRECTORY}/key\nLoadCredential=cert:/run/secrets/cert.pem\nLoadCredential=key:/run/secrets/key.pem\nRestart=always\nRestartSec=5\nType=simple\n\n[Unit]\nAfter=network.target\nWants=network.target\n```\n\nI guess the test is mostly focused on whether the feature works at all but it would be nice to have an actual user service as an example. Btw, how does the passtru work in the case of a package that can act as both a system and user service? E.g. mpd.",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "created_at": "2026-05-04T20:31:06Z",
+   "diff_hunk": "@@ -0,0 +1,20 @@\n+{ pkgs, ... }:\n+{\n+  home.services.tunnel = {\n+    imports = [ pkgs.ghostunnel.passthru.services.default ];\n+    ghostunnel = {\n+      listen = \"127.0.0.1:8443\";\n+      target = \"127.0.0.1:8080\";\n+      cert = \"/run/secrets/cert.pem\";\n+      key = \"/run/secrets/key.pem\";\n+      allowAll = true;\n+    };\n+  };\n+\n+  nmt.script = ''\n+    assertFileExists home-files/.config/systemd/user/tunnel.service\n+    assertFileContains home-files/.config/systemd/user/tunnel.service '/bin/ghostunnel'",
+   "id": 3184327843,
+   "line": 16,
+   "original_commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "original_line": 16,
+   "original_position": 16,
+   "original_start_line": null,
+   "path": "tests/modules/services-modular/ghostunnel.nix",
+   "position": 16,
+   "pull_request_review_id": 4223286058,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-04T20:31:07Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "How will the service know to reload or restart when the configuration changes?",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "created_at": "2026-05-04T20:34:39Z",
+   "diff_hunk": "@@ -0,0 +1,77 @@\n+# Modular Services {#sec-usage-modular-services}\n+\n+Home Manager supports nixpkgs\n+[modular services](https://nixos.org/manual/nixos/unstable/#modular-services)\n+under [](#opt-home.services). This is the home-manager analog to the\n+NixOS `system.services` namespace: each entry is an abstract service\n+sourced from `<nixpkgs/lib/services/lib.nix>` with the upstream portable\n+systemd module loaded into it, so service modules shipped with packages\n+(e.g. `pkgs.<name>.passthru.services.default`) drop in unchanged --\n+the same module evaluates on NixOS and on Home Manager.\n+\n+A minimal example -- run a one-shot user service from a package's\n+modular service definition:\n+\n+```nix\n+{ pkgs, ... }: {\n+  home.services.tunnel = {\n+    imports = [ pkgs.ghostunnel.passthru.services.default ];\n+    ghostunnel = {\n+      listen = \"127.0.0.1:8443\";\n+      target = \"127.0.0.1:8080\";\n+      cert = \"/run/secrets/cert.pem\";\n+      key = \"/run/secrets/key.pem\";\n+      allowAll = true;\n+    };\n+  };\n+}\n+```\n+\n+This produces `~/.config/systemd/user/tunnel.service` with the expected\n+`ExecStart`, `LoadCredential`, and `WantedBy=default.target`.\n+\n+Each service exposes the upstream NixOS-style schema: [`process.argv`],\n+`systemd.lib`, `systemd.mainExecStart`, `systemd.service`,\n+`systemd.services`, `systemd.sockets`. Lifted units are translated from\n+NixOS-style attrs (`wantedBy`, `serviceConfig`, `unitConfig`,\n+`environment`, ...) into the section-based INI shape\n+(`{ Unit; Service; Install; }`) that home-manager's\n+[](#opt-systemd.user.services) consumes. Only common keys are mapped\n+explicitly; uncommon options remain reachable via `unitConfig`,\n+`serviceConfig`, or `socketConfig`.\n+\n+Sub-services (nested `services.<sub>` inside another service) and their\n+units are dashed under the parent service name. The empty unit key\n+`\"\"` denotes the service's *primary* unit (lifted to a unit named\n+after the service itself); [`process.argv`] becomes the default\n+`ExecStart` for that unit, which defaults to `WantedBy=default.target`.\n+\n+## Configuration data {#sec-usage-modular-services-configdata}\n+\n+Each service can declare configuration files via `configData.<name>`.\n+These are materialized at `$XDG_CONFIG_HOME/system-services/<service>/<name>`\n+(mirroring how NixOS lifts `configData` to `environment.etc`), with the\n+absolute path injected back into `configData.<name>.path` so the service\n+can refer to its files at a stable location:",
+   "id": 3184348598,
+   "line": 55,
+   "original_commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "original_line": 55,
+   "original_position": 55,
+   "original_start_line": null,
+   "path": "docs/manual/usage/modular-services.md",
+   "position": 55,
+   "pull_request_review_id": 4223310547,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-04T20:34:39Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "thanks - this one indeed wasn't the best example. i'll draft up a follow-up PR.\nas to `mpd`, while currently it does not expose a modular service, what we can do i think is use `default.target` over NixOS's `multi-user.target`.\nfor what it's worth, when there are further attributes not applicable for a user service, systemd would ignore those.\n\nedit: Home Manager could further extend the upstream services, but yeah.\n",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "created_at": "2026-05-05T11:19:25Z",
+   "diff_hunk": "@@ -0,0 +1,20 @@\n+{ pkgs, ... }:\n+{\n+  home.services.tunnel = {\n+    imports = [ pkgs.ghostunnel.passthru.services.default ];\n+    ghostunnel = {\n+      listen = \"127.0.0.1:8443\";\n+      target = \"127.0.0.1:8080\";\n+      cert = \"/run/secrets/cert.pem\";\n+      key = \"/run/secrets/key.pem\";\n+      allowAll = true;\n+    };\n+  };\n+\n+  nmt.script = ''\n+    assertFileExists home-files/.config/systemd/user/tunnel.service\n+    assertFileContains home-files/.config/systemd/user/tunnel.service '/bin/ghostunnel'",
+   "id": 3187992026,
+   "in_reply_to_id": 3184327843,
+   "line": 16,
+   "original_commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "original_line": 16,
+   "original_position": 16,
+   "original_start_line": null,
+   "path": "tests/modules/services-modular/ghostunnel.nix",
+   "position": 16,
+   "pull_request_review_id": 4227463512,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-05T11:21:20Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "f59dfa0d52e4a7005ed526a5b5806ae00f21080d",
+   "id": 4200242119,
+   "state": "PENDING",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "d0420950e4775c2b0de0f27a3ef44aa967826a20",
+   "id": 4214065077,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-02T01:35:54Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "d0420950e4775c2b0de0f27a3ef44aa967826a20",
+   "id": 4214073696,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-02T01:43:02Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0dcc023200f9283bbb4fa403592b9b5352171b8c",
+   "id": 4215123841,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-02T14:38:42Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "4a5b7a6dc3ac23dd2cea2c50a0307eb656e3797a",
+   "id": 4219781007,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-04T11:55:07Z",
+   "user": {
+    "id": 886074,
+    "login": "teto",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "smart folks at nixpkgs seem to like it and contrary to flake-parts, at least I can understand some of the possible positives. So ok for letting in the experiment, would be cool to share service definitions across nixpkgs/HM (which this makes possible right xD ?!)",
+   "commit_id": "4a5b7a6dc3ac23dd2cea2c50a0307eb656e3797a",
+   "id": 4219826986,
+   "state": "APPROVED",
+   "submitted_at": "2026-05-04T12:01:44Z",
+   "user": {
+    "id": 886074,
+    "login": "teto",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "4a5b7a6dc3ac23dd2cea2c50a0307eb656e3797a",
+   "id": 4220260411,
+   "state": "APPROVED",
+   "submitted_at": "2026-05-04T13:13:51Z",
+   "user": {
+    "id": 12465195,
+    "login": "ambroisie",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "4a5b7a6dc3ac23dd2cea2c50a0307eb656e3797a",
+   "id": 4221723644,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-04T16:34:37Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "id": 4223024827,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-04T19:52:57Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "id": 4223042104,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-04T19:55:23Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "id": 4223158146,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-04T20:12:53Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "id": 4223286058,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-04T20:31:06Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "id": 4223310547,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-04T20:34:39Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "58bc263e0103e27650845c265b1ceb98e1903055",
+   "id": 4227463512,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-05T11:19:25Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "home-manager-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 886074,
+    "login": "teto",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fb6a0c6d398179f746ac6636d1acdf757e19eded",
+   "commit_url": "https://api.github.com/repos/nix-community/home-manager/commits/fb6a0c6d398179f746ac6636d1acdf757e19eded",
+   "created_at": "2026-05-04T15:22:17Z",
+   "event": "merged",
+   "id": 25139136953
+  },
+  {
+   "actor": {
+    "id": 886074,
+    "login": "teto",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-04T15:22:17Z",
+   "event": "closed",
+   "id": 25139137031,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fad81549779b6f7b0c154d8a5f56349aa767d90c",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/fad81549779b6f7b0c154d8a5f56349aa767d90c",
+   "created_at": "2026-05-10T14:47:43Z",
+   "event": "referenced",
+   "id": 25354639075
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "45b3d4a4d2541cba0f27cd902c841ffe823bd880",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/45b3d4a4d2541cba0f27cd902c841ffe823bd880",
+   "created_at": "2026-05-10T20:18:26Z",
+   "event": "referenced",
+   "id": 25358437155
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "2e34ddf55d6a0dc24cf77f648561349f28f0ee4e",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/2e34ddf55d6a0dc24cf77f648561349f28f0ee4e",
+   "created_at": "2026-05-10T20:20:32Z",
+   "event": "referenced",
+   "id": 25358461868
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "f0d89fefb62824fe4bd23e280f6db975038d41aa",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/f0d89fefb62824fe4bd23e280f6db975038d41aa",
+   "created_at": "2026-07-25T21:11:55Z",
+   "event": "referenced",
+   "id": 28484415775
+  }
+ ]
+}

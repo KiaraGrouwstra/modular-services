@@ -1,0 +1,556 @@
+{
+ "comments": [
+  {
+   "body": ":facepalm:  I was expecting a draft PR to not start testing etc.\r\nthen fumbled rebasing,\r\nsorry if anyone involved in the accidentally included commits was alerted to this.\r\nand sorry for wasting some CI time :disappointed: ",
+   "created_at": "2026-06-22T04:59:22Z",
+   "id": 4765046139,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-22T04:59:22Z",
+   "user": {
+    "id": 153512689,
+    "login": "fsnkty",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Will revisit in separate PR's.",
+   "created_at": "2026-06-24T03:24:00Z",
+   "id": 4785585532,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-24T03:24:00Z",
+   "user": {
+    "id": 153512689,
+    "login": "fsnkty",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/534124",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "## Things done\r\n\r\nmodularize various services.\r\n\r\n- breeze themes inclusion and setting,\r\n- gtk handling and breeze theme setting,\r\n- drkonqi,\r\n- plasma-browser-integration,\r\n- kwallet,\r\n- rebuild-cache-service\r\n\r\nadd options under `services.desktopManager.plasma6`\r\n```\r\nthemes {\r\n  breeze.enable\r\n  gtk.enable\r\n  gtk.setBreeze\r\n}\r\nservices {\r\n  drkonqi.enable\r\n  plasma-browser-integration.enable\r\n  kwallet.enable\r\n  kwallet.unlock-with-luks\r\n  rebuild-cache-service\r\n}\r\n```\r\nand `environment.plasma6`\r\n```\r\nexcludeRequiredPackages\r\n```\r\n\r\n## TODO:\r\n- [ ] address added \"FIXME\"s\r\n  - [ ] warn the user effectively about the potential danger of `excludeRequiredPackages`\r\n  - [ ] conditional security wrapper helpers\r\n  - [ ] dconf setting inconsistently removing expected defaults such as `button-layout`\r\n  - [ ] assert boot.initrd.systemd.enable for the `kwallet.unlock-with-luks` option\r\n- [ ] further modularization \r\n  - [ ] setting `systemsettings` menus viability as relevant\r\n  ( `environment.etc \"xdg/kdeglobals\"` `[KDE Control Module Restrictions][$i]` )\r\n    - [ ] users editor when users are immutable, this fail silently otherwise\r\n    - [ ] there are many more examples of this, List to be updated.\r\n  - [ ] baloo/milou\r\n  - [ ] fuse / kio-fuse\r\n  - [ ] timezone etc, polkit exceptions,  hide related settings when not relevant\r\n- [x] enable a exclude option for \"required\" packages \r\n( although removing these can break many features, a good amount of them can be safely removed with proper understanding )\r\n\r\nuser testing would be greatly appreciated as I'm aware my use case is quite limited in scope.\r\ntesting can be as simple as\r\n```nix\r\ndisabledModules = [ \"${modulesPath}/services/desktop-managers/plasma6.nix\" ];\r\nimports = [ \"${inputs.fsnkty-nixpkgs}/nixos/modules/services/desktop-managers/plasma6.nix\" ];\r\n```\r\nthought likely, if you are on nixos-unstable, it will fail to eval as the `union` package is not yet available there as of writing.\r\nhand testing real use cases feels important so while this PR is a draft, or until unstable has the `union` package, the PR wont include it.\r\n\r\n\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n## official testing & contribution compliance\r\n- Built on platform:\r\n  - [X] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] ~~x86_64-darwin~~\r\n  - [ ] ~~aarch64-darwin~~\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  screen.png looks fine\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [-] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n1 failure, `nixosTests.simple-container`, log file doesn't exist, just a link to a deleted store file.\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [-] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n( fails on a i686 linux eval test? otherwise fine.)  \r\n- [X] Follows the [automation/AI policy].\r\nNo LLM/AI written code included or referenced in any commit\r\nNo LLM/AI influenced testing or debugging.\r\nLLM/AI assisted research limited to at most duckduckgo search automatic prompts used at most to link to relevant media. unsure if I did or did not follow anything from it. \r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-06-24T03:24:00Z",
+  "closed_by": {
+   "id": 153512689,
+   "login": "fsnkty",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 2,
+  "created_at": "2026-06-22T04:17:17Z",
+  "draft": true,
+  "id": 4713364004,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "d93f0b",
+    "default": false,
+    "description": "This PR causes rebuilds for all NixOS tests and should normally target the staging branches.",
+    "id": 9207249328,
+    "name": "10.rebuild-nixos-tests"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 534124,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/534124.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/534124.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "NixOS/plasma6: Modularize various services, avoid \"with\" & mixed use of \"lib.\" / \"inherits\"",
+  "type": null,
+  "updated_at": "2026-06-24T03:27:22Z",
+  "user": {
+   "id": 153512689,
+   "login": "fsnkty",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 488,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:staging-nixos",
+   "ref": "staging-nixos",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "8d96f2900e9b02aaa572236caf9e676d227e8797",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "## Things done\r\n\r\nmodularize various services.\r\n\r\n- breeze themes inclusion and setting,\r\n- gtk handling and breeze theme setting,\r\n- drkonqi,\r\n- plasma-browser-integration,\r\n- kwallet,\r\n- rebuild-cache-service\r\n\r\nadd options under `services.desktopManager.plasma6`\r\n```\r\nthemes {\r\n  breeze.enable\r\n  gtk.enable\r\n  gtk.setBreeze\r\n}\r\nservices {\r\n  drkonqi.enable\r\n  plasma-browser-integration.enable\r\n  kwallet.enable\r\n  kwallet.unlock-with-luks\r\n  rebuild-cache-service\r\n}\r\n```\r\nand `environment.plasma6`\r\n```\r\nexcludeRequiredPackages\r\n```\r\n\r\n## TODO:\r\n- [ ] address added \"FIXME\"s\r\n  - [ ] warn the user effectively about the potential danger of `excludeRequiredPackages`\r\n  - [ ] conditional security wrapper helpers\r\n  - [ ] dconf setting inconsistently removing expected defaults such as `button-layout`\r\n  - [ ] assert boot.initrd.systemd.enable for the `kwallet.unlock-with-luks` option\r\n- [ ] further modularization \r\n  - [ ] setting `systemsettings` menus viability as relevant\r\n  ( `environment.etc \"xdg/kdeglobals\"` `[KDE Control Module Restrictions][$i]` )\r\n    - [ ] users editor when users are immutable, this fail silently otherwise\r\n    - [ ] there are many more examples of this, List to be updated.\r\n  - [ ] baloo/milou\r\n  - [ ] fuse / kio-fuse\r\n  - [ ] timezone etc, polkit exceptions,  hide related settings when not relevant\r\n- [x] enable a exclude option for \"required\" packages \r\n( although removing these can break many features, a good amount of them can be safely removed with proper understanding )\r\n\r\nuser testing would be greatly appreciated as I'm aware my use case is quite limited in scope.\r\ntesting can be as simple as\r\n```nix\r\ndisabledModules = [ \"${modulesPath}/services/desktop-managers/plasma6.nix\" ];\r\nimports = [ \"${inputs.fsnkty-nixpkgs}/nixos/modules/services/desktop-managers/plasma6.nix\" ];\r\n```\r\nthought likely, if you are on nixos-unstable, it will fail to eval as the `union` package is not yet available there as of writing.\r\nhand testing real use cases feels important so while this PR is a draft, or until unstable has the `union` package, the PR wont include it.\r\n\r\n\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n## official testing & contribution compliance\r\n- Built on platform:\r\n  - [X] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] ~~x86_64-darwin~~\r\n  - [ ] ~~aarch64-darwin~~\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  screen.png looks fine\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [-] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n1 failure, `nixosTests.simple-container`, log file doesn't exist, just a link to a deleted store file.\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [-] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n( fails on a i686 linux eval test? otherwise fine.)  \r\n- [X] Follows the [automation/AI policy].\r\nNo LLM/AI written code included or referenced in any commit\r\nNo LLM/AI influenced testing or debugging.\r\nLLM/AI assisted research limited to at most duckduckgo search automatic prompts used at most to link to relevant media. unsure if I did or did not follow anything from it. \r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 1,
+  "closed_at": "2026-06-24T03:24:00Z",
+  "comments": 2,
+  "commits": 5,
+  "created_at": "2026-06-22T04:17:17Z",
+  "deletions": 335,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/534124.diff",
+  "draft": true,
+  "head": {
+   "label": "fsnkty:modularize-plasma6",
+   "ref": "modularize-plasma6",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2023-12-27T23:20:23Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "fsnkty/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/fsnkty/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 736441483,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/fsnkty/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/fsnkty/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 153512689,
+     "login": "fsnkty",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/fsnkty/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-06-24T03:27:22Z",
+    "size": 2713858,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/fsnkty/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/fsnkty/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-06-24T03:16:17Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "a2f1b677a9a1a79d0cd5679a566a980de49bea5c",
+   "user": {
+    "id": 153512689,
+    "login": "fsnkty",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3909068727,
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "d93f0b",
+    "default": false,
+    "description": "This PR causes rebuilds for all NixOS tests and should normally target the staging branches.",
+    "id": 9207249328,
+    "name": "10.rebuild-nixos-tests"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "355f649943ad2ed6eb287d618233b3906cbba507",
+  "mergeable": true,
+  "mergeable_state": "blocked",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 534124,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/534124.patch",
+  "rebaseable": false,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 3,
+  "state": "closed",
+  "title": "NixOS/plasma6: Modularize various services, avoid \"with\" & mixed use of \"lib.\" / \"inherits\"",
+  "updated_at": "2026-06-24T03:27:22Z",
+  "user": {
+   "id": 153512689,
+   "login": "fsnkty",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#534124",
+ "review_comments": [
+  {
+   "body": "We don't want to have that big top-level with but replacing it with attrValues is also ugly. I think we are good when we just use it directly before lists.",
+   "commit_id": "a2f1b677a9a1a79d0cd5679a566a980de49bea5c",
+   "created_at": "2026-06-23T09:22:32Z",
+   "diff_hunk": "@@ -71,128 +71,135 @@ in\n     qt.enable = true;\n     programs.xwayland.enable = true;\n     environment.systemPackages =\n-      with kdePackages;",
+   "id": 3458527584,
+   "line": 74,
+   "original_commit_id": "eff58f37b58a7d812417142542231ce982fbc18c",
+   "original_line": 74,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/services/desktop-managers/plasma6.nix",
+   "position": 132,
+   "pull_request_review_id": 4551811545,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "LEFT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-23T09:22:33Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The `nixos/plasma6: modularize various services & add kwallet unlock with … ` commit is to big, I can't follow it at all. We need to do that in smaller pieces.",
+   "commit_id": "a2f1b677a9a1a79d0cd5679a566a980de49bea5c",
+   "created_at": "2026-06-23T09:24:59Z",
+   "diff_hunk": "",
+   "id": 3458543701,
+   "line": 1,
+   "original_commit_id": "9dfecb85309f632a759f7397579ffb333e94d0e5",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "nixos/modules/services/desktop-managers/plasma6.nix",
+   "position": 1,
+   "pull_request_review_id": 4551830100,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2026-06-23T09:24:59Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't think we want to add an option which you are not supposed to use at all.",
+   "commit_id": "a2f1b677a9a1a79d0cd5679a566a980de49bea5c",
+   "created_at": "2026-06-23T09:25:41Z",
+   "diff_hunk": "@@ -103,11 +103,26 @@ in\n       };\n     };\n \n-    environment.plasma6.excludePackages = mkOption {\n-      description = \"List of default packages to exclude from the configuration\";\n-      type = types.listOf types.package;\n-      default = [ ];\n-      example = literalExpression \"[ pkgs.kdePackages.elisa ]\";\n+    environment.plasma6 = {\n+      excludePackages = mkOption {\n+        description = \"List of default packages to exclude from the configuration\";\n+        type = types.listOf types.package;\n+        default = [ ];\n+        example = literalExpression \"[ pkgs.kdePackages.elisa ]\";\n+      };\n+      # FIXME: warn the user effectively about the potential danger of this option\n+      excludeRequiredPackages = mkOption {",
+   "id": 3458548255,
+   "line": 114,
+   "original_commit_id": "e1cc444f096811bbff87916233c9f39e7ba8ba34",
+   "original_line": 114,
+   "original_position": 17,
+   "original_start_line": null,
+   "path": "nixos/modules/services/desktop-managers/plasma6.nix",
+   "position": 95,
+   "pull_request_review_id": 4551835440,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-23T09:25:47Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "The PR's base branch is set to `master`, but this PR rebuilds all NixOS tests.\n\nPlease [change the base branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-base-branch-of-a-pull-request) to [the right base branch for your changes](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#branch-conventions) (probably `staging-nixos`).\n\n<!-- nixpkgs review key: check-target-branch; resolved: false -->",
+   "commit_id": "b6aed7af36f79787a1f45c626d29c1ef136089d9",
+   "id": 4541077066,
+   "state": "DISMISSED",
+   "submitted_at": "2026-06-22T04:22:13Z",
+   "user": {
+    "id": 277519137,
+    "login": "nixpkgs-branch-check[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  },
+  {
+   "body": "The PR's base branch is set to `staging-nixos`, but 14 commits from the `master` branch are included. Make sure you know the [right base branch for your changes](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#branch-conventions), then:\n- If the changes should go to the `master` branch, [change the base branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-base-branch-of-a-pull-request).\n- If the changes should go to the `staging-nixos` branch, rebase your PR onto the correct merge-base:\n  ```bash\n  # git rebase --onto $(git merge-base upstream/staging-nixos HEAD) $(git merge-base upstream/master HEAD)\n  git rebase --onto 4831080ceb7e50350fa7099eb2d151fa1945764a 21eb6ce8994ced877e5a6ac31d539f0860f09300\n  git push --force-with-lease\n  ```\n\n<!-- nixpkgs review key: prepare; resolved: true -->",
+   "commit_id": "b6aed7af36f79787a1f45c626d29c1ef136089d9",
+   "id": 4541148298,
+   "state": "DISMISSED",
+   "submitted_at": "2026-06-22T04:39:04Z",
+   "user": {
+    "id": 277519137,
+    "login": "nixpkgs-branch-check[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "eff58f37b58a7d812417142542231ce982fbc18c",
+   "id": 4551811545,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-23T09:22:32Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "9dfecb85309f632a759f7397579ffb333e94d0e5",
+   "id": 4551830100,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-23T09:24:59Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "e1cc444f096811bbff87916233c9f39e7ba8ba34",
+   "id": 4551835440,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-23T09:25:42Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 190413589,
+    "login": "nixpkgs-ci[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-06-22T04:38:30Z",
+   "event": "closed",
+   "id": 27023331774,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 190413589,
+    "login": "nixpkgs-ci[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-06-22T04:38:31Z",
+   "event": "reopened",
+   "id": 27023332444,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 153512689,
+    "login": "fsnkty",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-06-24T03:24:00Z",
+   "event": "closed",
+   "id": 27124495489,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

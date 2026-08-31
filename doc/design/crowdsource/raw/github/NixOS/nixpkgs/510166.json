@@ -1,0 +1,596 @@
+{
+ "comments": [
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha)\n\nCommand: `nixpkgs-review pr 510166`\nCommit: [`194b6ea5b1860100dd439e754937bd9a8ceafa41`](https://github.com/NixOS/nixpkgs/commit/194b6ea5b1860100dd439e754937bd9a8ceafa41) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/194b6ea5b1860100dd439e754937bd9a8ceafa41..pull/510166/head))\nMerge: [`72d086ff5d0ed3fc7a3a8524f5a00695bbcdb768`](https://github.com/NixOS/nixpkgs/commit/72d086ff5d0ed3fc7a3a8524f5a00695bbcdb768)\n\nLogs: https://github.com/Uzlkav/nixpkgs-review-gha/actions/runs/24436918197\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 3 packages built:</summary>\n  <ul>\n    <li>hyprpanel</li>\n    <li>pywal16</li>\n    <li>pywal16.dist</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:white_check_mark: 3 packages built:</summary>\n  <ul>\n    <li>hyprpanel</li>\n    <li>pywal16</li>\n    <li>pywal16.dist</li>\n  </ul>\n</details>\n\n---\n### `x86_64-darwin` (sandbox = relaxed)\n<details>\n  <summary>:white_check_mark: 2 packages built:</summary>\n  <ul>\n    <li>pywal16</li>\n    <li>pywal16.dist</li>\n  </ul>\n</details>\n\n---\n### `aarch64-darwin` (sandbox = relaxed)\n<details>\n  <summary>:white_check_mark: 2 packages built:</summary>\n  <ul>\n    <li>pywal16</li>\n    <li>pywal16.dist</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-04-15T05:06:06Z",
+   "id": 4249363050,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-15T05:06:06Z",
+   "user": {
+    "id": 177883133,
+    "login": "Uzlkav",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "https://github.com/NixOS/nixpkgs/pull/510142",
+   "created_at": "2026-04-15T20:21:12Z",
+   "id": 4255193262,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-15T20:21:12Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@NickCao Can I ask why this was closed? It is a separate package from the one under the `python3Packages` namespace. If we should only keep one of them around, the code allowing for alternative backends should be merged into the `python3Packages` version and one of the packages dropped. In the meantime it seems like it would be a good idea to keep this package updated.\r\n\r\nAlso, is there a policy about whether we should keep a package both in `by-name` and `python-modules`? I see that [beets](https://search.nixos.org/packages?channel=25.11&include_modular_service_options=1&include_nixos_options=1&query=beets) is in both. The only precedent I found was [this](https://github.com/NixOS/nixpkgs/pull/239291) draft pr which focuses splitting out libraries (I think).",
+   "created_at": "2026-04-15T20:55:42Z",
+   "id": 4255405605,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-15T20:55:42Z",
+   "user": {
+    "id": 177883133,
+    "login": "Uzlkav",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Oops, sorry, I thought they are the same. And yes we should only keep one of them, make the top level one a simple wapper of the library, as in beets:\r\n```\r\n❯ cat pkgs/by-name/be/beets/package.nix\r\n{\r\n  python3,\r\n}:\r\n\r\npython3.pkgs.toPythonApplication python3.pkgs.beets\r\n```",
+   "created_at": "2026-04-15T20:58:32Z",
+   "id": 4255426715,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-15T20:58:32Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Hmm, ok, may have time to work on this later today. If I do I'll also merge the optional dependency stuff into the python package. Thank you!",
+   "created_at": "2026-04-15T21:03:24Z",
+   "id": 4255456198,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-15T21:03:24Z",
+   "user": {
+    "id": 177883133,
+    "login": "Uzlkav",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Hmm, ok, may have time to work on this later today. If I do I'll also merge the optional dependency stuff into the python package. Thank you!\r\n\r\nYes that's one thing to take care of, the top level attr should have the necessary override to include all the optional deps as we do now.\r\n\r\nWe can merge this PR and take your time reworking the package.",
+   "created_at": "2026-04-15T21:05:01Z",
+   "id": 4255466202,
+   "minimized": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-04-15T21:05:01Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Oh, I didn’t even know there was another package with the same name in the python-modules. It looks like it was added by an auto-update script. https://github.com/NixOS/nixpkgs/commit/f7d0aa8579b54381a6e06678b12cc6c1e6172971",
+   "created_at": "2026-04-15T23:17:45Z",
+   "id": 4256332583,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-15T23:17:45Z",
+   "user": {
+    "id": 69713071,
+    "login": "Moraxyc",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've created a draft pr to track progress on this here: #511665\r\nI am not sure how to expose the overridable attributes and haven't had any time to figure out how, so I'm fairly sure nothing works at the moment ",
+   "created_at": "2026-04-20T07:10:17Z",
+   "id": 4278553022,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-20T07:10:17Z",
+   "user": {
+    "id": 177883133,
+    "login": "Uzlkav",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/510166",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\nChangelog:\r\nhttps://github.com/eylles/pywal16/releases/tag/3.8.15\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-04-15T21:11:23Z",
+  "closed_by": {
+   "id": 15247171,
+   "login": "NickCao",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 8,
+  "created_at": "2026-04-15T04:46:02Z",
+  "draft": false,
+  "id": 4266303463,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR updates a package to a newer version",
+    "id": 290122819,
+    "name": "8.has: package (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Darwin.",
+    "id": 1955058051,
+    "name": "10.rebuild-darwin: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by a maintainer listed in any of the changed packages.",
+    "id": 4061482046,
+    "name": "12.approved-by: package-maintainer"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 510166,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/510166.diff",
+   "merged_at": "2026-04-15T21:11:22Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/510166.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "pywal16: 3.8.14 -> 3.8.15",
+  "type": null,
+  "updated_at": "2026-04-20T07:10:17Z",
+  "user": {
+   "id": 177883133,
+   "login": "Uzlkav",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 2,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21132,
+    "open_issues_count": 21132,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:37:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "4ebd2659e4ff7f8191ea02fdb76844357bccc583",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\nChangelog:\r\nhttps://github.com/eylles/pywal16/releases/tag/3.8.15\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 1,
+  "closed_at": "2026-04-15T21:11:23Z",
+  "comments": 8,
+  "commits": 1,
+  "created_at": "2026-04-15T04:46:02Z",
+  "deletions": 2,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/510166.diff",
+  "draft": false,
+  "head": {
+   "label": "Uzlkav:pywal16-upd",
+   "ref": "pywal16-upd",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2026-02-01T00:54:26Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "Uzlkav/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/Uzlkav/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 1146966057,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/Uzlkav/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/Uzlkav/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 177883133,
+     "login": "Uzlkav",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/Uzlkav/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-07-20T05:59:50Z",
+    "size": 2777322,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/Uzlkav/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/Uzlkav/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-07-20T05:50:00Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "194b6ea5b1860100dd439e754937bd9a8ceafa41",
+   "user": {
+    "id": 177883133,
+    "login": "Uzlkav",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3531865849,
+  "labels": [
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR updates a package to a newer version",
+    "id": 290122819,
+    "name": "8.has: package (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Darwin.",
+    "id": 1955058051,
+    "name": "10.rebuild-darwin: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by a maintainer listed in any of the changed packages.",
+    "id": 4061482046,
+    "name": "12.approved-by: package-maintainer"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "14e94fd64ed76a795c4e37ab50958551d4f238cd",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-04-15T21:11:22Z",
+  "merged_by": {
+   "id": 15247171,
+   "login": "NickCao",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 510166,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/510166.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "pywal16: 3.8.14 -> 3.8.15",
+  "updated_at": "2026-04-20T07:10:17Z",
+  "user": {
+   "id": 177883133,
+   "login": "Uzlkav",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#510166",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "LGTM, thank you!",
+   "commit_id": "194b6ea5b1860100dd439e754937bd9a8ceafa41",
+   "id": 4110927346,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-15T05:07:32Z",
+   "user": {
+    "id": 69713071,
+    "login": "Moraxyc",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-15T20:21:12Z",
+   "event": "closed",
+   "id": 24543278609,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-15T21:05:01Z",
+   "event": "reopened",
+   "id": 24544512934,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "14e94fd64ed76a795c4e37ab50958551d4f238cd",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/14e94fd64ed76a795c4e37ab50958551d4f238cd",
+   "created_at": "2026-04-15T21:11:22Z",
+   "event": "merged",
+   "id": 24544687674
+  },
+  {
+   "actor": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-15T21:11:23Z",
+   "event": "closed",
+   "id": 24544687774,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

@@ -1,0 +1,1041 @@
+{
+ "comments": [
+  {
+   "body": "## :x: `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`3e99927`](https://github.com/Defelo/nixpkgs-review-gha/commit/3e999274c00361af1c97924d1451b9daf75a7350))\n\nCommand: `nixpkgs-review pr 552737 -p nixosTests.trailbase`\nCommit: [`0e670c4ef6499ad852cc78fd2537accede0e7687`](https://github.com/NixOS/nixpkgs/commit/0e670c4ef6499ad852cc78fd2537accede0e7687) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/0e670c4ef6499ad852cc78fd2537accede0e7687..pull/552737/head))\nMerge: [`3b979aff6f6188339a16fb272d1bfd81a16cbaf5`](https://github.com/NixOS/nixpkgs/commit/3b979aff6f6188339a16fb272d1bfd81a16cbaf5)\n\nLogs: https://github.com/lucasew/nixpkgs-review-gha/actions/runs/31833087243/attempts/1\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:x: 1 package failed to build:</summary>\n  <ul>\n    <li>nixosTests.trailbase</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:grey_question: 1 package not supported on this runner:</summary>\n  <ul>\n    <li>nixosTests.trailbase</li>\n  </ul>\n</details>\n\n---\n### `x86_64-darwin`\n:white_check_mark: *No rebuilds*\n\n---\n### `aarch64-darwin` (sandbox = relaxed)\n<details>\n  <summary>:grey_question: 1 package not supported on this runner:</summary>\n  <ul>\n    <li>nixosTests.trailbase</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-08-14T20:00:19Z",
+   "id": 5297603140,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-14T20:00:19Z",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## :white_check_mark: `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`3e99927`](https://github.com/Defelo/nixpkgs-review-gha/commit/3e999274c00361af1c97924d1451b9daf75a7350))\n\nCommand: `nixpkgs-review pr 552737 -p nixosTests.trailbase`\nCommit: [`cee94f2a7e17a7cf449f6312cc5ec460fececa8d`](https://github.com/NixOS/nixpkgs/commit/cee94f2a7e17a7cf449f6312cc5ec460fececa8d) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/cee94f2a7e17a7cf449f6312cc5ec460fececa8d..pull/552737/head))\nMerge: [`77b911b198aafb4e8fdd1bbb363ccf1f575f2122`](https://github.com/NixOS/nixpkgs/commit/77b911b198aafb4e8fdd1bbb363ccf1f575f2122)\n\nTriggered by @lucasew (15693688)\nLogs: https://github.com/lucasew/nixpkgs-review-gha/actions/runs/31839029485/attempts/1\n\n\n\n---\n### `x86_64-linux`\n<details><summary>:white_check_mark: 1 test built:</summary><ul>\n<li>nixosTests.trailbase</li>\n</ul></details>\n\n---\n### `aarch64-linux`\n<details><summary>:grey_question: 1 package not supported on this runner:</summary><ul>\n<li>nixosTests.trailbase</li>\n</ul></details>\n\n---\n### `x86_64-darwin`\n:white_check_mark: *No rebuilds*\n\n---\n### `aarch64-darwin` (sandbox = relaxed)\n<details><summary>:grey_question: 1 package not supported on this runner:</summary><ul>\n<li>nixosTests.trailbase</li>\n</ul></details>",
+   "created_at": "2026-08-14T21:22:04Z",
+   "id": 5298298468,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-14T21:22:04Z",
+   "user": {
+    "id": 286113851,
+    "login": "nixpkgs-review-gha",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@NixOS/ngi-nixpkgs ",
+   "created_at": "2026-08-14T21:31:07Z",
+   "id": 5298366115,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-14T21:31:07Z",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## :white_check_mark: `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`3e99927`](https://github.com/Defelo/nixpkgs-review-gha/commit/3e999274c00361af1c97924d1451b9daf75a7350))\n\nCommand: `nixpkgs-review pr 552737`\nCommit: [`262a9a1d9616f6b95412f3f84c6333070e1605dc`](https://github.com/NixOS/nixpkgs/commit/262a9a1d9616f6b95412f3f84c6333070e1605dc) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/262a9a1d9616f6b95412f3f84c6333070e1605dc..pull/552737/head))\nMerge: [`c24c4f5d16aecb5cc6a03844a74a3df17a1f0053`](https://github.com/NixOS/nixpkgs/commit/c24c4f5d16aecb5cc6a03844a74a3df17a1f0053)\n\nTriggered by @lucasew (15693688)\nLogs: https://github.com/lucasew/nixpkgs-review-gha/actions/runs/32147185453/attempts/1\n\n\n\n---\n### `x86_64-linux`\n<details><summary>:fast_forward: 2 packages blacklisted:</summary><ul>\n<li>nixos-install-tools</li>\n<li>tests.nixos-functions.nixos-test</li>\n</ul></details><details><summary>:white_check_mark: 1 package built:</summary><ul>\n<li>trailbase</li>\n</ul></details>\n\n---\n### `aarch64-linux`\n<details><summary>:fast_forward: 2 packages blacklisted:</summary><ul>\n<li>nixos-install-tools</li>\n<li>tests.nixos-functions.nixos-test</li>\n</ul></details><details><summary>:white_check_mark: 1 package built:</summary><ul>\n<li>trailbase</li>\n</ul></details>",
+   "created_at": "2026-08-18T14:52:46Z",
+   "id": 5329929569,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-18T14:52:46Z",
+   "user": {
+    "id": 286113851,
+    "login": "nixpkgs-review-gha",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\r\n\r\nGenerated using [`nixpkgs-review`](https://github.com/Mic92/nixpkgs-review).\r\n\r\nCommand: `nixpkgs-review pr 552737 --additional-package nixosTests.trailbase`\r\nCommit: `d85d744fe6105938bfffb91fb266ce669013998f`\r\n\r\n---\r\n### `x86_64-linux`\r\n<details>\r\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\r\n  <ul>\r\n    <li>nixos-install-tools</li>\r\n    <li>tests.nixos-functions.nixos-test</li>\r\n  </ul>\r\n</details>\r\n<details>\r\n  <summary>:white_check_mark: 1 test built:</summary>\r\n  <ul>\r\n    <li>nixosTests.trailbase</li>\r\n  </ul>\r\n</details>\r\n<details>\r\n  <summary>:white_check_mark: 5 packages built:</summary>\r\n  <ul>\r\n    <li>python313Packages.mintotp</li>\r\n    <li>python313Packages.trailbase</li>\r\n    <li>python314Packages.mintotp</li>\r\n    <li>python314Packages.trailbase</li>\r\n    <li>trailbase</li>\r\n  </ul>\r\n</details>\r\n\r\n\r\n---\r\n### `aarch64-linux`\r\n<details>\r\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\r\n  <ul>\r\n    <li>nixos-install-tools</li>\r\n    <li>tests.nixos-functions.nixos-test</li>\r\n  </ul>\r\n</details>\r\n<details>\r\n  <summary>:white_check_mark: 1 test built:</summary>\r\n  <ul>\r\n    <li>nixosTests.trailbase</li>\r\n  </ul>\r\n</details>\r\n<details>\r\n  <summary>:white_check_mark: 5 packages built:</summary>\r\n  <ul>\r\n    <li>python313Packages.mintotp</li>\r\n    <li>python313Packages.trailbase</li>\r\n    <li>python314Packages.mintotp</li>\r\n    <li>python314Packages.trailbase</li>\r\n    <li>trailbase</li>\r\n  </ul>\r\n</details>\r\n\r\n\r\n---\r\n### `aarch64-darwin`\r\n<details>\r\n  <summary>:white_check_mark: 5 packages built:</summary>\r\n  <ul>\r\n    <li>python313Packages.mintotp</li>\r\n    <li>python313Packages.trailbase</li>\r\n    <li>python314Packages.mintotp</li>\r\n    <li>python314Packages.trailbase</li>\r\n    <li>trailbase</li>\r\n  </ul>\r\n</details>",
+   "created_at": "2026-08-19T15:08:40Z",
+   "id": 5344058432,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-19T15:08:40Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/552737",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Adds [TrailBase](https://trailbase.io) 0.32.2. NLnet/NGI-funded single-executable Firebase alternative: auth, typed record APIs, admin UI.\n\nShips as a package plus a modular service (`pkgs.trailbase.services.default`), not a classic `services.trailbase.enable` module. I can add one if reviewers want it.\n\nNixOS test (`nixosTests.trailbase`): health + admin UI, login/refresh/logout, then record CRUD after a restart. Ran locally on x86_64-linux.\n\nCargo `client_integration_test` is skipped. It wants a seeded depot, WASM guests, and email. The VM test covers login + CRUD against the packaged server.\n\nRelated: https://github.com/ngi-nix/projects/issues/2136\n\nAssisted-by: Grok 4.6 (xAI). I reviewed the package, modular service, and test.\n\n## Things done\n\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\n\n- Built on platform:\n  - [x] x86_64-linux\n  - [ ] aarch64-linux\n  - [ ] aarch64-darwin\n- Tested, as applicable:\n  - [x] [NixOS tests] in [nixos/tests].\n  - [x] [Package tests] at `passthru.tests`.\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\n- Nixpkgs Release Notes\n  - [ ] Package update: when the change is major or breaking.\n- NixOS Release Notes\n  - [ ] Module addition: when adding a new NixOS module.\n  - [ ] Module update: when the change is significant.\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\n- [x] Follows the [automation/AI policy].\n\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\n\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test",
+  "closed_at": "2026-08-26T11:52:11Z",
+  "closed_by": {
+   "id": 81826728,
+   "login": "stepbrobd",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 5,
+  "created_at": "2026-08-14T19:10:04Z",
+  "draft": false,
+  "id": 5154876192,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Python is a high-level, general-purpose programming language.",
+    "id": 9820195,
+    "name": "6.topic: python"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "7b845a",
+    "default": false,
+    "description": "Contributions that include code generation with LLMs",
+    "id": 11544961878,
+    "name": "llm-assisted"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 552737,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/552737.diff",
+   "merged_at": "2026-08-26T11:52:11Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/552737.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "trailbase: init at 0.32.2",
+  "type": null,
+  "updated_at": "2026-08-26T11:52:11Z",
+  "user": {
+   "id": 15693688,
+   "login": "lucasew",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 548,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "dc6900f79eca4ab22a05bb543641b70563847aa8",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Adds [TrailBase](https://trailbase.io) 0.32.2. NLnet/NGI-funded single-executable Firebase alternative: auth, typed record APIs, admin UI.\n\nShips as a package plus a modular service (`pkgs.trailbase.services.default`), not a classic `services.trailbase.enable` module. I can add one if reviewers want it.\n\nNixOS test (`nixosTests.trailbase`): health + admin UI, login/refresh/logout, then record CRUD after a restart. Ran locally on x86_64-linux.\n\nCargo `client_integration_test` is skipped. It wants a seeded depot, WASM guests, and email. The VM test covers login + CRUD against the packaged server.\n\nRelated: https://github.com/ngi-nix/projects/issues/2136\n\nAssisted-by: Grok 4.6 (xAI). I reviewed the package, modular service, and test.\n\n## Things done\n\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\n\n- Built on platform:\n  - [x] x86_64-linux\n  - [ ] aarch64-linux\n  - [ ] aarch64-darwin\n- Tested, as applicable:\n  - [x] [NixOS tests] in [nixos/tests].\n  - [x] [Package tests] at `passthru.tests`.\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\n- Nixpkgs Release Notes\n  - [ ] Package update: when the change is major or breaking.\n- NixOS Release Notes\n  - [ ] Module addition: when adding a new NixOS module.\n  - [ ] Module update: when the change is significant.\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\n- [x] Follows the [automation/AI policy].\n\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\n\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test",
+  "changed_files": 11,
+  "closed_at": "2026-08-26T11:52:11Z",
+  "comments": 5,
+  "commits": 4,
+  "created_at": "2026-08-14T19:10:04Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/552737.diff",
+  "draft": false,
+  "head": {
+   "label": "lucasew:init/trailbase",
+   "ref": "init/trailbase",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2021-01-12T22:34:34Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "lucasew/CONTRIB-nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/lucasew/CONTRIB-nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 329129989,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/lucasew/CONTRIB-nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/lucasew/CONTRIB-nixpkgs/milestones{/number}",
+    "name": "CONTRIB-nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 15693688,
+     "login": "lucasew",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/lucasew/CONTRIB-nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:24:21Z",
+    "size": 3097439,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/lucasew/CONTRIB-nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/lucasew/CONTRIB-nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2025-05-23T23:28:52Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "d85d744fe6105938bfffb91fb266ce669013998f",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4282523231,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Python is a high-level, general-purpose programming language.",
+    "id": 9820195,
+    "name": "6.topic: python"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "7b845a",
+    "default": false,
+    "description": "Contributions that include code generation with LLMs",
+    "id": 11544961878,
+    "name": "llm-assisted"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "9ed9ac0d8ef70ed3b644211168feffef1b7d837c",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-08-26T11:52:11Z",
+  "merged_by": {
+   "id": 81826728,
+   "login": "stepbrobd",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 552737,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/552737.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 11,
+  "state": "closed",
+  "title": "trailbase: init at 0.32.2",
+  "updated_at": "2026-08-26T11:52:11Z",
+  "user": {
+   "id": 15693688,
+   "login": "lucasew",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#552737",
+ "review_comments": [
+  {
+   "body": "why `...`?",
+   "commit_id": "d85d744fe6105938bfffb91fb266ce669013998f",
+   "created_at": "2026-08-17T12:06:48Z",
+   "diff_hunk": "@@ -0,0 +1,124 @@\n+{\n+  lib,\n+  rustPlatform,\n+  fetchFromGitHub,\n+  fetchPnpmDeps,\n+  pkg-config,\n+  protobuf,\n+  cmake,\n+  cacert,\n+  geos,\n+  nodejs,\n+  pnpm_11,\n+  pnpmConfigHook,\n+  versionCheckHook,\n+  nix-update-script,\n+  nixosTests,\n+}:\n+\n+let\n+  pnpm = pnpm_11;\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"trailbase\";\n+  version = \"0.32.2\";\n+\n+  __structuredAttrs = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"trailbaseio\";\n+    repo = \"trailbase\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-b+HtxTg9UN5uvix9FkzRnRr7eP6dLVGz0v8UPqeTqaM=\";\n+    fetchSubmodules = true;\n+  };\n+\n+  cargoHash = \"sha256-RUbP49jXJj8UC2Sww0UlH8uyEpkshi2gewNqZ7XYeG4=\";\n+\n+  patches = [ ./skip-pnpm-install.patch ];\n+\n+  pnpmWorkspaces = [ \"trailbase-admin-ui...\" ];",
+   "id": 3796174760,
+   "line": 45,
+   "original_commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "original_line": 40,
+   "original_position": 40,
+   "original_start_line": null,
+   "path": "pkgs/by-name/tr/trailbase/package.nix",
+   "position": 45,
+   "pull_request_review_id": 4951365380,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-17T12:15:46Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "why is this needed? default flags are not necessary?",
+   "commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "created_at": "2026-08-17T12:07:45Z",
+   "diff_hunk": "@@ -0,0 +1,124 @@\n+{\n+  lib,\n+  rustPlatform,\n+  fetchFromGitHub,\n+  fetchPnpmDeps,\n+  pkg-config,\n+  protobuf,\n+  cmake,\n+  cacert,\n+  geos,\n+  nodejs,\n+  pnpm_11,\n+  pnpmConfigHook,\n+  versionCheckHook,\n+  nix-update-script,\n+  nixosTests,\n+}:\n+\n+let\n+  pnpm = pnpm_11;\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"trailbase\";\n+  version = \"0.32.2\";\n+\n+  __structuredAttrs = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"trailbaseio\";\n+    repo = \"trailbase\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-b+HtxTg9UN5uvix9FkzRnRr7eP6dLVGz0v8UPqeTqaM=\";\n+    fetchSubmodules = true;\n+  };\n+\n+  cargoHash = \"sha256-RUbP49jXJj8UC2Sww0UlH8uyEpkshi2gewNqZ7XYeG4=\";\n+\n+  patches = [ ./skip-pnpm-install.patch ];\n+\n+  pnpmWorkspaces = [ \"trailbase-admin-ui...\" ];\n+\n+  pnpmDeps = fetchPnpmDeps {\n+    inherit (finalAttrs)\n+      pname\n+      version\n+      src\n+      pnpmWorkspaces\n+      ;\n+    inherit pnpm;\n+    fetcherVersion = 4;\n+    hash = \"sha256-ue2hqveVMWEIB9GUD3NCohPO2VW2G+17L/OqLhz6UeE=\";\n+    pnpmInstallFlags = [\n+      \"--fetch-retries=5\"\n+      \"--fetch-timeout=300000\"\n+    ];",
+   "id": 3796182526,
+   "line": null,
+   "original_commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "original_line": 55,
+   "original_position": 55,
+   "original_start_line": 52,
+   "path": "pkgs/by-name/tr/trailbase/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4951365380,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-08-17T12:15:46Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "maybe move this close to `patches` and comment that this is from the patch",
+   "commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "created_at": "2026-08-17T12:08:37Z",
+   "diff_hunk": "@@ -0,0 +1,124 @@\n+{\n+  lib,\n+  rustPlatform,\n+  fetchFromGitHub,\n+  fetchPnpmDeps,\n+  pkg-config,\n+  protobuf,\n+  cmake,\n+  cacert,\n+  geos,\n+  nodejs,\n+  pnpm_11,\n+  pnpmConfigHook,\n+  versionCheckHook,\n+  nix-update-script,\n+  nixosTests,\n+}:\n+\n+let\n+  pnpm = pnpm_11;\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"trailbase\";\n+  version = \"0.32.2\";\n+\n+  __structuredAttrs = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"trailbaseio\";\n+    repo = \"trailbase\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-b+HtxTg9UN5uvix9FkzRnRr7eP6dLVGz0v8UPqeTqaM=\";\n+    fetchSubmodules = true;\n+  };\n+\n+  cargoHash = \"sha256-RUbP49jXJj8UC2Sww0UlH8uyEpkshi2gewNqZ7XYeG4=\";\n+\n+  patches = [ ./skip-pnpm-install.patch ];\n+\n+  pnpmWorkspaces = [ \"trailbase-admin-ui...\" ];\n+\n+  pnpmDeps = fetchPnpmDeps {\n+    inherit (finalAttrs)\n+      pname\n+      version\n+      src\n+      pnpmWorkspaces\n+      ;\n+    inherit pnpm;\n+    fetcherVersion = 4;\n+    hash = \"sha256-ue2hqveVMWEIB9GUD3NCohPO2VW2G+17L/OqLhz6UeE=\";\n+    pnpmInstallFlags = [\n+      \"--fetch-retries=5\"\n+      \"--fetch-timeout=300000\"\n+    ];\n+  };\n+\n+  # wasmtime's cargo-auditable build is broken:\n+  # https://github.com/rust-secure-code/cargo-auditable/issues/124\n+  auditable = false;\n+\n+  nativeBuildInputs = [\n+    cmake\n+    pkg-config\n+    protobuf\n+    nodejs\n+    pnpm\n+    pnpmConfigHook\n+    rustPlatform.bindgenHook\n+  ];\n+\n+  buildInputs = [ geos ];\n+\n+  env.TRAILBASE_SKIP_PNPM_INSTALL = \"1\";",
+   "id": 3796188079,
+   "line": null,
+   "original_commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "original_line": 74,
+   "original_position": 74,
+   "original_start_line": null,
+   "path": "pkgs/by-name/tr/trailbase/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4951365380,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-17T12:15:46Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "can the test be simpler? (if you can manage this level complexity feel free to ignore, im not sure if breaking changes will cause a fairly comprehensive test to break or not)",
+   "commit_id": "d85d744fe6105938bfffb91fb266ce669013998f",
+   "created_at": "2026-08-17T12:15:08Z",
+   "diff_hunk": "@@ -0,0 +1,50 @@\n+{ lib, pkgs, ... }:\n+{\n+  _class = \"nixosTest\";\n+  name = \"trailbase\";\n+\n+  nodes = {\n+    machine =\n+      { pkgs, ... }:\n+      {\n+        environment.systemPackages = [\n+          pkgs.curl\n+          (pkgs.writers.writePython3Bin \"trailbase-api\" {\n+            flakeIgnore = [ \"E501\" ];\n+          } (builtins.readFile ./api.py))",
+   "id": 3796237514,
+   "line": 14,
+   "original_commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "original_line": 14,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "nixos/tests/trailbase/default.nix",
+   "position": 14,
+   "pull_request_review_id": 4951365380,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-17T12:15:46Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "this probably was the model trying to mitigate my ass internet",
+   "commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "created_at": "2026-08-17T13:15:09Z",
+   "diff_hunk": "@@ -0,0 +1,124 @@\n+{\n+  lib,\n+  rustPlatform,\n+  fetchFromGitHub,\n+  fetchPnpmDeps,\n+  pkg-config,\n+  protobuf,\n+  cmake,\n+  cacert,\n+  geos,\n+  nodejs,\n+  pnpm_11,\n+  pnpmConfigHook,\n+  versionCheckHook,\n+  nix-update-script,\n+  nixosTests,\n+}:\n+\n+let\n+  pnpm = pnpm_11;\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"trailbase\";\n+  version = \"0.32.2\";\n+\n+  __structuredAttrs = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"trailbaseio\";\n+    repo = \"trailbase\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-b+HtxTg9UN5uvix9FkzRnRr7eP6dLVGz0v8UPqeTqaM=\";\n+    fetchSubmodules = true;\n+  };\n+\n+  cargoHash = \"sha256-RUbP49jXJj8UC2Sww0UlH8uyEpkshi2gewNqZ7XYeG4=\";\n+\n+  patches = [ ./skip-pnpm-install.patch ];\n+\n+  pnpmWorkspaces = [ \"trailbase-admin-ui...\" ];\n+\n+  pnpmDeps = fetchPnpmDeps {\n+    inherit (finalAttrs)\n+      pname\n+      version\n+      src\n+      pnpmWorkspaces\n+      ;\n+    inherit pnpm;\n+    fetcherVersion = 4;\n+    hash = \"sha256-ue2hqveVMWEIB9GUD3NCohPO2VW2G+17L/OqLhz6UeE=\";\n+    pnpmInstallFlags = [\n+      \"--fetch-retries=5\"\n+      \"--fetch-timeout=300000\"\n+    ];",
+   "id": 3796661533,
+   "in_reply_to_id": 3796182526,
+   "line": null,
+   "original_commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "original_line": 55,
+   "original_position": 55,
+   "original_start_line": 52,
+   "path": "pkgs/by-name/tr/trailbase/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4951979266,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-08-17T13:15:09Z",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": " https://pnpm.io/filtering#--filter-package_name-1",
+   "commit_id": "d85d744fe6105938bfffb91fb266ce669013998f",
+   "created_at": "2026-08-17T13:30:14Z",
+   "diff_hunk": "@@ -0,0 +1,124 @@\n+{\n+  lib,\n+  rustPlatform,\n+  fetchFromGitHub,\n+  fetchPnpmDeps,\n+  pkg-config,\n+  protobuf,\n+  cmake,\n+  cacert,\n+  geos,\n+  nodejs,\n+  pnpm_11,\n+  pnpmConfigHook,\n+  versionCheckHook,\n+  nix-update-script,\n+  nixosTests,\n+}:\n+\n+let\n+  pnpm = pnpm_11;\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"trailbase\";\n+  version = \"0.32.2\";\n+\n+  __structuredAttrs = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"trailbaseio\";\n+    repo = \"trailbase\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-b+HtxTg9UN5uvix9FkzRnRr7eP6dLVGz0v8UPqeTqaM=\";\n+    fetchSubmodules = true;\n+  };\n+\n+  cargoHash = \"sha256-RUbP49jXJj8UC2Sww0UlH8uyEpkshi2gewNqZ7XYeG4=\";\n+\n+  patches = [ ./skip-pnpm-install.patch ];\n+\n+  pnpmWorkspaces = [ \"trailbase-admin-ui...\" ];",
+   "id": 3796769572,
+   "in_reply_to_id": 3796174760,
+   "line": 45,
+   "original_commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "original_line": 40,
+   "original_position": 40,
+   "original_start_line": null,
+   "path": "pkgs/by-name/tr/trailbase/package.nix",
+   "position": 45,
+   "pull_request_review_id": 4952113288,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-17T13:30:15Z",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "makes sense, thx",
+   "commit_id": "d85d744fe6105938bfffb91fb266ce669013998f",
+   "created_at": "2026-08-17T13:32:16Z",
+   "diff_hunk": "@@ -0,0 +1,124 @@\n+{\n+  lib,\n+  rustPlatform,\n+  fetchFromGitHub,\n+  fetchPnpmDeps,\n+  pkg-config,\n+  protobuf,\n+  cmake,\n+  cacert,\n+  geos,\n+  nodejs,\n+  pnpm_11,\n+  pnpmConfigHook,\n+  versionCheckHook,\n+  nix-update-script,\n+  nixosTests,\n+}:\n+\n+let\n+  pnpm = pnpm_11;\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"trailbase\";\n+  version = \"0.32.2\";\n+\n+  __structuredAttrs = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"trailbaseio\";\n+    repo = \"trailbase\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-b+HtxTg9UN5uvix9FkzRnRr7eP6dLVGz0v8UPqeTqaM=\";\n+    fetchSubmodules = true;\n+  };\n+\n+  cargoHash = \"sha256-RUbP49jXJj8UC2Sww0UlH8uyEpkshi2gewNqZ7XYeG4=\";\n+\n+  patches = [ ./skip-pnpm-install.patch ];\n+\n+  pnpmWorkspaces = [ \"trailbase-admin-ui...\" ];",
+   "id": 3796782430,
+   "in_reply_to_id": 3796174760,
+   "line": 45,
+   "original_commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "original_line": 40,
+   "original_position": 40,
+   "original_start_line": null,
+   "path": "pkgs/by-name/tr/trailbase/package.nix",
+   "position": 45,
+   "pull_request_review_id": 4952128454,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-17T13:32:16Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Would it be worth packaging https://pypi.org/project/trailbase/#description? This might help clean it up a decent chunk.",
+   "commit_id": "d85d744fe6105938bfffb91fb266ce669013998f",
+   "created_at": "2026-08-18T15:15:31Z",
+   "diff_hunk": "@@ -0,0 +1,50 @@\n+{ lib, pkgs, ... }:\n+{\n+  _class = \"nixosTest\";\n+  name = \"trailbase\";\n+\n+  nodes = {\n+    machine =\n+      { pkgs, ... }:\n+      {\n+        environment.systemPackages = [\n+          pkgs.curl\n+          (pkgs.writers.writePython3Bin \"trailbase-api\" {\n+            flakeIgnore = [ \"E501\" ];\n+          } (builtins.readFile ./api.py))",
+   "id": 3805411814,
+   "in_reply_to_id": 3796237514,
+   "line": 14,
+   "original_commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "original_line": 14,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "nixos/tests/trailbase/default.nix",
+   "position": 14,
+   "pull_request_review_id": 4962688786,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-18T15:22:12Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Should this have a `lib.mkDefault`? Just so it's possible to set `trailbase.package` to a different value without having to `lib.mkForce`.",
+   "commit_id": "262a9a1d9616f6b95412f3f84c6333070e1605dc",
+   "created_at": "2026-08-18T15:21:54Z",
+   "diff_hunk": "@@ -0,0 +1,123 @@\n+{\n+  lib,\n+  rustPlatform,\n+  fetchFromGitHub,\n+  fetchPnpmDeps,\n+  pkg-config,\n+  protobuf,\n+  cmake,\n+  cacert,\n+  geos,\n+  nodejs,\n+  pnpm_11,\n+  pnpmConfigHook,\n+  versionCheckHook,\n+  nix-update-script,\n+  nixosTests,\n+}:\n+\n+let\n+  pnpm = pnpm_11;\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"trailbase\";\n+  version = \"0.32.2\";\n+\n+  __structuredAttrs = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"trailbaseio\";\n+    repo = \"trailbase\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-b+HtxTg9UN5uvix9FkzRnRr7eP6dLVGz0v8UPqeTqaM=\";\n+    fetchSubmodules = true;\n+  };\n+\n+  cargoHash = \"sha256-RUbP49jXJj8UC2Sww0UlH8uyEpkshi2gewNqZ7XYeG4=\";\n+\n+  patches = [ ./skip-pnpm-install.patch ];\n+\n+  # Skip cargo's workspace-wide pnpm install; pnpmConfigHook already did it.\n+  env.TRAILBASE_SKIP_PNPM_INSTALL = \"1\";\n+\n+  # Package plus its workspace dependencies:\n+  # https://pnpm.io/filtering#--filter-package_name-1\n+  pnpmWorkspaces = [ \"trailbase-admin-ui...\" ];\n+\n+  pnpmDeps = fetchPnpmDeps {\n+    inherit (finalAttrs)\n+      pname\n+      version\n+      src\n+      pnpmWorkspaces\n+      ;\n+    inherit pnpm;\n+    fetcherVersion = 4;\n+    hash = \"sha256-ue2hqveVMWEIB9GUD3NCohPO2VW2G+17L/OqLhz6UeE=\";\n+  };\n+\n+  # wasmtime's cargo-auditable build is broken:\n+  # https://github.com/rust-secure-code/cargo-auditable/issues/124\n+  auditable = false;\n+\n+  nativeBuildInputs = [\n+    cmake\n+    pkg-config\n+    protobuf\n+    nodejs\n+    pnpm\n+    pnpmConfigHook\n+    rustPlatform.bindgenHook\n+  ];\n+\n+  buildInputs = [ geos ];\n+\n+  postPatch = ''\n+    # `trail --version` prints the git tag. fetchFromGitHub has no .git.\n+    substituteInPlace crates/build/src/version.rs \\\n+      --replace-fail 'get_output(\"git\", &[\"describe\", \"--tags\", \"--match=v*\", \"--long\"])' \\\n+      'Some(\"v${finalAttrs.version}\".to_string())'\n+  '';\n+\n+  cargoBuildFlags = [\n+    \"--bin\"\n+    \"trail\"\n+  ];\n+\n+  # test_utils is behind `#[cfg(debug_assertions)]`.\n+  checkType = \"debug\";\n+\n+  # reqwest/rustls refuses to build a client without a CA bundle,\n+  # even for the local HTTP OAuth mock.\n+  nativeCheckInputs = [ cacert ];\n+\n+  # Full client e2e needs a seeded depot, WASM guests, and email.\n+  # The NixOS test covers login + record CRUD against the packaged server.\n+  checkFlags = [ \"--skip=client_integration_test\" ];\n+\n+  nativeInstallCheckInputs = [ versionCheckHook ];\n+  versionCheckProgramArg = \"--version\";\n+  doInstallCheck = true;\n+\n+  passthru = {\n+    tests = {\n+      inherit (nixosTests) trailbase;\n+    };\n+    services.default = {\n+      imports = [ (lib.modules.importApply ./service.nix { }) ];\n+      trailbase.package = finalAttrs.finalPackage;",
+   "id": 3805465782,
+   "line": null,
+   "original_commit_id": "262a9a1d9616f6b95412f3f84c6333070e1605dc",
+   "original_line": 108,
+   "original_position": 108,
+   "original_start_line": null,
+   "path": "pkgs/by-name/tr/trailbase/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4962688786,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-18T15:22:12Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "ill use the python client",
+   "commit_id": "d85d744fe6105938bfffb91fb266ce669013998f",
+   "created_at": "2026-08-18T16:49:42Z",
+   "diff_hunk": "@@ -0,0 +1,50 @@\n+{ lib, pkgs, ... }:\n+{\n+  _class = \"nixosTest\";\n+  name = \"trailbase\";\n+\n+  nodes = {\n+    machine =\n+      { pkgs, ... }:\n+      {\n+        environment.systemPackages = [\n+          pkgs.curl\n+          (pkgs.writers.writePython3Bin \"trailbase-api\" {\n+            flakeIgnore = [ \"E501\" ];\n+          } (builtins.readFile ./api.py))",
+   "id": 3806145024,
+   "in_reply_to_id": 3796237514,
+   "line": 14,
+   "original_commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "original_line": 14,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "nixos/tests/trailbase/default.nix",
+   "position": 14,
+   "pull_request_review_id": 4963576260,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-18T16:49:42Z",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "good call",
+   "commit_id": "262a9a1d9616f6b95412f3f84c6333070e1605dc",
+   "created_at": "2026-08-19T12:43:40Z",
+   "diff_hunk": "@@ -0,0 +1,123 @@\n+{\n+  lib,\n+  rustPlatform,\n+  fetchFromGitHub,\n+  fetchPnpmDeps,\n+  pkg-config,\n+  protobuf,\n+  cmake,\n+  cacert,\n+  geos,\n+  nodejs,\n+  pnpm_11,\n+  pnpmConfigHook,\n+  versionCheckHook,\n+  nix-update-script,\n+  nixosTests,\n+}:\n+\n+let\n+  pnpm = pnpm_11;\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"trailbase\";\n+  version = \"0.32.2\";\n+\n+  __structuredAttrs = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"trailbaseio\";\n+    repo = \"trailbase\";\n+    tag = \"v${finalAttrs.version}\";\n+    hash = \"sha256-b+HtxTg9UN5uvix9FkzRnRr7eP6dLVGz0v8UPqeTqaM=\";\n+    fetchSubmodules = true;\n+  };\n+\n+  cargoHash = \"sha256-RUbP49jXJj8UC2Sww0UlH8uyEpkshi2gewNqZ7XYeG4=\";\n+\n+  patches = [ ./skip-pnpm-install.patch ];\n+\n+  # Skip cargo's workspace-wide pnpm install; pnpmConfigHook already did it.\n+  env.TRAILBASE_SKIP_PNPM_INSTALL = \"1\";\n+\n+  # Package plus its workspace dependencies:\n+  # https://pnpm.io/filtering#--filter-package_name-1\n+  pnpmWorkspaces = [ \"trailbase-admin-ui...\" ];\n+\n+  pnpmDeps = fetchPnpmDeps {\n+    inherit (finalAttrs)\n+      pname\n+      version\n+      src\n+      pnpmWorkspaces\n+      ;\n+    inherit pnpm;\n+    fetcherVersion = 4;\n+    hash = \"sha256-ue2hqveVMWEIB9GUD3NCohPO2VW2G+17L/OqLhz6UeE=\";\n+  };\n+\n+  # wasmtime's cargo-auditable build is broken:\n+  # https://github.com/rust-secure-code/cargo-auditable/issues/124\n+  auditable = false;\n+\n+  nativeBuildInputs = [\n+    cmake\n+    pkg-config\n+    protobuf\n+    nodejs\n+    pnpm\n+    pnpmConfigHook\n+    rustPlatform.bindgenHook\n+  ];\n+\n+  buildInputs = [ geos ];\n+\n+  postPatch = ''\n+    # `trail --version` prints the git tag. fetchFromGitHub has no .git.\n+    substituteInPlace crates/build/src/version.rs \\\n+      --replace-fail 'get_output(\"git\", &[\"describe\", \"--tags\", \"--match=v*\", \"--long\"])' \\\n+      'Some(\"v${finalAttrs.version}\".to_string())'\n+  '';\n+\n+  cargoBuildFlags = [\n+    \"--bin\"\n+    \"trail\"\n+  ];\n+\n+  # test_utils is behind `#[cfg(debug_assertions)]`.\n+  checkType = \"debug\";\n+\n+  # reqwest/rustls refuses to build a client without a CA bundle,\n+  # even for the local HTTP OAuth mock.\n+  nativeCheckInputs = [ cacert ];\n+\n+  # Full client e2e needs a seeded depot, WASM guests, and email.\n+  # The NixOS test covers login + record CRUD against the packaged server.\n+  checkFlags = [ \"--skip=client_integration_test\" ];\n+\n+  nativeInstallCheckInputs = [ versionCheckHook ];\n+  versionCheckProgramArg = \"--version\";\n+  doInstallCheck = true;\n+\n+  passthru = {\n+    tests = {\n+      inherit (nixosTests) trailbase;\n+    };\n+    services.default = {\n+      imports = [ (lib.modules.importApply ./service.nix { }) ];\n+      trailbase.package = finalAttrs.finalPackage;",
+   "id": 3813031955,
+   "in_reply_to_id": 3805465782,
+   "line": null,
+   "original_commit_id": "262a9a1d9616f6b95412f3f84c6333070e1605dc",
+   "original_line": 108,
+   "original_position": 108,
+   "original_start_line": null,
+   "path": "pkgs/by-name/tr/trailbase/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4972193373,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-19T12:43:41Z",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "overall lgtm, a few nits",
+   "commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "id": 4951365380,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-17T12:15:46Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "id": 4951979266,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-17T13:15:09Z",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "id": 4952113288,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-17T13:30:14Z",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "id": 4952128454,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-17T13:32:16Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "262a9a1d9616f6b95412f3f84c6333070e1605dc",
+   "id": 4962688786,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-18T15:22:12Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "cee94f2a7e17a7cf449f6312cc5ec460fececa8d",
+   "id": 4963576260,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-18T16:49:42Z",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "262a9a1d9616f6b95412f3f84c6333070e1605dc",
+   "id": 4972193373,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-19T12:43:41Z",
+   "user": {
+    "id": 15693688,
+    "login": "lucasew",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Looks good, great that the test is simpler with the trailbase sdk helping.",
+   "commit_id": "d85d744fe6105938bfffb91fb266ce669013998f",
+   "id": 4973674021,
+   "state": "APPROVED",
+   "submitted_at": "2026-08-19T15:10:00Z",
+   "user": {
+    "id": 78790545,
+    "login": "sempiternal-aurora",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "d85d744fe6105938bfffb91fb266ce669013998f",
+   "id": 5029975015,
+   "state": "APPROVED",
+   "submitted_at": "2026-08-26T11:45:39Z",
+   "user": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "9ed9ac0d8ef70ed3b644211168feffef1b7d837c",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/9ed9ac0d8ef70ed3b644211168feffef1b7d837c",
+   "created_at": "2026-08-26T11:52:11Z",
+   "event": "merged",
+   "id": 30040245273
+  },
+  {
+   "actor": {
+    "id": 81826728,
+    "login": "stepbrobd",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-08-26T11:52:11Z",
+   "event": "closed",
+   "id": 30040245399,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

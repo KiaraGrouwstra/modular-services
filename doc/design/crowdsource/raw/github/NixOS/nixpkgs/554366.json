@@ -1,0 +1,918 @@
+{
+ "comments": [
+  {
+   "body": "cc @bartoostveen since they use git-pages extensively as well, and probably have some opinions on this. Will look at this later.",
+   "created_at": "2026-08-20T12:36:40Z",
+   "id": 5355971586,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-20T12:36:40Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I am currently away, and will still be for the next ~4 days, but I'll see if I can squeeze in a review in the meantime.",
+   "created_at": "2026-08-23T10:44:26Z",
+   "id": 5385588072,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-23T10:44:26Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I pushed a new commit which is a fixup commit, I will squash all of these once this pr is reviewed by current reviewers.\r\n\r\nI didn't mark it as a `fixup!` because nixpkgs lint CI doesn't like fixup commits.",
+   "created_at": "2026-08-24T11:51:41Z",
+   "id": 5394789764,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-24T11:51:41Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "(as mentioned above, this is currently waiting on a review from bartoostveen some time late this week. requesting review for tracking purposes - no hurry.)",
+   "created_at": "2026-08-25T02:33:05Z",
+   "id": 5404311203,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-25T02:34:18Z",
+   "user": {
+    "id": 2818072,
+    "login": "dramforever",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`5f60c00`](https://github.com/Defelo/nixpkgs-review-gha/commit/5f60c005cbf4fa124091567bfe7aa21cedc453a6))\n\nCommand: `nixpkgs-review pr 554366 -a git-pages.passthru.tests`\nCommit: [`ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f`](https://github.com/NixOS/nixpkgs/commit/ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f..pull/554366/head))\nMerge: [`531210c9b604357d03a253152e5252c049b50e9e`](https://github.com/NixOS/nixpkgs/commit/531210c9b604357d03a253152e5252c049b50e9e)\n\nLogs: https://github.com/phanirithvij/nixpkgs-review-gha/actions/runs/32724292235/attempts/2\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>git-pages.passthru.tests.git-pages-modular</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>git-pages.passthru.tests.git-pages-modular</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-08-29T03:50:14Z",
+   "id": 5460152766,
+   "minimized": {
+    "reason": "outdated"
+   },
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-30T03:10:15Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/554366",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Adapted from @dtomvan's module https://github.com/dtomvan/puntbestanden/blob/hoofdlijn/modules/services/git-pages.nix\r\n\r\nWe deployed it for our pr previews in https://github.com/ngi-nix/forge\r\n\r\nI would like to backport this as well so that we can use it from nixpkgs in our infra. It is a [valid backport](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#changes-acceptable-for-releases).\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 5,
+  "created_at": "2026-08-19T16:37:46Z",
+  "draft": false,
+  "id": 5194972167,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a module in `nixos/`",
+    "id": 290122827,
+    "name": "8.has: module (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   },
+   {
+    "color": "0fafaa",
+    "default": false,
+    "description": "Backport PR automatically",
+    "id": 11039388330,
+    "name": "backport release-26.05"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 554366,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/554366.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/554366.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "git-pages.services.default: init",
+  "type": null,
+  "updated_at": "2026-08-30T03:10:15Z",
+  "user": {
+   "id": 29627898,
+   "login": "phanirithvij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 175,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "376c95ec3676fa527e55047a35bbae880e4450ae",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Adapted from @dtomvan's module https://github.com/dtomvan/puntbestanden/blob/hoofdlijn/modules/services/git-pages.nix\r\n\r\nWe deployed it for our pr previews in https://github.com/ngi-nix/forge\r\n\r\nI would like to backport this as well so that we can use it from nixpkgs in our infra. It is a [valid backport](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#changes-acceptable-for-releases).\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 5,
+  "closed_at": null,
+  "comments": 5,
+  "commits": 1,
+  "created_at": "2026-08-19T16:37:46Z",
+  "deletions": 1,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/554366.diff",
+  "draft": false,
+  "head": {
+   "label": "phanirithvij:git-pages-modular-service",
+   "ref": "git-pages-modular-service",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-08-12T15:42:02Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "phanirithvij/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/phanirithvij/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 841533886,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/phanirithvij/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/phanirithvij/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 29627898,
+     "login": "phanirithvij",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/phanirithvij/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:00:58Z",
+    "size": 2910843,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/phanirithvij/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/phanirithvij/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-08-31T16:21:48Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4315720840,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a module in `nixos/`",
+    "id": 290122827,
+    "name": "8.has: module (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   },
+   {
+    "color": "0fafaa",
+    "default": false,
+    "description": "Backport PR automatically",
+    "id": 11039388330,
+    "name": "backport release-26.05"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": "1327c2d6dc51fe186875e9eeeefe356f0c3a97fe",
+  "mergeable": true,
+  "mergeable_state": "unstable",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 554366,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/554366.patch",
+  "rebaseable": true,
+  "requested_reviewers": [
+   {
+    "id": 252042,
+    "login": "drupol",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 10,
+  "state": "open",
+  "title": "git-pages.services.default: init",
+  "updated_at": "2026-08-30T03:10:15Z",
+  "user": {
+   "id": 29627898,
+   "login": "phanirithvij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#554366",
+ "review_comments": [
+  {
+   "body": "I don't really think this is nessecary, this could be an example value to me. I know I've done this in my own repo (in a seperate module that is, on purpose), but you're sort-of breaching the idea behind the RFC42 `settings` option [^1].\n\n> Since with this approach there will be no more hardcoded defaults and composability is not a problem anymore, there is not a big need to have NixOS options for every setting anymore. Traditionally this has lead to huge modules with dozens of options, each of them only for a single field in the configuration. Such modules are problematic because they're hard to write, review and maintain, are generally of lower quality, fill the option listing with noise and more.\n\n[^1]: https://github.com/NixOS/rfcs/blob/master/rfcs/0042-config-option.md",
+   "commit_id": "034497dc245f585baa8f0120fda22570ca19cb6e",
+   "created_at": "2026-08-24T10:53:44Z",
+   "diff_hunk": "@@ -0,0 +1,125 @@\n+{ formats, coreutils }:\n+\n+{\n+  config,\n+  lib,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.git-pages;\n+  settingsFormat = formats.toml { };\n+  configFile = \"git-pages.toml\";\n+  configOutPath = config.configData.${configFile}.path;\n+in\n+{\n+  _class = \"service\";\n+\n+  meta.maintainers = with lib.maintainers; [\n+    dtomvan\n+    phanirithvij\n+  ];\n+\n+  options.git-pages = {\n+    package = lib.mkOption {\n+      description = \"Package to use for git-pages\";\n+      defaultText = \"The git-pages package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    port = lib.mkOption {\n+      description = \"Port to open the main pages server on\";\n+      default = 3000;\n+      type = lib.types.port;\n+    };\n+\n+    caddyPort = lib.mkOption {\n+      description = \"Port for caddy\";\n+      default = 3001;\n+      type = lib.types.nullOr lib.types.port;\n+    };\n+\n+    metricsPort = lib.mkOption {\n+      description = \"Port to open a prometheus exporter on\";\n+      default = 3002;\n+      type = lib.types.nullOr lib.types.port;\n+    };\n+\n+    secretFile = lib.mkOption {\n+      description = \"Path to secrets.toml\";\n+      default = null;\n+      type = lib.types.nullOr lib.types.str;\n+    };\n+\n+    settings = lib.mkOption {\n+      type = settingsFormat.type;\n+      description = \"Settings to set in git-pages.toml. See https://codeberg.org/git-pages/git-pages\";\n+      default = { };\n+    };\n+  };\n+\n+  config = {\n+    git-pages.settings.server = {\n+      pages = lib.mkOptionDefault \"tcp/0.0.0.0:${toString cfg.port}\";\n+      caddy = lib.mkOptionDefault (\n+        if cfg.caddyPort == null then \"-\" else \"tcp/0.0.0.0:${toString cfg.caddyPort}\"\n+      );\n+      metrics = lib.mkOptionDefault (\n+        if cfg.metricsPort == null then \"-\" else \"tcp/0.0.0.0:${toString cfg.metricsPort}\"\n+      );\n+    };",
+   "id": 3842780480,
+   "line": null,
+   "original_commit_id": "034497dc245f585baa8f0120fda22570ca19cb6e",
+   "original_line": 70,
+   "original_position": 70,
+   "original_start_line": 62,
+   "path": "pkgs/by-name/gi/git-pages/service.nix",
+   "position": 1,
+   "pull_request_review_id": 5007028979,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-08-24T11:03:34Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This is unnessecary: https://github.com/NixOS/nixpkgs/blob/bd9ec57806870b16256899df4f03cff5c1f8d0d3/nixos/modules/system/service/systemd/service.nix#L112",
+   "commit_id": "034497dc245f585baa8f0120fda22570ca19cb6e",
+   "created_at": "2026-08-24T10:58:16Z",
+   "diff_hunk": "@@ -0,0 +1,125 @@\n+{ formats, coreutils }:\n+\n+{\n+  config,\n+  lib,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.git-pages;\n+  settingsFormat = formats.toml { };\n+  configFile = \"git-pages.toml\";\n+  configOutPath = config.configData.${configFile}.path;\n+in\n+{\n+  _class = \"service\";\n+\n+  meta.maintainers = with lib.maintainers; [\n+    dtomvan\n+    phanirithvij\n+  ];\n+\n+  options.git-pages = {\n+    package = lib.mkOption {\n+      description = \"Package to use for git-pages\";\n+      defaultText = \"The git-pages package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    port = lib.mkOption {\n+      description = \"Port to open the main pages server on\";\n+      default = 3000;\n+      type = lib.types.port;\n+    };\n+\n+    caddyPort = lib.mkOption {\n+      description = \"Port for caddy\";\n+      default = 3001;\n+      type = lib.types.nullOr lib.types.port;\n+    };\n+\n+    metricsPort = lib.mkOption {\n+      description = \"Port to open a prometheus exporter on\";\n+      default = 3002;\n+      type = lib.types.nullOr lib.types.port;\n+    };\n+\n+    secretFile = lib.mkOption {\n+      description = \"Path to secrets.toml\";\n+      default = null;\n+      type = lib.types.nullOr lib.types.str;\n+    };\n+\n+    settings = lib.mkOption {\n+      type = settingsFormat.type;\n+      description = \"Settings to set in git-pages.toml. See https://codeberg.org/git-pages/git-pages\";\n+      default = { };\n+    };\n+  };\n+\n+  config = {\n+    git-pages.settings.server = {\n+      pages = lib.mkOptionDefault \"tcp/0.0.0.0:${toString cfg.port}\";\n+      caddy = lib.mkOptionDefault (\n+        if cfg.caddyPort == null then \"-\" else \"tcp/0.0.0.0:${toString cfg.caddyPort}\"\n+      );\n+      metrics = lib.mkOptionDefault (\n+        if cfg.metricsPort == null then \"-\" else \"tcp/0.0.0.0:${toString cfg.metricsPort}\"\n+      );\n+    };\n+\n+    process.argv = [\n+      (lib.getExe cfg.package)\n+      \"-config\"\n+      configOutPath\n+    ];\n+\n+    configData.\"${configFile}\".source = settingsFormat.generate configFile cfg.settings;\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.mainExecStart = config.systemd.lib.escapeSystemdExecArgs config.process.argv;",
+   "id": 3842823843,
+   "line": null,
+   "original_commit_id": "034497dc245f585baa8f0120fda22570ca19cb6e",
+   "original_line": 81,
+   "original_position": 81,
+   "original_start_line": null,
+   "path": "pkgs/by-name/gi/git-pages/service.nix",
+   "position": 1,
+   "pull_request_review_id": 5007028979,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-24T11:03:34Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "To be clear, this should be kept as it can't be configured thru `settings`...",
+   "commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "created_at": "2026-08-24T11:02:45Z",
+   "diff_hunk": "@@ -0,0 +1,125 @@\n+{ formats, coreutils }:\n+\n+{\n+  config,\n+  lib,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.git-pages;\n+  settingsFormat = formats.toml { };\n+  configFile = \"git-pages.toml\";\n+  configOutPath = config.configData.${configFile}.path;\n+in\n+{\n+  _class = \"service\";\n+\n+  meta.maintainers = with lib.maintainers; [\n+    dtomvan\n+    phanirithvij\n+  ];\n+\n+  options.git-pages = {\n+    package = lib.mkOption {\n+      description = \"Package to use for git-pages\";\n+      defaultText = \"The git-pages package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    port = lib.mkOption {\n+      description = \"Port to open the main pages server on\";\n+      default = 3000;\n+      type = lib.types.port;\n+    };\n+\n+    caddyPort = lib.mkOption {\n+      description = \"Port for caddy\";\n+      default = 3001;\n+      type = lib.types.nullOr lib.types.port;\n+    };\n+\n+    metricsPort = lib.mkOption {\n+      description = \"Port to open a prometheus exporter on\";\n+      default = 3002;\n+      type = lib.types.nullOr lib.types.port;\n+    };\n+\n+    secretFile = lib.mkOption {\n+      description = \"Path to secrets.toml\";\n+      default = null;\n+      type = lib.types.nullOr lib.types.str;\n+    };\n+\n+    settings = lib.mkOption {\n+      type = settingsFormat.type;\n+      description = \"Settings to set in git-pages.toml. See https://codeberg.org/git-pages/git-pages\";\n+      default = { };\n+    };\n+  };\n+\n+  config = {\n+    git-pages.settings.server = {\n+      pages = lib.mkOptionDefault \"tcp/0.0.0.0:${toString cfg.port}\";\n+      caddy = lib.mkOptionDefault (\n+        if cfg.caddyPort == null then \"-\" else \"tcp/0.0.0.0:${toString cfg.caddyPort}\"\n+      );\n+      metrics = lib.mkOptionDefault (\n+        if cfg.metricsPort == null then \"-\" else \"tcp/0.0.0.0:${toString cfg.metricsPort}\"\n+      );\n+    };\n+\n+    process.argv = [\n+      (lib.getExe cfg.package)\n+      \"-config\"\n+      configOutPath\n+    ];\n+\n+    configData.\"${configFile}\".source = settingsFormat.generate configFile cfg.settings;\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.mainExecStart = config.systemd.lib.escapeSystemdExecArgs config.process.argv;\n+\n+    systemd.service = {\n+      description = \"Forge-agnostic static site server\";\n+      documentation = [ \"https://codeberg.org/git-pages/git-pages\" ];\n+\n+      after = [ \"network.target\" ];\n+      wants = [ \"network.target\" ];\n+      wantedBy = [ \"multi-user.target\" ];\n+      restartTriggers = [ config.configData.\"${configFile}\".source ];\n+\n+      serviceConfig = {\n+        ExecStartPre = \"${lib.getExe' coreutils \"mkdir\"} -p data\";\n+        Restart = \"always\";\n+\n+        StateDirectory = \"git-pages\";\n+        WorkingDirectory = \"/var/lib/git-pages\";\n+        BindReadOnlyPaths = [ configOutPath ];\n+\n+        LoadCredential = lib.optional (cfg.secretFile != null) \"secrets.toml:${cfg.secretFile}\";",
+   "id": 3842852324,
+   "line": 70,
+   "original_commit_id": "034497dc245f585baa8f0120fda22570ca19cb6e",
+   "original_line": 100,
+   "original_position": 100,
+   "original_start_line": null,
+   "path": "pkgs/by-name/gi/git-pages/service.nix",
+   "position": 70,
+   "pull_request_review_id": 5007028979,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-24T11:03:34Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks for pointing to this, I dropped these options.",
+   "commit_id": "034497dc245f585baa8f0120fda22570ca19cb6e",
+   "created_at": "2026-08-24T11:49:39Z",
+   "diff_hunk": "@@ -0,0 +1,125 @@\n+{ formats, coreutils }:\n+\n+{\n+  config,\n+  lib,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.git-pages;\n+  settingsFormat = formats.toml { };\n+  configFile = \"git-pages.toml\";\n+  configOutPath = config.configData.${configFile}.path;\n+in\n+{\n+  _class = \"service\";\n+\n+  meta.maintainers = with lib.maintainers; [\n+    dtomvan\n+    phanirithvij\n+  ];\n+\n+  options.git-pages = {\n+    package = lib.mkOption {\n+      description = \"Package to use for git-pages\";\n+      defaultText = \"The git-pages package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    port = lib.mkOption {\n+      description = \"Port to open the main pages server on\";\n+      default = 3000;\n+      type = lib.types.port;\n+    };\n+\n+    caddyPort = lib.mkOption {\n+      description = \"Port for caddy\";\n+      default = 3001;\n+      type = lib.types.nullOr lib.types.port;\n+    };\n+\n+    metricsPort = lib.mkOption {\n+      description = \"Port to open a prometheus exporter on\";\n+      default = 3002;\n+      type = lib.types.nullOr lib.types.port;\n+    };\n+\n+    secretFile = lib.mkOption {\n+      description = \"Path to secrets.toml\";\n+      default = null;\n+      type = lib.types.nullOr lib.types.str;\n+    };\n+\n+    settings = lib.mkOption {\n+      type = settingsFormat.type;\n+      description = \"Settings to set in git-pages.toml. See https://codeberg.org/git-pages/git-pages\";\n+      default = { };\n+    };\n+  };\n+\n+  config = {\n+    git-pages.settings.server = {\n+      pages = lib.mkOptionDefault \"tcp/0.0.0.0:${toString cfg.port}\";\n+      caddy = lib.mkOptionDefault (\n+        if cfg.caddyPort == null then \"-\" else \"tcp/0.0.0.0:${toString cfg.caddyPort}\"\n+      );\n+      metrics = lib.mkOptionDefault (\n+        if cfg.metricsPort == null then \"-\" else \"tcp/0.0.0.0:${toString cfg.metricsPort}\"\n+      );\n+    };",
+   "id": 3843168983,
+   "in_reply_to_id": 3842780480,
+   "line": null,
+   "original_commit_id": "034497dc245f585baa8f0120fda22570ca19cb6e",
+   "original_line": 70,
+   "original_position": 70,
+   "original_start_line": 62,
+   "path": "pkgs/by-name/gi/git-pages/service.nix",
+   "position": 1,
+   "pull_request_review_id": 5007465901,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-08-24T11:49:40Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This is not descriptive enough IMHO. As we want to avoid consumers of this service to accidentally make secrets world-readable, my own description of `environmentFile`:\r\n\r\n```nix\r\nenvironmentFile = mkOption {\r\n  description = ''\r\n    File that contains values for the git-pages config. This file may be used for secrets.\r\n\r\n\r\n    ::: {.note}\r\n    See the [git-pages documentation](https://git-pages.org/running-a-server/#environment-variables) on environment variables.\r\n    :::\r\n  '';\r\n  type = nullOr path;\r\n  default = null;\r\n  example = \"/run/secrets/git-pages.env\";\r\n};\r\n```\r\n\r\nTranslates nicely to:\r\n\r\n```suggestion\r\n      description = ''\r\n        File that contains secrets for the git-pages config.\r\n        If values in this file are set, any options specified take priority over the options set in\r\n        {option}`git-pages.settings`.\r\n    \r\n        ::: {.note}\r\n        See the [git-pages documentation](https://git-pages.org/running-a-server/#configuration) on \r\n        secrets and environment variables.\r\n        :::\r\n      '';\r\n```",
+   "commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "created_at": "2026-08-29T21:17:56Z",
+   "diff_hunk": "@@ -0,0 +1,95 @@\n+{ formats, coreutils }:\n+\n+{\n+  config,\n+  lib,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.git-pages;\n+  settingsFormat = formats.toml { };\n+  configFile = \"git-pages.toml\";\n+  configOutPath = config.configData.${configFile}.path;\n+in\n+{\n+  _class = \"service\";\n+\n+  meta.maintainers = with lib.maintainers; [\n+    dtomvan\n+    phanirithvij\n+  ];\n+\n+  options.git-pages = {\n+    package = lib.mkOption {\n+      description = \"Package to use for git-pages\";\n+      defaultText = \"The git-pages package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    secretFile = lib.mkOption {\n+      description = \"Path to secrets.toml\";",
+   "id": 3887705169,
+   "line": 31,
+   "original_commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "original_line": 31,
+   "original_position": 31,
+   "original_start_line": null,
+   "path": "pkgs/by-name/gi/git-pages/service.nix",
+   "position": 31,
+   "pull_request_review_id": 5059213541,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-29T21:46:31Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "IMO we should direct consumers to the actual documentation, not the git repo, but again, just nitpicking here.\r\n\r\n```suggestion\r\n      description = ''\r\n        Settings to set in config.toml.\r\n\r\n        ::: {.note}\r\n        See the [git-pages documentation](https://git-pages.org/running-a-server/#configuration) on configuring the server.\r\n        :::\r\n      '';\r\n```",
+   "commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "created_at": "2026-08-29T21:22:52Z",
+   "diff_hunk": "@@ -0,0 +1,95 @@\n+{ formats, coreutils }:\n+\n+{\n+  config,\n+  lib,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.git-pages;\n+  settingsFormat = formats.toml { };\n+  configFile = \"git-pages.toml\";\n+  configOutPath = config.configData.${configFile}.path;\n+in\n+{\n+  _class = \"service\";\n+\n+  meta.maintainers = with lib.maintainers; [\n+    dtomvan\n+    phanirithvij\n+  ];\n+\n+  options.git-pages = {\n+    package = lib.mkOption {\n+      description = \"Package to use for git-pages\";\n+      defaultText = \"The git-pages package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    secretFile = lib.mkOption {\n+      description = \"Path to secrets.toml\";\n+      default = null;\n+      type = lib.types.nullOr lib.types.str;\n+    };\n+\n+    settings = lib.mkOption {\n+      type = settingsFormat.type;\n+      description = \"Settings to set in git-pages.toml. See https://codeberg.org/git-pages/git-pages\";",
+   "id": 3887715051,
+   "line": 38,
+   "original_commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "original_line": 38,
+   "original_position": 38,
+   "original_start_line": null,
+   "path": "pkgs/by-name/gi/git-pages/service.nix",
+   "position": 38,
+   "pull_request_review_id": 5059213541,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-29T22:38:47Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "See next comment.\n\n```suggestion\n     git-pages.settings.storage.fs.root = mkDefault \"/var/lib/private/git-pages/data\";\n  }\n```",
+   "commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "created_at": "2026-08-29T21:24:12Z",
+   "diff_hunk": "@@ -0,0 +1,95 @@\n+{ formats, coreutils }:\n+\n+{\n+  config,\n+  lib,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.git-pages;\n+  settingsFormat = formats.toml { };\n+  configFile = \"git-pages.toml\";\n+  configOutPath = config.configData.${configFile}.path;\n+in\n+{\n+  _class = \"service\";\n+\n+  meta.maintainers = with lib.maintainers; [\n+    dtomvan\n+    phanirithvij\n+  ];\n+\n+  options.git-pages = {\n+    package = lib.mkOption {\n+      description = \"Package to use for git-pages\";\n+      defaultText = \"The git-pages package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    secretFile = lib.mkOption {\n+      description = \"Path to secrets.toml\";\n+      default = null;\n+      type = lib.types.nullOr lib.types.str;\n+    };\n+\n+    settings = lib.mkOption {\n+      type = settingsFormat.type;\n+      description = \"Settings to set in git-pages.toml. See https://codeberg.org/git-pages/git-pages\";\n+      default = { };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      (lib.getExe cfg.package)\n+      \"-config\"\n+      configOutPath\n+    ];\n+\n+    configData.\"${configFile}\".source = settingsFormat.generate configFile cfg.settings;\n+  }",
+   "id": 3887717881,
+   "line": 51,
+   "original_commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "original_line": 51,
+   "original_position": 51,
+   "original_start_line": null,
+   "path": "pkgs/by-name/gi/git-pages/service.nix",
+   "position": 51,
+   "pull_request_review_id": 5059213541,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-29T21:44:51Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n        ExecStartPre = \"${lib.getExe' coreutils \"mkdir\"} -p ${cfg.settings.storage.fs.root}/blob\";\n```",
+   "commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "created_at": "2026-08-29T21:25:17Z",
+   "diff_hunk": "@@ -0,0 +1,95 @@\n+{ formats, coreutils }:\n+\n+{\n+  config,\n+  lib,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.git-pages;\n+  settingsFormat = formats.toml { };\n+  configFile = \"git-pages.toml\";\n+  configOutPath = config.configData.${configFile}.path;\n+in\n+{\n+  _class = \"service\";\n+\n+  meta.maintainers = with lib.maintainers; [\n+    dtomvan\n+    phanirithvij\n+  ];\n+\n+  options.git-pages = {\n+    package = lib.mkOption {\n+      description = \"Package to use for git-pages\";\n+      defaultText = \"The git-pages package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    secretFile = lib.mkOption {\n+      description = \"Path to secrets.toml\";\n+      default = null;\n+      type = lib.types.nullOr lib.types.str;\n+    };\n+\n+    settings = lib.mkOption {\n+      type = settingsFormat.type;\n+      description = \"Settings to set in git-pages.toml. See https://codeberg.org/git-pages/git-pages\";\n+      default = { };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      (lib.getExe cfg.package)\n+      \"-config\"\n+      configOutPath\n+    ];\n+\n+    configData.\"${configFile}\".source = settingsFormat.generate configFile cfg.settings;\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.service = {\n+      description = \"Forge-agnostic static site server\";\n+      documentation = [ \"https://codeberg.org/git-pages/git-pages\" ];\n+\n+      after = [ \"network.target\" ];\n+      wants = [ \"network.target\" ];\n+      wantedBy = [ \"multi-user.target\" ];\n+      restartTriggers = [ config.configData.\"${configFile}\".source ];\n+\n+      serviceConfig = {\n+        ExecStartPre = \"${lib.getExe' coreutils \"mkdir\"} -p data\";",
+   "id": 3887720094,
+   "line": 63,
+   "original_commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "original_line": 63,
+   "original_position": 63,
+   "original_start_line": null,
+   "path": "pkgs/by-name/gi/git-pages/service.nix",
+   "position": 63,
+   "pull_request_review_id": 5059213541,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-29T21:44:51Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n        WorkingDirectory = \"%S/git-pages\";\n```",
+   "commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "created_at": "2026-08-29T21:25:46Z",
+   "diff_hunk": "@@ -0,0 +1,95 @@\n+{ formats, coreutils }:\n+\n+{\n+  config,\n+  lib,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.git-pages;\n+  settingsFormat = formats.toml { };\n+  configFile = \"git-pages.toml\";\n+  configOutPath = config.configData.${configFile}.path;\n+in\n+{\n+  _class = \"service\";\n+\n+  meta.maintainers = with lib.maintainers; [\n+    dtomvan\n+    phanirithvij\n+  ];\n+\n+  options.git-pages = {\n+    package = lib.mkOption {\n+      description = \"Package to use for git-pages\";\n+      defaultText = \"The git-pages package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    secretFile = lib.mkOption {\n+      description = \"Path to secrets.toml\";\n+      default = null;\n+      type = lib.types.nullOr lib.types.str;\n+    };\n+\n+    settings = lib.mkOption {\n+      type = settingsFormat.type;\n+      description = \"Settings to set in git-pages.toml. See https://codeberg.org/git-pages/git-pages\";\n+      default = { };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      (lib.getExe cfg.package)\n+      \"-config\"\n+      configOutPath\n+    ];\n+\n+    configData.\"${configFile}\".source = settingsFormat.generate configFile cfg.settings;\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.service = {\n+      description = \"Forge-agnostic static site server\";\n+      documentation = [ \"https://codeberg.org/git-pages/git-pages\" ];\n+\n+      after = [ \"network.target\" ];\n+      wants = [ \"network.target\" ];\n+      wantedBy = [ \"multi-user.target\" ];\n+      restartTriggers = [ config.configData.\"${configFile}\".source ];\n+\n+      serviceConfig = {\n+        ExecStartPre = \"${lib.getExe' coreutils \"mkdir\"} -p data\";\n+        Restart = \"always\";\n+\n+        StateDirectory = \"git-pages\";\n+        WorkingDirectory = \"/var/lib/git-pages\";",
+   "id": 3887721026,
+   "line": 67,
+   "original_commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "original_line": 67,
+   "original_position": 67,
+   "original_start_line": null,
+   "path": "pkgs/by-name/gi/git-pages/service.nix",
+   "position": 67,
+   "pull_request_review_id": 5059213541,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-29T21:44:51Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Small hardening opportunity, not really neccesary, I suppose only in the case of a supply chain attack or something like that.\n\n```suggestion\n        RestrictRealtime = true;\n        RestrictAddressFamilies = \"AF_INET AF_INET6 AF_UNIX\";\n        RestrictNamespaces = true;\n```",
+   "commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "created_at": "2026-08-29T21:37:20Z",
+   "diff_hunk": "@@ -0,0 +1,95 @@\n+{ formats, coreutils }:\n+\n+{\n+  config,\n+  lib,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.git-pages;\n+  settingsFormat = formats.toml { };\n+  configFile = \"git-pages.toml\";\n+  configOutPath = config.configData.${configFile}.path;\n+in\n+{\n+  _class = \"service\";\n+\n+  meta.maintainers = with lib.maintainers; [\n+    dtomvan\n+    phanirithvij\n+  ];\n+\n+  options.git-pages = {\n+    package = lib.mkOption {\n+      description = \"Package to use for git-pages\";\n+      defaultText = \"The git-pages package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    secretFile = lib.mkOption {\n+      description = \"Path to secrets.toml\";\n+      default = null;\n+      type = lib.types.nullOr lib.types.str;\n+    };\n+\n+    settings = lib.mkOption {\n+      type = settingsFormat.type;\n+      description = \"Settings to set in git-pages.toml. See https://codeberg.org/git-pages/git-pages\";\n+      default = { };\n+    };\n+  };\n+\n+  config = {\n+    process.argv = [\n+      (lib.getExe cfg.package)\n+      \"-config\"\n+      configOutPath\n+    ];\n+\n+    configData.\"${configFile}\".source = settingsFormat.generate configFile cfg.settings;\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.service = {\n+      description = \"Forge-agnostic static site server\";\n+      documentation = [ \"https://codeberg.org/git-pages/git-pages\" ];\n+\n+      after = [ \"network.target\" ];\n+      wants = [ \"network.target\" ];\n+      wantedBy = [ \"multi-user.target\" ];\n+      restartTriggers = [ config.configData.\"${configFile}\".source ];\n+\n+      serviceConfig = {\n+        ExecStartPre = \"${lib.getExe' coreutils \"mkdir\"} -p data\";\n+        Restart = \"always\";\n+\n+        StateDirectory = \"git-pages\";\n+        WorkingDirectory = \"/var/lib/git-pages\";\n+        BindReadOnlyPaths = [ configOutPath ];\n+\n+        LoadCredential = lib.optional (cfg.secretFile != null) \"secrets.toml:${cfg.secretFile}\";\n+\n+        # systemd service hardening\n+        DynamicUser = true;\n+        ProtectHome = true;\n+        MemoryDenyWriteExecute = true;\n+        PrivateDevices = true;\n+        PrivateTmp = true;\n+        ProtectSystem = \"strict\";\n+        ProtectControlGroups = true;\n+        RestrictSUIDSGID = true;\n+        RestrictRealtime = true;",
+   "id": 3887744553,
+   "line": 81,
+   "original_commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "original_line": 81,
+   "original_position": 81,
+   "original_start_line": null,
+   "path": "pkgs/by-name/gi/git-pages/service.nix",
+   "position": 81,
+   "pull_request_review_id": 5059213541,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-29T21:44:51Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "Nice port! Some comments, and the checklist seems to check out!\n\n- [x] Has a NixOS VM test\n- [x] Has a `meta.maintainers` attribute\n- [x] Systemd-specific definitions are behind `optionalAttrs (options ? systemd)` to promote portability.\n- [x] `_class = \"service\"`\n- [x] Modular services provided through `passthru.services` must override the default of the package option using `finalAttrs.finalPackage`\n- [x] Is the modular services infrastructure sufficient for this service? If one or more features are not covered, comment in https://github.com/NixOS/nixpkgs/issues/428084\n- [x] Has been added to `nixos/modules/misc/documentation/modular-services.nix`\n",
+   "commit_id": "034497dc245f585baa8f0120fda22570ca19cb6e",
+   "id": 5007028979,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-24T11:03:33Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "034497dc245f585baa8f0120fda22570ca19cb6e",
+   "id": 5007465901,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-24T11:49:39Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Good to me after squashing into a single commit :+1:",
+   "commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "id": 5007481901,
+   "state": "APPROVED",
+   "submitted_at": "2026-08-24T11:51:50Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't personally use git-pages the server, but I have no objections.",
+   "commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "id": 5008595387,
+   "state": "APPROVED",
+   "submitted_at": "2026-08-24T13:56:02Z",
+   "user": {
+    "id": 2818072,
+    "login": "dramforever",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Apologies for the late review, something personal got in the way.\r\n\r\nA few remarks, do whatever you want with it. I hope I don't come across as harsh or unnecessarily nitpicky, as I think this generally already looks very nice. I only think the mkdir call (and with it the default storage directory, and the working directory definition) should really be improved, so I am still requesting changes instead of approval with comments.",
+   "commit_id": "ebb3aecdc9e07c8f6b7cbec5a081b4df6c47ea4f",
+   "id": 5059213541,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-08-29T21:44:51Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": []
+}

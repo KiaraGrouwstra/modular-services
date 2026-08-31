@@ -1,0 +1,723 @@
+{
+ "comments": [
+  {
+   "body": "I still kind want a separate by-name pass to collect all the services, rather than doing `passthru.services`, to have a stronger package set vs service set separation (but sharinging the underlying `by-name` directory so the names are forced to be in sync).\r\n\r\nBut ultimately, I'm more keen in seeing all our services things (NixOS, nix-darwin, home-manager, etc.) converted to modular services than I care about these details.",
+   "created_at": "2025-08-23T19:23:32Z",
+   "id": 3217273564,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-23T23:07:37Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@Ericson2314 the current pattern allows for that, as it still has an option for the package.\r\n\r\nBut what is the goal of making the service + package composition a manual operation?\r\nIt makes it easier to have mismatched package version + service definition combinations, so that needs to be counteracted by some real world benefit, or it wouldn't make sense.\r\n",
+   "created_at": "2025-08-27T10:33:44Z",
+   "id": 3227657289,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-27T10:33:44Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/should-we-expose-the-type-for-modular-services/73751/1\n",
+   "created_at": "2025-12-28T18:51:55Z",
+   "id": 3694959593,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-28T18:51:55Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/435092",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "This PR resolves tech debt from the modular services / portable services implementation.\r\n\r\n- Most significantly, this removes the `pkgs` module argument, which can cause conflicts and uncertainty; see the changed README for details.\r\n\r\n- Provide a proper entrypoint (`configure`) to help with service manager integration, separating the boundaries a little better\r\n\r\n\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n## Context\r\n\r\n- https://github.com/NixOS/nixpkgs/issues/428084\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": "2025-08-27T10:21:59Z",
+  "closed_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 3,
+  "created_at": "2025-08-19T20:25:42Z",
+  "draft": false,
+  "id": 3335590382,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "PHP is a general-purpose scripting language geared towards web development.",
+    "id": 6685855770,
+    "name": "6.topic: php"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 435092,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/435092.diff",
+   "merged_at": "2025-08-27T10:21:59Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/435092.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 1,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "Modular services: no `pkgs`",
+  "type": null,
+  "updated_at": "2026-07-23T17:17:24Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 271,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "f6a7685be201a7cce82f267e7f44d631d46441ac",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "This PR resolves tech debt from the modular services / portable services implementation.\r\n\r\n- Most significantly, this removes the `pkgs` module argument, which can cause conflicts and uncertainty; see the changed README for details.\r\n\r\n- Provide a proper entrypoint (`configure`) to help with service manager integration, separating the boundaries a little better\r\n\r\n\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n## Context\r\n\r\n- https://github.com/NixOS/nixpkgs/issues/428084\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 17,
+  "closed_at": "2025-08-27T10:21:59Z",
+  "comments": 3,
+  "commits": 4,
+  "created_at": "2025-08-19T20:25:42Z",
+  "deletions": 79,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/435092.diff",
+  "draft": false,
+  "head": {
+   "label": "roberth:modular-services-no-pkgs",
+   "ref": "modular-services-no-pkgs",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2016-01-17T16:08:57Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "roberth/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/roberth/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 49824545,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/roberth/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "other",
+     "name": "Other",
+     "spdx_id": "NOASSERTION"
+    },
+    "milestones_url": "https://api.github.com/repos/roberth/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 496447,
+     "login": "roberth",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/roberth/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-17T21:41:24Z",
+    "size": 2904048,
+    "stargazers_count": 1,
+    "subscription_url": "https://api.github.com/repos/roberth/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/roberth/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2021-06-15T20:50:35Z",
+    "visibility": "public",
+    "watchers": 1,
+    "watchers_count": 1,
+    "web_commit_signoff_required": false
+   },
+   "sha": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 2757547018,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "PHP is a general-purpose scripting language geared towards web development.",
+    "id": 6685855770,
+    "name": "6.topic: php"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "5bd040e3c316322b4a49b8302a1102f4f9b9ed9d",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2025-08-27T10:21:59Z",
+  "merged_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 435092,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/435092.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 63433,
+    "login": "talyz",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 252042,
+    "login": "drupol",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 705123,
+    "login": "jtojnar",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 1447245,
+    "login": "globin",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 4,
+  "state": "closed",
+  "title": "Modular services: no `pkgs`",
+  "updated_at": "2026-07-23T17:17:24Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#435092",
+ "review_comments": [
+  {
+   "body": "Is there a way to avoid having to list out all the dependencies for the service in the package file?\r\n\r\nI'm thinking of something similar to `callPackage` when doing the `importApply ./service.nix`?",
+   "commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "created_at": "2025-08-23T11:16:49Z",
+   "diff_hunk": "@@ -7,6 +7,8 @@\n   ghostunnel,\n   apple-sdk_12,\n   darwinMinVersionHook,\n+  writeScript,\n+  runtimeShell,\n }:",
+   "id": 2295788705,
+   "line": 12,
+   "original_commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "original_line": 12,
+   "original_position": 6,
+   "original_start_line": 10,
+   "path": "pkgs/by-name/gh/ghostunnel/package.nix",
+   "position": 6,
+   "pull_request_review_id": 3147758675,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 10,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2025-08-23T11:16:49Z",
+   "user": {
+    "id": 9132420,
+    "login": "wolfgangwalther",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes, that should work, except we'll need to use `setFunctionArgs` because these aren't normal functions; it needs that change in `importApply`, or in a new helper.",
+   "commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "created_at": "2025-08-27T10:21:46Z",
+   "diff_hunk": "@@ -7,6 +7,8 @@\n   ghostunnel,\n   apple-sdk_12,\n   darwinMinVersionHook,\n+  writeScript,\n+  runtimeShell,\n }:",
+   "id": 2303510838,
+   "in_reply_to_id": 2295788705,
+   "line": 12,
+   "original_commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "original_line": 12,
+   "original_position": 6,
+   "original_start_line": 10,
+   "path": "pkgs/by-name/gh/ghostunnel/package.nix",
+   "position": 6,
+   "pull_request_review_id": 3159208480,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 10,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2025-08-27T10:21:46Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I have strong doubts that gluing services to packages is a good idea. For context and additional detail see [my argument](https://discourse.nixos.org/t/nix-ngi-report-for-2025q1-2025-01-13-2025-04-15/63859) on establishing a notion of \"application\" that would *have* a \"package as defined by Nix (i.e. files with metadata)\" and a service module, and whatever else. From that point of view, it's hard to go along with this change, as it complicates invocation for what I consider to be the default scenario -- as a user, I don't want to set `package` explicitly every time I construct a modular service. The argument that one can mix Nixpkgs instances is of questionable value, because you can always do that by overriding a `package` from some calling context that has that alternative Nixpkgs around. ",
+   "commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "created_at": "2025-12-28T19:03:28Z",
+   "diff_hunk": "@@ -12,18 +12,44 @@\n   nodes = {\n     server =\n       { pkgs, ... }:\n+      let\n+        # Normally the package services.default attribute combines this, but we\n+        # don't have that, because this is not a production service. Should it be?",
+   "id": 2649873529,
+   "line": 17,
+   "original_commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "original_line": 17,
+   "original_position": 6,
+   "original_start_line": 16,
+   "path": "nixos/tests/modular-service-etc/test.nix",
+   "position": 6,
+   "pull_request_review_id": 3614797111,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 16,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2025-12-28T19:04:29Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> because you can always do that by overriding a package from some calling context that has that alternative Nixpkgs around.\r\n\r\nNot _always_!\r\nWe'd have to accept conditional on version in some modules, but that's not how any of the codebases are typically set up, whether that's Nixpkgs, or third party repos/flakes. Almost all of those assume that they only have to deal with the `package` version that's in tree or pinned in tree.\r\n\r\n> as a user, I don't want to set `package` explicitly every time I construct a modular service.\r\n\r\nWhat is the friction?\r\nFor the user (configuration), they have to identify the service somehow, and `pkgs.foo.services.default` looks fine to me. We could even make that `pkgs.foo.service` if we don't care about \"schema\" uniformity as much.\r\n\r\nIs it friction for the module author? We could reduce indirections and define modules with `finalPackage` and omit the `package` option.\r\nSince we can't guarantee version interoperability for all services, perhaps we should just get rid of this `package` indirection?",
+   "commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "created_at": "2025-12-28T23:11:19Z",
+   "diff_hunk": "@@ -12,18 +12,44 @@\n   nodes = {\n     server =\n       { pkgs, ... }:\n+      let\n+        # Normally the package services.default attribute combines this, but we\n+        # don't have that, because this is not a production service. Should it be?",
+   "id": 2649983525,
+   "in_reply_to_id": 2649873529,
+   "line": 17,
+   "original_commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "original_line": 17,
+   "original_position": 6,
+   "original_start_line": 16,
+   "path": "nixos/tests/modular-service-etc/test.nix",
+   "position": 6,
+   "pull_request_review_id": 3614868612,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 16,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2025-12-28T23:11:19Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "i looked over it all, thought about it, fine with me\r\n\r\ni wonder if package maintainers who aren't interested in modular services will be annoyed by all the additional args to their packages though? :sweat_smile:\r\n\r\noh well... let's ship it :+1:",
+   "commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "id": 3142684019,
+   "state": "APPROVED",
+   "submitted_at": "2025-08-22T00:51:21Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "id": 3144841913,
+   "state": "APPROVED",
+   "submitted_at": "2025-08-22T14:59:58Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "id": 3147758675,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-23T11:16:49Z",
+   "user": {
+    "id": 9132420,
+    "login": "wolfgangwalther",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "id": 3159208480,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-27T10:21:46Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "id": 3614797111,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-28T19:03:28Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "8a7e4f589a52eac93a60f13b4a4a07efc78b9d2b",
+   "id": 3614868612,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-28T23:11:19Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "5bd040e3c316322b4a49b8302a1102f4f9b9ed9d",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/5bd040e3c316322b4a49b8302a1102f4f9b9ed9d",
+   "created_at": "2025-08-27T10:21:59Z",
+   "event": "merged",
+   "id": 19365691983
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-08-27T10:22:00Z",
+   "event": "closed",
+   "id": 19365692007,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

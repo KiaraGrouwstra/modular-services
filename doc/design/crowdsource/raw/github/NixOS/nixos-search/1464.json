@@ -1,0 +1,323 @@
+{
+ "comments": [
+  {
+   "body": "# Relevance benchmark: frontend query vs deployed ES\n\n> Index: `latest-50-nixos-unstable`. metrics: (Success@10, MRR, Recall@10).\n\n## Packages\n\n> 98 queries, k=10.\n\n### Overall\n\n| metric | value |\n| --- | --- |\n| Success@10 | 0.541 |\n| MRR | 0.464 |\n| Recall@10 | 0.505 |\n\n### By category\n\n| category | n | Success@10 | MRR |\n| --- | --- | --- | --- |\n| exact | 16 | 1.000 | 1.000 |\n| intent | 24 | 0.333 | 0.229 |\n| multiterm | 13 | 0.462 | 0.283 |\n| prefix | 22 | 1.000 | 0.879 |\n| typo | 23 | 0.043 | 0.043 |\n\n## Options\n\n> 119 queries, k=10.\n\n### Overall\n\n| metric | value |\n| --- | --- |\n| Success@10 | 0.538 |\n| MRR | 0.287 |\n| Recall@10 | 0.534 |\n\n### By category\n\n| category | n | Success@10 | MRR |\n| --- | --- | --- | --- |\n| dotted | 25 | 0.840 | 0.480 |\n| exact | 18 | 0.833 | 0.650 |\n| intent | 16 | 0.125 | 0.094 |\n| multiterm | 23 | 0.565 | 0.226 |\n| prefix | 19 | 0.632 | 0.192 |\n| typo | 18 | 0.056 | 0.006 |\n\n<details>\n<summary>Per-query results</summary>\n\n| id | track | q | category | success | mrr | top-3 ranked |\n| --- | --- | --- | --- | --- | --- | --- |\n| g001 | pkg | ripgrep | exact | 1 | 1.000 | pkg:ripgrep, pkg:ripgrep-all, pkg:emacsPackages.ripgrep |\n| g002 | pkg | htop | exact | 1 | 1.000 | pkg:htop, pkg:htop-vim, pkg:abtop |\n| g003 | pkg | jq | exact | 1 | 1.000 | pkg:jq, pkg:jqp, pkg:jql |\n| g004 | pkg | tmux | exact | 1 | 1.000 | pkg:tmux, pkg:tmuxp, pkg:tmuxai |\n| g005 | pkg | neovim | exact | 1 | 1.000 | pkg:neovim, pkg:neovim-qt, pkg:neovim-gtk |\n| g006 | pkg | fzf | exact | 1 | 1.000 | pkg:fzf, pkg:fzf-obc, pkg:fzf-make |\n| g007 | pkg | bat | exact | 1 | 1.000 | pkg:bat, pkg:bats, pkg:batik |\n| g008 | opt | nginx | exact | 0 | 0.000 | opt:services.agorakit.nginx, opt:services.akkoma.nginx, opt:services.anuko-time-tracker.nginx |\n| g008 | pkg | nginx | exact | 1 | 1.000 | pkg:nginx, pkg:nginxMainline, pkg:nginxShibboleth |\n| g009 | opt | grafana | exact | 0 | 0.000 | opt:services.grafana.settings, opt:services.grafana.settings.security.secret_key, opt:services.grafana-image-renderer.provisionGrafana |\n| g009 | pkg | grafana | exact | 1 | 1.000 | pkg:grafana, pkg:grafanactl, pkg:grafana-loki |\n| g010 | opt | prometheus | exact | 0 | 0.000 | opt:services.restic.server.prometheus, opt:services.prometheus.webExternalUrl, opt:services.prometheus.package |\n| g010 | pkg | prometheus | exact | 1 | 1.000 | pkg:prometheus, pkg:prometheus-cpp, pkg:prometheus-sachet |\n| g011 | opt | postgresql | exact | 1 | 0.200 | opt:services.part-db.settings.DATABASE_URL, opt:services.postgresqlWalReceiver.receivers.<name>.postgresqlPackage, opt:services.ferretdb.settings.FERRETDB_POSTGRESQL_URL |\n| g011 | pkg | postgresql | exact | 1 | 1.000 | pkg:postgresql, pkg:postgresql_15, pkg:postgresql_16 |\n| g012 | opt | openssh | exact | 1 | 0.333 | opt:services.openssh.package, opt:programs.ssh.package, opt:services.openssh.enable |\n| g012 | pkg | openssh | exact | 1 | 1.000 | pkg:openssh, pkg:openssh_hpn, pkg:opensshTest |\n| g013 | opt | caddy | exact | 1 | 0.333 | opt:services.misskey.reverseProxy.webserver.caddy, opt:services.caddy.package, opt:services.caddy.enable |\n| g013 | pkg | caddy | exact | 1 | 1.000 | pkg:caddy, pkg:vimPlugins.nvim-treesitter-parsers.caddy, pkg:emacsPackages.caddyfile-mode |\n| g014 | opt | gitea | exact | 1 | 0.333 | opt:services.gitea.dump.enable, opt:services.gitea-actions-runner.instances.<name>.settings, opt:services.gitea.enable |\n| g014 | pkg | gitea | exact | 1 | 1.000 | pkg:gitea, pkg:gitea-mcp-server, pkg:gitea-actions-runner |\n| g015 | opt | jellyfin | exact | 1 | 0.500 | opt:services.jellyfin.package, opt:services.jellyfin.enable, opt:services.jellyfin.group |\n| g015 | pkg | jellyfin | exact | 1 | 1.000 | pkg:jellyfin, pkg:jellyfin-web, pkg:jellyfin-tui |\n| g016 | opt | services.openssh.enable | exact | 1 | 1.000 | opt:services.openssh.enable, opt:services.openssh.enableRecommendedAlgorithms, opt:services.sshd.enable |\n| g017 | opt | services.grafana.enable | exact | 1 | 1.000 | opt:services.grafana.enable |\n| g018 | opt | networking.firewall.enable | exact | 1 | 1.000 | opt:networking.firewall.enable |\n| g019 | opt | services.redis.servers | exact | 1 | 1.000 | opt:services.redis.servers, opt:services.redis.servers.<name>.appendFsync, opt:services.redis.servers.<name>.appendOnly |\n| g020 | opt | services.syncthing.enable | exact | 1 | 1.000 | opt:services.syncthing.enable |\n| g021 | opt | services.printing.enable | exact | 1 | 1.000 | opt:services.printing.enable |\n| g022 | opt | services.nginx.virtualHosts | exact | 1 | 1.000 | opt:services.nginx.virtualHosts, opt:services.nginx.virtualHosts.<name>.acmeFallbackHost, opt:services.nginx.virtualHosts.<name>.acmeRoot |\n| g023 | opt | networking.firewall.allowedTCPPorts | exact | 1 | 1.000 | opt:networking.firewall.allowedTCPPorts, opt:services.syncthing.relay.port, opt:services.syncthing.relay.statusPort |\n| g024 | opt | services.nextcloud.hostName | exact | 1 | 1.000 | opt:services.nextcloud.hostName, opt:services.nextcloud.settings.trusted_domains |\n| g025 | opt | networking.networkmanager.logLevel | exact | 1 | 1.000 | opt:networking.networkmanager.logLevel |\n| g026 | opt | postgres | prefix | 0 | 0.000 | opt:services.bitmagnet.settings.postgres, opt:services.maubot.settings.plugin_databases.postgres, opt:services.postgresql.identMap |\n| g026 | pkg | postgres | prefix | 1 | 1.000 | pkg:postgresql, pkg:postgresql_15, pkg:postgresql_16 |\n| g027 | opt | graf | prefix | 1 | 0.111 | opt:services.grafana-image-renderer.provisionGrafana, opt:services.grafana-to-ntfy.enable, opt:services.grafana.declarativePlugins |\n| g027 | pkg | graf | prefix | 1 | 0.500 | pkg:grafx2, pkg:grafana, pkg:grafterm |\n| g028 | opt | prom | prefix | 0 | 0.000 | opt:security.duosec.prompts, opt:services.prometheus.webExternalUrl, opt:services.tabbyapi.settings.logging.log_prompt |\n| g028 | pkg | prom | prefix | 1 | 1.000 | pkg:prometheus, pkg:prom2json, pkg:promptfoo |\n| g029 | pkg | ripgr | prefix | 1 | 1.000 | pkg:ripgrep, pkg:ripgrep-all, pkg:emacsPackages.ripgrep |\n| g030 | opt | jelly | prefix | 1 | 0.333 | opt:services.jellyfin.package, opt:services.jellyfin.group, opt:services.jellyfin.enable |\n| g030 | pkg | jelly | prefix | 1 | 0.333 | pkg:jelly, pkg:jellyfish, pkg:jellyfin |\n| g031 | opt | syncth | prefix | 1 | 0.111 | opt:services.syncthing.group, opt:services.syncthing.package, opt:services.syncthing.relay.enable |\n| g031 | pkg | syncth | prefix | 1 | 1.000 | pkg:syncthing, pkg:syncthingtray, pkg:syncthing-relay |\n| g032 | opt | wireg | prefix | 0 | 0.000 | opt:networking.wireguard.interfaces.<name>.fwMark, opt:networking.wireguard.interfaces, opt:networking.wireguard.interfaces.<name>.mtu |\n| g033 | opt | nftab | prefix | 1 | 0.100 | opt:services.firewalld.settings.NftablesCounters, opt:nix.firewall.extraNftablesRules, opt:services.firewalld.settings.NftablesFlowtable |\n| g034 | opt | hypr | prefix | 0 | 0.000 | opt:services.xserver.windowManager.hypr.enable, opt:services.hypridle.enable, opt:programs.hyprlock.enable |\n| g035 | opt | ngin | prefix | 0 | 0.000 | opt:services.davis.nginx, opt:services.nginx.package, opt:services.mediawiki.nginx.hostName |\n| g035 | pkg | ngin | prefix | 1 | 1.000 | pkg:nginx, pkg:nginxStable, pkg:nginx-sso |\n| g036 | pkg | mariad | prefix | 1 | 1.000 | pkg:mariadb, pkg:mariadb_114, pkg:mariadb_118 |\n| g037 | opt | fail2 | prefix | 0 | 0.000 | opt:services.prometheus.exporters.fail2ban.fail2banSocket, opt:services.fail2ban.package, opt:services.prometheus.exporters.fail2ban.group |\n| g037 | pkg | fail2 | prefix | 1 | 1.000 | pkg:fail2ban, pkg:reaction, pkg:prometheus-fail2ban-exporter |\n| g038 | opt | tailsc | prefix | 1 | 0.111 | opt:services.prometheus.exporters.tailscale.environmentFile, opt:services.tailscaleAuth.enable, opt:services.nginx.tailscaleAuth.enable |\n| g038 | pkg | tailsc | prefix | 1 | 1.000 | pkg:tailscale, pkg:tailscalesd, pkg:tailscale-gui |\n| g039 | opt | nextcl | prefix | 1 | 0.200 | opt:services.nextcloud.occ, opt:services.nextcloud.settings.overwriteprotocol, opt:services.nextcloud.home |\n| g039 | pkg | nextcl | prefix | 1 | 1.000 | pkg:nextcloud32, pkg:nextcloud34, pkg:nextcloud33 |\n| g040 | opt | traef | prefix | 1 | 0.333 | opt:services.traefik.package, opt:services.traefik.dynamicConfigOptions, opt:services.traefik.enable |\n| g040 | pkg | traef | prefix | 1 | 1.000 | pkg:traefik, pkg:traefik-certs-dumper, pkg:authelia |\n| g041 | opt | cadd | prefix | 1 | 0.500 | opt:services.caddy.package, opt:services.caddy.enable, opt:services.caddy.dataDir |\n| g041 | pkg | cadd | prefix | 1 | 1.000 | pkg:caddy, pkg:emacsPackages.caddyfile-mode, pkg:rPackages.cadd_v1_6_hg19 |\n| g042 | opt | transm | prefix | 0 | 0.000 | opt:services.transmission.package, opt:services.transmission.group, opt:services.transmission.settings.message-level |\n| g042 | pkg | transm | prefix | 1 | 1.000 | pkg:transmission_4, pkg:transmission_4-qt, pkg:transmission_4-mac |\n| g043 | opt | unbou | prefix | 1 | 0.143 | opt:services.unbound.group, opt:services.unbound.settings, opt:services.unbound.localControlSocketPath |\n| g043 | pkg | unbou | prefix | 1 | 1.000 | pkg:unbound, pkg:unbound-full, pkg:unbound-with-systemd |\n| g044 | opt | dnsma | prefix | 1 | 1.000 | opt:services.dnsmasq.enable, opt:services.dnsmasq.package, opt:services.prometheus.exporters.dnsmasq.dnsmasqListenAddress |\n| g044 | pkg | dnsma | prefix | 1 | 0.500 | pkg:dnsmap, pkg:dnsmasq, pkg:prometheus-dnsmasq-exporter |\n| g045 | pkg | neovi | prefix | 1 | 1.000 | pkg:neovim, pkg:neovide, pkg:neovim-qt |\n| g046 | pkg | thunder | prefix | 1 | 1.000 | pkg:thunderbird, pkg:thunderbolt, pkg:thunderbird-140 |\n| g047 | pkg | chrom | prefix | 1 | 0.500 | pkg:chroma, pkg:chromium, pkg:chromaprint |\n| g048 | pkg | borgb | prefix | 1 | 1.000 | pkg:borgbackup |\n| g049 | opt | mosqui | prefix | 1 | 0.500 | opt:services.mosquitto.package, opt:services.mosquitto.enable, opt:services.mosquitto.settings |\n| g049 | pkg | mosqui | prefix | 1 | 1.000 | pkg:mosquitto, pkg:haskellPackages.mosquitto-hs, pkg:chickenPackages_5.chickenEggs.mosquitto |\n| g050 | opt | elastic | prefix | 1 | 0.200 | opt:services.mastodon.elasticsearch.host, opt:services.mastodon.elasticsearch.port, opt:services.mastodon.elasticsearch.prefix |\n| g050 | pkg | elastic | prefix | 1 | 0.500 | pkg:elastic, pkg:elasticsearch, pkg:elasticsearch7 |\n| g051 | opt | ngnix | typo | 0 | 0.000 |  |\n| g051 | pkg | ngnix | typo | 0 | 0.000 |  |\n| g052 | opt | postgrsql | typo | 0 | 0.000 |  |\n| g052 | pkg | postgrsql | typo | 0 | 0.000 |  |\n| g053 | opt | promethues | typo | 0 | 0.000 |  |\n| g053 | pkg | promethues | typo | 0 | 0.000 |  |\n| g054 | opt | grafan | typo | 1 | 0.111 | opt:services.grafana-image-renderer.provisionGrafana, opt:services.grafana-to-ntfy.enable, opt:services.grafana.declarativePlugins |\n| g054 | pkg | grafan | typo | 1 | 1.000 | pkg:grafana, pkg:grafanactl, pkg:grafana-loki |\n| g055 | pkg | firefx | typo | 0 | 0.000 |  |\n| g056 | pkg | ripgrap | typo | 0 | 0.000 |  |\n| g057 | opt | jellifin | typo | 0 | 0.000 |  |\n| g057 | pkg | jellifin | typo | 0 | 0.000 |  |\n| g058 | opt | sytemd-boot | typo | 0 | 0.000 |  |\n| g059 | opt | wireguad | typo | 0 | 0.000 |  |\n| g060 | opt | samaba | typo | 0 | 0.000 |  |\n| g060 | pkg | samaba | typo | 0 | 0.000 |  |\n| g061 | pkg | redsi | typo | 0 | 0.000 |  |\n| g062 | opt | openssg | typo | 0 | 0.000 |  |\n| g062 | pkg | openssg | typo | 0 | 0.000 |  |\n| g063 | pkg | kubctl | typo | 0 | 0.000 |  |\n| g064 | pkg | terrafrom | typo | 0 | 0.000 |  |\n| g065 | pkg | chromiun | typo | 0 | 0.000 |  |\n| g066 | pkg | thunderbrid | typo | 0 | 0.000 |  |\n| g067 | opt | dcoker | typo | 0 | 0.000 |  |\n| g067 | pkg | dcoker | typo | 0 | 0.000 |  |\n| g068 | opt | nextcoud | typo | 0 | 0.000 |  |\n| g068 | pkg | nextcoud | typo | 0 | 0.000 |  |\n| g069 | opt | gitae | typo | 0 | 0.000 |  |\n| g069 | pkg | gitae | typo | 0 | 0.000 |  |\n| g070 | opt | vaultwardn | typo | 0 | 0.000 |  |\n| g070 | pkg | vaultwardn | typo | 0 | 0.000 |  |\n| g071 | opt | tailscle | typo | 0 | 0.000 |  |\n| g071 | pkg | tailscle | typo | 0 | 0.000 |  |\n| g072 | opt | fial2ban | typo | 0 | 0.000 |  |\n| g072 | pkg | fial2ban | typo | 0 | 0.000 |  |\n| g073 | opt | mosquito | typo | 0 | 0.000 |  |\n| g073 | pkg | mosquito | typo | 0 | 0.000 | pkg:haskellPackages.c-mosquitto |\n| g074 | opt | syncthign | typo | 0 | 0.000 |  |\n| g074 | pkg | syncthign | typo | 0 | 0.000 |  |\n| g075 | opt | cady | typo | 0 | 0.000 |  |\n| g075 | pkg | cady | typo | 0 | 0.000 |  |\n| g076 | opt | services.nginx | dotted | 0 | 0.000 | opt:services.nginx.additionalModules, opt:services.nginx.appendConfig, opt:services.nginx.appendHttpConfig |\n| g077 | opt | virtualisation.docker | dotted | 1 | 0.100 | opt:virtualisation.docker.autoPrune.allVolumes.enable, opt:virtualisation.docker.autoPrune.allVolumes.flags, opt:virtualisation.docker.autoPrune.dates |\n| g078 | opt | services.openssh | dotted | 1 | 0.167 | opt:services.openssh.allowSFTP, opt:services.openssh.authorizedKeysCommand, opt:services.openssh.authorizedKeysCommandUser |\n| g079 | opt | services.postgresql | dotted | 1 | 0.250 | opt:services.postgresql.authentication, opt:services.postgresql.checkConfig, opt:services.postgresql.dataDir |\n| g080 | opt | services.grafana | dotted | 1 | 0.333 | opt:services.grafana.dataDir, opt:services.grafana.declarativePlugins, opt:services.grafana.enable |\n| g081 | opt | services.prometheus | dotted | 0 | 0.000 | opt:services.prometheus.alertmanager-ntfy.enable, opt:services.prometheus.alertmanager-ntfy.extraConfigFiles, opt:services.prometheus.alertmanager-ntfy.package |\n| g082 | opt | networking.firewall | dotted | 1 | 0.100 | opt:networking.firewall.allowPing, opt:networking.firewall.allowedTCPPortRanges, opt:networking.firewall.allowedTCPPorts |\n| g083 | opt | networking.wireguard | dotted | 1 | 1.000 | opt:networking.wireguard.enable, opt:networking.wireguard.interfaces, opt:networking.wireguard.interfaces.<name>.allowedIPsAsRoutes |\n| g084 | opt | services.redis | dotted | 1 | 0.500 | opt:services.redis.package, opt:services.redis.servers, opt:services.redis.servers.<name>.appendFsync |\n| g085 | opt | services.caddy | dotted | 1 | 0.167 | opt:services.caddy.acmeCA, opt:services.caddy.adapter, opt:services.caddy.configFile |\n| g086 | opt | boot.loader.systemd-boot | dotted | 1 | 0.125 | opt:boot.loader.systemd-boot.bootCounting.enable, opt:boot.loader.systemd-boot.bootCounting.tries, opt:boot.loader.systemd-boot.configurationLimit |\n| g087 | opt | programs.hyprland | dotted | 1 | 1.000 | opt:programs.hyprland.enable, opt:programs.hyprland.package, opt:programs.hyprland.portalPackage |\n| g088 | opt | services.jellyfin | dotted | 1 | 0.250 | opt:services.jellyfin.cacheDir, opt:services.jellyfin.configDir, opt:services.jellyfin.dataDir |\n| g089 | opt | services.syncthing | dotted | 1 | 0.167 | opt:services.syncthing.all_proxy, opt:services.syncthing.cert, opt:services.syncthing.configDir |\n| g090 | opt | hardware.bluetooth | dotted | 1 | 0.500 | opt:hardware.bluetooth.disabledPlugins, opt:hardware.bluetooth.enable, opt:hardware.bluetooth.hsphfpd.enable |\n| g091 | opt | services.samba | dotted | 1 | 1.000 | opt:services.samba.enable, opt:services.samba.nmbd.enable, opt:services.samba.nmbd.extraArgs |\n| g092 | opt | services.tailscale | dotted | 0 | 0.000 | opt:services.tailscale.authKeyFile, opt:services.tailscale.authKeyParameters, opt:services.tailscale.authKeyParameters.baseURL |\n| g093 | opt | services.restic | dotted | 1 | 1.000 | opt:services.restic.backups, opt:services.restic.backups.<name>.backupCleanupCommand, opt:services.restic.backups.<name>.backupPrepareCommand |\n| g094 | opt | services.openssh.ports | dotted | 1 | 1.000 | opt:services.openssh.ports |\n| g095 | opt | services.nginx.enable | dotted | 1 | 1.000 | opt:services.nginx.enable, opt:services.nginx.enableReload, opt:services.nginx.enableQuicBPF |\n| g096 | opt | virtualisation.docker.enable | dotted | 1 | 1.000 | opt:virtualisation.docker.enable, opt:virtualisation.docker.enableNvidia, opt:virtualisation.docker.enableOnBoot |\n| g097 | opt | services.grafana.settings | dotted | 1 | 1.000 | opt:services.grafana.settings, opt:services.grafana.settings.analytics.check_for_plugin_updates, opt:services.grafana.settings.analytics.check_for_updates |\n| g098 | opt | services.postgresql.dataDir | dotted | 1 | 1.000 | opt:services.postgresql.dataDir |\n| g099 | opt | services.mysql | dotted | 1 | 0.333 | opt:services.mysql.configFile, opt:services.mysql.dataDir, opt:services.mysql.enable |\n| g100 | opt | services.fail2ban | dotted | 0 | 0.000 | opt:services.fail2ban.banaction, opt:services.fail2ban.banaction-allports, opt:services.fail2ban.bantime |\n| g101 | opt | docker container | multiterm | 1 | 0.250 | opt:virtualisation.oci-containers.containers, opt:virtualisation.docker.enableNvidia, opt:services.komodo-periphery.dockerHost |\n| g101 | pkg | docker container | multiterm | 0 | 0.000 | pkg:docker-slim, pkg:python314Packages.dockerpty, pkg:python313Packages.dockerpty |\n| g102 | opt | ssh daemon | multiterm | 0 | 0.000 | opt:services.openssh.ports, opt:services.openssh.generateHostKeys, opt:services.openssh.allowSFTP |\n| g102 | pkg | ssh daemon | multiterm | 1 | 0.100 | pkg:ssh-agent-switcher, pkg:haskellPackages.sshtun, pkg:pueue |\n| g103 | opt | home assistant | multiterm | 1 | 0.200 | opt:services.home-assistant.package, opt:services.home-assistant-matter-hub.enable, opt:services.home-assistant-matter-hub.settings.homeAssistantUrl |\n| g103 | pkg | home assistant | multiterm | 0 | 0.000 | pkg:home-assistant-cli, pkg:home-assistant-custom-components.sun2, pkg:home-assistant-custom-components.spook |\n| g104 | opt | matrix synapse | multiterm | 1 | 0.143 | opt:services.matrix-synapse.log, opt:services.matrix-synapse.configureRedisLocally, opt:services.matrix-synapse.dataDir |\n| g104 | pkg | matrix synapse | multiterm | 0 | 0.000 | pkg:matrix-synapse-plugins.matrix-synapse-shared-secret-auth, pkg:synadm, pkg:matrix-synapse-plugins.synapse-http-antispam |\n| g105 | pkg | docker compose | multiterm | 0 | 0.000 | pkg:compose2nix, pkg:gnomeExtensions.docker, pkg:docker-compose-language-service |\n| g106 | opt | vault warden | multiterm | 1 | 0.143 | opt:services.vaultwarden.backupDir, opt:services.vaultwarden.config, opt:services.vaultwarden.configureNginx |\n| g106 | pkg | vault warden | multiterm | 1 | 1.000 | pkg:vaultwarden, pkg:vaultwarden-mysql, pkg:vaultwarden-sqlite |\n| g107 | opt | next cloud | multiterm | 0 | 0.000 | opt:services.nextcloud-spreed-signaling.backends, opt:services.nextcloud-spreed-signaling.backends.<name>.secretFile, opt:services.nextcloud-spreed-signaling.backends.<name>.urls |\n| g107 | pkg | next cloud | multiterm | 1 | 0.333 | pkg:nextflow, pkg:nextcloud-client, pkg:nextcloud32 |\n| g108 | pkg | paperless ngx | multiterm | 1 | 0.250 | pkg:python314Packages.pypaperless, pkg:python313Packages.pypaperless, pkg:runningx |\n| g109 | opt | network manager | multiterm | 0 | 0.000 | opt:services.wg-netmanager.enable, opt:networking.modemmanager.enable, opt:networking.modemmanager.fccUnlockScripts |\n| g110 | opt | virtual hosts | multiterm | 0 | 0.000 | opt:services.h2o.hosts, opt:services.caddy.virtualHosts.<name>.serverAliases, opt:services.httpd.virtualHosts.<name>.serverAliases |\n| g111 | opt | allowed tcp ports | multiterm | 1 | 0.500 | opt:nix.firewall.allowedTCPPorts, opt:networking.firewall.allowedTCPPorts, opt:networking.firewall.interfaces.<name>.allowedTCPPorts |\n| g112 | opt | allowed udp ports | multiterm | 1 | 0.500 | opt:nix.firewall.allowedUDPPorts, opt:networking.firewall.allowedUDPPorts, opt:networking.firewall.interfaces.<name>.allowedUDPPorts |\n| g113 | opt | enable on boot | multiterm | 0 | 0.000 | opt:boot.loader.generationsDir.enable, opt:boot.loader.limine.secureBoot.enable, opt:boot.plymouth.enable |\n| g114 | opt | allow ping | multiterm | 1 | 1.000 | opt:networking.firewall.allowPing, opt:networking.firewall.pingLimit, opt:services.avahi.nssmdnsFull |\n| g115 | opt | host keys | multiterm | 1 | 0.125 | opt:services.openssh.generateHostKeys, opt:services.autossh-ng.sessions.<name>.knownHostsFile, opt:boot.initrd.network.ssh.hostKeys |\n| g116 | opt | listen addresses | multiterm | 0 | 0.000 | opt:services.agorakit.nginx.listen, opt:services.akkoma.nginx.listen, opt:services.anuko-time-tracker.nginx.listen |\n| g117 | opt | enable nvidia | multiterm | 1 | 0.143 | opt:hardware.nvidia.prime.sync.enable, opt:hardware.nvidia.prime.reverseSync.enable, opt:hardware.nvidia.nvidiaSettings |\n| g118 | opt | object storage | multiterm | 1 | 1.000 | opt:services.minio.enable, opt:services.nextcloud.config.objectstore.s3.enable, opt:services.rustfs.enable |\n| g118 | pkg | object storage | multiterm | 1 | 1.000 | pkg:minio, pkg:python314Packages.swift, pkg:python313Packages.swift |\n| g119 | opt | secret management | multiterm | 0 | 0.000 | opt:services.snmpd.configText, opt:services.pdfding.secretKeyFile, opt:services.maubot.settings.homeservers |\n| g119 | pkg | secret management | multiterm | 0 | 0.000 | pkg:teller, pkg:argocd-vault-plugin, pkg:fnox |\n| g120 | opt | network firewall | multiterm | 1 | 0.500 | opt:virtualisation.libvirtd.firewallBackend, opt:networking.firewall.enable, opt:networking.firewall.package |\n| g121 | opt | wireguard vpn | multiterm | 1 | 0.200 | opt:services.dsnet.enable, opt:networking.networkmanager.ensureProfiles.profiles.<name>.connection.type, opt:boot.initrd.network.openvpn.configuration |\n| g122 | opt | container runtime | multiterm | 0 | 0.000 | opt:virtualisation.containerd.enable, opt:services.kubernetes.kubelet.containerRuntimeEndpoint, opt:virtualisation.cri-o.enable |\n| g122 | pkg | container runtime | multiterm | 0 | 0.000 | pkg:conmon, pkg:youki, pkg:cri-o |\n| g123 | opt | mesh vpn | multiterm | 0 | 0.000 | opt:boot.initrd.network.openvpn.configuration, opt:boot.initrd.network.openvpn.enable, opt:networking.wlanInterfaces.<name>.meshID |\n| g123 | pkg | mesh vpn | multiterm | 1 | 1.000 | pkg:tailscale, pkg:easytier, pkg:cunicu |\n| g124 | opt | password manager | multiterm | 0 | 0.000 | opt:boot.initrd.luks.devices.<name>.fallbackToPassword, opt:boot.initrd.luks.devices.<name>.fido2.passwordLess, opt:boot.initrd.systemd.managerEnvironment |\n| g124 | pkg | password manager | multiterm | 0 | 0.000 | pkg:pypass, pkg:enpass, pkg:keepass |\n| g125 | opt | boot loader | multiterm | 1 | 0.500 | opt:boot.loader.refind.enable, opt:boot.loader.grub.enable, opt:boot.loader.generationsDir.copyKernels |\n| g126 | opt | web server | intent | 0 | 0.000 | opt:services.amule.settings.WebServer.Port, opt:services.amule.settings.WebServer.Enabled, opt:services.firezone.server.web.enable |\n| g126 | pkg | web server | intent | 0 | 0.000 | pkg:webalizer, pkg:serverpod_cli, pkg:haskellPackages.webby |\n| g127 | opt | reverse proxy | intent | 0 | 0.000 | opt:services.oauth2-proxy.nginx.proxy, opt:services.goatcounter.proxy, opt:services.oauth2-proxy.reverseProxy |\n| g127 | pkg | reverse proxy | intent | 1 | 0.333 | pkg:authentik-outposts.proxy, pkg:frp, pkg:nginx |\n| g128 | pkg | version control system | intent | 1 | 1.000 | pkg:git, pkg:vcsh, pkg:gitweb |\n| g129 | pkg | interactive process viewer | intent | 1 | 1.000 | pkg:htop, pkg:htop-vim, pkg:nvitop |\n| g130 | opt | virtual private network | intent | 0 | 0.000 | opt:containers.<name>.privateNetwork, opt:networking.interfaces.<name>.virtual, opt:networking.interfaces.<name>.virtualOwner |\n| g130 | pkg | virtual private network | intent | 0 | 0.000 | pkg:vpnc, pkg:tinc, pkg:tinc_pre |\n| g131 | opt | self hosted password manager | intent | 0 | 0.000 | opt:services.pinchflat.selfhosted, opt:services.selfoss.database.password, opt:boot.initrd.luks.devices.<name>.fallbackToPassword |\n| g131 | pkg | self hosted password manager | intent | 0 | 0.000 | pkg:makeself, pkg:modemmanager, pkg:virt-manager |\n| g132 | opt | media streaming server | intent | 0 | 0.000 | opt:services.airsonic.enable, opt:services.etebase-server.settings.global.media_root, opt:services.mediatomb.serverName |\n| g132 | pkg | media streaming server | intent | 0 | 0.000 | pkg:serviio, pkg:ezstream, pkg:vlc |\n| g133 | pkg | backup tool | intent | 0 | 0.000 | pkg:btrbk, pkg:deja-dup, pkg:bacula |\n| g134 | opt | file synchronization | intent | 0 | 0.000 | opt:services.devpi-server.secretFile, opt:boot.initrd.clevis.devices.<name>.secretFile, opt:boot.initrd.extraFiles |\n| g134 | pkg | file synchronization | intent | 1 | 1.000 | pkg:syncthing, pkg:syncthing-relay, pkg:freefilesync |\n| g135 | opt | relational database server | intent | 0 | 0.000 | opt:services.c2fmzq-server.settings.database, opt:services.dendrite.settings.key_server.database.connection_string, opt:services.dendrite.settings.room_server.database.connection_string |\n| g135 | pkg | relational database server | intent | 0 | 0.000 | pkg:xorg-server, pkg:mapserver, pkg:libvncserver |\n| g136 | opt | in memory key value store | intent | 0 | 0.000 | opt:services.cachix-watch-store.signingKeyFile, opt:boot.initrd.luks.devices.<name>.gpgCard.publicKey, opt:boot.initrd.luks.devices.<name>.keyFile |\n| g136 | pkg | in memory key value store | intent | 0 | 0.000 | pkg:linux, pkg:keychain, pkg:minizip |\n| g137 | opt | secret storage | intent | 0 | 0.000 | opt:services.athens.storage.s3.secret, opt:services.authelia.instances.<name>.secrets.sessionSecretFile, opt:services.send.environmentFile |\n| g137 | pkg | secret storage | intent | 0 | 0.000 | pkg:himitsu, pkg:netboxPlugins.netbox-secrets, pkg:libsecret |\n| g138 | opt | s3 compatible object storage | intent | 0 | 0.000 | opt:services.garage.enable, opt:services.nextcloud.config.objectstore.s3.enable, opt:services.athens.storage.s3.awsContainerCredentialsRelativeURI |\n| g138 | pkg | s3 compatible object storage | intent | 0 | 0.000 | pkg:python314Packages.minio, pkg:python313Packages.minio, pkg:s3fs |\n| g139 | opt | metrics monitoring stack | intent | 0 | 0.000 | opt:openstack.zfs.datasets, opt:openstack.zfs.datasets.<name>.mount, opt:openstack.zfs.datasets.<name>.properties |\n| g139 | pkg | metrics monitoring stack | intent | 0 | 0.000 | pkg:stack, pkg:stacks, pkg:perlPackages.DevelStackTrace |\n| g140 | opt | document management | intent | 0 | 0.000 | opt:services.moonraker.allowSystemControl, opt:documentation.dev.enable, opt:documentation.doc.enable |\n| g140 | pkg | document management | intent | 0 | 0.000 | pkg:papra, pkg:lasuite-drive, pkg:strictdoc |\n| g141 | opt | printing support | intent | 1 | 1.000 | opt:services.printing.enable, opt:boot.initrd.luks.fido2Support, opt:boot.initrd.luks.gpgSupport |\n| g141 | pkg | printing support | intent | 0 | 0.000 | pkg:pantheon.elementary-print-shim, pkg:p910nd, pkg:zprint |\n| g142 | opt | wireless bluetooth support | intent | 0 | 0.000 | opt:services.matterjs-server.bluetoothSupport, opt:boot.initrd.luks.fido2Support, opt:boot.initrd.luks.gpgSupport |\n| g143 | opt | caching dns resolver | intent | 0 | 0.000 | opt:security.acme.certs.<name>.dnsResolver, opt:security.acme.defaults.dnsResolver, opt:services.netbird.clients.<name>.dns-resolver.address |\n| g143 | pkg | caching dns resolver | intent | 1 | 0.500 | pkg:haskellPackages.dnscache, pkg:unbound, pkg:unbound-full |\n| g144 | pkg | text editor | intent | 0 | 0.000 | pkg:python314Packages.editor, pkg:python313Packages.editor, pkg:textadept |\n| g145 | pkg | graphical web browser | intent | 0 | 0.000 | pkg:dillo, pkg:gitweb, pkg:noweb |\n| g146 | pkg | desktop email client | intent | 0 | 0.000 | pkg:hey-mail, pkg:rdesktop, pkg:ddclient |\n| g147 | pkg | video player | intent | 1 | 0.500 | pkg:cine, pkg:mpv, pkg:minitube |\n| g148 | pkg | raster image editor | intent | 0 | 0.000 | pkg:imagej, pkg:SDL_image, pkg:vcdimager |\n| g149 | opt | bittorrent client | intent | 1 | 0.500 | opt:services.qbittorrent.enable, opt:services.transmission.enable, opt:programs.nxdumpclient.enable |\n| g149 | pkg | bittorrent client | intent | 1 | 0.167 | pkg:xd, pkg:rqbit, pkg:stig |\n| g150 | pkg | terminal multiplexer | intent | 1 | 1.000 | pkg:tmux, pkg:mtm, pkg:byobu |\n| g151 | pkg | continuwuity | exact | 1 | 1.000 | pkg:matrix-continuwuity |\n\n</details>\n\n<!-- Sticky Pull Request Comment -->",
+   "created_at": "2026-07-26T16:36:13Z",
+   "id": 5084389343,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-26T17:55:19Z",
+   "user": {
+    "id": 41898282,
+    "login": "github-actions[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixos-search/pull/1464",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "At nixpkgs, I have proposed (NixOS/nixpkgs#540863) splitting each modular service into two halves: a portable package service at `pkgs/**/service.nix`, reachable as `pkgs.<pkg>.services.<svc>`, and environment-specific implementations thereof (so far: a NixOS system-level service) at `nixos/modules/system/service/modular/<pkg>/<svc>/system.nix`.\r\nBoth are enumerated in a registry keyed `<environment>.<pkg>.<service>` and exposed as `lib.nixos.modularServices` (all environments) and `config.modularServices` (the `system` slice).\r\n\r\nThe current change then helps validate that the proposed method may help make discoverable what services would be supported on what environments (NixOS/nixpkgs#545204).\r\n\r\n<img width=\"964\" height=\"1520\" alt=\"image\" src=\"https://github.com/user-attachments/assets/ddc6d872-9914-4497-9315-6b3fb89c8c9b\" />\r\n\r\n<img width=\"964\" height=\"1520\" alt=\"image\" src=\"https://github.com/user-attachments/assets/2868548b-3643-45d1-adae-f919b67c59df\" />\r\n\r\n(Note that, while in the screenshots the maintainers listed for the package service vs its NixOS system implementation are identical, these are separate - one does not need to maintain one just because they volunteered to maintain the other.)\r\n\r\nDisclaimer: I used a coding agent in the creation of this patch.\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 1,
+  "created_at": "2026-07-26T15:59:37Z",
+  "draft": true,
+  "id": 4981354310,
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 1464,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixos-search/pull/1464.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixos-search/pull/1464.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixos-search",
+  "state": "open",
+  "state_reason": null,
+  "title": "feat(flake-info): index the modular-service base/environment split",
+  "type": null,
+  "updated_at": "2026-07-26T20:54:49Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 1390,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:main",
+   "ref": "main",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2020-03-28T04:16:53Z",
+    "default_branch": "main",
+    "description": "Search NixOS packages and options",
+    "disabled": false,
+    "fork": false,
+    "forks": 180,
+    "forks_count": 180,
+    "full_name": "NixOS/nixos-search",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixos-search/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "https://search.nixos.org",
+    "id": 250712577,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixos-search/issues{/number}",
+    "language": "Elm",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixos-search/milestones{/number}",
+    "name": "nixos-search",
+    "open_issues": 187,
+    "open_issues_count": 187,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixos-search/pulls{/number}",
+    "pushed_at": "2026-08-30T12:54:55Z",
+    "size": 2505,
+    "stargazers_count": 594,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixos-search/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixos-search/tags",
+    "topics": [
+     "elasticsearch",
+     "elm",
+     "search"
+    ],
+    "updated_at": "2026-08-30T12:55:02Z",
+    "visibility": "public",
+    "watchers": 594,
+    "watchers_count": 594,
+    "web_commit_signoff_required": false
+   },
+   "sha": "6cfdebb5f0ff44c71bfeccf4d1986de07b82a6e4",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "At nixpkgs, I have proposed (NixOS/nixpkgs#540863) splitting each modular service into two halves: a portable package service at `pkgs/**/service.nix`, reachable as `pkgs.<pkg>.services.<svc>`, and environment-specific implementations thereof (so far: a NixOS system-level service) at `nixos/modules/system/service/modular/<pkg>/<svc>/system.nix`.\r\nBoth are enumerated in a registry keyed `<environment>.<pkg>.<service>` and exposed as `lib.nixos.modularServices` (all environments) and `config.modularServices` (the `system` slice).\r\n\r\nThe current change then helps validate that the proposed method may help make discoverable what services would be supported on what environments (NixOS/nixpkgs#545204).\r\n\r\n<img width=\"964\" height=\"1520\" alt=\"image\" src=\"https://github.com/user-attachments/assets/ddc6d872-9914-4497-9315-6b3fb89c8c9b\" />\r\n\r\n<img width=\"964\" height=\"1520\" alt=\"image\" src=\"https://github.com/user-attachments/assets/2868548b-3643-45d1-adae-f919b67c59df\" />\r\n\r\n(Note that, while in the screenshots the maintainers listed for the package service vs its NixOS system implementation are identical, these are separate - one does not need to maintain one just because they volunteered to maintain the other.)\r\n\r\nDisclaimer: I used a coding agent in the creation of this patch.\r\n",
+  "changed_files": 17,
+  "closed_at": null,
+  "comments": 1,
+  "commits": 4,
+  "created_at": "2026-07-26T15:59:37Z",
+  "deletions": 296,
+  "diff_url": "https://github.com/NixOS/nixos-search/pull/1464.diff",
+  "draft": true,
+  "head": {
+   "label": "KiaraGrouwstra:modular-service-split-support",
+   "ref": "modular-service-split-support",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2025-05-31T18:03:11Z",
+    "default_branch": "main",
+    "description": "Search NixOS packages and options",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/nixos-search",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "https://search.nixos.org",
+    "id": 993877724,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/milestones{/number}",
+    "name": "nixos-search",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/pulls{/number}",
+    "pushed_at": "2026-08-30T14:56:47Z",
+    "size": 2610,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/tags",
+    "topics": [],
+    "updated_at": "2025-05-31T18:03:11Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "eaa99076a07767456e393208ba4d105b27331209",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4136859787,
+  "labels": [],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 1464,
+  "patch_url": "https://github.com/NixOS/nixos-search/pull/1464.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 50398876,
+    "login": "hsjobeki",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 1,
+  "state": "open",
+  "title": "feat(flake-info): index the modular-service base/environment split",
+  "updated_at": "2026-07-26T20:54:49Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixos-search#1464",
+ "review_comments": [
+  {
+   "body": "i dunno if this is supposed to match anything, but should this semantically not be closer to nixpkgs package services?",
+   "commit_id": "a26600cb46ead38bf40bfecb64735cc738a90f67",
+   "created_at": "2026-07-26T20:22:05Z",
+   "diff_hunk": "@@ -124,22 +130,39 @@ fn resolve_repology_counts(file: &Option<PathBuf>) -> HashMap<String, u64> {\n     }\n }\n \n-pub fn get_nixpkgs_package_services(nixpkgs: &Source) -> Result<HashMap<String, Vec<String>>> {\n+/// Evaluate `attribute` in the flake-info nix script and parse it as a map from\n+/// package attribute name to `T`.\n+fn get_package_map<T: serde::de::DeserializeOwned>(\n+    nixpkgs: &Source,\n+    attribute: &str,\n+) -> Result<HashMap<String, T>> {\n     let mut command = super::nix_eval_command(&[\"eval\", \"--json\", \"--no-write-lock-file\"]);\n     command.add_args([\"--override-flake\", \"nixpkgs\", &nixpkgs.to_flake_ref()].iter());\n-    command.add_arg(\"nixos-package-services\");\n+    command.add_arg(attribute);\n \n     let cow = command\n         .run()\n-        .with_context(|| \"Failed to gather modular service mapping for packages\")?;\n+        .with_context(|| format!(\"Failed to gather {} for packages\", attribute))?;\n \n     let output = &*cow.stdout_string_lossy();\n     let de = &mut serde_json::Deserializer::from_str(output);\n-    let map: HashMap<String, Vec<String>> = serde_path_to_error::deserialize(de)\n-        .with_context(|| \"Could not parse package-services map\")?;\n+    let map: HashMap<String, T> = serde_path_to_error::deserialize(de)\n+        .with_context(|| format!(\"Could not parse {}\", attribute))?;\n     Ok(map)\n }\n \n+pub fn get_nixpkgs_package_services(nixpkgs: &Source) -> Result<HashMap<String, Vec<String>>> {\n+    get_package_map(nixpkgs, \"nixos-package-services\")",
+   "id": 3653353866,
+   "line": null,
+   "original_commit_id": "a26600cb46ead38bf40bfecb64735cc738a90f67",
+   "original_line": 155,
+   "original_position": 67,
+   "original_start_line": null,
+   "path": "flake-info/src/commands/nixpkgs_info.rs",
+   "position": 1,
+   "pull_request_review_id": 4782522489,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-26T20:22:05Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "a26600cb46ead38bf40bfecb64735cc738a90f67",
+   "id": 4782522489,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-26T20:22:05Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixos-search-prs"
+ ],
+ "timeline": []
+}

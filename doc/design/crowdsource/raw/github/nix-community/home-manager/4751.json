@@ -1,0 +1,376 @@
+{
+ "comments": [
+  {
+   "body": "Relevant RFC: https://github.com/NixOS/rfcs/pull/163",
+   "created_at": "2023-12-09T10:58:47Z",
+   "id": 1848371087,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-12-09T10:58:47Z",
+   "user": {
+    "id": 1187078,
+    "login": "zeorin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Actually this would be much more simpler to implement in home-manager as it already do uses something like that in fish module. NixOS part is much more complex and will require much more attention that's why I previously didn't linked the exact RFC.",
+   "created_at": "2023-12-09T13:20:33Z",
+   "id": 1848408782,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-12-09T13:20:33Z",
+   "user": {
+    "id": 26714676,
+    "login": "Animeshz",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Personally, it annoys me that home-manager and NixOS use a different schema for systemd unit files. I figured this might be an opportunity to align with what NixOS will/might be doing.",
+   "created_at": "2023-12-13T09:49:41Z",
+   "id": 1853590532,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 3,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2023-12-13T09:49:41Z",
+   "user": {
+    "id": 1187078,
+    "login": "zeorin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "<p>\n  Thank you for your contribution!\n  I marked this issue as stale due to inactivity.\n  Please be considerate of people watching this issue and receiving notifications before commenting 'I have this issue too'.\n  We welcome additional information that will help resolve this issue.\n  <b>Please read the relevant sections below before commenting.</b>\n</p>\n\n<details>\n<summary><b>If you are the original author of the issue</b></summary>\n<p>\n\n* If this is resolved, please consider closing it so that the maintainers know not to focus on this.\n* If this might still be an issue, but you are not interested in promoting its resolution, please consider closing it while encouraging others to take over and reopen an issue if they care enough.\n* If you know how to solve the issue, please consider submitting a Pull Request that addresses this issue.\n\n</p>\n</details>\n\n<details>\n<summary><b>If you are <i>not</i> the original author of the issue</b></summary>\n<p>\n\n* If you are also experiencing this issue, please add details of your situation to help with the debugging process.\n* If you know how to solve the issue, please consider submitting a Pull Request that addresses this issue.\n\n</p>\n</details>\n\n<details>\n<summary><b>Memorandum on closing issues</b></summary>\n<p>\n  Don't be afraid to manually close an issue, even if it holds valuable information.\n  Closed issues stay in the system for people to search, read, cross-reference, or even reopen – nothing is lost!\n  Closing obsolete issues is an important way to help maintainers focus their time and effort.\n</p>\n</details>\n",
+   "created_at": "2024-03-14T20:31:14Z",
+   "id": 1998417362,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-03-14T20:31:14Z",
+   "user": {
+    "id": 26384082,
+    "login": "stale[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  },
+  {
+   "body": "Supporting non-systemd might help when it comes to installing a home-manager profile in a OCI container (`pkgs.dockerTools`).",
+   "created_at": "2024-04-14T09:28:27Z",
+   "id": 2053981740,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2024-04-14T09:28:27Z",
+   "user": {
+    "id": 252042,
+    "login": "drupol",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@drupol For containers, you may be able to get away with using something like <https://github.com/gdraheim/docker-systemctl-replacement> and setting `systemd.user.systemctlPath`. I've never tried it though.\r\n\r\nIt seems to add a Python dependency, though. Perhaps there is a similar, more lightweight equivalent somewhere, though. If not, perhaps it's not too tricky to implement the bare minimum.",
+   "created_at": "2024-04-14T19:16:33Z",
+   "id": 2054158924,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-04-14T19:17:45Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "<p>\n  Thank you for your contribution!\n  I marked this issue as stale due to inactivity.\n  Please be considerate of people watching this issue and receiving notifications before commenting 'I have this issue too'.\n  We welcome additional information that will help resolve this issue.\n  <b>Please read the relevant sections below before commenting.</b>\n</p>\n\n<details>\n<summary><b>If you are the original author of the issue</b></summary>\n<p>\n\n* If this is resolved, please consider closing it so that the maintainers know not to focus on this.\n* If this might still be an issue, but you are not interested in promoting its resolution, please consider closing it while encouraging others to take over and reopen an issue if they care enough.\n* If you know how to solve the issue, please consider submitting a Pull Request that addresses this issue.\n\n</p>\n</details>\n\n<details>\n<summary><b>If you are <i>not</i> the original author of the issue</b></summary>\n<p>\n\n* If you are also experiencing this issue, please add details of your situation to help with the debugging process.\n* If you know how to solve the issue, please consider submitting a Pull Request that addresses this issue.\n\n</p>\n</details>\n\n<details>\n<summary><b>Memorandum on closing issues</b></summary>\n<p>\n  Don't be afraid to manually close an issue, even if it holds valuable information.\n  Closed issues stay in the system for people to search, read, cross-reference, or even reopen – nothing is lost!\n  Closing obsolete issues is an important way to help maintainers focus their time and effort.\n</p>\n</details>\n",
+   "created_at": "2024-07-18T03:43:26Z",
+   "id": 2235258480,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-07-18T03:43:26Z",
+   "user": {
+    "id": 26384082,
+    "login": "stale[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  },
+  {
+   "body": "On NixOS side, the linked RFC has been closed in favor of an experimental [Modular services](https://github.com/NixOS/nixpkgs/issues/428084) approach.",
+   "created_at": "2025-08-27T03:17:00Z",
+   "id": 3226602270,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-08-27T03:17:00Z",
+   "user": {
+    "id": 67634026,
+    "login": "folliehiyuki",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "On that note, are there any plans to support modular services within home-manager?",
+   "created_at": "2026-04-21T17:23:08Z",
+   "id": 4290512441,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-21T17:23:08Z",
+   "user": {
+    "id": 90054389,
+    "login": "justDeeevin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> On that note, are there any plans to support modular services within home-manager?\n\nAlready supported: https://github.com/nix-community/home-manager/pull/9215",
+   "created_at": "2026-05-14T21:20:44Z",
+   "id": 4454835762,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-14T21:20:44Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That was merged after I made my comment. Thanks for letting me know! So cool :>",
+   "created_at": "2026-05-16T15:50:59Z",
+   "id": 4467325025,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-16T15:50:59Z",
+   "user": {
+    "id": 90054389,
+    "login": "justDeeevin",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-community/home-manager/issues/4751",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": {
+   "id": 20448408,
+   "login": "berbiche",
+   "site_admin": false,
+   "type": "User"
+  },
+  "assignees": [
+   {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 16734772,
+    "login": "sumnerevans",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 20448408,
+    "login": "berbiche",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "body": "### Description\r\n\r\nMany of major projects such as [Mic92/sops-nix](https://github.com/Mic92/sops-nix) and even some of home-manager's module within `service.*` namespace depend on `systemd.*` options for populating services at the time of activation.\r\n\r\nI've been stuck many times due to this as I don't have systemd as my service manager (runit instead) yet want to use home-manager as a portable and reproducible solution for managing most of packages in the system.\r\n\r\nFor nixos, it might seem counter-intuitive, even tho there's a rfc going on for it, but for home-manager a portable service layer would actually serve really great. Projects like [numtide/devshell](https://github.com/numtide/devshell) have used procfiles and honcho based approach for services after long discussions.\r\n\r\nNot proposing a breaking change, there could be a conversion layer for a portable service interface like there is on fish config from shell options.",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 11,
+  "created_at": "2023-12-08T16:26:21Z",
+  "id": 2032969914,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "3D690B",
+    "default": false,
+    "description": "",
+    "id": 2649370186,
+    "name": "feature request"
+   },
+   {
+    "color": "bfd4f2",
+    "default": false,
+    "description": "",
+    "id": 2956537956,
+    "name": "status: stale"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 4751,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 3,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 3
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Support for non-systemd service managers.",
+  "type": null,
+  "updated_at": "2026-05-16T15:51:00Z",
+  "user": {
+   "id": 26714676,
+   "login": "Animeshz",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "nix-community/home-manager#4751",
+ "sources": [
+  "home-manager-issues"
+ ],
+ "timeline": []
+}

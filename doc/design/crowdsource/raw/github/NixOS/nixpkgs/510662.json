@@ -1,0 +1,1286 @@
+{
+ "comments": [
+  {
+   "body": "Any opinions on how to test this? I currently have roughly the same NixOS module running in production as I already modified the `mautrix-telegram` module, and now ported it to NixOS, since it finally officially got released.",
+   "created_at": "2026-04-16T17:47:40Z",
+   "id": 4262242825,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T17:47:40Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Reference: https://github.com/bartoostveen/infra/blob/master/modules/infra/mautrix-telegram-go.nix",
+   "created_at": "2026-04-16T17:50:44Z",
+   "id": 4262259798,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T17:50:44Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "1. I think we should keep the python bridge around for a while, the new bridge removes the old style relaybot, making the migration not so frictionless\r\n2. we've always wanted a generic nixos module that works for all of the go bridges, this can be the chance pursuing that.",
+   "created_at": "2026-04-16T18:14:02Z",
+   "id": 4262391360,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-16T18:14:49Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Idea: make it a modular service? https://github.com/NixOS/nixpkgs/blob/c8f5b96f5a6222a573cb0c61b74d47ffd868d7b6/nixos/doc/manual/development/modular-services.md",
+   "created_at": "2026-04-16T18:16:52Z",
+   "id": 4262410902,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T18:16:52Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That might be a good idea. All bridges share the same config now, except for the `network` section and of course defaults like the bot name.",
+   "created_at": "2026-04-16T18:21:03Z",
+   "id": 4262437684,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T18:21:03Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> That might be a good idea. All bridges share the same config now, except for the `network` section and of course defaults like the bot name.\r\n\r\nWe don't even need to provide that default in the module, the go code handles merging user config with the default automatically it seems.",
+   "created_at": "2026-04-16T18:22:30Z",
+   "id": 4262446291,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T18:22:30Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yeah, I implied that. I am not at all comfortable with modular services though, so this might not be a very good idea for me to pursue yet. As for keeping the Python bridge around: I am not sure if that is a good idea, since it is not maintained anymore since around september last year, and won't be maintained anymore if I'm correct.",
+   "created_at": "2026-04-16T18:28:30Z",
+   "id": 4262482401,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T18:28:30Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> As for keeping the Python bridge around: I am not sure if that is a good idea, since it is not maintained anymore since around september last year, and won't be maintained anymore if I'm correct.\r\n\r\nYes, it would never see any updates. But the migration is a non-trivial effort, I don't want to force the users to update NOW, or stuck on an outdated version of nixpkgs.",
+   "created_at": "2026-04-16T18:54:27Z",
+   "id": 4262642429,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T18:54:27Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Alright. Should I for now just add a new `mautrix-telegram-go` module then? And then a `mautrix-telegram-go` package that goes with it? Then we can work on migrating all go bridges to a unified modular service or module separately.",
+   "created_at": "2026-04-16T18:58:30Z",
+   "id": 4262665471,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T18:58:30Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I believe there were some talks about a generic module before, search github issues/PRs first maybe?",
+   "created_at": "2026-04-16T18:59:46Z",
+   "id": 4262672820,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T18:59:46Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "There is #338249 but nothing concrete as far as I can see at a glance.",
+   "created_at": "2026-04-16T20:06:51Z",
+   "id": 4263058845,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-16T20:06:51Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Ok I got a draft for a module that works for both the python and go version of the bridge, commit by commit: https://github.com/NickCao/nixpkgs/commits/mautrix-telegram-go-module/",
+   "created_at": "2026-04-17T00:05:54Z",
+   "id": 4264259070,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-17T00:05:54Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`v0.2606.0` is out :)",
+   "created_at": "2026-06-16T20:42:03Z",
+   "id": 4723457762,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-16T20:42:03Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm sorry for letting this become stale, I'll incorporate the feedback :)",
+   "created_at": "2026-06-20T21:24:41Z",
+   "id": 4760029440,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-20T21:24:41Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Rebased upon master :)",
+   "created_at": "2026-06-20T21:25:04Z",
+   "id": 4760030282,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-20T21:25:04Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Will test this all later (as I do not currently have a spare home server to do so, will need some tests as well), but I incorporated everyone's feedback, meaning I'd like some early feedback on the course I am taking. I am not sure if going with a mautrix-telegram**-go** package is the way to go, but it got suggested by @NickCao so I am going with this. As said before, pretty rough quick refactor, but pushed anyway since I am not sure if this is desirable.",
+   "created_at": "2026-06-20T22:06:30Z",
+   "id": 4760121186,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-20T22:06:30Z",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "may use a rebase over merge conflicts",
+   "created_at": "2026-07-23T18:41:37Z",
+   "id": 5062076492,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-23T18:41:37Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Hey, [v26.08](https://github.com/mautrix/telegram/releases/tag/v0.2608.0) has been released. :)",
+   "created_at": "2026-08-16T21:03:44Z",
+   "id": 5309658718,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 2,
+    "total_count": 2
+   },
+   "updated_at": "2026-08-16T21:03:44Z",
+   "user": {
+    "id": 67663319,
+    "login": "SchweGELBin",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/510662",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Changelog: https://github.com/mautrix/telegram/releases/tag/v0.2604.0\r\nRelease announcement: https://mau.fi/blog/2026-04-mautrix-release/\r\n\r\n- **mautrix-telegram: 0.15.3 -> 0.2604.0**\r\n- **mautrix-telegram: add bartoostveen to meta.maintainers**\r\n- **nixos/mautrix-telegram: migrate to bridgev2**\r\n- **nixos/mautrix-telegram: document removal of Python-based bridge**\r\n\r\nNot sure if I did the right thing, as this is a large breaking change. It seems like there is not a good migration path though, so this might be the only way.\r\nThe docs are based on Mautrix-Whatsapp docs. ~~Still marked as WIP since I want to get this tested properly first.~~\r\n\r\nPackage tests still do not pass in the nix container, so `doCheck` is still set to `false`.\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [x] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [x] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 18,
+  "created_at": "2026-04-16T17:37:55Z",
+  "draft": false,
+  "id": 4277494542,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Darwin.",
+    "id": 1955058051,
+    "name": "10.rebuild-darwin: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 510662,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/510662.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/510662.patch"
+  },
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "mautrix-telegram: migrate to Go-based bridgev2 bridge",
+  "type": null,
+  "updated_at": "2026-08-17T21:10:01Z",
+  "user": {
+   "id": 50515369,
+   "login": "bartoostveen",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 268,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "33622481caad454c519bfe7d8a5a3255cbb42a0d",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Changelog: https://github.com/mautrix/telegram/releases/tag/v0.2604.0\r\nRelease announcement: https://mau.fi/blog/2026-04-mautrix-release/\r\n\r\n- **mautrix-telegram: 0.15.3 -> 0.2604.0**\r\n- **mautrix-telegram: add bartoostveen to meta.maintainers**\r\n- **nixos/mautrix-telegram: migrate to bridgev2**\r\n- **nixos/mautrix-telegram: document removal of Python-based bridge**\r\n\r\nNot sure if I did the right thing, as this is a large breaking change. It seems like there is not a good migration path though, so this might be the only way.\r\nThe docs are based on Mautrix-Whatsapp docs. ~~Still marked as WIP since I want to get this tested properly first.~~\r\n\r\nPackage tests still do not pass in the nix container, so `doCheck` is still set to `false`.\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [x] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [x] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 6,
+  "closed_at": null,
+  "comments": 18,
+  "commits": 4,
+  "created_at": "2026-04-16T17:37:55Z",
+  "deletions": 184,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/510662.diff",
+  "draft": false,
+  "head": {
+   "label": "bartoostveen:mautrix-telegram-go",
+   "ref": "mautrix-telegram-go",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2025-04-12T07:37:23Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "bartoostveen/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/bartoostveen/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 965002658,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/bartoostveen/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/bartoostveen/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 50515369,
+     "login": "bartoostveen",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/bartoostveen/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-28T15:21:54Z",
+    "size": 3289646,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/bartoostveen/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/bartoostveen/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-07-12T15:30:06Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "user": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3540903826,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Darwin.",
+    "id": 1955058051,
+    "name": "10.rebuild-darwin: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 510662,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/510662.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 1449319,
+    "login": "pacien",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 7677321,
+    "login": "nyanloutre",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 7677567,
+    "login": "Vskilet",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 8,
+  "state": "open",
+  "title": "mautrix-telegram: migrate to Go-based bridgev2 bridge",
+  "updated_at": "2026-08-17T21:10:01Z",
+  "user": {
+   "id": 50515369,
+   "login": "bartoostveen",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#510662",
+ "review_comments": [
+  {
+   "body": "Hey, it would be great to have consistency between the mautrix packages, meaning that all of them use the same version scheme.\r\nI'm open for alternatives, but they should effect every mautrix package.\r\n```suggestion\r\nbuildGoModule rec {\r\n  pname = \"mautrix-telegram\";\r\n  version = \"26.04\";\r\n  tag = \"v0.2604.0\";\r\n\r\n  src = fetchFromGitHub {\r\n    owner = \"mautrix\";\r\n    repo = \"telegram\";\r\n    inherit tag;\r\n```",
+   "commit_id": "45065358bc0ded5f2c4ce14ac11a07cd14ebaabf",
+   "created_at": "2026-04-17T11:42:27Z",
+   "diff_hunk": "@@ -1,93 +1,43 @@\n {\n   lib,\n-  fetchPypi,\n+  stdenv,\n+  buildGoModule,\n   fetchFromGitHub,\n-  python3,\n-\n-  withE2BE ? true,\n+  olm,\n+  withGoOlm ? false,\n }:\n \n-let\n-  tulir-telethon = python3.pkgs.telethon.overrideAttrs (\n-    finalAttrs: previousAttrs: {\n-      version = \"1.99.0a6\";\n-      pname = \"tulir_telethon\";\n-      src = fetchFromGitHub {\n-        owner = \"tulir\";\n-        repo = \"Telethon\";\n-        tag = \"v${finalAttrs.version}\";\n-        hash = \"sha256-ulnA+xKbZDOTzXYmF9oBWNBNhgxSiF+mKx1ijoCyo/w=\";\n-      };\n-      dontUsePytestCheck = true;\n-    }\n-  );\n-in\n-python3.pkgs.buildPythonApplication (finalAttrs: {\n+buildGoModule (finalAttrs: {\n   pname = \"mautrix-telegram\";\n-  version = \"0.15.3\";\n-  pyproject = true;\n+  version = \"0.2604.0\";\n \n   src = fetchFromGitHub {\n     owner = \"mautrix\";\n     repo = \"telegram\";\n     tag = \"v${finalAttrs.version}\";",
+   "id": 3099975519,
+   "line": null,
+   "original_commit_id": "dd527d3a1e6515397a7e11b903cdce8c85b0e968",
+   "original_line": 17,
+   "original_position": 39,
+   "original_start_line": 10,
+   "path": "pkgs/by-name/ma/mautrix-telegram/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4128440081,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-04-17T11:43:53Z",
+   "user": {
+    "id": 67663319,
+    "login": "SchweGELBin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "And it would be great to have consistent attributes to the mautrix packages:\r\n\r\n```suggestion\r\n  withGoolm ? false,\r\n```",
+   "commit_id": "45065358bc0ded5f2c4ce14ac11a07cd14ebaabf",
+   "created_at": "2026-04-17T11:57:27Z",
+   "diff_hunk": "@@ -1,93 +1,43 @@\n {\n   lib,\n-  fetchPypi,\n+  stdenv,\n+  buildGoModule,\n   fetchFromGitHub,\n-  python3,\n-\n-  withE2BE ? true,\n+  olm,\n+  withGoOlm ? false,",
+   "id": 3100057106,
+   "line": null,
+   "original_commit_id": "dd527d3a1e6515397a7e11b903cdce8c85b0e968",
+   "original_line": 7,
+   "original_position": 11,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ma/mautrix-telegram/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4128526990,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-17T11:58:10Z",
+   "user": {
+    "id": 67663319,
+    "login": "SchweGELBin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think we should add, like, other mautrix modules, registration file generation\n```bash\nif [ ! -f '${registrationFile}' ]; then\n          ${cfg.package}/bin/mautrix-signal \\\n            --generate-registration \\\n            --config='${settingsFile}' \\\n            --registration='${registrationFile}'\n        fi\n        chmod 640 ${registrationFile}\n```",
+   "commit_id": "d7f2ad63403d59cd26447215921b512169441c62",
+   "created_at": "2026-05-19T08:16:24Z",
+   "diff_hunk": "@@ -177,83 +123,50 @@ in\n         pkgs.ffmpeg-headless\n       ];\n \n-      # mautrix-telegram tries to generate a dotfile in the home directory of\n-      # the running user if using a postgresql database:\n-      #\n-      #  File \"python3.10/site-packages/asyncpg/connect_utils.py\", line 257, in _dot_postgre>\n-      #    return (pathlib.Path.home() / '.postgresql' / filename).resolve()\n-      #  File \"python3.10/pathlib.py\", line 1000, in home\n-      #    return cls(\"~\").expanduser()\n-      #  File \"python3.10/pathlib.py\", line 1440, in expanduser\n-      #    raise RuntimeError(\"Could not determine home directory.\")\n-      # RuntimeError: Could not determine home directory.\n-      environment.HOME = dataDir;\n-\n+      # The settings file needs to be writable at runtime, otherwise the bridge will not start\n       preStart = ''\n-        # substitute the settings file by environment variables\n-        # in this case read from EnvironmentFile\n-        test -f '${settingsFile}' && rm -f '${settingsFile}'\n-        old_umask=$(umask)\n-        umask 0177\n-        ${pkgs.envsubst}/bin/envsubst \\\n-          -o '${settingsFile}' \\\n-          -i '${settingsFileUnsubstituted}'\n-        umask $old_umask\n-\n-        # generate the appservice's registration file if absent\n-        if [ ! -f '${registrationFile}' ]; then\n-          ${cfg.package}/bin/mautrix-telegram \\\n-            --generate-registration \\\n-            --config='${settingsFile}' \\\n-            --registration='${registrationFile}'\n-        fi\n-\n-        old_umask=$(umask)\n-        umask 0177\n-        # 1. Overwrite registration tokens in config\n-        #    is set, set it as the login shared secret value for the configured\n-        #    homeserver domain.\n-        ${pkgs.yq}/bin/yq -s '.[0].appservice.as_token = .[1].as_token\n-          | .[0].appservice.hs_token = .[1].hs_token\n-          | .[0]' \\\n-          '${settingsFile}' '${registrationFile}' > '${settingsFile}.tmp'\n-        mv '${settingsFile}.tmp' '${settingsFile}'\n-\n-        umask $old_umask\n-      ''\n-      + lib.optionalString (cfg.package ? alembic) ''\n-        # run automatic database init and migration scripts\n-        ${cfg.package.alembic}/bin/alembic -x config='${settingsFile}' upgrade head\n+        cp ${settingsFile} ${runtimeSettingsFile}\n+        chmod 660 ${runtimeSettingsFile}",
+   "id": 3264703421,
+   "line": null,
+   "original_commit_id": "dd527d3a1e6515397a7e11b903cdce8c85b0e968",
+   "original_line": 129,
+   "original_position": 273,
+   "original_start_line": null,
+   "path": "nixos/modules/services/matrix/mautrix-telegram.nix",
+   "position": 1,
+   "pull_request_review_id": 4317039101,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-19T08:16:29Z",
+   "user": {
+    "id": 42416805,
+    "login": "hatch01",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "doesn't generate a new line and causes syntax errors in the resulting shell file",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "created_at": "2026-07-18T07:20:51Z",
+   "diff_hunk": "@@ -177,83 +178,81 @@ in\n         pkgs.ffmpeg-headless\n       ];\n \n-      # mautrix-telegram tries to generate a dotfile in the home directory of\n-      # the running user if using a postgresql database:\n-      #\n-      #  File \"python3.10/site-packages/asyncpg/connect_utils.py\", line 257, in _dot_postgre>\n-      #    return (pathlib.Path.home() / '.postgresql' / filename).resolve()\n-      #  File \"python3.10/pathlib.py\", line 1000, in home\n-      #    return cls(\"~\").expanduser()\n-      #  File \"python3.10/pathlib.py\", line 1440, in expanduser\n-      #    raise RuntimeError(\"Could not determine home directory.\")\n-      # RuntimeError: Could not determine home directory.\n-      environment.HOME = dataDir;\n-\n+      # The settings file needs to be writable at runtime, otherwise the bridge will not start\n       preStart = ''\n-        # substitute the settings file by environment variables\n-        # in this case read from EnvironmentFile\n-        test -f '${settingsFile}' && rm -f '${settingsFile}'\n         old_umask=$(umask)\n         umask 0177\n-        ${pkgs.envsubst}/bin/envsubst \\\n-          -o '${settingsFile}' \\\n-          -i '${settingsFileUnsubstituted}'\n-        umask $old_umask\n-\n+      ''\n+      +\n+        # Only substitute environment variables directly if we are using the\n+        # Python version, otherwise the Go version will load these itself\n+        (optionalString isPythonVersion ''\n+          # substitute the settings file by environment variables\n+          # in this case read from EnvironmentFile\n+          test -f '${settingsFile}' && rm -f '${settingsFile}'\n+          ${getExe pkgs.envsubst} \\\n+            -o '${runtimeSettingsFile}' \\\n+            -i '${settingsFile}'\n+        '')\n+      + (optionalString (!isPythonVersion) \"cp ${settingsFile} ${runtimeSettingsFile}\")\n+      + ''\n         # generate the appservice's registration file if absent",
+   "id": 3607880858,
+   "line": 199,
+   "original_commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "original_line": 199,
+   "original_position": 339,
+   "original_start_line": 198,
+   "path": "nixos/modules/services/matrix/mautrix-telegram.nix",
+   "position": 339,
+   "pull_request_review_id": 4728007446,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": 198,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-23T19:02:48Z",
+   "user": {
+    "id": 52157081,
+    "login": "VlaDexa",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Why are you removing envsubst? We need it for example for ENCRYPTION_PICKLE_KEY:\r\n\r\n```nix\r\nservices.mautrix-telegram = {\r\n  settings = {\r\n    encryption = {\r\n      pickle_key = \"$MAUTRIX_TELEGRAM_ENCRYPTION_PICKLE_KEY\";\r\n      ...\r\n    };\r\n    ...\r\n  };\r\n  ...\r\n};\r\n```\r\n\r\nMaybe do preStart like in mautrix-whatsapp (already go version): https://github.com/NixOS/nixpkgs/blob/eb14681ee6e3e73a7c51564d512fc814d45e3059/nixos/modules/services/matrix/mautrix-whatsapp.nix#L200-L232",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "created_at": "2026-08-09T18:27:28Z",
+   "diff_hunk": "@@ -177,83 +178,81 @@ in\n         pkgs.ffmpeg-headless\n       ];\n \n-      # mautrix-telegram tries to generate a dotfile in the home directory of\n-      # the running user if using a postgresql database:\n-      #\n-      #  File \"python3.10/site-packages/asyncpg/connect_utils.py\", line 257, in _dot_postgre>\n-      #    return (pathlib.Path.home() / '.postgresql' / filename).resolve()\n-      #  File \"python3.10/pathlib.py\", line 1000, in home\n-      #    return cls(\"~\").expanduser()\n-      #  File \"python3.10/pathlib.py\", line 1440, in expanduser\n-      #    raise RuntimeError(\"Could not determine home directory.\")\n-      # RuntimeError: Could not determine home directory.\n-      environment.HOME = dataDir;\n-\n+      # The settings file needs to be writable at runtime, otherwise the bridge will not start\n       preStart = ''\n-        # substitute the settings file by environment variables\n-        # in this case read from EnvironmentFile\n-        test -f '${settingsFile}' && rm -f '${settingsFile}'\n         old_umask=$(umask)\n         umask 0177\n-        ${pkgs.envsubst}/bin/envsubst \\\n-          -o '${settingsFile}' \\\n-          -i '${settingsFileUnsubstituted}'\n-        umask $old_umask\n-\n+      ''\n+      +\n+        # Only substitute environment variables directly if we are using the\n+        # Python version, otherwise the Go version will load these itself\n+        (optionalString isPythonVersion ''\n+          # substitute the settings file by environment variables\n+          # in this case read from EnvironmentFile\n+          test -f '${settingsFile}' && rm -f '${settingsFile}'\n+          ${getExe pkgs.envsubst} \\\n+            -o '${runtimeSettingsFile}' \\\n+            -i '${settingsFile}'\n+        '')\n+      + (optionalString (!isPythonVersion) \"cp ${settingsFile} ${runtimeSettingsFile}\")\n+      + ''",
+   "id": 3744795481,
+   "line": 198,
+   "original_commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "original_line": 198,
+   "original_position": 338,
+   "original_start_line": 185,
+   "path": "nixos/modules/services/matrix/mautrix-telegram.nix",
+   "position": 338,
+   "pull_request_review_id": 4892165976,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 185,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-08-09T18:44:53Z",
+   "user": {
+    "id": 11363539,
+    "login": "renesat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes, as I understand you change EnvironmentFile, but it's a bit confusing if different mautrix bridges have a different interface. This may be useful, but then you need to change all the modules",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "created_at": "2026-08-09T18:31:50Z",
+   "diff_hunk": "@@ -177,83 +178,81 @@ in\n         pkgs.ffmpeg-headless\n       ];\n \n-      # mautrix-telegram tries to generate a dotfile in the home directory of\n-      # the running user if using a postgresql database:\n-      #\n-      #  File \"python3.10/site-packages/asyncpg/connect_utils.py\", line 257, in _dot_postgre>\n-      #    return (pathlib.Path.home() / '.postgresql' / filename).resolve()\n-      #  File \"python3.10/pathlib.py\", line 1000, in home\n-      #    return cls(\"~\").expanduser()\n-      #  File \"python3.10/pathlib.py\", line 1440, in expanduser\n-      #    raise RuntimeError(\"Could not determine home directory.\")\n-      # RuntimeError: Could not determine home directory.\n-      environment.HOME = dataDir;\n-\n+      # The settings file needs to be writable at runtime, otherwise the bridge will not start\n       preStart = ''\n-        # substitute the settings file by environment variables\n-        # in this case read from EnvironmentFile\n-        test -f '${settingsFile}' && rm -f '${settingsFile}'\n         old_umask=$(umask)\n         umask 0177\n-        ${pkgs.envsubst}/bin/envsubst \\\n-          -o '${settingsFile}' \\\n-          -i '${settingsFileUnsubstituted}'\n-        umask $old_umask\n-\n+      ''\n+      +\n+        # Only substitute environment variables directly if we are using the\n+        # Python version, otherwise the Go version will load these itself\n+        (optionalString isPythonVersion ''\n+          # substitute the settings file by environment variables\n+          # in this case read from EnvironmentFile\n+          test -f '${settingsFile}' && rm -f '${settingsFile}'\n+          ${getExe pkgs.envsubst} \\\n+            -o '${runtimeSettingsFile}' \\\n+            -i '${settingsFile}'\n+        '')\n+      + (optionalString (!isPythonVersion) \"cp ${settingsFile} ${runtimeSettingsFile}\")\n+      + ''",
+   "id": 3744807016,
+   "in_reply_to_id": 3744795481,
+   "line": 198,
+   "original_commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "original_line": 198,
+   "original_position": 338,
+   "original_start_line": 185,
+   "path": "nixos/modules/services/matrix/mautrix-telegram.nix",
+   "position": 338,
+   "pull_request_review_id": 4892183755,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 185,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-08-09T18:31:50Z",
+   "user": {
+    "id": 11363539,
+    "login": "renesat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Here you are trying to remove the file from the Nix store :)\nI think you forgot to rename it to 'runtimeSettingsFile'.\n\n```suggestion\n          test -f '${runtimeSettingsFile}' && rm -f '${runtimeSettingsFile}'\n```",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "created_at": "2026-08-09T18:38:49Z",
+   "diff_hunk": "@@ -177,83 +178,81 @@ in\n         pkgs.ffmpeg-headless\n       ];\n \n-      # mautrix-telegram tries to generate a dotfile in the home directory of\n-      # the running user if using a postgresql database:\n-      #\n-      #  File \"python3.10/site-packages/asyncpg/connect_utils.py\", line 257, in _dot_postgre>\n-      #    return (pathlib.Path.home() / '.postgresql' / filename).resolve()\n-      #  File \"python3.10/pathlib.py\", line 1000, in home\n-      #    return cls(\"~\").expanduser()\n-      #  File \"python3.10/pathlib.py\", line 1440, in expanduser\n-      #    raise RuntimeError(\"Could not determine home directory.\")\n-      # RuntimeError: Could not determine home directory.\n-      environment.HOME = dataDir;\n-\n+      # The settings file needs to be writable at runtime, otherwise the bridge will not start\n       preStart = ''\n-        # substitute the settings file by environment variables\n-        # in this case read from EnvironmentFile\n-        test -f '${settingsFile}' && rm -f '${settingsFile}'\n         old_umask=$(umask)\n         umask 0177\n-        ${pkgs.envsubst}/bin/envsubst \\\n-          -o '${settingsFile}' \\\n-          -i '${settingsFileUnsubstituted}'\n-        umask $old_umask\n-\n+      ''\n+      +\n+        # Only substitute environment variables directly if we are using the\n+        # Python version, otherwise the Go version will load these itself\n+        (optionalString isPythonVersion ''\n+          # substitute the settings file by environment variables\n+          # in this case read from EnvironmentFile\n+          test -f '${settingsFile}' && rm -f '${settingsFile}'",
+   "id": 3744832005,
+   "line": 192,
+   "original_commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "original_line": 192,
+   "original_position": 332,
+   "original_start_line": null,
+   "path": "nixos/modules/services/matrix/mautrix-telegram.nix",
+   "position": 332,
+   "pull_request_review_id": 4892221792,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-09T18:39:10Z",
+   "user": {
+    "id": 11363539,
+    "login": "renesat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n    \"main.Tag=${finalAttrs.tag}\"\r\n```\r\n\r\nNeed to use tag version, otherwise an error occurs:\r\n\r\n```\r\npanic: invalid semver: 26.07\r\n\r\ngoroutine 1 [running]:\r\ngo.mau.fi/util/progver.semverToCalver({0x2441c71, 0x5})\r\n\tgo.mau.fi/util@v0.9.11/progver/progver.go:110 +0x185\r\ngo.mau.fi/util/progver.ProgramVersion.Init({{0x221a929, 0x10}, {0x2272feb, 0x23}, {0x2201880, 0x5}, 0x1, {0x0, 0x0}, {0x2441c70, ...}, ...}, ...)\r\n\tgo.mau.fi/util@v0.9.11/progver/progver.go:64 +0x18a\r\nmaunium.net/go/mautrix/bridgev2/matrix/mxmain.(*BridgeMain).InitVersion(0x393e380, {0x2441c70?, 0x0?}, {0x2205b2f?, 0x1bab690?}, {0x2205b2f?, 0x0?})\r\n\tmaunium.net/go/mautrix@v0.29.0/bridgev2/matrix/mxmain/main.go:451 +0x170\r\nmain.main()\r\n\tgo.mau.fi/mautrix-telegram/cmd/mautrix-telegram/main.go:94 +0xdc\r\n```\r\n\r\nSame on mautrix-whatsapp: https://github.com/NixOS/nixpkgs/blob/ee48b147c18c7de1e6ec97dc74792be42724bed1/pkgs/by-name/ma/mautrix-whatsapp/package.nix#L36\r\n",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "created_at": "2026-08-09T18:54:01Z",
+   "diff_hunk": "@@ -0,0 +1,50 @@\n+{\n+  lib,\n+  stdenv,\n+  buildGoModule,\n+  fetchFromGitHub,\n+  olm,\n+  withGoolm ? false,\n+}:\n+\n+buildGoModule (finalAttrs: {\n+  pname = \"mautrix-telegram\";\n+  version = \"26.06\";\n+  tag = \"v0.2606.0\";\n+\n+  __structuredAttrs = true;\n+  strictDeps = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"mautrix\";\n+    repo = \"telegram\";\n+    inherit (finalAttrs) tag;\n+    hash = \"sha256-tKoqtGCkUtCT/SMxRX6LzivGu0p/AM6TPDQoW9plTyE=\";\n+  };\n+\n+  vendorHash = \"sha256-+VDdJg5RZzMrphJ5SK+YbdENhPiHJpwGY/JqBJewtUo=\";\n+\n+  ldflags = [\n+    \"-X\"\n+    \"main.Tag=v${finalAttrs.version}\"",
+   "id": 3744873193,
+   "line": 29,
+   "original_commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "original_line": 29,
+   "original_position": 29,
+   "original_start_line": null,
+   "path": "pkgs/by-name/ma/mautrix-telegram-go/package.nix",
+   "position": 29,
+   "pull_request_review_id": 4892266280,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-09T20:15:34Z",
+   "user": {
+    "id": 11363539,
+    "login": "renesat",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "dd527d3a1e6515397a7e11b903cdce8c85b0e968",
+   "id": 4128440081,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-17T11:43:01Z",
+   "user": {
+    "id": 67663319,
+    "login": "SchweGELBin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "dd527d3a1e6515397a7e11b903cdce8c85b0e968",
+   "id": 4128526990,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-17T11:57:34Z",
+   "user": {
+    "id": 67663319,
+    "login": "SchweGELBin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "dd527d3a1e6515397a7e11b903cdce8c85b0e968",
+   "id": 4317039101,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T08:16:29Z",
+   "user": {
+    "id": 42416805,
+    "login": "hatch01",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "id": 4728007446,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-18T07:20:51Z",
+   "user": {
+    "id": 52157081,
+    "login": "VlaDexa",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Approving redirects",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "id": 4728219376,
+   "state": "APPROVED",
+   "submitted_at": "2026-07-18T09:15:25Z",
+   "user": {
+    "id": 43472218,
+    "login": "GetPsyched",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "id": 4892165976,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-08-09T18:27:35Z",
+   "user": {
+    "id": 11363539,
+    "login": "renesat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "id": 4892183755,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-09T18:31:50Z",
+   "user": {
+    "id": 11363539,
+    "login": "renesat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "id": 4892221792,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-09T18:38:49Z",
+   "user": {
+    "id": 11363539,
+    "login": "renesat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "61a0ad6c20b7b96cc132911582fbe4121d04e92d",
+   "id": 4892266280,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-09T18:54:01Z",
+   "user": {
+    "id": 11363539,
+    "login": "renesat",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-16T17:38:59Z",
+   "event": "renamed",
+   "id": 24577343975,
+   "rename": {
+    "from": "mautrix-telegram-go: migrate to Go-based bridgev2 bridge",
+    "to": "mautrix-telegra: migrate to Go-based bridgev2 bridge"
+   }
+  },
+  {
+   "actor": {
+    "id": 50515369,
+    "login": "bartoostveen",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-16T17:39:03Z",
+   "event": "renamed",
+   "id": 24577345992,
+   "rename": {
+    "from": "mautrix-telegra: migrate to Go-based bridgev2 bridge",
+    "to": "mautrix-telegram: migrate to Go-based bridgev2 bridge"
+   }
+  }
+ ]
+}

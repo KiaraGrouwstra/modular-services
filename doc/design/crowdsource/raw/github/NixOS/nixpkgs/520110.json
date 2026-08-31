@@ -1,0 +1,357 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/520110",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "## Things done\r\n- Replaced a TBD placeholder in modular services guidance with a short best‑practices note.\r\n- Added a direct link to the NixOS tests manual section.\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-05-14T14:44:20Z",
+  "closed_by": {
+   "id": 163424596,
+   "login": "xx-Tasneem-Ahmed-xx",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 0,
+  "created_at": "2026-05-14T14:27:06Z",
+  "draft": false,
+  "id": 4446712881,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR is the author's first one; please be gentle!",
+    "id": 5609547489,
+    "name": "12.first-time contribution"
+   },
+   {
+    "color": "eb6420",
+    "default": false,
+    "description": "This PR currently has no reviewers requested and needs attention.",
+    "id": 8887634332,
+    "name": "9.needs: reviewer"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 520110,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/520110.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/520110.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "docs: replace modular-services TBD with test best practices link",
+  "type": null,
+  "updated_at": "2026-05-14T18:33:29Z",
+  "user": {
+   "id": 163424596,
+   "login": "xx-Tasneem-Ahmed-xx",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 2,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "703ea4942ecf5181121f905b6a4163e362355b07",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "## Things done\r\n- Replaced a TBD placeholder in modular services guidance with a short best‑practices note.\r\n- Added a direct link to the NixOS tests manual section.\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 1,
+  "closed_at": "2026-05-14T14:44:20Z",
+  "comments": 0,
+  "commits": 2,
+  "created_at": "2026-05-14T14:27:06Z",
+  "deletions": 1,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/520110.diff",
+  "draft": false,
+  "head": {
+   "label": "xx-Tasneem-Ahmed-xx:docs-replace-modular-services-TBD-with-test-best-practices-link",
+   "ref": "docs-replace-modular-services-TBD-with-test-best-practices-link",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2026-05-14T13:37:16Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "xx-Tasneem-Ahmed-xx/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/xx-Tasneem-Ahmed-xx/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 1238818645,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/xx-Tasneem-Ahmed-xx/nixpkgs/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/xx-Tasneem-Ahmed-xx/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 163424596,
+     "login": "xx-Tasneem-Ahmed-xx",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/xx-Tasneem-Ahmed-xx/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-05-14T14:47:40Z",
+    "size": 2575298,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/xx-Tasneem-Ahmed-xx/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/xx-Tasneem-Ahmed-xx/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-05-14T13:37:16Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "35f7ae14eee505e02a3802b9b9b7a089a9bf11cf",
+   "user": {
+    "id": 163424596,
+    "login": "xx-Tasneem-Ahmed-xx",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3683526310,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR is the author's first one; please be gentle!",
+    "id": 5609547489,
+    "name": "12.first-time contribution"
+   },
+   {
+    "color": "eb6420",
+    "default": false,
+    "description": "This PR currently has no reviewers requested and needs attention.",
+    "id": 8887634332,
+    "name": "9.needs: reviewer"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "4ebc8a03996b5189fe4ac07aa34fcd0feaf02c65",
+  "mergeable": true,
+  "mergeable_state": "blocked",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 520110,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/520110.patch",
+  "rebaseable": false,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "docs: replace modular-services TBD with test best practices link",
+  "updated_at": "2026-05-14T18:33:29Z",
+  "user": {
+   "id": 163424596,
+   "login": "xx-Tasneem-Ahmed-xx",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#520110",
+ "review_comments": [],
+ "reviews": [],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 163424596,
+    "login": "xx-Tasneem-Ahmed-xx",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-14T14:33:39Z",
+   "event": "closed",
+   "id": 25533557337,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 163424596,
+    "login": "xx-Tasneem-Ahmed-xx",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-14T14:40:31Z",
+   "event": "reopened",
+   "id": 25533856306,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 163424596,
+    "login": "xx-Tasneem-Ahmed-xx",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-14T14:44:20Z",
+   "event": "closed",
+   "id": 25534023455,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

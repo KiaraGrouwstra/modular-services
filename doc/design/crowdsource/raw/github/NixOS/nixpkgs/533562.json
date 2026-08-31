@@ -1,0 +1,477 @@
+{
+ "comments": [
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/prs-already-reviewed/2617/3179\n",
+   "created_at": "2026-07-23T21:39:31Z",
+   "id": 5063803001,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-23T21:39:31Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/533562",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Bot-based backport to `release-26.05`, triggered by a label in #498536.\n\n**Before merging, ensure that this backport is [acceptable for the release](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#changes-acceptable-for-releases).**\n\nEven as a non-committer, if you find that it is not acceptable, leave a comment.\n\n> [!TIP]\n> If you maintain all packages touched by this pull request, and they are all located under `pkgs/by-name/*`, you can comment **`@NixOS/nixpkgs-merge-bot merge`** to automatically merge this PR using the [`nixpkgs-merge-bot`](https://github.com/NixOS/nixpkgs/blob/master/ci/README.md#nixpkgs-merge-bot).",
+  "closed_at": "2026-07-24T15:09:24Z",
+  "closed_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 1,
+  "created_at": "2026-06-20T09:49:32Z",
+  "draft": false,
+  "id": 4706006395,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Linux.",
+    "id": 737642408,
+    "name": "10.rebuild-linux: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The project is part of the NGI funding grant. https://nlnet.nl/NGI/",
+    "id": 1361647463,
+    "name": "6.topic: NLNet / NGI"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by a maintainer listed in any of the changed packages.",
+    "id": 4061482046,
+    "name": "12.approved-by: package-maintainer"
+   },
+   {
+    "color": "d4c5f9",
+    "default": false,
+    "description": "This targets a stable branch",
+    "id": 8558397955,
+    "name": "4.workflow: backport"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 533562,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/533562.diff",
+   "merged_at": "2026-07-24T15:09:24Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/533562.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "[Backport release-26.05] holo-daemon: 0.8.0 -> 0.9.0; init modular service",
+  "type": null,
+  "updated_at": "2026-07-24T15:09:26Z",
+  "user": {
+   "id": 190413589,
+   "login": "nixpkgs-ci[bot]",
+   "site_admin": false,
+   "type": "Bot"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 213,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:release-26.05",
+   "ref": "release-26.05",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "3c36bce45bf345af13ee14c28d602564d54a78fb",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Bot-based backport to `release-26.05`, triggered by a label in #498536.\n\n**Before merging, ensure that this backport is [acceptable for the release](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#changes-acceptable-for-releases).**\n\nEven as a non-committer, if you find that it is not acceptable, leave a comment.\n\n> [!TIP]\n> If you maintain all packages touched by this pull request, and they are all located under `pkgs/by-name/*`, you can comment **`@NixOS/nixpkgs-merge-bot merge`** to automatically merge this PR using the [`nixpkgs-merge-bot`](https://github.com/NixOS/nixpkgs/blob/master/ci/README.md#nixpkgs-merge-bot).",
+  "changed_files": 4,
+  "closed_at": "2026-07-24T15:09:24Z",
+  "comments": 1,
+  "commits": 2,
+  "created_at": "2026-06-20T09:49:32Z",
+  "deletions": 2,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/533562.diff",
+  "draft": false,
+  "head": {
+   "label": "NixOS:backport-498536-to-release-26.05",
+   "ref": "backport-498536-to-release-26.05",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "03e90e51b56d15e301afce54a25607c0aca4f169",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "id": 3903067959,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Linux.",
+    "id": 737642408,
+    "name": "10.rebuild-linux: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The project is part of the NGI funding grant. https://nlnet.nl/NGI/",
+    "id": 1361647463,
+    "name": "6.topic: NLNet / NGI"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by a maintainer listed in any of the changed packages.",
+    "id": 4061482046,
+    "name": "12.approved-by: package-maintainer"
+   },
+   {
+    "color": "d4c5f9",
+    "default": false,
+    "description": "This targets a stable branch",
+    "id": 8558397955,
+    "name": "4.workflow: backport"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "14326421039b431a9b49bb070b2889a0cab1ede2",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-07-24T15:09:24Z",
+  "merged_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 533562,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/533562.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 476346,
+    "login": "imincik",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 9713184,
+    "login": "wegank",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 25235514,
+    "login": "Prince213",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 60861925,
+    "login": "ethancedwards8",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 83901271,
+    "login": "eljamm",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "[Backport release-26.05] holo-daemon: 0.8.0 -> 0.9.0; init modular service",
+  "updated_at": "2026-07-24T15:09:26Z",
+  "user": {
+   "id": 190413589,
+   "login": "nixpkgs-ci[bot]",
+   "site_admin": false,
+   "type": "Bot"
+  }
+ },
+ "ref": "NixOS/nixpkgs#533562",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "03e90e51b56d15e301afce54a25607c0aca4f169",
+   "id": 4537238572,
+   "state": "APPROVED",
+   "submitted_at": "2026-06-20T11:23:33Z",
+   "user": {
+    "id": 84702057,
+    "login": "themadbit",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "03e90e51b56d15e301afce54a25607c0aca4f169",
+   "id": 4625211883,
+   "state": "APPROVED",
+   "submitted_at": "2026-07-03T10:51:32Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "14326421039b431a9b49bb070b2889a0cab1ede2",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/14326421039b431a9b49bb070b2889a0cab1ede2",
+   "created_at": "2026-07-24T15:09:24Z",
+   "event": "merged",
+   "id": 28443074240
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-24T15:09:25Z",
+   "event": "closed",
+   "id": 28443074314,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

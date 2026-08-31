@@ -1,0 +1,132 @@
+{
+ "archetype": "regular",
+ "archived": false,
+ "category_id": 14,
+ "closed": false,
+ "created_at": "2026-08-21T17:23:46.687Z",
+ "host": "discourse.nixos.org",
+ "id": 79684,
+ "last_posted_at": "2026-08-21T17:25:08.642Z",
+ "like_count": 4,
+ "posts": [
+  {
+   "accepted_answer": false,
+   "badges_granted": [],
+   "can_accept_answer": false,
+   "can_unaccept_answer": false,
+   "can_vote": false,
+   "created_at": "2026-08-21T17:23:46.845Z",
+   "deleted_at": null,
+   "event": null,
+   "flair_name": null,
+   "id": 268634,
+   "incoming_link_count": 10,
+   "link_counts": [
+    {
+     "clicks": 5,
+     "internal": false,
+     "reflection": false,
+     "title": "GitHub - KiaraGrouwstra/modular-services: Portable Nix services · GitHub",
+     "url": "https://github.com/KiaraGrouwstra/modular-services"
+    },
+    {
+     "clicks": 2,
+     "internal": false,
+     "reflection": false,
+     "title": "[modular services] User creation/specification · Issue #545287 · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/issues/545287"
+    },
+    {
+     "clicks": 1,
+     "internal": false,
+     "reflection": false,
+     "title": "nixos/tests: support a few more running on darwin + hygiene by roberth · Pull Request #551799 · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/pull/551799"
+    },
+    {
+     "clicks": 1,
+     "internal": false,
+     "reflection": false,
+     "title": "nixos/modular-services: reload/restart on `configData` change by KiaraGrouwstra · Pull Request #518717 · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/pull/518717"
+    },
+    {
+     "clicks": 0,
+     "internal": false,
+     "reflection": false,
+     "title": "lib/services: fix test expectations for the reload options by KiaraGrouwstra · Pull Request #545732 · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/pull/545732"
+    }
+   ],
+   "name": "",
+   "post_number": 1,
+   "post_type": 1,
+   "posts_count": 2,
+   "primary_group_name": null,
+   "quote_count": 0,
+   "raw": "# Modular services meeting #7 2026-08-21\n\nAttendees: @eveeifyeve @roberth @lassulus @aanderse @kiara + 1 guest.\n\n- @eveeifyeve: Do we want an `allowNetwork` option?\n    - @lassulus: Quite service manager specific\n    - @aanderse: Should be in scope and is worth doing\n    - @roberth: In scope, and modular services integrations can bring in other tools if needed\n    - @lassulus: I don't think we'd want to run tools like bubblewrap inside systemd, but otherwise writing the interface is a lot of work\n    - @aanderse: It's a point people bring up as a point of contention. Figuring out the interface is the task of the modular services project.\n    - @roberth: I think we agree on scope and can work out the details. `allowNetwork` seems like a good one to add.\n\n- @eveeifyeve: Which flake attribute?\n    - @roberth: I would suggest `<flake>.modules.service.<name>`, matching the module `class`, which we might want to change to `packageConfig` or something\n    - @eveeifyeve: Not sure if the distinction is clear enough to users.\n    - @lassulus: They're similar but you don't have to run a command as service\n    - @lassulus: Package modules name was kind of taken by Nixpkgs architecture team at some point, but did not materialize\n    - @kiara: modular programs seems to focused around binaries\n    - @lassulus: It's an is-a relationship where all modular services are package modules, but not all package modules are service modules.\n    - @roberth: Similar to NixOS services, NixOS programs are global and package modules solve the same problem of making them usable in any context, not just NixOS\n    - @eveeifyeve: What about window managers\n    - @lassulus: Good example, because e.g. you can invoke a compositor from the Linux terminal\n    - @eveeifyeve: What about running e.g. hyprland on say finix using modular services\n    - @aanderse: hyprland does just work because it's just a program, and most of those just work\n    - @aanderse: before systemd, launching from the terminal was fairly normal practice\n    - @eveeifyeve: Could we have a universal repo for all configuration management.\n    - @aanderse: even if modular services was highly successful not all configuration would move to that\n    - @roberth: forks and reimplementations are good because innovations are possible and they can even transfer back into the popular main thing, e.g. NixOS\n    - @eveeifyeve: I've been playing around with implementing a general configuration manager like that\n    - @aanderse: cool idea. I've had to port modules to finix that weren't always great and portability at the system level would help a lot.\n    - @eveeifyeve: yeah. configurations that are not necessarily locked to NixOS.\n    - @roberth: that would be something like \"portable system modules\"?\n    - @eveeifyeve: I was calling it universal\n    - @roberth: system indicates the scale it operates at, which is useful\n\n\n- @kiara: Separate repo?\n    - https://github.com/KiaraGrouwstra/modular-services\n    - @roberth: Great!\n    - Creating an org for it...\n    - @kiara: apparently the free org offering is quite limited\n    - @roberth: considering a systemd unit logic refactor to make it independently usable. Not sure where to put it now.\n    - @lassulus: refactor in `nixpkgs` can be done later\n    - @kiara: divergence is ok; otherwise we've just reinvented the same workflow with extra steps\n    - @eveeifyeve: we should communicate that we work should be done\n    - @kiara: I don't think nixpkgs gets flooded\n    - @roberth: we can also see it as a QA step\n\n- @eveeifyeve: I'm planning to run hydra on RPi and chromebook with finix, on a macbook and some more.\n    - @aanderse: 🤩\n\n- @kiara: what to work on next\n    - @aanderse: research the use of shims and security, to inform how we could design the interface\n    - @roberth: I won't be making progress on https://github.com/NixOS/nixpkgs/issues/545287 anytime soon probably\n \n\n- Pr Review \n    - https://github.com/NixOS/nixpkgs/pull/545732\n        - @eveeifyeve: ran the normal eval test, couldn't run NixOS Specific test due to https://github.com/NixOS/nixpkgs/pull/551799 \n    - https://github.com/NixOS/nixpkgs/pull/551799\n        - @eveeifyeve: Remembered running nixos tests on darwin\n        - @anderse: Not well versed and confident enough to merge this pr.\n    - https://github.com/NixOS/nixpkgs/pull/518717 \n        - @eveeifyeve: Does this reload with reloadCommand/reloadSignal or is this a seperate thing?\n        - @kiara: Yeah it should\n        - @kiara: Mentions the idea of opting out of reloads.\n        - @eveeifyeve: Should be opt in? Because ideally we don't have a service that will be reloading configs by default.\n        - @aanderse: Concern about it being systemd specific implementation",
+   "reads": 86,
+   "reply_count": 0,
+   "reply_to_post_number": null,
+   "topic_accepted_answer": null,
+   "topic_id": 79684,
+   "updated_at": "2026-08-21T17:23:46.845Z",
+   "user_id": 11918,
+   "user_title": null,
+   "username": "Eveeifyeve",
+   "version": 1,
+   "wiki": false
+  },
+  {
+   "accepted_answer": false,
+   "badges_granted": [],
+   "can_accept_answer": false,
+   "can_unaccept_answer": false,
+   "created_at": "2026-08-21T17:25:08.642Z",
+   "deleted_at": null,
+   "event": null,
+   "flair_name": null,
+   "id": 268635,
+   "incoming_link_count": 1,
+   "link_counts": [
+    {
+     "clicks": 5,
+     "internal": false,
+     "reflection": false,
+     "title": "You're invited to talk on Matrix",
+     "url": "https://matrix.to/#/!skjfPnBZwrJbAxHTxh:nixos.org/$BPbpFWKoeW0EWRX9VwxvXYUbb7i-MQ5CanZUAQQxfBw?via=nixos.org&via=matrix.org&via=nixos.dev"
+    }
+   ],
+   "name": "",
+   "post_number": 2,
+   "post_type": 1,
+   "posts_count": 2,
+   "primary_group_name": null,
+   "quote_count": 0,
+   "raw": "Just some notes: \n - the separate repo meeting note is still in [a bit of debate in our matrix channel.](https://matrix.to/#/!skjfPnBZwrJbAxHTxh:nixos.org/$BPbpFWKoeW0EWRX9VwxvXYUbb7i-MQ5CanZUAQQxfBw?via=nixos.org&via=matrix.org&via=nixos.dev)\n - The finix stuff I will be running to start with, then I have my own project that is coming soon that will have finit.",
+   "reads": 67,
+   "reply_count": 0,
+   "reply_to_post_number": null,
+   "topic_accepted_answer": null,
+   "topic_id": 79684,
+   "updated_at": "2026-08-21T17:57:12.239Z",
+   "user_id": 11918,
+   "user_title": null,
+   "username": "Eveeifyeve",
+   "version": 2,
+   "wiki": false
+  }
+ ],
+ "posts_count": 2,
+ "posts_fetched": 2,
+ "reply_count": 0,
+ "slug": "modular-services-meeting-7-2026-08-21",
+ "sources": [
+  "discourse-meetings"
+ ],
+ "tags": null,
+ "title": "Modular services meeting #7 2026-08-21",
+ "url": "https://discourse.nixos.org/t/modular-services-meeting-7-2026-08-21/79684",
+ "views": 168,
+ "word_count": 766
+}

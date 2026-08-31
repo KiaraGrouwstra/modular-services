@@ -1,0 +1,1691 @@
+{
+ "comments": [
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/modular-services-meeting-3-2026-06-26/78582/1\n",
+   "created_at": "2026-06-26T15:26:53Z",
+   "id": 4810961110,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-26T15:26:53Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i'm maybe feeling unsure about this having notion on distinct service managers, as i'm inclined to consider this as the territory of the consuming environment. if not, i wonder to what extent we might see other stuff creep in that's mostly useful to a single consuming environment. to maybe phrase it differently: would one applications really support notifications by one service manager yet not by another?\r\n\r\nedit: on jitsi i now received explanation on services not necessarily supporting specific notification protocols, so now this makes sense to me\r\n",
+   "created_at": "2026-06-26T16:06:54Z",
+   "id": 4811279289,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-10T16:14:10Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/modular-services-meeting-4-2026-07-10/78847/1\n",
+   "created_at": "2026-07-10T18:12:03Z",
+   "id": 4938221824,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-10T18:12:03Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "We are CI green and also gold (good to go) by me, it should be ready for the hungry merge button.",
+   "created_at": "2026-07-10T18:30:08Z",
+   "id": 4938359235,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-10T18:31:58Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Breaks `nixosTests.php85` I think:\r\n\r\n```\r\nerror:\r\n       … while evaluating the attribute 'drvPath'\r\n         at /home/ma27/Projects/nixpkgs/lib/customisation.nix:415:11:\r\n          414|         // {\r\n          415|           drvPath =\r\n             |           ^\r\n          416|             assert condition;\r\n\r\n       … while evaluating an expression to select 'drvPath' on it\r\n         at «internal»:1:552:\r\n       (stack trace truncated; use '--show-trace' to show the full trace)\r\n\r\n       error: The option `containers.machine.systemd.services.php-fpm.serviceConfig.ExecReload' has conflicting definition values:\r\n       - In `/home/ma27/Projects/nixpkgs/nixos/modules/system/service/systemd/service.nix, via option containers.machine.system.services.php-fpm.systemd.services.\"\"': \"\"\r\n       - In `/home/ma27/Projects/nixpkgs/nixos/modules/system/service/systemd/service.nix, via option containers.machine.system.services.php-fpm.systemd.services.\"\"': \"/nix/store/mp8s10fwm685azvvv1qq7zyf7iajjlj8-coreutils-9.11/bin/kill -USR2 $MAINPID\"\r\n       Use `lib.mkForce value` or `lib.mkDefault value` to change the priority on any of these definitions.\r\n\r\n```",
+   "created_at": "2026-07-31T22:35:41Z",
+   "id": 5148036579,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-31T22:35:41Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/535695",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Adds generalization support for reloading & readiness.\r\n\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-07-11T12:31:36Z",
+  "closed_by": {
+   "id": 7755101,
+   "login": "aanderse",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 5,
+  "created_at": "2026-06-26T14:25:31Z",
+  "draft": false,
+  "id": 4752735374,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 535695,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/535695.diff",
+   "merged_at": "2026-07-11T12:31:36Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/535695.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "lib/services: add some generalization options",
+  "type": null,
+  "updated_at": "2026-07-31T22:35:41Z",
+  "user": {
+   "id": 88671402,
+   "login": "eveeifyeve",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 94,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "298a89570e1dd1194847b404410be95894ec8397",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Adds generalization support for reloading & readiness.\r\n\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 2,
+  "closed_at": "2026-07-11T12:31:36Z",
+  "comments": 5,
+  "commits": 2,
+  "created_at": "2026-06-26T14:25:31Z",
+  "deletions": 1,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/535695.diff",
+  "draft": false,
+  "head": {
+   "label": "DigitalBrewStudios:modular-service-generalization-service-api",
+   "ref": "modular-service-generalization-service-api",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2025-09-30T15:45:42Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "DigitalBrewStudios/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/DigitalBrewStudios/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": false,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 1067258975,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/DigitalBrewStudios/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/DigitalBrewStudios/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 206447114,
+     "login": "DigitalBrewStudios",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/DigitalBrewStudios/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T14:53:24Z",
+    "size": 2845548,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/DigitalBrewStudios/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/DigitalBrewStudios/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-01-03T03:08:45Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "user": {
+    "id": 206447114,
+    "login": "DigitalBrewStudios",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "id": 3942873836,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "fa6488337a9f548b99e9cf430b465e9f0fa8699a",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-07-11T12:31:36Z",
+  "merged_by": {
+   "id": 7755101,
+   "login": "aanderse",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 535695,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/535695.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 708570,
+    "login": "mmlb",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 50398876,
+    "login": "hsjobeki",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 78693624,
+    "login": "llakala",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 22,
+  "state": "closed",
+  "title": "lib/services: add some generalization options",
+  "updated_at": "2026-07-31T22:35:41Z",
+  "user": {
+   "id": 88671402,
+   "login": "eveeifyeve",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#535695",
+ "review_comments": [
+  {
+   "body": "```suggestion\n      runtimeDirectoryPermission = mkOption {\n```",
+   "commit_id": "33c0eb283f19d5feee5fc6fe4366157c23f94d48",
+   "created_at": "2026-06-26T14:27:03Z",
+   "diff_hunk": "@@ -49,6 +50,54 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"SIGHUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+          Note: Setting this will set the respective setting for the type of notificationProtocol you want to use.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.str;\n+        example = lib.literalExpression \"${pkgs.coreutils}/bin/kill -HUP $MAINPID\";\n+        description = ''\n+          Command for reloading this service.\n+        '';\n+      };\n+\n+      runtimeDirectory = mkOption {\n+        type = types.nullOr types.str;\n+        description = ''\n+          Sets runtime directory of the current process.\n+        '';\n+      };\n+      runtimePermission = mkOption {",
+   "id": 3482019285,
+   "line": null,
+   "original_commit_id": "33c0eb283f19d5feee5fc6fe4366157c23f94d48",
+   "original_line": 78,
+   "original_position": 42,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4580207160,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-26T14:27:03Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "could potentially assign a value to `reloadCommand` conditional on `reloadSignal != null`... something like `\"${pkgs.coreutils}/bin/kill -${reloadSignal} $MAINPID`",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "created_at": "2026-06-26T14:40:50Z",
+   "diff_hunk": "@@ -49,6 +50,54 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"SIGHUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+          Note: Setting this will set the respective setting for the type of notificationProtocol you want to use.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {",
+   "id": 3482109847,
+   "line": 63,
+   "original_commit_id": "33c0eb283f19d5feee5fc6fe4366157c23f94d48",
+   "original_line": 64,
+   "original_position": 28,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 22,
+   "pull_request_review_id": 4580307696,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-26T14:40:50Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n      assertion = (config.process.reloadSignal && config.process.reloadCommand);\n```\n\ntypo missing r",
+   "commit_id": "a931a6570ccba8e1a49dd8d61b9aa8b3cb2f872c",
+   "created_at": "2026-06-26T18:29:31Z",
+   "diff_hunk": "@@ -49,6 +50,50 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"SIGHUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+          Note: Setting this will set the respective setting for the type of notificationProtocol you want to use.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default =\n+          if (config.process.reloadSignal != null) then\n+            \"${pkgs.coreutils}/bin/kill -${config.process.reloadSignal} $MAINPID\"\n+          else\n+            null;\n+        example = lib.literalExpression \"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\";\n+\n+        description = ''\n+          Command for reloading this service.\n+        '';\n+      };\n+    };\n+\n+    notificationProtocol = mkOption {\n+      type = types.enum [\n+        \"none\"\n+        \"systemd\"\n+        \"s6\"\n+      ];\n+      default = \"none\";\n+\n+      description = ''\n+        Notification protocol you want to use.\n+      '';\n     };\n   };\n+\n+  config.assertions = [\n+    {\n+      assetion = (config.process.reloadSignal && config.process.reloadCommand);",
+   "id": 3483376705,
+   "line": null,
+   "original_commit_id": "a931a6570ccba8e1a49dd8d61b9aa8b3cb2f872c",
+   "original_line": 95,
+   "original_position": 54,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4581833790,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-26T18:29:31Z",
+   "user": {
+    "id": 708570,
+    "login": "mmlb",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`kill` accepts `HUP` as a signal, not `SIGHUP` IIRC",
+   "commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "created_at": "2026-06-28T11:01:35Z",
+   "diff_hunk": "@@ -49,6 +50,50 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"SIGHUP\";",
+   "id": 3487760630,
+   "line": null,
+   "original_commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "original_line": 57,
+   "original_position": 16,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4587427895,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-28T11:26:35Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "this option should not impact notification protocol",
+   "commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "created_at": "2026-06-28T11:02:48Z",
+   "diff_hunk": "@@ -49,6 +50,50 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"SIGHUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+          Note: Setting this will set the respective setting for the type of notificationProtocol you want to use.",
+   "id": 3487762312,
+   "line": null,
+   "original_commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "original_line": 60,
+   "original_position": 19,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4587427895,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-28T11:26:35Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "maybe set to `null` here and then in `config` you can `mkIf` + `mkForce` to enforce the value?",
+   "commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "created_at": "2026-06-28T11:05:04Z",
+   "diff_hunk": "@@ -49,6 +50,50 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"SIGHUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+          Note: Setting this will set the respective setting for the type of notificationProtocol you want to use.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default =",
+   "id": 3487765022,
+   "line": null,
+   "original_commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "original_line": 66,
+   "original_position": 25,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4587427895,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-28T11:26:35Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "maybe we can add an additional detail to be clear... command the underlying service manager will use to reload this daemon or some such... 🤔",
+   "commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "created_at": "2026-06-28T11:10:16Z",
+   "diff_hunk": "@@ -49,6 +50,50 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"SIGHUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+          Note: Setting this will set the respective setting for the type of notificationProtocol you want to use.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default =\n+          if (config.process.reloadSignal != null) then\n+            \"${pkgs.coreutils}/bin/kill -${config.process.reloadSignal} $MAINPID\"\n+          else\n+            null;\n+        example = lib.literalExpression \"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\";\n+\n+        description = ''\n+          Command for reloading this service.",
+   "id": 3487771050,
+   "line": null,
+   "original_commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "original_line": 74,
+   "original_position": 33,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4587427895,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-28T11:26:35Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`nix`lang has no implicit cast to bool as far as i know",
+   "commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "created_at": "2026-06-28T11:11:48Z",
+   "diff_hunk": "@@ -49,6 +50,50 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"SIGHUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+          Note: Setting this will set the respective setting for the type of notificationProtocol you want to use.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default =\n+          if (config.process.reloadSignal != null) then\n+            \"${pkgs.coreutils}/bin/kill -${config.process.reloadSignal} $MAINPID\"\n+          else\n+            null;\n+        example = lib.literalExpression \"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\";\n+\n+        description = ''\n+          Command for reloading this service.\n+        '';\n+      };\n+    };\n+\n+    notificationProtocol = mkOption {\n+      type = types.enum [\n+        \"none\"\n+        \"systemd\"\n+        \"s6\"\n+      ];\n+      default = \"none\";\n+\n+      description = ''\n+        Notification protocol you want to use.\n+      '';\n     };\n   };\n+\n+  config.assertions = [\n+    {\n+      assertion = (config.process.reloadSignal && config.process.reloadCommand);",
+   "id": 3487772725,
+   "line": null,
+   "original_commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "original_line": 95,
+   "original_position": 54,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4587427895,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-28T11:27:22Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "let's expand this to include a few more details\r\n\r\nsomething more along the lines of notification protocol this daemon supports for communication with the underlying service manager",
+   "commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "created_at": "2026-06-28T11:19:00Z",
+   "diff_hunk": "@@ -49,6 +50,50 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"SIGHUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+          Note: Setting this will set the respective setting for the type of notificationProtocol you want to use.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default =\n+          if (config.process.reloadSignal != null) then\n+            \"${pkgs.coreutils}/bin/kill -${config.process.reloadSignal} $MAINPID\"\n+          else\n+            null;\n+        example = lib.literalExpression \"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\";\n+\n+        description = ''\n+          Command for reloading this service.\n+        '';\n+      };\n+    };\n+\n+    notificationProtocol = mkOption {\n+      type = types.enum [\n+        \"none\"\n+        \"systemd\"\n+        \"s6\"\n+      ];\n+      default = \"none\";\n+\n+      description = ''\n+        Notification protocol you want to use.",
+   "id": 3487780607,
+   "line": null,
+   "original_commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "original_line": 88,
+   "original_position": 47,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4587427895,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-28T11:27:38Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "👆",
+   "commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "created_at": "2026-06-28T11:21:14Z",
+   "diff_hunk": "@@ -113,6 +113,19 @@ in\n       defaultText = lib.literalExpression \"config.systemd.lib.escapeSystemdExecArgs config.process.argv\";\n     };\n \n+    systemd.mainExecReload = mkOption {\n+      description = ''\n+        TODO",
+   "id": 3487783089,
+   "line": null,
+   "original_commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "original_line": 118,
+   "original_position": 6,
+   "original_start_line": null,
+   "path": "nixos/modules/system/service/systemd/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4587427895,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-28T11:26:35Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "this should be optional",
+   "commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "created_at": "2026-06-28T11:22:55Z",
+   "diff_hunk": "@@ -113,6 +113,19 @@ in\n       defaultText = lib.literalExpression \"config.systemd.lib.escapeSystemdExecArgs config.process.argv\";\n     };\n \n+    systemd.mainExecReload = mkOption {\n+      description = ''\n+        TODO\n+      '';\n+      type = types.str;",
+   "id": 3487785022,
+   "line": null,
+   "original_commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "original_line": 120,
+   "original_position": 8,
+   "original_start_line": null,
+   "path": "nixos/modules/system/service/systemd/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4587427895,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-28T11:26:35Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "unfortunately we cannot infer this ... we would need a separate option to store this... let's keep it simple logic for now and say `\"notify\"` instead of `\"notify-reload\"` and give this some more thought... 🤔",
+   "commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "created_at": "2026-06-28T11:26:25Z",
+   "diff_hunk": "@@ -170,7 +183,15 @@ in\n       # TODO description;\n       wantedBy = lib.mkDefault [ \"multi-user.target\" ];\n       serviceConfig = {\n-        Type = lib.mkDefault \"simple\";\n+        ExecReload = config.systemd.mainExecReload;\n+        Type = lib.mkDefault (\n+          if\n+            (config.serviceManager.notificationProtocol == \"systemd\" && config.process.reloadCommand != null)\n+          then\n+            \"notify-reload\"",
+   "id": 3487789204,
+   "line": null,
+   "original_commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "original_line": 191,
+   "original_position": 30,
+   "original_start_line": null,
+   "path": "nixos/modules/system/service/systemd/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4587427895,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-28T11:26:35Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "To address @KiaraGrouwstra's concern, we could remove `\"s6\"` and move the declaration of `\"systemd\"` being valid to the systemd module.\n\nAn s6 integration can similarly extend the enum on its own using type merging",
+   "commit_id": "2ff7d552a5cc94f1e688b09aa9e6486992f29ca8",
+   "created_at": "2026-07-10T16:05:04Z",
+   "diff_hunk": "@@ -49,6 +50,51 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"HUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = lib.literalExpression ''\"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\"'';\n+\n+        description = ''\n+          Command used for reloading in the underlying service manager to reload.\n+        '';\n+      };\n     };\n+\n+    notificationProtocol = mkOption {\n+      type = types.enum [\n+        \"none\"\n+        \"systemd\"\n+        \"s6\"",
+   "id": 3560313458,
+   "line": null,
+   "original_commit_id": "f27e25abdaa76b74d4d724d357a95568ca278020",
+   "original_line": 78,
+   "original_position": 37,
+   "original_start_line": 77,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4673059066,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-10T16:05:37Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This also could be a empty enum list so it's extensible, then a service could `[\"systemd\", \"s6\"]` or `[ ]` if service supports none. Then check in service.nix in nixos if it contains systemd then do notify.",
+   "commit_id": "73b63af3edb01464b2dfea7a1f905523d9734440",
+   "created_at": "2026-07-10T16:14:30Z",
+   "diff_hunk": "@@ -49,6 +50,51 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"HUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = lib.literalExpression ''\"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\"'';\n+\n+        description = ''\n+          Command used for reloading in the underlying service manager to reload.\n+        '';\n+      };\n     };\n+\n+    notificationProtocol = mkOption {\n+      type = types.enum [\n+        \"none\"\n+        \"systemd\"\n+        \"s6\"\n+      ];",
+   "id": 3560369430,
+   "line": null,
+   "original_commit_id": "f27e25abdaa76b74d4d724d357a95568ca278020",
+   "original_line": 79,
+   "original_position": 38,
+   "original_start_line": 75,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4673119618,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-10T16:17:02Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Although that would make it annoying to specify portable modules. If the service supports both protocols, it would needs conditionals on both just to stop offending the `enum` type check when loaded into a service manager that is unaware of the other.",
+   "commit_id": "2ff7d552a5cc94f1e688b09aa9e6486992f29ca8",
+   "created_at": "2026-07-10T16:17:05Z",
+   "diff_hunk": "@@ -49,6 +50,51 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"HUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = lib.literalExpression ''\"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\"'';\n+\n+        description = ''\n+          Command used for reloading in the underlying service manager to reload.\n+        '';\n+      };\n     };\n+\n+    notificationProtocol = mkOption {\n+      type = types.enum [\n+        \"none\"\n+        \"systemd\"\n+        \"s6\"",
+   "id": 3560383840,
+   "in_reply_to_id": 3560313458,
+   "line": null,
+   "original_commit_id": "f27e25abdaa76b74d4d724d357a95568ca278020",
+   "original_line": 78,
+   "original_position": 37,
+   "original_start_line": 77,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4673135375,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-10T16:17:06Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`mkIf` + `mkForce`",
+   "commit_id": "73b63af3edb01464b2dfea7a1f905523d9734440",
+   "created_at": "2026-07-10T17:40:19Z",
+   "diff_hunk": "@@ -49,6 +50,51 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"HUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = lib.literalExpression ''\"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\"'';\n+\n+        description = ''\n+          Command used for reloading in the underlying service manager to reload.\n+        '';\n+      };\n     };\n+\n+    notificationProtocol = mkOption {\n+      type = types.enum [\n+        \"none\"\n+        \"systemd\"\n+        \"s6\"\n+      ];\n+      default = \"none\";\n+\n+      description = ''\n+        Notification protocol that this service supports with the underlying service manager.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    assertions = [\n+      {\n+        assertion = config.process.reloadSignal != null && config.process.reloadCommand != null;\n+        message = \"reloadSignal conflicts with reloadCommand. Please either use reloadSignal or reloadCommand.\";\n+      }\n+    ];\n+\n+    process.reloadCommand =",
+   "id": 3560874212,
+   "line": null,
+   "original_commit_id": "73b63af3edb01464b2dfea7a1f905523d9734440",
+   "original_line": 96,
+   "original_position": 55,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 1,
+   "pull_request_review_id": 4673696794,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-10T17:40:19Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "at the risk of being rude by commenting post-approve (if not post-merge) still, my nit here would be we should probably make this a sub-module of boolean options for correctness (duplicates here would not make sense) to prevent people having to change their config to accommodate such a change later.",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "created_at": "2026-07-11T14:40:39Z",
+   "diff_hunk": "@@ -49,6 +50,53 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"HUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = lib.literalExpression ''\"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\"'';\n+\n+        description = ''\n+          Command used for reloading in the underlying service manager to reload.\n+        '';\n+      };\n     };\n+\n+    notificationProtocol = mkOption {\n+      type = types.listOf (",
+   "id": 3564390701,
+   "line": 75,
+   "original_commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "original_line": 75,
+   "original_position": 34,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 34,
+   "pull_request_review_id": 4678061227,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-11T14:40:39Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Again like this was discussed by @aanderse, It could be mentioned in the future. \r\nBut for now there is no need to have a sub-module of boolean options, unless there is specific setting to readiness notification protocols which I assume from my research, there is not, hence it doesn't really need a sub-module. \r\n\r\nWe already have in apply to make it unique so in the case of duplicates it doesn't matter, but however in upstream nixpkgs reviews as @aanderse said, we should encourage the user to not make duplicates in the notificationProtocol setting. ",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "created_at": "2026-07-11T15:03:04Z",
+   "diff_hunk": "@@ -49,6 +50,53 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"HUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = lib.literalExpression ''\"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\"'';\n+\n+        description = ''\n+          Command used for reloading in the underlying service manager to reload.\n+        '';\n+      };\n     };\n+\n+    notificationProtocol = mkOption {\n+      type = types.listOf (",
+   "id": 3564433571,
+   "in_reply_to_id": 3564390701,
+   "line": 75,
+   "original_commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "original_line": 75,
+   "original_position": 34,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 34,
+   "pull_request_review_id": 4678117837,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-11T15:06:06Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i agree with @KiaraGrouwstra in that we should aim for this - i just didn't want to hold up progress. \r\n\r\ni think @roberth said he had some thoughts about this",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "created_at": "2026-07-11T15:14:51Z",
+   "diff_hunk": "@@ -49,6 +50,53 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"HUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = lib.literalExpression ''\"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\"'';\n+\n+        description = ''\n+          Command used for reloading in the underlying service manager to reload.\n+        '';\n+      };\n     };\n+\n+    notificationProtocol = mkOption {\n+      type = types.listOf (",
+   "id": 3564452216,
+   "in_reply_to_id": 3564390701,
+   "line": 75,
+   "original_commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "original_line": 75,
+   "original_position": 34,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 34,
+   "pull_request_review_id": 4678138557,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-11T15:14:51Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "constraining irrelevant degrees of freedom i think has relevance outside UI generation as well - aside from constraining duplication here, it would also make it invariant to the order that such items might be specified in. that aside, having separate options for the various options may help document them or separately set defaults for them as well.\r\n\r\nthe list of enum form, on the other hand, i think mostly has brevity of configuration going for it.\r\n",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "created_at": "2026-07-11T15:26:20Z",
+   "diff_hunk": "@@ -49,6 +50,53 @@ in\n           a shell script or `importas` from `pkgs.execline`.\n         '';\n       };\n+\n+      reloadSignal = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = \"HUP\";\n+        description = ''\n+          Configures the reload signal to send to the service manager.\n+        '';\n+      };\n+\n+      reloadCommand = mkOption {\n+        type = types.nullOr types.str;\n+        default = null;\n+        example = lib.literalExpression ''\"''${pkgs.coreutils}/bin/kill -HUP $MAINPID\"'';\n+\n+        description = ''\n+          Command used for reloading in the underlying service manager to reload.\n+        '';\n+      };\n     };\n+\n+    notificationProtocol = mkOption {\n+      type = types.listOf (",
+   "id": 3564471168,
+   "in_reply_to_id": 3564390701,
+   "line": 75,
+   "original_commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "original_line": 75,
+   "original_position": 34,
+   "original_start_line": null,
+   "path": "lib/services/service.nix",
+   "position": 34,
+   "pull_request_review_id": 4678156201,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-11T15:26:20Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "this scalar string no longer matches its actual type",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "created_at": "2026-07-11T21:11:57Z",
+   "diff_hunk": "@@ -170,7 +212,10 @@ in\n       # TODO description;\n       wantedBy = lib.mkDefault [ \"multi-user.target\" ];\n       serviceConfig = {\n-        Type = lib.mkDefault \"simple\";\n+        ExecReload = config.systemd.mainExecReload;\n+        Type = lib.mkDefault (\n+          if (config.serviceManager.notificationProtocol == \"systemd\") then \"notify\" else \"simple\"",
+   "id": 3565042301,
+   "line": 217,
+   "original_commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "original_line": 217,
+   "original_position": 56,
+   "original_start_line": null,
+   "path": "nixos/modules/system/service/systemd/service.nix",
+   "position": 56,
+   "pull_request_review_id": 4678765453,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-11T21:11:57Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "fixed in #540857",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "created_at": "2026-07-24T07:22:44Z",
+   "diff_hunk": "@@ -170,7 +212,10 @@ in\n       # TODO description;\n       wantedBy = lib.mkDefault [ \"multi-user.target\" ];\n       serviceConfig = {\n-        Type = lib.mkDefault \"simple\";\n+        ExecReload = config.systemd.mainExecReload;\n+        Type = lib.mkDefault (\n+          if (config.serviceManager.notificationProtocol == \"systemd\") then \"notify\" else \"simple\"",
+   "id": 3643654787,
+   "in_reply_to_id": 3565042301,
+   "line": 217,
+   "original_commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "original_line": 217,
+   "original_position": 56,
+   "original_start_line": null,
+   "path": "nixos/modules/system/service/systemd/service.nix",
+   "position": 56,
+   "pull_request_review_id": 4771082308,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-24T07:22:44Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "33c0eb283f19d5feee5fc6fe4366157c23f94d48",
+   "id": 4580207160,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-26T14:27:02Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "33c0eb283f19d5feee5fc6fe4366157c23f94d48",
+   "id": 4580307696,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-26T14:40:50Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "a931a6570ccba8e1a49dd8d61b9aa8b3cb2f872c",
+   "id": 4581833790,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-26T18:29:31Z",
+   "user": {
+    "id": 708570,
+    "login": "mmlb",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "2cdbee204ab31d777fb87d3c1b72c9ad85457bf4",
+   "id": 4587427895,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-28T11:26:35Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "f27e25abdaa76b74d4d724d357a95568ca278020",
+   "id": 4673059066,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-10T16:05:03Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "f27e25abdaa76b74d4d724d357a95568ca278020",
+   "id": 4673119618,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-10T16:14:29Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "f27e25abdaa76b74d4d724d357a95568ca278020",
+   "id": 4673120720,
+   "state": "APPROVED",
+   "submitted_at": "2026-07-10T16:14:40Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "f27e25abdaa76b74d4d724d357a95568ca278020",
+   "id": 4673135375,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-10T16:17:05Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "73b63af3edb01464b2dfea7a1f905523d9734440",
+   "id": 4673696794,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-10T17:40:19Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "id": 4678061227,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-11T14:40:38Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "id": 4678117837,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-11T15:03:04Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "id": 4678138557,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-11T15:14:51Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "id": 4678156201,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-11T15:26:20Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "id": 4678765453,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-11T21:11:57Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "aae4936e07347062039621483c8fd0b4382ae16c",
+   "id": 4771082308,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-24T07:22:44Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fa6488337a9f548b99e9cf430b465e9f0fa8699a",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/fa6488337a9f548b99e9cf430b465e9f0fa8699a",
+   "created_at": "2026-07-11T12:31:36Z",
+   "event": "merged",
+   "id": 27852018813
+  },
+  {
+   "actor": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-11T12:31:36Z",
+   "event": "closed",
+   "id": 27852018840,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "979b6b58c3d421eefe520bb10e7cd1794ecabfdd",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/979b6b58c3d421eefe520bb10e7cd1794ecabfdd",
+   "created_at": "2026-07-18T08:42:24Z",
+   "event": "referenced",
+   "id": 28155171160
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "f0b0d23f04c1097ab119f9231ae2908d83a874d5",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/f0b0d23f04c1097ab119f9231ae2908d83a874d5",
+   "created_at": "2026-07-18T09:36:14Z",
+   "event": "referenced",
+   "id": 28155951424
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "ae9994806ca939447a8a6adc4f94d12cbdf06e01",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/ae9994806ca939447a8a6adc4f94d12cbdf06e01",
+   "created_at": "2026-07-20T09:01:23Z",
+   "event": "referenced",
+   "id": 28203002808
+  },
+  {
+   "actor": {
+    "id": 476346,
+    "login": "imincik",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "ed97170327d872d25e348a4ada885bf7983493f3",
+   "commit_url": "https://api.github.com/repos/imincik/nixpkgs/commits/ed97170327d872d25e348a4ada885bf7983493f3",
+   "created_at": "2026-07-20T13:25:09Z",
+   "event": "referenced",
+   "id": 28214081987
+  },
+  {
+   "actor": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "2e4a482362a8743068b51c8c04adb7527458ee4c",
+   "commit_url": "https://api.github.com/repos/DigitalBrewStudios/finix-modular-services/commits/2e4a482362a8743068b51c8c04adb7527458ee4c",
+   "created_at": "2026-07-25T00:56:32Z",
+   "event": "referenced",
+   "id": 28462921346
+  },
+  {
+   "actor": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "5156341ea498ab23e2f4b59392dfe2a60b3c8f58",
+   "commit_url": "https://api.github.com/repos/DigitalBrewStudios/finix-modular-services/commits/5156341ea498ab23e2f4b59392dfe2a60b3c8f58",
+   "created_at": "2026-07-25T01:05:03Z",
+   "event": "referenced",
+   "id": 28463081205
+  },
+  {
+   "actor": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "05d6d183f94c78c0309e2861890848e341b4f397",
+   "commit_url": "https://api.github.com/repos/DigitalBrewStudios/finix-modular-services/commits/05d6d183f94c78c0309e2861890848e341b4f397",
+   "created_at": "2026-07-25T01:06:38Z",
+   "event": "referenced",
+   "id": 28463111657
+  },
+  {
+   "actor": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fbaf3598aaea33af62335f9be024c341a6c36bc6",
+   "commit_url": "https://api.github.com/repos/DigitalBrewStudios/finix-modular-services/commits/fbaf3598aaea33af62335f9be024c341a6c36bc6",
+   "created_at": "2026-07-25T01:14:08Z",
+   "event": "referenced",
+   "id": 28463249889
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fd0b7ca9186bbf2ca671d876b11c3010516e0138",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nixpkgs/commits/fd0b7ca9186bbf2ca671d876b11c3010516e0138",
+   "created_at": "2026-07-26T08:59:52Z",
+   "event": "referenced",
+   "id": 28494991311
+  },
+  {
+   "actor": {
+    "id": 52288096,
+    "login": "moeleak",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "df595fc96e381ef4b4143f6dc08d5fdbb0926875",
+   "commit_url": "https://api.github.com/repos/moeleak/nixpkgs/commits/df595fc96e381ef4b4143f6dc08d5fdbb0926875",
+   "created_at": "2026-07-30T07:02:30Z",
+   "event": "referenced",
+   "id": 28705359171
+  },
+  {
+   "actor": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "aba06ed375f1fef32f9aa92cfa53b48ae3e2b55e",
+   "commit_url": "https://api.github.com/repos/DigitalBrewStudios/finix-modular-services/commits/aba06ed375f1fef32f9aa92cfa53b48ae3e2b55e",
+   "created_at": "2026-08-09T01:24:15Z",
+   "event": "referenced",
+   "id": 29171880845
+  },
+  {
+   "actor": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "c940e530ad167c32ce71910f7f143a0ce3a1d6ca",
+   "commit_url": "https://api.github.com/repos/DigitalBrewStudios/finix-modular-services/commits/c940e530ad167c32ce71910f7f143a0ce3a1d6ca",
+   "created_at": "2026-08-30T17:33:42Z",
+   "event": "referenced",
+   "id": 30242297526
+  },
+  {
+   "actor": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "65a420d5a19ef13c442486def51ee2626061ba7a",
+   "commit_url": "https://api.github.com/repos/DigitalBrewStudios/finix-modular-services/commits/65a420d5a19ef13c442486def51ee2626061ba7a",
+   "created_at": "2026-08-30T17:34:42Z",
+   "event": "referenced",
+   "id": 30242317962
+  }
+ ]
+}

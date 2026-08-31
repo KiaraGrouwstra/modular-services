@@ -1,0 +1,1100 @@
+{
+ "comments": [
+  {
+   "body": "@ofborg test restic borgbackup contracts.fileBackup-borgbackup contracts.fileBackup-restic",
+   "created_at": "2026-05-20T20:59:33Z",
+   "id": 4502587710,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-20T20:59:33Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ofborg test contracts.fileBackup-demo",
+   "created_at": "2026-05-20T21:01:28Z",
+   "id": 4502599636,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-20T21:01:28Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/pre-rfc-decouple-services-using-structured-typing/58257/46\n",
+   "created_at": "2026-05-20T21:59:17Z",
+   "id": 4502985126,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-20T21:59:17Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "For #506343 what the plan for that PR now with this?",
+   "created_at": "2026-05-24T03:17:01Z",
+   "id": 4527254425,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-24T03:17:01Z",
+   "user": {
+    "id": 97130632,
+    "login": "nyabinary",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@nyabinary:\r\n\r\n> For #506343 what the plan for that PR now with this?\r\n\r\nas per https://github.com/NixOS/nixpkgs/pull/506343#issuecomment-4484975687, while we managed to get a sense of where to go there, we feel reviewers deserve more sensible chunking than such a big bang PR. This PR would make for a start to a more layered approach.",
+   "created_at": "2026-05-24T04:07:39Z",
+   "id": 4527346672,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-24T04:07:39Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> For #506343 what the plan for that PR now with this?\r\n\r\nI wouldn't say it's a _start_. That PR's goal is to take the concepts as far as possible, so we could answer any potential questions about interoperability with other concepts like modular services, or about how this \"options machinery\" (cf.\r\nPR description) could look like. It wouldn't ever get merged as-is, but we might one day cherry-pick ideas.\r\n\r\nYou could see the current PR as step 1 cherry-picked from #506343.",
+   "created_at": "2026-05-24T06:24:12Z",
+   "id": 4527597767,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-24T06:25:32Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/522054",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "**Converting back the PR to draft because I got some sizable amount of changes I want to make and you should know that before continuing.**\r\n\r\nThis PR follows the [RFC 189](https://github.com/NixOS/rfcs/pull/189) to implement a contract for file backups.\r\n\r\nFile backups means specifically backing up files on a filesystem. Backing up a database using a dump command or taking snapshots of a snapshottable filesystem (e.g. ZFS) are out of scope. Separate contracts will be made for those as seen fit.\r\n\r\n# Previous work\r\n\r\nThis PR supersedes https://github.com/NixOS/nixpkgs/pull/495303 which was introducing a contract for secrets. I am of the opinion that PR, although having similar goals, was doomed to fail from the start because:\r\n\r\n1. It touches a subject that has a lot of bagage in nixpkgs - secrets. Although the contract was technically forward compatible with the Vars initiative, I fully understand it still looked like a competitor.\r\n2. The intended providers for the contract - sops-nix, agenix, etc. - live outside of the nixpkgs repo, making it hard to give concrete usage examples.\r\n3. The contract was not fully backwards compatible as it was changing the type of an existing option in the consumers.\r\n\r\nThis contract does not suffer from the issues.\r\n\r\nTwo other prior PRs exist that introduced contracts by the wrong end. They started by adding a complex mechanism without a concrete use case and it made it hard to distinguish between intrinsic complexity and accidental complexity. This PR does not suffer from this issue either as it introduces no such mechanism and focuses on the essence of the contract. The PRs are linked at the end of the PR description.\r\n\r\nThere is also the PR https://github.com/NixOS/nixpkgs/pull/506343 which goes very far, a bit like a research project, and sees what pushing the contracts mechanism can lead to. It answers to the questions like does this work with modular services and others with success. The implementation might change in the future but the answers are there.\r\n\r\nFinally, I do use this contract, although with a different naming convention, in my project and it works great for about 10 services https://shb.skarabox.com/contracts-backup.html. The options I chose are the minimal necessary ones to satisfy all those services.\r\n\r\n# Contract\r\n\r\nThis PR creates a standardized option submodule that allows maintainers of a service to codify how their service should be backed up. The submodule provides the following option:\r\n\r\n```nix\r\n{\r\n  input = {\r\n    user = mkOption {\r\n      type = types.str;\r\n    };\r\n\r\n    sourceDirectories = mkOption {\r\n      type = types.nonEmptyListOf types.str;\r\n    };\r\n\r\n    excludePatterns = mkOption {\r\n      type = types.listOf types.str;\r\n      default = [ ];\r\n    };\r\n  };\r\n\r\n  output = {\r\n    script = mkOption {\r\n      type = types.package;\r\n    };\r\n  };\r\n}\r\n```\r\n\r\nThe `input.user` option defines which Unix user the backup service should run under to have the correct permission to backup the wanted files.\r\n\r\nThe `input.sourceDirectories` option defines which directories to back up.\r\n\r\nThe `input.excludePatterns` option defines which patterns to exclude from the backup. For example, setting `[ \"_exclude\" \"*.rnd\" ]` would exclude the file whose name exactly matches `_exclude` and all files ending in `.rnd`. Note that uniformizing the handling of this option across all providers is important although must still be further expanded in this PR (I'm happy to get suggestions here, TBH I didn’t want to spend too much time making this option perfect before getting more feedback on the PR). The generic test is used to enforce all providers implement this option as expected. See the `Provider` section below for the generic test.\r\n\r\nThe `output.script` option must be a package whose goal is to provide a uniformized helper on the command line:\r\n\r\n```bash\r\n# List snapshots. Must output 1 snapshot by line.\r\n# No format is imposed on what the snapshot should look like\r\n# but copying it verbatim in the restore command must restore that snapshot.\r\n$ <script> snaphots\r\n\r\n# Restore a snapshot:\r\n$ <script> restore <snapshot>\r\n\r\n# Take a backup:\r\n$ <script> backup\r\n\r\n# Pass a custom command to the underlying provider:\r\n$ <script> exec <arg> [<arg> ...]\r\n```\r\n\r\nThese exact same commands must be understood by all providers. These are enforced by the generic tests, see the `Provider` section below for the generic test.\r\n\r\nThe user may expose the package provided under the `output.script` option in any way they see fit, including adding them in the `environment.systemPackages` option.\r\n\r\nThis package, although not strictly necessary from a user perspective, is necessary to make the tests generic as it can then trigger a backup or restore a snapshot ion a standard way for each test. After writing those tests I realized extracting this script was super nice and thus why it appeared as an option here instead of staying internal in the tests.\r\n\r\n# Consumer\r\n\r\nA service that wants to be backed up, also called a consumer of the file backup contract, must declare and define at least the `input.user` and `input.sourceDirectories` options and optionally the `input.excludePatterns` option. Although the usefulness is limited, the `output.script` option may be referenced by the service. A minimal example is:\r\n\r\n```nix\r\n{\r\n  options.services.vaultwarden.fileBackupContract.input = {\r\n    user = mkOption {\r\n      type = types.str;\r\n      default = \"vaultwarden\";\r\n    };\r\n\r\n    sourceDirectories = mkOption {\r\n      type = types.nonEmptyListOf types.str;\r\n      default = [ cfg.dataDir ];\r\n      defaultText = [ \"config.services.vaultwarden.dataDir\" ];\r\n    };\r\n  };\r\n}\r\n```\r\n\r\nThe `nextcloud` and `home-assistant` modules are modified to implement this contract. You will notice the implementation is fully backwards compatible and is quite minimal.\r\n\r\n# Provider\r\n\r\nThe `restic`  and `borgbackup` modules are modified to implement this contract. Although the diff here is bigger than for the consumers, the diff is merely a massaging of the options of the contract to match those of the existing `restic` and `borgbackup` providers. Most of the diff is related to the implementation of the script that goes into the `output.script` option. The modifications are fully backwards compatible.\r\n\r\nA service that can back up files which wants to become a provider of this contract must:\r\n\r\n1. Implement all the options of the contract:\r\n\r\n```nix\r\n{\r\n  input = {\r\n    user = mkOption {\r\n      type = types.str;\r\n    };\r\n\r\n    sourceDirectories = mkOption {\r\n      type = types.nonEmptyListOf types.str;\r\n    };\r\n\r\n    excludePatterns = mkOption {\r\n      type = types.listOf types.str;\r\n      default = [ ];\r\n    };\r\n  };\r\n\r\n  output = {\r\n    script = mkOption {\r\n      type = types.package;\r\n      default = pkgs.writeShellApplication { ... };\r\n    };\r\n  };\r\n}\r\n```\r\n\r\nEach option must be handled the same way by all providers. This is enforced by making the provider pass the NixOS VM generic test described hereunder.\r\n\r\n5. Pass the generic test. \r\n\r\nThe goal of the generic test is to make sure each provider behaves in the same uniformized way, making them interchangeable.\r\n\r\nA provider wanting to implement this contract must add a file at\r\n\r\n```\r\nnixos/tests/contracts/fileBackup/<provider name>.nix\r\n```\r\n\r\nwhich imports the generic test function\r\n```\r\ngenericTest = import ./genericTest.nix args;\r\n```\r\nand uses it to define a test. A line referencing this new file must be added to `nixos/tests/contracts/default.nix`. The test can then be run with `nix-build -A nixosTests.contracts.fileBackup-<provider name>`.\r\n\r\nAll generic test functions (for this contract and others) accept one `attrset` as argument which must define the following attributes:\r\n\r\n- `providerName (str)`\r\n- `providerRoot (listOf str)` this is the path in the option tree to the provider option implementing the `fileBackupContract`. It is a list because the generic test uses `setAttrByPath` and `getAttrFromPath` to respectively set the `input` and get the `output` of the contract.\r\n- `maintainers` to know who to ping in case of an issue.\r\n- `imports` which is a list of modules which is used both to import the actual provider module to be tested but also to setup any required options needed to initialize the provider, would this be necessary.\r\n\r\nFurthermore, the generic test function defines the `test.input` and `test.output` options which follows exactly the same definition as the contract. These can be used in the modules in the `imports` if required by the provider.\r\n\r\n# Usage\r\n\r\nTo make this PR more concrete, a demo file has been added at `nixos/tests/contracts/fileBackup/demo.nix` with a NixOS VM test which shows how the end user would use the `fileBackup` contract.\r\n\r\nThe demo shows the `restic` and `borgbackup` services using the file backup contract to backup both `nextcloud` and `home-assistant`. This demo file could be moved to the manual instead of living as a NixOS VM test but I wanted to showcase this is actually evaluating and building correctly.\r\n\r\n```nix\r\n{\r\n  services.restic.backups.\"home-assistant\" = {\r\n    // Here goes \"normal\" Restic options\r\n    initialize = true;\r\n    repository = \"/opt/restic-repos/${name}\";\r\n    passwordFile = \"${pkgs.writeText \"password\" \"restic-${name}-password\"}\";\r\n\r\n    pruneOpts = [\r\n      \"--keep-daily 7\"\r\n      \"--keep-weekly 5\"\r\n      \"--keep-monthly 12\"\r\n      \"--keep-yearly 75\"\r\n    ];\r\n\r\n    // Contract option\r\n    fileBackupContract.input = config.services.home-assistant.fileBackupContract.input;\r\n  };\r\n}\r\n```\r\n\r\n# Out of Scope\r\n\r\n## Options Machinery\r\n\r\nAll in all, this PR does not do anything magic as far as the module system is concerned and that is its primary goal, keep it simple.\r\n\r\nClearly, the options for the contract are repeated in various places. It is quite evident that it would be beneficial in the long run to somehow define the options once in a source of truth location and be able to reuse them when needed. After all, the diff in the consumers repeat a lot of stuff.\r\n\r\nI specifically want to _not_ include this consideration in this PR. The goal here is to focus on the contract itself. What it means to have a file backup contract, what options should go in there, etc. Attempts were made to introduce the machinery to avoid repeating the options in other PRs but these did not receive a lot of attention. If you have ideas though, feel free to comment on those PRs:\r\n\r\n- https://github.com/NixOS/nixpkgs/pull/432529 implementation using dependent types\r\n- https://github.com/NixOS/nixpkgs/pull/485453 implementation using functions\r\n\r\n## Service Orchestration\r\n\r\nOr is it out of scope? Should we stop a service before backing up the files? Should the contract include a \"hook\" option that triggers a dump of a consumer service's files?\r\n\r\n## Streaming Backup\r\n\r\nI do have an implementation ready for this but it should probably go into its own follow-up PR.\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n- [x] nix-build -A nixosTests.restic\r\n- [x] nix-build -A nixosTests.borgbackup\r\n- [x] nix-build -A nixosTests.contracts.fileBackup-restic\r\n- [x] nix-build -A nixosTests.contracts.fileBackup-borgbackup\r\n- [x] nix-build -A nixosTests.contracts.fileBackup-demo\r\n- [x] (cd nixos/; nix-build release.nix -A manual.x86_64-linux)\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 6,
+  "created_at": "2026-05-19T20:35:42Z",
+  "draft": true,
+  "id": 4480848465,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 522054,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/522054.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/522054.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 1,
+   "heart": 8,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 9
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "Contracts for file backups",
+  "type": null,
+  "updated_at": "2026-06-12T22:47:27Z",
+  "user": {
+   "id": 1044950,
+   "login": "ibizaman",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 799,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:35:41Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "beed88e0e42a9ff63b16f0034689b1e10585ea83",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "**Converting back the PR to draft because I got some sizable amount of changes I want to make and you should know that before continuing.**\r\n\r\nThis PR follows the [RFC 189](https://github.com/NixOS/rfcs/pull/189) to implement a contract for file backups.\r\n\r\nFile backups means specifically backing up files on a filesystem. Backing up a database using a dump command or taking snapshots of a snapshottable filesystem (e.g. ZFS) are out of scope. Separate contracts will be made for those as seen fit.\r\n\r\n# Previous work\r\n\r\nThis PR supersedes https://github.com/NixOS/nixpkgs/pull/495303 which was introducing a contract for secrets. I am of the opinion that PR, although having similar goals, was doomed to fail from the start because:\r\n\r\n1. It touches a subject that has a lot of bagage in nixpkgs - secrets. Although the contract was technically forward compatible with the Vars initiative, I fully understand it still looked like a competitor.\r\n2. The intended providers for the contract - sops-nix, agenix, etc. - live outside of the nixpkgs repo, making it hard to give concrete usage examples.\r\n3. The contract was not fully backwards compatible as it was changing the type of an existing option in the consumers.\r\n\r\nThis contract does not suffer from the issues.\r\n\r\nTwo other prior PRs exist that introduced contracts by the wrong end. They started by adding a complex mechanism without a concrete use case and it made it hard to distinguish between intrinsic complexity and accidental complexity. This PR does not suffer from this issue either as it introduces no such mechanism and focuses on the essence of the contract. The PRs are linked at the end of the PR description.\r\n\r\nThere is also the PR https://github.com/NixOS/nixpkgs/pull/506343 which goes very far, a bit like a research project, and sees what pushing the contracts mechanism can lead to. It answers to the questions like does this work with modular services and others with success. The implementation might change in the future but the answers are there.\r\n\r\nFinally, I do use this contract, although with a different naming convention, in my project and it works great for about 10 services https://shb.skarabox.com/contracts-backup.html. The options I chose are the minimal necessary ones to satisfy all those services.\r\n\r\n# Contract\r\n\r\nThis PR creates a standardized option submodule that allows maintainers of a service to codify how their service should be backed up. The submodule provides the following option:\r\n\r\n```nix\r\n{\r\n  input = {\r\n    user = mkOption {\r\n      type = types.str;\r\n    };\r\n\r\n    sourceDirectories = mkOption {\r\n      type = types.nonEmptyListOf types.str;\r\n    };\r\n\r\n    excludePatterns = mkOption {\r\n      type = types.listOf types.str;\r\n      default = [ ];\r\n    };\r\n  };\r\n\r\n  output = {\r\n    script = mkOption {\r\n      type = types.package;\r\n    };\r\n  };\r\n}\r\n```\r\n\r\nThe `input.user` option defines which Unix user the backup service should run under to have the correct permission to backup the wanted files.\r\n\r\nThe `input.sourceDirectories` option defines which directories to back up.\r\n\r\nThe `input.excludePatterns` option defines which patterns to exclude from the backup. For example, setting `[ \"_exclude\" \"*.rnd\" ]` would exclude the file whose name exactly matches `_exclude` and all files ending in `.rnd`. Note that uniformizing the handling of this option across all providers is important although must still be further expanded in this PR (I'm happy to get suggestions here, TBH I didn’t want to spend too much time making this option perfect before getting more feedback on the PR). The generic test is used to enforce all providers implement this option as expected. See the `Provider` section below for the generic test.\r\n\r\nThe `output.script` option must be a package whose goal is to provide a uniformized helper on the command line:\r\n\r\n```bash\r\n# List snapshots. Must output 1 snapshot by line.\r\n# No format is imposed on what the snapshot should look like\r\n# but copying it verbatim in the restore command must restore that snapshot.\r\n$ <script> snaphots\r\n\r\n# Restore a snapshot:\r\n$ <script> restore <snapshot>\r\n\r\n# Take a backup:\r\n$ <script> backup\r\n\r\n# Pass a custom command to the underlying provider:\r\n$ <script> exec <arg> [<arg> ...]\r\n```\r\n\r\nThese exact same commands must be understood by all providers. These are enforced by the generic tests, see the `Provider` section below for the generic test.\r\n\r\nThe user may expose the package provided under the `output.script` option in any way they see fit, including adding them in the `environment.systemPackages` option.\r\n\r\nThis package, although not strictly necessary from a user perspective, is necessary to make the tests generic as it can then trigger a backup or restore a snapshot ion a standard way for each test. After writing those tests I realized extracting this script was super nice and thus why it appeared as an option here instead of staying internal in the tests.\r\n\r\n# Consumer\r\n\r\nA service that wants to be backed up, also called a consumer of the file backup contract, must declare and define at least the `input.user` and `input.sourceDirectories` options and optionally the `input.excludePatterns` option. Although the usefulness is limited, the `output.script` option may be referenced by the service. A minimal example is:\r\n\r\n```nix\r\n{\r\n  options.services.vaultwarden.fileBackupContract.input = {\r\n    user = mkOption {\r\n      type = types.str;\r\n      default = \"vaultwarden\";\r\n    };\r\n\r\n    sourceDirectories = mkOption {\r\n      type = types.nonEmptyListOf types.str;\r\n      default = [ cfg.dataDir ];\r\n      defaultText = [ \"config.services.vaultwarden.dataDir\" ];\r\n    };\r\n  };\r\n}\r\n```\r\n\r\nThe `nextcloud` and `home-assistant` modules are modified to implement this contract. You will notice the implementation is fully backwards compatible and is quite minimal.\r\n\r\n# Provider\r\n\r\nThe `restic`  and `borgbackup` modules are modified to implement this contract. Although the diff here is bigger than for the consumers, the diff is merely a massaging of the options of the contract to match those of the existing `restic` and `borgbackup` providers. Most of the diff is related to the implementation of the script that goes into the `output.script` option. The modifications are fully backwards compatible.\r\n\r\nA service that can back up files which wants to become a provider of this contract must:\r\n\r\n1. Implement all the options of the contract:\r\n\r\n```nix\r\n{\r\n  input = {\r\n    user = mkOption {\r\n      type = types.str;\r\n    };\r\n\r\n    sourceDirectories = mkOption {\r\n      type = types.nonEmptyListOf types.str;\r\n    };\r\n\r\n    excludePatterns = mkOption {\r\n      type = types.listOf types.str;\r\n      default = [ ];\r\n    };\r\n  };\r\n\r\n  output = {\r\n    script = mkOption {\r\n      type = types.package;\r\n      default = pkgs.writeShellApplication { ... };\r\n    };\r\n  };\r\n}\r\n```\r\n\r\nEach option must be handled the same way by all providers. This is enforced by making the provider pass the NixOS VM generic test described hereunder.\r\n\r\n5. Pass the generic test. \r\n\r\nThe goal of the generic test is to make sure each provider behaves in the same uniformized way, making them interchangeable.\r\n\r\nA provider wanting to implement this contract must add a file at\r\n\r\n```\r\nnixos/tests/contracts/fileBackup/<provider name>.nix\r\n```\r\n\r\nwhich imports the generic test function\r\n```\r\ngenericTest = import ./genericTest.nix args;\r\n```\r\nand uses it to define a test. A line referencing this new file must be added to `nixos/tests/contracts/default.nix`. The test can then be run with `nix-build -A nixosTests.contracts.fileBackup-<provider name>`.\r\n\r\nAll generic test functions (for this contract and others) accept one `attrset` as argument which must define the following attributes:\r\n\r\n- `providerName (str)`\r\n- `providerRoot (listOf str)` this is the path in the option tree to the provider option implementing the `fileBackupContract`. It is a list because the generic test uses `setAttrByPath` and `getAttrFromPath` to respectively set the `input` and get the `output` of the contract.\r\n- `maintainers` to know who to ping in case of an issue.\r\n- `imports` which is a list of modules which is used both to import the actual provider module to be tested but also to setup any required options needed to initialize the provider, would this be necessary.\r\n\r\nFurthermore, the generic test function defines the `test.input` and `test.output` options which follows exactly the same definition as the contract. These can be used in the modules in the `imports` if required by the provider.\r\n\r\n# Usage\r\n\r\nTo make this PR more concrete, a demo file has been added at `nixos/tests/contracts/fileBackup/demo.nix` with a NixOS VM test which shows how the end user would use the `fileBackup` contract.\r\n\r\nThe demo shows the `restic` and `borgbackup` services using the file backup contract to backup both `nextcloud` and `home-assistant`. This demo file could be moved to the manual instead of living as a NixOS VM test but I wanted to showcase this is actually evaluating and building correctly.\r\n\r\n```nix\r\n{\r\n  services.restic.backups.\"home-assistant\" = {\r\n    // Here goes \"normal\" Restic options\r\n    initialize = true;\r\n    repository = \"/opt/restic-repos/${name}\";\r\n    passwordFile = \"${pkgs.writeText \"password\" \"restic-${name}-password\"}\";\r\n\r\n    pruneOpts = [\r\n      \"--keep-daily 7\"\r\n      \"--keep-weekly 5\"\r\n      \"--keep-monthly 12\"\r\n      \"--keep-yearly 75\"\r\n    ];\r\n\r\n    // Contract option\r\n    fileBackupContract.input = config.services.home-assistant.fileBackupContract.input;\r\n  };\r\n}\r\n```\r\n\r\n# Out of Scope\r\n\r\n## Options Machinery\r\n\r\nAll in all, this PR does not do anything magic as far as the module system is concerned and that is its primary goal, keep it simple.\r\n\r\nClearly, the options for the contract are repeated in various places. It is quite evident that it would be beneficial in the long run to somehow define the options once in a source of truth location and be able to reuse them when needed. After all, the diff in the consumers repeat a lot of stuff.\r\n\r\nI specifically want to _not_ include this consideration in this PR. The goal here is to focus on the contract itself. What it means to have a file backup contract, what options should go in there, etc. Attempts were made to introduce the machinery to avoid repeating the options in other PRs but these did not receive a lot of attention. If you have ideas though, feel free to comment on those PRs:\r\n\r\n- https://github.com/NixOS/nixpkgs/pull/432529 implementation using dependent types\r\n- https://github.com/NixOS/nixpkgs/pull/485453 implementation using functions\r\n\r\n## Service Orchestration\r\n\r\nOr is it out of scope? Should we stop a service before backing up the files? Should the contract include a \"hook\" option that triggers a dump of a consumer service's files?\r\n\r\n## Streaming Backup\r\n\r\nI do have an implementation ready for this but it should probably go into its own follow-up PR.\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n- [x] nix-build -A nixosTests.restic\r\n- [x] nix-build -A nixosTests.borgbackup\r\n- [x] nix-build -A nixosTests.contracts.fileBackup-restic\r\n- [x] nix-build -A nixosTests.contracts.fileBackup-borgbackup\r\n- [x] nix-build -A nixosTests.contracts.fileBackup-demo\r\n- [x] (cd nixos/; nix-build release.nix -A manual.x86_64-linux)\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 10,
+  "closed_at": null,
+  "comments": 6,
+  "commits": 7,
+  "created_at": "2026-05-19T20:35:42Z",
+  "deletions": 32,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/522054.diff",
+  "draft": true,
+  "head": {
+   "label": "ibizaman:contract-backup",
+   "ref": "contract-backup",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2022-05-23T06:55:50Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "ibizaman/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/ibizaman/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 495292405,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/ibizaman/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/ibizaman/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 1044950,
+     "login": "ibizaman",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/ibizaman/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-20T17:42:06Z",
+    "size": 3103279,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/ibizaman/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/ibizaman/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2024-02-06T12:57:14Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "aed52a3be115c003414e6179660b489e9499987f",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3711845457,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": "ace881fb47088707383dfa299368142d6e8ee3ee",
+  "mergeable": true,
+  "mergeable_state": "blocked",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 522054,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/522054.patch",
+  "rebaseable": true,
+  "requested_reviewers": [
+   {
+    "id": 131599,
+    "login": "mweinelt",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 333807,
+    "login": "bachp",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 1327662,
+    "login": "britter",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 6806011,
+    "login": "dotlambda",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 11587657,
+    "login": "Scrumplex",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 26026535,
+    "login": "provokateurin",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 39011842,
+    "login": "toast003",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 12,
+  "state": "open",
+  "title": "Contracts for file backups",
+  "updated_at": "2026-06-12T22:47:27Z",
+  "user": {
+   "id": 1044950,
+   "login": "ibizaman",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#522054",
+ "review_comments": [
+  {
+   "body": "Nit\n\n```suggestion\n                lib.optional (config.fileBackupContract != null) config.fileBackupContract.input.sourceDirectories;\n```\n",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-05-20T21:43:49Z",
+   "diff_hunk": "@@ -423,7 +473,11 @@ in\n \n             paths = lib.mkOption {\n               type = with lib.types; nullOr (coercedTo str lib.singleton (listOf str));\n-              default = null;\n+              default =\n+                if config.fileBackupContract == null then\n+                  null\n+                else\n+                  config.fileBackupContract.input.sourceDirectories;",
+   "id": 3277368600,
+   "line": 480,
+   "original_commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "original_line": 480,
+   "original_position": 81,
+   "original_start_line": 477,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 81,
+   "pull_request_review_id": 4332471668,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 477,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-05-20T21:46:06Z",
+   "user": {
+    "id": 252042,
+    "login": "drupol",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n                lib.optionals (config.fileBackupContract != null) (map (n: \"sh:**/${n}\") config.fileBackupContract.input.excludePatterns);\n```\n",
+   "commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "created_at": "2026-05-20T21:45:14Z",
+   "diff_hunk": "@@ -603,7 +658,11 @@ in\n                 Can not be set when {option}`createCommand` is set to\n                 `import-tar`.\n               '';\n-              default = [ ];\n+              default =\n+                if config.fileBackupContract == null then\n+                  [ ]\n+                else\n+                  (map (n: \"sh:**/${n}\") config.fileBackupContract.input.excludePatterns);",
+   "id": 3277375049,
+   "line": null,
+   "original_commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "original_line": 665,
+   "original_position": 104,
+   "original_start_line": 662,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 1,
+   "pull_request_review_id": 4332471668,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-05-20T21:46:06Z",
+   "user": {
+    "id": 252042,
+    "login": "drupol",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "in the falsy case the suggestion returns empty list rather than null, which as per the declared type i'm not sure is intended here",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-05-20T22:23:35Z",
+   "diff_hunk": "@@ -423,7 +473,11 @@ in\n \n             paths = lib.mkOption {\n               type = with lib.types; nullOr (coercedTo str lib.singleton (listOf str));\n-              default = null;\n+              default =\n+                if config.fileBackupContract == null then\n+                  null\n+                else\n+                  config.fileBackupContract.input.sourceDirectories;",
+   "id": 3277536881,
+   "in_reply_to_id": 3277368600,
+   "line": 480,
+   "original_commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "original_line": 480,
+   "original_position": 81,
+   "original_start_line": 477,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 81,
+   "pull_request_review_id": 4332654816,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 477,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-05-20T22:23:35Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n            fileBackup = lib.mkOption {\n```\n\nthere's more places like this, but i'd consider this for perhaps brevity + discoverability (going by the contract name)",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-05-20T22:28:47Z",
+   "diff_hunk": "@@ -830,6 +889,79 @@ in\n               default = [ ];\n               example = [ \"--cleanup-commits\" ];\n             };\n+\n+            fileBackupContract = lib.mkOption {",
+   "id": 3277555755,
+   "line": 891,
+   "original_commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "original_line": 893,
+   "original_position": 113,
+   "original_start_line": null,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 111,
+   "pull_request_review_id": 4332673291,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-20T22:28:47Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n                    request = {\n```\nmay be a more robust name when switching context between provider vs consumer, on top of facilitating calling the consumer (in pre-resolution context) a requester",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-05-20T22:29:46Z",
+   "diff_hunk": "@@ -830,6 +889,79 @@ in\n               default = [ ];\n               example = [ \"--cleanup-commits\" ];\n             };\n+\n+            fileBackupContract = lib.mkOption {\n+              description = \"Provider of the fileBackup contract.\";\n+              default = null;\n+              type = lib.types.nullOr (\n+                lib.types.submodule {\n+                  options = {\n+                    input = {",
+   "id": 3277559055,
+   "line": 897,
+   "original_commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "original_line": 899,
+   "original_position": 119,
+   "original_start_line": null,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 117,
+   "pull_request_review_id": 4332676571,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-21T08:54:15Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n                    result = {\n```\nso, input/output terminology takes the perspective from the provider, yet gets more confusing from the perspective of the consumer, where that `output` is mostly something that comes in",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-05-20T22:30:19Z",
+   "diff_hunk": "@@ -830,6 +889,79 @@ in\n               default = [ ];\n               example = [ \"--cleanup-commits\" ];\n             };\n+\n+            fileBackupContract = lib.mkOption {\n+              description = \"Provider of the fileBackup contract.\";\n+              default = null;\n+              type = lib.types.nullOr (\n+                lib.types.submodule {\n+                  options = {\n+                    input = {\n+                      user = lib.mkOption {\n+                        description = ''\n+                          As which user the backup should run.\n+                        '';\n+                        type = lib.types.str;\n+                        example = \"vaultwarden\";\n+                      };\n+\n+                      sourceDirectories = lib.mkOption {\n+                        description = ''\n+                          Directories to backup.\n+                        '';\n+                        type = lib.types.nonEmptyListOf lib.types.str;\n+                        example = [\n+                          \"/var/lib/vaultwarden\"\n+                        ];\n+                      };\n+\n+                      excludePatterns = lib.mkOption {\n+                        description = ''\n+                          File patterns to exclude.\n+                        '';\n+                        type = lib.types.listOf lib.types.str;\n+                        default = [ ];\n+                      };\n+                    };\n+                    output = {",
+   "id": 3277561062,
+   "line": 924,
+   "original_commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "original_line": 926,
+   "original_position": 146,
+   "original_start_line": null,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 144,
+   "pull_request_review_id": 4332679003,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-21T08:55:10Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Indeed, I'm not aware of a function to do that.",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-05-21T21:01:58Z",
+   "diff_hunk": "@@ -423,7 +473,11 @@ in\n \n             paths = lib.mkOption {\n               type = with lib.types; nullOr (coercedTo str lib.singleton (listOf str));\n-              default = null;\n+              default =\n+                if config.fileBackupContract == null then\n+                  null\n+                else\n+                  config.fileBackupContract.input.sourceDirectories;",
+   "id": 3284317777,
+   "in_reply_to_id": 3277368600,
+   "line": 480,
+   "original_commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "original_line": 480,
+   "original_position": 81,
+   "original_start_line": 477,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 81,
+   "pull_request_review_id": 4340700816,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 477,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-05-21T21:01:58Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thinking about this more, I think now `response` makes more sense than `result`. Request-response is a common combination.",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-05-21T21:06:05Z",
+   "diff_hunk": "@@ -830,6 +889,79 @@ in\n               default = [ ];\n               example = [ \"--cleanup-commits\" ];\n             };\n+\n+            fileBackupContract = lib.mkOption {\n+              description = \"Provider of the fileBackup contract.\";\n+              default = null;\n+              type = lib.types.nullOr (\n+                lib.types.submodule {\n+                  options = {\n+                    input = {\n+                      user = lib.mkOption {\n+                        description = ''\n+                          As which user the backup should run.\n+                        '';\n+                        type = lib.types.str;\n+                        example = \"vaultwarden\";\n+                      };\n+\n+                      sourceDirectories = lib.mkOption {\n+                        description = ''\n+                          Directories to backup.\n+                        '';\n+                        type = lib.types.nonEmptyListOf lib.types.str;\n+                        example = [\n+                          \"/var/lib/vaultwarden\"\n+                        ];\n+                      };\n+\n+                      excludePatterns = lib.mkOption {\n+                        description = ''\n+                          File patterns to exclude.\n+                        '';\n+                        type = lib.types.listOf lib.types.str;\n+                        default = [ ];\n+                      };\n+                    };\n+                    output = {",
+   "id": 3284338393,
+   "in_reply_to_id": 3277561062,
+   "line": 924,
+   "original_commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "original_line": 926,
+   "original_position": 146,
+   "original_start_line": null,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 144,
+   "pull_request_review_id": 4340730978,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-21T21:06:05Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The naming is unfortunate, the *file*Backup contract only allows backing up source*Directories*. Something like paths sounds broader.\n\nAnother option that does seem lacking is retention. Disk space is not unlimited so pruning of backups is pretty much essential. Having that in its own contract feels like it would decouple things more than necessary.",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-06-08T15:53:08Z",
+   "diff_hunk": "@@ -830,6 +887,79 @@ in\n               default = [ ];\n               example = [ \"--cleanup-commits\" ];\n             };\n+\n+            fileBackupContract = lib.mkOption {\n+              description = \"Provider of the fileBackup contract.\";\n+              default = null;\n+              type = lib.types.nullOr (\n+                lib.types.submodule {\n+                  options = {\n+                    input = {\n+                      user = lib.mkOption {\n+                        description = ''\n+                          As which user the backup should run.\n+                        '';\n+                        type = lib.types.str;\n+                        example = \"vaultwarden\";\n+                      };\n+\n+                      sourceDirectories = lib.mkOption {",
+   "id": 3374587854,
+   "line": 906,
+   "original_commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "original_line": 906,
+   "original_position": 126,
+   "original_start_line": null,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 126,
+   "pull_request_review_id": 4451149249,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-08T15:53:08Z",
+   "user": {
+    "id": 1486805,
+    "login": "toonn",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> The naming is unfortunate, the fileBackup contract only allows backing up sourceDirectories. Something like paths sounds broader.\r\n\r\nThat’s a good point. The name file comes from the need to distinguish between backing up actual files on disk and not streams. Streams would be coming from the stdout of programs, for example for backing up a database. This is purposely not proposed here to keep the scope somewhat small but I do have an implementation.\r\n\r\nI don’t know if there’s a better name than path but path does encapsulate both files and directories. At least to my knowledge. Then we could rename the option sourcePaths.\r\n\r\n> Another option that does seem lacking is retention. Disk space is not unlimited so pruning of backups is pretty much essential. Having that in its own contract feels like it would decouple things more than necessary.\r\n\r\nThat’s indeed a valid concern but IMO it doesn’t belong in this contract which is only used to let a service tell what to back up. The contract sits between the consumer and the provider. Retention is more of a concern between the backup service and the user, so between the provider and the user. \r\n\r\nNow having the user be able to tell its preference for backup retention once and that be applied to all backup services is an interesting consideration.",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-06-08T17:13:37Z",
+   "diff_hunk": "@@ -830,6 +887,79 @@ in\n               default = [ ];\n               example = [ \"--cleanup-commits\" ];\n             };\n+\n+            fileBackupContract = lib.mkOption {\n+              description = \"Provider of the fileBackup contract.\";\n+              default = null;\n+              type = lib.types.nullOr (\n+                lib.types.submodule {\n+                  options = {\n+                    input = {\n+                      user = lib.mkOption {\n+                        description = ''\n+                          As which user the backup should run.\n+                        '';\n+                        type = lib.types.str;\n+                        example = \"vaultwarden\";\n+                      };\n+\n+                      sourceDirectories = lib.mkOption {",
+   "id": 3375058873,
+   "in_reply_to_id": 3374587854,
+   "line": 906,
+   "original_commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "original_line": 906,
+   "original_position": 126,
+   "original_start_line": null,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 126,
+   "pull_request_review_id": 4451775379,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-08T17:14:58Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Do services just get to request backups? Because just because the service maintainer thinks something needs backups doesn't mean that I as a user of the service agree. I'd expect an opt-in mechanism and if I'm opting in explicitly, having the retention settings right there as well makes it a lot easier to maintain an overview.\r\n\r\nDoing a systemwide default for backup retention is good but control over individual backups is also important I don't use the same retention for my various backups.",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-06-12T22:16:54Z",
+   "diff_hunk": "@@ -830,6 +887,79 @@ in\n               default = [ ];\n               example = [ \"--cleanup-commits\" ];\n             };\n+\n+            fileBackupContract = lib.mkOption {\n+              description = \"Provider of the fileBackup contract.\";\n+              default = null;\n+              type = lib.types.nullOr (\n+                lib.types.submodule {\n+                  options = {\n+                    input = {\n+                      user = lib.mkOption {\n+                        description = ''\n+                          As which user the backup should run.\n+                        '';\n+                        type = lib.types.str;\n+                        example = \"vaultwarden\";\n+                      };\n+\n+                      sourceDirectories = lib.mkOption {",
+   "id": 3406505770,
+   "in_reply_to_id": 3374587854,
+   "line": 906,
+   "original_commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "original_line": 906,
+   "original_position": 126,
+   "original_start_line": null,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 126,
+   "pull_request_review_id": 4489511820,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-12T22:16:54Z",
+   "user": {
+    "id": 1486805,
+    "login": "toonn",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That's fair. Currently, it's all opt-in anyway so it matches your expectations. I was a bit extrapolating there.\r\n\r\nAlso, since the contract option is just one more option in the restic service, you can still access [all existing restic options](https://search.nixos.org/options?channel=unstable&query=services.restic.backups) and set retention per service this way:\r\n\r\n```nix\r\n{\r\n  services.restic.backups.\"home-assistant\" = {\r\n    // Here goes \"normal\" Restic options\r\n    initialize = true;\r\n    repository = \"/opt/restic-repos/${name}\";\r\n    passwordFile = \"${pkgs.writeText \"password\" \"restic-${name}-password\"}\";\r\n\r\n    pruneOpts = [\r\n      \"--keep-daily 7\"\r\n      \"--keep-weekly 5\"\r\n      \"--keep-monthly 12\"\r\n      \"--keep-yearly 75\"\r\n    ];\r\n\r\n    // Contract option\r\n    fileBackupContract.input = config.services.home-assistant.fileBackupContract.input;\r\n  };\r\n}\r\n```",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "created_at": "2026-06-12T22:45:27Z",
+   "diff_hunk": "@@ -830,6 +887,79 @@ in\n               default = [ ];\n               example = [ \"--cleanup-commits\" ];\n             };\n+\n+            fileBackupContract = lib.mkOption {\n+              description = \"Provider of the fileBackup contract.\";\n+              default = null;\n+              type = lib.types.nullOr (\n+                lib.types.submodule {\n+                  options = {\n+                    input = {\n+                      user = lib.mkOption {\n+                        description = ''\n+                          As which user the backup should run.\n+                        '';\n+                        type = lib.types.str;\n+                        example = \"vaultwarden\";\n+                      };\n+\n+                      sourceDirectories = lib.mkOption {",
+   "id": 3406609290,
+   "in_reply_to_id": 3374587854,
+   "line": 906,
+   "original_commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "original_line": 906,
+   "original_position": 126,
+   "original_start_line": null,
+   "path": "nixos/modules/services/backup/borgbackup.nix",
+   "position": 126,
+   "pull_request_review_id": 4489648149,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-12T22:45:47Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "Two minor optional nit I saw while quickly glancing at it. ",
+   "commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "id": 4332471668,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-20T21:46:06Z",
+   "user": {
+    "id": 252042,
+    "login": "drupol",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "id": 4332654816,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-20T22:23:35Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "id": 4332673291,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-20T22:28:46Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "id": 4332676571,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-20T22:29:45Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "id": 4332679003,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-20T22:30:18Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "id": 4340700816,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-21T21:01:58Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "1e68d28669d05f5fe295753f5271d6d0984202ca",
+   "id": 4340730978,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-21T21:06:05Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "id": 4451149249,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-08T15:53:08Z",
+   "user": {
+    "id": 1486805,
+    "login": "toonn",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "id": 4451775379,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-08T17:13:37Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "id": 4489511820,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-12T22:16:54Z",
+   "user": {
+    "id": 1486805,
+    "login": "toonn",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "aed52a3be115c003414e6179660b489e9499987f",
+   "id": 4489648149,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-12T22:45:28Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-20T21:15:39Z",
+   "event": "renamed",
+   "id": 25777642129,
+   "rename": {
+    "from": "Contracts for files and streaming backups",
+    "to": "Contracts for file backups"
+   }
+  }
+ ]
+}

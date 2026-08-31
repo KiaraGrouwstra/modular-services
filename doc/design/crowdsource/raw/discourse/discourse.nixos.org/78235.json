@@ -1,0 +1,80 @@
+{
+ "archetype": "regular",
+ "archived": false,
+ "category_id": 14,
+ "closed": false,
+ "created_at": "2026-06-12T15:42:51.624Z",
+ "host": "discourse.nixos.org",
+ "id": 78235,
+ "last_posted_at": "2026-06-12T15:42:51.885Z",
+ "like_count": 4,
+ "posts": [
+  {
+   "accepted_answer": false,
+   "badges_granted": [],
+   "can_accept_answer": false,
+   "can_unaccept_answer": false,
+   "can_vote": false,
+   "created_at": "2026-06-12T15:42:51.885Z",
+   "deleted_at": null,
+   "event": null,
+   "flair_name": null,
+   "id": 261686,
+   "incoming_link_count": 16,
+   "link_counts": [
+    {
+     "clicks": 5,
+     "internal": true,
+     "reflection": false,
+     "title": "Portable rust based service runner for the experimental modular services spec",
+     "url": "https://discourse.nixos.org/t/portable-rust-based-service-runner-for-the-experimental-modular-services-spec/74338"
+    },
+    {
+     "clicks": 5,
+     "internal": true,
+     "reflection": false,
+     "title": "Modular services meeting #1 2026-05-26",
+     "url": "https://discourse.nixos.org/t/modular-services-meeting-1-2026-05-26/77846"
+    },
+    {
+     "clicks": 3,
+     "internal": false,
+     "reflection": false,
+     "title": "Comparing NixOS:master...roberth:modular-services-compliance-suite · NixOS/nixpkgs · GitHub",
+     "url": "https://github.com/NixOS/nixpkgs/compare/master...roberth:nixpkgs:modular-services-compliance-suite"
+    }
+   ],
+   "name": "Robert Hensing",
+   "post_number": 1,
+   "post_type": 1,
+   "posts_count": 1,
+   "primary_group_name": null,
+   "quote_count": 0,
+   "raw": "Previous meeting: [#1 2026-05-26](https://discourse.nixos.org/t/modular-services-meeting-1-2026-05-26/77846)\n\nAttendees: @aanderse, @roberth, @tomberek, @eveeifyeve, @kiara, @lassulus\n\n* @Eveeifyeve: been working on this serviceManager API, got a branch up\n\n* @tomberek: we should be aware of @svanderburg’s earlier work, RFC 163, nix-processmgmt\n\n  * @roberth: i’ve been aware of it, and he discovered many of the options we might want, tho he and i agreed his wasn’t very NixOS-like (many functions), so we should adapt the concepts\n\n* @Eveeifyeve: php-fpm’s adaptations to different environments (NixOS, finix) could just use shims\n\n* @kiara: Are we modeling a lowest common denominator\n\n* @aanderse: I think we’re modeling various information attributes\n\n* ?: risk of playing favorites\n\n* @kiara: if we wanna support environment-specific stuff, will we get one giant frankenstein interface? or keep to info useful to multiple environments?\n\n* @roberth: environment-specific interfaces could just help for consistency (rather than as an abstraction)\n\n* @kiara: how do we avoid just wrapping environment-specific options then?\n\n* @tomberek: what about other use cases?\n\n* [weyl nimi](https://discourse.nixos.org/t/portable-rust-based-service-runner-for-the-experimental-modular-services-spec/74338)\n\n* @aanderse: how would k8s fit into the picture: k8s can use MS or MS supports k8s?\n\n* @kiara: I’m interested in this use case. It fills a gap between NixOS and k8s. Experimenting with this for Fediversity\n\n* @tomberek: distributed systemd is something I would expect to evolve in the ecosystem at some point\n\n* @kiara: ~~Kelsey Hightower when talking about about the gap between NixOS vs Kubernetes mentioned having done CoreOS before~~ - looks like that wasn’t actually distributed, never mind\n\n* @aanderse: I don’t think systemd has those ambitions. Nomad was closer to what you’re talking about, but wasn’t a viable k8s - abandoned (+ switched to BSL)\n\n* @roberth: a missing ingredient for this kind of thing is mutable units\n\n* @aanderse: deploy-rs may support or consider this\n\n* @aanderse: we could support evaluating systemd units based on modular services. Small amount of work to support this use case\n\n* @aanderse: finit supports ad hoc services in /run too.\n\n* @tomberek: decoupling of infrastructure and control plane is helpful. Disnix also did this nicely\n\n* @aanderse: doesn’t model cross-service interactions between the mutable part and the system part\n\n* @tomberek: nixos-containers could be part of the pattern here. Coupled things go into your infra layer, and the rest can go into the container-based service layer. The layers are declared independently.\n\n* @aanderse: @phaer is doing some cool work on decoupling in NixOS.\n\n* @EveeifyEve: any blockers for integration with NixBSD?\n\n* @aanderse: They’re interested, no active efforts to start integrating so far. They also have a different finit integration.\n\n* @EveeifyEve: what other integrations are missing that would help people? e.g. dev-env, services-flake, nixbsd\n\n* @aanderse: Those are all valid gaps to fill, but we should focus last meeting’s plan.\n\n* @roberth: Not before we’ve figured out a number of options\n\n* @roberth: here’s a branch for testing modular services in a portable fashion: https://github.com/NixOS/nixpkgs/compare/master...roberth:nixpkgs:modular-services-compliance-suite\n\n  * @kiara: use NixOS test container stuff\n  * @kiara: could we generalize this to a test framework that service module authors can use?\n  * @roberth: perhaps, but I didn’t consider it in scope for now\n\n### Housekeeping\n\n* @aanderse: Meeting is biweekly\n\n* @aanderse: Let’s avoid analysis paralysis. For instance, backcompat is not a concern\n\n* actions\n\n  * async: answer @eveeifyeve’s questions\n  * roberth: finish platform-generic “compliance” test\n  * roberth: review `environment` PR\n  * kiara: continue on PRs\n    * docs\n    * user-service\n  * lassulus: continue on flags PR",
+   "reads": 82,
+   "reply_count": 0,
+   "reply_to_post_number": null,
+   "title_is_group": false,
+   "topic_accepted_answer": null,
+   "topic_id": 78235,
+   "updated_at": "2026-06-12T15:42:51.885Z",
+   "user_id": 6,
+   "user_title": "Great contributor",
+   "username": "roberth",
+   "version": 1,
+   "wiki": false
+  }
+ ],
+ "posts_count": 1,
+ "posts_fetched": 1,
+ "reply_count": 0,
+ "slug": "modular-services-meeting-2-2026-06-12",
+ "sources": [
+  "discourse-meetings"
+ ],
+ "tags": null,
+ "title": "Modular services meeting #2 2026-06-12",
+ "url": "https://discourse.nixos.org/t/modular-services-meeting-2-2026-06-12/78235",
+ "views": 182,
+ "word_count": 600
+}

@@ -1,0 +1,903 @@
+{
+ "comments": [
+  {
+   "body": "I'm skeptical about having a service abstraction layer.\r\n\r\n* I suppose the goal is to move from `systemd.services.*` back to a generic `jobs.*` option. However, this only works for services defined in NixOS modules, not for upstream units. This would cause us to lose one of the biggest advantages of systemd, namely the ability to use upstream units directly. (In the Upstart days, IIRC, we had to define all Upstart services in NixOS modules, so there was no reuse of upstream job files. Not that there were many upstream job files...)\r\n\r\n* An abstraction layer would condemn us to the least common denominator of init systems, which is very small. For example, systemd and Upstart have *completely* different dependency systems, so having dependencies between services would be out. Startup notification, cgroups, etc. - i.e. all the features that make systemd so much better in keeping track of services - would be out. Likewise for socket activation, resource control, sensible logging, etc. etc. Some of these could be implemented on other systems, but cgroups in particular would probably be impossible to emulate on OS X. And without cgroups, you can't reliably keep track of processes so service scripts quickly become littered with `killall` hacks.\r\n\r\n* Even if most services are currently simple (i.e. use `ExecStart` etc.), moving to an abstraction layer imposes a cost in that people will be discouraged from improving a service by using systemd-specific features (since that would make the service no longer portable to other init systems). So for instance, if somebody creates a PR to add socket activation to some service S, that PR might be rejected because it would cause S to no longer work on OS X.",
+   "created_at": "2017-05-24T16:06:00Z",
+   "id": 303771655,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 10,
+    "-1": 1,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 11
+   },
+   "updated_at": "2017-05-24T16:06:00Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> An abstraction layer would condemn us to the least common denominator of init systems, which is very small. For example, systemd and Upstart have completely different dependency systems, \r\n\r\n@edolstra I explicitly addressed what I think we should do about idiosyncratic features in my proposal. Did you not see that? I'm very explicitly saying we should not do what you just said would be a problem.\r\n\r\nI'm also curious what you think we should do about the problem. I know you use NixOS a lot but it feels like a pity to lose out on all the goodness if we're using other platforms.\r\n",
+   "created_at": "2017-05-24T16:13:02Z",
+   "id": 303773608,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-24T16:13:02Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I did see that, but I don't think it will work in practice. For example:\r\n\r\n* Alice adds a service that uses the abstraction layer.\r\n* A while later, Bob improves the service by adding socket activation, but this breaks the service on systems that don't provide socket activation.\r\n* Bob's improvement gets reverted because people were relying on the service working on those systems.\r\n\r\nNow, maybe, somebody at this point steps up to add socket activation to the abstraction layer (and to all supported backends). But I don't think we should count on that. (Also, it won't work for all the non-portable stuff like cgroups.)\r\n",
+   "created_at": "2017-05-24T16:20:58Z",
+   "id": 303775879,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-24T16:20:58Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Your objections make sense; but how about turning the problem on its head a bit? The main thing I want to be able to share is the module config schema and how it plugs into service execution. I don't care as much if someone needs to write two or three different `config` sections per service to make it work on all backends. How ridiculous would this be?\r\n\r\n```nix\r\n{ config, lib, pkgs, ... }:\r\n\r\nlet\r\n  cfg = config.myservice;\r\n\r\n  configFile = builtins.toFile (builtins.toJSON { port = cfg.port; });\r\n\r\n  startScript = ''\r\n    ${pkgs.foo}/bin/foo -c ${configFile}\r\n  '';\r\nin {\r\n  options = {\r\n     enable = lib.mkOption { ... };\r\n     port = lib.mkOption { ... };\r\n     # You get the idea\r\n   };\r\n\r\n  config = lib.mkIf cfg.enable {\r\n    systemd.services.foo = {\r\n      serviceConfig.PrivateTmp = true;\r\n      script = startScript;\r\n   };\r\n   docker.services.foo = {\r\n     volumes = { \"/data\" = {}; };\r\n     script = startScript;\r\n   };\r\n   launchd.services.foo = {\r\n    launchdOptions.StartOnMount = true;\r\n    script = startScript;\r\n   };\r\n  };\r\n}\r\n```\r\n\r\nObviously details would vary, but this would allow individual service modules to factor out common stuff (config generation, possibly start commands, environment variables, etc.) across the different launch systems, but we wouldn't make any attempt to abstract over common options between them. Laziness means we don't evaluate config we don't use, so e.g., asking for a docker container out of a particular service won't force the systemd config and vice versa. Eventually we might realize that many of those systemd/docker/launchd triplets look the same and might factor them into some common functions, but we wouldn't be forced to decide that ahead of time.\r\n\r\nI can sketch something like this out quickly in a PR if you'd like something more concrete to munch on.",
+   "created_at": "2017-05-24T16:46:36Z",
+   "id": 303783123,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 18,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 18
+   },
+   "updated_at": "2017-05-24T16:47:09Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I will join as a user of NixOS services on a a system with NixPkgs kernel but without systemd.\r\n\r\n1. In many situations `nixosInstance.config.systemd.services.[name].runner` is a script that can be used to start the service, and the target service management solution can just.\r\n2. In case where service can be convinced to put configs into `/etc/`, `nixosInstance.config.environment.etc.[filename]` gives you the config; the launcher script is usually simple anyway.\r\n\r\nGiven that we often need to patch the build system to make sure it uses `$PATH` correctly, and that we try to move a lot of configs out of `/etc/`, I expect that upstream `systemd` configs will require an interesting amount of patching. And I think that adding alternative service definitions in this case (maintained by whoever needs them) seems no less reasonable than having multiple `boost` versions in NixPkgs.\r\n\r\nI do hope that we could eventually have `service.configs` or something where the configs are kept, because a lot of service definitions do not leave an easy way to access their configs in a simple programmatic way, and I know of no guildelines on how to provide such access in NixOS. I really hope that not being able to list all the configs a service definition generates is not desirable for most services, so such export shouldn't limit desirable improvements, and experience shows that config generation is most of the work anyway unless the service definition is completely trivial.",
+   "created_at": "2017-05-24T17:13:00Z",
+   "id": 303790620,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2017-05-24T17:13:00Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@copumpkin Yeah that sounds pretty good to me!\r\n\r\nWe'll probably want to have variants of `module-list.nix` for various environments, in order to filter out services that don't support particular environments.",
+   "created_at": "2017-05-24T18:27:25Z",
+   "id": 303811002,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 6,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 6
+   },
+   "updated_at": "2017-05-24T18:27:25Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "We added `meta.maintainers` to services, so why not `meta.platforms`?  EDIT: I see the platforms here will be of a different kind; anyway that's all an unimportant nitpick from me ATM.",
+   "created_at": "2017-05-24T18:29:47Z",
+   "id": 303811627,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2017-05-24T18:31:21Z",
+   "user": {
+    "id": 1785925,
+    "login": "vcunat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@7c6f434c I don't think upstream systemd units typically need a lot of patching. Also, they're extensible without patching. E.g. you can set systemd.services.foo.path while still using the upstream `foo` unit. (Also `Exec*` directives require absolute paths, so systemd units tend to rely less on $PATH.)\r\n\r\nRegarding \"mainained by whoever needs them\" tends not to work that way in practice. Somebody will do a PR to add (say) OS X support to the Postgresql module, and then it becomes everybody else's responsibility to keep it working. (I.e. if somebody changes something to the module that breaks it on OS X, then that person will get blamed, even though that person might have no way to test on OS X.)\r\n\r\n@vcunat Maybe, though that requires parsing/evaluating potentially a lot of files that are not usable on a particular platform.",
+   "created_at": "2017-05-24T18:34:21Z",
+   "id": 303812896,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-24T18:34:21Z",
+   "user": {
+    "id": 1148549,
+    "login": "edolstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yeah, perhaps a module-level meta would make sense (also for module-level documentation, maintainership, etc.). Then module-list could just enumerate and filter. That's complicated slightly by modules usually being functions and needing to be knotted before being able to query the `meta`, but it's not awful.",
+   "created_at": "2017-05-24T18:34:27Z",
+   "id": 303812925,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-24T18:36:21Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@edolstra Re: «mainained by whoever needs them» — it doesn't work that way in general, but specifically in the case where the split is caused by using an upstream unit, there is a better chance, because from the mainline NixOS side there is no reason to touch the forked version anyway… Well, if the config is shared, the systemd-specific part will be inside ifs.\r\n\r\nBut the only thing I actively want is config access.",
+   "created_at": "2017-05-24T18:50:52Z",
+   "id": 303817359,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-24T18:50:52Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@copumpkin I think that approach makes the most sense, this makes the difference very explicit and nix has primitives to define common options in a nice way. For example my modules for launchd also support some options like `script` and `path` so for simple cases the config could be reused.\r\n\r\n```nix\r\n{ config, lib, pkgs, ... }:\r\nwith lib;\r\nlet\r\n  cfg = services.foo;\r\n  service =\r\n    { script = \"${pkgs.foo}/bin/food\";\r\n      path = [ pkgs.hello ];\r\n    };\r\nin {\r\n  options = {\r\n    services.foo.enable = mkOption {};\r\n  };\r\n\r\n  config = mkIf cfg.enable {\r\n    systemd.services.foo = service;\r\n    launchd.services.foo = service;\r\n    docker.services.foo.container = \"foo\";\r\n  };\r\n}\r\n```\r\n\r\nSomething else that I've been wondering about is how this would work for darwin and regular linux systems without accidentally binging in activation scripts from the NixOS core modules, etc.\r\nWhat I've done for nix-darwin is to copy or reimplement common options instead of importing them.",
+   "created_at": "2017-05-24T20:12:34Z",
+   "id": 303838042,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-24T20:12:34Z",
+   "user": {
+    "id": 689294,
+    "login": "LnL7",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@LnL7 I think laziness mostly avoids bringing in any config we don't ask for. I'll sketch out a very simple proof of concept a bit later in a PR and see if I run into any issues.\r\n\r\nIn a sentence, ultimately all config reduces to one or two \"entry points\", like `system.build`; we'd probably just add separate entry points for Darwin/docker/etc.",
+   "created_at": "2017-05-24T20:16:37Z",
+   "id": 303839057,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-24T20:17:44Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yeah, that last comment is probably a little bit out of the scope of this issue.",
+   "created_at": "2017-05-24T20:28:54Z",
+   "id": 303842212,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-24T20:28:54Z",
+   "user": {
+    "id": 689294,
+    "login": "LnL7",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think service abstraction was abstracted very well by kubernetes, and as\nsuch kubernetes could be used for a reference. Currently I'm very much\nsatisfied with kubernetes, but I'm still missing a cluster+container aware\nLinux distribution. Anything in between will be just abstracting with too\nlittle information to be usable on anything but single node systems, and\nthen we are back on systemd/launchd/docker-compose.\n\nHere is just a short list of what abstraction should handle:\n\n- services requirements(packages, mounts)\n- hardware requirements(CPU, CPU resources, physical disks, USB, PCI, ...)\n- security requirements(capabilites, apparmor, seccomp, exposed paths, ...)\n- network requirements(ports, sockets, network policy, ...)\n- storage requirements(storage size, iops, read-only,/readwrite)\n- secrets\n- scheduling requirements\n- cross service dependencies (which services some service depends on, which\nexposed resources)\n...\n\nKubernetes support most of these, and it's very easy to ignore unsupported\nrequirements on some simpler service managers like systemd. While I'm not\nsaying all this should be added at beginning, I'm saying reference design\nshould be good enough to support all this. While I'm not good in writing\nrfc-s, and I've not figured out how to solve everything just yet, I just\nwant to share what would be a good implementation, that will be usable on\nhighly profiled systems that we are deploying today. With simpler\nabstractions it's hard to support more complex systems. I rather like\ncurrent (systemd) implementation, as half done implementation design we\nwill have to live with.\n\nAs alternative approach I like @LnL7 idea the most, as it's easy to support\nmultiple abstractions at the same time, I can see several issues related to\ndifferent option being used by different abstractions, but well I think\nit's something we can live with until general abstraction is created.\n\nOn Wed, 24 May 2017, 20:50 Michael Raskin, <notifications@github.com> wrote:\n\n> @edolstra <https://github.com/edolstra> Re: «mainained by whoever needs\n> them» — it doesn't work that way in general, but specifically in the case\n> where the split is caused by using an upstream unit, there is a better\n> chance, because from the mainline NixOS side there is no reason to touch\n> the forked version anyway… Well, if the config is shared, the\n> systemd-specific part will be inside ifs.\n>\n> But the only thing I actively want is config access.\n>\n> —\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/NixOS/nixpkgs/issues/26067#issuecomment-303817359>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/AAjvS26MxnjjCc17YDJYG5r_vHSo0WAGks5r9HwQgaJpZM4NlQxI>\n> .\n>\n",
+   "created_at": "2017-05-24T20:47:47Z",
+   "id": 303847103,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2017-05-24T20:47:47Z",
+   "user": {
+    "id": 585547,
+    "login": "offlinehacker",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "So, since I was tagged, my 2 cents are that the NixOS module system is annoying and uncomposable, and the solution here is probably just plain functions, choosing different ones with the same high level interface for different backends. In the case of \"just run this program with these args\", there of course can be a common helper function interface. In more complex cases, we only have as many backends as can support the interface, or possibly have graceful degredation for cases where we can't.",
+   "created_at": "2017-05-25T00:11:49Z",
+   "id": 303887178,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2017-05-25T00:11:49Z",
+   "user": {
+    "id": 487050,
+    "login": "shlevy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Here's a sketch of the idea I proposed: https://github.com/NixOS/nixpkgs/pull/26075\r\n\r\n@shlevy I partially agree but the merging behavior is nice (feels a bit like AOP in some cases) and I don't want to reinvent everything just to get some basic reuse 😄 ",
+   "created_at": "2017-05-25T00:16:00Z",
+   "id": 303887774,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-25T00:16:00Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@shlevy if there is config export, we can just use separate NixOS instances for every service, then it behaves as a pure function…",
+   "created_at": "2017-05-25T09:11:28Z",
+   "id": 303962205,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-25T09:11:28Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Are there any updates on this issue, please",
+   "created_at": "2019-08-25T18:30:17Z",
+   "id": 524653189,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 6,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 6
+   },
+   "updated_at": "2019-08-25T18:30:17Z",
+   "user": {
+    "id": 104795,
+    "login": "mmahut",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue predates the RFC process. I propose a champion (not me, although I think it would be great to have for Darwin, Docker, WSL etc) pours the key points of this issue into a RFC and we can get traction on it that way.",
+   "created_at": "2019-10-24T12:31:09Z",
+   "id": 545895432,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 7,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 7
+   },
+   "updated_at": "2019-10-24T12:31:09Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thank you for your contributions.\nThis has been automatically marked as stale because it has had no activity for 180 days.\nIf this is still important to you, we ask that you leave a comment below. Your comment can be as simple as \"still important to me\". This lets people see that at least one person still cares about this. Someone will have to do this at most twice a year if there is no other activity.\nHere are suggestions that might help resolve this more quickly:\n1. Search for maintainers and people that previously touched the\n   related code and @ mention them in a comment.\n2. Ask on the [NixOS Discourse](https://discourse.nixos.org/). 3. Ask on the [#nixos channel](irc://irc.freenode.net/#nixos) on\n   [irc.freenode.net](https://freenode.net).\n",
+   "created_at": "2020-06-01T12:04:38Z",
+   "id": 636818994,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 2,
+    "confused": 1,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2020-06-01T12:04:38Z",
+   "user": {
+    "id": 26384082,
+    "login": "stale[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  },
+  {
+   "body": "This is still important to me. I would love to use a simpler init system with NixOS.",
+   "created_at": "2020-06-07T17:17:14Z",
+   "id": 640250753,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 15,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 15
+   },
+   "updated_at": "2020-06-07T17:17:14Z",
+   "user": {
+    "id": 3226995,
+    "login": "rien",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I like the idea of taking the most capable system (kubernetes apparently) and adding wrappers or ignoring features in other systems.\n\nSo keep the systemd config layer, but add a more general one that mostly translates directly to systemd configurations.\n\nThen, if you want to have an init.d type system, you would basically run all the scripts once, and output a bunch of warnings about unsupported features. The system would not restart crashed services or handle log rotation until someone comes up with a wrapper for those. On the plus side, the closure would be tiny and it would work in containers.\n\nIn fact, those general settings could get their defaults from the current systemd settings, so most modules would work as-is.\n\n",
+   "created_at": "2020-06-08T07:06:07Z",
+   "id": 640410839,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2020-06-08T07:06:07Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "+1 here, this is one thing that still keeps me from considering to adopt NixOS.",
+   "created_at": "2020-06-08T08:48:25Z",
+   "id": 640462974,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-06-08T08:48:25Z",
+   "user": {
+    "id": 60704889,
+    "login": "lpolzer-enercity",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think the best way forward would be to create an RFC.\n\nIs there anyone that wants to champion this?\n",
+   "created_at": "2020-06-09T06:56:39Z",
+   "id": 641073953,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-06-09T06:56:39Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@wmertens I don't know enough about different init systems to evaluate how well it grapples with some of the challenges Eelco mentioned, but IIRC a Nix newsletter early this year featured a blog post (https://sandervanderburg.blogspot.com/2020/02/a-declarative-process-manager-agnostic.html) by @svanderburg about the project https://github.com/svanderburg/nix-processmgmt, which seems to have made substantive progress on the core concepts, here?",
+   "created_at": "2020-09-28T14:32:24Z",
+   "id": 700046053,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 5,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2020-09-28T14:32:24Z",
+   "user": {
+    "id": 2548365,
+    "login": "abathur",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@abathur I hadn't seen that, it looks impressive! Seem like @svanderburg found a nice middle ground between service-specific and service-agnostic.\r\n\r\nI wonder how far along this is to be able to boot e.g. nixos-minimal with a different service manager.",
+   "created_at": "2020-09-29T12:33:08Z",
+   "id": 700671538,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-09-29T12:33:08Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Don't forget to watch Sander present nix-processmgmt https://cfp.nixcon.org/nixcon2020/talk/TW79FU/ :)",
+   "created_at": "2020-10-16T10:10:04Z",
+   "id": 709955576,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 6,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 3,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 9
+   },
+   "updated_at": "2020-10-16T10:10:04Z",
+   "user": {
+    "id": 54934,
+    "login": "wmertens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'd also enjoy to use NixOS without `systemd`, I'm rather interested to build a minimal system that uses `openrc` instead.",
+   "created_at": "2023-02-15T23:32:25Z",
+   "id": 1432225445,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2023-02-15T23:32:25Z",
+   "user": {
+    "id": 24259245,
+    "login": "martin-braun",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've recently been curious about NixOS but, similarly, I'd rather have [s6](https://wiki.gentoo.org/wiki/S6_and_s6-rc-based_init_system) and/or OpenRC as well :/",
+   "created_at": "2023-06-17T23:34:35Z",
+   "id": 1595887493,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-06-17T23:34:35Z",
+   "user": {
+    "id": 28468662,
+    "login": "ThisNekoGuy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/is-nixbsd-a-posibility/29612/16\n",
+   "created_at": "2023-06-27T02:43:39Z",
+   "id": 1608645157,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 1,
+    "total_count": 1
+   },
+   "updated_at": "2023-06-27T02:43:39Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": ":)\r\n- https://github.com/NixOS/rfcs/pull/163",
+   "created_at": "2023-10-06T13:27:30Z",
+   "id": 1750682277,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 8,
+    "heart": 0,
+    "hooray": 8,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 16
+   },
+   "updated_at": "2023-10-06T13:27:30Z",
+   "user": {
+    "id": 2548365,
+    "login": "abathur",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@roberth Can we finally close this because we have modular services? :)\n\nOr at least narrow the scope to a little abstraction for supporting multiple init systems at once for very basic things top modular services.",
+   "created_at": "2025-12-20T20:28:40Z",
+   "id": 3678091475,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-20T20:28:40Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "They're in development\n- https://github.com/NixOS/nixpkgs/issues/428084\n\nThe original proposal here did not go into much specifics beyond an architectural \"layer\".\nModular services is a concrete implementation of these ideas, but I find \"layer\" to be an insufficient tool for describing the architecture.\nInstead, I'd like to summarize modular services architecture as\n\n- handling variance between platforms and their init systems\n  - *modules as mix-ins* for handling variance between platforms and their init systems\n- separation between *naming* and definition using `imports` into `submodule`\n  - *empty submodules* as \"slots\" the can become anything depending on mix-ins\n\nExpressions come together from four places\n- core skeleton (reused by platform integration modules, \"finishable software\", vendoring ok, RFC material)\n  - portable options like `argv`\n  - general scaffolding enabling sub-services: tree-like compositions of services that are deployed together\n- platform integration modules\n  - non-portable options like `systemd.whatever`\n  - config file generation\n  - integration into configuration manager such as NixOS, e.g. `users.services` option\n- service modules\n  - how does one run and configure e.g. postgres?\n- user configurations\n  - user configuration at the level of the configuration manager (e.g. NixOS): what services exist, in which context, and how do some of them interrelate? `system.services.mywebapp = ...;` with references to `config.system.services.my-global-db` etc.\n  - for any given service instance\n    - an `imports` to make it behave like e.g. postgres\n    - definitions that go into e.g. postgres-specific options\n    - any overrides, e.g. extra environment variable, systemd hardening tweaks\n\nAre those layers, ordered from low to high?\nMaybe NixOS has layers? `boot` and `environment` could be \"lower\" than most `services.<name>`.\n\nFeels hand-wavy, but I guess that's architecture for ya :)\n\nI guess the arbitrary nesting of sub-services threw me off. That doesn't feel like layering at all, but that's ok.\n*The layers are at the mix-in level*, just like they would be when implemented purely in established NixOS-like patterns. NixOS is the largest set of mixins I've ever seen, with few other types of \"large-scale composition\" to speak of besides specialisations, nixos-containers.\n",
+   "created_at": "2025-12-20T22:47:44Z",
+   "id": 3678181285,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 4,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2025-12-20T22:48:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/26067",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "We've talked about this for years, usually in the context of people hating or wanting to replace `systemd`, but I think it's time to start talking about it in other less negative contexts as well.\r\n\r\n## Motivation\r\n\r\nNixpkgs now works pretty well on Darwin, and the `nix-darwin` effort by @LnL7 can manage services using launchd. Unfortunately, even though 99% of the logic could be shared with NixOS services, it can't currently be.\r\n\r\nFurthermore, people are taking more and more infrastructure to distributed container scheduling systems like Kubernetes, ECS, or Nomad. Although in some cases people might run the host on NixOS, I think Nix can provide an equally compelling story for the container guests. @lethalman's `dockerTools` is a promising start to that, but just like `nix-darwin`, anyone using it has to reinvent the configuration for their services because NixOS service modules can't be reused.\r\n\r\nFinally, assorted work like [declarative user environments](https://github.com/NixOS/nixpkgs/pull/9250), [replacing the init system](https://github.com/NixOS/nixpkgs/issues/24346) (please don't turn this thread into another systemd flamewar; we have plenty of other venues for that), and service testing on virtualized platforms (I can't run any of the NixOS VM tests on EC2, Azure, Google Cloud, and so on) all could benefit heavily from such a layer.\r\n\r\n## Prior work\r\n\r\nThe major effort so far has been https://github.com/NixOS/nixpkgs/pull/5246 and it's an impressive feat but has long bitrotted, and @offlinehacker does not have the time to pick it up again.\r\n\r\n## Key goals\r\n\r\n1. Should be possible to evaluate/build on non-NixOS systems, and ideally non-Linux ones (with a suitable back-end)\r\n2. Shouldn't lose the nice functionality we enjoy from `systemd`. More generally, it shouldn't prevent us from using system-specific idiosyncrasies that don't exist in other systems. If we see some of them being used repeatedly all over the place, we eventually factor them out into the SAL.\r\n3. Shouldn't get overly complicated or generalized. Let's not try to plan for every eventuality and just tackle low-hanging fruit for now.\r\n4. Don't get mired in getting something perfect all at once. 1000-line+ PRs rarely get merged or even reviewed, and bitrot easily. I'm convinced we can do this incrementally and see if we like it on one or two simple services with small PRs, and then start working outwards from there.\r\n\r\n## Proposed approach\r\n\r\nI'm not actually going to propose a technical approach here. Rather, I'd like to propose how we approach figuring out how to implement it.\r\n\r\n1. Go through all of our service modules and categorize how many of them use each `key` in `systemd.services.<name>.<key>` and how.\r\n2. Write the thinnest layer that covers the two or three most commonly used service keys and translates its config to the current `systemd.services` machinery\r\n3. Write a simple \"dump to text file\" backend for the SAL that lists enabled services in an arbitrary piece of config, and builds on a non-Linux platform\r\n4. In separate PRs, start switching over small numbers of our simplest services to use the new SAL machinery, possibly leaving some `systemd.services` config behind to merge with the config that SAL sets\r\n5. Start work on more interesting backends like a launchd one and a docker one, etc.\r\n\r\nI expect most services don't do much beyond setting `ExecStart`/`script` and some environment, possibly with a default `wantedBy = [ \"multi-user.target\" ]` which basically means \"please run my unit\" in most cases. Many services probably want a way to express that they need networking, and some might want to run as a separate user. Eventually we'll start running into services that depend on other services, and I propose not trying to tackle that at first.\r\n\r\ncc @shlevy @offlinehacker @edolstra @globin @LnL7 \r\n\r\nP.S: this isn't an RFC because I'm not actually saying what to do, but just what I want and how I think we should go about making it happen",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 33,
+  "created_at": "2017-05-24T15:16:27Z",
+  "id": 231076185,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "eb6420",
+    "default": false,
+    "description": "This needs feedback from more community members.",
+    "id": 465618943,
+    "name": "9.needs: community feedback"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 26067,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 60,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 60
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Make a service abstraction layer",
+  "type": null,
+  "updated_at": "2026-06-23T17:27:10Z",
+  "user": {
+   "id": 2623,
+   "login": "copumpkin",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#26067",
+ "sources": [
+  "nixpkgs-service-abstraction-layer",
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": []
+}

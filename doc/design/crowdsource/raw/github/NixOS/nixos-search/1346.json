@@ -1,0 +1,376 @@
+{
+ "comments": [
+  {
+   "body": "arguably these were more correct than the suggested file names mentioned (`configuration.nix` is now contending for NixOS entrypoint with both `system.nix` as well as with flakes), but yeah, unfortunately `_class` may have been mostly confusing to newer users. perhaps we could find a better place for them some time.",
+   "created_at": "2026-06-18T10:10:32Z",
+   "id": 4740867951,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-18T10:10:32Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It would be good to make the modular services changed to state the nixos example, so that it's more explicit the example is for nixos. Like adding `# configuration.nix` to the top of the file could do it. With home-manager, darwin, etc people can find out with their respective docs or options defined.",
+   "created_at": "2026-06-25T12:01:49Z",
+   "id": 4798985589,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-25T12:04:14Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> so that it's more explicit the example is for nixos\r\n\r\nhm. so.\r\nis that technically correct right now tho?\r\ncuz you would get the generic functionality (which is worth whatever your system shims do with that), while currently at least one service (php-fpm) out of the like 4 seems to have finix bits there as well.\r\n\r\nnow, the existing services there may have some escape hatches for nixos, but at that point we've maybe reached a semantic discussion there.\r\n\r\nthe underlying semantic question right now then becomes: is a modular service something that works on your system, or is it a service implementing the generic interface, rendering 'it works on system x' technically outside of the responsibility of what a modular service is, at least until the interface (and the system's shims, without requiring the escape hatches) make it work?\r\n\r\ni think the proper solution there would be explicitly segregating the generic bits vs the system-specific escape hatches so one would know what they'd get, but that isn't where we're at today.\r\n",
+   "created_at": "2026-06-25T20:26:26Z",
+   "id": 4803861845,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-25T20:27:56Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixos-search/pull/1346",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Closes #1344.",
+  "closed_at": "2026-07-13T08:10:25Z",
+  "closed_by": {
+   "id": 131856,
+   "login": "raboof",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 3,
+  "created_at": "2026-06-18T10:08:17Z",
+  "draft": false,
+  "id": 4691341687,
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 1346,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixos-search/pull/1346.diff",
+   "merged_at": "2026-07-13T08:10:25Z",
+   "patch_url": "https://github.com/NixOS/nixos-search/pull/1346.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixos-search",
+  "state": "closed",
+  "state_reason": null,
+  "title": "remove `_class` mentions` from option results' snippets",
+  "type": null,
+  "updated_at": "2026-08-19T08:34:54Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 1,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:main",
+   "ref": "main",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2020-03-28T04:16:53Z",
+    "default_branch": "main",
+    "description": "Search NixOS packages and options",
+    "disabled": false,
+    "fork": false,
+    "forks": 180,
+    "forks_count": 180,
+    "full_name": "NixOS/nixos-search",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixos-search/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "https://search.nixos.org",
+    "id": 250712577,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixos-search/issues{/number}",
+    "language": "Elm",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixos-search/milestones{/number}",
+    "name": "nixos-search",
+    "open_issues": 187,
+    "open_issues_count": 187,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixos-search/pulls{/number}",
+    "pushed_at": "2026-08-30T12:54:55Z",
+    "size": 2505,
+    "stargazers_count": 594,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixos-search/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixos-search/tags",
+    "topics": [
+     "elasticsearch",
+     "elm",
+     "search"
+    ],
+    "updated_at": "2026-08-30T12:55:02Z",
+    "visibility": "public",
+    "watchers": 594,
+    "watchers_count": 594,
+    "web_commit_signoff_required": false
+   },
+   "sha": "178734f7ae329a450f430cdeba5769a1864df940",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Closes #1344.",
+  "changed_files": 1,
+  "closed_at": "2026-07-13T08:10:25Z",
+  "comments": 3,
+  "commits": 1,
+  "created_at": "2026-06-18T10:08:17Z",
+  "deletions": 5,
+  "diff_url": "https://github.com/NixOS/nixos-search/pull/1346.diff",
+  "draft": false,
+  "head": {
+   "label": "KiaraGrouwstra:declass",
+   "ref": "declass",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2025-05-31T18:03:11Z",
+    "default_branch": "main",
+    "description": "Search NixOS packages and options",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/nixos-search",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "https://search.nixos.org",
+    "id": 993877724,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/milestones{/number}",
+    "name": "nixos-search",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/pulls{/number}",
+    "pushed_at": "2026-08-30T14:56:47Z",
+    "size": 2610,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/nixos-search/tags",
+    "topics": [],
+    "updated_at": "2025-05-31T18:03:11Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "f9723b7e79b78c958aa27804ff16ee5cc25bf66c",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3890418478,
+  "labels": [],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "688a4ec70d135f376832a941c0fb9aaeb6b6d5f3",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-07-13T08:10:25Z",
+  "merged_by": {
+   "id": 131856,
+   "login": "raboof",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 1346,
+  "patch_url": "https://github.com/NixOS/nixos-search/pull/1346.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "remove `_class` mentions` from option results' snippets",
+  "updated_at": "2026-08-19T08:34:54Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixos-search#1346",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "I agree the `_class` is currently confusing, let's merge this to remove it and make further improvements in follow-up PRs",
+   "commit_id": "f9723b7e79b78c958aa27804ff16ee5cc25bf66c",
+   "id": 4682868463,
+   "state": "APPROVED",
+   "submitted_at": "2026-07-13T08:10:17Z",
+   "user": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixos-search-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-06-18T10:08:33Z",
+   "event": "renamed",
+   "id": 26905241594,
+   "rename": {
+    "from": "unlist `_class` mentions` from option results' snippets",
+    "to": "remove `_class` mentions` from option results' snippets"
+   }
+  },
+  {
+   "actor": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "688a4ec70d135f376832a941c0fb9aaeb6b6d5f3",
+   "commit_url": "https://api.github.com/repos/NixOS/nixos-search/commits/688a4ec70d135f376832a941c0fb9aaeb6b6d5f3",
+   "created_at": "2026-07-13T08:10:25Z",
+   "event": "merged",
+   "id": 27896932866
+  },
+  {
+   "actor": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-13T08:10:25Z",
+   "event": "closed",
+   "id": 27896932964,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

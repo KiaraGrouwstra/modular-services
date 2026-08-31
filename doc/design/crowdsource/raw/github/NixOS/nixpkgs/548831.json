@@ -1,0 +1,234 @@
+{
+ "comments": [
+  {
+   "body": "I don't really see why. To me, this feels like an edge-case deployment-wise. Sure, there's software where this does make sense (e.g. gitlab/github runner), but Nextcloud already gives you strong user separation and if you want to have instance-level separation for different tenants, I don't see why these instances should live on the same system in the first place?\n\nFeel free to explain your use-case, but right now this seems like a very large, expensive change with very little gain.\n\n> explore a modular service alongside the current module, or take another direction?\n\nI still think that's a massively flawed design (see the discussions in https://github.com/NixOS/nixpkgs/issues/428084).\nI'm not going to stop people from adding that to nixpkgs, but I'll strongly believe this shouldn't be part of the scope of this maintainer team and I'm not going to guarantee anything beyond syntactic integrity.",
+   "created_at": "2026-08-03T21:32:00Z",
+   "id": 5171960434,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 4,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2026-08-03T21:32:00Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I agree with @Ma27 , NixOS has built-in containers which are super easy to deploy and can be utilised for the purpose. ",
+   "created_at": "2026-08-04T02:53:35Z",
+   "id": 5174056871,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-08-04T02:53:35Z",
+   "user": {
+    "id": 231537,
+    "login": "ser",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes, just stage the nextcloud(s) into separate container [simple example with native reverse proxy](https://github.com/paepckehh/nixos/blob/main/server/all/nextcloud.nix). Because of the shared nix-store - every instance adds only a few kb on-disk overhead and via shared localhost interface binding zero network overhead.\n\nBeside of that: Nextcloud is an unfixable php security runtime nightmare, do no run it naked on a base system anyhow without modern application layer firewall reverse proxy in front. \n\nThe native NixOS instancing would lead to a lot of internal dependencies and operative issues for the a shared base os db/httpd/php sharing. ",
+   "created_at": "2026-08-04T03:57:23Z",
+   "id": 5174429180,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-04T03:57:23Z",
+   "user": {
+    "id": 120342602,
+    "login": "paepckehh",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I agree with the other comments. I also think this is outside the scope of this module,  because basically everything living under `services.*` is not meant to support multiple instances of the same service (unless the software itself supports it out of the box).",
+   "created_at": "2026-08-04T04:47:54Z",
+   "id": 5174728662,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-04T04:47:54Z",
+   "user": {
+    "id": 26026535,
+    "login": "provokateurin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't want to be repetitive but besides agreeing with the previous comments I would even advice @uwu-420 no now go forward with developing it in Nextcloud module to avoid frustration and effort that would mostly over-complicate the code and increase maintainance for a use-case that is basically unheard of in NC servers, mostly due to the existing possibilities to isolate users internally and separation via containers and reverse proxy. It you want even more isolation, you should go for multiple NixOS VM with one NC and reverse-proxy on each",
+   "created_at": "2026-08-04T05:58:52Z",
+   "id": 5175193985,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-04T05:58:52Z",
+   "user": {
+    "id": 1446633,
+    "login": "staticdev",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "A potential use case I would have had is having a second nextcloud deployment on my machine that I can use as playground for trying stuff that could break it. But TIL about NixOS containers and I think that solves all of what I had in mind. Thanks!\n\nI'm okay with this issue getting closed if you want to.",
+   "created_at": "2026-08-04T06:59:48Z",
+   "id": 5175657880,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-04T06:59:48Z",
+   "user": {
+    "id": 164377175,
+    "login": "uwu-420",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/548831",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "I would like to implement support for running several independent Nextcloud instances on one NixOS host. Before starting a large refactor, I would like the Nextcloud team's view on the interface and compatibility approach.\n\nThe conservative option I see is to keep `services.nextcloud.*` as the existing instance and add `services.nextcloud.instances.<name>` for additional instances. Both interfaces could feed one internal per-instance implementation. The existing instance would keep its current names and paths, while named instances would use distinct names and paths for managed resources such as the user, state and runtime directories, locally created database and database user, Redis server, PHP-FPM pool, credential runtime directory, systemd units and timers, OCC wrapper, and Nginx virtual host.\n\nAnother option is to add a Nextcloud modular service imported through [`system.services.<name>`](https://nixos.org/manual/nixos/unstable/#modular-services), alongside the existing module. The current [contributor guidance](https://github.com/NixOS/nixpkgs/blob/master/nixos/README-modular-services.md) says this framework is still in development and cautions against using a modular service to implement a widely used NixOS module, so I would only choose that with agreement here. Progress and open questions are tracked in #428084.\n\nI would add a focused NixOS VM test with one instance using the current interface and one using the new interface. It would verify distinct setup, state and data directories, locally created databases, Redis and PHP-FPM sockets, systemd units, OCC wrappers, and HTTP endpoints.\n\nWould the team be interested in reviewing this work? If so, should I use the compatibility-preserving `instances` design, explore a modular service alongside the current module, or take another direction?\n\ncc @bachp @britter @dotlambda @Ma27 @provokateurin @staticdev\n\nAssisted-by: OpenAI Codex (GPT-5)\n",
+  "closed_at": "2026-08-04T14:19:47Z",
+  "closed_by": {
+   "id": 26026535,
+   "login": "provokateurin",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 6,
+  "created_at": "2026-08-03T14:02:52Z",
+  "id": 5050652109,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 548831,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": "not_planned",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "nixos/nextcloud: support multiple instances",
+  "type": null,
+  "updated_at": "2026-08-04T14:19:47Z",
+  "user": {
+   "id": 164377175,
+   "login": "uwu-420",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#548831",
+ "sources": [
+  "nixpkgs-phrase-issues",
+  "nixpkgs-system-services-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 26026535,
+    "login": "provokateurin",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-08-04T14:19:47Z",
+   "event": "closed",
+   "id": 28954682657,
+   "intent": null,
+   "state_reason": "not_planned"
+  }
+ ]
+}

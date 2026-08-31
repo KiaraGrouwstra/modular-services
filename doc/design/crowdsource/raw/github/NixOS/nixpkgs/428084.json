@@ -1,0 +1,1155 @@
+{
+ "comments": [
+  {
+   "body": "i think one relevant todo to add here would be providing a transition path so services could be ported in a way the 'legacy module' interface would become a wrapper over the portable service module, e.g. `options.services.ghostunnel = pkgs.ghostunnel.services.default;`.\n\nedit: a PR on this had since been opened at #475372\n",
+   "created_at": "2025-12-01T13:38:41Z",
+   "id": 3596597320,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 11,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 11
+   },
+   "updated_at": "2026-02-15T10:17:16Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "more follow-up directions:\n\n- [ ] #490688\n- [ ] #490640\n- [ ] #490813\n- ~~[ ] #490662~~\n\nnote that, while each may be relevant in their own right, the first two here should further help facilitate first-class support for micro-service set-ups in modular services.\n",
+   "created_at": "2026-02-15T14:32:32Z",
+   "id": 3904556062,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-08T23:20:07Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "For\n\n> 4. Use modular service to implement traditional service and distill instructions\n\nOne module that could probably be easily converted to modular services is the Authelia module. I’m basing that off the fact that it is already equipped to handle multiple instances https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/security/authelia.nix#L278",
+   "created_at": "2026-02-15T16:20:11Z",
+   "id": 3904757932,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-15T16:20:11Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> One module that could probably be easily converted to modular services is the Authelia module. I’m basing that off the fact that it is already equipped to handle multiple instances\n\nif it generates multiple systemd services, i wonder how a modular service's `argv` and options would then turn out: so far the modular service abstraction seems closer to the level of a distinct service, than to options generating multiple services.\n\n~~edit: such multiple instantiations of a service maybe contracts could help out on.~~\n\nthe base case of doing multiple instantiations from separate configuration is covered in the [test](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/ghostunnel-modular.nix).\n\nedit: we can indeed handle these, see #506645.\n",
+   "created_at": "2026-02-15T17:51:37Z",
+   "id": 3904908631,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-04T14:52:34Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "https://github.com/NixOS/nixpkgs/pull/475372 this is a PR that I guess I forgot to link here, where I tried to convert an existing service with a compat layer. That compat layer needs more work, but then I think we can start mass converting services.",
+   "created_at": "2026-02-16T15:57:17Z",
+   "id": 3909247376,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 3,
+    "heart": 3,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 6
+   },
+   "updated_at": "2026-02-16T15:57:17Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> start mass converting services\n\nmass converting services to a highly experimental framework that has had no RFC or buy in from almost anyone? i am just trying to understand what i missed, help appreciated 🙇‍♂️",
+   "created_at": "2026-02-16T16:13:55Z",
+   "id": 3909330367,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-02-16T16:13:55Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i think we may first need answers to its current limitations, only then would it make sense to start such a broader discussion",
+   "created_at": "2026-02-16T17:21:31Z",
+   "id": 3909672906,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 7,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 7
+   },
+   "updated_at": "2026-02-16T17:21:31Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/nixifying-kubernetes-with-nix-csi-easykubenix-and-dinix/70899/27\n",
+   "created_at": "2026-02-23T13:12:40Z",
+   "id": 3944716422,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-23T13:12:40Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've adjusted [the GSoC idea](https://github.com/NixOS/GSoC/blob/main/ideas/2026.md#migrate-some-nixos-modules-to-modular-services) to be more realistic.\n\n> but then I think we can start mass converting services.\n\nI've heard someone worried about this. We're definitely not at a stage where we could consider that yet.\nI'd like to write a new RFC first. Although this does stem from RFC 163 among other ideas, that one was rather un-NixOS-like. It needs an overhaul, and it needs more attention drawn to it.\nWe've had some participation on PRs and issues, but it'd be good to centralize some of that and have a place for discussing the big picture again.\n",
+   "created_at": "2026-02-27T14:51:47Z",
+   "id": 3973361258,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 2,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2026-02-27T14:51:47Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@aanderse Realistically the questions that need to be answered can only be answered experimentally by converting a bunch of services. If that should happen on a branch before getting merged, sure.\n\nEveryone knows that importing all modules and using `enable = ...` is dogshit non-modular software engineering that would not be accepted except but for the fact that it is grandfathered in. Now we finally have a solution to that, *and* potentially also to rampant NixOS vs Home Manager vs Nix Darwin copypasta. This is really good! Let's try to find process that doesn't involve in waiting decades more before these problems are finally fixed.",
+   "created_at": "2026-02-27T16:36:17Z",
+   "id": 3973901878,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 5,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2026-02-27T16:37:01Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Would love to integrate Home Manager like modules into nixos!",
+   "created_at": "2026-02-27T17:12:07Z",
+   "id": 3974072977,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-27T17:12:07Z",
+   "user": {
+    "id": 41731334,
+    "login": "qweered",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> [@aanderse](https://github.com/aanderse) Realistically the questions that need to be answered can only be answered experimentally by converting a bunch of services. If that should happen on a branch before getting merged, sure.\n> \n> Everyone knows that importing all modules and using `enable = ...` is dogshit non-modular software engineering that would not be accepted except but for the fact that it is grandfathered in. Now we finally have a solution to that, _and_ potentially also to rampant NixOS vs Home Manager vs Nix Darwin copypasta. This is really good! Let's try to find process that doesn't involve in waiting decades more before these problems are finally fixed.\n\ni completely agree that this is a better way forward, no arguments there. i also love the idea that overnight my project could gain dozens of services with no work on my part required. i think you really nailed it when you said this doesn't need to be merged into the `NixOS/nixpkgs` repo, though - that is one of the advantages here... we can write modules anywhere and test them out without interrupting mainline nixos. let's do that 👍",
+   "created_at": "2026-02-27T17:47:47Z",
+   "id": 3974233645,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-02-27T17:47:47Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I'd like to write a new RFC first. Although this does stem from RFC 163 among other ideas, that one was rather un-NixOS-like. It needs an overhaul, and it needs more attention drawn to it.\n\nPlease let's not waste anymore time with the RFC process. If need be, RFC documents are great, but they don't need to be an \"RFC\", and instead can be PR'd straight into the relevant codebase. If it needs more eyes, announce it on Discourse and elsewhere. And if it's stuck because people can't agree whether it's good or not, escalate it to the relevant authority, which would be the Nixpkgs core team here.\n\nYes we need to design things properly and can't just rush everything or else we'll end up pulling another Flake, but the [initial PR](https://github.com/NixOS/nixpkgs/pull/372170) was opened over a year ago, refined multiple times after feedback from various people (including every lib/module system maintainer and other strict reviewers!), and merged after 6 months. It has been seen by hundreds of people judging by the reactions. It definitely did not go under the radar.\n\nAt this point I'd really just like to hear more feedback from people using it in practice, so that _if_ there's really any major problems, we can fix them as soon as possible. I'm ready for it, and I believe @roberth is too!",
+   "created_at": "2026-03-02T21:23:49Z",
+   "id": 3986991861,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 5,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 8,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 13
+   },
+   "updated_at": "2026-03-02T21:23:49Z",
+   "user": {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Everyone knows that importing all modules and using `enable = ...` is dogshit non-modular software engineering that would not be accepted except but for the fact that it is grandfathered in. Now we finally have a solution to that, _and_ potentially also to rampant NixOS vs Home Manager vs Nix Darwin copypasta.\n\nFWIW, speaking just as a (neglectful) nix-darwin committer, I believe conflating these two goals is most of why modular services have been somewhat controversial. One of the goals is a performance/architecture/flexibility win for NixOS, the other one is attempting to aim towards a somewhat unrealized bespoke abstraction layer over widely different systems that doesn’t provide any inherent benefit to NixOS. I personally believe that it’s unlikely that modular services in their current form will be very useful for reducing maintenance burden for nix-darwin or providing a genuine abstraction for portability between systemd and launchd, unless by bringing NixOS services down to a lowest common denominator, which I don’t think would be a good thing.\n\nCoupling solutions to modular instantiation and an abstraction around service definitions could make sense if we had a compelling design for the latter, but I’m not wholly convinced a good service‐manager‐portable form of the latter is even possible, and from what I’ve seen I believe that modular services currently don’t make any meaningful progress on that front and would require at least major breaking changes to do so. So I worry designing around that goal will hold back progress on improving evaluation performance and instancing flexibility for NixOS modules.",
+   "created_at": "2026-03-03T14:26:00Z",
+   "id": 3991433341,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 5,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 2,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 8
+   },
+   "updated_at": "2026-03-03T14:26:00Z",
+   "user": {
+    "id": 18535642,
+    "login": "emilazy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I personally believe that it’s unlikely that modular services in their current form will be very useful for reducing maintenance burden for nix-darwin\n\nif i might ask for context, what would you see as needed for it to achieve that?\n",
+   "created_at": "2026-03-03T17:28:49Z",
+   "id": 3992519532,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-03T17:28:49Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The mass conversion of service I am hoping for it totally separate from support other init systems to be clear. I don't really mind modular services \"case analysis\" approach to systemd/finit/whatever, but supporting new things no matter the approach is simple a more creative process that should be done separately from any mass conversions.\n\nAnd FWIW, the thing I most want to dedup with first is not home-manager or nix-darwin but Nix BSD, since it is a more \"apples to apples\" with (Linux) NixOS.",
+   "created_at": "2026-03-03T19:31:59Z",
+   "id": 3993092649,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-03T19:31:59Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "As someone who already uses a few NixOS service modules to generate non-systemd daemons, I can say I have sometimes absurd hacks to extract the config file and command line parameters from the less conveniently structured modules, and having better official way to get these uniformly and from the proper level of abstraction would be nice, and I think some shape of prepare/launch/cleanup split maps well to systemd and also to whatever else, and service-manager-specific things living in the attributes I don't evaluate will cost me little.",
+   "created_at": "2026-03-03T21:03:59Z",
+   "id": 3993528142,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2026-03-03T21:03:59Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> if i might ask for context, what would you see as needed for it to achieve that?\n\nI’ll focus just on the notion of service portability here, separate from issues of instancing or modular imports.\n\nThe problem is that different service managers have fundamental differences in models and target OSes with fundamental differences in execution environments. For instance, launchd has no explicit notion of dependencies, and is based on the assumption that services will be written to explicitly wait for their dependencies to be brought up, including through pervasive socket activation. systemd has an elaborate system of dependency ordering instead, with “waiting for dependencies” often being expected to be in service definitions rather than service code, and although it does also support socket activation, the runtime interfaces are incompatible and a socket‐activated service cannot be used directly with both systemd and launchd without an additional API shim layer or handling these portability differences in the program itself.\n\nThe current modular services lowest common denominator is an argv to execute, but that lowest common denominator is very low indeed – for instance, it’s rarely the case that you want a service to run as `root:root`. NixOS fully embraces and utilizes systemd, and macOS of course does launchd as well. We must think about what’s idiomatic for a given platform rather than just a barebones case that will meet the needs of few services by itself. NixOS wants services to use dynamic users by default and to use extensive hardening options, whereas on macOS we must explicitly declare users and sandboxing is done with a very different sandboxing profile scheme and usually left to applications themselves. To reduce maintenance burden and make services truly portable would require abstracting over these differences rather than having extensive logic for each service manager in every service with significant semantic divergence. (Even before that point, I think there are already potential problems, because even a trivial service with an argv list and nothing else is not necessarily going to be handled the same way across service managers with fundamentally different models.)\n\nThe platform‐specific glue that NixOS and nix-darwin modules deal with goes beyond just the service manager, too; `systemd-tmpfiles` is also very widely used in NixOS and by upstreams, and user and group definitions are common as well in both NixOS and nix-darwin. I don’t believe we can productively abstract over the entire OS layer. Insofar as extensive “case analysis” on the service manager is required to achieve portability, then I think the guidelines in the [platform support tiers](https://github.com/NixOS/rfcs/blob/master/rfcs/0046-platform-support-tiers.md#support-tiers) RFC are indicative about to what degree we should expect Nixpkgs maintainers to be happy with carrying such logic, especially for platforms with no official support like FreeBSD, and in any case at that point we have failed to achieve meaningful portability and reduced maintenance burden of service management code; we’ve only moved it further away from the projects it needs to keep in sync with.\n\nAnd I think this is actually close to the best case; systemd was originally intended as somewhat of a launchd clone, despite having differences from the start and diverging further in the years since. I wouldn’t say NixBSD is closer to NixOS than that, as I believe `rc.d` is a significantly different model more similar to (but nicer than) sysvinit scripts, involving explicit PID file tracking, albeit with a convenience abstraction layer for common tasks on top. Something like s6, which expects to be used with execline scripts and to have functionality like socket activation, user-switching, and sandboxing factored out into independent wrapper tools, is further afield still in terms of design. Once we get to systems like Windows or Upstart, a meaningful abstraction layer seems likely to be hopeless; I realize that Upstart is an irrelevant concern these days, but I think it’s instructive to consider the mess it would have been if, around the time of the Upstart to systemd transition, we had tried to abstract over a service manager based on event triggers and one with a fundamentally inverted model based on dependencies.\n\nTo provide an interface that truly abstracts over these kinds of differences rather than one that offers the bare minimum as a leaky abstraction and then leaves the rest to explicit case analysis would be tantamount to designing a service manager ourselves and then implementing it in terms of existing ones. I am not sure whether that is possible to do well, but if it is, I believe that would look like treating the service execution environment like the Nix build sandbox – smoothing away differences by offering as little as possible by default, with bespoke restricted users and as much system functionality sandboxed away as possible, and selectively exposing only what is needed. That would help mitigate platform differences and have benefits in terms of hardening, but I think it would still be difficult to achieve something that offers useful functionality cross‐platform and doesn’t involve compromising NixOS’s full exploitation of systemd functionality for the sake of out‐of‐tree projects. If we could acheive such a thing, though, it seems like it would be better to achieve it outside of Nixpkgs so that the whole world could benefit and we could get buy‐in from upstreams.\n\nI believe it makes a sense to step back and consider how we think about portability in general. We can write packages that are mostly generic over platforms for two reasons: firstly, package builds generally don’t require much from their environment and are happy with a very restricted hermetic environment that is broadly similar between OSes; secondly, upstreams do much of the work in their build systems and code to adapt to differences between platforms they support. The first doesn’t apply to services, which somewhat definitionally need to interact with the rest of the system in various complex ways. The second is something many upstreams already do for service management – but writing our own bespoke service definitions against an interface nobody else uses preempts our ability to make use of that work. There has been some movement in NixOS in the direction of reusing upstream unit files whenever possible with `systemd.packages` and only overriding the minimum necessary; going down the service portability route in this manner would regress on that front.\n\nIf upstreams code against some platform interface, then the options for making their software work on different platforms are for upstreams to support multiple platform interfaces, or to implement the same interface across multiple platforms (e.g. something like [InitWare](https://github.com/InitWare/InitWare)), or to create a standard abstraction that can be coded against, implemented, and reused across many upstreams and consumers. Maintaining our own bespoke abstraction layers that upstreams aren’t going to adopt and that therefore require duplicating their work on our own is not the kind of thing that has gone well in the past or is sustainable, IMO – see, for example, scripted initrd and scripted networking; I think embracing native platform tooling and working with upstreams for the functionality we need has been a marked improvement in NixOS maintainability.\n\nSpeaking to @7c6f434c’s point, it does seem to me that if we’re talking about portability and sharing code between different systems, trying to make service management portable is the wrong layer, and that what would allow a lot of practical deduplication between NixOS, Home Manager, nix-darwin is just focusing on the other end and decoupling configuration generation by itself. That code usually is very similar between platforms and unnecessarily duplicated between projects. Since I believe platform‐specific glue in modules is inevitable, focusing on the part that doesn’t touch on OS‐specific abstractions would have the biggest returns for portability and shared logic without requiring a novel abstraction layer.",
+   "created_at": "2026-03-04T00:50:29Z",
+   "id": 3994512395,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 25,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 26
+   },
+   "updated_at": "2026-03-04T00:50:29Z",
+   "user": {
+    "id": 18535642,
+    "login": "emilazy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "(Some relevant wisdom from the past: Eelco makes similar points about portability between service managers in https://github.com/NixOS/nixpkgs/issues/26067#issuecomment-303771655, and https://github.com/NixOS/nixpkgs/issues/26067#issuecomment-303847103 discusses the kind of thing it’d take to make a meaningful true abstraction layer here, based on Kubernetes, which is much closer to a Nix-style “you get nothing by default and everything you need from the system must be explicitly specified” model, and which would not be very compatible with the current scheme where you can assume your argv gets passed through to a fairly “bare, exposed” systemd service by default.)",
+   "created_at": "2026-03-04T01:42:12Z",
+   "id": 3994700983,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-04T01:42:12Z",
+   "user": {
+    "id": 18535642,
+    "login": "emilazy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't get how we can say both \"case analysis is bad\" and \"leak abstractions over widely different things bad\". Like, which is it? Most of the argument above is against \"leak abstractions over widely different things bad\", and I agree actually, but modular services *does not do that*. Instead it goes with the \"case analysis\" approach (`argv` is hardly an abstraction) which is much less discussed above.\n\n> Insofar as extensive “case analysis” on the service manager is required to achieve portability, then I think the guidelines in the [platform support tiers](https://github.com/NixOS/rfcs/blob/master/rfcs/0046-platform-support-tiers.md#support-tiers) RFC are indicative about to what degree we should expect Nixpkgs maintainers to be happy with carrying such logic, especially for platforms with no official support like FreeBSD, and in any case at that point we have failed to achieve meaningful portability and reduced maintenance burden of service management code; we’ve only moved it further away from the projects it needs to keep in sync with.\n\nThis also feels circular to me. The point of upstreaming parts of these other projects is not so half of it can live upstream, and half of it can live downstream, but that the *whole thing* can go upstream. Then, we're not moving anything further away from anything. Platforms can march higher up through the support tiers too, as more stuff works upstream.\n\nUsing low tiers to prevent things outright was never the point of that RFC --- the point is to to allow CI to move forward and not allow abandoned side project to stall everyone else. But it's going too far assume that everything that is not Tier 1 today is and must forever remain an abandoned side project. Projects must have at least a *chance* to prove themselves. If they fail *then* we can rip it all back out again, sure, no problem.\n\n> I believe it makes a sense to step back and consider how we think about portability in general. [...] doesn’t apply to services, which somewhat definitionally need to interact with the rest of the system in various complex ways. The second is something many upstreams already do for service management – but writing our own bespoke service definitions against an interface nobody else uses preempts our ability to make use of that work. There has been some movement in NixOS in the direction of reusing upstream unit files whenever possible with systemd.packages and only overriding the minimum necessary; going down the service portability route in this manner would regress on that front.\n\nThe case analysis approach is perfectly compatible with this. Upstream provides a systemd unit file and some other init's thing, we use them both.\n\n------\n\nFinally all this ignores that even if the service management side is completely different, the program *configuration* stuff is the same, and despite the trend towards more freeform JSON etc. many NixOS modules still contain lots of configuration code. That stuff is completely reusable and we stand to gain a lot by tying to ruse it.\n\nThe fact of the matter is that NixOS use of modules is a bad dead-end architecture, and we need to fix it. I could also bring up Spectrum and the fact that it doesn't think any of NixOS can be reused is another problem. Even as NixOS remains a huge upgrade over traditional distros, the fact remains that \"how to deploy things?\" is an area is that is changing a lot in recent years, that needs better answers (and better OS primitives, I might digress), and there is plenty of innovation done in this space, so kubernetes or flatpak slop or whatever doesn't end up eating our lunch. We have to clear out the fundamental tech debt here to foster shared-community experimentation, and not relegate everything to side projects that struggle to keep up with Nixpkgs.\n\nFinally, I'll add with the new Hydra changes about to get deployed, we should be in a golden age for more platforms and things, as we can finally spin up a lot more builders without hitting Hydra scaling limits.",
+   "created_at": "2026-03-04T14:48:07Z",
+   "id": 3998020702,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 5,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2026-03-04T14:52:23Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "(I’m again only talking about portability between service managers here, separate from other modularity benefits.)\n\n> I don't get how we can say both \"case analysis is bad\" and \"leak abstractions over widely different things bad\". Like, which is it? Most of the argument above is against \"leak abstractions over widely different things bad\", and I agree actually, but modular services _does not do that_. Instead it goes with the \"case analysis\" approach (`argv` is hardly an abstraction) which is much less discussed above.\n\nIf we assume that modular services shouldn’t try to do any abstraction over different service managers, and instead just include raw definitions for each respective service manager, then they don’t constitute a solution to “rampant NixOS vs Home Manager vs Nix Darwin copypasta” in the area of service management – the amount of code for service management will be the same.\n\nI think the truest form of that would look like simply exposing the existing `systemd.*` and `launchd.*` hierarchies verbatim, and guarding those definitions based on platform. This is similar to how Home Manager modules achieve portability between Linux and macOS.\n\nIn that case, I’d say it’s equivalent to my proposal to instead focus on factoring out the platform‐independent configuration generation parts of modules – except that it has moved into Nixpkgs, which brings it further away from the maintainers of the relevant projects and raises questions of which service managers should be supported in‐tree and which should have to do additional per‐module work out of tree. I’m not sure that is better; configuration generation is much easier to split out as a coherent interface and a public API that multiple projects can use, whereas having service management code that is specific to out‐of‐tree projects and quite coupled to them inside Nixpkgs seems like a layering violation that would cause friction in those projects’ development.\n\nHowever, the current reality is that modular services already does try to do some further amount of abstraction than this, because it exposes a shared argv interface independent of the service manager. A modular service that does `process.argv = [ … ];` with no case analysis on the service manager is nominally portable, but in fact produces a rather differently‐behaving service depending on what service manager you use it with, and is probably suitable for essentially no use case.\n\nSo I think a pure zero‐abstraction case analysis approach would be better than that status quo, but is dubious in terms of benefits both in terms of reducing code duplication and development model. From a nix-darwin point of view, I think it would be far preferable for us to be able to reuse the non‐macOS‐related parts of modules than to have those parts upstream in Nixpkgs too, unless we completely upstreamed nix-darwin.\n\nIt was my understanding that the intention was to add more abstraction rather than less, though. In that case, the problems of the existing leaky abstraction would be accentuated, because the current default execution environment and ambient authority differ substantially between service manager, and a lot of the things we’d need to abstract have implications on program code. The default handling of logging between systemd, launchd, and s6 is very different, along with how you would be expected to adjust it – systemd logs standard output and standard error persistently to the central journal by default, launchd drops it on the floor if you don’t send it to a file, and s6 expects you to set up separate logger processes for each service. For an example that has an impact on program code, I already mentioned the different socket activation APIs, but another one is readiness notification. It’s important for usable service dependencies, but the APIs the service code must use to signal readiness differ between systemd and s6, and as I said, launchd has a different model entirely and no notion of service dependencies or readiness. Right now, if we tried to extend modular services to something like Kubernetes that provides *less* to the service than systemd or launchd by default and requires more explicit information from the service, it’s unclear what the defaults should be for a service defining only `process.argv` to work at all.\n\nMaking a gradual rollout of further portable abstractions work without regular breaking changes would necessitate the different approach I mentioned, which would be a major breaking change and require quite a bit more upfront work. That’s why I’m sceptical that coupling it to the other benefits of modular services that don’t require the same amount of R&D is the best move, especially if we want to do a mass migration in a timely manner.\n\n> This also feels circular to me. The point of upstreaming parts of these other projects is not so half of it can live upstream, and half of it can live downstream, but that the _whole thing_ can go upstream. Then, we're not moving anything further away from anything. Platforms can march higher up through the support tiers too, as more stuff works upstream.\n\nThis wasn’t my understanding; what we have documented and what I understood expectations to be is that the code to glue modular services to a specific service management discipline would live in the existing out‐of‐tree projects. It’s been unclear from previous discussions whether there is interest on either end in having Home Manager and nix-darwin merge into Nixpkgs, even as separate directory hierarchies. If the portability story is based around having every Nix‐based OS and configuration tool become part of a single shared codebase, then I do think that’s something that could use wider community input, and it will accentuate concerns about NixOS maintainers being burdened with expectations of providing support for platforms they have no interest in, even if it’s just a matter of having to exploit Linux/systemd functionality less fully in order to not break them. Maybe that would be a good direction to go in, but it’s a major change, and not one that has been clearly communicated up to this point.\n\nI’m also not sure how that ties in to portability to more niche systems like finit – it seems unlikely that finix would ever merge upstream into Nixpkgs, so if modular services require case analysis to support finit then we have precisely the case of code specific to an obscure platform in Nixpkgs, that can never be removed or upstreamed, and that is still split between an upstream and downstream project?\n\n> Using low tiers to prevent things outright was never the point of that RFC --- the point is to to allow CI to move forward and not allow abandoned side project to stall everyone else. But it's going too far assume that everything that is not Tier 1 today is and must forever remain an abandoned side project. Projects must have at least a _chance_ to prove themselves. If they fail _then_ we can rip it all back out again, sure, no problem.\n\nI agree with that, but I’m talking about wording like this:\n\n> Completely platform-specific fixes are expected to be rare and non-intrusive.\n\n> Fixes necessary for this platforms must be either limited to compilation toolchains, or general cleanups of non-standard assumptions (e.g. «everything that is not x86 is a kind of ARM» or «malloc(0) behaviour is a reliable indicator of other malloc features»). These fixes must be generic: there should be a reasonable expectation that other exotic platforms would equally benefit from the exact same fix.\n\nIt’s reasonable that we want to let maintainers push back on platform‐specific code for niche platforms that doesn’t generalize or fix an obvious bug, and it happens in practice. I think this generalizes to service management too; it’s not reasonable for services in Nixpkgs to be expected to carry case analysis for every platform and every obscure service manager.\n\nIn fact, I think the case is stronger for service management: the nice thing about portability of packages is that, in an ideal world, we could upstream all these fixes rather than carrying such conditionals and patches in Nixpkgs indefinitely. The fact that we offer reduced levels of support for more obscure platforms legitimizes expecting people to go upstream with portability fixes rather than carrying code for them in Nixpkgs. However, since using modular services to provide service manager portability means forgoing the use of upstream service definitions, there’s no notion of a temporary platform‐specific fix or upstreaming support; such conditionals would need to stick around forever.\n\n> The case analysis approach is perfectly compatible with this. Upstream provides a systemd unit file and some other init's thing, we use them both.\n\nI don’t think it’s possible to use an existing systemd `.service` or launchd `.plist` file from upstream with modular services as they stand. That’s something NixOS modules already do. I think the more we move in that direction, the less sense it makes to build out tooling for defining services in Nix code or abstraction layers between service managers, so this seems like a pretty critical design point, and an area where modular services are currently pushing in the opposite direction to recent movement in NixOS.\n\n> Finally all this ignores that even if the service management side is completely different, the program _configuration_ stuff is the same, and despite the trend towards more freeform JSON etc. many NixOS modules still contain lots of configuration code. That stuff is completely reusable and we stand to gain a lot by tying to ruse it.\n\nI didn’t mean to ignore it; focusing on that was my primary proposal for a more viable approach to reducing duplication and allowing reuse of the portable parts of service modules:\n\n> Speaking to @7c6f434c’s point, it does seem to me that if we’re talking about portability and sharing code between different systems, trying to make service management portable is the wrong layer, and that what would allow a lot of practical deduplication between NixOS, Home Manager, nix-darwin is just focusing on the other end and decoupling configuration generation by itself. That code usually is very similar between platforms and unnecessarily duplicated between projects. Since I believe platform‐specific glue in modules is inevitable, focusing on the part that doesn’t touch on OS‐specific abstractions would have the biggest returns for portability and shared logic without requiring a novel abstraction layer.\n\nI think that this approach to portability would be much easier to reuse directly in other projects and involve much fewer questions about maintenance burden, what to support in‐tree, and the effects on the development model of other projects. I can easily see nix-darwin and other projects significantly reducing their code duplication with NixOS with that. (Home Manager is a bit more complicated, since per‐user configuration can often look quite different.) I think it would also change what a mass migration looks like quite significantly, so we should probably decide how we’re going to approach instancing and better modularity for NixOS, and portability of service configuration generation code, before starting to boil the ocean for it.\n\n> The fact of the matter is that NixOS use of modules is a bad dead-end architecture, and we need to fix it. I could also bring up Spectrum and the fact that it doesn't think any of NixOS can be reused is another problem. Even as NixOS remains a huge upgrade over traditional distros, the fact remains that \"how to deploy things?\" is an area is that is changing a lot in recent years, that needs better answers (and better OS primitives, I might digress), and there is plenty of innovation done in this space, so kubernetes or flatpak slop or whatever doesn't end up eating our lunch. We have to clear out the fundamental tech debt here to foster shared-community experimentation, and not relegate everything to side projects that struggle to keep up with Nixpkgs.\n\nI think Spectrum is a good example of why the `process.argv` baseline is an insufficient leaky abstraction, precisely because the default shares much less than systemd and launchd do and more explicit information on how things should be wired up is required. But I’m not an expert on Spectrum.\n\nI think a service management approach that treats services as maximally hermetic and isolated by default while exposing object‐capability‐style affordances to wire them up to the rest of the system as needed would be a very worthy research project, compelling for portability and security and distributed deployment, a better fit for the Nix model than the current status quo of NixOS and its use of systemd, and could potentially even (though I’m less confident in this) be productively implemented with adapters to existing service managers. I also think it would be a much bigger lift than what modular services currently try to do, involve substantial breaking changes to its model, and would have the best results if it wasn’t tightly coupled to Nix and Nixpkgs but instead an independent component we could reuse and try to get wider buy‐in for. So the fact that such a thing would be very interesting doesn’t seem to me to be an argument for the current portability story of modular services today being compelling.",
+   "created_at": "2026-03-04T16:28:19Z",
+   "id": 3998655081,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 16,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 16
+   },
+   "updated_at": "2026-03-04T16:32:13Z",
+   "user": {
+    "id": 18535642,
+    "login": "emilazy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> At this point I'd really just like to hear more feedback from people using it in practice\n\nWe, at [the NGI team](https://nixos.org/community/teams/ngi/), are building out new [software distribution platform](https://github.com/ngi-nix/ngi-nix-forge/) using [Nimi](https://github.com/weyl-ai/nimi) and Modular services.",
+   "created_at": "2026-03-18T09:48:51Z",
+   "id": 4081145791,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 5,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 3,
+    "total_count": 9
+   },
+   "updated_at": "2026-03-18T09:49:03Z",
+   "user": {
+    "id": 476346,
+    "login": "imincik",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "to respond to some of the comments made by @emilazy here:\n\n> trying to make service management portable is the wrong layer, and that what would allow a lot of practical deduplication between NixOS, Home Manager, nix-darwin is just focusing on the other end and decoupling configuration generation by itself. That code usually is very similar between platforms and unnecessarily duplicated between projects. Since I believe platform‐specific glue in modules is inevitable, focusing on the part that doesn’t touch on OS‐specific abstractions would have the biggest returns for portability and shared logic without requiring a novel abstraction layer.\n\nthis sounds like #509595. it indeed seems like the lower-hanging fruit.\n\n> It was my understanding that the intention was to add more abstraction rather than less, though. In that case, the problems of the existing leaky abstraction would be accentuated\n\ni wouldn't deny this challenge, and may not know about the particulars there - but as long as added some info can be meaningfully used for a given system, i think that could make for added value (where bespoke service modules were otherwise missing), even if other bits may need to be handled for it per service still.\n\n> upstream service definitions\n\ni agree use of these seems nicer, where available for a given system (i imagine this may help darwin more than finix, for one). i would presume the main use-case of modular services to be for services where these have not been available to handle system compatibility for us already - but those cases will realistically both exist, so i would see these as not mutually exclusive.\n\n> I personally believe that it’s unlikely that modular services in their current form will be very useful [...]\n\nright - the interface so far is very limited.\ni think the best way to meaningfully iterate on that interface tho is to gradually get a sense of its pain points for the purpose of consuming such services from different systems, so we could improve it - which implies having different systems able to make use of the info they offer in the first place.\n\n> unless by bringing NixOS services down to a lowest common denominator, which I don’t think would be a good thing.\n\ni think the reason i don't so much fear this is that there is no inherent requirement to add any specific bits we don't like. i think we can in fact add what we do like, while still handling by system what's better done that way.\n\n> I think a service management approach that treats services as maximally hermetic and isolated by default while exposing object‐capability‐style affordances to wire them up to the rest of the system as needed would be a very worthy research project, compelling for portability and security and distributed deployment, a better fit for the Nix model than the current status quo of NixOS and its use of systemd, and could potentially even (though I’m less confident in this) be productively implemented with adapters to existing service managers. I also think it would be a much bigger lift than what modular services currently try to do, involve substantial breaking changes to its model, and would have the best results if it wasn’t tightly coupled to Nix and Nixpkgs but instead an independent component we could reuse and try to get wider buy‐in for. So the fact that such a thing would be very interesting doesn’t seem to me to be an argument for the current portability story of modular services today being compelling.\n\nwe don't have that perfect system-agnostic model today. what we do have however, is something extensible, such that it could provide some value without _needing_ to be perfect today. lacking a perfect solution, that could end up[^wip] the best thing we've got so far, and iterating on it with consumers from different systems could gradually make it better still.\n\nmaybe something better like you suggested could end up coming closer through such efforts, as well.\n\n[^wip]: given resolution of the outstanding issues listed here\n",
+   "created_at": "2026-05-11T20:17:50Z",
+   "id": 4424740437,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-11T20:17:50Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Yes we need to design things properly and can't just rush everything or else we'll end up pulling another Flake\n\nThis is kinda, [what I feared might happen](https://github.com/NixOS/nixpkgs/pull/430490#discussion_r2254621123).\n\nAnd I must say, e.g. this `_class = \"\"` stuff in [nixos search](https://search.nixos.org/options?channel=25.11&query=services#show=option%253Aservices.SystemdJournal2Gelf.enable) that has no meaning except in the context of modular services gives me \"it's 2020 and half-baked flakes are being added everywhere\"-vibes.\n\nSame for whatever `<imports = [ pkgs.ghostunnel.services.default ]>.ghostunnel.allowAll` is supposed to be which greets me whenever I open `configuration.nix(8)`.\n\nNow, it didn't took much time to find the first review asking for something to be a modular service instead (https://github.com/NixOS/nixpkgs/pull/509610#pullrequestreview-4158230819) and things being a modular service only (https://github.com/NixOS/nixpkgs/pull/508462).\n\nSo to me it actually looks like history is repeating itself here.",
+   "created_at": "2026-05-14T18:33:30Z",
+   "id": 4453609921,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 4,
+    "-1": 2,
+    "confused": 0,
+    "eyes": 2,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 8
+   },
+   "updated_at": "2026-05-14T18:33:30Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@Ma27 as much as i support modular services and am trying to support pushing them forward... i can't help but to at least somewhat agree with you\n\ni think it is fine for _some_ modular services to make it into `NixOS/nixpkgs` as long as they aren't disruptive, as previously expressed... but i think i would be beyond careless to _start mass converting services_...\n\n> And I must say, e.g. this `_class = \"\"` stuff in [nixos search](https://search.nixos.org/options?channel=25.11&query=services#show=option%253Aservices.SystemdJournal2Gelf.enable)\n\nyeah, that is really strong evidence for your point - maybe it shouldn't be so prominent or confusing, or maybe it should be in a separate nixos search instance\n\n\n> Now, it didn't took much time to find the first review asking for something to be a modular service instead ([#509610 (review)](https://github.com/NixOS/nixpkgs/pull/509610#pullrequestreview-4158230819)) \n\ni missed the \"instead\" here, it looked more like an \"as well\" to me... right? \"as well\" is fine in my opinion... \"instead\" is not at all!\n\n> and things being a modular service only ([#508462](https://github.com/NixOS/nixpkgs/pull/508462)).\n\nthis is very concerning. if someone doesn't want to write a nixos module at all they should provide that out of tree in their own repo. i 100% agree with you here.\n\n---\n\nthanks for voicing your concerns @Ma27. what do other people think?",
+   "created_at": "2026-05-14T19:47:55Z",
+   "id": 4454186400,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-14T19:47:55Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> And I must say, e.g. this `_class = \"\"` stuff in [nixos search](https://search.nixos.org/options?channel=25.11&query=services#show=option%253Aservices.SystemdJournal2Gelf.enable) that has no meaning except in the context of modular services gives me \"it's 2020 and half-baked flakes are being added everywhere\"-vibes.\n\nhuh, these are a way to type modules so one type can't import different types, what's specific to modular services about that? i mostly put them there as good practice to better clarify what goes where, particularly now the option search covers three categories rather than one. to be fair, the categories used to not be separated, so that maybe contributed as well. if people dislike them we can remove them again.\n\n> maybe it should be in a separate nixos search instance\n\nwell it is in a separate tab now\n\n> this is very concerning. if someone doesn't want to write a nixos module at all they should provide that out of tree in their own repo. i 100% agree with you here.\n\nhm, i maybe felt different in this case.\n\nnixos just so happened to live in the nixpkgs repo. however, nixos is technically just one consumer - of lib, of packages, and their modules (currently: modular services).\n\nisn't people contributing what they want how open source works? why would it be on them to instead contribute what someone else might have wanted, if the contribution is in-scope and independently usable?\n",
+   "created_at": "2026-05-14T20:12:41Z",
+   "id": 4454351286,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-14T20:12:41Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I really do not appreciate the Flakes comparison --- it doesn't actually make any sense.\n\nFlakes was implemented in the Nix repo, but experimented in a bazillion other repos right away, without any migration strategy. And of course there was a ton of winking and nodding of a \"who care if it is experimental, go use it!\" sirt The inertia of out-of-tree usage is what has gotten Flakes to the defacto-stable state.\n\nModular services is a within-Nixpkgs experiment. No externally written modular services are promised anything. We've had plenty of within-Nixpkgs experimentation before, it's how most of the abstractions within Nixpkgs have happened. (Home manager or Nix Darwin might experimentally consume modular services within Nixpkgs, but that's roles reversed only 2 repos, and thus completely different.)\n\nAnd besides, what is the alternative here? That was spend a bazlllion meetings trying to imagine what the perfect modular services looks like? Come on --- that's clearly never going to work, or even happen. The only way this gets done is to make it a community project where we iteratively figure out the right design, and probably tackle lots of tech debt in the process before the right design becomes possible.\n\nAnyone that has processes concerns should lay out a *positive* vision for how a project like this *ought* to go about. It's simple not good enough to just say \"not like this, not like that\" and enshrine the shitty status quo of singleton services because no methodology is good enough --- no Nixpkgs NIMBYism, please.",
+   "created_at": "2026-05-15T00:49:22Z",
+   "id": 4455884598,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 3,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 6
+   },
+   "updated_at": "2026-05-15T00:49:22Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> And besides, what is the alternative here?\n\ni continue to fail to see how writing modular services in your own repo isn't a viable alternative - it worked out well for us [here](https://git.syndicate-lang.org/synit/slam/src/commit/750124463e8f51ba6c8724131afeac738d149b41/modular-services).\n\nsure, we should add some modular services to nixpkgs... but let's not take what @Ma27 said to extremes... i think he's just asking us to be reasonable and measured about this. considering how easy it is to write modular services and host them in any repo we want that seems more than reasonable. we can have our innovation without much cost associated... i think that is a reasonable ask.",
+   "created_at": "2026-05-15T01:56:45Z",
+   "id": 4456217846,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-05-15T01:56:45Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Anyone that has processes concerns should lay out a _positive_ vision\n\nI think this was pretty clear: implement the NixOS service as a priority and the modular service can be a secondary impl. The modular service can't become load-bearing before we even have a proper design.\n\n\n\n> Modular services is a within-Nixpkgs experiment. No externally written modular services are promised anything.\n\nWhich makes no sense because the only init system fleshed out in this repo is systemd. We have packages for `runit`, `finit`, `sysvinit`, ... and no way for those packages to actually consume said services - so any impl automatically gets shoved out-of-tree.\n\nThis along with the \"lowest common denominator\" problem as explained upthread is why modular services is exactly like Flakes - it's getting shoved through and advertised everywhere before any design is even forthcoming.",
+   "created_at": "2026-05-15T02:03:33Z",
+   "id": 4456246902,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 4,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2026-05-15T02:03:51Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> > Modular services is a within-Nixpkgs experiment. No externally written modular services are promised anything.\n> \n> Which makes no sense because the only init system fleshed out in this repo is systemd. We have packages for `runit`, `finit`, `sysvinit`, ... and no way for those packages to actually consume said services - so any impl automatically gets shoved out-of-tree.\n\nAs work like “package modules” progresses—aiming to migrate non-service-specific options—we’ll eventually see NixOS modules built on top of these more modular abstractions. Once both “modular services” and “package modules” mature, eventually this pave the way for supporting or making it easier to support alternative init systems in NixOS down the line, right?",
+   "created_at": "2026-05-15T08:03:27Z",
+   "id": 4458103935,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-15T08:08:17Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i'd imagine growth to the interface as being largely non-breaking to consumers - and even then, we've had a good way to deal with deprecations/renames as used for nixos options already as well",
+   "created_at": "2026-05-15T08:16:29Z",
+   "id": 4458164070,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-15T08:16:29Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "If someone iterated on modular services out of tree for a while, and then tried to merge it upstream in one massive PR, would you all really be happier about it?",
+   "created_at": "2026-05-15T21:21:36Z",
+   "id": 4463743591,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-15T21:21:36Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@eclairevoyant \n\n> The modular service can't become load-bearing before we even have a proper design.\n\nWhat is becoming load bearing? No one is ripping out the non-modular services infrastructure, are they?\n\n> Which makes no sense because the only init system fleshed out in this repo is systemd.\n\nThat is just one motivation for modular services. Another, more basic one, is having more than one instance for a service. Right now, for example, you get *one* postgresql and must use separate logical DBs within it. Even if we never support anything but systemd, there are still a bunch of reasons why we would like to lift this annoying restriction and allow as many or few postgresql services to be run as one wants. It's not the 1990s anymore --- everyone knows that Singletons are Bad.",
+   "created_at": "2026-05-15T21:27:11Z",
+   "id": 4463777848,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2026-05-15T21:28:09Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Another, more basic one, is having more than one instance for a service.\n\ni'd rather not run a dozen `postgresql` instances as `root`. until someone adds support for basic things like actually specifying a non `root` user i just don't understand a number of your arguments. 🤷‍♂️",
+   "created_at": "2026-05-15T21:41:43Z",
+   "id": 4463862288,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-15T21:41:43Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Then let's add support for that? Surely it shouldn't be hard since regular services also support it?\n\n@roberth's plan was always to make this a community-driven collaborative processes. Anything basic like this that is missing should not be taken as a sign that he or anyone else thinks it doesn't matter, but simply that it wasn't designed and implemented yet. Slowly building up the full feature set over many PRs was supposed to allow more people to get up to speed, and make more opportunities for a wider set of people to influence the design.",
+   "created_at": "2026-05-15T22:04:29Z",
+   "id": 4464112411,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 4,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2026-05-15T22:04:29Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Then let's add support for that? Surely it shouldn't be hard since regular services also support it?\n> \n> [@roberth](https://github.com/roberth)'s plan was always to make this a community-driven collaborative processes. Anything basic like this that is missing should not be taken as a sign that he or anyone else thinks it doesn't matter, but simply that it wasn't designed and implemented yet. Slowly building up the full feature set over many PRs was supposed to allow more people to get up to speed, and make more opportunities for a wider set of people to influence the design.\n\nright. i mentioned several missing features months and months ago - none have been implemented yet. to me not having such a basic feature is a sign that either there isn't enough interest in modular services yet, or simply they aren't ready to be fully features in `NixOS/nixpkgs`.\n\nbtw i have been working to support the modular services effort in other ways so haven't personally got around to adding user and group support yet",
+   "created_at": "2026-05-15T22:13:44Z",
+   "id": 4464176339,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 6,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 6
+   },
+   "updated_at": "2026-05-15T22:13:44Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> they aren't ready to be fully featured in `NixOS/nixpkgs`\n\nthat's their beauty, they can organically grow from having systems needing to manage things more manually to taking care of more concerns. just needs some more love.",
+   "created_at": "2026-05-17T08:06:26Z",
+   "id": 4469848534,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-05-17T08:06:26Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "(I’ll respond to both https://github.com/nix-darwin/nix-darwin/pull/1765#issuecomment-4424998639 and https://github.com/NixOS/nixpkgs/issues/428084#issuecomment-4424740437 here to keep the discussion in one place.)\n\n> @emilazy:\n> \n> thanks again for your extensive feedback - and apologies, i should have indeed responded to your primary concerns when (if not before) filing this. given they've been relevant to modular services more broadly than the darwin case, i've responded to a few of them there now, hoping this will also provide for some context to my optimism.\n> \n> that said, as someone on nixos rather than mac, i'll admit i've felt out of my depth here. as such, i hadn't personally felt qualified earlier to respond to your feedback at the tracking thread on the darwin-related bits. more importantly tho, your points stand, and for the most part i wouldn't be qualified to say otherwise - it's mostly that in the areas of uncertainty i've been felt more hopeful on this.\n\nUnderstandable – but I do want to say that I believe that designing a portable services abstraction from a systemd/Linux‐centric starting point is going to have the same kinds of issues that arise from English speakers trying to invent an international auxiliary language. It seems like finit has benefited here from having substantial similiarities to systemd’s fundamental model and implementing some systemd functionality wholesale. If you start with systemd, launchd, and s6-rc as the reference points to abstract over, it quickly becomes apparent just how diverse the service management landscape is and how constrained you are trying to implement a lightweight abstraction layer over them. (Although upstart isn’t relevant any more, throwing its backwards event‐triggered design into that mix may be even more revealing…)\n\n> > That kind of silent exposure and brokenness is not something we ought to expose to users, and this is before it has even tried to tackle the important issues of dependency handling and readiness notification, for which the systemd and launchd stories are completely incompatible. (Though this is already present in the modular services in Nixpkgs: the `php` modular service sets `Type = \"notify\";` for systemd and an equivalent for finit, but that’s not a concept that exists in launchd.)\n> \n> so, maybe this was part of why i'd felt optimistic enough (in spite of my ignorance, and your warnings) to file this, but to users there may be different ways to interface with this:\n> \n> 1. directly configuring the 'lowest common denominator' interface (e.g. `process.argv = ...;`). in practice, i would expect this to happen primarily at service definitions in nixpkgs.\n> 2. importing aforementioned service definitions from nixpkgs (e.g. `imports = [ pkgs.ghostunnel.services.default ];`), which on the side of a consuming system such as nix-darwin would involve processing the info from that lowest common denominator interface in a way sensible on the system in question, for in as far as applicable. as you note, this comes with no particular guarantees that the service in question has been tweaked for use on the consuming system, and as such is only as good as the expressiveness of that generic interface and the consuming system's ability to handle the info it exposes in a useful manner.\n> 3. system-specific options, like some of the ones suggested in this initial draft like `launchd`. for what it's worth, these may just be redundant with the following category.\n> 4. raw config using system configuration outside of modular services interfaces, like the blocks conditional on systemd in the service definitions at nixpkgs.[1](#user-content-fn-native-2de5605eeb26abe3e40cb32bcb2b6a56) such config can be either located at system-specific service definitions (as the mentioned nixos-specific blocks - for darwin not touched upon in this PR so far) to fill the gaps by the (current) generic interface, or at the side of the the config of whoever is consuming the system.\n> \n> so to more concretely answer:\n> \n> > That kind of silent exposure and brokenness is not something we ought to expose to users\n> \n> i think we could address this gap by communicating to users the distinction between nixpkgs service definitions at best offering the info from the generic interface, vs system-specific modular service definitions that might complement the upstream definitions to fill their system-specific gaps, providing equivalents to the upstream blocks conditional on systemd.\n> \n> as such, users might be made aware whether the service they wanted to consume has been tested for their system, or whether they might have reached the territory of having to tinker with what was available from outside of their native system.\n> \n> does that make some sense?\n> \n> again, sorry for having rushed this out before doing a better job on the communication front.\n\nI think this understates the problem with (2). It’s not that functionality might be missing to enhance the generic service definition, but that what a system gets may be missing critical configuration required for basic security or correctness.\n\nFor something like configuration of a service’s user, there is a fundamental tension between portability and security. Currently, modular services will omit it from the case analysis of unsupported service managers, turning correctly‐written service definitions into security vulnerabilities. To fix that, either we need a portable way to specify service users, or we need “critical extensions” such that service definitions fail when an unsupported service manager is used. The latter would seem to somewhat defeat the point as far as portability goes, and the former is very difficult: as I mentioned in my review, not only is user definition on NixOS and nix-darwin quite different, but on systemd the idiomatic and most secure thing is to avoid defining static users at all whenever possible, and instead use `DynamicUser=`, `StateDirectory=`, etc.; these are very widely used in NixOS at present, but are essentially intractable to implement in any lightweight way in launchd.\n\nTrying to implement a compatible or similar interface for launchd would be a large amount of work that starts to approach our own bespoke implementation of a service manager; omitting support for them would leave nix-darwin users either with insecure services unexpectedly running as `root` and potentially missing the directories, options, and credentials they need to function at all, or else prevent them from using idiomatically‐written services at all; avoiding their use would make things worse for NixOS. (In the limit of “just implement something compatible with the best systemd idioms for launchd”, which unfortunately isn’t possible due to fundamentally differing OS functionality anyway, you may as well skip to consuming systemd `.service` files entirely and not try and do portability at the Nix layer.)\n\nThe most tractable approach I can imagine, which could also help address the user services issues you saw with Home Manager, is for services to come “without users”, needing to be wrapped in something that specifies user configuration or having an “object capability” for a user passed down into them from the surrounding OS configuration. Unfortunately, this would be a breaking change, because you could no longer get by with just a `process.argv` to run things as `root` – and it would also increase the amount of external glue required to adapt any given modular service to an OS configuration framework.\n\nOf course, it’s not just users, but *everything* remotely load‐bearing about a service configuration, as exemplified by the fact that the `ghostunnel` modular service is nominally importable on any system but [completely broken on anything but systemd](https://github.com/NixOS/nixpkgs/blob/5705e031258ae76b66cbdae2ad7656727db2a5d1/pkgs/by-name/gh/ghostunnel/service.nix#L206-L237). Addressing this at the root would approach my proposal of giving services nothing by default and requiring their environments to be passed in fully – which, yes, is something we don’t yet have, and that would be useless to specify real‐world services before implementing more abstractions than modular services currently have, but there’s a reason I talked about that model specifically: if you want to incrementally make service portability work while maintaining any kind of true abstraction capability and avoid handing huge security or correctness footguns to users, you need to start from scratch and build up from there, rather than providing the entire ambient system by default and then unportably restricting or extending it.\n\nIt’s difficult, for sure, especially when covering multiple OSes. That’s why I suggested that portability and code reuse for configuration of services through Nix is likely best pursued through other means like abstracting our configuration generation, rather than at the level of service definitions themselves.\n\n> to respond to some of the comments made by [@emilazy](https://github.com/emilazy) here:\n> \n> > trying to make service management portable is the wrong layer, and that what would allow a lot of practical deduplication between NixOS, Home Manager, nix-darwin is just focusing on the other end and decoupling configuration generation by itself. That code usually is very similar between platforms and unnecessarily duplicated between projects. Since I believe platform‐specific glue in modules is inevitable, focusing on the part that doesn’t touch on OS‐specific abstractions would have the biggest returns for portability and shared logic without requiring a novel abstraction layer.\n>\n> this sounds like [#509595](https://github.com/NixOS/nixpkgs/pull/509595). it indeed seems like the lower-hanging fruit.\n\nI think that’s not quite what I mean – it’s a helper for command‐line flags in modular services, which are indeed a kind of service configuration we generate, but it’s still tying the configuration generation to the service moule, rather than providing an interface for configuring the parts that aren’t hooking a service up, to generate configuration files to be consumed across NixOS, Home Manager, nix-darwin, etc., and leaving the service management and other OS‐specific glue to those projects. That’s a large amount of domain knowledge locked up in NixOS modules that would be considerably easier to factor out in a portable way and get reused; the trade‐offs around portability are much closer to those we already have for packages, rather than the significant new ones introduced by modular services.\n\n> > It was my understanding that the intention was to add more abstraction rather than less, though. In that case, the problems of the existing leaky abstraction would be accentuated\n> \n> i wouldn't deny this challenge, and may not know about the particulars there - but as long as added some info can be meaningfully used for a given system, i think that could make for added value (where bespoke service modules were otherwise missing), even if other bits may need to be handled for it per service still.\n\n(Hopefully the above helped elaborate on the fundamental design challenges I see here.)\n\n> > upstream service definitions\n> \n> i agree use of these seems nicer, where available for a given system (i imagine this may help darwin more than finix, for one). i would presume the main use-case of modular services to be for services where these have not been available to handle system compatibility for us already - but those cases will realistically both exist, so i would see these as not mutually exclusive.\n\nFWIW, of the four upstream modular services, two of them (`kls-utils` and `php`) have upstream systemd `.service` files, so I believe the tension I mentioned is already here from a NixOS perspective.\n\n> > I personally believe that it’s unlikely that modular services in their current form will be very useful [...]\n> \n> right - the interface so far is very limited. i think the best way to meaningfully iterate on that interface tho is to gradually get a sense of its pain points for the purpose of consuming such services from different systems, so we could improve it - which implies having different systems able to make use of the info they offer in the first place.\n\nTo be clear, by “current form” I mean the underlying design as it stands – starting with an argv that feeds into a “bare” unabstracted service configuration and that layers system‐specific configuration on top using “fail‐open” case analysis – rather than simply a matter of missing functionality. I believe the issues around settings that are load‐bearing for correct functioning or security of a service, but that cannot reasonably be made portable, are things that can’t be fixed with incremental additions.\n\n> > unless by bringing NixOS services down to a lowest common denominator, which I don’t think would be a good thing.\n> \n> i think the reason i don't so much fear this is that there is no inherent requirement to add any specific bits we don't like. i think we can in fact add what we do like, while still handling by system what's better done that way.\n\nThe lowest common denominator I mean is NixOS services being unable to make full use of systemd as they currently do: in the example above, if making `DynamicUser=`, `StateDirectory=`, systemd‐style socket activation, etc. work on launchd isn’t viable, then either most services consumed in NixOS – and certainly the most idiomatic and secure ones – will be unportable and under non‐systemd service managers will either yield a silently insecure or broken configuration at runtime or else just flag an error and refuse to work, or we’ll make NixOS services work in an attempt to experimentally serve out‐of‐tree projects despite, as far as I can speak as a somewhat absentee maintainer as one of them, my scepticism that they’ll actually reap meaningful rewards from the current approach.",
+   "created_at": "2026-05-17T23:39:45Z",
+   "id": 4472875537,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 8,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 8
+   },
+   "updated_at": "2026-05-17T23:39:45Z",
+   "user": {
+    "id": 18535642,
+    "login": "emilazy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "(Responding to @Ericson2314’s comments separately.)\n\n> I really do not appreciate the Flakes comparison --- it doesn't actually make any sense.\n> \n> Flakes was implemented in the Nix repo, but experimented in a bazillion other repos right away, without any migration strategy. And of course there was a ton of winking and nodding of a \"who care if it is experimental, go use it!\" sirt The inertia of out-of-tree usage is what has gotten Flakes to the defacto-stable state.\n> \n> Modular services is a within-Nixpkgs experiment. No externally written modular services are promised anything. We've had plenty of within-Nixpkgs experimentation before, it's how most of the abstractions within Nixpkgs have happened. (Home manager or Nix Darwin might experimentally consume modular services within Nixpkgs, but that's roles reversed only 2 repos, and thus completely different.)\n> \n> And besides, what is the alternative here? That was spend a bazlllion meetings trying to imagine what the perfect modular services looks like? Come on --- that's clearly never going to work, or even happen. The only way this gets done is to make it a community project where we iteratively figure out the right design, and probably tackle lots of tech debt in the process before the right design becomes possible.\n>\n> Anyone that has processes concerns should lay out a _positive_ vision for how a project like this _ought_ to go about. It's simple not good enough to just say \"not like this, not like that\" and enshrine the shitty status quo of singleton services because no methodology is good enough --- no Nixpkgs NIMBYism, please.\n\nI hope that at least one of the options I suggested in my previous comments counts as a positive vision:\n\n1. Focusing on instancing rather than portability, as I alluded to:\n\n   > […] I believe conflating these two goals is most of why modular services have been somewhat controversial. One of the goals is a performance/architecture/flexibility win for NixOS, the other one is attempting to aim towards a somewhat unrealized bespoke abstraction layer over widely different systems that doesn’t provide any inherent benefit to NixOS. […]\n   >\n   > Coupling solutions to modular instantiation and an abstraction around service definitions could make sense if we had a compelling design for the latter, but I’m not wholly convinced a good service‐manager‐portable form of the latter is even possible, and from what I’ve seen I believe that modular services currently don’t make any meaningful progress on that front and would require at least major breaking changes to do so. So I worry designing around that goal will hold back progress on improving evaluation performance and instancing flexibility for NixOS modules.\n\n2. Focusing on portability of the relatively system‐independent configuration file generation, rather than the OS‐specific service layer:\n\n   > > Speaking to @7c6f434c’s point, it does seem to me that if we’re talking about portability and sharing code between different systems, trying to make service management portable is the wrong layer, and that what would allow a lot of practical deduplication between NixOS, Home Manager, nix-darwin is just focusing on the other end and decoupling configuration generation by itself. That code usually is very similar between platforms and unnecessarily duplicated between projects. Since I believe platform‐specific glue in modules is inevitable, focusing on the part that doesn’t touch on OS‐specific abstractions would have the biggest returns for portability and shared logic without requiring a novel abstraction layer.\n   >\n   > I think that this approach to portability would be much easier to reuse directly in other projects and involve much fewer questions about maintenance burden, what to support in‐tree, and the effects on the development model of other projects. I can easily see nix-darwin and other projects significantly reducing their code duplication with NixOS with that. (Home Manager is a bit more complicated, since per‐user configuration can often look quite different.) I think it would also change what a mass migration looks like quite significantly, so we should probably decide how we’re going to approach instancing and better modularity for NixOS, and portability of service configuration generation code, before starting to boil the ocean for it.\n\n3. Pursuing a portable service abstraction in an object‐capability fashion akin to the Nix model, by isolating services fully by default to avoid the “inconsistent baseline”, and only poking holes in a way that can be done portably or appropriately ruled out when unsupported:\n\n   > To provide an interface that truly abstracts over these kinds of differences rather than one that offers the bare minimum as a leaky abstraction and then leaves the rest to explicit case analysis would be tantamount to designing a service manager ourselves and then implementing it in terms of existing ones. I am not sure whether that is possible to do well, but if it is, I believe that would look like treating the service execution environment like the Nix build sandbox – smoothing away differences by offering as little as possible by default, with bespoke restricted users and as much system functionality sandboxed away as possible, and selectively exposing only what is needed.\n   >\n   > […]\n   >\n   > I think a service management approach that treats services as maximally hermetic and isolated by default while exposing object‐capability‐style affordances to wire them up to the rest of the system as needed would be a very worthy research project, compelling for portability and security and distributed deployment, a better fit for the Nix model than the current status quo of NixOS and its use of systemd, and could potentially even (though I’m less confident in this) be productively implemented with adapters to existing service managers.\n4. Pursuing portable service definitions as a standalone project that can be adopted across the ecosystem, rather than being tied to Nix:\n\n   > If upstreams code against some platform interface, then the options for making their software work on different platforms are for upstreams to support multiple platform interfaces, or to implement the same interface across multiple platforms (e.g. something like InitWare), or to create a standard abstraction that can be coded against, implemented, and reused across many upstreams and consumers. Maintaining our own bespoke abstraction layers that upstreams aren’t going to adopt and that therefore require duplicating their work on our own is not the kind of thing that has gone well in the past or is sustainable, IMO – see, for example, scripted initrd and scripted networking; I think embracing native platform tooling and working with upstreams for the functionality we need has been a marked improvement in NixOS maintainability.\n\nOf course, some of these are more ambitious than others, and some of them are closer to R&D projects than things we can mass‐migrate NixOS to in the short term. But that’s inevitable when I’m pointing out that modular services is coupling several ambitious goals together, some of which have serious design challenges and greatly differing effects on the ecosystem; the right positive vision to pursue depends on which goals have priority, and some are easier than others.\n\nIncrementalism is great, but I do see some concrete comparisons to flakes here. Coupling together multiple tricky and not inherently related goals is one of them, but more saliently: a lot of people pointed out design issues with flakes, which were often brushed off by saying that they could be incrementally fixed and improved along the way. That doesn’t work for fundamental things that would require significant backwards‐incompatible changes to fix, though, as I talked about for portability in my previous comments; designing an abstraction in a sufficiently tricky and diverse space does require *some* upfront design work to achieve a sound foundation.\n\n(Of course, flakes having skipped that step before adoption, those design issues have never been addressed, so it’s not surprising that people are reluctant to see non-trivial adoption of modular services in the presence of known design issues – and I admit I confess I was surprised to see “Rather than hiding that, I figured it would be more valuable to be upfront about that, because I believe it is symptomatic of a larger gap in portability that I have intended to make more visible by adding support for modular services on the Home Manager side.” as a rationale for exposing a known‐problematic design as a visible end‐user feature in https://github.com/nix-community/home-manager/pull/9264.)\n\n> > Which makes no sense because the only init system fleshed out in this repo is systemd.\n> \n> That is just one motivation for modular services. Another, more basic one, is having more than one instance for a service. Right now, for example, you get _one_ postgresql and must use separate logical DBs within it. Even if we never support anything but systemd, there are still a bunch of reasons why we would like to lift this annoying restriction and allow as many or few postgresql services to be run as one wants. It's not the 1990s anymore --- everyone knows that Singletons are Bad.\n\nSure. But if the priority is solving instancing and avoiding singletons, not portability to non‐systemd systems, then it can be solved much more directly and I doubt that people would be nearly as concerned. It would be much easier to define a systemd/Linux‐specific service definition interface that supports modular imports and instancing, the modules would be more compatible with existing NixOS services, and we could even benefit from systemd’s standard instancing mechanisms.\n\nIf the priority is service instancing and eval time improvements for NixOS, and modular services’s design is blocking those on figuring out a portability story that has serious issues right now, that I’m personally sceptical can be made to work acceptably, and that gives people reasonable worries about the distribution of maintenance burden and expectations of support, then that seems like a reason not to couple the two together, rather than a reason that people discussing the issues with the portability story are holding back instancing – it’s not reasonable to keep responding to criticism of the portability story by bringing up instancing, which so far nobody has expressed any objection to, when there is no need to tie the two together.\n\n> Then let's add support for that? Surely it shouldn't be hard since regular services also support it?\n\nHandling users for services is not just a matter of adding additional structure on top, precisely because of portability issues; I went into detail about this in my review at https://github.com/nix-darwin/nix-darwin/pull/1765#pullrequestreview-4260049352 and my further comments just above at https://github.com/NixOS/nixpkgs/issues/428084#issuecomment-4472875537.\n\nThings being easy in regular services that only support systemd doesn’t mean they’re easy in the modular services context where deriving the benefits of portability requires common functionality to work reasonably consistently across diverse service managers – and in the case of systemd, the most idiomatic and secure functionality used widely in NixOS for this purpose is also some of the least portable.",
+   "created_at": "2026-05-17T23:41:30Z",
+   "id": 4472878966,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 10,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 10
+   },
+   "updated_at": "2026-05-17T23:41:30Z",
+   "user": {
+    "id": 18535642,
+    "login": "emilazy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@emilazy i don't think the ambition it to make it take _no_ work to make arbitrary services work on a given system - tho we can probably make it take _less_ work, such as thru the portable config files that you mentioned, for one (`lib/services/config-data.nix`'s `configData`).\n\nso i think in a sense we're on the same page - i'm just saying that probably isn't the only possible win, without having to have reached perfection.\n\n> if the priority is solving instancing and avoiding singletons [...] then it can be solved much more directly\n\nright, people interested in that can work on that\n\n> The most tractable approach I can imagine, which could also help address the user services issues you saw with Home Manager, is for services to come “without users”, needing to be wrapped in something that specifies user configuration or having an “object capability” for a user passed down into them from the surrounding OS configuration. Unfortunately, this would be a breaking change, because you could no longer get by with just a `process.argv` to run things as `root` – and it would also increase the amount of external glue required to adapt any given modular service to an OS configuration framework.\n\nhm, i'm not completely following. in nixos, options added might use a default following prior functionality, to prevent such changes from breaking. are you saying that isn't viable here, or instead not desirable?\n",
+   "created_at": "2026-05-18T06:58:47Z",
+   "id": 4475178245,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-18T06:58:47Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I was surprised to see [...] as a rationale for exposing a known‐problematic design as a visible end‐user feature in https://github.com/nix-community/home-manager/pull/9264.\n\nso, so far i think the target audience is tinkerers, but i think 'end users' use the same codebase and manual.\nright now i think it should help there kind of aren't really any modular services of packages people would likely be interested in, so you still kind of have to actively seek them out, which probably helps filter audiences a bit.\n\ncurrently the nixos manual entry linked from the home manager one does mention the feature as in development. might i address your concern by more clearly communicating that in the home manager one as well? or was this about more than that?",
+   "created_at": "2026-05-18T08:11:51Z",
+   "id": 4475683753,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-18T08:11:51Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Hello folks, I thought I'd contribute why I think this feature would be useful for my usecase, as I suspect others will have similar experiences. Apologies if I'm being captain obvious here, but I read above that there's an aspiration for this feature's specification to be driven from user experiences, so I thought I'd share.\n\nI'm using Nix extensively for a non-profit I'm working with, where the entire dev team including myself is made up of volunteers. As such, institutional knowledge retention and dealing with contributor churn is a priority in order to make the project viable over the long term. I've been trying my best to build a zero-config developer UX which can get volunteers setup with as little friction as possible. We use services-flake and process-compose-flake to achieve most of this, however when we then bake VM images to deploy, we then need to re-develop the service definition for NixOS. In our usecase, the utility of this feature would be bridging the divide between running our developer environment where the service-manager is just process-compose running on Linux or MacOS, and then running on systemd via NixOS.",
+   "created_at": "2026-05-20T13:36:53Z",
+   "id": 4498947394,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 7,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 7,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 2,
+    "total_count": 16
+   },
+   "updated_at": "2026-05-20T13:37:34Z",
+   "user": {
+    "id": 101739,
+    "login": "johnhamelink",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@state-plumber while maybe a stop-gap solution, if the underlying challenge is to make compatibility layers for NixOS services consisting of multiple sets of systemd services (each with their own `pkgs.<package>.passthru.services.<service>`), i had this [poc](https://github.com/NixOS/nixpkgs/pull/506645/changes#diff-57f141e029e6c8477e9d53ff66e4ea541bc8094f525b3480b73289bce2bb4761R177-R200) on doing that for services containing sets of systemd services - which i imagine could be extended to multiple parallel sets using a `concatMapAttrs` passing names to each kind of service.",
+   "created_at": "2026-05-23T11:40:55Z",
+   "id": 4525197772,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-23T11:40:55Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/428084",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Tracking issue for Modular Services.\n\n- [Kanban Board](https://github.com/orgs/NixOS/projects/116)\n- [Docs as of `nixos-unstable`](https://nixos.org/manual/nixos/unstable/#modular-services)\n- [Initial PR](https://github.com/NixOS/nixpkgs/pull/372170)\n\n<!-- I invite you to collaborate on _modular services_. (EDIT: and you can make PRs or push to this branch) -->\n> [!TIP]\n> Modular services is in development: sync up async, ask questions etc on [#modular-services on the NixOS Matrix](https://matrix.to/#/#modular-services:nixos.org)\n\n<details><summary>We mostly use the label board for tracking now. Click to unfold status as of early 2026. This issue and thread are still useful for links to external projects and for some communication.</summary>\nKnown issues:\n\n- [ ] docs generation for importable modules ~~(assigned: @roberth @mightyiam)~~\n  - [x] https://github.com/NixOS/nixpkgs/pull/430876\n    - [ ] improve, https://github.com/NixOS/nixpkgs/issues/432550\n  - [ ] something more structured, at least for the manual\n  - [ ] make search.nixos.org backend responsible for combining the NixOS and service option sets as it sees fit\n- [ ] reloadTriggers\n- [ ] environment variables https://github.com/NixOS/nixpkgs/pull/518860\n\nNext steps. Can be reordered as needed.\n\n- [x] 1. Make initial implementation #372170 available for contributors\n- [ ] 2. Equip modular services with functionality to support more kinds of services (i.e. so that more projects run well on it)\n- [ ] 3. Integration into e.g. nix-darwin, arion, devenv?\n- [ ] 4. Use modular service to implement traditional service and distill instructions\n- [ ] 5. Evaluate state of affairs\n- [ ] 6. nix.dev docs\n- [ ] 7. Discourse post\n\nOther TODOs:\n- [ ] systemd user unit support\n- [ ] try combine with https://github.com/NixOS/nixpkgs/pull/432529\n\n</details>",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 43,
+  "created_at": "2025-07-24T14:45:32Z",
+  "id": 3260169441,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "efefef",
+    "default": false,
+    "description": "Long-lived issue tracking long-term fixes or multiple sub-problems",
+    "id": 6858435354,
+    "name": "5.scope: tracking"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 428084,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 27,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 21,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 20,
+   "total_count": 68
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Modular services tracking",
+  "type": null,
+  "updated_at": "2026-07-25T13:26:11Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#428084",
+ "sources": [
+  "nixpkgs-tracking",
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues",
+  "nixpkgs-portable-service-layer-issues"
+ ],
+ "timeline": []
+}

@@ -1,0 +1,586 @@
+{
+ "comments": [
+  {
+   "body": "@copumpkin, thanks for your PR! By analyzing the history of the files in this pull request, we identified @edolstra, @bjornfor and @offlinehacker to be potential reviewers.",
+   "created_at": "2017-05-25T00:14:50Z",
+   "id": 303887612,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-25T00:14:50Z",
+   "user": {
+    "id": 15710697,
+    "login": "mention-bot",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "My main question for feedback is how do we expose this sort of thing? I was thinking of something like the following:\r\n\r\n```nix\r\n{\r\n  dockerServices = config: (import ./nixos/lib/eval-config.nix {\r\n    modules = [ config ];\r\n  }).config.system.build.toplevel-docker;\r\n}\r\n```\r\n\r\nBut it feels a bit awkward to then stick `dockerServices` in `all-packages.nix`. I really just want to be able to call a function, pass in some service config, and get out a nice baked container image (or several). Same with `trivialServices` for simple shell launchers.\r\n\r\nI imagine `nix-darwin` would consume it differently.\r\n\r\nAnother question is how to warn people if they decide to specify useless config in there. Someone could write `networking.firewall.enable = true` inside the config block they pass to `dockerServices` but it would just be ignored. I'd rather the user be warned not to use irrelevant config. I could do as @edolstra said in the other ticket and only selectively include modules based on some meta tag, but I liked the laziness of not doing that.",
+   "created_at": "2017-05-25T18:28:44Z",
+   "id": 304086685,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-05-25T18:28:44Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "What is the status of this pull request?",
+   "created_at": "2019-08-03T14:39:58Z",
+   "id": 517929304,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2019-08-03T14:39:58Z",
+   "user": {
+    "id": 104795,
+    "login": "mmahut",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Closing due to lack of activity, feel free re-open this if needed.",
+   "created_at": "2019-10-05T20:37:10Z",
+   "id": 538686597,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2019-10-05T20:37:10Z",
+   "user": {
+    "id": 104795,
+    "login": "mmahut",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/26075",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "###### Motivation for this change\r\n\r\nSee #26067. Not quite sure how to expose this, and I'd be tempted to move the service modules out of the `nixos` folder if this catches on.\r\n\r\nHere's how I use it:\r\n\r\n```nix\r\n(import ./nixos/lib/eval-config.nix {\r\n  modules = [\r\n    {\r\n      services.hologram-server = {\r\n        enable = true;\r\n        awsAccount = \"123456\";\r\n        awsDefaultRole = \"foo\";\r\n        ldapBaseDN = \"foobar\";\r\n        ldapBindDN = \"baaz\";\r\n        ldapBindPassword = \"quuux\";\r\n        ldapHost = \"zomg\";\r\n      };\r\n    }\r\n  ];\r\n}).config.system.build.toplevel-trivial\r\n```\r\n\r\nThen just `nix-build` that and you get a runner script that launches your service on any platform supported by the package.\r\n\r\nAlso, `toplevel-docker` will contain as many `dockerTools`-style containers as your config has docker-flavored services enabled.",
+  "closed_at": "2019-10-05T20:37:10Z",
+  "closed_by": {
+   "id": 104795,
+   "login": "mmahut",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 4,
+  "created_at": "2017-05-25T00:14:47Z",
+  "draft": false,
+  "id": 231206345,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "eb6420",
+    "default": false,
+    "description": "This needs feedback from more community members.",
+    "id": 465618943,
+    "name": "9.needs: community feedback"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 26075,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/26075.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/26075.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "[WIP] One way to do other types of services",
+  "type": null,
+  "updated_at": "2019-10-05T20:37:10Z",
+  "user": {
+   "id": 2623,
+   "login": "copumpkin",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 77,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "88c16a63c6e4355f1e7f78e1727f19a1c8eabee0",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "###### Motivation for this change\r\n\r\nSee #26067. Not quite sure how to expose this, and I'd be tempted to move the service modules out of the `nixos` folder if this catches on.\r\n\r\nHere's how I use it:\r\n\r\n```nix\r\n(import ./nixos/lib/eval-config.nix {\r\n  modules = [\r\n    {\r\n      services.hologram-server = {\r\n        enable = true;\r\n        awsAccount = \"123456\";\r\n        awsDefaultRole = \"foo\";\r\n        ldapBaseDN = \"foobar\";\r\n        ldapBindDN = \"baaz\";\r\n        ldapBindPassword = \"quuux\";\r\n        ldapHost = \"zomg\";\r\n      };\r\n    }\r\n  ];\r\n}).config.system.build.toplevel-trivial\r\n```\r\n\r\nThen just `nix-build` that and you get a runner script that launches your service on any platform supported by the package.\r\n\r\nAlso, `toplevel-docker` will contain as many `dockerTools`-style containers as your config has docker-flavored services enabled.",
+  "changed_files": 4,
+  "closed_at": "2019-10-05T20:37:10Z",
+  "comments": 4,
+  "commits": 1,
+  "created_at": "2017-05-25T00:14:47Z",
+  "deletions": 3,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/26075.diff",
+  "draft": false,
+  "head": {
+   "label": "copumpkin:service-generalization",
+   "ref": "service-generalization",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2014-08-09T05:29:12Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "copumpkin/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/copumpkin/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": null,
+    "id": 22779900,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/copumpkin/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "other",
+     "name": "Other",
+     "spdx_id": "NOASSERTION"
+    },
+    "milestones_url": "https://api.github.com/repos/copumpkin/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 26,
+    "open_issues_count": 26,
+    "owner": {
+     "id": 2623,
+     "login": "copumpkin",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/copumpkin/nixpkgs/pulls{/number}",
+    "pushed_at": "2018-09-17T22:46:41Z",
+    "size": 774139,
+    "stargazers_count": 9,
+    "subscription_url": "https://api.github.com/repos/copumpkin/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/copumpkin/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2022-01-17T05:22:30Z",
+    "visibility": "public",
+    "watchers": 9,
+    "watchers_count": 9,
+    "web_commit_signoff_required": false
+   },
+   "sha": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 122349177,
+  "labels": [
+   {
+    "color": "eb6420",
+    "default": false,
+    "description": "This needs feedback from more community members.",
+    "id": 465618943,
+    "name": "9.needs: community feedback"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "2b8fed5ff050aed07f508a758c3b60a2e19c43ca",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 26075,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/26075.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 4,
+  "state": "closed",
+  "title": "[WIP] One way to do other types of services",
+  "updated_at": "2019-10-05T20:37:10Z",
+  "user": {
+   "id": 2623,
+   "login": "copumpkin",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#26075",
+ "review_comments": [
+  {
+   "body": "We could probably abstract many basic simple services like this with a simple function to automatically do `docker-containers`, `trivial-services`, and maybe even `systemd.services`. The autogenerated config could then be merged with idiosyncratic config for any of those.",
+   "commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "created_at": "2017-05-25T02:10:13Z",
+   "diff_hunk": "@@ -94,9 +96,15 @@ in {\n       after       = [ \"network.target\" ];\n       wantedBy    = [ \"multi-user.target\" ];\n \n-      serviceConfig = {\n-        ExecStart = \"${pkgs.hologram.bin}/bin/hologram-server --debug --conf ${cfgFile}\";\n-      };\n+      inherit script;\n+    };\n+\n+    docker-containers.hologram-server = {",
+   "id": 118404931,
+   "line": 102,
+   "original_commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "original_line": 102,
+   "original_position": 19,
+   "original_start_line": null,
+   "path": "nixos/modules/services/security/hologram-server.nix",
+   "position": 19,
+   "pull_request_review_id": 40193613,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2017-05-25T02:10:13Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I would keep `serviceConfig.ExecStart = script;` as direct commands are more transparent to the user (ex: there are visible in systemctl status). Otherwise the user has to look at the content of the script file.",
+   "commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "created_at": "2017-05-25T06:31:25Z",
+   "diff_hunk": "@@ -94,9 +96,15 @@ in {\n       after       = [ \"network.target\" ];\n       wantedBy    = [ \"multi-user.target\" ];\n \n-      serviceConfig = {\n-        ExecStart = \"${pkgs.hologram.bin}/bin/hologram-server --debug --conf ${cfgFile}\";\n-      };\n+      inherit script;",
+   "id": 118426668,
+   "line": 99,
+   "original_commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "original_line": 99,
+   "original_position": 16,
+   "original_start_line": null,
+   "path": "nixos/modules/services/security/hologram-server.nix",
+   "position": 16,
+   "pull_request_review_id": 40216383,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2017-05-25T06:31:25Z",
+   "user": {
+    "id": 96200,
+    "login": "Mic92",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "For my launchd modules I added [`command`](https://github.com/LnL7/nix-darwin/blob/master/modules/launchd/default.nix#L50-L54) which defaults to a writeScript if a script is defined.",
+   "commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "created_at": "2017-05-25T10:05:09Z",
+   "diff_hunk": "@@ -94,9 +96,15 @@ in {\n       after       = [ \"network.target\" ];\n       wantedBy    = [ \"multi-user.target\" ];\n \n-      serviceConfig = {\n-        ExecStart = \"${pkgs.hologram.bin}/bin/hologram-server --debug --conf ${cfgFile}\";\n-      };\n+      inherit script;",
+   "id": 118455819,
+   "in_reply_to_id": 118426668,
+   "line": 99,
+   "original_commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "original_line": 99,
+   "original_position": 16,
+   "original_start_line": null,
+   "path": "nixos/modules/services/security/hologram-server.nix",
+   "position": 16,
+   "pull_request_review_id": 40248729,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2017-05-25T10:05:10Z",
+   "user": {
+    "id": 689294,
+    "login": "LnL7",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm not sure if we should put those options into the top-level but I love the basic idea!",
+   "commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "created_at": "2017-05-25T17:59:07Z",
+   "diff_hunk": "@@ -94,9 +96,15 @@ in {\n       after       = [ \"network.target\" ];\n       wantedBy    = [ \"multi-user.target\" ];\n \n-      serviceConfig = {\n-        ExecStart = \"${pkgs.hologram.bin}/bin/hologram-server --debug --conf ${cfgFile}\";\n-      };\n+      inherit script;\n+    };\n+\n+    docker-containers.hologram-server = {",
+   "id": 118545196,
+   "in_reply_to_id": 118404931,
+   "line": 102,
+   "original_commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "original_line": 102,
+   "original_position": 19,
+   "original_start_line": null,
+   "path": "nixos/modules/services/security/hologram-server.nix",
+   "position": 19,
+   "pull_request_review_id": 40348391,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2017-05-25T17:59:07Z",
+   "user": {
+    "id": 114159,
+    "login": "fpletz",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "id": 40193613,
+   "state": "COMMENTED",
+   "submitted_at": "2017-05-25T02:10:13Z",
+   "user": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "id": 40216383,
+   "state": "COMMENTED",
+   "submitted_at": "2017-05-25T06:31:25Z",
+   "user": {
+    "id": 96200,
+    "login": "Mic92",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "id": 40248729,
+   "state": "COMMENTED",
+   "submitted_at": "2017-05-25T10:05:10Z",
+   "user": {
+    "id": 689294,
+    "login": "LnL7",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "85681034c8b3c64819adeba94b7a9288417635e5",
+   "id": 40348391,
+   "state": "COMMENTED",
+   "submitted_at": "2017-05-25T17:59:07Z",
+   "user": {
+    "id": 114159,
+    "login": "fpletz",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-other-service-types"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 2623,
+    "login": "copumpkin",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "56e18c50ccb53250e589724ca00f4dd53805bd56",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/56e18c50ccb53250e589724ca00f4dd53805bd56",
+   "created_at": "2017-10-13T13:19:43Z",
+   "event": "referenced",
+   "id": 1292256686
+  },
+  {
+   "actor": {
+    "id": 104795,
+    "login": "mmahut",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2019-10-05T20:37:10Z",
+   "event": "closed",
+   "id": 2689515595,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

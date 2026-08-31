@@ -1,0 +1,211 @@
+{
+ "comments": [
+  {
+   "body": "Also happening for me with https://search.nixos.org/packages?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=kanidm\n```json\n{\"from\":0,\"size\":50,\"sort\":[{\"_score\":\"desc\",\"package_attr_name\":\"asc\",\"package_pversion\":\"asc\"}],\"aggs\":{\"package_attr_set\":{\"terms\":{\"field\":\"package_attr_set\",\"size\":20}},\"package_license_set\":{\"terms\":{\"field\":\"package_license_set\",\"size\":20}},\"package_maintainers_set\":{\"terms\":{\"field\":\"package_maintainers_set\",\"size\":20}},\"package_teams_set\":{\"terms\":{\"field\":\"package_teams_set\",\"size\":20}},\"package_platforms\":{\"terms\":{\"field\":\"package_platforms\",\"size\":20,\"include\":[\"x86_64-linux\",\"aarch64-linux\",\"i686-linux\",\"x86_64-darwin\",\"aarch64-darwin\"]}},\"all\":{\"global\":{},\"aggregations\":{\"package_attr_set\":{\"terms\":{\"field\":\"package_attr_set\",\"size\":20}},\"package_license_set\":{\"terms\":{\"field\":\"package_license_set\",\"size\":20}},\"package_maintainers_set\":{\"terms\":{\"field\":\"package_maintainers_set\",\"size\":20}},\"package_teams_set\":{\"terms\":{\"field\":\"package_teams_set\",\"size\":20}},\"package_platforms\":{\"terms\":{\"field\":\"package_platforms\",\"size\":20,\"include\":[\"x86_64-linux\",\"aarch64-linux\",\"i686-linux\",\"x86_64-darwin\",\"aarch64-darwin\"]}}}}},\"query\":{\"bool\":{\"filter\":[{\"term\":{\"type\":{\"value\":\"package\",\"_name\":\"filter_packages\"}}},{\"bool\":{\"must\":[{\"bool\":{\"should\":[]}},{\"bool\":{\"should\":[]}},{\"bool\":{\"should\":[]}},{\"bool\":{\"should\":[]}},{\"bool\":{\"should\":[]}}]}}],\"must_not\":[],\"must\":[{\"dis_max\":{\"tie_breaker\":0.7,\"queries\":[{\"multi_match\":{\"type\":\"cross_fields\",\"query\":\"kanidm\",\"analyzer\":\"whitespace\",\"auto_generate_synonyms_phrase_query\":false,\"operator\":\"and\",\"_name\":\"multi_match_kanidm\",\"fields\":[\"package_attr_name^9\",\"package_attr_name.*^5.3999999999999995\",\"package_programs^9\",\"package_programs.*^5.3999999999999995\",\"package_pname^6\",\"package_pname.*^3.5999999999999996\",\"package_description^1.3\",\"package_description.*^0.78\",\"package_longDescription^1\",\"package_longDescription.*^0.6\",\"flake_name^0.5\",\"flake_name.*^0.3\"]}},{\"wildcard\":{\"package_attr_name\":{\"value\":\"*kanidm*\",\"case_insensitive\":true}}}]}}]}}}\n```\nNot just an isolated issue. Firefox 149.0.2 in case it's relevant, the search query can be anything but [empty](https://search.nixos.org/packages?channel=unstable&include_modular_service_options=1&include_nixos_options=1) - if so, no packages/options load and no POST requests are sent:\n\n<img width=\"2250\" height=\"1530\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b8ba83fb-2581-44b2-9b51-ae6e328891a2\" />\n",
+   "created_at": "2026-04-13T00:08:44Z",
+   "id": 4233042436,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-13T00:08:44Z",
+   "user": {
+    "id": 79593869,
+    "login": "TheRealGramdalf",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes, this was reported in https://github.com/NixOS/nixos-search/pull/1189#issuecomment-4232732541 as well. #1196 should be a workaround for now.\n\nThe cause of the issue was that we didn't notice there weren't any successful imports of the latest-45-nixos-unstable index yet. The imports work as follows: there is an alias, `latest-45-nixos-unstable`, that points to the latest successful import. The import job looks if a git-hash-specific import (e.g. `nixos-45-unstable-4c1018dae018162ec878d42fec712642d214fdfa`) already exists. If so, it stops. If not, it creates it, populates it, and then points the alias to it.\n\nIn this case, the initial import of nixos-45-unstable-4c1018dae018162ec878d42fec712642d214fdfa had failed, and subsequent jobs didn't even attempt the import, and we didn't notice in manual testing - apparently we tested only with the 25.11 index.\n\nThe plan for fixing this is:\n* [x] #1196\n* [x] manually remove `nixos-45-unstable-4c1018dae018162ec878d42fec712642d214fdfa`\n* [x] see if the next import succeeds ([it did](https://github.com/NixOS/nixos-search/actions/runs/24331699615/job/71038925947))\n* [x] #1200 \n* [ ] #1220 so we don't miss this so easily in the future\n* [ ] automatically remove `nixos-45-unstable-4c1018dae018162ec878d42fec712642d214fdfa` again when its population fails, so it's automatically retried the next time.",
+   "created_at": "2026-04-13T07:06:06Z",
+   "id": 4234465138,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-22T07:27:38Z",
+   "user": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixos-search/issues/1197",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Reproducible url: https://search.nixos.org/packages?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=users\n\nScreenshot:\n\n<img width=\"1179\" height=\"225\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/7ff2a87a-13e6-4c03-8644-d71677bd123a\" />\n\nWith 25.11 channel there are plenty:\n\n<img width=\"1219\" height=\"536\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/25bc4771-c21c-43b4-8b74-ddeb3d047359\" />\n\nI observed there is a 404 post request:\n\n<img width=\"1270\" height=\"880\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/578502a6-ca63-4ae0-a6f6-7f9abba65625\" />\n\nRequest payload:\n\n```json\n{\"from\":0,\"size\":50,\"sort\":[{\"_score\":\"desc\",\"option_name\":\"asc\"}],\"aggs\":{\"all\":{\"global\":{},\"aggregations\":{}}},\"query\":{\"bool\":{\"filter\":[{\"terms\":{\"type\":[\"option\",\"service\"],\"_name\":\"filter_option_service\"}}],\"must_not\":[],\"must\":[{\"dis_max\":{\"tie_breaker\":0.7,\"queries\":[{\"multi_match\":{\"type\":\"cross_fields\",\"query\":\"users\",\"analyzer\":\"whitespace\",\"auto_generate_synonyms_phrase_query\":false,\"operator\":\"and\",\"_name\":\"multi_match_users\",\"fields\":[\"option_name^6\",\"option_name.*^3.5999999999999996\",\"option_description^1\",\"option_description.*^0.6\",\"flake_name^0.5\",\"flake_name.*^0.3\",\"service_package^3\",\"service_package.*^1.7999999999999998\",\"service_packages^3\",\"service_packages.*^1.7999999999999998\"]}},{\"wildcard\":{\"option_name\":{\"value\":\"*users*\",\"case_insensitive\":true}}}]}}]}}}\n```",
+  "closed_at": "2026-07-26T21:35:17Z",
+  "closed_by": {
+   "id": 53050011,
+   "login": "Sigmanificient",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 2,
+  "created_at": "2026-04-12T22:32:45Z",
+  "id": 4250160949,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 1197,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 8,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 8
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixos-search",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "\"Bad Status Server returned 404\" when searching in https://search.nixos.org/(options/packages) with unstable channel",
+  "type": null,
+  "updated_at": "2026-07-26T21:35:17Z",
+  "user": {
+   "id": 128056314,
+   "login": "kagurazaka-ayano",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixos-search#1197",
+ "sources": [
+  "nixos-search-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "8bd45feda36bbca28b3120a2eefeb061a30d47ae",
+   "commit_url": "https://api.github.com/repos/raboof/nixos-search/commits/8bd45feda36bbca28b3120a2eefeb061a30d47ae",
+   "created_at": "2026-04-13T11:27:12Z",
+   "event": "referenced",
+   "id": 24443797054
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "a84a91a4788d9ab31feb6f46d0c2579600bdb64e",
+   "commit_url": "https://api.github.com/repos/raboof/nixos-search/commits/a84a91a4788d9ab31feb6f46d0c2579600bdb64e",
+   "created_at": "2026-04-14T12:53:02Z",
+   "event": "referenced",
+   "id": 24487768678
+  },
+  {
+   "actor": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "19f005c05c613216d16cb13b5c9fd05b830b2103",
+   "commit_url": "https://api.github.com/repos/NixOS/nixos-search/commits/19f005c05c613216d16cb13b5c9fd05b830b2103",
+   "created_at": "2026-04-14T12:55:13Z",
+   "event": "referenced",
+   "id": 24487842924
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "96476af15e4f0bf8f4723f928c8eaf90a6c27d2f",
+   "commit_url": "https://api.github.com/repos/NixOS/nixos-search/commits/96476af15e4f0bf8f4723f928c8eaf90a6c27d2f",
+   "created_at": "2026-04-28T14:59:32Z",
+   "event": "referenced",
+   "id": 24953337748
+  },
+  {
+   "actor": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "722f28f9344e77d402e70199d61dd5676074161f",
+   "commit_url": "https://api.github.com/repos/Malix-Labs/nixos-search/commits/722f28f9344e77d402e70199d61dd5676074161f",
+   "created_at": "2026-05-30T10:28:19Z",
+   "event": "referenced",
+   "id": 26140319728
+  },
+  {
+   "actor": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "35f4037ed289baf0af1af30cae147d18c582443c",
+   "commit_url": "https://api.github.com/repos/Malix-Labs/nixos-search/commits/35f4037ed289baf0af1af30cae147d18c582443c",
+   "created_at": "2026-05-30T10:28:23Z",
+   "event": "referenced",
+   "id": 26140320317
+  },
+  {
+   "actor": {
+    "id": 53050011,
+    "login": "Sigmanificient",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-26T21:35:17Z",
+   "event": "closed",
+   "id": 28508108895,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

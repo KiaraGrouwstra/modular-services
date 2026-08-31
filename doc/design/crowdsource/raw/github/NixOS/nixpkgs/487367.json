@@ -1,0 +1,1808 @@
+{
+ "comments": [
+  {
+   "body": "I was about to actually take the time and review this insanely huge, single commit PR when I found my name in there.\r\n\r\nI don't know what happened but I strongly think you took my PR piped it through your LLM of choice and then posted it. I'm not generally against the usage of LLM however when it's this obvious I would have liked at least a notice.\r\n\r\nAnyway what I am really against is setting me as a maintainer without asking, or even notifying me. Please do not do that. As I've stated in the other netbird PR I am not interested in maintaining it anymore.\r\n\r\nIf you actually want to adopt/modernize the netbird module:\r\n- add yourself as a maintainer\r\n- split up this PR into multiple smaller commits\r\n- minimize the change\r\n\tI haven't completely read everything but from skimming it seems to contain a lot of unnecessary option declarations and other things that just blow up the changeset.",
+   "created_at": "2026-02-24T12:44:37Z",
+   "id": 3951522865,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-24T12:44:37Z",
+   "user": {
+    "id": 58092422,
+    "login": "PatrickDaG",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@PatrickDaG apologies, I'm new to nixpkg submissions and forgot to update the maintainer. I've since removed you in lieu of myself. This PR is based on main, where you're the listed maintainer. No PR of yours was run through an LLM, and though I _did_ leverage Claude for assistance, the PR isn't 100% vibe-coded. As far as I can see, that's fine by the contribution guidelines, but if a heads-up on this is helpful to reviewers then sure, Ican include one in future!\r\n\r\nI've re-read the contribution guidelines in-depth, received some advice on a few key RFCs on another PR of mine here and re-written this PR in accordance. Notably, I've split this PR into several smaller commits (each detailed in the description) and limited the addition of new typed options. Hopefully this is more parseable for the reviewer :) if there's any additional feedback, I'll do my best to implement it ASAP! ",
+   "created_at": "2026-02-26T10:41:32Z",
+   "id": 3965745578,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-26T10:42:12Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@shuuri-labs thanks for contributing this, I have been itching to re-write the `services.netbird` module since upstream included a reverse proxy feature [1].\r\n\r\nOn that note, I looked through changes and noticed you decided to keep nginx. Is there any consideration for adding a `traefik` option? Nginx does not work well with netbird reverse proxy due to lack of TLS pass through.\r\n\r\nIf there's no time, I may add this option myself at a later date once this gets merged.\r\n\r\n[1] https://docs.netbird.io/selfhosted/migration/enable-reverse-proxy",
+   "created_at": "2026-03-06T20:18:43Z",
+   "id": 4013922958,
+   "minimized": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2026-03-06T20:18:43Z",
+   "user": {
+    "id": 225436867,
+    "login": "debtquity",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Hey @debtquity, you're welcome :) \r\n\r\nTwo reasons for not making the switch to Traefik just yet: \r\n- Trying to keep this first PR (my first submission to nixpkgs) reasonable in size \r\n- Would like to look into adding Caddy support for NetBird's 'permiter' reverse proxy, too - arguably more 'Nix-y' than Traefik and in theory also supports the the TLS passthrough we need (with the help of a plugin)\r\n\r\nDefinitely not done with the NetBird module after this gets merged, don't worry!",
+   "created_at": "2026-03-11T11:01:49Z",
+   "id": 4038404191,
+   "minimized": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-03-11T11:01:49Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This Caddy configuration worked for me: https://github.com/bct/nix-config/blob/a147a7172527af8ae9998f6ecaede7a86cbd1956/nixos/cloud/megahost-one/netbird.nix#L70-L119",
+   "created_at": "2026-03-11T14:16:54Z",
+   "id": 4039530981,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-11T14:17:05Z",
+   "user": {
+    "id": 548,
+    "login": "bct",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@PatrickDaG \r\n\r\nApologies, I've been out sick for the past month. I'm back now have been working on/testing this for the past couple days. I've addressed your comments and tested this module on my personal VPS which runs my own self-hosted NetBird instance. I found (and fixed) the following issues: \r\n\r\n1. Relay package default was wrong: relay.nix defaulted to pkgs.netbird (client) instead of pkgs.netbird-relay. The binary netbird-relay didn't exist in the client package. Added it.\r\n\r\n2. Embedded IDP used invalid ManagerType = \"integrated\" when enabled: Embedded IDP should in fact use ManagerType \"none\" so changed it to that. \r\n                                                          \r\n3. Relay had no metricsPort option: It silently bound to 9090 which conflicting with management's default metrics port. Added a configurable metricsPort (default 9091).\r\n\r\nOther than that, everything is working well - I can connect clients, connect to and pass traffic via Relay, access the dashboard and change settings etc. \r\n\r\nHere's the basic config that uses the new module. I've commented what needs replacing should anyone want to test it themselves: https://gist.github.com/shuuri-labs/2aeb3a7229723620375a1396765d513a\r\n\r\n\r\n\r\n",
+   "created_at": "2026-04-22T13:23:58Z",
+   "id": 4296563368,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-22T13:23:58Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review`](https://github.com/Mic92/nixpkgs-review).\n\nCommand: `nixpkgs-review pr 487367 --additional-package nixosTests.netbird`\nCommit: `eb194d92aef261873d5f6e5dbb61debce3f5a2d7`\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:x: 2 packages failed to build:</summary>\n  <ul>\n    <li>nixosTests.netbird.server-management</li>\n    <li>nixosTests.netbird.server-relay</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 2 tests built:</summary>\n  <ul>\n    <li>nixosTests.netbird.client</li>\n    <li>nixosTests.netbird.server-signal</li>\n  </ul>\n</details>\n\n---\n<details>\n<summary>Error logs: `x86_64-linux`</summary>\n<details>\n<summary>nixosTests.netbird.server-management</summary>\n<pre>managementWithPostgres # [   10.242522] netbird-mgmt[1211]: Error: failed reading provided config file: /var/lib/netbird-mgmt/management.json: failed fetching OIDC configuration from endpoint https://idp.test/.well-known/openid-configuration Get &quot;https://idp.test/.well-known/openid-configuration&quot;: dial tcp: lookup idp.test: no such host\nmanagementWithPostgres # [   10.247876] systemd[1]: netbird-management.service: Main process exited, code=exited, status=1/FAILURE\nmanagementWithPostgres # [   10.250121] systemd[1]: netbird-management.service: Failed with result &#x27;exit-code&#x27;.\nmanagementWithPostgres # [   10.255850] dhcpcd[1067]: eth0: soliciting a DHCP lease\nmanagementWithPostgres # [   10.423773] NET: Registered PF_PACKET protocol family\nmanagementWithPostgres # [   10.265374] dhcpcd[1067]: eth0: offered 10.0.2.15 from 10.0.2.2\nmanagementWithPostgres # [   10.268677] dhcpcd[1067]: eth0: probing address 10.0.2.15/24\n!!! Traceback (most recent call last):\n!!!   File &quot;&lt;string&gt;&quot;, line 4, in &lt;module&gt;\n!!!     management.wait_for_unit(&quot;netbird-management.service&quot;)\n!!! \n!!! RequestedAssertionFailed: unit &quot;netbird-management.service&quot; reached state &quot;failed&quot;\ncleanup\nkill QemuMachine (pid 15)\nmanagement # qemu-system-x86_64: terminating on signal 15 from pid 6 (/nix/store/0r6k8xa2kgqyp3r4v2w7yrb80ma2iawm-python3-3.13.12/bin/python3.13)\nkill QemuMachine (pid 17)\nmanagementWithPostgres # qemu-system-x86_64: terminating on signal 15 from pid 6 (/nix/store/0r6k8xa2kgqyp3r4v2w7yrb80ma2iawm-python3-3.13.12/bin/python3.13)\nkill QemuMachine (pid 16)\nmanagementWithRelay # qemu-system-x86_64: terminating on signal 15 from pid 6 (/nix/store/0r6k8xa2kgqyp3r4v2w7yrb80ma2iawm-python3-3.13.12/bin/python3.13)\n(finished: cleanup, in 0.14 seconds)</pre>\n</details>\n<details>\n<summary>nixosTests.netbird.server-relay</summary>\n<pre>relay # [    8.712583] NET: Registered PF_PACKET protocol family\nrelay # [    8.554365] dhcpcd[1084]: eth0: offered 10.0.2.15 from 10.0.2.2\nrelay # [    8.557202] dhcpcd[1084]: eth0: probing address 10.0.2.15/24\nrelay: (finished: waiting for unit netbird-relay.service, in 9.61 seconds)\nrelay: waiting for TCP port 8443 on localhost\nrelay # Connection to localhost (::1) 8443 port [tcp/pcsync-https] succeeded!\nrelay: (finished: waiting for TCP port 8443 on localhost, in 0.04 seconds)\nrelay: must succeed: test -d /var/lib/netbird-relay\nrelay: (finished: must succeed: test -d /var/lib/netbird-relay, in 0.01 seconds)\nrelay: must succeed: iptables -L INPUT -n | grep -q 8443\nrelay: output: \n!!! Traceback (most recent call last):\n!!!   File &quot;&lt;string&gt;&quot;, line 11, in &lt;module&gt;\n!!!     relay.succeed(&quot;iptables -L INPUT -n | grep -q 8443&quot;)\n!!! \n!!! RequestedAssertionFailed: command `iptables -L INPUT -n | grep -q 8443` failed (exit code 1)\ncleanup\nkill QemuMachine (pid 13)\nrelay # qemu-system-x86_64: terminating on signal 15 from pid 6 (/nix/store/0r6k8xa2kgqyp3r4v2w7yrb80ma2iawm-python3-3.13.12/bin/python3.13)\n(finished: cleanup, in 0.05 seconds)</pre>\n</details>\n</details>\n",
+   "created_at": "2026-04-26T18:37:36Z",
+   "id": 4322718363,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-26T18:37:36Z",
+   "user": {
+    "id": 58092422,
+    "login": "PatrickDaG",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks for running the tests @PatrickDaG! pushed a fix for both failures:\r\n\r\n- **server-management** - the test nodes all had `oidcConfigEndpoint` pointing to `idp.test` which obviously doesn't resolve in the test VM. the management binary tries to fetch the OIDC discovery endpoint on startup and bails. removed it from all three test nodes and the default (empty string) lets it start without attempting OIDC discovery.\r\n\r\n- **server-relay**: the iptables check was looking at the `INPUT` chain directly (`iptables -L INPUT -n`), but NixOS firewall puts the actual port rules in the `nixos-fw` sub-chain and just jumps to it from `INPUT`. changed it to `iptables -L -n` so it searches all chains.",
+   "created_at": "2026-04-29T12:25:47Z",
+   "id": 4343631172,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-29T12:26:12Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Can you make sure the tests run on your end?",
+   "created_at": "2026-05-07T17:57:25Z",
+   "id": 4399739200,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-07T17:57:25Z",
+   "user": {
+    "id": 58092422,
+    "login": "PatrickDaG",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "My netbird dashboard is broken at the moment, and I came across this when trying to fix it. Thought I'd chip in regarding the traefik configuration.\r\n\r\nI've written the code that eventually became #490985, which is a WIP redesign to the traefik module. As you said it's probably best to leave adding a traefik proxy option to the netbird module for a separate PR; I would also recommend waiting until the aforementioned PR is merged as well. I can give pointers on how to write the traefik config in a way that takes advantage of some of the new features coming up, since the approach will be a little different.\r\n\r\nAs far as the actual traefik options, this should have the options you need: https://docs.netbird.io/selfhosted/external-reverse-proxy#combined-container-setup-v0-65-0\r\nJust so there's a direct link when the time comes.",
+   "created_at": "2026-05-31T20:10:51Z",
+   "id": 4587942190,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-31T20:10:51Z",
+   "user": {
+    "id": 79593869,
+    "login": "TheRealGramdalf",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm no longer with netbird, and since I've switched to Tailscale in my own homelab, so I'll be ceasing work on this PR. @RafaelKr has integrated my work into his PR, so that should serve as the successor to this one. Thanks for all the reviews/contributions, everyone! Closing.  ",
+   "created_at": "2026-07-08T10:36:49Z",
+   "id": 4913914745,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-08T10:37:45Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That's unfortunate. But thank you very much for your initial effort, I really appreciate it! I probably won't have the time to become the lone maintainer of the netbird module, especially because it's pre-1.0 and moving pretty fast right now.\r\n\r\nStill here are some notes that might be helpful:\r\n- For mutually exclusive options we might want to use a [lib.types.attrTag](https://nixos.org/manual/nixos/unstable/#sec-option-types-sums) instead of enable options. For example instead of using `options.services.netbird.server.relay.enableNginx` we would use `options.services.netbird.server.relay.webserver.nginx`, `options.services.netbird.server.relay.webserver.traefik`, ...\r\nThis way it's even possible to pass additional options for the different webservers.  \r\nThis also applies to the IdP and TURN/relay config.  \r\nSee [services.misskey.reverseProxy.webserver](https://search.nixos.org/options?channel=26.05&query=misskey+reverseProxy#show=option%253Aservices.misskey.reverseProxy.webserver) for an example of `lib.types.attrTag`.\r\n- It might make sense to implement this as an [experimental NixOS Modular Service](https://nixos.org/manual/nixos/stable/#modular-services) as it would allow for composition of the different services. This composition pattern would allow to \"easily\" [scale the deployment across multiple hosts](https://docs.netbird.io/selfhosted/maintenance/scaling/scaling-your-self-hosted-deployment)",
+   "created_at": "2026-07-13T10:27:48Z",
+   "id": 4956979295,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T10:29:18Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'd be up to comaintain the module, but I currently don't have time to help with the inital creation",
+   "created_at": "2026-07-13T11:10:33Z",
+   "id": 4957314097,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T11:10:33Z",
+   "user": {
+    "id": 1529052,
+    "login": "jvanbruegge",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "For me it's the same. I use netbird currently in a dockerized setup managed through `virtualisation.oci-containers`, but would love to migrate to a native approach and maintain the module.\r\nWhile I don't have the capacity to setup another PR and make big changes, I gladly have a close look over changes and test them.",
+   "created_at": "2026-07-13T12:35:57Z",
+   "id": 4958001055,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T12:35:57Z",
+   "user": {
+    "id": 13383409,
+    "login": "JuliusFreudenberger",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Just to let you know, I'm working on it and making good progress. I already implemented my proposed usage of `types.attrTag` for the webserver configuration and really like the outcome. I also added traefik as a webserver option and on top of that I got the netbird-proxy (the new beta Reverse Proxy) component configured and running. It's not yet polished enough to be published and it probably will take some more hours of work, but I'm getting there.\r\n\r\nI'll do incremental PRs for easy reviewability. So first doing a polished version of the current PR state. Then do another PR for implementing traefik on top. Also for traefik we might wait on #490985. And then the proxy module in another separate PR.\r\n\r\nIn another PR Caddy could also be added, as it's the third wesberver option that upstream netbird supports, if there's a need for it. For my setup I don't need it.",
+   "created_at": "2026-07-18T11:34:09Z",
+   "id": 5011096416,
+   "minimized": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 2,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2026-07-18T11:34:09Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Just to let you know, I'm working on it and making good progress. I already implemented my proposed usage of `types.attrTag` for the webserver configuration and really like the outcome. \n>I also added traefik as a webserver option and on top of that I got the netbird-proxy (the new beta Reverse Proxy) component configured and running. It's not yet polished enough to be published and it probably will take some more hours of work, but I'm getting there.\n\nWhen you say traefik as a webserver, do you mean as a proxy? I don't think traefik can actually host content directly, usually that requires a dedicated webserver such as nginx\n\n> Then do another PR for implementing traefik on top. Also for traefik we might wait on #490985. And then the proxy module in another separate PR.\n\nThat would be ideal, yes. When the time comes please put any routing configuration under `services.traefik.extraFiles.\"netbird\".settings`,  there will be further documentation on how exactly to do this coming with the PR. Feel free to ping/request my review if you wish. \n\n\n",
+   "created_at": "2026-07-18T17:35:27Z",
+   "id": 5012246072,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-18T17:35:27Z",
+   "user": {
+    "id": 79593869,
+    "login": "TheRealGramdalf",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Hey @RafaelKr are you still going to publish a PR? \r\nI'm working on the relay and I was thinking of upstreaming it soon. \r\n\r\nInstead of a big PR I want to start uploading chunks. Maybe the proxy next.",
+   "created_at": "2026-08-17T10:45:15Z",
+   "id": 5315028277,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-17T10:45:15Z",
+   "user": {
+    "id": 2585816,
+    "login": "woile",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes, I would like to. Hopefully I'll find some time on the next weekend.\r\n\r\nWhen talking about \"proxy\" we need to be careful what we're actually talking about. Because there are two things that can be called reverse proxy:\r\n1. The reverse proxy that sits before the netbird components (relay, signal, management, dashboard) and routes traffic depending on the Path. In the netbird documentation it's called [External Reverse Proxy](https://docs.netbird.io/selfhosted/external-reverse-proxy). In my upcoming PR I like to call this the \"Ingress Proxy\", but this may be called differently, if someone has a better name for it.\r\n2. The NetBird reverse proxy service that launched with v0.65.0.\r\n\r\nThe second one depends on the first one, as it requires traefik as its ingress proxy. (The `External Reverse Proxy` documentation states this in their first info-block as \"This is not to be confused with the NetBird reverse proxy service that launched with v0.65.0. The NetBird reverse proxy feature is only compatible with Traefik because it requires TLS passthrough, which Traefik supports natively.\")\r\n\r\nSo actually we need to rework the ingress proxy first, to be able to use traefik and only then can introduce the reverse proxy service. And some people suggested to wait for the traefik refactor in #490985 (or maybe #553100 which might become its successor) before doing it here.\r\n\r\nSo actually we should implement in the following order:\r\n1. Native relay + embedded IdP server (this PR)\r\n2. Rework the ingress proxy: Currently it only supports nginx, we need to rebuild this to support other reverse proxy software aswell, starting with additional support for traefik\r\n3. Now we can introduce the netbird reverse proxy service feature\r\n\r\nI'll tag you as soon as I open the PR.",
+   "created_at": "2026-08-17T11:31:52Z",
+   "id": 5315468276,
+   "minimized": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-08-17T11:31:52Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> When talking about \"proxy\" we need to be careful what we're actually talking about\r\n\r\nAgreed, I generally assume reverse proxies are an external component of the netbird service, and proxy means the netbird-proxy itself.\r\n\r\n> Native relay + embedded IdP server (this PR)\r\n\r\nDo we need an IdP? I've been running the `netbird-relay` fine (via podman) using using the `NB_AUTH_SECRET`. It doesn't seem to require an IdP.\r\n\r\n> Rework the ingress proxy\r\n> Now we can introduce the netbird reverse proxy service feature\r\n\r\nCan't we just start with something small? let the netbird-proxy start under systemd, and let users configure their reverse proxies? It could be explained in the markdown. \r\nBeing traefik the netbird's \"choice\" for reverse-proxies (as proxy only works with it), it feels weird having a mix of many reverse-proxies (`enableNginx`, `enableTraefik`, etc). \r\n\r\nShouldn't we follow a more single-responsability-principle and focus on netbird only? And start with systemd, and if later it's needed, we can add the modular service, but at least we would have a clear and well-defined interface.\r\n\r\nMaybe in the future, if [RFC 189](https://github.com/NixOS/rfcs/pull/189) is ever approved, we'll be able to specify \"we need any reverse proxy with x and y features\".",
+   "created_at": "2026-08-17T16:43:47Z",
+   "id": 5317827415,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-17T16:43:47Z",
+   "user": {
+    "id": 2585816,
+    "login": "woile",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Do we need an IdP? I've been running the netbird-relay fine (via podman) using using the NB_AUTH_SECRET. It doesn't seem to require an IdP.\r\n\r\nIt's not about `netbird-relay`, It's just much more convenient to have the embedded IdP when you run netbird fully managed with NixOS. Else you need to also configure another external IdP software.\r\n\r\nOverall in the end I'd like to be as near to the official way NetBird does things now by default (embedded IdP, netbird-relay instead of coturn, allow Traefik for the `netbird-proxy`), by still allowing the other (legacy) options that NetBird offers.\r\n\r\nUnfortunately I didn't have time to get anything ready for a PR. Still I want to provide a little sneak peek what I'm currently using to sucessfully run 2 NixOS 26.05 hosts to run netbird (one with the reverse proxy feature): https://github.com/RafaelKr/nixpkgs/commits/wip/nixos-26.05-netbird\r\n\r\nThe first 5 commits are just some fixes on top of this PR (some could already be applied to master, independently of this PR). Then comes an interesting commit, opening up the possibility for different ingress reverse proxies, still only providing nginx at that point. Later there is [nixos/netbird: add Traefik ingress backend](https://github.com/RafaelKr/nixpkgs/commit/efc289150e0a23a28639e1dda966e7869871bcc2) and then on top of that the reverse proxy component is introduced.\r\n\r\nPlease don't go into much detail yet, but it's more or less how the final configuration shape may look.",
+   "created_at": "2026-08-23T11:27:35Z",
+   "id": 5385753771,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-23T20:02:24Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> It's just much more convenient to have the embedded IdP when you run netbird fully managed with NixOS. Else you need to also configure another external IdP software\r\n\r\nIn my current containerized setup I also use the internal IdP but then include my PocketID instance. I deactivated internal authentication mechanism, so I get directly redirected there for SSO.\r\n\r\nI agree, that keeping to that structure (and therefore close to upstream's default deployment) is favorable.",
+   "created_at": "2026-08-23T20:14:44Z",
+   "id": 5388231457,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-23T20:14:44Z",
+   "user": {
+    "id": 13383409,
+    "login": "JuliusFreudenberger",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@woile something I also wanted to comment about:\n\n> Can't we just start with something small? let the netbird-proxy start under systemd, and let users configure their reverse proxies? It could be explained in the markdown.\n> Being traefik the netbird's \"choice\" for reverse-proxies (as proxy only works with it), it feels weird having a mix of many reverse-proxies (enableNginx, enableTraefik, etc).\n>\n> Shouldn't we follow a more single-responsability-principle and focus on netbird only? And start with systemd, and if later it's needed, we can add the modular service, but at least we would have a clear and well-defined interface.\n>\n> Maybe in the future, if RFC 189 is ever approved, we'll be able to specify \"we need any reverse proxy with x and y features\".\n\nCould you elaborate how you mean that? My understanding is you would like to first provide all current available netbird packages and a basic module layer and then let the users add the \"glue\" code like reverse proxy routing, do I understand that correctly?\n\nI agree with \"it feels weird having a mix of many reverse-proxies\" when using enableX flags. I approached a much more modular architecture than that, interestingly it seems to somewhat being a bit related to what RFC 189 is describing. You define the ingress proxy on the netbird module root level. And each netbird service provides its routing configuration based on the selected ingress proxy.\n\nI'll put up the option interface rendered with https://github.com/NuschtOS/search tomorrow, so it's easier to reason about it.\n\n@JuliusFreudenberger\n> I agree, that keeping to that structure (and therefore close to upstream's default deployment) is favorable.\n\nOne thing I'm not sure about is if we should follow netbirds direction with the combined binary. Currently we still use their multi-binary setup. But I think it's mentioned less and less in their documentation. So I don't know if they might drop it and we should also switch to their new binary soon, so instead of having different pkgs per service we have just one package.",
+   "created_at": "2026-08-23T20:51:10Z",
+   "id": 5388394342,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-23T21:01:10Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This is probably already accounted for, but I just wanted to make sure- when you say starting with the embedded IdP, do you mean to say that external IdP would become unavailable until a later PR?\nI prefer an external IdP, so I need to be able to set that up even if embedded is the default going forward",
+   "created_at": "2026-08-23T22:24:48Z",
+   "id": 5388803170,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-23T22:24:48Z",
+   "user": {
+    "id": 79593869,
+    "login": "TheRealGramdalf",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> This is probably already accounted for, but I just wanted to make sure- when you say starting with the embedded IdP, do you mean to say that external IdP would become unavailable until a later PR?\n> I prefer an external IdP, so I need to be able to set that up even if embedded is the default going forward\n\nYou can still use the same `oidcConfigEndpoint` option which is already available in the current netbird module on the stable channel. Enabling the embedded IdP is fully optional.\n\nEdit: A little clarification: NetBird uses embedded as their new default, but for the NixOS module you still need to actively decide if you enable the embedded IdP or if you set the `oidcConfigEndpoint`.",
+   "created_at": "2026-08-23T23:00:51Z",
+   "id": 5388958545,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-23T23:26:02Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> My understanding is you would like to first provide all current available netbird packages and a basic module layer and then let the users add the \"glue\" code like reverse proxy routing, do I understand that correctly?\r\n\r\nIn principle, yes. I see a lot of PR's trying to do too much, and never landing. I would like to have well discussed interfaces designed for the different chunks (netbird-relay, netbird-proxy, fixes to the dashboard, etc), which are easier to review, and later have the third party things like IdP or reverse proxy, but once we have a solid foundation of the core netbird module.\r\n\r\nIdP and reverse proxy also increase the complexity of the module, make it require more maintainability, and a lot of people already have them and can reuse, if not, it's documented. But still, it could be included, and the longer we post-pone, the higher the chances we can use something like RFC 189\r\n\r\n> netbirds direction with the combined binary\r\n\r\ndo you have examples in the documentation? We should try to be aligned with the docs, so it feels familiar to the users.",
+   "created_at": "2026-08-24T07:14:44Z",
+   "id": 5391910995,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-24T07:14:44Z",
+   "user": {
+    "id": 2585816,
+    "login": "woile",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@woile got it. Then let's try to get it done chunk by chunk.\r\n\r\nAs promised I published an option search for the current state: https://rafaelkr.github.io/nixos-search/wip-netbird-f7b59ee5/options\r\n\r\nUnfortunately the NüschtOS Search lists options sorted by their string length, but searching for each chunk helps. Those filters are the most interesting ones where feedback for the option structure would be welcome:\r\n- `s.n.s.management.idp` (embedded Dex IdP)\r\n- `s.n.s.relay` (netbird-relay)\r\n- `s.n.s.ingress` (extendable attrTag, search for `s.n.s.ingress.nginx` or `s.n.s.ingress.traefik` in particular)\r\n- `services.netbird.server.reverseProxy` (netbird-proxy)\r\n\r\nAlso reading https://github.com/RafaelKr/nixpkgs/blob/f7b59ee5d7fb9a995c530a985dc6e3d65e894c67/nixos/modules/services/networking/netbird/server.md helps.\r\n\r\nThis is the config I currently use to run my 2 NixOS hosts: https://gist.github.com/RafaelKr/1e21a7cdf123ff08a546735b7d42c7e9\r\n\r\nAs told, this is only a sneak peek. So it is **not to be meant to run in production**, doing so is on your own risk.\r\nI need to work through every commit again, clean up and polish things.\r\n\r\nI'll be on vacation soon, so realistically I'll only get to work on it at mid to end september again.\r\n@woile at https://github.com/NixOS/nixpkgs/pull/354032#issuecomment-5308979303 you offered to give a shot at implementing e.g. the relay. As I don't want to block the progress on this, you may want to do so. We could also move this discussion to e.g. a matrix room, so we don't flood this discussion further. If you like to do so you can hit me up at the same username I use on GitHub.\r\n\r\nP.S. The `relay.nix` in my fork is still mostly the same version as the one introduced with this PR we're commenting on. I only improved some descriptions and made it compatible with my ingress pattern.\r\nAnd I just noticed that this PR implemented `services.netbird.server.relay.openFirewall` in a way that would open up UDP 3478 required for STUN, but also TCP 33080 (relay port) which is not required when running behind the ingress reverse proxy. This may be splitted into `services.netbird.server.relay.openFirewall` for the TCP relay port and into `services.netbird.server.relay.stun.openFirewall` for the STUN UDP port.",
+   "created_at": "2026-08-24T08:53:03Z",
+   "id": 5392868573,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-24T08:53:03Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> > netbirds direction with the combined binary\r\n> \r\n> do you have examples in the documentation? We should try to be aligned with the docs, so it feels familiar to the users.\r\n\r\nIn their [0.65 release blog post](https://netbird.io/knowledge-hub/reverse-proxy) they describe it as\r\n\r\n> ### Self-Hosted Improvements\r\n> \r\n> Version 0.65 also introduces a unified NetBird server binary that consolidates multiple services into a single container for self-hosted deployments. This means fewer containers to manage, simpler Docker Compose stacks, and faster setup. If you're running an existing deployment, the quick start script has been updated and we've published a  [migration guide](https://docs.netbird.io/selfhosted/migration/enable-reverse-proxy) to walk you through enabling the reverse proxy on your current installation.\r\n> \r\n> We've also switched the default reverse proxy in the quick start script from Caddy to Traefik. Traefik is required for the reverse proxy feature because it supports TLS passthrough, which lets the NetBird proxy handle TLS termination directly.\r\n\r\nAnd it's just the default they now use when using their quickstart installation guide.\r\n\r\nIIRC in the past they still used the multi-container setup for a [distributed architecture](https://docs.netbird.io/selfhosted/maintenance/scaling/scaling-your-self-hosted-deployment) (running accross multiple servers) / [high-availability](https://docs.netbird.io/selfhosted/maintenance/scaling/high-availability) (commercial license required). But I think they updated their docs now and also use the combined binary there.\r\n\r\nSo maybe it would be better if we would also add the combined binary as a nix package and use that in each netbird component. Maybe adding it would also be a good start instead of adding the relay first.\r\n\r\nBTW: https://github.com/netbirdio/netbird/blob/v0.77.1/infrastructure_files/getting-started.sh is always a good reference to see how things are setup.",
+   "created_at": "2026-08-24T09:07:49Z",
+   "id": 5393030797,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-24T09:07:49Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I recently merged the addition of the netbird-combined package in https://github.com/NixOS/nixpkgs/pull/554815\r\n\r\nAfter stumbling through the complexity of the current module, I realized I still didn't have a fully working setup and pivoted to setting up the combined. I've been proving a private module for this out and had planned to submit it once I've got a bit more runtime on it.\r\n\r\n> So maybe it would be better if we would also add the combined binary as a nix package and use that in each netbird component. \r\n\r\nThe combined binary takes a config that manages everything. I'm not sure I'd try and use it in each component, but instead create a new standalone module.",
+   "created_at": "2026-08-24T12:46:30Z",
+   "id": 5395387740,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-24T12:51:27Z",
+   "user": {
+    "id": 2071575,
+    "login": "adamcstephens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I also submitted this idea: https://github.com/netbirdio/netbird/discussions/7290 \r\n\r\nThis simple patch exposes dex's connectors config for pre-population of an oidc provider. The management server currently supports this option. If we want, we could apply this patch to add this bit of declarative config in nixos. With this, my config is:\r\n\r\n```nix\r\nservices.netbird.server = {\r\n  domain = site.services.netbird;\r\n\r\n  dashboard = {\r\n    enable = true;\r\n    package = inputs.nixos-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.netbird-dashboard;\r\n    enableNginx = true;\r\n    managementServer = \"https://${config.services.netbird.server.domain}\";\r\n    settings = {\r\n      AUTH_AUTHORITY = \"https://${config.services.netbird.server.domain}/oauth2\";\r\n      AUTH_CLIENT_ID = \"netbird-dashboard\";\r\n      AUTH_AUDIENCE = \"netbird-dashboard\";\r\n      AUTH_SUPPORTED_SCOPES = \"openid profile email groups\";\r\n      AUTH_REDIRECT_URI = \"/nb-auth\";\r\n      AUTH_SILENT_REDIRECT_URI = \"/nb-silent-auth\";\r\n      USE_AUTH0 = \"false\";\r\n    };\r\n  };\r\n\r\n  combined = {\r\n    enable = true;\r\n    package =\r\n      inputs.nixpkgs-netbird-combined.legacyPackages.${pkgs.stdenv.hostPlatform.system}.netbird-combined.overrideAttrs\r\n        (old: {\r\n          patches = (old.patches or [ ]) ++ [ ./auth-dex-config.patch ];\r\n        });\r\n\r\n    settings.server = {\r\n      listenAddress = \":${toString port}\";\r\n      # port is required\r\n      exposedAddress = \"https://${site.services.netbird}:443\";\r\n      authSecret._secret = config.age.secrets.netbird-relay-auth-secret.path;\r\n      disableAnonymousMetrics = false;\r\n      disableGeoliteUpdate = false;\r\n      auth = {\r\n        issuer = \"https://${config.services.netbird.server.domain}/oauth2\";\r\n        localAuthDisabled = true;\r\n        signKeyRefreshEnabled = true;\r\n        dashboardRedirectURIs = [\r\n          \"https://${config.services.netbird.server.domain}/nb-auth\"\r\n          \"https://${config.services.netbird.server.domain}/nb-silent-auth\"\r\n        ];\r\n        # openssl rand -base64 32\r\n        sessionCookieEncryptionKey._secret = config.age.secrets.netbird-cookie-key.path;\r\n\r\n        staticConnectors = [\r\n          {\r\n            type = \"oidc\";\r\n            id = \"robins\";\r\n            name = \"Robins\";\r\n            config = {\r\n              issuer = \"https://${site.services.kanidm}/oauth2/openid/netbird\";\r\n              clientID = \"netbird\";\r\n              clientSecret._secret = config.age.secrets.netbird-oauth-secret.path;\r\n              redirectURI = \"https://${config.services.netbird.server.domain}/oauth2/callback\";\r\n              scopes = [\r\n                \"openid\"\r\n                \"profile\"\r\n                \"email\"\r\n                \"groups\"\r\n              ];\r\n            };\r\n          }\r\n        ];\r\n      };\r\n```\r\n\r\nWe could probably make this a bit more user friendly too, by pre-configuring dashboard.",
+   "created_at": "2026-08-24T12:54:43Z",
+   "id": 5395479356,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-24T12:55:16Z",
+   "user": {
+    "id": 2071575,
+    "login": "adamcstephens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> IIRC in the past they still used the multi-container setup for a [distributed architecture](https://docs.netbird.io/selfhosted/maintenance/scaling/scaling-your-self-hosted-deployment) (running accross multiple servers) / [high-availability](https://docs.netbird.io/selfhosted/maintenance/scaling/high-availability) (commercial license required). But I think they updated their docs now and also use the combined binary there.\r\n\r\nCombined binary or not, I think to the service interface we expose, it doesn't matter. E.g: Users should be able to run multiple relays, without having to run everything else. This can be done with the combined binary or just with `netbird-relay`. \r\n\r\nAgreed that we should adopt it for the module. Although, it might be better to ask netbird for clarification.\r\n\r\nI've asked in matrix for a new space, I'll share it once available, otherwise I'll open a Github issue here.",
+   "created_at": "2026-08-24T13:34:26Z",
+   "id": 5395972537,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-24T13:34:26Z",
+   "user": {
+    "id": 2585816,
+    "login": "woile",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I created a Matrix room at `#nixos-netbird:robins.wtf` . We can get it adopted by the project, but creating it is the first step.",
+   "created_at": "2026-08-24T13:38:22Z",
+   "id": 5396019029,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 2,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-08-24T13:38:22Z",
+   "user": {
+    "id": 2071575,
+    "login": "adamcstephens",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/487367",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "## Motivation\r\n\r\nThe existing NetBird server modules have limited configurability - management and signal lack TLS options, there's no relay server module, and the embedded IDP isn't exposed. Essentially, the NixOS module's options lag pretty far behind the latest versions of NetBird's various components\r\n\r\n## Changes\r\n\r\nBug fix: signal state directory\r\n\r\nThe signal server's RuntimeDirectory, StateDirectory, and WorkingDirectory all pointed to netbird-mgmt instead of netbird-signal. This caused signal and management to share (and potentially corrupt) each other's files when both ran on the same machine.\r\n\r\nNew module: services.netbird.server.relay\r\n\r\nFull relay server module with:\r\n- Typed port option (default 33080) for the internal listen port - avoids conflicts with nginx on port 443\r\n- Secure secret injection via systemd LoadCredential → EnvironmentFile → NB_AUTH_SECRET env var (secret never appears in /proc or the Nix store)\r\n- Embedded STUN server with configurable UDP ports\r\n- Nginx reverse proxy with WebSocket upgrade headers\r\n- Firewall integration (openFirewall)\r\n- extraOptions escape hatch for advanced CLI flags (direct TLS, etc.)\r\n- DynamicUser = true and full systemd hardening (ProtectSystem = \"strict\", etc.)\r\n\r\nThe orchestrator module (server.nix) gains useRelay and relayAuthSecretFile options to wire relay + management together automatically.\r\n\r\nExpanded: services.netbird.server.management\r\n\r\n- Relay integration: relayAddresses and relaySecretFile (via _secret pattern for JSON config injection)\r\n- Database backends: store.engine (sqlite/postgres/mysql) with store.postgres.dsnFile / store.mysql.dsnFile for secret DSN handling\r\n- Embedded IDP: idp.embedded.enable toggle - sets ManagerType = \"integrated\" and provides sensible ProviderConfig defaults derived from domain. Users customize via the freeform settings option (e.g.\r\nsettings.ProviderConfig.Owner.Email)\r\n- TLS support (Let's Encrypt or manual certs)\r\n- GeoLite updates disabled by default (privacy for self-hosted)\r\n- Backwards-compat aliases: singleAccountModeDomain → singleAccountMode.domain, disableSingleAccountMode → removed with migration message\r\n- ProtectSystem = \"strict\" and full systemd hardening\r\n\r\nExpanded: services.netbird.server.signal\r\n\r\n- TLS support (Let's Encrypt or manual certs) with validation assertions\r\n- Firewall integration (openFirewall)\r\n- Metrics port option\r\n- ProtectSystem = \"strict\", restartTriggers, directory mode hardening\r\n\r\nExpanded: services.netbird.clients (client module)\r\n\r\n- Multi-instance support via services.netbird.clients.<name>\r\n- DNS, routing, and firewall configuration options\r\n- Rosenpass (post-quantum cryptography) support\r\n- SSH server integration\r\n- Self-hosted server connection options\r\n\r\n**Commits**\r\n\r\n1. nixos/netbird: expand client module options - multi-instance client support, DNS/routing/firewall options, Rosenpass, SSH server, self-hosted connection; expanded netbird.md documentation; register new heading\r\nIDs in redirects.json\r\n2. nixos/netbird: fix signal server state directory - 3-line bug fix: netbird-mgmt → netbird-signal in RuntimeDirectory/StateDirectory/WorkingDirectory\r\n3. maintainers: add shuuri-labs - add maintainer entry to maintainer-list.nix\r\n4. nixos/netbird: update server maintainer to shuuri-labs - change meta.maintainers in server.nix\r\n5. nixos/netbird: add TLS and firewall options to signal server - TLS (Let's Encrypt / manual certs), openFirewall, metricsPort, assertions, ProtectSystem = \"strict\", restartTriggers\r\n6. nixos/netbird: add relay server module - new relay.nix with secure secret handling (LoadCredential + EnvironmentFile), STUN, nginx, firewall, DynamicUser = true; server.nix gains useRelay/relayAuthSecretFile\r\norchestration and unconditional turnDomain default\r\n7. nixos/netbird: expand management server options - relay config, database backends, embedded IDP, TLS, backwards-compat aliases, ProtectSystem = \"strict\", Relay.Secret warning fix, defaultText corrections\r\n8. nixos/tests/netbird: reorganize and add server tests - move client test into directory, add server-management (3 nodes), server-signal, server-relay tests\r\n9. nixos/netbird: update server documentation - expanded server.md with quickstart, relay vs Coturn, embedded IDP, database, and complete examples\r\n\r\n**Tests**\r\n- Reorganized nixos/tests/netbird.nix → nixos/tests/netbird/ directory with client.nix, server-management.nix, server-signal.nix, server-relay.nix\r\n- Management test covers 3 configurations: basic, with relay, with PostgreSQL\r\n- Signal test verifies service startup, correct ports, and isolated state directory\r\n- Relay test verifies service startup, port binding, state directory, and firewall rules\r\n\r\n**Documentation**\r\n- Expanded netbird.md (client) with DNS, routing, security, Rosenpass, SSH, and self-hosted sections\r\n- Expanded server.md with quickstart guides (Coturn and relay), relay vs Coturn comparison table, embedded IDP setup, PostgreSQL backend example, relay standalone configuration, and a complete self-hosted example\r\n\r\n## How to test\r\n```bash\r\n# Run all NetBird tests\r\nnix build .#checks.x86_64-linux.nixosTests.netbird -L\r\n\r\n# Run individual tests\r\nnix build .#checks.x86_64-linux.nixosTests.netbird.server-management -L\r\nnix build .#checks.x86_64-linux.nixosTests.netbird.server-relay -L\r\nnix build .#checks.x86_64-linux.nixosTests.netbird.server-signal -L\r\n```\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [x] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [x] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-07-08T10:36:49Z",
+  "closed_by": {
+   "id": 61762328,
+   "login": "shuuri-labs",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 31,
+  "created_at": "2026-02-05T18:03:56Z",
+  "draft": false,
+  "id": 3902859281,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR is the author's first one; please be gentle!",
+    "id": 5609547489,
+    "name": "12.first-time contribution"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes `maintainers/maintainer-list.nix`",
+    "id": 6879370208,
+    "name": "8.has: maintainer-list (update)"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 487367,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/487367.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/487367.patch"
+  },
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "update netbird server modules",
+  "type": null,
+  "updated_at": "2026-08-24T13:38:23Z",
+  "user": {
+   "id": 61762328,
+   "login": "shuuri-labs",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 1127,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21132,
+    "open_issues_count": 21132,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:37:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "7dd586fcb88a5cc9a278b82d4b490670796603d8",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "## Motivation\r\n\r\nThe existing NetBird server modules have limited configurability - management and signal lack TLS options, there's no relay server module, and the embedded IDP isn't exposed. Essentially, the NixOS module's options lag pretty far behind the latest versions of NetBird's various components\r\n\r\n## Changes\r\n\r\nBug fix: signal state directory\r\n\r\nThe signal server's RuntimeDirectory, StateDirectory, and WorkingDirectory all pointed to netbird-mgmt instead of netbird-signal. This caused signal and management to share (and potentially corrupt) each other's files when both ran on the same machine.\r\n\r\nNew module: services.netbird.server.relay\r\n\r\nFull relay server module with:\r\n- Typed port option (default 33080) for the internal listen port - avoids conflicts with nginx on port 443\r\n- Secure secret injection via systemd LoadCredential → EnvironmentFile → NB_AUTH_SECRET env var (secret never appears in /proc or the Nix store)\r\n- Embedded STUN server with configurable UDP ports\r\n- Nginx reverse proxy with WebSocket upgrade headers\r\n- Firewall integration (openFirewall)\r\n- extraOptions escape hatch for advanced CLI flags (direct TLS, etc.)\r\n- DynamicUser = true and full systemd hardening (ProtectSystem = \"strict\", etc.)\r\n\r\nThe orchestrator module (server.nix) gains useRelay and relayAuthSecretFile options to wire relay + management together automatically.\r\n\r\nExpanded: services.netbird.server.management\r\n\r\n- Relay integration: relayAddresses and relaySecretFile (via _secret pattern for JSON config injection)\r\n- Database backends: store.engine (sqlite/postgres/mysql) with store.postgres.dsnFile / store.mysql.dsnFile for secret DSN handling\r\n- Embedded IDP: idp.embedded.enable toggle - sets ManagerType = \"integrated\" and provides sensible ProviderConfig defaults derived from domain. Users customize via the freeform settings option (e.g.\r\nsettings.ProviderConfig.Owner.Email)\r\n- TLS support (Let's Encrypt or manual certs)\r\n- GeoLite updates disabled by default (privacy for self-hosted)\r\n- Backwards-compat aliases: singleAccountModeDomain → singleAccountMode.domain, disableSingleAccountMode → removed with migration message\r\n- ProtectSystem = \"strict\" and full systemd hardening\r\n\r\nExpanded: services.netbird.server.signal\r\n\r\n- TLS support (Let's Encrypt or manual certs) with validation assertions\r\n- Firewall integration (openFirewall)\r\n- Metrics port option\r\n- ProtectSystem = \"strict\", restartTriggers, directory mode hardening\r\n\r\nExpanded: services.netbird.clients (client module)\r\n\r\n- Multi-instance support via services.netbird.clients.<name>\r\n- DNS, routing, and firewall configuration options\r\n- Rosenpass (post-quantum cryptography) support\r\n- SSH server integration\r\n- Self-hosted server connection options\r\n\r\n**Commits**\r\n\r\n1. nixos/netbird: expand client module options - multi-instance client support, DNS/routing/firewall options, Rosenpass, SSH server, self-hosted connection; expanded netbird.md documentation; register new heading\r\nIDs in redirects.json\r\n2. nixos/netbird: fix signal server state directory - 3-line bug fix: netbird-mgmt → netbird-signal in RuntimeDirectory/StateDirectory/WorkingDirectory\r\n3. maintainers: add shuuri-labs - add maintainer entry to maintainer-list.nix\r\n4. nixos/netbird: update server maintainer to shuuri-labs - change meta.maintainers in server.nix\r\n5. nixos/netbird: add TLS and firewall options to signal server - TLS (Let's Encrypt / manual certs), openFirewall, metricsPort, assertions, ProtectSystem = \"strict\", restartTriggers\r\n6. nixos/netbird: add relay server module - new relay.nix with secure secret handling (LoadCredential + EnvironmentFile), STUN, nginx, firewall, DynamicUser = true; server.nix gains useRelay/relayAuthSecretFile\r\norchestration and unconditional turnDomain default\r\n7. nixos/netbird: expand management server options - relay config, database backends, embedded IDP, TLS, backwards-compat aliases, ProtectSystem = \"strict\", Relay.Secret warning fix, defaultText corrections\r\n8. nixos/tests/netbird: reorganize and add server tests - move client test into directory, add server-management (3 nodes), server-signal, server-relay tests\r\n9. nixos/netbird: update server documentation - expanded server.md with quickstart, relay vs Coturn, embedded IDP, database, and complete examples\r\n\r\n**Tests**\r\n- Reorganized nixos/tests/netbird.nix → nixos/tests/netbird/ directory with client.nix, server-management.nix, server-signal.nix, server-relay.nix\r\n- Management test covers 3 configurations: basic, with relay, with PostgreSQL\r\n- Signal test verifies service startup, correct ports, and isolated state directory\r\n- Relay test verifies service startup, port binding, state directory, and firewall rules\r\n\r\n**Documentation**\r\n- Expanded netbird.md (client) with DNS, routing, security, Rosenpass, SSH, and self-hosted sections\r\n- Expanded server.md with quickstart guides (Coturn and relay), relay vs Coturn comparison table, embedded IDP setup, PostgreSQL backend example, relay standalone configuration, and a complete self-hosted example\r\n\r\n## How to test\r\n```bash\r\n# Run all NetBird tests\r\nnix build .#checks.x86_64-linux.nixosTests.netbird -L\r\n\r\n# Run individual tests\r\nnix build .#checks.x86_64-linux.nixosTests.netbird.server-management -L\r\nnix build .#checks.x86_64-linux.nixosTests.netbird.server-relay -L\r\nnix build .#checks.x86_64-linux.nixosTests.netbird.server-signal -L\r\n```\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [x] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [x] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 15,
+  "closed_at": "2026-07-08T10:36:49Z",
+  "comments": 31,
+  "commits": 15,
+  "created_at": "2026-02-05T18:03:56Z",
+  "deletions": 55,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/487367.diff",
+  "draft": false,
+  "head": {
+   "label": "shuuri-labs:update-netbird-server-components",
+   "ref": "update-netbird-server-components",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2026-02-03T13:16:27Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "shuuri-labs/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/shuuri-labs/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 1148871021,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/shuuri-labs/nixpkgs/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/shuuri-labs/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 61762328,
+     "login": "shuuri-labs",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/shuuri-labs/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-04-29T12:23:52Z",
+    "size": 2498918,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/shuuri-labs/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/shuuri-labs/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-02-03T13:16:27Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3251332137,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR is the author's first one; please be gentle!",
+    "id": 5609547489,
+    "name": "12.first-time contribution"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes `maintainers/maintainer-list.nix`",
+    "id": 6879370208,
+    "name": "8.has: maintainer-list (update)"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "74a554b5d2f91349cf8264d68af3dc45f1f9ab25",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 487367,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/487367.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 3494992,
+    "login": "nazarewk",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 43472218,
+    "login": "GetPsyched",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 14,
+  "state": "closed",
+  "title": "update netbird server modules",
+  "updated_at": "2026-08-24T13:38:23Z",
+  "user": {
+   "id": 61762328,
+   "login": "shuuri-labs",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#487367",
+ "review_comments": [
+  {
+   "body": "I'm not sure what the official nixpkgs stance is on this but I feel like this basically just lists the options and doesn't really add anything apart from a whole bunch of text to the manual.",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "created_at": "2026-03-24T17:27:28Z",
+   "diff_hunk": "",
+   "id": 2983181412,
+   "line": 1,
+   "original_commit_id": "764c2fb63777722f9f0088c0213d1fd83af150dc",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "nixos/modules/services/networking/netbird.md",
+   "position": 1,
+   "pull_request_review_id": 4000991852,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2026-03-24T17:58:35Z",
+   "user": {
+    "id": 58092422,
+    "login": "PatrickDaG",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Is there a reason why you declare all these options? If not I would think an generic RFC 42 style ´settings´ option would keep the module smaller.",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "created_at": "2026-03-24T17:30:54Z",
+   "diff_hunk": "@@ -180,6 +182,190 @@ in\n                 '';\n               };\n \n+              dns = {\n+                disable = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Completely disable NetBird DNS features.\";\n+                };\n+                extraLabels = mkOption {\n+                  type = listOf str;\n+                  default = [ ];\n+                  example = [ \"myserver=10.0.0.5\" ];\n+                  description = \"Extra DNS labels for peer resolution (format: hostname=ip).\";\n+                };\n+                routeInterval = mkOption {\n+                  type = nullOr ints.positive;\n+                  default = null;\n+                  description = \"DNS route update interval in milliseconds.\";\n+                };\n+              };\n+\n+              firewall.disableNetbird = mkOption {\n+                type = bool;\n+                default = false;\n+                description = \"Disable NetBird's built-in firewall rules.\";\n+              };\n+\n+              routing = {\n+                disableClientRoutes = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Don't accept routes advertised by peers.\";\n+                };\n+                disableServerRoutes = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Don't advertise routes to peers.\";\n+                };\n+                blockLanAccess = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Block access to local LAN from NetBird network.\";\n+                };\n+                blockInbound = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Block all inbound connections from NetBird peers.\";\n+                };\n+              };\n+\n+              externalIpMap = mkOption {\n+                type = nullOr str;\n+                default = null;\n+                example = \"192.168.1.100/32->203.0.113.50/32\";\n+                description = \"Map external IPs for NAT traversal.\";\n+              };\n+\n+              mtu = mkOption {\n+                type = nullOr ints.positive;\n+                default = null;\n+                example = 1280;\n+                description = \"Custom MTU for the WireGuard interface.\";\n+              };\n+\n+              interfaceBlacklist = mkOption {\n+                type = listOf str;\n+                default = [ ];\n+                example = [\n+                  \"docker0\"\n+                  \"br-*\"\n+                ];\n+                description = \"Network interfaces to exclude from routing.\";\n+              };\n+\n+              rosenpass = {\n+                enable = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Enable Rosenpass post-quantum key exchange.\";\n+                };\n+                permissive = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Allow connections with peers that don't support Rosenpass.\";\n+                };\n+              };\n+\n+              ssh = {\n+                enable = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Enable NetBird's built-in SSH server.\";\n+                };\n+                permitRoot = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Allow root SSH access via NetBird.\";\n+                };\n+                sftp.enable = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Enable SFTP subsystem.\";\n+                };\n+                portForwarding = {\n+                  local = mkOption {\n+                    type = bool;\n+                    default = false;\n+                    description = \"Enable local port forwarding.\";\n+                  };\n+                  remote = mkOption {\n+                    type = bool;\n+                    default = false;\n+                    description = \"Enable remote port forwarding.\";\n+                  };\n+                };\n+                disableAuth = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = ''\n+                    Disable SSH authentication.\n+\n+                    WARNING: This is a security risk. Only enable if you understand the implications.\n+                  '';\n+                };\n+                jwtCacheTtl = mkOption {\n+                  type = nullOr ints.positive;\n+                  default = null;\n+                  description = \"JWT cache TTL in seconds.\";\n+                };\n+              };\n+\n+              connection = {\n+                lazy = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Connect only when traffic is detected.\";\n+                };\n+                networkMonitor = mkOption {\n+                  type = bool;\n+                  default = true;\n+                  description = \"Enable network monitoring.\";\n+                };\n+                preSharedKey = mkOption {\n+                  type = nullOr path;\n+                  default = null;\n+                  description = \"Path to WireGuard preshared key file.\";\n+                };\n+              };\n+\n+              server = {\n+                managementUrl = mkOption {\n+                  type = nullOr str;\n+                  default = null;\n+                  example = \"https://management.example.com:443\";\n+                  description = \"Custom management server URL (self-hosted).\";\n+                };\n+                adminUrl = mkOption {\n+                  type = nullOr str;\n+                  default = null;\n+                  description = \"Custom admin panel URL.\";\n+                };\n+              };\n+\n+              hostname = mkOption {\n+                type = nullOr str;\n+                default = null;\n+                description = \"Custom hostname for this peer.\";\n+              };\n+\n+              debug.anonymizeLogs = mkOption {\n+                type = bool;\n+                default = false;\n+                description = \"Anonymize sensitive information in logs.\";\n+              };\n+\n+              extraEnvironment = mkOption {",
+   "id": 2983202842,
+   "line": 183,
+   "original_commit_id": "764c2fb63777722f9f0088c0213d1fd83af150dc",
+   "original_line": 358,
+   "original_position": 186,
+   "original_start_line": null,
+   "path": "nixos/modules/services/networking/netbird.nix",
+   "position": 4,
+   "pull_request_review_id": 4000991852,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-24T17:58:35Z",
+   "user": {
+    "id": 58092422,
+    "login": "PatrickDaG",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I feel like testing for the environment here is not really useful since it just tests the module options we have created instead of the interaction with the actual program that we want to test.",
+   "commit_id": "bd036e541728525f69eb6d9c59768daba70c2cbf",
+   "created_at": "2026-03-24T17:32:29Z",
+   "diff_hunk": "@@ -78,14 +105,35 @@\n           retry(check_success, retries)\n           return output\n \n-    instances = [\"netbird\", \"netbird-custom\"]\n+    instances = [\"netbird\", \"netbird-custom\", \"netbird-advanced\", \"netbird-withSsh\", \"netbird-selfhosted\"]\n \n     for name in instances:\n       node.wait_for_unit(f\"{name}.service\")\n       node.wait_for_file(f\"/var/run/{name}/sock\")\n \n     for name in instances:\n       wait_until_rcode(node, f\"{name} status |& grep -C20 Disconnected\", 0, retries=5)\n+\n+    # Verify environment variables are set correctly for advanced client",
+   "id": 2983212040,
+   "line": null,
+   "original_commit_id": "764c2fb63777722f9f0088c0213d1fd83af150dc",
+   "original_line": 117,
+   "original_position": 48,
+   "original_start_line": null,
+   "path": "nixos/tests/netbird/client.nix",
+   "position": 1,
+   "pull_request_review_id": 4000991852,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-24T17:58:35Z",
+   "user": {
+    "id": 58092422,
+    "login": "PatrickDaG",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Does this work? According to ´systemd.exec´ it should fail because the file will be accessed befor preStart runs?",
+   "commit_id": "bd036e541728525f69eb6d9c59768daba70c2cbf",
+   "created_at": "2026-03-24T17:45:26Z",
+   "diff_hunk": "@@ -0,0 +1,250 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  utils,\n+  ...\n+}:\n+\n+let\n+  inherit (lib)\n+    concatStringsSep\n+    getExe'\n+    mkEnableOption\n+    mkIf\n+    mkMerge\n+    mkOption\n+    mkPackageOption\n+    optionals\n+    ;\n+\n+  inherit (lib.types)\n+    bool\n+    listOf\n+    nullOr\n+    enum\n+    path\n+    port\n+    str\n+    ;\n+\n+  inherit (utils) escapeSystemdExecArgs;\n+\n+  cfg = config.services.netbird.server.relay;\n+  stateDir = \"/var/lib/netbird-relay\";\n+in\n+\n+{\n+  options.services.netbird.server.relay = {\n+    enable = mkEnableOption \"NetBird Relay Server\";\n+\n+    package = mkPackageOption pkgs \"netbird\" { };\n+\n+    port = mkOption {\n+      type = port;\n+      default = 33080;\n+      description = ''\n+        Port the relay server listens on.\n+        When behind nginx (enableNginx), this is the internal port that nginx proxies to.\n+      '';\n+    };\n+\n+    exposedAddress = mkOption {\n+      type = str;\n+      description = ''\n+        The public URL where clients can reach this relay server.\n+        This is advertised to clients via the management server.\n+      '';\n+      example = \"rels://relay.example.com:443\";\n+    };\n+\n+    authSecretFile = mkOption {\n+      type = path;\n+      description = ''\n+        Path to a file containing the relay authentication secret.\n+        The file should contain only the raw secret value.\n+        This must match the relaySecretFile configured in the management server.\n+      '';\n+    };\n+\n+    logLevel = mkOption {\n+      type = enum [\n+        \"panic\"\n+        \"fatal\"\n+        \"error\"\n+        \"warn\"\n+        \"info\"\n+        \"debug\"\n+        \"trace\"\n+      ];\n+      default = \"info\";\n+      description = \"Log level for the relay server.\";\n+    };\n+\n+    stun = {\n+      enable = mkOption {\n+        type = bool;\n+        default = true;\n+        description = ''\n+          Enable the embedded STUN server.\n+          This provides STUN functionality alongside the relay server.\n+        '';\n+      };\n+\n+      ports = mkOption {\n+        type = listOf port;\n+        default = [ 3478 ];\n+        description = \"UDP ports for the embedded STUN server.\";\n+      };\n+    };\n+\n+    openFirewall = mkOption {\n+      type = bool;\n+      default = false;\n+      description = ''\n+        Whether to open the relay and STUN ports in the firewall.\n+      '';\n+    };\n+\n+    enableNginx = mkEnableOption \"Nginx reverse-proxy for the relay server\";\n+\n+    domain = mkOption {\n+      type = nullOr str;\n+      default = null;\n+      description = \"Domain name for nginx virtual host configuration.\";\n+    };\n+\n+    extraOptions = mkOption {\n+      type = listOf str;\n+      default = [ ];\n+      description = ''\n+        Additional command-line options passed to the relay server.\n+        Use this for advanced settings like TLS configuration\n+        (e.g. `[\"--tls-cert-file\" \"/path/to/cert\" \"--tls-key-file\" \"/path/to/key\"]`).\n+      '';\n+    };\n+  };\n+\n+  config = mkIf cfg.enable (mkMerge [\n+    {\n+      assertions = [\n+        {\n+          assertion = cfg.enableNginx -> cfg.domain != null;\n+          message = \"domain must be set when enableNginx is true\";\n+        }\n+      ];\n+\n+      systemd.services.netbird-relay = {\n+        description = \"NetBird Relay Server\";\n+        documentation = [ \"https://docs.netbird.io/\" ];\n+\n+        after = [ \"network.target\" ];\n+        wantedBy = [ \"multi-user.target\" ];\n+        restartTriggers = [\n+          cfg.port\n+          cfg.logLevel\n+          cfg.exposedAddress\n+          cfg.stun.enable\n+        ];\n+\n+        serviceConfig = {\n+          # Secret handling: write EnvironmentFile in preStart from LoadCredential,\n+          # then ExecStart reads it. This avoids exposing the secret in /proc\n+          # and gives systemd proper process tracking (unlike a script wrapper).\n+          LoadCredential = [ \"auth-secret:${cfg.authSecretFile}\" ];\n+\n+          ExecStart = escapeSystemdExecArgs (\n+            [\n+              (getExe' cfg.package \"netbird-relay\")\n+              \"--listen-address\"\n+              \":${toString cfg.port}\"\n+              \"--exposed-address\"\n+              cfg.exposedAddress\n+              \"--log-level\"\n+              cfg.logLevel\n+              \"--log-file\"\n+              \"console\"\n+            ]\n+            ++ optionals cfg.stun.enable [\n+              \"--enable-stun\"\n+              \"--stun-ports\"\n+              (concatStringsSep \",\" (map toString cfg.stun.ports))\n+            ]\n+            ++ cfg.extraOptions\n+          );\n+\n+          Restart = \"always\";\n+          RuntimeDirectory = \"netbird-relay\";\n+          RuntimeDirectoryMode = \"0750\";\n+          StateDirectory = \"netbird-relay\";\n+          StateDirectoryMode = \"0750\";\n+          WorkingDirectory = stateDir;\n+          DynamicUser = true;\n+\n+          # hardening\n+          LockPersonality = true;\n+          MemoryDenyWriteExecute = true;\n+          NoNewPrivileges = true;\n+          PrivateMounts = true;\n+          PrivateTmp = true;\n+          ProtectClock = true;\n+          ProtectControlGroups = true;\n+          ProtectHome = true;\n+          ProtectHostname = true;\n+          ProtectKernelLogs = true;\n+          ProtectKernelModules = true;\n+          ProtectKernelTunables = true;\n+          ProtectSystem = \"strict\";\n+          RemoveIPC = true;\n+          RestrictNamespaces = true;\n+          RestrictRealtime = true;\n+          RestrictSUIDSGID = true;\n+\n+          # Relay may need to bind to privileged ports when not behind nginx\n+          AmbientCapabilities = [ \"CAP_NET_BIND_SERVICE\" ];\n+          CapabilityBoundingSet = [ \"CAP_NET_BIND_SERVICE\" ];\n+        };\n+\n+        # Inject the auth secret via EnvironmentFile.\n+        # LoadCredential makes the file available at $CREDENTIALS_DIRECTORY/auth-secret,\n+        # then preStart writes an EnvironmentFile that ExecStart picks up.\n+        # The relay binary reads NB_AUTH_SECRET from the environment via setFlagsFromEnvVars().\n+        preStart = ''\n+          umask 077\n+          echo \"NB_AUTH_SECRET=$(< \"$CREDENTIALS_DIRECTORY/auth-secret\")\" > \"$RUNTIME_DIRECTORY/env\"\n+        '';\n+\n+        stopIfChanged = false;\n+      };\n+\n+      systemd.services.netbird-relay.serviceConfig.EnvironmentFile = \"/run/netbird-relay/env\";",
+   "id": 2983290786,
+   "line": null,
+   "original_commit_id": "0c4cd0ef6ce5be23d2566fb4dc38cd66459c8473",
+   "original_line": 220,
+   "original_position": 220,
+   "original_start_line": null,
+   "path": "nixos/modules/services/networking/netbird/relay.nix",
+   "position": 1,
+   "pull_request_review_id": 4000991852,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-24T17:58:35Z",
+   "user": {
+    "id": 58092422,
+    "login": "PatrickDaG",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yeah, fair enough. I've trimmed the docs to remove sections that just listed individual options ",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "created_at": "2026-04-22T13:06:39Z",
+   "diff_hunk": "",
+   "id": 3124144993,
+   "in_reply_to_id": 2983181412,
+   "line": 1,
+   "original_commit_id": "764c2fb63777722f9f0088c0213d1fd83af150dc",
+   "original_line": 1,
+   "original_position": 1,
+   "original_start_line": null,
+   "path": "nixos/modules/services/networking/netbird.md",
+   "position": 1,
+   "pull_request_review_id": 4154877017,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "file",
+   "updated_at": "2026-04-22T13:06:39Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'venow replaced them with the existing extraEnvironment (freeform attrsOf str) for NB_* env vars and config (freeform JSON) for config.json overrides. Removed just under 200 lines in the process :) hope this is more RFC 42 compliant!",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "created_at": "2026-04-22T13:07:43Z",
+   "diff_hunk": "@@ -180,6 +182,190 @@ in\n                 '';\n               };\n \n+              dns = {\n+                disable = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Completely disable NetBird DNS features.\";\n+                };\n+                extraLabels = mkOption {\n+                  type = listOf str;\n+                  default = [ ];\n+                  example = [ \"myserver=10.0.0.5\" ];\n+                  description = \"Extra DNS labels for peer resolution (format: hostname=ip).\";\n+                };\n+                routeInterval = mkOption {\n+                  type = nullOr ints.positive;\n+                  default = null;\n+                  description = \"DNS route update interval in milliseconds.\";\n+                };\n+              };\n+\n+              firewall.disableNetbird = mkOption {\n+                type = bool;\n+                default = false;\n+                description = \"Disable NetBird's built-in firewall rules.\";\n+              };\n+\n+              routing = {\n+                disableClientRoutes = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Don't accept routes advertised by peers.\";\n+                };\n+                disableServerRoutes = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Don't advertise routes to peers.\";\n+                };\n+                blockLanAccess = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Block access to local LAN from NetBird network.\";\n+                };\n+                blockInbound = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Block all inbound connections from NetBird peers.\";\n+                };\n+              };\n+\n+              externalIpMap = mkOption {\n+                type = nullOr str;\n+                default = null;\n+                example = \"192.168.1.100/32->203.0.113.50/32\";\n+                description = \"Map external IPs for NAT traversal.\";\n+              };\n+\n+              mtu = mkOption {\n+                type = nullOr ints.positive;\n+                default = null;\n+                example = 1280;\n+                description = \"Custom MTU for the WireGuard interface.\";\n+              };\n+\n+              interfaceBlacklist = mkOption {\n+                type = listOf str;\n+                default = [ ];\n+                example = [\n+                  \"docker0\"\n+                  \"br-*\"\n+                ];\n+                description = \"Network interfaces to exclude from routing.\";\n+              };\n+\n+              rosenpass = {\n+                enable = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Enable Rosenpass post-quantum key exchange.\";\n+                };\n+                permissive = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Allow connections with peers that don't support Rosenpass.\";\n+                };\n+              };\n+\n+              ssh = {\n+                enable = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Enable NetBird's built-in SSH server.\";\n+                };\n+                permitRoot = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Allow root SSH access via NetBird.\";\n+                };\n+                sftp.enable = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Enable SFTP subsystem.\";\n+                };\n+                portForwarding = {\n+                  local = mkOption {\n+                    type = bool;\n+                    default = false;\n+                    description = \"Enable local port forwarding.\";\n+                  };\n+                  remote = mkOption {\n+                    type = bool;\n+                    default = false;\n+                    description = \"Enable remote port forwarding.\";\n+                  };\n+                };\n+                disableAuth = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = ''\n+                    Disable SSH authentication.\n+\n+                    WARNING: This is a security risk. Only enable if you understand the implications.\n+                  '';\n+                };\n+                jwtCacheTtl = mkOption {\n+                  type = nullOr ints.positive;\n+                  default = null;\n+                  description = \"JWT cache TTL in seconds.\";\n+                };\n+              };\n+\n+              connection = {\n+                lazy = mkOption {\n+                  type = bool;\n+                  default = false;\n+                  description = \"Connect only when traffic is detected.\";\n+                };\n+                networkMonitor = mkOption {\n+                  type = bool;\n+                  default = true;\n+                  description = \"Enable network monitoring.\";\n+                };\n+                preSharedKey = mkOption {\n+                  type = nullOr path;\n+                  default = null;\n+                  description = \"Path to WireGuard preshared key file.\";\n+                };\n+              };\n+\n+              server = {\n+                managementUrl = mkOption {\n+                  type = nullOr str;\n+                  default = null;\n+                  example = \"https://management.example.com:443\";\n+                  description = \"Custom management server URL (self-hosted).\";\n+                };\n+                adminUrl = mkOption {\n+                  type = nullOr str;\n+                  default = null;\n+                  description = \"Custom admin panel URL.\";\n+                };\n+              };\n+\n+              hostname = mkOption {\n+                type = nullOr str;\n+                default = null;\n+                description = \"Custom hostname for this peer.\";\n+              };\n+\n+              debug.anonymizeLogs = mkOption {\n+                type = bool;\n+                default = false;\n+                description = \"Anonymize sensitive information in logs.\";\n+              };\n+\n+              extraEnvironment = mkOption {",
+   "id": 3124151478,
+   "in_reply_to_id": 2983202842,
+   "line": 183,
+   "original_commit_id": "764c2fb63777722f9f0088c0213d1fd83af150dc",
+   "original_line": 358,
+   "original_position": 186,
+   "original_start_line": null,
+   "path": "nixos/modules/services/networking/netbird.nix",
+   "position": 4,
+   "pull_request_review_id": 4154884018,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-22T13:07:43Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've removed them along with the extra test clients. The test now checks core functionality (services start and reach 'Disconnected' state)",
+   "commit_id": "bd036e541728525f69eb6d9c59768daba70c2cbf",
+   "created_at": "2026-04-22T13:08:38Z",
+   "diff_hunk": "@@ -78,14 +105,35 @@\n           retry(check_success, retries)\n           return output\n \n-    instances = [\"netbird\", \"netbird-custom\"]\n+    instances = [\"netbird\", \"netbird-custom\", \"netbird-advanced\", \"netbird-withSsh\", \"netbird-selfhosted\"]\n \n     for name in instances:\n       node.wait_for_unit(f\"{name}.service\")\n       node.wait_for_file(f\"/var/run/{name}/sock\")\n \n     for name in instances:\n       wait_until_rcode(node, f\"{name} status |& grep -C20 Disconnected\", 0, retries=5)\n+\n+    # Verify environment variables are set correctly for advanced client",
+   "id": 3124157232,
+   "in_reply_to_id": 2983212040,
+   "line": null,
+   "original_commit_id": "764c2fb63777722f9f0088c0213d1fd83af150dc",
+   "original_line": 117,
+   "original_position": 48,
+   "original_start_line": null,
+   "path": "nixos/tests/netbird/client.nix",
+   "position": 1,
+   "pull_request_review_id": 4154889997,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-22T13:08:39Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yep, this is a bug. Fixed now and tested on my actual NetBird self-hosted instance. I found a fixed a couple of extra bugs which I've detailed in my comment below",
+   "commit_id": "bd036e541728525f69eb6d9c59768daba70c2cbf",
+   "created_at": "2026-04-22T13:09:42Z",
+   "diff_hunk": "@@ -0,0 +1,250 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  utils,\n+  ...\n+}:\n+\n+let\n+  inherit (lib)\n+    concatStringsSep\n+    getExe'\n+    mkEnableOption\n+    mkIf\n+    mkMerge\n+    mkOption\n+    mkPackageOption\n+    optionals\n+    ;\n+\n+  inherit (lib.types)\n+    bool\n+    listOf\n+    nullOr\n+    enum\n+    path\n+    port\n+    str\n+    ;\n+\n+  inherit (utils) escapeSystemdExecArgs;\n+\n+  cfg = config.services.netbird.server.relay;\n+  stateDir = \"/var/lib/netbird-relay\";\n+in\n+\n+{\n+  options.services.netbird.server.relay = {\n+    enable = mkEnableOption \"NetBird Relay Server\";\n+\n+    package = mkPackageOption pkgs \"netbird\" { };\n+\n+    port = mkOption {\n+      type = port;\n+      default = 33080;\n+      description = ''\n+        Port the relay server listens on.\n+        When behind nginx (enableNginx), this is the internal port that nginx proxies to.\n+      '';\n+    };\n+\n+    exposedAddress = mkOption {\n+      type = str;\n+      description = ''\n+        The public URL where clients can reach this relay server.\n+        This is advertised to clients via the management server.\n+      '';\n+      example = \"rels://relay.example.com:443\";\n+    };\n+\n+    authSecretFile = mkOption {\n+      type = path;\n+      description = ''\n+        Path to a file containing the relay authentication secret.\n+        The file should contain only the raw secret value.\n+        This must match the relaySecretFile configured in the management server.\n+      '';\n+    };\n+\n+    logLevel = mkOption {\n+      type = enum [\n+        \"panic\"\n+        \"fatal\"\n+        \"error\"\n+        \"warn\"\n+        \"info\"\n+        \"debug\"\n+        \"trace\"\n+      ];\n+      default = \"info\";\n+      description = \"Log level for the relay server.\";\n+    };\n+\n+    stun = {\n+      enable = mkOption {\n+        type = bool;\n+        default = true;\n+        description = ''\n+          Enable the embedded STUN server.\n+          This provides STUN functionality alongside the relay server.\n+        '';\n+      };\n+\n+      ports = mkOption {\n+        type = listOf port;\n+        default = [ 3478 ];\n+        description = \"UDP ports for the embedded STUN server.\";\n+      };\n+    };\n+\n+    openFirewall = mkOption {\n+      type = bool;\n+      default = false;\n+      description = ''\n+        Whether to open the relay and STUN ports in the firewall.\n+      '';\n+    };\n+\n+    enableNginx = mkEnableOption \"Nginx reverse-proxy for the relay server\";\n+\n+    domain = mkOption {\n+      type = nullOr str;\n+      default = null;\n+      description = \"Domain name for nginx virtual host configuration.\";\n+    };\n+\n+    extraOptions = mkOption {\n+      type = listOf str;\n+      default = [ ];\n+      description = ''\n+        Additional command-line options passed to the relay server.\n+        Use this for advanced settings like TLS configuration\n+        (e.g. `[\"--tls-cert-file\" \"/path/to/cert\" \"--tls-key-file\" \"/path/to/key\"]`).\n+      '';\n+    };\n+  };\n+\n+  config = mkIf cfg.enable (mkMerge [\n+    {\n+      assertions = [\n+        {\n+          assertion = cfg.enableNginx -> cfg.domain != null;\n+          message = \"domain must be set when enableNginx is true\";\n+        }\n+      ];\n+\n+      systemd.services.netbird-relay = {\n+        description = \"NetBird Relay Server\";\n+        documentation = [ \"https://docs.netbird.io/\" ];\n+\n+        after = [ \"network.target\" ];\n+        wantedBy = [ \"multi-user.target\" ];\n+        restartTriggers = [\n+          cfg.port\n+          cfg.logLevel\n+          cfg.exposedAddress\n+          cfg.stun.enable\n+        ];\n+\n+        serviceConfig = {\n+          # Secret handling: write EnvironmentFile in preStart from LoadCredential,\n+          # then ExecStart reads it. This avoids exposing the secret in /proc\n+          # and gives systemd proper process tracking (unlike a script wrapper).\n+          LoadCredential = [ \"auth-secret:${cfg.authSecretFile}\" ];\n+\n+          ExecStart = escapeSystemdExecArgs (\n+            [\n+              (getExe' cfg.package \"netbird-relay\")\n+              \"--listen-address\"\n+              \":${toString cfg.port}\"\n+              \"--exposed-address\"\n+              cfg.exposedAddress\n+              \"--log-level\"\n+              cfg.logLevel\n+              \"--log-file\"\n+              \"console\"\n+            ]\n+            ++ optionals cfg.stun.enable [\n+              \"--enable-stun\"\n+              \"--stun-ports\"\n+              (concatStringsSep \",\" (map toString cfg.stun.ports))\n+            ]\n+            ++ cfg.extraOptions\n+          );\n+\n+          Restart = \"always\";\n+          RuntimeDirectory = \"netbird-relay\";\n+          RuntimeDirectoryMode = \"0750\";\n+          StateDirectory = \"netbird-relay\";\n+          StateDirectoryMode = \"0750\";\n+          WorkingDirectory = stateDir;\n+          DynamicUser = true;\n+\n+          # hardening\n+          LockPersonality = true;\n+          MemoryDenyWriteExecute = true;\n+          NoNewPrivileges = true;\n+          PrivateMounts = true;\n+          PrivateTmp = true;\n+          ProtectClock = true;\n+          ProtectControlGroups = true;\n+          ProtectHome = true;\n+          ProtectHostname = true;\n+          ProtectKernelLogs = true;\n+          ProtectKernelModules = true;\n+          ProtectKernelTunables = true;\n+          ProtectSystem = \"strict\";\n+          RemoveIPC = true;\n+          RestrictNamespaces = true;\n+          RestrictRealtime = true;\n+          RestrictSUIDSGID = true;\n+\n+          # Relay may need to bind to privileged ports when not behind nginx\n+          AmbientCapabilities = [ \"CAP_NET_BIND_SERVICE\" ];\n+          CapabilityBoundingSet = [ \"CAP_NET_BIND_SERVICE\" ];\n+        };\n+\n+        # Inject the auth secret via EnvironmentFile.\n+        # LoadCredential makes the file available at $CREDENTIALS_DIRECTORY/auth-secret,\n+        # then preStart writes an EnvironmentFile that ExecStart picks up.\n+        # The relay binary reads NB_AUTH_SECRET from the environment via setFlagsFromEnvVars().\n+        preStart = ''\n+          umask 077\n+          echo \"NB_AUTH_SECRET=$(< \"$CREDENTIALS_DIRECTORY/auth-secret\")\" > \"$RUNTIME_DIRECTORY/env\"\n+        '';\n+\n+        stopIfChanged = false;\n+      };\n+\n+      systemd.services.netbird-relay.serviceConfig.EnvironmentFile = \"/run/netbird-relay/env\";",
+   "id": 3124163985,
+   "in_reply_to_id": 2983290786,
+   "line": null,
+   "original_commit_id": "0c4cd0ef6ce5be23d2566fb4dc38cd66459c8473",
+   "original_line": 220,
+   "original_position": 220,
+   "original_start_line": null,
+   "path": "nixos/modules/services/networking/netbird/relay.nix",
+   "position": 1,
+   "pull_request_review_id": 4154897094,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-22T13:09:42Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Should we not remove this from the default if the builtin relay is now recommended? Enabling both by default seems wrong to me.",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "created_at": "2026-06-05T13:07:00Z",
+   "diff_hunk": "@@ -59,6 +63,12 @@ let\n       TimeBasedCredentials = false;\n     };",
+   "id": 3362815793,
+   "line": 64,
+   "original_commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "original_line": 64,
+   "original_position": 20,
+   "original_start_line": null,
+   "path": "nixos/modules/services/networking/netbird/management.nix",
+   "position": 20,
+   "pull_request_review_id": 4436470737,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-06-05T13:07:00Z",
+   "user": {
+    "id": 11312895,
+    "login": "b12f",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`\"very-insecure-key\"` is not valid base64 (it contains `-`). netbird base64-decodes this key (`util/crypt/crypt.go`, `NewFieldEncrypt`) and `log.Fatalf`s at startup, so any deployment that doesn't override the default already fails at runtime with a cryptic base64 error. Defaulting to `null` and asserting it is set turns that into a clear build-time error. (Also worth noting in the docs: netbird has no key-rotation command — the store is single-key AES-GCM — so the key must be chosen once with e.g. `openssl rand -base64 32` and kept stable.)\n\n```suggestion\n    DataStoreEncryptionKey = null;\n```\n\nand, in the `assertions` list:\n\n```nix\n{\n  assertion = managementConfig.DataStoreEncryptionKey != null;\n  message = ''\n    services.netbird.server: settings.DataStoreEncryptionKey must be set.\n    Generate a key with `openssl rand -base64 32` and provide it as a secret, e.g.\n    settings.DataStoreEncryptionKey._secret = \"/run/secrets/netbird-datastore-key\".\n  '';\n}\n```\n\n*Implemented in [`ad57cf1`](https://github.com/RafaelKr/nixpkgs/commit/ad57cf1a7ade81760a9caf2fc5825f5cd18855c4) — cherry-pick-ready.*",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "created_at": "2026-07-08T09:33:50Z",
+   "diff_hunk": "@@ -75,7 +85,17 @@ let\n     Datadir = \"${stateDir}/data\";\n     DataStoreEncryptionKey = \"very-insecure-key\";",
+   "id": 3542826318,
+   "line": 86,
+   "original_commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "original_line": 86,
+   "original_position": 33,
+   "original_start_line": null,
+   "path": "nixos/modules/services/networking/netbird/management.nix",
+   "position": 33,
+   "pull_request_review_id": 4652840172,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-08T09:56:27Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The embedded IdP's owner is seeded here with a `Password` field.\n\nThe embedded IdP reads the owner's bcrypt hash from `Owner.Hash`, not `Owner.Password`. `OwnerConfig` in `management/server/idp/embedded.go` has exactly three fields — `Email`, `Hash`, `Username` (no `Password`) — and the owner is only seeded when `c.Owner.Hash != \"\"`, so an `Owner.Password` key is silently dropped by the JSON decoder and the admin is never created (login fails). Renaming the key to `Hash` fixes it.\n\n**This is not version drift — `Password` has never existed.** The embedded IdP was introduced in netbird **v0.62.0** (`embedded.go` is absent in v0.61.0 and earlier), and `OwnerConfig` has used `Hash` from that first release through the current **v0.74.2**. The value the PR supplies is already a bcrypt hash (per the `htpasswd` comment), so only the key name is wrong.\n\nLikely origin of the name: the owner is mapped into a Dex `dex.Password{ Hash: []byte(c.Owner.Hash) }` where it's consumed — the Dex *type* is named `Password`, but its credential field is `Hash`. Easy to conflate the type name with the config key.\n\n```suggestion\n      Owner = {\n        Email = \"\";\n        Hash = \"\";\n        Username = \"\";\n      };\n```\n\n*Implemented in [`0e667c8`](https://github.com/RafaelKr/nixpkgs/commit/0e667c82c4fc873a1f1198b99c8ac74849e82637) (with the `server.md` fix below) — cherry-pick-ready.*",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "created_at": "2026-07-08T09:40:04Z",
+   "diff_hunk": "@@ -126,6 +145,30 @@ let\n         UseIDToken = false;\n       };\n     };\n+  }\n+  // optionalAttrs cfg.idp.embedded.enable {\n+    EmbeddedIdP = {\n+      Enabled = true;\n+      Issuer = \"https://${cfg.domain}/oauth2\";\n+      LocalAddress = \"127.0.0.1:${toString cfg.port}\";\n+      Storage = {\n+        Type = \"sqlite3\";\n+        Config.File = \"${stateDir}/idp.db\";\n+      };\n+      DashboardRedirectURIs = [\n+        \"https://${cfg.domain}/nb-auth\"\n+        \"https://${cfg.domain}/nb-silent-auth\"\n+      ];\n+      CLIRedirectURIs = [\n+        \"http://localhost:53000/\"\n+        \"http://localhost:54000/\"\n+      ];\n+      Owner = {\n+        Email = \"\";\n+        Password = \"\";\n+        Username = \"\";\n+      };",
+   "id": 3542864837,
+   "line": 170,
+   "original_commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "original_line": 170,
+   "original_position": 91,
+   "original_start_line": 166,
+   "path": "nixos/modules/services/networking/netbird/management.nix",
+   "position": 91,
+   "pull_request_review_id": 4652840172,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 166,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-08T09:56:27Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "As @b12f correctly noted, shipping a default TURN server alongside the recommended native relay is wrong — and it also drags in two placeholder secrets (the `Turns` plaintext password and `Secret`) that trip the world-readable warnings on every relay-only setup, including the relay example in this PR's own `server.md`:\n\n```\nThe TURNConfig.Secret is world-readable in the Nix Store, you should provide it as a _secret.\nA TURNConfig.Turns password is world-readable in the Nix Store, you should provide it as a _secret.\n```\n\nEmptying `Turns` and nulling `Secret` fixes both: coturn overrides `Turns` via `server.nix` (`mkDefault`), and relay/no-TURN setups get a clean config. With `Secret = null` the existing `isString` world-readable check is already correct, so **no warning-gating is needed**. (For `TimeBasedCredentials`, add a small assertion that `Secret` is set when it is enabled.) A fuller alternative is to drop the whole `TURNConfig` block from the defaults and populate it only under the coturn branch — cleaner separation, but more invasive. The `Stuns` list must stay: STUN is needed for direct P2P even with the relay (the relay ships an embedded STUN on `:3478`, which the default `Stuns` entry targets).\n\n```suggestion\n    TURNConfig = {\n      Turns = [ ];\n\n      CredentialsTTL = \"12h\";\n      Secret = null;\n      TimeBasedCredentials = false;\n    };\n```\n\n*Implemented in [`2a9d1aa`](https://github.com/RafaelKr/nixpkgs/commit/2a9d1aa21ce03182676a6ca6089f145f1c83ee4c) — cherry-pick-ready.*",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "created_at": "2026-07-08T09:42:50Z",
+   "diff_hunk": "@@ -59,6 +63,12 @@ let\n       TimeBasedCredentials = false;\n     };",
+   "id": 3542882754,
+   "line": 64,
+   "original_commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "original_line": 64,
+   "original_position": 20,
+   "original_start_line": 51,
+   "path": "nixos/modules/services/networking/netbird/management.nix",
+   "position": 1,
+   "pull_request_review_id": 4652840172,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 51,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-08T09:56:27Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Two things here:\n\n1. The key must be `Hash`, not `Password` — same bug as the derived block in `management.nix` (the value is already a bcrypt hash, per the comment). As written, copy-pasting this leaves the admin unable to log in.\n2. `mkpasswd` is the more idiomatic generator for a NixOS doc than `htpasswd`: it's a small standalone package (`htpasswd` pulls in `apacheHttpd`), prints just the hash (no `tr -d ':\\n'`), emits the native `$2b$` bcrypt variant, and can read the password from a prompt instead of `argv`. Its default cost is only 5, so pass `-R 10`. (`htpasswd`'s `$2y$` also works — Go's bcrypt gates on the major version only — so this is ergonomics, not a correctness fix.)\n\n```suggestion\n          # Generate with: mkpasswd -m bcrypt -R 10   (type the password when prompted)\n          Hash._secret = \"/run/secrets/admin-password-hash\";\n```\n\n*Implemented in [`0e667c8`](https://github.com/RafaelKr/nixpkgs/commit/0e667c82c4fc873a1f1198b99c8ac74849e82637) (same commit as the `management.nix` owner fix) — cherry-pick-ready.*",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "created_at": "2026-07-08T09:45:48Z",
+   "diff_hunk": "@@ -42,3 +43,172 @@ There are quite a few settings that need to be passed to Netbird for it to funct\n   };\n }\n ```\n+\n+### Modern Setup with Relay Server {#module-services-netbird-server-quickstart-relay}\n+\n+NetBird v0.28+ introduced a modern relay server that replaces Coturn with better performance and simpler configuration. The relay server includes an embedded STUN server.\n+\n+```nix\n+{\n+  services.netbird.server = {\n+    enable = true;\n+\n+    domain = \"netbird.example.selfhosted\";\n+\n+    enableNginx = true;\n+\n+    # Use the modern relay instead of Coturn\n+    useRelay = true;\n+    relayAuthSecretFile = \"/run/secrets/relay-auth\";\n+\n+    management = {\n+      oidcConfigEndpoint = \"https://sso.example.selfhosted/oauth2/openid/netbird/.well-known/openid-configuration\";\n+    };\n+  };\n+}\n+```\n+\n+## Relay vs Coturn {#module-services-netbird-server-relay-vs-coturn}\n+\n+| Feature | Relay Server | Coturn |\n+|---------|--------------|--------|\n+| Protocol | WebSocket/HTTP(S) | TURN (UDP/TCP) |\n+| Firewall | Single port (443) | Multiple ports + UDP range |\n+| Setup | Simple | More complex |\n+| Embedded STUN | Yes | No (separate config) |\n+| Performance | Optimized for NetBird | General-purpose |\n+\n+**Recommendation:** Use the relay server for new deployments. Only use Coturn if you have specific requirements for standard TURN protocol compatibility.\n+\n+## Embedded Identity Provider {#module-services-netbird-server-embedded-idp}\n+\n+NetBird supports an embedded identity provider for simplified deployments that don't require an external SSO. Enable it with `idp.embedded.enable`, then customize via the freeform `settings` option:\n+\n+```nix\n+{\n+  services.netbird.server.management = {\n+    enable = true;\n+    domain = \"netbird.example.com\";\n+    turnDomain = \"netbird.example.com\";\n+\n+    idp.embedded.enable = true;\n+\n+    settings = {\n+      ProviderConfig = {\n+        Owner = {\n+          Email = \"admin@example.com\";\n+          Username = \"admin\";\n+          # Generate with: htpasswd -bnBC 10 \"\" 'your-password' | tr -d ':\\n'\n+          Password._secret = \"/run/secrets/admin-password-hash\";",
+   "id": 3542901812,
+   "line": 102,
+   "original_commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "original_line": 102,
+   "original_position": 82,
+   "original_start_line": 101,
+   "path": "nixos/modules/services/networking/netbird/server.md",
+   "position": 82,
+   "pull_request_review_id": 4652840172,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 101,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-08T09:56:27Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Somehow the suggestion code-range in the preview is off here (should replace full 51-64). I don't know why this is. But it's correct in my commit, I you descide to cherry-pick it as is.",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "created_at": "2026-07-08T09:58:43Z",
+   "diff_hunk": "@@ -59,6 +63,12 @@ let\n       TimeBasedCredentials = false;\n     };",
+   "id": 3542983570,
+   "in_reply_to_id": 3542882754,
+   "line": 64,
+   "original_commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "original_line": 64,
+   "original_position": 20,
+   "original_start_line": 51,
+   "path": "nixos/modules/services/networking/netbird/management.nix",
+   "position": 1,
+   "pull_request_review_id": 4653022971,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 51,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-08T09:58:43Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "As stated above.",
+   "commit_id": "4ec64295d2f699817c335d4a8fec44d769fc7ff4",
+   "id": 3847657624,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-02-24T12:46:29Z",
+   "user": {
+    "id": 58092422,
+    "login": "PatrickDaG",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Hope I didn't come of too direct in the last message. Sorry about that. I should rather thank you that someone finally adopted the netbird module and will hopefully modernize it and add support for all the new things.\n\nThe multiple commits make it much more readable, thank you for that. I've added some small questions/suggestion, but all in all looks promising.\n\nOh, if you want you can of course take a look at my PR #354032, or have claude take a look, then I can at least feel like all the time spend on it wasn't completely wasted.",
+   "commit_id": "22fe74f0ab2c9e182e9245e7171c08b90ff3cadd",
+   "id": 4000991852,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-03-24T17:58:35Z",
+   "user": {
+    "id": 58092422,
+    "login": "PatrickDaG",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "764c2fb63777722f9f0088c0213d1fd83af150dc",
+   "id": 4154877017,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-22T13:06:39Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "764c2fb63777722f9f0088c0213d1fd83af150dc",
+   "id": 4154884018,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-22T13:07:43Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "764c2fb63777722f9f0088c0213d1fd83af150dc",
+   "id": 4154889997,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-22T13:08:38Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0c4cd0ef6ce5be23d2566fb4dc38cd66459c8473",
+   "id": 4154897094,
+   "state": "COMMENTED",
+   "submitted_at": "2026-04-22T13:09:42Z",
+   "user": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "id": 4436470737,
+   "state": "COMMENTED",
+   "submitted_at": "2026-06-05T13:06:59Z",
+   "user": {
+    "id": 11312895,
+    "login": "b12f",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks for putting this together — the native relay and embedded IdP are exactly what a self-hosted NetBird needs (no external IdP, no coturn), and it's great to have server-side tests to go with them. I've been running this module for my small home-network since last weekend, rebased onto `release-26.05` and with netbird bumped to 0.74.2; the module works unchanged against that newer binary (management.json keys and CLI flags are unchanged from 0.69), which is a good forward-compat signal. The rebased branch is here: <https://github.com/RafaelKr/nixpkgs/tree/nixos-26.05-netbird> — each point below is already implemented as a commit there, so feel free to cherry-pick.\n\nA few things worth addressing before merge:\n\n- **Functional bug:** the embedded-IdP owner is seeded with an `Owner.Password` field, but netbird only reads `Owner.Hash` (bcrypt) — with `Password` the initial admin cannot log in. This is not version drift: the embedded IdP was introduced in netbird v0.62.0, and its `OwnerConfig` has had `Hash` (never `Password`) from that first release through the current v0.74.2. Same key in the `server.md` example.\n- **Invalid default secret:** `DataStoreEncryptionKey` defaults to `\"very-insecure-key\"`, which is not valid base64 — netbird base64-decodes it and `log.Fatalf`s on startup, so any deployment that doesn't override it already fails at runtime. Better to require it (default `null` + assertion), turning that runtime crash into a clear build-time error.\n- **Redundant default TURN:** the defaults ship a TURN server plus secret, enabled alongside the now-recommended native relay. @b12f already flagged this (https://github.com/NixOS/nixpkgs/pull/487367#discussion_r3362815793). Emptying `TURNConfig.Turns` and nulling `TURNConfig.Secret` gives relay/no-TURN setups a clean config; coturn is unaffected (it overrides `Turns` via `server.nix`). Note the `Stuns` list should **stay** — STUN is needed for direct P2P even with the relay (the relay ships an embedded STUN on `:3478`, which the default `Stuns` entry targets); only `Turns` is relay-redundant.\n\nNothing blocking beyond the owner-field bug; the rest is security/UX hardening of the defaults.",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "id": 4652840172,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-07-08T09:56:27Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "a10f5d699fde342496551afd5558874a6602ff5d",
+   "id": 4653022971,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-08T09:58:43Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "148bf226d5e58bd75bf5e7b26eca0fc5789e9654",
+   "commit_url": "https://api.github.com/repos/RafaelKr/nixpkgs/commits/148bf226d5e58bd75bf5e7b26eca0fc5789e9654",
+   "created_at": "2026-07-07T14:10:22Z",
+   "event": "referenced",
+   "id": 27668059154
+  },
+  {
+   "actor": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "2fce1f1ca645234b05f1112715b1a2e341850c22",
+   "commit_url": "https://api.github.com/repos/RafaelKr/nixpkgs/commits/2fce1f1ca645234b05f1112715b1a2e341850c22",
+   "created_at": "2026-07-07T14:41:35Z",
+   "event": "referenced",
+   "id": 27669585678
+  },
+  {
+   "actor": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "27d8e0f2b9accce6de055c7dcbf0a0e519c4bf51",
+   "commit_url": "https://api.github.com/repos/RafaelKr/nixpkgs/commits/27d8e0f2b9accce6de055c7dcbf0a0e519c4bf51",
+   "created_at": "2026-07-07T14:41:35Z",
+   "event": "referenced",
+   "id": 27669585766
+  },
+  {
+   "actor": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "ad1891a1526ed7d2bed7b96c25ec27e0aaf39711",
+   "commit_url": "https://api.github.com/repos/RafaelKr/nixpkgs/commits/ad1891a1526ed7d2bed7b96c25ec27e0aaf39711",
+   "created_at": "2026-07-08T06:51:44Z",
+   "event": "referenced",
+   "id": 27701312474
+  },
+  {
+   "actor": {
+    "id": 61762328,
+    "login": "shuuri-labs",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-08T10:36:49Z",
+   "event": "closed",
+   "id": 27710411912,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

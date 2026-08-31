@@ -1,0 +1,993 @@
+{
+ "comments": [
+  {
+   "body": "The short answer is no.",
+   "created_at": "2017-03-26T09:00:00Z",
+   "id": 289267403,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 40,
+    "-1": 104,
+    "confused": 49,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 7,
+    "rocket": 0,
+    "total_count": 200
+   },
+   "updated_at": "2017-03-26T09:00:00Z",
+   "user": {
+    "id": 41977,
+    "login": "joachifm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Do enough people want to replace systemd with another init system in the near future?\r\nThe near future means 2~5 years.\r\n\r\nWhether they have time or will to replace it is another story.\r\n\r\nIdeally, an init system properly integrated into Nix would be preferable.",
+   "created_at": "2017-03-26T09:17:51Z",
+   "id": 289268229,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 70,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 70
+   },
+   "updated_at": "2017-03-26T09:20:01Z",
+   "user": {
+    "id": 748856,
+    "login": "crocket",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "There's a recent [ML thread](http://lists.science.uu.nl/pipermail/nix-dev/2017-March/023113.html) &ndash;  it *seems* that a group of people wants to take action in that direction.",
+   "created_at": "2017-03-26T09:20:28Z",
+   "id": 289268347,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-26T09:20:28Z",
+   "user": {
+    "id": 1785925,
+    "login": "vcunat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The more interesting question is whether a PR adding support for different backends would be accepted, since there are also costs associated with maintaining these additional backends. \r\n\r\nI don't think it's a smart move to expand the scope of the project, since there are a lot of other issues still open. \r\n\r\n@crocket I like some other init systems better than systemd, but at the same time do I see that systemd is good enough.\r\n\r\nIf an entity wants to commit development resources, then by all means do it. I might even use it, but I don't see init systems as a large differentiator to overall system performance (usability or otherwise). ",
+   "created_at": "2017-03-26T09:21:56Z",
+   "id": 289268404,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 9,
+    "-1": 8,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 17
+   },
+   "updated_at": "2017-03-26T09:21:56Z",
+   "user": {
+    "id": 16732294,
+    "login": "0xABAB",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@0xABAB Although it does the job at the moment, it carries a big risk of RedHat vendor lock-ins that will cost a lot in the long term. I might feel forced to use *BSD in the long term if vendor lock-ins abounded in linux distros in the future.\r\n\r\n@vcunat Yes, I read that. I wanted to know whether a similar sentiment is shared by enough people that replacing systemd with another init system in the near future will be politically possible. It makes sense to make efforts to do something only if it is politically possible.\r\n\r\nIf it was politically possible and demanded, then I'd have more confidence in migrating toward NixOS.",
+   "created_at": "2017-03-26T09:22:08Z",
+   "id": 289268418,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 14,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 14
+   },
+   "updated_at": "2017-03-26T09:27:43Z",
+   "user": {
+    "id": 748856,
+    "login": "crocket",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't know.  I haven't seen that topic seriously discussed lately, except for that thread.",
+   "created_at": "2017-03-26T09:25:43Z",
+   "id": 289268542,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 12,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 14
+   },
+   "updated_at": "2017-03-26T09:25:43Z",
+   "user": {
+    "id": 1785925,
+    "login": "vcunat",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@crocket vendor lock-in is only a problem to entitities who do not understand software. Politically, I would like to rip out systemd too, if that was the question. \r\n\r\nIt's not as if systemd is obfuscated or completely undocumented. Additionally, I don't believe it's the case that RedHat has a proprietary version of systemd which works a lot better than the open-source version. So, if it's good enough for RedHat's customers, then it's good enough for me. ",
+   "created_at": "2017-03-26T09:33:28Z",
+   "id": 289268871,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 14,
+    "-1": 11,
+    "confused": 1,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 26
+   },
+   "updated_at": "2017-03-26T09:33:28Z",
+   "user": {
+    "id": 16732294,
+    "login": "0xABAB",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Closing, as I belive the question has been answered, and I feel like the discussion is heading down an all too familiar path ... @crocket you may want to check out guixsd if systemd is a blocker; otherwise I think there's no way around writing some code yourself at this point (see runix, not-os, &c for inspiration).",
+   "created_at": "2017-03-26T10:46:06Z",
+   "id": 289271989,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 20,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 23
+   },
+   "updated_at": "2017-03-26T10:46:06Z",
+   "user": {
+    "id": 41977,
+    "login": "joachifm",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "In some sense if you learn to use NixOS, migrating to not-OS or whatever spin-off without systemd there will be will be relatively cheap.\r\n\r\nThe core boot scripts are cheap to write manually, so you don't need that part to be accepted by larger community; the reason you want a larger community is for packages and services — NixPkgs is usable on Linux anyway, and NixOS supports exporting services as systemd-independent runner scripts.\r\n\r\nYou can look at\r\nhttps://github.com/7c6f434c/7c6f434c-configurations/blob/master/init-less-system/generic/tools.nix#L373\r\nThis is a couple of helper functions I use to build a configuration on my notebook. Some systemd features actively break things I consider basic functionality, so I run some busybox scripts instead of an init system; the code I link allows me to reuse the parts of NixOS that I like without paying the cost of the parts I don't.\r\n\r\nWhat I want to say is: even if you fail to convince people to merge changes into NixOS, the truly unmergeable part will be small and maintainable by a minimal team, and the large politically-neutral part of work can be shared between communities.",
+   "created_at": "2017-03-26T11:50:06Z",
+   "id": 289277423,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 23,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 8,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 31
+   },
+   "updated_at": "2017-03-26T11:50:06Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't think anyone would be really opposed to having a service abstraction layer and that many would welcome it as long as it actually implemented cleanly :)",
+   "created_at": "2017-03-26T12:10:00Z",
+   "id": 289279066,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 23,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 19,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 42
+   },
+   "updated_at": "2017-03-26T12:10:00Z",
+   "user": {
+    "id": 1447245,
+    "login": "globin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I like some other init systems better than systemd\r\n\r\n@0xABAB I'm just curious of which init systems you prefer to systemd.\r\n\r\n> even if you fail to convince people to merge changes into NixOS, the truly unmergeable part will be small and maintainable by a minimal team\r\n\r\n@7c6f434c It is economically infeasible for me to head a development effort. I'm not a developer.\r\n\r\nI just wanted to know whether NixOS will accept replacement of systemd. It seems that the NixOS core team would allow replacement of systemd if a sufficiently large amount of manpower was directed toward it. So, I surmise there is a tangible possibility that NixOS will replace systemd in the foreseeable future. The possibility may or may not materialize. That's all I wanted to know for now.\r\n\r\n> I don't think anyone would be really opposed to having a service abstraction layer and that many would welcome it as long as it actually implemented cleanly :)\r\n\r\n@globin systemd and OpenRC have different assumptions and different capabilities. It would be difficult to write a service abstraction layer that wraps around both systemd and OpenRC. I think writing a new init system for NixOS or just adopting any other simple init system might be cheaper. Or, just fork OpenRC, and use it in NixOS.",
+   "created_at": "2017-03-26T12:17:36Z",
+   "id": 289279476,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-26T12:36:08Z",
+   "user": {
+    "id": 748856,
+    "login": "crocket",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't think we'd want to *replace* systemd, only abstract our services to a level where we can switch init systems quite easily.",
+   "created_at": "2017-03-26T12:46:23Z",
+   "id": 289280920,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 49,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 3,
+    "rocket": 0,
+    "total_count": 52
+   },
+   "updated_at": "2017-03-26T12:46:23Z",
+   "user": {
+    "id": 1447245,
+    "login": "globin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@crocket well, there are some such developments anyway, you could look at notOS keeping in mind that taking single services from NixOS is feasible. I think non-systemd NixPkgs-based system is or will be soon feasible for a user with skills in medium-complexity system administration; I expect that doing anything non-standard with NixOS is hard without these skills.\r\n\r\n@globin or we can get one more `enableParallelBuild` story… (I hope we won't — maybe we will even fix the `enableParallelBuild` one eventually)",
+   "created_at": "2017-03-26T13:07:55Z",
+   "id": 289282227,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-26T13:07:55Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> skills in medium-complexity system administration\r\n\r\n@7c6f434c Can you define this?\r\nAlso, even if doing non-standard things was possible, it could continually cost a lot of time.",
+   "created_at": "2017-03-26T13:27:08Z",
+   "id": 289284469,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-26T13:35:59Z",
+   "user": {
+    "id": 748856,
+    "login": "crocket",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Always hard to define such things… Well, configuring a Nix-based anything is writing simple scripts in a domain-specific language not used anywhere else, so I guess if you can comfortably use `man bash` as reference (you may still prefer some other source, of course), if «does any log in `/var/log/` mention the config file you want to use» is a thing that you check without thinking too much about «how», such things…",
+   "created_at": "2017-03-26T13:37:01Z",
+   "id": 289285080,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-26T13:37:01Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That's not too difficult. When I said I was not a programmer, I meant I was no longer a programmer. I used to be a web programmer, and I also used to be a hobbyist system administrator who used to run a Slackware(which was a bad experience) linux router and submitted dozens of packages to AUR and SlackBuilds(Slackware's manual dependency resolution takes too much time!!). I have used linux for almost 7 years.\r\n\r\nI have some competence in debian, ubuntu, docker, and FreeBSD. I started dabbling with FreeBSD again in a virtual machine after deciding to replace systemd over years.\r\nI know how to write Haskell at a beginner/intermediate level.\r\n\r\nAfter changing my career, my work doesn't involve programming or system administration at all, but I still do some programming and maintenance when I need to for system maintenance.\r\n\r\nIf that was your definition of medium-complexity system administration, I would qualify as one. Still, I have obligations to fulfill, and I can no longer justify pouring long uninterrupted blocks of time into system maintenance for more than a few days per month. I should work to eat.\r\n\r\nI'm not a system administrator in the sense that I can no longer be a dedicated system administrator of medium-complexity for any meaningfully long periods of time.\r\n\r\nIf changing the init system didn't take too much time in the near future, I could try it.",
+   "created_at": "2017-03-26T13:47:09Z",
+   "id": 289285659,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2017-03-26T14:06:07Z",
+   "user": {
+    "id": 748856,
+    "login": "crocket",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "You definitely have the qualification to use and to meaningfully \ncontribute (there are many one-off things requiring an hour or so in all\nthe Nix* projects…), but I agree it is a good idea for you to check \ncarefully which of the similar projects would take less effort for you\nto start using.\n\n\n\n",
+   "created_at": "2017-03-26T14:06:26Z",
+   "id": 289286780,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-26T14:06:26Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Can you recommend a potential approach to obtaining a non-systemd NixPkgs-based system without spending too much time in the near future? I have yet to learn Nix and NixOS, so I may not understand.\r\n\r\nI just looked in `/usr/share/systemd/system` on my ArchLinux system, and I was scared by hundreds of init scripts in it.\r\nPorting them manually alone would be a huge load of work. Anything that doesn't involve such a huge load of work is welcome.\r\n\r\nAre there Instructions like http://systemd-free.org/migrate.php or http://systemd-free.org/install.php?",
+   "created_at": "2017-03-26T14:20:53Z",
+   "id": 289287521,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-26T14:39:29Z",
+   "user": {
+    "id": 748856,
+    "login": "crocket",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I should try Not-OS before recommending or not recommending it, I guess…\n\nI would recommend maybe just using Nix-on-random-Linux to get some familiarity first anyway…\n\nIf you can quickly write a bootscript (boot/mount/switch_root) for your system, trying something out can be done quickly, but otherwise I'd need to check out the project before recommending anything…\n\n\n\n",
+   "created_at": "2017-03-26T15:51:03Z",
+   "id": 289292790,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-26T15:51:03Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@7c6f434c https://github.com/cleverca22/not-os says\r\n\r\n> An operating system generator, based on NixOS, that, given a config, outputs a small (47 MB), read-only squashfs for a runit-based operating system, with support for iPXE and signed boot.\r\n\r\nThus, it is not for a desktop computer. RedHat is giving us an up-hill battle.",
+   "created_at": "2017-03-27T06:28:17Z",
+   "id": 289364757,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 1,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2017-03-27T06:28:17Z",
+   "user": {
+    "id": 748856,
+    "login": "crocket",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Well, maybe if you skip the image → squashfs step… Will look at it at some point.",
+   "created_at": "2017-03-27T08:38:11Z",
+   "id": 289389281,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2017-03-27T08:38:11Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Thus, it is not for a desktop computer. RedHat is giving us an up-hill battle.\r\n\r\nPrecisely. They have also been both the major funders and adopters of systemd and other software stack solutions.\r\n\r\nIt is being increasingly difficult to avoid any of the larger corporations. Building another company/corporation will not change this but lead to similar problems.\r\n\r\nI'd wish it were possible to all have distributed computer systems without being tied to any individual company per se. There are some who try to remain independent - slackware, gentoo. Others are following what red hat gives them.",
+   "created_at": "2017-08-01T02:19:55Z",
+   "id": 319248951,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 8,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 8
+   },
+   "updated_at": "2017-08-01T02:20:25Z",
+   "user": {
+    "id": 10137,
+    "login": "ghost",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I moved to gentoo a few months ago. I am grateful for freedom and customization options it gives me.",
+   "created_at": "2017-08-01T03:14:57Z",
+   "id": 319256098,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 35,
+    "-1": 9,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 12,
+    "hooray": 11,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 67
+   },
+   "updated_at": "2017-08-01T03:15:09Z",
+   "user": {
+    "id": 748856,
+    "login": "crocket",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "An aside - looking for help with systemd on nixos: https://stackoverflow.com/questions/58243712/how-to-install-systemctl-service-on-nixos",
+   "created_at": "2019-10-04T23:04:16Z",
+   "id": 538586818,
+   "minimized": {
+    "reason": "resolved"
+   },
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2019-10-05T07:23:37Z",
+   "user": {
+    "id": 11139560,
+    "login": "ORESoftware",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> NixPkgs is usable on Linux anyway, and NixOS supports exporting services as systemd-independent runner scripts.\r\n\r\n@7c6f434c  So if I understand you, I could use NixPkgs on Slackware without any problem?",
+   "created_at": "2020-08-18T18:55:21Z",
+   "id": 675654461,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-08-18T18:55:21Z",
+   "user": {
+    "id": 9854,
+    "login": "brandonzylstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": ">> NixPkgs is usable on Linux anyway, and NixOS supports exporting services as systemd-independent runner scripts.\n>@7c6f434c  So if I understand you, I could use NixPkgs on Slackware without any problem?\n\nI mean, I have yet to see a large collection of packages that can be used without _any_ problem, and of course there is some amount of NixOS-like assumptions sneaking in (tip: many of these can be mimicked on Slackware without damaging Slackware in any way, just create some strategically placed symlinks), but a lot of packages from Nixpkgs can be used on any x86_64 or aarch64 Linux as-is with the same experience as on NixOS just by straight nix-build or nix-shell.\n\n\n\n",
+   "created_at": "2020-08-18T19:13:44Z",
+   "id": 675663006,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 1,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2020-08-18T19:13:44Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I moved to gentoo a few months ago. I am grateful for freedom and customization options it gives me.\r\n\r\n@crocket How do you do reproducibility on it? Darch (godarch.com)? Figure it is OK to ask you since this thread is closed :)",
+   "created_at": "2020-11-01T13:56:45Z",
+   "id": 720092646,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-11-01T13:56:45Z",
+   "user": {
+    "id": 2621663,
+    "login": "dm17",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Gentoo downloads dependencies into cache directory before building. Building is done in an offline network namespace.\r\nIf build process tries to access network, build fails.\r\nDependencies are tied to hashes so that they cannot be altered.\r\nSo, you are going to get the same input every time.\r\n\r\nBy the way, I recommend artix linux for people who want a simple linux distribution where you don't have to build.\r\nI may try artix linux with s6 init system because s6 looks interesting.",
+   "created_at": "2020-11-01T14:02:42Z",
+   "id": 720093424,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 4,
+    "-1": 1,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2020-11-01T14:07:42Z",
+   "user": {
+    "id": 748856,
+    "login": "crocket",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Gentoo downloads dependencies into cache directory before building. Building is done in an offline network namespace.\r\n> If build process tries to access network, build fails.\r\n> Dependencies are tied to hashes so that they cannot be altered.\r\n> So, you are going to get the same input every time.\r\n> \r\n> By the way, I recommend artix linux for people who want a simple linux distribution where you don't have to build.\r\n> I may try artix linux with s6 init system because s6 looks interesting.\r\n\r\n@crocket \r\nI mentioned Darch because like NixOS it should allow for easily reproducible installations. I'm not as concerned with builds failing as reproducible installations and making \"DevOps\" easy. It should also work with Artix and all sorts of distros.",
+   "created_at": "2020-11-01T14:16:12Z",
+   "id": 720095288,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2020-11-01T14:16:12Z",
+   "user": {
+    "id": 2621663,
+    "login": "dm17",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The issue here is that nixOS uses `systemd` in a non mission-critical manner. Generations ran fine on grub, and `systemd-boot` isn't really `systemd` the PID-0. At the end of https://github.com/bedrocklinux/bedrocklinux-userland/issues/221 there were a few examples of projects that managed to use a nixOS-like system, that didn't depend on systemd. Considering the strengths of `nix` this is likely the best way forward. ",
+   "created_at": "2021-06-18T11:28:01Z",
+   "id": 863969811,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 9,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 9
+   },
+   "updated_at": "2021-07-30T14:09:41Z",
+   "user": {
+    "id": 15856657,
+    "login": "appetrosyan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "So what is current status? Can we use nixOS without systemd?",
+   "created_at": "2021-09-07T17:14:23Z",
+   "id": 914481358,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 5,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2021-09-07T17:14:23Z",
+   "user": {
+    "id": 79555780,
+    "login": "0oAstro",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": ">So what is current status? Can we use nixOS without systemd?\n\nNo, NixOS mainline requires systemd and there are no signs of that changing,\n\n\n\n",
+   "created_at": "2021-09-07T19:25:02Z",
+   "id": 914566783,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 3,
+    "confused": 4,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 7
+   },
+   "updated_at": "2021-09-07T19:25:02Z",
+   "user": {
+    "id": 1891350,
+    "login": "7c6f434c",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Would NixOS governance be open to an effort to make this possible?",
+   "created_at": "2021-09-10T13:50:24Z",
+   "id": 916919743,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 7,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 7
+   },
+   "updated_at": "2021-09-10T13:50:24Z",
+   "user": {
+    "id": 10122937,
+    "login": "ketzacoatl",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "If you hate systemd that much and think it's some kind of monstorous crap, then you should use GNU's Guix system instead of NixOS because it uses the shepherd init system. Nix is directly integrated with systemd to boot up and manage daemons efficiently, and adding an extra init system will only make the developers cry as they struggle to implement a wrapper for them too.",
+   "created_at": "2021-12-13T03:02:44Z",
+   "id": 992064258,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 14,
+    "-1": 79,
+    "confused": 1,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 1,
+    "rocket": 0,
+    "total_count": 95
+   },
+   "updated_at": "2021-12-13T03:03:16Z",
+   "user": {
+    "id": 10137,
+    "login": "ghost",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@crocket mentioned gentoo, and I know this is an old issue, but it might be worth looking at this overlay:\n\nhttps://github.com/trofi/nix-guix-gentoo",
+   "created_at": "2024-02-13T02:08:28Z",
+   "id": 1940236176,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-02-13T02:08:28Z",
+   "user": {
+    "id": 69330490,
+    "login": "CamoCatX",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Sorry to necro an old thread, but those who are interested in this topic might want to look at Finix.\n\nhttps://github.com/finix-community/finix\nhttps://www.youtube.com/watch?v=FyCsArNibUM\n\nThere's also sixos:\n\nhttps://codeberg.org/amjoseph/sixos\nhttps://media.ccc.de/v/38c3-sixos-a-nix-os-without-systemd",
+   "created_at": "2025-10-21T09:28:46Z",
+   "id": 3425622184,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 5,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2025-10-21T09:28:46Z",
+   "user": {
+    "id": 660911,
+    "login": "jonhermansen",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/24346",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "I'd like to dive into NixOS right away, but systemd makes me hesitate.\r\nGentoo comes with OpenRC and presents systemd as **an option**.\r\nTo avoid systemd, I could install Nix on Gentoo or Void Linux, but that's not a proven track to me, yet.\r\n\r\nI'd like to know whether it doesn't involve too much work for a poor user without a lot of time to replace systemd with OpenRC or runit on NixOS.",
+  "closed_at": "2017-03-26T10:46:06Z",
+  "closed_by": {
+   "id": 41977,
+   "login": "joachifm",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 36,
+  "created_at": "2017-03-26T08:44:53Z",
+  "id": 217037375,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Requests for a specific question to be answered",
+    "id": 6314754,
+    "name": "0.kind: question"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 24346,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 123,
+   "-1": 3,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 10,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 136
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Can I replace systemd with OpenRC or runit on NixOS?",
+  "type": null,
+  "updated_at": "2025-10-21T09:28:47Z",
+  "user": {
+   "id": 748856,
+   "login": "crocket",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#24346",
+ "sources": [
+  "nixpkgs-replace-systemd"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 41977,
+    "login": "joachifm",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2017-03-26T10:46:06Z",
+   "event": "closed",
+   "id": 1015634377,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

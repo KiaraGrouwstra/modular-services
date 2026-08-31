@@ -1,0 +1,350 @@
+{
+ "comments": [
+  {
+   "body": "If I just install `ghostty` do I get the service files installed? If not, we need to change this PR so that they are, but allow people to opt out of the service file install.",
+   "created_at": "2025-11-13T20:24:51Z",
+   "id": 3529580523,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-11-13T20:24:51Z",
+   "user": {
+    "id": 740022,
+    "login": "jcollie",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I apologize for the distraction. After digging deeper, my issue is mostly with the way Home Manager manages the things. After forking and overriding the home-manager module for ghostty I was able to rewrite these configs without this PR patch in place.\r\n\r\nAgain, sorry for the time burden, but today I learned a lot more about how overlays and package builds and the whole system works..... versus the black magic approach I used before.",
+   "created_at": "2025-11-14T03:12:32Z",
+   "id": 3530630120,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-11-14T03:12:32Z",
+   "user": {
+    "id": 171574,
+    "login": "dcode",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/461350",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Moves the systemd service, dbus service, desktop entry, and metainfo files to their own dedicated outputs for better modularity and to follow nixpkgs conventions. I needed this to override the specified exe to use nixGL on home-manager.\n\n<!--\n^ Please summarise the changes you have done and explain why they are necessary here ^\n\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\nFor new packages please briefly describe the package or provide a link to its homepage.\n-->\n\n## Things done\n\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\n\n- Built on platform:\n  - [x] x86_64-linux\n  - [ ] aarch64-linux\n  - [ ] x86_64-darwin\n  - [ ] aarch64-darwin\n- Tested, as applicable:\n  - [ ] [NixOS tests] in [nixos/tests].\n  - [ ] [Package tests] at `passthru.tests`.\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\n- Nixpkgs Release Notes\n  - [ ] Package update: when the change is major or breaking.\n- NixOS Release Notes\n  - [ ] Module addition: when adding a new NixOS module.\n  - [ ] Module update: when the change is significant.\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\n\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\n\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\n\n---\n\nAdd a :+1: [reaction] to [pull requests you find important].\n\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\n",
+  "closed_at": "2025-11-14T03:12:32Z",
+  "closed_by": {
+   "id": 171574,
+   "login": "dcode",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 2,
+  "created_at": "2025-11-13T20:05:00Z",
+  "draft": false,
+  "id": 3622647965,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Linux.",
+    "id": 1955058054,
+    "name": "10.rebuild-linux: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR is the author's first one; please be gentle!",
+    "id": 5609547489,
+    "name": "12.first-time contribution"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 461350,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/461350.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/461350.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "ghostty: split xdg files into their own outputs",
+  "type": null,
+  "updated_at": "2025-11-14T03:12:33Z",
+  "user": {
+   "id": 171574,
+   "login": "dcode",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 18,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:38:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "0a7b2aac56d11ab371db3905db32760aab6b7361",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Moves the systemd service, dbus service, desktop entry, and metainfo files to their own dedicated outputs for better modularity and to follow nixpkgs conventions. I needed this to override the specified exe to use nixGL on home-manager.\n\n<!--\n^ Please summarise the changes you have done and explain why they are necessary here ^\n\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\nFor new packages please briefly describe the package or provide a link to its homepage.\n-->\n\n## Things done\n\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\n\n- Built on platform:\n  - [x] x86_64-linux\n  - [ ] aarch64-linux\n  - [ ] x86_64-darwin\n  - [ ] aarch64-darwin\n- Tested, as applicable:\n  - [ ] [NixOS tests] in [nixos/tests].\n  - [ ] [Package tests] at `passthru.tests`.\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\n- Nixpkgs Release Notes\n  - [ ] Package update: when the change is major or breaking.\n- NixOS Release Notes\n  - [ ] Module addition: when adding a new NixOS module.\n  - [ ] Module update: when the change is significant.\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\n\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\n\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\n\n---\n\nAdd a :+1: [reaction] to [pull requests you find important].\n\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\n",
+  "changed_files": 1,
+  "closed_at": "2025-11-14T03:12:32Z",
+  "comments": 2,
+  "commits": 1,
+  "created_at": "2025-11-13T20:05:00Z",
+  "deletions": 1,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/461350.diff",
+  "draft": false,
+  "head": {
+   "label": "dcode:ghostty-split-xdg",
+   "ref": "ghostty-split-xdg",
+   "repo": null,
+   "sha": "d6a56aaeca43d47e60c255a8d467ebc0d7e794c0",
+   "user": {
+    "id": 171574,
+    "login": "dcode",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3008202851,
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Linux.",
+    "id": 1955058054,
+    "name": "10.rebuild-linux: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR is the author's first one; please be gentle!",
+    "id": 5609547489,
+    "name": "12.first-time contribution"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "081e030997e458811f4b77c4eeca693cd3e8bb90",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 461350,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/461350.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 740022,
+    "login": "jcollie",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 22406910,
+    "login": "pluiedev",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "ghostty: split xdg files into their own outputs",
+  "updated_at": "2025-11-14T03:12:33Z",
+  "user": {
+   "id": 171574,
+   "login": "dcode",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#461350",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "I think so. I don't run NixOS, but all the files are installed into the nix store by default. In home-manager, the default behavior is they get linked into the environment (i.e. as a systemd user service). The difference is, with this patch, I can override all the of the various service files. I tried without it, but then I get configuration conflicts.\n\nWhether I override the files or not, they get installed into the nix store. Here's the find output (truncated for readability):\n\n```shell\nfind /nix/store/syf466iq87anh9sv88jbm49l47qfj8xb-ghostty-1.2.3/ \\\n  -name app-com.mitchellh.ghostty.service -o \\\n  -name com.mitchellh.ghostty.metainfo.xml -o \\\n  -name  com.mitchellh.ghostty.desktop -o \\\n  -name com.mitchellh.ghostty.service\n.../share/metainfo/com.mitchellh.ghostty.metainfo.xml\n.../share/kio/servicemenus/com.mitchellh.ghostty.desktop\n.../share/applications/com.mitchellh.ghostty.desktop\n.../share/systemd/user/app-com.mitchellh.ghostty.service\n.../share/dbus-1/services/com.mitchellh.ghostty.service\n```",
+   "commit_id": "d6a56aaeca43d47e60c255a8d467ebc0d7e794c0",
+   "id": 3461712945,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-13T21:13:30Z",
+   "user": {
+    "id": 171574,
+    "login": "dcode",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't see a need to merge this\n\nThese new outputs aren't \"Nixpkgs conventions\" that I've ever really seen around. I also don't know how they would help with \"modularity\" - splitting the service will still pull in the main bin output, for example\n\nI'm also sure there are other ways to make the binary use NixGL? I'm honestly not too sure how this would even help with it either",
+   "commit_id": "d6a56aaeca43d47e60c255a8d467ebc0d7e794c0",
+   "id": 3462282840,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-14T00:38:52Z",
+   "user": {
+    "id": 48872998,
+    "login": "getchoo",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 171574,
+    "login": "dcode",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-11-14T03:12:32Z",
+   "event": "closed",
+   "id": 20932068862,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

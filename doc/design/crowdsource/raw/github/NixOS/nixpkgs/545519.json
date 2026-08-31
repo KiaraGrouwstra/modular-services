@@ -1,0 +1,405 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/545519",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Reverts NixOS/nixpkgs#518860\r\n\r\nBroke seemingly most downstream module usages.",
+  "closed_at": "2026-07-25T07:29:36Z",
+  "closed_by": {
+   "id": 386765,
+   "login": "K900",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 0,
+  "created_at": "2026-07-25T07:19:39Z",
+  "draft": false,
+  "id": 4974741475,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Tooling for automated testing of packages and modules",
+    "id": 1339304902,
+    "name": "6.topic: testing"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 545519,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/545519.diff",
+   "merged_at": "2026-07-25T07:29:36Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/545519.patch"
+  },
+  "reactions": {
+   "+1": 2,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 2
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "Revert \"nixos/modular-services: add portable `process.environment`\"",
+  "type": null,
+  "updated_at": "2026-07-26T02:36:02Z",
+  "user": {
+   "id": 386765,
+   "login": "K900",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 6,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "9e3461d3ed9792395b1ebb8e99a9bb7f866cda7b",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Reverts NixOS/nixpkgs#518860\r\n\r\nBroke seemingly most downstream module usages.",
+  "changed_files": 8,
+  "closed_at": "2026-07-25T07:29:36Z",
+  "comments": 0,
+  "commits": 1,
+  "created_at": "2026-07-25T07:19:39Z",
+  "deletions": 184,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/545519.diff",
+  "draft": false,
+  "head": {
+   "label": "NixOS:revert-518860-modular-services-env-vars",
+   "ref": "revert-518860-modular-services-env-vars",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "ec69cf3f7b865bd6ed95451855518fb1d070d2dc",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "id": 4131530822,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Tooling for automated testing of packages and modules",
+    "id": 1339304902,
+    "name": "6.topic: testing"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "8b49416599e90fab16591ad08f9bee6a8cad1b7f",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-07-25T07:29:36Z",
+  "merged_by": {
+   "id": 386765,
+   "login": "K900",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 545519,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/545519.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 43863,
+    "login": "philiptaron",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 50398876,
+    "login": "hsjobeki",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 78693624,
+    "login": "llakala",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "Revert \"nixos/modular-services: add portable `process.environment`\"",
+  "updated_at": "2026-07-26T02:36:02Z",
+  "user": {
+   "id": 386765,
+   "login": "K900",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#545519",
+ "review_comments": [],
+ "reviews": [],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 386765,
+    "login": "K900",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "8b49416599e90fab16591ad08f9bee6a8cad1b7f",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/8b49416599e90fab16591ad08f9bee6a8cad1b7f",
+   "created_at": "2026-07-25T07:29:36Z",
+   "event": "merged",
+   "id": 28470309092
+  },
+  {
+   "actor": {
+    "id": 386765,
+    "login": "K900",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-25T07:29:36Z",
+   "event": "closed",
+   "id": 28470309146,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

@@ -1,0 +1,286 @@
+{
+ "comments": [
+  {
+   "body": "Interesting, it does work on my side. I'm also running 25.11. However, I do agree we should probably remove the `testing` tag.\n\n<img width=\"1527\" height=\"655\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b9438ed2-ee66-4962-aeb9-509063a435b3\" />",
+   "created_at": "2026-04-24T11:27:42Z",
+   "id": 4312790230,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-24T11:27:42Z",
+   "user": {
+    "id": 8405359,
+    "login": "BonusPlay",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> - Enable Beszel Agent:\n> ```nix\n>  services.beszel.agent = {\n>     enable = true;\n>     environment = {\n>       HUB_URL = \"http://127.0.0.1:8905\";\n>       TOKEN = \"[... fill in from the Beszel Hub ...]\";\n>       KEY = \"[... fill in from the Beszel Hub ...]\";\n>     };\n> ```\n\n@krystianhub have you enabled `smartmon` on the agent side?\nIt is opt-in, since it can have a negative impact on HDD idle time.\n\n[services.beszel.agent.smartmon.enable](https://search.nixos.org/options?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=services.beszel.agent&show=option:services.beszel.agent.smartmon.enable)",
+   "created_at": "2026-04-24T13:03:52Z",
+   "id": 4313404126,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-24T13:04:33Z",
+   "user": {
+    "id": 21687187,
+    "login": "arunoruto",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes I did",
+   "created_at": "2026-04-24T16:01:05Z",
+   "id": 4314530813,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-24T16:01:05Z",
+   "user": {
+    "id": 1358334,
+    "login": "krystianhub",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> However, I do agree we should probably remove the `testing` tag.\n\nWith all these recent issues, I will go ahead and try to make a PR which should fix the most obvious one. I could take out the `testing` tag.",
+   "created_at": "2026-04-24T20:42:01Z",
+   "id": 4316236041,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-24T20:42:01Z",
+   "user": {
+    "id": 21687187,
+    "login": "arunoruto",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I tried to build the package without the `testing` tag, but it ends up in this problem:\n```log\n...\nbeszel> Running phase: checkPhase\nbeszel> ok      github.com/henrygd/beszel/agent 0.963s\nbeszel> ?       github.com/henrygd/beszel/agent/battery [no test files]\nbeszel> ok      github.com/henrygd/beszel/agent/deltatracker    0.417s\nbeszel> ?       github.com/henrygd/beszel/agent/health  [no test files]\nbeszel> ok      github.com/henrygd/beszel/agent/utils   0.843s\nbeszel> ?       github.com/henrygd/beszel/internal/alerts       [no test files]\nbeszel> ok      github.com/henrygd/beszel/internal/cmd/agent    0.471s\nbeszel> ok      github.com/henrygd/beszel/internal/entities/smart       0.419s\nbeszel> ?       github.com/henrygd/beszel/internal/entities/systemd     [no test files]\nbeszel> ok      github.com/henrygd/beszel/internal/ghupdate     0.618s\nbeszel> # github.com/henrygd/beszel/internal/hub_test [github.com/henrygd/beszel/internal/hub.test]\nbeszel> internal/hub/api_test.go:29:27: undefined: beszelTests.GetHubWithUser\nbeszel> internal/hub/api_test.go:36:28: undefined: beszelTests.CreateUser\nbeszel> internal/hub/api_test.go:41:32: undefined: beszelTests.CreateUserWithRole\nbeszel> internal/hub/api_test.go:45:35: undefined: beszelTests.CreateUserWithRole\nbeszel> internal/hub/api_test.go:50:32: undefined: beszelTests.CreateSuperuser\nbeszel> internal/hub/api_test.go:56:29: undefined: beszelTests.CreateRecord\nbeszel> internal/hub/api_test.go:333:17: undefined: beszelTests.CreateRecord\nbeszel> internal/hub/api_test.go:535:17: undefined: beszelTests.CreateRecord\nbeszel> internal/hub/api_test.go:653:25: undefined: beszelTests.NewTestHub\nbeszel> internal/hub/api_test.go:716:25: undefined: beszelTests.NewTestHub\nbeszel> internal/hub/api_test.go:716:25: too many errors\nbeszel> FAIL    github.com/henrygd/beszel/internal/hub [build failed]\nbeszel> FAIL\n```\n\nI guess we need a different method of building the tests then for this to work...\n\n**EDIT**: nvm, the solution was easy... just adding `\"-tags=testing\"` to the `checkFlags` builds the package!",
+   "created_at": "2026-04-24T21:53:35Z",
+   "id": 4316639491,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-04-24T22:03:34Z",
+   "user": {
+    "id": 21687187,
+    "login": "arunoruto",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "~~this is still an issue for me on 26.05 I tried a variety of systemd permissioning and had no luck unsure if its the issue described here that the app isnt calling smart or if it doesnt have permissions. i turned on debug and see only this one smart reference~~\n\nmy problem was the hub was older and needed to be updated\n\n\n",
+   "created_at": "2026-07-15T16:16:56Z",
+   "id": 4982822178,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-16T11:48:26Z",
+   "user": {
+    "id": 64710,
+    "login": "mogorman",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/512864",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Nixpkgs version\n\n- Stable (25.11)\n\n### Describe the bug\n\nThe **beszel** package in nixpkgs is currently built with the **testing** build tag:\n\nhttps://github.com/NixOS/nixpkgs/blob/10e7ad5bbcb421fe07e3a4ad53a634b0cd57ffac/pkgs/by-name/be/beszel/package.nix#L56\n\nThis causes Beszel Hub to not collect any SMART monitoring data. In the UI, the \"SMART\" tab remains empty and no disks are shown.\n\nWith the **testing** tag enabled, the following code is compiled:\n\nhttps://github.com/henrygd/beszel/blob/c1c1cd1bcbeb234c5735bb02d527ff76b60e7c49/internal/hub/systems/systems_test_helpers.go#L18\n```\nfunc backgroundSmartFetchEnabled() bool { return false }\n```\n\nThis effectively disables SMART data collection entirely.\n\nWhen the **testing** tag is not present, a different implementation is used:\n\nhttps://github.com/henrygd/beszel/blob/c1c1cd1bcbeb234c5735bb02d527ff76b60e7c49/internal/hub/systems/systems_production.go#L9\n```\nfunc backgroundSmartFetchEnabled() bool { return true }\n```\n\nIn this case, the hub correctly collects SMART data from connected agents, and the \"SMART\" tab in the UI is populated.\n\nOverriding the package to remove the **testing** tag fixes the issue:\n\n```\n  services.beszel.hub = {\n    enable = true;\n    package = pkgs.beszel.overrideAttrs (prev: {\n      doCheck = false;\n      tags = [ ];\n    });\n  };\n```\n\n### Steps to reproduce\n\n- Enable Beszel Hub:\n```\n  services.beszel.hub = {\n    enable = true;\n    port = 8905;\n  };\n```\n\n- Go to localhost:8905 and connect new agent; note SSH key and token\n\n- Enable Beszel Agent:\n```\n services.beszel.agent = {\n    enable = true;\n    environment = {\n      HUB_URL = \"http://127.0.0.1:8905\";\n      TOKEN = \"[... fill in from the Beszel Hub ...]\";\n      KEY = \"[... fill in from the Beszel Hub ...]\";\n    };\n```\n\n- Go back to Beszel Hub, click on SMART data tab (http://localhost:8905/smart)\n- Wait a few minutes, observe no disks listed\n\n### Expected behaviour\n\nSMART data should show up automatically in the Beszel Hub from connected agents.\nAfter a few minutes, it should appear in the UI at: http://localhost:8905/smart\n\n### Screenshots\n\n_No response_\n\n### Relevant log output\n\n```console\n\n```\n\n### Additional context\n\nI initially suspected systemd permissions around smartctl, but ruled that out.\n\nTo investigate further, I instrumented the beszel binary with additional **fmt.Println** debugging to understand why no SMART data was being collected - even with **LOG_LEVEL=debug**, there were no relevant errors.\n\nThis led me to the following code path:\nhttps://github.com/henrygd/beszel/blob/c1c1cd1bcbeb234c5735bb02d527ff76b60e7c49/internal/hub/systems/system.go#L157\n```\n// Fetch and save SMART devices when system first comes online or at intervals\n\tif backgroundSmartFetchEnabled() && sys.detailsFetched.Load() {\n```\n\nThe condition evaluates to false because **backgroundSmartFetchEnabled()** returns false when the binary is built with the **testing** tag.\n\nAs a result, the SMART collector is never executed, which explains the complete absence of SMART data in the UI.\n\n### System metadata\n\n- system: `\"x86_64-linux\"`\n- host os: `Linux 6.12.82, NixOS, 25.11 (Xantusia), 25.11.20260419.e07580d`\n- multi-user?: `yes`\n- sandbox: `yes`\n- version: `nix-env (Nix) 2.31.4`\n- nixpkgs: `/nix/store/6db66vpld3nina2hjv4y4rdi67ckzs9j-source`\n\n### Notify maintainers\n\n@Bot-wxt1221 \n@arunoruto \n@BonusPlay \n\n---\n\n**Note for maintainers:** Please tag this issue in your pull request description. (i.e. `Resolves #ISSUE`.)\n\n\n### I assert that this issue is relevant for Nixpkgs\n\n- [x] I assert that this is a bug and not a support request.\n- [x] I assert that this is not a [duplicate of an existing issue](https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+label%3A%220.kind%3A+bug%22+-label%3A%226.topic%3A+darwin%22+-label%3A%226.topic%3A+nixos%22). \n- [x] I assert that I have read the [NixOS Code of Conduct](https://github.com/NixOS/.github/blob/master/CODE_OF_CONDUCT.md) and agree to abide by it.\n\n### Is this issue important to you?\n\nAdd a :+1: [reaction] to [issues you find important].\n\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\n[issues you find important]: https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 6,
+  "created_at": "2026-04-23T18:51:50Z",
+  "id": 4318138633,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Something is broken",
+    "id": 6314750,
+    "name": "0.kind: bug"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 512864,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 3,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 4
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "beszel: Beszel Hub doesn't collect S.M.A.R.T. data",
+  "type": null,
+  "updated_at": "2026-07-16T11:48:26Z",
+  "user": {
+   "id": 1358334,
+   "login": "krystianhub",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#512864",
+ "sources": [
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 71629732,
+    "login": "oynqr",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "81eaac45175b7986fbc60c76cb4e96813c1cbd8e",
+   "commit_url": "https://api.github.com/repos/oynqr/nixpkgs/commits/81eaac45175b7986fbc60c76cb4e96813c1cbd8e",
+   "created_at": "2026-04-29T17:53:32Z",
+   "event": "referenced",
+   "id": 25002315578
+  },
+  {
+   "actor": {
+    "id": 71629732,
+    "login": "oynqr",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "1caf72908f9157c57f31b0cded2eb0cab7fb545d",
+   "commit_url": "https://api.github.com/repos/oynqr/nixpkgs/commits/1caf72908f9157c57f31b0cded2eb0cab7fb545d",
+   "created_at": "2026-05-01T08:52:43Z",
+   "event": "referenced",
+   "id": 25066023049
+  },
+  {
+   "actor": {
+    "id": 71629732,
+    "login": "oynqr",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "ddb73eff079f80b88af214b708bc6a033f4502af",
+   "commit_url": "https://api.github.com/repos/oynqr/nixpkgs/commits/ddb73eff079f80b88af214b708bc6a033f4502af",
+   "created_at": "2026-05-07T05:36:56Z",
+   "event": "referenced",
+   "id": 25247228493
+  },
+  {
+   "actor": {
+    "id": 71629732,
+    "login": "oynqr",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "e5124d1555ca5a4b361c3f23ef140258191c57f6",
+   "commit_url": "https://api.github.com/repos/oynqr/nixpkgs/commits/e5124d1555ca5a4b361c3f23ef140258191c57f6",
+   "created_at": "2026-05-12T11:12:26Z",
+   "event": "referenced",
+   "id": 25426780241
+  },
+  {
+   "actor": {
+    "id": 261596211,
+    "login": "nixos-cuda-channel-updater[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   },
+   "commit_id": "5331563b402c756449e916f17542ff96bb128cfc",
+   "commit_url": "https://api.github.com/repos/nixos-cuda/nixpkgs/commits/5331563b402c756449e916f17542ff96bb128cfc",
+   "created_at": "2026-05-20T21:30:06Z",
+   "event": "referenced",
+   "id": 25778119791
+  }
+ ]
+}

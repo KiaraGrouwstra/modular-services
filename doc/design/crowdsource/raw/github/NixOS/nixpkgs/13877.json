@@ -1,0 +1,417 @@
+{
+ "comments": [
+  {
+   "body": "Awesome! Thank you.\n",
+   "created_at": "2016-03-14T10:04:46Z",
+   "id": 196234642,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2016-03-14T10:04:46Z",
+   "user": {
+    "id": 2179419,
+    "login": "jagajaga",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/13877",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "###### Things done:\n- [ ] Tested using sandboxing (`nix-build --option build-use-chroot true` or [nix.useChroot](http://nixos.org/nixos/manual/options.html#opt-nix.useChroot) on NixOS)\n- [ ] Built on platform(s): NixOS / OSX / Linux\n- [ ] Tested compilation of all pkgs that depend on this change using `nix-shell -p nox --run \"nox-review wip\"`\n- [ ] Tested execution of all binary files (usually in `./result/bin/`)\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/.github/CONTRIBUTING.md).\n\n---\n\n_Please note, that points are not mandatory, but rather desired._\n\nInitial package has been created. However, the configuration system is very modular (sites-enabled, sites-available, modules-enabled, etc) so the service configuration seems non-trivial. Would like some input. Have an initial service configuration here: https://gist.github.com/sheenobu/4d8b29895b7a419a4ec5\n",
+  "closed_at": "2016-03-14T10:04:51Z",
+  "closed_by": {
+   "id": 2179419,
+   "login": "jagajaga",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 1,
+  "created_at": "2016-03-13T07:38:38Z",
+  "draft": false,
+  "id": 140461559,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "eb6420",
+    "default": false,
+    "description": "This issue needs the person who filed it to respond",
+    "id": 84668464,
+    "name": "9.needs: reporter feedback"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 13877,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/13877.diff",
+   "merged_at": "2016-03-14T10:04:51Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/13877.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "freeradius: init at 3.0.11",
+  "type": null,
+  "updated_at": "2016-03-14T10:04:51Z",
+  "user": {
+   "id": 1443459,
+   "login": "sheenobu",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 41,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:38:34Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "11c486cd1965815acfff78e10527b3b2b83a3778",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "###### Things done:\n- [ ] Tested using sandboxing (`nix-build --option build-use-chroot true` or [nix.useChroot](http://nixos.org/nixos/manual/options.html#opt-nix.useChroot) on NixOS)\n- [ ] Built on platform(s): NixOS / OSX / Linux\n- [ ] Tested compilation of all pkgs that depend on this change using `nix-shell -p nox --run \"nox-review wip\"`\n- [ ] Tested execution of all binary files (usually in `./result/bin/`)\n- [ ] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/.github/CONTRIBUTING.md).\n\n---\n\n_Please note, that points are not mandatory, but rather desired._\n\nInitial package has been created. However, the configuration system is very modular (sites-enabled, sites-available, modules-enabled, etc) so the service configuration seems non-trivial. Would like some input. Have an initial service configuration here: https://gist.github.com/sheenobu/4d8b29895b7a419a4ec5\n",
+  "changed_files": 2,
+  "closed_at": "2016-03-14T10:04:51Z",
+  "comments": 1,
+  "commits": 1,
+  "created_at": "2016-03-13T07:38:38Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/13877.diff",
+  "draft": false,
+  "head": {
+   "label": "sheenobu:freeradius/init",
+   "ref": "freeradius/init",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2016-01-24T03:51:28Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "sheenobu/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/sheenobu/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 50271114,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/sheenobu/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/sheenobu/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 1443459,
+     "login": "sheenobu",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/sheenobu/nixpkgs/pulls{/number}",
+    "pushed_at": "2021-05-03T03:27:52Z",
+    "size": 1418531,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/sheenobu/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/sheenobu/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2021-04-10T08:55:30Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "0bae05dacd6a884ae8af5fe4b4bb4f92a8f0caf3",
+   "user": {
+    "id": 1443459,
+    "login": "sheenobu",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 62664594,
+  "labels": [
+   {
+    "color": "eb6420",
+    "default": false,
+    "description": "This issue needs the person who filed it to respond",
+    "id": 84668464,
+    "name": "9.needs: reporter feedback"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "a9cd600c3c1b5eec36eaa04cdc18d3e32bb0dce6",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2016-03-14T10:04:51Z",
+  "merged_by": {
+   "id": 2179419,
+   "login": "jagajaga",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 13877,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/13877.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 2,
+  "state": "closed",
+  "title": "freeradius: init at 3.0.11",
+  "updated_at": "2016-03-14T10:04:51Z",
+  "user": {
+   "id": 1443459,
+   "login": "sheenobu",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#13877",
+ "review_comments": [
+  {
+   "body": "Please omit pkg's name in the description.\n",
+   "commit_id": "0bae05dacd6a884ae8af5fe4b4bb4f92a8f0caf3",
+   "created_at": "2016-03-13T18:48:55Z",
+   "diff_hunk": "@@ -0,0 +1,39 @@\n+{ stdenv, fetchurl, autoreconfHook, talloc, openssl ? null }:\n+\n+## TODO: include ldap optionally\n+## TODO: include sqlite optionally\n+## TODO: include mysql optionally\n+\n+stdenv.mkDerivation rec {\n+  name = \"freeradius-${version}\";\n+  version = \"3.0.11\";\n+\n+  buildInputs = [\n+    autoreconfHook\n+    talloc\n+    openssl\n+  ];\n+\n+  configureFlags = [\n+     \"--sysconfdir=/etc\"\n+     \"--localstatedir=/var\"\n+  ];\n+\n+  installFlags = [\n+    \"sysconfdir=\\${out}/etc\"\n+    \"localstatedir=\\${TMPDIR}\"\n+   ];\n+\n+  src = fetchurl {\n+    url = \"ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${version}.tar.gz\";\n+    sha256 = \"0naxw9b060rbp4409904j6nr2zwl6wbjrbq1839xrwhmaf8p4yxr\";\n+  };\n+\n+  meta = with stdenv.lib; {\n+    homepage = http://freeradius.org/;\n+    description = \"FreeRADIUS is a modular, high performance free RADIUS suite\";",
+   "id": 55941743,
+   "line": null,
+   "original_commit_id": "6b1c8d9a135c15a57154aaa2255f84ff1277ce27",
+   "original_line": null,
+   "original_position": 34,
+   "original_start_line": null,
+   "path": "pkgs/servers/freeradius/default.nix",
+   "position": 1,
+   "pull_request_review_id": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2016-03-14T05:51:06Z",
+   "user": {
+    "id": 2179419,
+    "login": "jagajaga",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks. Amended the commit, then push -f'ed to my branch. Let me know if that isn't the preferred process.\n",
+   "commit_id": "0bae05dacd6a884ae8af5fe4b4bb4f92a8f0caf3",
+   "created_at": "2016-03-14T05:51:49Z",
+   "diff_hunk": "@@ -0,0 +1,39 @@\n+{ stdenv, fetchurl, autoreconfHook, talloc, openssl ? null }:\n+\n+## TODO: include ldap optionally\n+## TODO: include sqlite optionally\n+## TODO: include mysql optionally\n+\n+stdenv.mkDerivation rec {\n+  name = \"freeradius-${version}\";\n+  version = \"3.0.11\";\n+\n+  buildInputs = [\n+    autoreconfHook\n+    talloc\n+    openssl\n+  ];\n+\n+  configureFlags = [\n+     \"--sysconfdir=/etc\"\n+     \"--localstatedir=/var\"\n+  ];\n+\n+  installFlags = [\n+    \"sysconfdir=\\${out}/etc\"\n+    \"localstatedir=\\${TMPDIR}\"\n+   ];\n+\n+  src = fetchurl {\n+    url = \"ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${version}.tar.gz\";\n+    sha256 = \"0naxw9b060rbp4409904j6nr2zwl6wbjrbq1839xrwhmaf8p4yxr\";\n+  };\n+\n+  meta = with stdenv.lib; {\n+    homepage = http://freeradius.org/;\n+    description = \"FreeRADIUS is a modular, high performance free RADIUS suite\";",
+   "id": 55958554,
+   "line": null,
+   "original_commit_id": "6b1c8d9a135c15a57154aaa2255f84ff1277ce27",
+   "original_line": null,
+   "original_position": 34,
+   "original_start_line": null,
+   "path": "pkgs/servers/freeradius/default.nix",
+   "position": 1,
+   "pull_request_review_id": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2016-03-14T05:51:49Z",
+   "user": {
+    "id": 1443459,
+    "login": "sheenobu",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 2179419,
+    "login": "jagajaga",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "1c9b2ccdec5ea949851d1cab5cf612934479a9a7",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/1c9b2ccdec5ea949851d1cab5cf612934479a9a7",
+   "created_at": "2016-03-14T10:04:51Z",
+   "event": "referenced",
+   "id": 588459934
+  },
+  {
+   "actor": {
+    "id": 2179419,
+    "login": "jagajaga",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "1c9b2ccdec5ea949851d1cab5cf612934479a9a7",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/1c9b2ccdec5ea949851d1cab5cf612934479a9a7",
+   "created_at": "2016-03-14T10:04:51Z",
+   "event": "merged",
+   "id": 588459935
+  },
+  {
+   "actor": {
+    "id": 2179419,
+    "login": "jagajaga",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2016-03-14T10:04:51Z",
+   "event": "closed",
+   "id": 588459936,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

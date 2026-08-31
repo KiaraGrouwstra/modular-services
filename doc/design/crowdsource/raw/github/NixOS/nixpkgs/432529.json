@@ -1,0 +1,3061 @@
+{
+ "comments": [
+  {
+   "body": "Let me just second @roberth that this should absolutely leverage Modular Services (https://github.com/NixOS/nixpkgs/issues/428084). Modular services removes us from \"singleton\" hell making the interface / instance distinction much clearer.\r\n\r\n(In contrast, if you only have a single \"PostgreSQL\", for example, it is much harder to learn the difference between \"the PostgresSQL module interface\" (contract) an \"*a* PostgresSQL instance\", because all there is the \"*the* PostgresSQL instance\".)",
+   "created_at": "2025-08-22T15:09:07Z",
+   "id": 3214714886,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-22T15:09:07Z",
+   "user": {
+    "id": 1055245,
+    "login": "Ericson2314",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Let me just second @roberth that this should absolutely leverage Modular Services (#428084). Modular services removes us from \"singleton\" hell making the interface / instance distinction much clearer.\r\n> \r\n> (In contrast, if you only have a single \"PostgreSQL\", for example, it is much harder to learn the difference between \"the PostgresSQL module interface\" (contract) an \"_a_ PostgresSQL instance\", because all there is the \"_the_ PostgresSQL instance\".)\r\n\r\nHow would this work even, wouldn't this change a lot of the RFC as its implemented right now?",
+   "created_at": "2025-08-25T13:48:20Z",
+   "id": 3220361287,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-25T13:48:20Z",
+   "user": {
+    "id": 97130632,
+    "login": "nyabinary",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@Ericson2314 That's a good remark but TBH I'm not sure it should apply here. I don't see how having multiple instances of the same contract would be something we want. I feel (it's really a feeling) that we would actually want a singleton behavior for contracts.\r\n\r\nI suppose your worry is about having multiple similar instances of a same contract? A reverse proxy or secret contract would have different names, I assume we would agree on that, and thus the modular service implementation would apply for variations of a same contract, or maybe multiple versions. I still got the feeling in this case we would want to name the contracts with unique names, like `secrets-A` or `secrets-B`.",
+   "created_at": "2025-08-29T09:49:21Z",
+   "id": 3236440982,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-29T10:02:23Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "given @roberth mentioned the idea of combining them at #428084, perhaps they'd be in a better position to comment on how they envisioned it.",
+   "created_at": "2025-09-02T16:41:11Z",
+   "id": 3246064216,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-02T16:41:11Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ibizaman could you maybe rebase this PR (maybe even on a revision that might be cached)? it now suffers from #429953",
+   "created_at": "2025-12-06T21:38:26Z",
+   "id": 3621213949,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-12-06T21:38:26Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i feel like the dual link may be a necessary evil.\r\ni recall you mentioning you preferred to maybe go for a version closer to SelfHostBlocks' instead. maybe you could try a branch in that direction?\r\n",
+   "created_at": "2025-12-08T00:19:49Z",
+   "id": 3623900191,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-08T00:19:49Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm still grasping at straws a bit here, but if the design is stuck in a local optimum with the dual linking, maybe it's worth exploring potential larger changes to the design?\r\n\r\nMaybe the contract instances could be more prominent, reifying them as **`contracts.<type>.instances.<name>`**, and then either users (`configuration.nix`) or perhaps even services could create entries in there.\r\nIt may be possible to then let consumers create contract instances, and have a provider service automatically read and fill all of them (or according to some filter, etc).\r\n\r\n\"Writing to all instances\" is a recipe for infinite recursion if you try with `config.instances = mapAttrs ... ...;`, but you could set up option merging to affect all instances instead, or, nicer, a `deferredModule` like `contracts.<type>.allInstancesModule` that's always imported by the `instances.<name>` submodule.\r\nA provider can then use that `allInstancesModule` to do its thing inside each contract, filling out the `output` based on `name` and `input`. Maybe do all of that in a big `mkIf` if you want to control which provider gets which contract (in case you have multiple).\r\n\r\nThen, somewhat separately, the provider service can generate its own configurations off of the actual instance values.\r\n\r\nSince that approach largely automates the provider part from a user perspective, that seems like it might get rid of the dual link problem, but I can't really tell if I've overlooked something else at this point.\r\n",
+   "created_at": "2025-12-08T16:33:54Z",
+   "id": 3627897593,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-12-08T16:33:54Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> given @roberth mentioned the idea of combining them at #428084, perhaps they'd be in a better position to comment on how they envisioned it.\r\n\r\nI don't expect modular services to be unique somehow; more a matter of derisking the unknown unknowns.",
+   "created_at": "2025-12-08T16:35:42Z",
+   "id": 3627906614,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-12-08T16:35:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've also given the whole subject a thought, and concluded the whole thing could be a lot simpler, very much along the lines of what @Roberth proposed. \r\n\r\nWhat's really to standardise is each namespace and type of interface, not the mechanism. Because the mechanism is actually just global module options, and what we haven't formally settled is whether and how exactly certain behaviors should be communicated via e.g. `config.backup.<subtree>.<name>` (where `<subtree>` is currently to be `instances`, but maybe we can find something more concise and self-explanatory).\r\n\r\nSo maybe this is not required to be an RFC at all, and we could just start with a concrete use case, such as @lassulus did with secrets?",
+   "created_at": "2025-12-08T19:36:03Z",
+   "id": 3628704593,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-12-09T10:33:07Z",
+   "user": {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "There may well be value in forcefully standardizing the solution by means of generic logic when it's shown to work well.\r\nSo taking a step back may be helpful indeed.\r\n\r\nRegarding my suggestion, `instances` is not great.\r\nPerhaps rename\r\n`contracts.<type>.instances.<name>` to `contractTypes.<type>.contracts.<name>`\r\n\r\nUn-nesting it might be nice, but I don't know if that's actually feasible without something like [`attrsWith` { `itemTypeFunction` }](https://github.com/NixOS/nixpkgs/issues/351888#issuecomment-2451859135)\r\n- `contractTypes.<name>`\r\n- `contracts.<type>.<name>`\r\n\r\n(So don't do that or save it for a refactor when everything else works)",
+   "created_at": "2025-12-09T09:33:15Z",
+   "id": 3631237865,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-09T09:33:15Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i [made an attempt](https://github.com/KiaraGrouwstra/nixpkgs/compare/ff06bd3398fb1bea6c937039ece7e7c8aa396ebf...contracts-split-out#files_bucket) at a simple hard-coded variant of @roberth's suggestion\r\n\r\nedit: got it to work now",
+   "created_at": "2025-12-18T16:37:44Z",
+   "id": 3671146617,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-19T19:30:08Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I agree the intent is superior to the mechanism itself.\r\n\r\nA working mechanism that I'm using in my project is based on functions that create option types.\r\n- The base function from which a consumer and provider is create is [here](https://github.com/ibizaman/selfhostblocks/blob/main/modules/contracts/default.nix).\r\n- It is used in the backup contract [here](https://github.com/ibizaman/selfhostblocks/blob/main/modules/contracts/backup.nix).\r\n\r\nIt's not super pretty because as you can see I needed to set defaults and defaultTexts everywhere to be able to be build the documentation. But at least [it works](https://shb.skarabox.com/contracts-backup.html)! And also, I tend to think the UX is more important than the messiness of the code.\r\n\r\nIt seems we're moving towards making this just work and refining later. I like that.\r\nSo should I create a PR with this other version of the contract mechanism? I don't mind putting in some work if it's worth it.\r\nOtherwise, what should be the next step?\r\n\r\n---\r\n\r\nI like indeed `contractTypes.<type>.contracts.<name>` better than the first suggestion. Although I'm not sure I understand why giving a name to an instance is necessary. I'll need to thing about it.\r\n\r\n---\r\n\r\nConcerning the dual linking, I've come to terms with it. At least, the other experience I have with it is using sops-nix with for example, this alone won't work:\r\n\r\n```nix\r\n{\r\n  myoption = config.sops.secrets.mysecret.path;\r\n}\r\n```\r\n\r\nYou need to define the secret, even with just an empty attrset:\r\n```nix\r\n{\r\n  sops.secrets.mysecret = {};\r\n}\r\n```",
+   "created_at": "2025-12-18T21:14:09Z",
+   "id": 3672246892,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-18T21:15:20Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "let's get branches up and see what sticks, yeah :)\r\n\r\n(for that purpose, not having the `defaultText` strings in yet should be okay still as well)\r\n",
+   "created_at": "2025-12-19T11:34:00Z",
+   "id": 3674722661,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-21T11:35:12Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i made some progress - got the hard-coded branch to work (see link above).\r\nso @roberth was right on that approach looking valid, at least.\r\n\r\ni then tried to split that logic to slightly better resemble @ibizaman's PR here, and at least [managed to](https://github.com/KiaraGrouwstra/nixpkgs/compare/ff06bd3398fb1bea6c937039ece7e7c8aa396ebf...contracts-split-blocks#files_bucket) sort of split out a `restic` block from the `fileBackup` contract ([diff](https://github.com/KiaraGrouwstra/nixpkgs/compare/contracts-split-out...contracts-split-blocks#files_bucket)), tho so far without using the module system for the latter yet.\r\n\r\nan attempt to [fix that](https://github.com/KiaraGrouwstra/nixpkgs/commit/10dc416da3d8c068556015f4d74c7a140d693d95) (primarily see change on `restic.nix`) still failed (see commit message there).\r\n\r\ni gotta admit tho that @roberth's `attrsWith` comment went over my head.\r\n",
+   "created_at": "2025-12-19T23:11:24Z",
+   "id": 3676967020,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-19T23:11:24Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "hm, in addition to cosmetic preferences between potential interfaces, it could be of interest to check to what extent they may affect combining with stuff like https://github.com/ibizaman/selfhostblocks/issues/541\r\n",
+   "created_at": "2025-12-20T00:46:31Z",
+   "id": 3677098675,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-20T00:46:31Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@KiaraGrouwstra That looks like great progress, if iiuc. \r\n\r\n> ```nix\r\n>             blocks.restic.contracts.my-nextcloud-backup.input = config.services.nextcloud.fileBackup.input;\r\n> ```\r\n\r\nSingle linking confirmed?\r\n\r\n> ```nix\r\n> lib.mkIf (instance.input != null) (\r\n> ```\r\n\r\nThis vaguely reminds of the possibility of multi provider support; changing the condition to something else, like `provider` option, `type = enum [];`?\r\nThen `blocks.restic` could be renamed `contracts.backup`.\r\n\r\nWhat's nice about `enum []` is that it supports type merging in a unioning way. (Unlike `submodule`'s type merging which is vaguely intersecting in its merging)\r\nSo then you could have a restic module that declares `contracts.backup.<name>.provider` as `mkOption { type = enum [\"restic\"]; }` and it wouldn't interfere with any other providers!\r\nLimitation: no conditional declarations or imports, so it can't \"subclass\" the contract without also affecting any contracts it doesn't actually handle. Can be mitigated by prefixing the provider name to any additions, but the option docs and `valueMeta` introspection will look like a Christmas tree ;)\r\n\r\n> @roberth's `attrsWith` comment went over my head.\r\n\r\nMaybe I should have explained it more, but it's only relevant if you want to nest `attrsOf` directly in `attrsOf`, i.e. `foo.<name>.<name>`. (Same for `attrsWith`)\r\n\r\nI hope the rest of my comments is more useful.",
+   "created_at": "2025-12-20T01:58:47Z",
+   "id": 3677212545,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-12-20T01:58:47Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i [fixed](https://github.com/KiaraGrouwstra/nixpkgs/compare/ff06bd3398fb1bea6c937039ece7e7c8aa396ebf...contracts-split-blocks-module#files_bucket) the module part now - `deferredModule` tripped me up earlier.\r\ni'll try and further flesh that out.\r\n",
+   "created_at": "2025-12-20T17:49:30Z",
+   "id": 3677992100,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-20T17:50:17Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "okay, i think i can explain what i did now.\r\nrather than having found an actual solution, i instead managed to obtain what seemed like a nicer nextcloud test by taking two shortcuts:\r\n\r\n1. given the consumer doesn't directly need to use results from the back-up jobs, it isn't essential for the consumer to know the provider in this case, allowing to drop one side of the dual link in such select scenarios. in my nextcloud test, this had originally gone by unnoticed to me, as i had unwittingly just verified the output from the provider's end (`config.nodes.nextcloud.services.restic.fileBackup.outputs.nextcloud.backupService`), never having bothered making the link as consumers for contracts of this class tend not to need it.\r\n1. i also had not bothered explicitly linking in the test to show the consumer to the provider, in the sense i instead had nextcloud report its request back to the contract (`contracts.fileBackup.requests.nextcloud = config.services.nextcloud.fileBackup.input;`), whereas from the provider's side i opted to just handle any such `fileBackup` requests in batch (`services.restic.fileBackup.enable = true;`).\r\n\r\nwhile that might not amount to a proper solution (and in fact, i hadn't really solidified a new provider structure or contracting flow), it may be of interest to take these tricks into account to use when appropriate.\r\nbecause putting things together, i think we now know of a few scenarios that could help simplify things, from the perspective of the linking user:\r\n\r\n1. output-less contract usage, i.e. not needing to reference output in the consumer (haskell: `m ()`): could allow skipping the link informing the consumer of the provider (-> skip `services.nextcloud.fileBackup.provider = config.services.restic.backups.nextcloud.fileBackup;`). if we can verify this, we should document in `contracts.*.consumer.provider` this is for exposing `output` to the consumer, so people will know when to set it (which may be never, if we ever get a contract with no `output`, always, if the consuming service uses this output, or otherwise, at least when the user (= person who does the linking) want to use `<consumer>.output` themselves). note that from the `consumer` perspective, an output-less contracts could be deemed equivalent (?) to just exposing some data (the `input`) through a structured type (the 'contract'), which could then be used even without going through contracts. this could perhaps be the case then for the existing back-up contracts. (note that, in my implementation, the idea to aggregate such `input`s to handle them in bulk may nevertheless offer some additional convenience over just having a type.)\r\n1. not needing to individually configure requests of a given contract: allows aggregating consumer input in the background so one only needs to pass such aggregate demand to a provider (-> rather than the granular `services.restic.backups.nextcloud.fileBackup.consumer = config.services.nextcloud.fileBackup;`, settle for using global toggles/tweaks as in [my nextcloud test](https://github.com/KiaraGrouwstra/nixpkgs/compare/ff06bd3398fb1bea6c937039ece7e7c8aa396ebf...contracts-split-blocks-module#diff-77a5f0a443a876565db4c619b4b7fa77486f5ada748ae91a4d29f6160e418dc7)). we may wanna check if we can get a nice example for such bulk usage, maybe without straying as much from your implementations as i had.\r\n1. ~~'pure' (effect-less) contract usage, i.e. not needing to write `config` to arbitrary options (as found by [comparing with `module-interfaces`](https://github.com/NixOS/nixpkgs/pull/432529/files#r2328710574)): could allow skipping the link informing the provider of the consumer (i.e. `contracts.*.provider.consumer`, so skipping `services.restic.backups.nextcloud.fileBackup.consumer = config.services.nextcloud.fileBackup;`), given a contract variant using `module-interfaces`-like wiring. now, i'm not sure if we'd have entire contracts for which we could tell this is the case tho, in the sense the desire to set configuration would seem like a provider concern. now,~~ following @ibizaman's intuition, i think if one just needed such a pure function, then function is the right abstraction, i.e. one would not need contracts in the first place.\r\n",
+   "created_at": "2025-12-20T23:01:08Z",
+   "id": 3678188520,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-21T11:59:39Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "by the way, while maybe getting reviews has gotten harder in general, once we're comfortable settling for our answers to general technical questions (e.g. [bulk configuring](https://github.com/NixOS/nixpkgs/pull/432529#issuecomment-3678188520), [cross-node use](https://github.com/ibizaman/selfhostblocks/issues/541), [common denominator questions](https://discourse.nixos.org/t/pre-rfc-decouple-services-using-structured-typing/58257/31), [contract interactions/hierarchies](https://github.com/ibizaman/selfhostblocks/issues/467#issuecomment-2955076756)), we could split the PR up into individual contracts (with their corresponding providers/consumers/testing) - hopefully that would help reduce the cognitive load on reviewers so we could explicitly invite those with more experience in such specific fields to help with feedback on the UX of individual contracts.\r\n\r\n> A working mechanism that I'm using in my project is based on functions that create option types.\r\n> \r\n> * The base function from which a consumer and provider is create is [here](https://github.com/ibizaman/selfhostblocks/blob/main/modules/contracts/default.nix).\r\n> \r\n> * It is used in the backup contract [here](https://github.com/ibizaman/selfhostblocks/blob/main/modules/contracts/backup.nix).\r\n\r\ncould you maybe comment a bit on design considerations in how you designed the interface at selfhostblocks vis-a-vis the implementation in this PR so far, so we understand better the direction you would prefer here?\r\n",
+   "created_at": "2025-12-21T11:30:20Z",
+   "id": 3678711025,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-21T11:30:20Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "<!--\r\n\r\nin my understanding now, things fit together like:\r\n\r\n| | pure | effectful\r\n|-|-|-|\r\n| void | scalar value (nix), option (module system) | `throw` (nix), `config` (module system) |\r\n| return value | function (nix), computed option (module system) | IO-related builtins (nix), contracts using both output and writing config (module system) |\r\n\r\nfor my understanding, i guess your non-`importContract` contracts (`mount`, `ssl`) seems like custom types that can be used without the regular contracts machinery of output/results? (mounts could maybe be defined using `mkOptionType` to add sanity checks on their content.)\r\n\r\n-->\r\n\r\non selfhostblocks vs PR implementations, i see the PR uses the module system, whereas selfhostblocks looks implemented using plain nix.\r\ni think the module system, while inducing some learning curve, may offer some advantages w.r.t. overriding (`mkForce`) / extending things, so that could be one consideration here. maybe that trade-off could be explored by trying to extend/override things in one versus the other.\r\nthe selfhostblocks implementation currently i think does a bit more juggling to explicitly put in overriding of default values, specifically. with the module system i think overriding/extending could essentially come for free.\r\n(`module-interfaces` i think used some hybrid approach between module system and plain nix functions, which may have helped it drop the `.consumer` link, tho as per above its use-case likely seems to not add value over plain functions anyway.)\r\n\r\non the aforementioned common denominator / features question, i think we could work from a concrete example.\r\nlet's say we have a hierarchy of contracts based on various feature-levels in the request:\r\n\r\n- request for a secret consisting of a specified `owner`\r\n- same, but additionally allowing to specify `mode`\r\n\r\n<!--\r\n- same, but additionally allowing to specify `group`\r\n- a third level allowing to, in addition to the above, specify `mode`\r\n-->\r\n\r\nnow let's say we have a provider requiring at least the former, so would also have enough info using a request taking the enhanced form.\r\nnow let's say our consumer has specified only the `owner`, satisfying the plain form.\r\ncould we make that work?\r\n\r\nconversely, if the provider wanted at least the enhanced form, could we get our contracts to reject this (despite for docs purposes the selfhostblocks code specifying dummy defaults everywhere)?\r\n\r\nif we can tackle such type variance, then i imagine features/extensibility should work out.\r\n",
+   "created_at": "2025-12-22T01:17:40Z",
+   "id": 3679902033,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-12-22T01:17:40Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> i think the module system, while inducing some learning curve, may offer some advantages w.r.t. overriding (mkForce) / extending things, so that could be one consideration here\r\n\r\nAlthough I agree with you in principle, I don’t know how much we would need to extend an existing contract. Because this difference is just to generate a contract, after that step it’s back in the module system anyway.\r\n\r\n> the selfhostblocks implementation currently i think does a bit more juggling to explicitly put in overriding of default values, specifically. with the module system i think overriding/extending could essentially come for free.\r\n\r\nThere are two different aspects here. For default value specifically, it’s because I use values coming from `config.` as part of the default value. I that would be needed everywhere.\r\n\r\nConcerning needing to thread the `defaultValue` and `defaultValueText` options, oh yes that was painful to write. That being said, maybe I overlooked something when I wrote this so it could maybe be improved. Something else to note is I needed to do this to make the documentation generation happy. I mean it’s working there while not here so maybe in this PR’s implementation we’ll notice we need more code to handle it too.\r\n\r\n> let's say our consumer has specified only the owner, satisfying the plain form.\r\ncould we make that work?\r\n\r\nWithout actually testing it I’d say yes. We should just need to make the provider a freeform submodule which ignores extraneous arguments.\r\n\r\n> conversely, if the provider wanted at least the enhanced form, could we get our contracts to reject this\r\n\r\nSimilarly without testing, if the provider requests the extended form, the module system would error out saying an option was not defined. It wouldn’t be a great error message though.\r\n\r\n(btw I’m working on rebasing this PR then on the PR to use the system from SHB, to compare apples to apples)",
+   "created_at": "2025-12-22T07:49:16Z",
+   "id": 3680888653,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-22T07:49:16Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> (btw I’m working on rebasing this PR then on the PR to use the system from SHB, to compare apples to apples)\r\n\r\nif we can get branches side by side for such a comparison, that sounds great :v:\r\n\r\n> Without actually testing it I’d say yes. We should just need to make the provider a freeform submodule which ignores extraneous arguments.\r\n> Similarly without testing, if the provider requests the extended form, the module system would error out saying an option was not defined.\r\n\r\ncool, that's sounding somewhat future-proof.\r\n\r\n> the `defaultValue` and `defaultValueText` options [...] I needed to do this to make the documentation generation happy\r\n\r\nhm interesting. the default values feel a bit awkward for me still, in the sense it would sound like they'd affect the meaning (setting defaults if we wanted for an option to be mandatory)? i feel like i'm misunderstanding, not quite sure what to think there still.\r\n\r\nmaybe the core of my confusion is: if nixpkgs has had option documentation at nixos-search, does code for documenting contracts look different from nixpkgs' modules, and if so, do we know what would cause such difference in documentation demand there, if not use of a distinct documentation library?\r\n\r\n> For default value specifically, it’s because I use values coming from `config.` as part of the default value.\r\n\r\nright, that makes sense.\r\nso it's feeling like much of the boiler plate is coming from injecting `default` and `defaultText` fields, tho these may be needed for different reasons.\r\nin that case, i'd wonder if there could perhaps be a more generic way of tackling that, maybe traversing submodules to reconstruct them with the desired attributes set.\r\n\r\n(i think with config we also have the `priority` stuff for merging, tho i'm not sure that helps in our case of option defaults.)\r\n",
+   "created_at": "2025-12-22T12:35:55Z",
+   "id": 3681932620,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-12-22T13:02:44Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "for expanded context over the present PR, here's my sense of what stuff in [selfhostblocks' `/contracts`](https://github.com/ibizaman/selfhostblocks/tree/main/modules/contracts), as well as outstanding [suggested contracts](https://github.com/ibizaman/selfhostblocks/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22new%20contract%22) (would) actively use:\r\n\r\n| v area / > component | request | result |\r\n|-|-|-|\r\n| `ssl` | | Y |\r\n| `mount` | | Y |\r\n| `backup` (PR: `fileBackup`) | Y | [^1] |\r\n| `databasebackup` (PR: `streamingBackup`) | Y | [^1] |\r\n| `secret` | Y | Y |\r\n| s3 | Y | Y |\r\n| smtp | Y | Y |\r\n| ldap | Y | Y |\r\n| vars | Y | Y |\r\n| sso | ? | ? |\r\n\r\n[^1]: while a result structure is implemented here, consumers generally seem not to use this themselves yet so far, instead leaving such decisions to the user and provider, which i agree seems sensible here\r\n\r\nmy take-away from this is that from what we have so far, `secret` is the most canonical in the sense of utilizing the round-trip mechanism.\r\n\r\ni think areas not requiring the round-trip perhaps could already get their own PRs to e.g. add in `lib.types`, without necessarily depending on this round-trip PR - allowing us to already get the 20-80 while simplifying this PR.\r\n\r\nwhile that would render what's left here both more homogeneous while also maybe leaving less sample implementations here so far, for reviewing purposes such scoping could be a step forward: this could perhaps prevent trip-ups such as my (if not also @fricklerhandwerk's) alternative implementation attempts that turned out not to generalize to the canonical use-case here. (documentation/testing might get a bit easier too for types, given their `check`s could settle for unit over vm tests.)\r\n",
+   "created_at": "2025-12-23T13:37:31Z",
+   "id": 3686663833,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-12-23T13:37:31Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I just rebased on latest master and applied the treefmt linter. And also updated the restic streaming backup implementation by using the new command restic option. Nothing significant but it’s cool to see that new option.",
+   "created_at": "2025-12-23T23:46:01Z",
+   "id": 3688222303,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-12-23T23:46:01Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "FYI I created a new draft PR with an alternative implementation which is IMO better than the first. It has less weird quirks at least. I added a comparison in the description of the PR. https://github.com/NixOS/nixpkgs/pull/485453",
+   "created_at": "2026-02-04T17:05:16Z",
+   "id": 3848659347,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-02-04T17:05:16Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "#485453 mentioned that in this PR:\r\n\r\n> When the user messes up, the error message is not an infinite recursion. It’s not to say the error message is great but it’s better than infinite recursion.\r\n\r\nwould it be possible to get an example of this, such that we could verify that this happens (and we find no way to fix it)?\r\n",
+   "created_at": "2026-02-07T08:22:32Z",
+   "id": 3863940073,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-07T08:22:32Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "In an effort to focus discussion on something tangible, I created a PR which simply introduces one contract with one provider and one consumer. Following all the discussions here, I begin to believe trying to provide an implementation for contracts before having some concrete contracts is maybe too abstract, for me included. There's no clever implementation in here, just plain old options. https://github.com/NixOS/nixpkgs/pull/495303",
+   "created_at": "2026-03-04T22:37:49Z",
+   "id": 4000741000,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-04T22:37:49Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This PR is replaced by https://github.com/NixOS/nixpkgs/pull/522054\r\n\r\nSee that PR’s description for why it is better than this one.",
+   "created_at": "2026-05-20T21:30:54Z",
+   "id": 4502807707,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-20T21:30:54Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/432529",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "The following draft PR is probably better than this one. I added a comparison in the description of the PR. https://github.com/NixOS/nixpkgs/pull/485453\r\n\r\n---\r\n\r\nDraft PR showing implementation of the [Contracts RFC-189](https://github.com/NixOS/rfcs/pull/189) as well as 3 contracts example. From this PR, only the `nixos/modules/contracts/default.nix` would be merged as part of the RFC. The rest would happen later.\r\n\r\nIt is intended to be reviewed after reading the RFC document and also commit by commit.\r\n\r\n- [ ] build manual: `(cd nixos/; nix-build release.nix -A manual.x86_64-linux)` (does not work yet)\r\n- [x] `nix-build -A nixosTests.contracts-fileBackup-restic`\r\n- [x] `nix-build -A nixosTests.contracts-secret-hardcodedSecret`\r\n- [x] `nix-build -A nixosTests.contracts-streamingBackup-restic`\r\n- [x] `nix-build -A nixosTests.restic`\r\n- [x] `nix-build -A nixosTests.stash`\r\n\r\nOpen questions:\r\n\r\n- How to build the manual and fix the missing config.contracts error?\r\n   - Should we use imports?\r\n   - Should there be a fix in the evalModules code or somewhere else?\r\n- How to remove the need for the [dual link](https://github.com/ibizaman/rfcs/blob/contracts/rfcs/0189-contracts.md#dual-link) and only require to give the provider to the consumer and not the other way around?\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": "2026-05-20T21:30:54Z",
+  "closed_by": {
+   "id": 1044950,
+   "login": "ibizaman",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 28,
+  "created_at": "2025-08-10T13:48:01Z",
+  "draft": true,
+  "id": 3307591446,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "5319E7",
+    "default": false,
+    "description": "Novel ideas, large API changes, notable refactorings, issues with RFC potential, etc.",
+    "id": 5408643261,
+    "name": "1.severity: significant"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 432529,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/432529.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/432529.patch"
+  },
+  "reactions": {
+   "+1": 12,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 8,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 2,
+   "total_count": 22
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "Contracts RFC 189",
+  "type": null,
+  "updated_at": "2026-05-20T21:30:55Z",
+  "user": {
+   "id": 1044950,
+   "login": "ibizaman",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 1234,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21132,
+    "open_issues_count": 21132,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:37:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "e0848e60b7d6f2669e53d0e2934c3a8369d2c195",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "The following draft PR is probably better than this one. I added a comparison in the description of the PR. https://github.com/NixOS/nixpkgs/pull/485453\r\n\r\n---\r\n\r\nDraft PR showing implementation of the [Contracts RFC-189](https://github.com/NixOS/rfcs/pull/189) as well as 3 contracts example. From this PR, only the `nixos/modules/contracts/default.nix` would be merged as part of the RFC. The rest would happen later.\r\n\r\nIt is intended to be reviewed after reading the RFC document and also commit by commit.\r\n\r\n- [ ] build manual: `(cd nixos/; nix-build release.nix -A manual.x86_64-linux)` (does not work yet)\r\n- [x] `nix-build -A nixosTests.contracts-fileBackup-restic`\r\n- [x] `nix-build -A nixosTests.contracts-secret-hardcodedSecret`\r\n- [x] `nix-build -A nixosTests.contracts-streamingBackup-restic`\r\n- [x] `nix-build -A nixosTests.restic`\r\n- [x] `nix-build -A nixosTests.stash`\r\n\r\nOpen questions:\r\n\r\n- How to build the manual and fix the missing config.contracts error?\r\n   - Should we use imports?\r\n   - Should there be a fix in the evalModules code or somewhere else?\r\n- How to remove the need for the [dual link](https://github.com/ibizaman/rfcs/blob/contracts/rfcs/0189-contracts.md#dual-link) and only require to give the provider to the consumer and not the other way around?\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 16,
+  "closed_at": "2026-05-20T21:30:54Z",
+  "comments": 28,
+  "commits": 16,
+  "created_at": "2025-08-10T13:48:01Z",
+  "deletions": 56,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/432529.diff",
+  "draft": true,
+  "head": {
+   "label": "ibizaman:contracts-rfc",
+   "ref": "contracts-rfc",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2022-05-23T06:55:50Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "ibizaman/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/ibizaman/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 495292405,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/ibizaman/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/ibizaman/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 1044950,
+     "login": "ibizaman",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/ibizaman/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-20T17:42:06Z",
+    "size": 3103279,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/ibizaman/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/ibizaman/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2024-02-06T12:57:14Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 2733547917,
+  "labels": [
+   {
+    "color": "5319E7",
+    "default": false,
+    "description": "Novel ideas, large API changes, notable refactorings, issues with RFC potential, etc.",
+    "id": 5408643261,
+    "name": "1.severity: significant"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "89bf86665f254312c9b36919412b7257516a9fd7",
+  "mergeable": true,
+  "mergeable_state": "blocked",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 432529,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/432529.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 6599296,
+    "login": "fricklerhandwerk",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 46,
+  "state": "closed",
+  "title": "Contracts RFC 189",
+  "updated_at": "2026-05-20T21:30:55Z",
+  "user": {
+   "id": 1044950,
+   "login": "ibizaman",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#432529",
+ "review_comments": [
+  {
+   "body": "```suggestion\r\n      The `consumer` and `provider` options will then be set up automatically\r\n```",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T20:43:18Z",
+   "diff_hunk": "@@ -0,0 +1,154 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) attrs attrsOf functionTo submodule listOf str deferredModule optionType;\n+in\n+{\n+  options.contracts = mkOption {\n+    description = ''\n+      Base option for a contract.\n+\n+      To create a new contract, add an instance of `config.contracts.<name>`\n+      and define the `meta`, `input` and `output` options.\n+      The `consumer` and `provider` options will then be setup automatically",
+   "id": 2265433122,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 13,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:41Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Does this get loaded into NixOS itself (`_class = \"nixos\";`), or `evalModules`, or anywhere?",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T20:44:02Z",
+   "diff_hunk": "@@ -0,0 +1,154 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) attrs attrsOf functionTo submodule listOf str deferredModule optionType;\n+in\n+{",
+   "id": 2265433429,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 6,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:41Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Not sure yet what \"create an option\" means here. Probably not _declare an option_?",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T20:45:45Z",
+   "diff_hunk": "@@ -0,0 +1,154 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) attrs attrsOf functionTo submodule listOf str deferredModule optionType;\n+in\n+{\n+  options.contracts = mkOption {\n+    description = ''\n+      Base option for a contract.\n+\n+      To create a new contract, add an instance of `config.contracts.<name>`\n+      and define the `meta`, `input` and `output` options.\n+      The `consumer` and `provider` options will then be setup automatically\n+      and contain respectively the type of a consumer and provider\n+      of this new contract.\n+\n+      To use the `<name>` contract, create an option with either the\n+      `config.contracts.<name>.consumer` or `config.contracts.<name>.provider`\n+      type.",
+   "id": 2265434160,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 19,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:41Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n                This option is set up automatically. Define instead the `input` and `output` options.\r\n```\r\nset up => verb\r\nNot sure about the second part yet, but it looks like a sentence, not a clause.",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T20:47:53Z",
+   "diff_hunk": "@@ -0,0 +1,154 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) attrs attrsOf functionTo submodule listOf str deferredModule optionType;\n+in\n+{\n+  options.contracts = mkOption {\n+    description = ''\n+      Base option for a contract.\n+\n+      To create a new contract, add an instance of `config.contracts.<name>`\n+      and define the `meta`, `input` and `output` options.\n+      The `consumer` and `provider` options will then be setup automatically\n+      and contain respectively the type of a consumer and provider\n+      of this new contract.\n+\n+      To use the `<name>` contract, create an option with either the\n+      `config.contracts.<name>.consumer` or `config.contracts.<name>.provider`\n+      type.\n+\n+      The `behaviorTest` option is used to ensure all `provider` of a contract\n+      behave the same way.\n+    '';\n+    type =\n+      attrsOf (\n+        submodule (interface: {\n+          options = {\n+            meta = mkOption {\n+              description = ''\n+                Useful information about the contract and its maintenance.\n+              '';\n+              type = submodule {\n+                options = {\n+                  maintainers = mkOption {\n+                    description = ''\n+                      Maintainers of the contract.\n+                    '';\n+                    type = listOf str;\n+                  };\n+                  description = mkOption {\n+                    description = ''\n+                      Description of the contract.\n+                    '';\n+                    type = str;\n+                  };\n+                };\n+              };\n+            };\n+            input = mkOption {\n+              description = ''\n+                Input type of a contract.\n+              '';\n+              type = deferredModule;\n+            };\n+            output = mkOption {\n+              description = ''\n+                Output type of a contract.\n+              '';\n+              type = deferredModule;\n+            };\n+            consumer = mkOption {\n+              description = ''\n+                Consumer type for a contract.\n+\n+                This option is setup automatically, define instead the `input` and `output` options.",
+   "id": 2265434792,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 65,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:41Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n                This option is set up automatically, define instead the `input` and `output` options.\r\n```",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T20:49:31Z",
+   "diff_hunk": "@@ -0,0 +1,154 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) attrs attrsOf functionTo submodule listOf str deferredModule optionType;\n+in\n+{\n+  options.contracts = mkOption {\n+    description = ''\n+      Base option for a contract.\n+\n+      To create a new contract, add an instance of `config.contracts.<name>`\n+      and define the `meta`, `input` and `output` options.\n+      The `consumer` and `provider` options will then be setup automatically\n+      and contain respectively the type of a consumer and provider\n+      of this new contract.\n+\n+      To use the `<name>` contract, create an option with either the\n+      `config.contracts.<name>.consumer` or `config.contracts.<name>.provider`\n+      type.\n+\n+      The `behaviorTest` option is used to ensure all `provider` of a contract\n+      behave the same way.\n+    '';\n+    type =\n+      attrsOf (\n+        submodule (interface: {\n+          options = {\n+            meta = mkOption {\n+              description = ''\n+                Useful information about the contract and its maintenance.\n+              '';\n+              type = submodule {\n+                options = {\n+                  maintainers = mkOption {\n+                    description = ''\n+                      Maintainers of the contract.\n+                    '';\n+                    type = listOf str;\n+                  };\n+                  description = mkOption {\n+                    description = ''\n+                      Description of the contract.\n+                    '';\n+                    type = str;\n+                  };\n+                };\n+              };\n+            };\n+            input = mkOption {\n+              description = ''\n+                Input type of a contract.\n+              '';\n+              type = deferredModule;\n+            };\n+            output = mkOption {\n+              description = ''\n+                Output type of a contract.\n+              '';\n+              type = deferredModule;\n+            };\n+            consumer = mkOption {\n+              description = ''\n+                Consumer type for a contract.\n+\n+                This option is setup automatically, define instead the `input` and `output` options.\n+              '';\n+              type = optionType;\n+              readOnly = true;\n+              defaultText = lib.literalExpression ''\n+                submodule (consumer: {\n+                  options = {\n+                    provider = mkOption {\n+                      type = interface.config.provider;\n+                    };\n+                    input = mkOption {\n+                      type = submodule interface.config.input;\n+                    };\n+                    output = mkOption {\n+                      type = submodule interface.config.output;\n+                      readOnly = true;\n+                      default = consumer.config.provider.output;\n+                    };\n+                  };\n+                })\n+              '';\n+              default = submodule (consumer: {\n+                options = {\n+                  provider = mkOption {\n+                    type = interface.config.provider;\n+                  };\n+                  input = mkOption {\n+                    type = submodule interface.config.input;\n+                  };\n+                  output = mkOption {\n+                    type = submodule interface.config.output;\n+                    readOnly = true;\n+                    default = consumer.config.provider.output;\n+                  };\n+                };\n+              });\n+            };\n+            provider = mkOption {\n+              description = ''\n+                Provider type for a contract.\n+\n+                This option is setup automatically, define instead the `input` and `output` options.",
+   "id": 2265435282,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 106,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:41Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Not sure. We could make `deferredModuleWith { class = \"nixosTest\"; }` a thing (or even `_class` to align with the module attribute syntax).\r\nThat's not an instantiated test though, but `package` would be a sufficent type for that. (quirky name though? probably fine)",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T20:54:12Z",
+   "diff_hunk": "@@ -0,0 +1,154 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) attrs attrsOf functionTo submodule listOf str deferredModule optionType;\n+in\n+{\n+  options.contracts = mkOption {\n+    description = ''\n+      Base option for a contract.\n+\n+      To create a new contract, add an instance of `config.contracts.<name>`\n+      and define the `meta`, `input` and `output` options.\n+      The `consumer` and `provider` options will then be setup automatically\n+      and contain respectively the type of a consumer and provider\n+      of this new contract.\n+\n+      To use the `<name>` contract, create an option with either the\n+      `config.contracts.<name>.consumer` or `config.contracts.<name>.provider`\n+      type.\n+\n+      The `behaviorTest` option is used to ensure all `provider` of a contract\n+      behave the same way.\n+    '';\n+    type =\n+      attrsOf (\n+        submodule (interface: {\n+          options = {\n+            meta = mkOption {\n+              description = ''\n+                Useful information about the contract and its maintenance.\n+              '';\n+              type = submodule {\n+                options = {\n+                  maintainers = mkOption {\n+                    description = ''\n+                      Maintainers of the contract.\n+                    '';\n+                    type = listOf str;\n+                  };\n+                  description = mkOption {\n+                    description = ''\n+                      Description of the contract.\n+                    '';\n+                    type = str;\n+                  };\n+                };\n+              };\n+            };\n+            input = mkOption {\n+              description = ''\n+                Input type of a contract.\n+              '';\n+              type = deferredModule;\n+            };\n+            output = mkOption {\n+              description = ''\n+                Output type of a contract.\n+              '';\n+              type = deferredModule;\n+            };\n+            consumer = mkOption {\n+              description = ''\n+                Consumer type for a contract.\n+\n+                This option is setup automatically, define instead the `input` and `output` options.\n+              '';\n+              type = optionType;\n+              readOnly = true;\n+              defaultText = lib.literalExpression ''\n+                submodule (consumer: {\n+                  options = {\n+                    provider = mkOption {\n+                      type = interface.config.provider;\n+                    };\n+                    input = mkOption {\n+                      type = submodule interface.config.input;\n+                    };\n+                    output = mkOption {\n+                      type = submodule interface.config.output;\n+                      readOnly = true;\n+                      default = consumer.config.provider.output;\n+                    };\n+                  };\n+                })\n+              '';\n+              default = submodule (consumer: {\n+                options = {\n+                  provider = mkOption {\n+                    type = interface.config.provider;\n+                  };\n+                  input = mkOption {\n+                    type = submodule interface.config.input;\n+                  };\n+                  output = mkOption {\n+                    type = submodule interface.config.output;\n+                    readOnly = true;\n+                    default = consumer.config.provider.output;\n+                  };\n+                };\n+              });\n+            };\n+            provider = mkOption {\n+              description = ''\n+                Provider type for a contract.\n+\n+                This option is setup automatically, define instead the `input` and `output` options.\n+              '';\n+              type = optionType;\n+              readOnly = true;\n+              defaultText = lib.literalExpression ''\n+                submodule (provider: {\n+                  options = {\n+                    consumer = mkOption {\n+                      type = interface.config.consumer;\n+                    };\n+                    input = mkOption {\n+                      type = submodule interface.config.input;\n+                      readOnly = true;\n+                      default = provider.config.consumer.input;\n+                    };\n+                    output = mkOption {\n+                      type = submodule interface.config.output;\n+                    };\n+                  };\n+                }\n+              '';\n+              default = submodule (provider: {\n+                options = {\n+                  consumer = mkOption {\n+                    type = lib.types.nullOr interface.config.consumer;\n+                    default = null;\n+                  };\n+                  input = mkOption {\n+                    type = lib.types.nullOr (submodule interface.config.input);\n+                    readOnly = true;\n+                    default = provider.config.consumer.input or null;\n+                  };\n+                  output = mkOption {\n+                    type = submodule interface.config.output;\n+                  };\n+                };\n+              });\n+            };\n+            behaviorTest = mkOption {\n+              # The type should be more precise of course.\n+              # There should actually be a NixOSTest type.",
+   "id": 2265436732,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 146,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:41Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n      maintainers = [ lib.maintainers.ibizaman ];\r\n```\r\n\r\nOdd. Isn't this checked / tested?",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T20:54:46Z",
+   "diff_hunk": "@@ -0,0 +1,212 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) str path nonEmptyListOf listOf submodule;\n+in\n+{\n+  contracts.fileBackup = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];",
+   "id": 2265436896,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 9,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/fileBackup.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:41Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "nitpick:\r\nScript-ness doesn't seem to be a requirement, yet this name suggests that the type might be `str`, containing bash statements or something. `restoreProgram`, `restoreCall`, `restoreExe`? Or if it's secretly bash, `restoreCommand`. Not sure.",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T20:59:46Z",
+   "diff_hunk": "@@ -0,0 +1,212 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) str path nonEmptyListOf listOf submodule;\n+in\n+{\n+  contracts.fileBackup = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        File backup contract where a directory containing\n+        regular files is to be backed up.\n+      '';\n+    };\n+\n+    input = {\n+      options.user = mkOption {\n+        description = ''\n+          Unix user doing the backups.\n+        '';\n+        type = str;\n+        example = \"vaultwarden\";\n+      };\n+\n+      options.sourceDirectories = mkOption {\n+        description = \"Directories to backup.\";\n+        type = nonEmptyListOf str;\n+        example = \"/var/lib/vaultwarden\";\n+      };\n+\n+      options.excludePatterns = mkOption {\n+        description = \"File patterns to exclude.\";\n+        type = listOf str;\n+        default = [];\n+      };\n+\n+      options.hooks = mkOption {\n+        description = \"Hooks to run around the backup.\";\n+        default = {};\n+        type = submodule {\n+          options = {\n+            beforeBackup = mkOption {\n+              description = \"Hooks to run before backup.\";\n+              type = listOf path;\n+              default = [];\n+            };\n+\n+            afterBackup = mkOption {\n+              description = \"Hooks to run after backup.\";\n+              type = listOf path;\n+              default = [];\n+            };\n+          };\n+        };\n+      };\n+    };\n+\n+    output = output: {\n+      options.restoreScript = mkOption {",
+   "id": 2265438630,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 59,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/fileBackup.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:41Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n          This script can be ran manually to back up the database:\r\n```\r\nverb",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:00:12Z",
+   "diff_hunk": "@@ -0,0 +1,212 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) str path nonEmptyListOf listOf submodule;\n+in\n+{\n+  contracts.fileBackup = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        File backup contract where a directory containing\n+        regular files is to be backed up.\n+      '';\n+    };\n+\n+    input = {\n+      options.user = mkOption {\n+        description = ''\n+          Unix user doing the backups.\n+        '';\n+        type = str;\n+        example = \"vaultwarden\";\n+      };\n+\n+      options.sourceDirectories = mkOption {\n+        description = \"Directories to backup.\";\n+        type = nonEmptyListOf str;\n+        example = \"/var/lib/vaultwarden\";\n+      };\n+\n+      options.excludePatterns = mkOption {\n+        description = \"File patterns to exclude.\";\n+        type = listOf str;\n+        default = [];\n+      };\n+\n+      options.hooks = mkOption {\n+        description = \"Hooks to run around the backup.\";\n+        default = {};\n+        type = submodule {\n+          options = {\n+            beforeBackup = mkOption {\n+              description = \"Hooks to run before backup.\";\n+              type = listOf path;\n+              default = [];\n+            };\n+\n+            afterBackup = mkOption {\n+              description = \"Hooks to run after backup.\";\n+              type = listOf path;\n+              default = [];\n+            };\n+          };\n+        };\n+      };\n+    };\n+\n+    output = output: {\n+      options.restoreScript = mkOption {\n+        description = ''\n+          Name of script that can restore the database.\n+          One can then list snapshots with:\n+\n+          ```bash\n+          $ ${output.options.restoreScript.value} snapshots\n+          ```\n+\n+          And restore the database with:\n+\n+          ```bash\n+          $ ${output.options.restoreScript.value} restore latest\n+          ```\n+        '';\n+        type = path;\n+      };\n+\n+      options.backupService = mkOption {\n+        description = ''\n+          Name of service backing up the database.\n+\n+          This script can be ran manually to backup the database:",
+   "id": 2265438835,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 81,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/fileBackup.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Secret contract\r\n\r\nOk :see_no_evil: \r\n\r\n```suggestion\r\n        Contract for secrets handling where a consumer requests a secret\r\n```",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:02:49Z",
+   "diff_hunk": "@@ -0,0 +1,123 @@\n+# This \"secret\" contracts is an example and should be merged with the Vars initiative.\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) str path;\n+in\n+{\n+  contracts.secret = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        Secret contract where a consumer requests a secret",
+   "id": 2265439603,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 12,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/secret.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 2,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n        and a provider determines statically the file path where the secret will be provided at runtime.\r\n```\r\nMore accurate, but please double check",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:04:39Z",
+   "diff_hunk": "@@ -0,0 +1,123 @@\n+# This \"secret\" contracts is an example and should be merged with the Vars initiative.\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) str path;\n+in\n+{\n+  contracts.secret = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        Secret contract where a consumer requests a secret\n+        and a provider provides it at runtime at a given file path.",
+   "id": 2265440067,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 13,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/secret.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "You could move these to the test's top level if you prefer.\r\nThe test framework is also module-based.",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:08:44Z",
+   "diff_hunk": "@@ -0,0 +1,123 @@\n+# This \"secret\" contracts is an example and should be merged with the Vars initiative.\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) str path;\n+in\n+{\n+  contracts.secret = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        Secret contract where a consumer requests a secret\n+        and a provider provides it at runtime at a given file path.\n+      '';\n+    };\n+\n+    input = {\n+      options.mode = mkOption {\n+        description = ''\n+          Mode of the secret file.\n+        '';\n+        type = str;\n+      };\n+\n+      options.owner = mkOption {\n+        description = ''\n+          Linux user owning the secret file.\n+        '';\n+        type = str;\n+      };\n+\n+      options.group = mkOption {\n+        description = ''\n+          Linux group owning the secret file.\n+        '';\n+        type = str;\n+      };\n+    };\n+\n+    output = {\n+      options.path = mkOption {\n+        type = path;\n+        description = ''\n+          Path to the file containing the secret generated out of band.\n+\n+          This path will exist after deploying to a target host,\n+          it is not available through the nix store.\n+        '';\n+      };\n+    };\n+\n+    behaviorTest = { providerRoot, extraModules ? [] }: {\n+      nodes.machine = { config, ... }: {\n+        imports = extraModules;\n+\n+        options.test = {",
+   "id": 2265441362,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 56,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/secret.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n        Streaming backup contract where what the item to back up comes from a stream.\r\n```",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:09:59Z",
+   "diff_hunk": "@@ -0,0 +1,184 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption literalExpression;\n+  inherit (lib.types) path str;\n+in\n+{\n+  contracts.streamingBackup = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        Streaming backup contract where what to backup\n+        is coming from a stream.",
+   "id": 2265441730,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 12,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/streamingBackup.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n        back up a database or a tar file.\r\n```",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:10:16Z",
+   "diff_hunk": "@@ -0,0 +1,184 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption literalExpression;\n+  inherit (lib.types) path str;\n+in\n+{\n+  contracts.streamingBackup = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        Streaming backup contract where what to backup\n+        is coming from a stream.\n+\n+        For example, this contract is well suited to\n+        backup a database or a tar file.",
+   "id": 2265441815,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 15,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/streamingBackup.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n          description = \"A bash command that produces the database dump on stdout.\";\r\n```",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:16:18Z",
+   "diff_hunk": "@@ -0,0 +1,184 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption literalExpression;\n+  inherit (lib.types) path str;\n+in\n+{\n+  contracts.streamingBackup = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        Streaming backup contract where what to backup\n+        is coming from a stream.\n+\n+        For example, this contract is well suited to\n+        backup a database or a tar file.\n+      '';\n+    };\n+\n+    input = {\n+      options = {\n+        backupName = mkOption {\n+          description = \"Name of the backup in the repository.\";\n+          type = str;\n+          example = \"postgresql.sql\";\n+        };\n+\n+        backupCmd = mkOption {\n+          description = \"Command that produces the database dump on stdout.\";",
+   "id": 2265445787,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 28,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/streamingBackup.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n          description = \"A bash command that reads the database dump on stdin and restores the database.\";\r\n```",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:16:27Z",
+   "diff_hunk": "@@ -0,0 +1,184 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption literalExpression;\n+  inherit (lib.types) path str;\n+in\n+{\n+  contracts.streamingBackup = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        Streaming backup contract where what to backup\n+        is coming from a stream.\n+\n+        For example, this contract is well suited to\n+        backup a database or a tar file.\n+      '';\n+    };\n+\n+    input = {\n+      options = {\n+        backupName = mkOption {\n+          description = \"Name of the backup in the repository.\";\n+          type = str;\n+          example = \"postgresql.sql\";\n+        };\n+\n+        backupCmd = mkOption {\n+          description = \"Command that produces the database dump on stdout.\";\n+          type = str;\n+          example = literalExpression ''\n+            ''${pkgs.postgresql}/bin/pg_dumpall | ''${pkgs.gzip}/bin/gzip --rsyncable\n+          '';\n+        };\n+\n+        restoreCmd = mkOption {\n+          description = \"Command that reads the database dump on stdin and restores the database.\";",
+   "id": 2265446073,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 36,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/streamingBackup.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "thought: Neither of the backup contracts covers any scheduling of backups or integration with file system snapshots. Maybe that's ok for now, or should be covered by something else anyway.",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:18:35Z",
+   "diff_hunk": "@@ -0,0 +1,184 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption literalExpression;\n+  inherit (lib.types) path str;\n+in\n+{\n+  contracts.streamingBackup = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        Streaming backup contract where what to backup\n+        is coming from a stream.\n+\n+        For example, this contract is well suited to\n+        backup a database or a tar file.\n+      '';\n+    };\n+\n+    input = {\n+      options = {\n+        backupName = mkOption {\n+          description = \"Name of the backup in the repository.\";\n+          type = str;\n+          example = \"postgresql.sql\";\n+        };\n+\n+        backupCmd = mkOption {\n+          description = \"Command that produces the database dump on stdout.\";\n+          type = str;\n+          example = literalExpression ''\n+            ''${pkgs.postgresql}/bin/pg_dumpall | ''${pkgs.gzip}/bin/gzip --rsyncable\n+          '';\n+        };\n+\n+        restoreCmd = mkOption {\n+          description = \"Command that reads the database dump on stdin and restores the database.\";\n+          type = str;\n+          example = literalExpression ''\n+            ''${pkgs.gzip}/bin/gunzip | ''${pkgs.postgresql}/bin/psql postgres\n+          '';\n+        };\n+      };\n+    };\n+\n+    output = output: {\n+      options = {\n+        restoreScript = mkOption {\n+          description = ''\n+            Name of script that can restore the database.\n+            One can then list snapshots with:\n+\n+            ```bash\n+            $ ${output.options.restoreScript.value} snapshots\n+            ```\n+\n+            And restore the database with:\n+\n+            ```bash\n+            $ ${output.options.restoreScript.value} restore latest\n+            ```\n+          '';\n+          type = path;\n+        };\n+\n+        backupService = mkOption {\n+          description = ''\n+            Name of service backing up the database.\n+\n+            This script can be ran manually to backup the database:\n+\n+            ```bash\n+            $ systemctl start ${(lib.debug.traceValFn lib.attrNames output.config).backupService.value}\n+            ```\n+          '';\n+          type = str;\n+        };\n+      };\n+    };\n+\n+    behaviorTest = {\n+      providerRoot,\n+      extraModules ? [],\n+    }: {\n+      nodes.machine = { config, ... }: {\n+        imports = extraModules;\n+\n+        options.test = {\n+          repository = mkOption {\n+            type = str;\n+            default = \"/opt/repository\";\n+          };\n+          username = mkOption {\n+            type = str;\n+            default = \"me\";\n+          };\n+          backupName = mkOption {\n+            type = str;\n+            default = \"db.bck\";\n+          };\n+        };\n+\n+        config = lib.mkMerge [\n+          (lib.setAttrByPath providerRoot {\n+            consumer = config.services.postgresql.streamingBackup;\n+          })\n+          {\n+            services.postgresql = {\n+              streamingBackup.provider = lib.getAttrFromPath providerRoot;\n+\n+              enable = true;\n+              ensureDatabases = [\n+                config.test.username\n+                \"testdb\"\n+              ];\n+              ensureUsers = [{\n+                name = config.test.username;\n+                ensureDBOwnership = true;\n+                ensureClauses.login = true;\n+              }];\n+            };\n+            test.backupName = \"db.bck\";\n+            test.username = config.services.postgresql.superUser;\n+          }\n+          (lib.mkIf (config.test.username != \"root\") {\n+            users.users.${config.test.username} = {\n+              isSystemUser = true;\n+              group = config.test.username;\n+            };\n+            users.groups.${config.test.username} = {};\n+          })\n+        ];\n+      };\n+\n+      testScript = { nodes, ... }: let\n+        cfg = nodes.machine;\n+        inherit (lib.getAttrFromPath providerRoot nodes.machine) output;\n+      in ''\n+        import csv\n+\n+        start_all()\n+        machine.wait_for_unit(\"postgresql.service\")\n+        machine.wait_for_open_port(5432)\n+\n+        def peer_cmd(cmd, db=\"testdb\"):\n+            return \"sudo -u ${cfg.test.username} psql -U ${cfg.test.username} {db} --csv --command \\\"{cmd}\\\"\".format(cmd=cmd, db=db)\n+\n+        def query(query):\n+            res = machine.succeed(peer_cmd(query))\n+            return list(dict(l) for l in csv.DictReader(res.splitlines()))\n+\n+        def cmp_tables(a, b):\n+            for i in range(max(len(a), len(b))):\n+                diff = set(a[i]) ^ set(b[i])\n+                if len(diff) > 0:\n+                    raise Exception(i, diff)\n+\n+        table = [{'name': 'car', 'count': '1'}, {'name': 'lollipop', 'count': '2'}]\n+\n+        with subtest(\"create fixture\"):\n+            machine.succeed(peer_cmd(\"CREATE TABLE test (name text, count int)\"))\n+            machine.succeed(peer_cmd(\"INSERT INTO test VALUES ('car', 1), ('lollipop', 2)\"))\n+\n+            res = query(\"SELECT * FROM test\")\n+            cmp_tables(res, table)\n+\n+        with subtest(\"backup\"):\n+            print(machine.succeed(\"systemctl start ${output.backupService}\"))\n+\n+        with subtest(\"drop database\"):\n+            print(machine.succeed(peer_cmd(\"DROP DATABASE testdb\", db=\"postgres\")))\n+            machine.fail(peer_cmd(\"SELECT * FROM test\"))\n+\n+        with subtest(\"restore\"):\n+            print(machine.succeed(\"${output.restoreScript} restore latest\"))\n+\n+        with subtest(\"check restoration\"):\n+            res = query(\"SELECT * FROM test\")\n+            cmp_tables(res, table)\n+      '';\n+    };\n+  };\n+\n+  meta.buildDocsInSandbox = false;\n+}",
+   "id": 2265448238,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 184,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/streamingBackup.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Correct, the module attrset must not be strict in (require evaluation of) `config` or even `options`.\r\nMaybe `imports` could be useful here? Not sure I see \"a hacky import\".",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:28:48Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{ lib, config, pkgs, ... }:\n+let\n+  inherit ((import ../../../modules/contracts/fileBackup.nix {\n+    inherit lib;\n+  }).contracts.fileBackup) behaviorTest;\n+in\n+{\n+  name = \"contracts-fileBackup-restic\";\n+  meta.maintainers = [ lib.maintainers.ibizaman ];\n+  # I tried using the following line but it leads to infinite recursion.\n+  # Instead, I made a hacky import. pkgs.callPackage was also giving an\n+  # infinite recursion.\n+  #\n+  #     } // config.contracts.fileBackup.behaviorTest {",
+   "id": 2265451648,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/fileBackup/restic.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n      lazyAttrsOf (\r\n```\r\n\r\nThis is usually preferable for attrsets that are consumed primarily through attribute selection.\r\nIt allows the evaluation of more self-references than `attrsOf` would.\r\n\r\nhttps://nixos.org/manual/nixos/unstable/#sec-option-types-composed\r\n(which ultimately boils down to [this](https://github.com/NixOS/nixpkgs/pull/428330/files) non-module trade-off, after seeing through `mkIf` which ultimately isn't magic)",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-10T21:36:12Z",
+   "diff_hunk": "@@ -0,0 +1,154 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) attrs attrsOf functionTo submodule listOf str deferredModule optionType;\n+in\n+{\n+  options.contracts = mkOption {\n+    description = ''\n+      Base option for a contract.\n+\n+      To create a new contract, add an instance of `config.contracts.<name>`\n+      and define the `meta`, `input` and `output` options.\n+      The `consumer` and `provider` options will then be setup automatically\n+      and contain respectively the type of a consumer and provider\n+      of this new contract.\n+\n+      To use the `<name>` contract, create an option with either the\n+      `config.contracts.<name>.consumer` or `config.contracts.<name>.provider`\n+      type.\n+\n+      The `behaviorTest` option is used to ensure all `provider` of a contract\n+      behave the same way.\n+    '';\n+    type =\n+      attrsOf (",
+   "id": 2265453836,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 25,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3103740433,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-10T21:42:42Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I was assuming adding it to `module-list.nix` is enough?",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-11T09:21:12Z",
+   "diff_hunk": "@@ -0,0 +1,154 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) attrs attrsOf functionTo submodule listOf str deferredModule optionType;\n+in\n+{",
+   "id": 2266123724,
+   "in_reply_to_id": 2265433429,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 6,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3104823164,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-11T09:21:12Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Indeed create is vague, _declare_ seems more appropriate: one would declare an option with the type `config.contracts.<name>.consumer` since that is of type `optionType`. Do you see another word?",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-11T09:24:52Z",
+   "diff_hunk": "@@ -0,0 +1,154 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) attrs attrsOf functionTo submodule listOf str deferredModule optionType;\n+in\n+{\n+  options.contracts = mkOption {\n+    description = ''\n+      Base option for a contract.\n+\n+      To create a new contract, add an instance of `config.contracts.<name>`\n+      and define the `meta`, `input` and `output` options.\n+      The `consumer` and `provider` options will then be setup automatically\n+      and contain respectively the type of a consumer and provider\n+      of this new contract.\n+\n+      To use the `<name>` contract, create an option with either the\n+      `config.contracts.<name>.consumer` or `config.contracts.<name>.provider`\n+      type.",
+   "id": 2266131563,
+   "in_reply_to_id": 2265434160,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 19,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3104833539,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-11T09:24:52Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Most GitHub action fail because the flake can't be evaluated. Maybe it would appear as an error if they worked?",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-11T09:27:18Z",
+   "diff_hunk": "@@ -0,0 +1,212 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) str path nonEmptyListOf listOf submodule;\n+in\n+{\n+  contracts.fileBackup = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];",
+   "id": 2266137180,
+   "in_reply_to_id": 2265436896,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 9,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/fileBackup.nix",
+   "position": 1,
+   "pull_request_review_id": 3104840664,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-11T09:27:18Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`s/statically/at evaluation time` ?\r\nAlso would \"at activation time\" instead of at \"runtime\" be more accurate?",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-11T09:32:54Z",
+   "diff_hunk": "@@ -0,0 +1,123 @@\n+# This \"secret\" contracts is an example and should be merged with the Vars initiative.\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption;\n+  inherit (lib.types) str path;\n+in\n+{\n+  contracts.secret = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        Secret contract where a consumer requests a secret\n+        and a provider provides it at runtime at a given file path.",
+   "id": 2266149842,
+   "in_reply_to_id": 2265440067,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 13,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/secret.nix",
+   "position": 1,
+   "pull_request_review_id": 3104857762,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-11T09:33:01Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Contracts are for communication between the consumer and provider, without the end user intervention. I see the file backup contract here only useful for the consumer to tell what files should be backed up or not. \r\n\r\nOn the other hand, I see scheduling as the end user communicating with the provider directly. I could see a need for a common interface for scheduling though. So maybe a separate contract for that?\r\n\r\nNow I could be wrong and there is a valid use case for the consumer having a say in the scheduling, I just did not cross it yet.",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-11T09:44:48Z",
+   "diff_hunk": "@@ -0,0 +1,184 @@\n+{ lib, ... }:\n+let\n+  inherit (lib) mkOption literalExpression;\n+  inherit (lib.types) path str;\n+in\n+{\n+  contracts.streamingBackup = {\n+    meta = {\n+      maitainers = [ lib.maintainers.ibizaman ];\n+      description = ''\n+        Streaming backup contract where what to backup\n+        is coming from a stream.\n+\n+        For example, this contract is well suited to\n+        backup a database or a tar file.\n+      '';\n+    };\n+\n+    input = {\n+      options = {\n+        backupName = mkOption {\n+          description = \"Name of the backup in the repository.\";\n+          type = str;\n+          example = \"postgresql.sql\";\n+        };\n+\n+        backupCmd = mkOption {\n+          description = \"Command that produces the database dump on stdout.\";\n+          type = str;\n+          example = literalExpression ''\n+            ''${pkgs.postgresql}/bin/pg_dumpall | ''${pkgs.gzip}/bin/gzip --rsyncable\n+          '';\n+        };\n+\n+        restoreCmd = mkOption {\n+          description = \"Command that reads the database dump on stdin and restores the database.\";\n+          type = str;\n+          example = literalExpression ''\n+            ''${pkgs.gzip}/bin/gunzip | ''${pkgs.postgresql}/bin/psql postgres\n+          '';\n+        };\n+      };\n+    };\n+\n+    output = output: {\n+      options = {\n+        restoreScript = mkOption {\n+          description = ''\n+            Name of script that can restore the database.\n+            One can then list snapshots with:\n+\n+            ```bash\n+            $ ${output.options.restoreScript.value} snapshots\n+            ```\n+\n+            And restore the database with:\n+\n+            ```bash\n+            $ ${output.options.restoreScript.value} restore latest\n+            ```\n+          '';\n+          type = path;\n+        };\n+\n+        backupService = mkOption {\n+          description = ''\n+            Name of service backing up the database.\n+\n+            This script can be ran manually to backup the database:\n+\n+            ```bash\n+            $ systemctl start ${(lib.debug.traceValFn lib.attrNames output.config).backupService.value}\n+            ```\n+          '';\n+          type = str;\n+        };\n+      };\n+    };\n+\n+    behaviorTest = {\n+      providerRoot,\n+      extraModules ? [],\n+    }: {\n+      nodes.machine = { config, ... }: {\n+        imports = extraModules;\n+\n+        options.test = {\n+          repository = mkOption {\n+            type = str;\n+            default = \"/opt/repository\";\n+          };\n+          username = mkOption {\n+            type = str;\n+            default = \"me\";\n+          };\n+          backupName = mkOption {\n+            type = str;\n+            default = \"db.bck\";\n+          };\n+        };\n+\n+        config = lib.mkMerge [\n+          (lib.setAttrByPath providerRoot {\n+            consumer = config.services.postgresql.streamingBackup;\n+          })\n+          {\n+            services.postgresql = {\n+              streamingBackup.provider = lib.getAttrFromPath providerRoot;\n+\n+              enable = true;\n+              ensureDatabases = [\n+                config.test.username\n+                \"testdb\"\n+              ];\n+              ensureUsers = [{\n+                name = config.test.username;\n+                ensureDBOwnership = true;\n+                ensureClauses.login = true;\n+              }];\n+            };\n+            test.backupName = \"db.bck\";\n+            test.username = config.services.postgresql.superUser;\n+          }\n+          (lib.mkIf (config.test.username != \"root\") {\n+            users.users.${config.test.username} = {\n+              isSystemUser = true;\n+              group = config.test.username;\n+            };\n+            users.groups.${config.test.username} = {};\n+          })\n+        ];\n+      };\n+\n+      testScript = { nodes, ... }: let\n+        cfg = nodes.machine;\n+        inherit (lib.getAttrFromPath providerRoot nodes.machine) output;\n+      in ''\n+        import csv\n+\n+        start_all()\n+        machine.wait_for_unit(\"postgresql.service\")\n+        machine.wait_for_open_port(5432)\n+\n+        def peer_cmd(cmd, db=\"testdb\"):\n+            return \"sudo -u ${cfg.test.username} psql -U ${cfg.test.username} {db} --csv --command \\\"{cmd}\\\"\".format(cmd=cmd, db=db)\n+\n+        def query(query):\n+            res = machine.succeed(peer_cmd(query))\n+            return list(dict(l) for l in csv.DictReader(res.splitlines()))\n+\n+        def cmp_tables(a, b):\n+            for i in range(max(len(a), len(b))):\n+                diff = set(a[i]) ^ set(b[i])\n+                if len(diff) > 0:\n+                    raise Exception(i, diff)\n+\n+        table = [{'name': 'car', 'count': '1'}, {'name': 'lollipop', 'count': '2'}]\n+\n+        with subtest(\"create fixture\"):\n+            machine.succeed(peer_cmd(\"CREATE TABLE test (name text, count int)\"))\n+            machine.succeed(peer_cmd(\"INSERT INTO test VALUES ('car', 1), ('lollipop', 2)\"))\n+\n+            res = query(\"SELECT * FROM test\")\n+            cmp_tables(res, table)\n+\n+        with subtest(\"backup\"):\n+            print(machine.succeed(\"systemctl start ${output.backupService}\"))\n+\n+        with subtest(\"drop database\"):\n+            print(machine.succeed(peer_cmd(\"DROP DATABASE testdb\", db=\"postgres\")))\n+            machine.fail(peer_cmd(\"SELECT * FROM test\"))\n+\n+        with subtest(\"restore\"):\n+            print(machine.succeed(\"${output.restoreScript} restore latest\"))\n+\n+        with subtest(\"check restoration\"):\n+            res = query(\"SELECT * FROM test\")\n+            cmp_tables(res, table)\n+      '';\n+    };\n+  };\n+\n+  meta.buildDocsInSandbox = false;\n+}",
+   "id": 2266176736,
+   "in_reply_to_id": 2265448238,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 184,
+   "original_start_line": null,
+   "path": "nixos/modules/contracts/streamingBackup.nix",
+   "position": 1,
+   "pull_request_review_id": 3104898386,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-11T09:44:48Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I just assumed using import this way was more hacky or at least less favorable than relying on config.",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "created_at": "2025-08-11T12:44:00Z",
+   "diff_hunk": "@@ -0,0 +1,32 @@\n+{ lib, config, pkgs, ... }:\n+let\n+  inherit ((import ../../../modules/contracts/fileBackup.nix {\n+    inherit lib;\n+  }).contracts.fileBackup) behaviorTest;\n+in\n+{\n+  name = \"contracts-fileBackup-restic\";\n+  meta.maintainers = [ lib.maintainers.ibizaman ];\n+  # I tried using the following line but it leads to infinite recursion.\n+  # Instead, I made a hacky import. pkgs.callPackage was also giving an\n+  # infinite recursion.\n+  #\n+  #     } // config.contracts.fileBackup.behaviorTest {",
+   "id": 2266617939,
+   "in_reply_to_id": 2265451648,
+   "line": null,
+   "original_commit_id": "d360b941b45e5bacf0eb5b8a58825e7a51e53d4f",
+   "original_line": null,
+   "original_position": 14,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/fileBackup/restic.nix",
+   "position": 1,
+   "pull_request_review_id": 3105661553,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-11T15:21:44Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "for the record, despite this line the error i get building the manual (`(cd nixos/; nix-build release.nix -A manual.x86_64-linux)`) is:\r\n\r\n```\r\nerror:\r\n       … while calling the 'deepSeq' builtin\r\n         at /home/kiara/code/nixpkgs/lib/customisation.nix:478:35:\r\n          477|     in\r\n          478|     if drv == null then null else deepSeq drv' drv';\r\n             |                                   ^\r\n          479|\r\n\r\n       … while evaluating the attribute 'outPath'\r\n         at /home/kiara/code/nixpkgs/lib/customisation.nix:467:13:\r\n          466|           value = commonAttrs // {\r\n          467|             outPath = output.outPath;\r\n             |             ^\r\n          468|             drvPath = output.drvPath;\r\n\r\n       (stack trace truncated; use '--show-trace' to show the full trace)\r\n\r\n       error: attribute 'contracts' missing\r\n       at /home/kiara/code/nixpkgs/nixos/modules/services/web-apps/stash.nix:435:16:\r\n          434|       jwtSecretKeyFile = mkOption {\r\n          435|         type = config.contracts.secret.consumer;\r\n             |                ^\r\n          436|         description = \"Path to file containing a secret used to sign JWT tokens.\";\r\n```\r\n\r\nnot sure how this happened.\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-11T15:17:39Z",
+   "diff_hunk": "@@ -47,6 +47,10 @@\n   ./config/xdg/sounds.nix\n   ./config/xdg/terminal-exec.nix\n   ./config/zram.nix\n+  ./contracts/default.nix",
+   "id": 2267102929,
+   "line": 51,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 50,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/module-list.nix",
+   "position": 4,
+   "pull_request_review_id": 3106381794,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-11T15:17:40Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Indeed I get the same. I guess only the options attribute is populated at this point, not the config?",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-11T15:21:16Z",
+   "diff_hunk": "@@ -47,6 +47,10 @@\n   ./config/xdg/sounds.nix\n   ./config/xdg/terminal-exec.nix\n   ./config/zram.nix\n+  ./contracts/default.nix",
+   "id": 2267113873,
+   "in_reply_to_id": 2267102929,
+   "line": 51,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 50,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/module-list.nix",
+   "position": 4,
+   "pull_request_review_id": 3106398931,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-11T15:21:16Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "hm, `config` seems introspected at plenty other tests tho?\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-11T16:40:58Z",
+   "diff_hunk": "@@ -47,6 +47,10 @@\n   ./config/xdg/sounds.nix\n   ./config/xdg/terminal-exec.nix\n   ./config/zram.nix\n+  ./contracts/default.nix",
+   "id": 2267396393,
+   "in_reply_to_id": 2267102929,
+   "line": 51,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 50,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/module-list.nix",
+   "position": 4,
+   "pull_request_review_id": 3106787911,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 1,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-11T16:40:58Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Not in the type field as far as I grepped.",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-11T16:52:29Z",
+   "diff_hunk": "@@ -47,6 +47,10 @@\n   ./config/xdg/sounds.nix\n   ./config/xdg/terminal-exec.nix\n   ./config/zram.nix\n+  ./contracts/default.nix",
+   "id": 2267424222,
+   "in_reply_to_id": 2267102929,
+   "line": 51,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 50,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/module-list.nix",
+   "position": 4,
+   "pull_request_review_id": 3106828036,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-11T16:52:29Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "that explanation seems to add up, given after commenting those lines the error seems to change:\r\n\r\n<details>\r\n<summary>\r\ndetails\r\n</summary>\r\n\r\n```\r\n~/code/nixpkgs> nix-build nixos/release.nix -A manual.x86_64-linux\r\nthese 3 derivations will be built:\r\n  /nix/store/vinkj8blr6mrsy2k5z8lk0n6i11l3vjj-lazy-options.json.drv\r\n  /nix/store/qzykfx31izdzq9c2inyvpm48xxm07x1n-options.json.drv\r\n  /nix/store/29xq1kdbafpar7v70zwag14l73cigwa8-nixos-manual-html.drv\r\nthese 12 paths will be fetched (14.00 MiB download, 49.57 MiB unpacked):\r\n  /nix/store/a8s3qf5ydqbpqcshg1dgga9lag3xgbbp-brotli-1.1.0\r\n  /nix/store/lnab2vg7mcwddh63rimw1vh82nplzsxj-brotli-1.1.0-dev\r\n  /nix/store/7bcdsr7fykhji6dy8gq8jzd8qjswf13v-documentation-highlighter\r\n  /nix/store/my02p81al90i4anmaz79ad98a397zrri-nixos-render-docs-0.0\r\n  /nix/store/8d4pij8ir718s90cj8yrhhrxd5pc81bw-nixos-test-driver-docstrings\r\n  /nix/store/fgx655d67ry55jw7dddmb49avywqkvyb-options.json\r\n  /nix/store/lk0mhvqjffjx087p8wlwf71agdkz71ha-options.json\r\n  /nix/store/xiw440bqysi2p7dr375nca54in97b0vi-options.json\r\n  /nix/store/58dmrdsib24m3468d9n5s7g9g2gcgqmg-python3.13-markdown-it-py-3.0.0\r\n  /nix/store/kiyxdnmd5j4b5i124imq8jcgh4zgcrwq-python3.13-mdit-py-plugins-0.4.2\r\n  /nix/store/aa0shvk4589im4w2wsq5qxiws381q9k8-python3.13-mdurl-0.1.2\r\n  /nix/store/7i6x1w92r7njk1fvmq2fwhz7fjsd26pa-source\r\ncopying path '/nix/store/7bcdsr7fykhji6dy8gq8jzd8qjswf13v-documentation-highlighter' from 'https://cache.nixos.org'...\r\ncopying path '/nix/store/8d4pij8ir718s90cj8yrhhrxd5pc81bw-nixos-test-driver-docstrings' from 'https://cache.nixos.org'...\r\ncopying path '/nix/store/fgx655d67ry55jw7dddmb49avywqkvyb-options.json' from 'https://cache.nixos.org'...\r\ncopying path '/nix/store/lk0mhvqjffjx087p8wlwf71agdkz71ha-options.json' from 'https://cache.nixos.org'...\r\ncopying path '/nix/store/xiw440bqysi2p7dr375nca54in97b0vi-options.json' from 'https://cache.nixos.org'...\r\ncopying path '/nix/store/7i6x1w92r7njk1fvmq2fwhz7fjsd26pa-source' from 'https://cache.nixos.org'...\r\ncopying path '/nix/store/aa0shvk4589im4w2wsq5qxiws381q9k8-python3.13-mdurl-0.1.2' from 'https://cache.nixos.org'...\r\ncopying path '/nix/store/a8s3qf5ydqbpqcshg1dgga9lag3xgbbp-brotli-1.1.0' from 'https://cache.nixos.org'...\r\nbuilding '/nix/store/vinkj8blr6mrsy2k5z8lk0n6i11l3vjj-lazy-options.json.drv'...\r\ncopying path '/nix/store/58dmrdsib24m3468d9n5s7g9g2gcgqmg-python3.13-markdown-it-py-3.0.0' from 'https://cache.nixos.org'...\r\ncopying path '/nix/store/lnab2vg7mcwddh63rimw1vh82nplzsxj-brotli-1.1.0-dev' from 'https://cache.nixos.org'...\r\ncopying path '/nix/store/kiyxdnmd5j4b5i124imq8jcgh4zgcrwq-python3.13-mdit-py-plugins-0.4.2' from 'https://cache.nixos.org'...\r\nerror:\r\n       … from call site\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/lib/eval-cacheable-options.nix:1:1:\r\n            1| {\r\n             | ^\r\n            2|   libPath,\r\n\r\n       … while calling anonymous lambda\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/lib/eval-cacheable-options.nix:1:1:\r\n            1| {\r\n             | ^\r\n            2|   libPath,\r\n\r\n       … while evaluating the attribute 'optionsNix'\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/doc/manual/default.nix:158:36:\r\n          157| rec {\r\n          158|   inherit (optionsDoc) optionsJSON optionsNix optionsDocBook;\r\n             |                                    ^\r\n          159|\r\n\r\n       … while evaluating the attribute 'optionsNix'\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/lib/make-options-doc/default.nix:180:11:\r\n          179| rec {\r\n          180|   inherit optionsNix;\r\n             |           ^\r\n          181|\r\n\r\n       … while calling the 'listToAttrs' builtin\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/lib/make-options-doc/default.nix:167:16:\r\n          166|\r\n          167|   optionsNix = builtins.listToAttrs (\r\n             |                ^\r\n          168|     map (o: {\r\n\r\n       … while calling the 'map' builtin\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/lib/make-options-doc/default.nix:168:5:\r\n          167|   optionsNix = builtins.listToAttrs (\r\n          168|     map (o: {\r\n             |     ^\r\n          169|       name = o.name;\r\n\r\n       … from call site\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/lib/make-options-doc/default.nix:120:17:\r\n          119|   filteredOpts = lib.filter (opt: opt.visible && !opt.internal) transformedOpts;\r\n          120|   optionsList = lib.flip map filteredOpts (\r\n             |                 ^\r\n          121|     opt:\r\n\r\n       … while calling 'flip'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/trivial.nix:306:11:\r\n          305|   flip =\r\n          306|     f: a: b:\r\n             |           ^\r\n          307|     f b a;\r\n\r\n       … while calling the 'map' builtin\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/trivial.nix:307:5:\r\n          306|     f: a: b:\r\n          307|     f b a;\r\n             |     ^\r\n          308|\r\n\r\n       … while calling the 'filter' builtin\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/lib/make-options-doc/default.nix:119:18:\r\n          118|   transformedOpts = map transformOptions rawOpts;\r\n          119|   filteredOpts = lib.filter (opt: opt.visible && !opt.internal) transformedOpts;\r\n             |                  ^\r\n          120|   optionsList = lib.flip map filteredOpts (\r\n\r\n       … while calling the 'map' builtin\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/lib/make-options-doc/default.nix:118:21:\r\n          117|   rawOpts = lib.optionAttrSetToDocList options;\r\n          118|   transformedOpts = map transformOptions rawOpts;\r\n             |                     ^\r\n          119|   filteredOpts = lib.filter (opt: opt.visible && !opt.internal) transformedOpts;\r\n\r\n       … from call site\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/lib/make-options-doc/default.nix:117:13:\r\n          116| let\r\n          117|   rawOpts = lib.optionAttrSetToDocList options;\r\n             |             ^\r\n          118|   transformedOpts = map transformOptions rawOpts;\r\n\r\n       … while calling 'optionAttrSetToDocList''\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/options.nix:570:8:\r\n          569|   optionAttrSetToDocList' =\r\n          570|     _: options:\r\n             |        ^\r\n          571|     concatMap (\r\n\r\n       … while calling the 'concatMap' builtin\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/options.nix:571:5:\r\n          570|     _: options:\r\n          571|     concatMap (\r\n             |     ^\r\n          572|       opt:\r\n\r\n       … from call site\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/options.nix:609:8:\r\n          608|       [ docOption ] ++ optionals subOptionsVisible subOptions\r\n          609|     ) (collect isOption options);\r\n             |        ^\r\n          610|\r\n\r\n       … while calling 'collect'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/attrsets.nix:866:11:\r\n          865|   collect =\r\n          866|     pred: attrs:\r\n             |           ^\r\n          867|     if pred attrs then\r\n\r\n       … while calling the 'concatMap' builtin\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/attrsets.nix:870:7:\r\n          869|     else if isAttrs attrs then\r\n          870|       concatMap (collect pred) (attrValues attrs)\r\n             |       ^\r\n          871|     else\r\n\r\n       … while calling 'collect'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/attrsets.nix:866:11:\r\n          865|   collect =\r\n          866|     pred: attrs:\r\n             |           ^\r\n          867|     if pred attrs then\r\n\r\n       … while calling the 'concatMap' builtin\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/attrsets.nix:870:7:\r\n          869|     else if isAttrs attrs then\r\n          870|       concatMap (collect pred) (attrValues attrs)\r\n             |       ^\r\n          871|     else\r\n\r\n       … while calling 'collect'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/attrsets.nix:866:11:\r\n          865|   collect =\r\n          866|     pred: attrs:\r\n             |           ^\r\n          867|     if pred attrs then\r\n\r\n       … while calling the 'concatMap' builtin\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/attrsets.nix:870:7:\r\n          869|     else if isAttrs attrs then\r\n          870|       concatMap (collect pred) (attrValues attrs)\r\n             |       ^\r\n          871|     else\r\n\r\n       … while calling 'collect'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/attrsets.nix:866:11:\r\n          865|   collect =\r\n          866|     pred: attrs:\r\n             |           ^\r\n          867|     if pred attrs then\r\n\r\n       … while evaluating a branch condition\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/attrsets.nix:867:5:\r\n          866|     pred: attrs:\r\n          867|     if pred attrs then\r\n             |     ^\r\n          868|       [ attrs ]\r\n\r\n       … from call site\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/attrsets.nix:867:8:\r\n          866|     pred: attrs:\r\n          867|     if pred attrs then\r\n             |        ^\r\n          868|       [ attrs ]\r\n\r\n       … while calling 'isType'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/types.nix:103:20:\r\n          102|   outer_types = rec {\r\n          103|     isType = type: x: (x._type or \"\") == type;\r\n             |                    ^\r\n          104|\r\n\r\n       … from call site\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/types.nix:103:24:\r\n          102|   outer_types = rec {\r\n          103|     isType = type: x: (x._type or \"\") == type;\r\n             |                        ^\r\n          104|\r\n\r\n       … while calling anonymous lambda\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:854:37:\r\n          853|\r\n          854|       matchedOptions = mapAttrs (n: v: v.matchedOptions) resultsByName;\r\n             |                                     ^\r\n          855|\r\n\r\n       … while evaluating the attribute 'matchedOptions'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:820:13:\r\n          819|           {\r\n          820|             matchedOptions = evalOptionValue loc opt defns';\r\n             |             ^\r\n          821|             unmatchedDefns = [ ];\r\n\r\n       … from call site\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:820:30:\r\n          819|           {\r\n          820|             matchedOptions = evalOptionValue loc opt defns';\r\n             |                              ^\r\n          821|             unmatchedDefns = [ ];\r\n\r\n       … while calling 'evalOptionValue'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:1052:15:\r\n         1051|   evalOptionValue =\r\n         1052|     loc: opt: defs:\r\n             |               ^\r\n         1053|     let\r\n\r\n       … in the left operand of the update (//) operator\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:1090:5:\r\n         1089|     warnDeprecation opt\r\n         1090|     // {\r\n             |     ^\r\n         1091|       value = addErrorContext \"while evaluating the option `${showOption loc}':\" value;\r\n\r\n       … from call site\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:1085:9:\r\n         1084|       warnDeprecation =\r\n         1085|         warnIf (opt.type.deprecationMessage != null)\r\n             |         ^\r\n         1086|           \"The type `types.${opt.type.name}' of option `${showOption loc}' defined in ${showFiles opt.declarations} is deprecated. ${opt.type.deprecationMessage}\";\r\n\r\n       … while calling 'warnIf'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/trivial.nix:825:18:\r\n          824|   */\r\n          825|   warnIf = cond: msg: if cond then warn msg else x: x;\r\n             |                  ^\r\n          826|\r\n\r\n       … while evaluating a branch condition\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/trivial.nix:825:23:\r\n          824|   */\r\n          825|   warnIf = cond: msg: if cond then warn msg else x: x;\r\n             |                       ^\r\n          826|\r\n\r\n       … from call site\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:817:19:\r\n          816|           let\r\n          817|             opt = fixupOptionType loc (mergeOptionDecls loc decls);\r\n             |                   ^\r\n          818|           in\r\n\r\n       … while calling 'fixupOptionType'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:1296:10:\r\n         1295|   fixupOptionType =\r\n         1296|     loc: opt:\r\n             |          ^\r\n         1297|     if opt.type.getSubModules or null == null then\r\n\r\n       … while evaluating a branch condition\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:1297:5:\r\n         1296|     loc: opt:\r\n         1297|     if opt.type.getSubModules or null == null then\r\n             |     ^\r\n         1298|       opt // { type = opt.type or types.unspecified; }\r\n\r\n       … from call site\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:817:40:\r\n          816|           let\r\n          817|             opt = fixupOptionType loc (mergeOptionDecls loc decls);\r\n             |                                        ^\r\n          818|           in\r\n\r\n       … while calling 'mergeOptionDecls'\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:940:10:\r\n          939|   mergeOptionDecls =\r\n          940|     loc: opts:\r\n             |          ^\r\n          941|     foldl'\r\n\r\n       … while calling the 'foldl'' builtin\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:941:5:\r\n          940|     loc: opts:\r\n          941|     foldl'\r\n             |     ^\r\n          942|       (\r\n\r\n       … while calling anonymous lambda\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:943:14:\r\n          942|       (\r\n          943|         res: opt:\r\n             |              ^\r\n          944|         let\r\n\r\n       … in the right operand of the update (//) operator\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:1001:11:\r\n         1000|           opt.options\r\n         1001|           // res\r\n             |           ^\r\n         1002|           // {\r\n\r\n       … in the right operand of the update (//) operator\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:1002:11:\r\n         1001|           // res\r\n         1002|           // {\r\n             |           ^\r\n         1003|             declarations = res.declarations ++ [ opt._file ];\r\n\r\n       … in the right operand of the update (//) operator\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:1023:11:\r\n         1022|           }\r\n         1023|           // typeSet\r\n             |           ^\r\n         1024|       )\r\n\r\n       … while evaluating a branch condition\r\n         at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:978:20:\r\n          977|                     \"The option `${showOption loc}' in `${opt._file}' is already declared in ${showFiles res.declarations}.\"\r\n          978|               else if opt.options.type ? functor.wrappedDeprecationMessage then\r\n             |                    ^\r\n          979|                 { type = addDeprecatedWrapped opt.options.type; }\r\n\r\n       … while evaluating the attribute 'options.type'\r\n         at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/modules/services/web-apps/nextcloud.nix:1024:7:\r\n         1023|     fileBackup = lib.mkOption {\r\n         1024|       type = config.contracts.fileBackup.consumer;\r\n             |       ^\r\n         1025|     };\r\n\r\n       error: attribute 'contracts' missing\r\n       at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/modules/services/web-apps/nextcloud.nix:1024:14:\r\n         1023|     fileBackup = lib.mkOption {\r\n         1024|       type = config.contracts.fileBackup.consumer;\r\n             |              ^\r\n         1025|     };\r\nCacheable portion of option doc build failed.\r\nUsually this means that an option attribute that ends up in documentation (eg `default` or `description`) depends on the restricted module arguments `config` or `pkgs`.\r\n\r\nRebuild your configuration with `--show-trace` to find the offending location. Remove the references to restricted arguments (eg by escaping their antiquotations or adding a `defaultText`) or disable the sandboxed build for the failing module by setting `meta.buildDocsInSandbox = false`.\r\n\r\nerror: builder for '/nix/store/vinkj8blr6mrsy2k5z8lk0n6i11l3vjj-lazy-options.json.drv' failed with exit code 1;\r\n       last 25 log lines:\r\n       >        … while evaluating a branch condition\r\n       >          at /nix/store/xq9gm26vql7v1d7alaq4q20fvr5rgaw7-lib/modules.nix:978:20:\r\n       >           977|                     \"The option `${showOption loc}' in `${opt._file}' is already declared in ${showFiles res.declarations}.\"\r\n       >           978|               else if opt.options.type ? functor.wrappedDeprecationMessage then\r\n       >              |                    ^\r\n       >           979|                 { type = addDeprecatedWrapped opt.options.type; }\r\n       >\r\n       >        … while evaluating the attribute 'options.type'\r\n       >          at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/modules/services/web-apps/nextcloud.nix:1024:7:\r\n       >          1023|     fileBackup = lib.mkOption {\r\n       >          1024|       type = config.contracts.fileBackup.consumer;\r\n       >              |       ^\r\n       >          1025|     };\r\n       >\r\n       >        error: attribute 'contracts' missing\r\n       >        at /nix/store/349j6vlcdmf2a2xv0vz4mq7yb6wix7ql-nixos/modules/services/web-apps/nextcloud.nix:1024:14:\r\n       >          1023|     fileBackup = lib.mkOption {\r\n       >          1024|       type = config.contracts.fileBackup.consumer;\r\n       >              |              ^\r\n       >          1025|     };\r\n       > Cacheable portion of option doc build failed.\r\n       > Usually this means that an option attribute that ends up in documentation (eg `default` or `description`) depends on the restricted module arguments `config` or `pkgs`.\r\n       >\r\n       > Rebuild your configuration with `--show-trace` to find the offending location. Remove the references to restricted arguments (eg by escaping their antiquotations or adding a `defaultText`) or disable the sandboxed build for the failing module by setting `meta.buildDocsInSandbox = false`.\r\n       >\r\n       For full logs, run 'nix log /nix/store/vinkj8blr6mrsy2k5z8lk0n6i11l3vjj-lazy-options.json.drv'.\r\nerror: 1 dependencies of derivation '/nix/store/qzykfx31izdzq9c2inyvpm48xxm07x1n-options.json.drv' failed to build\r\nerror: 1 dependencies of derivation '/nix/store/29xq1kdbafpar7v70zwag14l73cigwa8-nixos-manual-html.drv' failed to build\r\n```\r\n\r\n</details>\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-12T10:18:11Z",
+   "diff_hunk": "@@ -47,6 +47,10 @@\n   ./config/xdg/sounds.nix\n   ./config/xdg/terminal-exec.nix\n   ./config/zram.nix\n+  ./contracts/default.nix",
+   "id": 2269386719,
+   "in_reply_to_id": 2267102929,
+   "line": 51,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 50,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/module-list.nix",
+   "position": 4,
+   "pull_request_review_id": 3109772001,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-12T10:19:10Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Also the usual escape hatch of adding defaultText does not work here. There should be an equivalent defaultType 😅",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-12T10:37:58Z",
+   "diff_hunk": "@@ -47,6 +47,10 @@\n   ./config/xdg/sounds.nix\n   ./config/xdg/terminal-exec.nix\n   ./config/zram.nix\n+  ./contracts/default.nix",
+   "id": 2269432850,
+   "in_reply_to_id": 2267102929,
+   "line": 51,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 50,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/module-list.nix",
+   "position": 4,
+   "pull_request_review_id": 3109841934,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-12T10:37:58Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@roberth thoughts?",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-12T11:26:45Z",
+   "diff_hunk": "@@ -47,6 +47,10 @@\n   ./config/xdg/sounds.nix\n   ./config/xdg/terminal-exec.nix\n   ./config/zram.nix\n+  ./contracts/default.nix",
+   "id": 2269540490,
+   "in_reply_to_id": 2267102929,
+   "line": 51,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 50,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/module-list.nix",
+   "position": 4,
+   "pull_request_review_id": 3110004316,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-12T11:26:45Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Btw I’m not opposed at all to try to fix something in the eval modules code but I’d love some guidance as of at least is it the correct thing to do. That’s also why I published the RFC as-is, I just didn’t know what to do.\r\n\r\nSame for the other issues like the one where the documentation does not build.",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-12T13:32:39Z",
+   "diff_hunk": "@@ -47,6 +47,10 @@\n   ./config/xdg/sounds.nix\n   ./config/xdg/terminal-exec.nix\n   ./config/zram.nix\n+  ./contracts/default.nix",
+   "id": 2269860267,
+   "in_reply_to_id": 2267102929,
+   "line": 51,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 50,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/module-list.nix",
+   "position": 4,
+   "pull_request_review_id": 3110638310,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-12T13:48:42Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "on this dual link, my hunch would be to maybe instead have `nixos/modules/services/web-apps/nextcloud.nix` add `config.contracts.fileBackup.consumer.provider.consumer = cfg.fileBackup;`.\r\n\r\n<details>\r\n<summary>\r\nthis yielded an infinite recursion tho, that seems to say this would make the consumer's type depend on the value of the consumer itself.\r\n</summary>\r\n\r\n```\r\n       … while evaluating the option `nodes.nextcloud.contracts.fileBackup.consumer':\r\n          138|                     default = provider.config.consumer.input or null;\r\n             |                               ^\r\n         at /home/kiara/code/nixpkgs/nixos/modules/contracts/default.nix:132:45:\r\n          132|                     type = lib.types.nullOr interface.config.consumer;\r\n             |                                             ^\r\n       … while evaluating the option `nodes.nextcloud.contracts.fileBackup.consumer':\r\n         at /home/kiara/code/nixpkgs/nixos/modules/services/web-apps/nextcloud.nix:1567:57:\r\n         1567|       contracts.fileBackup.consumer.provider.consumer = cfg.fileBackup;\r\n             |                                                         ^\r\n       … while evaluating the attribute 'options.type'\r\n         at /home/kiara/code/nixpkgs/nixos/modules/services/web-apps/nextcloud.nix:1024:7:\r\n         1024|       type = config.contracts.fileBackup.consumer;\r\n             |              ^\r\n         ...\r\n       error: infinite recursion encountered\r\n```\r\n\r\n</details>\r\n\r\n<details>\r\n<summary>\r\nmaking it `config.contracts.fileBackup.provider.consumer = cfg.fileBackup;` instead similarly yielded an infinite recursion, that i think says the provider's type would depend on the provider's own value.\r\n</summary>\r\n\r\n```\r\n         at /home/kiara/code/nixpkgs/nixos/modules/services/backup/restic.nix:307:39:\r\n          307|               type = lib.types.nullOr config.contracts.fileBackup.provider;\r\n             |                                       ^\r\n       … while evaluating the option `nodes.nextcloud.contracts.fileBackup.provider':\r\n         at /home/kiara/code/nixpkgs/nixos/modules/contracts/default.nix:98:31:\r\n           98|                     default = consumer.config.provider.output;\r\n             |                               ^\r\n         at /home/kiara/code/nixpkgs/nixos/modules/contracts/default.nix:90:28:\r\n           90|                     type = interface.config.provider;\r\n             |                            ^\r\n```\r\n\r\n</details>\r\n\r\nso hm, looks like i've mostly reproduced your infinite recursion issues so far.\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-14T22:51:05Z",
+   "diff_hunk": "@@ -63,8 +65,20 @@ let\n               https = false;\n               database.createLocally = lib.mkDefault true;\n               config = {\n-                adminpassFile = \"${pkgs.writeText \"adminpass\" config.adminpass}\"; # Don't try this at home!\n+                adminpassFile = \"${pkgs.writeText \"adminpass\" topLevelConfig.adminpass}\"; # Don't try this at home!\n               };\n+              fileBackup.provider = config.services.restic.backups.nextcloud.fileBackup;\n+            };\n+\n+            systemd.tmpfiles.rules = [\n+              \"d '/var/lib/backups/nextcloud' 0750 nextcloud root - -\"\n+            ];\n+            services.restic.backups.nextcloud = {\n+              repository = \"/var/lib/backups/nextcloud\";\n+              passwordFile = toString (pkgs.writeText \"password\" \"password\");\n+              initialize = true;\n+\n+              fileBackup.consumer = config.services.nextcloud.fileBackup;",
+   "id": 2277874944,
+   "line": 82,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 81,
+   "original_position": 31,
+   "original_start_line": null,
+   "path": "nixos/tests/nextcloud/default.nix",
+   "position": 30,
+   "pull_request_review_id": 3122315607,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-06T21:23:27Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Unfortunately, this has two downsides:\r\n\r\n> 1. It requires one more line in each provider definition. This would be okay if there wasn't the following downside.\r\n> 1. There's no way to write side effects. This means the provider can only write to its own output, which misses the whole point of having contracts in the first place.\r\n\r\nso, @fricklerhandwerk [was right](https://github.com/ibizaman/selfhostblocks/issues/467#issuecomment-2955767245) on needing to type effects, huh.\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-15T08:38:09Z",
+   "diff_hunk": "@@ -63,8 +65,20 @@ let\n               https = false;\n               database.createLocally = lib.mkDefault true;\n               config = {\n-                adminpassFile = \"${pkgs.writeText \"adminpass\" config.adminpass}\"; # Don't try this at home!\n+                adminpassFile = \"${pkgs.writeText \"adminpass\" topLevelConfig.adminpass}\"; # Don't try this at home!\n               };\n+              fileBackup.provider = config.services.restic.backups.nextcloud.fileBackup;\n+            };\n+\n+            systemd.tmpfiles.rules = [\n+              \"d '/var/lib/backups/nextcloud' 0750 nextcloud root - -\"\n+            ];\n+            services.restic.backups.nextcloud = {\n+              repository = \"/var/lib/backups/nextcloud\";\n+              passwordFile = toString (pkgs.writeText \"password\" \"password\");\n+              initialize = true;\n+\n+              fileBackup.consumer = config.services.nextcloud.fileBackup;",
+   "id": 2278542122,
+   "in_reply_to_id": 2277874944,
+   "line": 82,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 81,
+   "original_position": 31,
+   "original_start_line": null,
+   "path": "nixos/tests/nextcloud/default.nix",
+   "position": 30,
+   "pull_request_review_id": 3123260820,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-15T08:38:09Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "to be fair, the primary effect relevant here so far (back-ups, secrets, SSL) would seem to be 'in addition to having input/output, will write to these file paths'?\r\nlike i'm not sure that'd already cover further contracts such as reverse proxying, but maybe it'd help scope things for the example in this PR.\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-15T08:55:41Z",
+   "diff_hunk": "@@ -63,8 +65,20 @@ let\n               https = false;\n               database.createLocally = lib.mkDefault true;\n               config = {\n-                adminpassFile = \"${pkgs.writeText \"adminpass\" config.adminpass}\"; # Don't try this at home!\n+                adminpassFile = \"${pkgs.writeText \"adminpass\" topLevelConfig.adminpass}\"; # Don't try this at home!\n               };\n+              fileBackup.provider = config.services.restic.backups.nextcloud.fileBackup;\n+            };\n+\n+            systemd.tmpfiles.rules = [\n+              \"d '/var/lib/backups/nextcloud' 0750 nextcloud root - -\"\n+            ];\n+            services.restic.backups.nextcloud = {\n+              repository = \"/var/lib/backups/nextcloud\";\n+              passwordFile = toString (pkgs.writeText \"password\" \"password\");\n+              initialize = true;\n+\n+              fileBackup.consumer = config.services.nextcloud.fileBackup;",
+   "id": 2278566483,
+   "in_reply_to_id": 2277874944,
+   "line": 82,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 81,
+   "original_position": 31,
+   "original_start_line": null,
+   "path": "nixos/tests/nextcloud/default.nix",
+   "position": 30,
+   "pull_request_review_id": 3123293429,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-15T08:57:51Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Normally `config` is available, but NixOS also uses split evaluation for docs, making that... complicated.\r\nMaybe some `meta.buildInSandbox = false` can help?\r\n\r\nhttps://github.com/NixOS/nixpkgs/blob/160ee19abbe6ba229d5315a51099f5a8362a1879/nixos/modules/misc/meta.nix#L69-L82",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-20T13:50:51Z",
+   "diff_hunk": "@@ -47,6 +47,10 @@\n   ./config/xdg/sounds.nix\n   ./config/xdg/terminal-exec.nix\n   ./config/zram.nix\n+  ./contracts/default.nix",
+   "id": 2288242099,
+   "in_reply_to_id": 2267102929,
+   "line": 51,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 50,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/module-list.nix",
+   "position": 4,
+   "pull_request_review_id": 3136711540,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-20T13:50:52Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> will write to these file paths\r\n\r\nIt's more general, it's setting some option anywhere in the config tree.",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-08-29T09:30:30Z",
+   "diff_hunk": "@@ -63,8 +65,20 @@ let\n               https = false;\n               database.createLocally = lib.mkDefault true;\n               config = {\n-                adminpassFile = \"${pkgs.writeText \"adminpass\" config.adminpass}\"; # Don't try this at home!\n+                adminpassFile = \"${pkgs.writeText \"adminpass\" topLevelConfig.adminpass}\"; # Don't try this at home!\n               };\n+              fileBackup.provider = config.services.restic.backups.nextcloud.fileBackup;\n+            };\n+\n+            systemd.tmpfiles.rules = [\n+              \"d '/var/lib/backups/nextcloud' 0750 nextcloud root - -\"\n+            ];\n+            services.restic.backups.nextcloud = {\n+              repository = \"/var/lib/backups/nextcloud\";\n+              passwordFile = toString (pkgs.writeText \"password\" \"password\");\n+              initialize = true;\n+\n+              fileBackup.consumer = config.services.nextcloud.fileBackup;",
+   "id": 2309675981,
+   "in_reply_to_id": 2277874944,
+   "line": 82,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 81,
+   "original_position": 31,
+   "original_start_line": null,
+   "path": "nixos/tests/nextcloud/default.nix",
+   "position": 30,
+   "pull_request_review_id": 3168055892,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-29T09:30:30Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i just realized `module-interfaces` didn't actually define an `interfaces.*.provider.consumer` option, so i guess that was how they got away without needing dual linking.\r\n\r\nin this implementation that's `contracts.*.provider.consumer`, so for the case of nextcloud's restic file back-ups, my (initial) infinite recursion (that is, using `config.contracts.fileBackup.consumer.provider.consumer = cfg.fileBackup;`) seems to have gotten tripped up over its use in [typing the consumer (here: nextcloud)'s `fileBackup`](https://github.com/NixOS/nixpkgs/pull/432529/files#diff-80ddb2d38f0f6e01125ccb8683381d7be20be1df3dce01e5c200dd74f5173623R1024), i.e. its mentioned line:\r\n\r\n```\r\n         at nixpkgs/nixos/modules/services/web-apps/nextcloud.nix:1024:7:\r\n         1024|       type = config.contracts.fileBackup.consumer;\r\n             |              ^\r\n```\r\n\r\n... which does then actually seem to have involved a value getting propagated up so as to type its parent, causing the mentioned recursion.\r\n\r\nmy next step would be to actually think if there's a way to address that (or if we're at the limit of what's technically / logically possible).\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-09-07T14:35:20Z",
+   "diff_hunk": "@@ -63,8 +65,20 @@ let\n               https = false;\n               database.createLocally = lib.mkDefault true;\n               config = {\n-                adminpassFile = \"${pkgs.writeText \"adminpass\" config.adminpass}\"; # Don't try this at home!\n+                adminpassFile = \"${pkgs.writeText \"adminpass\" topLevelConfig.adminpass}\"; # Don't try this at home!\n               };\n+              fileBackup.provider = config.services.restic.backups.nextcloud.fileBackup;\n+            };\n+\n+            systemd.tmpfiles.rules = [\n+              \"d '/var/lib/backups/nextcloud' 0750 nextcloud root - -\"\n+            ];\n+            services.restic.backups.nextcloud = {\n+              repository = \"/var/lib/backups/nextcloud\";\n+              passwordFile = toString (pkgs.writeText \"password\" \"password\");\n+              initialize = true;\n+\n+              fileBackup.consumer = config.services.nextcloud.fileBackup;",
+   "id": 2328710574,
+   "in_reply_to_id": 2277874944,
+   "line": 82,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 81,
+   "original_position": 31,
+   "original_start_line": null,
+   "path": "nixos/tests/nextcloud/default.nix",
+   "position": 30,
+   "pull_request_review_id": 3194472144,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-06T21:28:17Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think `services.stash.passwordFile.input = mkIf (cfg.passwordFile != null) ..` would never have the intended consequence of setting `services.stash.passwordFile.input` only if `services.stash.passwordFile.provider` is set.\r\n\r\nThis very definition mandates `cfg.passwordFile != null` since it includes at least `{ input = «thunk»; }`. I think I managed to illustrate that with the following reproducer:\r\n\r\n```console\r\n❯ nix-instantiate --json --eval --expr '\r\n  let inherit (import <nixpkgs> {}) lib; in\r\n  (lib.evalModules {\r\n    modules = [\r\n      ({ config, ... }:{\r\n        options.foo = lib.mkOption {\r\n          type = lib.types.nullOr (lib.types.submodule ({\r\n            options.bar = lib.mkOption {\r\n              type = lib.types.str;\r\n            };\r\n          }));\r\n          default = null;\r\n        };\r\n        config.foo.bar = lib.mkIf (lib.traceVal config.foo != null) \"qux\";\r\n      })\r\n    ];\r\n  }).config.foo.bar\r\n'\r\ntrace: { bar = «thunk»; }\r\n\"qux\"\r\n```\r\n\r\nObserve that `config.foo.bar` evaluates to `\"qux\"` even though that is supposedly only meant to happen if `foo` is actually defined.\r\n\r\nAm I on to something here?",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-09-07T14:46:13Z",
+   "diff_hunk": "@@ -479,6 +479,26 @@ in\n       scrapers_path = mkIf (!cfg.mutableScrapers) cfg.scrapers;\n     };\n \n+    # I would prefer to have these in the \"default\" attr of the `services.stash.passwordFile` option\n+    # but I couldn't make it work.\n+    services.stash.passwordFile.input = mkIf (cfg.passwordFile != null) {\n+      owner = cfg.user;\n+      group = cfg.group;\n+      mode = \"0400\";\n+    };",
+   "id": 2328714550,
+   "line": 488,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 488,
+   "original_position": 33,
+   "original_start_line": 484,
+   "path": "nixos/modules/services/web-apps/stash.nix",
+   "position": 33,
+   "pull_request_review_id": 3194476454,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 484,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2025-09-07T16:35:07Z",
+   "user": {
+    "id": 610962,
+    "login": "aforemny",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "so basically, the `config.foo != null` check here is nonsensical in that the assignment `config.foo.bar = lib.mkIf ...`, being syntactic sugar for `config.foo = { bar = lib.mkIf ...; }`, already invalidates the check, rendering it always true?\r\n\r\n(i haven't so much considered the author's intent to think of fixes yet.)\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-09-08T11:59:33Z",
+   "diff_hunk": "@@ -479,6 +479,26 @@ in\n       scrapers_path = mkIf (!cfg.mutableScrapers) cfg.scrapers;\n     };\n \n+    # I would prefer to have these in the \"default\" attr of the `services.stash.passwordFile` option\n+    # but I couldn't make it work.\n+    services.stash.passwordFile.input = mkIf (cfg.passwordFile != null) {\n+      owner = cfg.user;\n+      group = cfg.group;\n+      mode = \"0400\";\n+    };",
+   "id": 2330027478,
+   "in_reply_to_id": 2328714550,
+   "line": 488,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 488,
+   "original_position": 33,
+   "original_start_line": 484,
+   "path": "nixos/modules/services/web-apps/stash.nix",
+   "position": 33,
+   "pull_request_review_id": 3196204264,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "side": "RIGHT",
+   "start_line": 484,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2025-09-08T11:59:34Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "the `provider.consumer` attribute seems used to propagate `input` from the consumer to the provider.\r\n`module-interfaces` had instead had the provider [as a function of `input`](https://github.com/fricklerhandwerk/module-interfaces/blob/caeb171fde3a6ce2dc61f4e59834df9e7bf584a0/example/string-provider.nix#L16), but over here that approach left questions on how to [generate configuration outside of the interface yet contingent on `input`](https://github.com/NixOS/nixpkgs/pull/432529/files#diff-60425e884c8d22815ecefadb60a2b1efdb50ec134701f236ee5a2f561b528ed4R317-R325), as alluded to by @ibizaman:\r\n\r\n> It's more general, it's setting some option anywhere in the config tree.\r\n\r\non ideas for mitigation to the mentioned `.consumer` issues, i thought of:\r\n\r\n1. juggling the types to prevent flowing upward\r\n    - narrow down / filter the links to just the bits needed to prevent overlap\r\n    - type not the whole but the needed part to prevent overlap\r\n1. getting rid of `.consumer` to get closer to `module-interfaces` again, given that was able to do without the dual link.\r\n1. move up `mkIf` to include what I had moved to `other`? - possibly namespaced such as to make it feel less concerned about recursion.\r\n\r\ni've now [made an attempt](https://github.com/ibizaman/nixpkgs/compare/contracts-rfc...KiaraGrouwstra:nixpkgs:contracts-un-dual) to explore that second route (arbitrarily trying to route further options thru an `other` attribute yielded from the `provider` function distinct from its `output`). that ran into infinite recursion errors as well tho - perhaps someone better-versed in the module system might be able to shed light on whether that could be remedied.\r\n\r\nthe idea of taking stuff through `other` [otherwise seems to work](https://github.com/fricklerhandwerk/module-interfaces/compare/main...KiaraGrouwstra:module-interfaces:other).\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-09-08T12:00:22Z",
+   "diff_hunk": "@@ -63,8 +65,20 @@ let\n               https = false;\n               database.createLocally = lib.mkDefault true;\n               config = {\n-                adminpassFile = \"${pkgs.writeText \"adminpass\" config.adminpass}\"; # Don't try this at home!\n+                adminpassFile = \"${pkgs.writeText \"adminpass\" topLevelConfig.adminpass}\"; # Don't try this at home!\n               };\n+              fileBackup.provider = config.services.restic.backups.nextcloud.fileBackup;\n+            };\n+\n+            systemd.tmpfiles.rules = [\n+              \"d '/var/lib/backups/nextcloud' 0750 nextcloud root - -\"\n+            ];\n+            services.restic.backups.nextcloud = {\n+              repository = \"/var/lib/backups/nextcloud\";\n+              passwordFile = toString (pkgs.writeText \"password\" \"password\");\n+              initialize = true;\n+\n+              fileBackup.consumer = config.services.nextcloud.fileBackup;",
+   "id": 2330029298,
+   "in_reply_to_id": 2277874944,
+   "line": 82,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 81,
+   "original_position": 31,
+   "original_start_line": null,
+   "path": "nixos/tests/nextcloud/default.nix",
+   "position": 30,
+   "pull_request_review_id": 3196206668,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-07T13:18:42Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "fyi, detnix just saw a [fix merged](https://github.com/DeterminateSystems/nix-src/pull/213) related to infinite recursion, tho it's not clear to me if that has relevance to upstream nix as well. (the code there and the upstream code look somewhat different to me, so not sure it applies.)\r\n\r\nedit: this does not seem a magical fix\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-09-26T17:37:14Z",
+   "diff_hunk": "@@ -63,8 +65,20 @@ let\n               https = false;\n               database.createLocally = lib.mkDefault true;\n               config = {\n-                adminpassFile = \"${pkgs.writeText \"adminpass\" config.adminpass}\"; # Don't try this at home!\n+                adminpassFile = \"${pkgs.writeText \"adminpass\" topLevelConfig.adminpass}\"; # Don't try this at home!\n               };\n+              fileBackup.provider = config.services.restic.backups.nextcloud.fileBackup;\n+            };\n+\n+            systemd.tmpfiles.rules = [\n+              \"d '/var/lib/backups/nextcloud' 0750 nextcloud root - -\"\n+            ];\n+            services.restic.backups.nextcloud = {\n+              repository = \"/var/lib/backups/nextcloud\";\n+              passwordFile = toString (pkgs.writeText \"password\" \"password\");\n+              initialize = true;\n+\n+              fileBackup.consumer = config.services.nextcloud.fileBackup;",
+   "id": 2383041071,
+   "in_reply_to_id": 2277874944,
+   "line": 82,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 81,
+   "original_position": 31,
+   "original_start_line": null,
+   "path": "nixos/tests/nextcloud/default.nix",
+   "position": 30,
+   "pull_request_review_id": 3273208628,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-07T11:20:46Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "trying more:\r\n\r\n<details>\r\n<summary>\r\n`config = config.services.nextcloud.fileBackup.other;` makes `config` depend on itself\r\n</summary>\r\n\r\n```\r\n       … while evaluating the attribute 'drvPath'\r\n         at /home/kiara/code/nixpkgs/lib/customisation.nix:418:7:\r\n          417|     // {\r\n          418|       drvPath =\r\n             |       ^\r\n          419|         assert condition;\r\n\r\n...\r\n\r\n       … from call site\r\n         at /home/kiara/code/nixpkgs/nixos/modules/services/web-apps/nextcloud.nix:1024:5:\r\n         1023|     # cfg.fileBackup.other\r\n         1024|     config.services.nextcloud.fileBackup.other\r\n             |     ^\r\n         1025|\r\n\r\n       … while evaluating the module argument `config' in \"/home/kiara/code/nixpkgs/nixos/modules/services/web-apps/nextcloud.nix\":\r\n\r\n       … while evaluating the attribute 'config'\r\n         at /home/kiara/code/nixpkgs/lib/modules.nix:257:21:\r\n          256|                     options\r\n          257|                     config\r\n             |                     ^\r\n          258|                     specialArgs\r\n\r\n       error: infinite recursion encountered\r\n       at /home/kiara/code/nixpkgs/lib/derivations.nix:159:9:\r\n          158|         outputName\r\n          159|         drvPath\r\n             |         ^\r\n          160|         name\r\n```\r\n\r\n</details>\r\n\r\nif i [split it out](https://github.com/KiaraGrouwstra/nixpkgs/compare/contracts-b...contracts-b-2) so `.other` is extracted in a qualified manner (rather than directly into `config`), i instead get:\r\n\r\n<details>\r\n<summary>\r\nprovider `services.nextcloud.fileBackup.provider`'s `.other` thru the consumer depends on the provider which has `other`... infinite recursion\r\n</summary>\r\n\r\n```\r\n       … from call site\r\n         at /home/kiara/code/nixpkgs/nixos/modules/services/web-apps/nextcloud.nix:1591:44:\r\n         1590|       # services.restic = mkIf cfg.enable cfg.fileBackup.other.services.restic;\r\n         1591|       services.restic = if cfg.enable then cfg.fileBackup.other.services.restic else { };\r\n             |                                            ^\r\n         1592|     }\r\n\r\n...\r\n\r\n       … from call site\r\n         at /home/kiara/code/nixpkgs/nixos/modules/contracts/default.nix:116:30:\r\n          115|                   # default = consumer.config.provider.other;\r\n          116|                   default = (consumer.config.provider consumer.config.input).other;\r\n             |                              ^\r\n          117|                 };\r\n\r\n...\r\n\r\n       … while evaluating the option `nodes.nextcloud.services.nextcloud.fileBackup.provider':\r\n\r\n...\r\n\r\n       … from call site\r\n         at /home/kiara/code/nixpkgs/nixos/tests/nextcloud/default.nix:70:37:\r\n           69|               };\r\n           70|               fileBackup.provider = config.services.restic.backups.nextcloud.fileBackup;\r\n             |                                     ^\r\n           71|             };\r\n\r\n...\r\n\r\n       … while evaluating the option `nodes.nextcloud.services.restic.backups':\r\n\r\n       (8 duplicate frames omitted)\r\n\r\n       … while calling the 'zipAttrsWith' builtin\r\n         at /home/kiara/code/nixpkgs/lib/modules.nix:765:30:\r\n          764|       # extract the definitions for each loc\r\n          765|       rawDefinitionsByName = zipAttrsWith (n: v: v) (\r\n             |                              ^\r\n          766|         map (\r\n\r\n       … while calling the 'map' builtin\r\n         at /home/kiara/code/nixpkgs/lib/modules.nix:766:9:\r\n          765|       rawDefinitionsByName = zipAttrsWith (n: v: v) (\r\n          766|         map (\r\n             |         ^\r\n          767|           module:\r\n\r\n       … in the condition of the assert statement\r\n         at /home/kiara/code/nixpkgs/lib/modules.nix:733:9:\r\n          732|       checkedConfigs =\r\n          733|         assert all (\r\n             |         ^\r\n          734|           c:\r\n\r\n       … while calling the 'all' builtin\r\n         at /home/kiara/code/nixpkgs/lib/modules.nix:733:16:\r\n          732|       checkedConfigs =\r\n          733|         assert all (\r\n             |                ^\r\n          734|           c:\r\n\r\n       error: infinite recursion encountered\r\n```\r\n\r\n</details>\r\n\r\nnarrowing the types down further seemed to not help there either.\r\n\r\ni'm starting less confident this is easy / possible. so maybe i should stop pretending i could figure this out.\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-12-08T00:11:17Z",
+   "diff_hunk": "@@ -63,8 +65,20 @@ let\n               https = false;\n               database.createLocally = lib.mkDefault true;\n               config = {\n-                adminpassFile = \"${pkgs.writeText \"adminpass\" config.adminpass}\"; # Don't try this at home!\n+                adminpassFile = \"${pkgs.writeText \"adminpass\" topLevelConfig.adminpass}\"; # Don't try this at home!\n               };\n+              fileBackup.provider = config.services.restic.backups.nextcloud.fileBackup;\n+            };\n+\n+            systemd.tmpfiles.rules = [\n+              \"d '/var/lib/backups/nextcloud' 0750 nextcloud root - -\"\n+            ];\n+            services.restic.backups.nextcloud = {\n+              repository = \"/var/lib/backups/nextcloud\";\n+              passwordFile = toString (pkgs.writeText \"password\" \"password\");\n+              initialize = true;\n+\n+              fileBackup.consumer = config.services.nextcloud.fileBackup;",
+   "id": 2596728811,
+   "in_reply_to_id": 2277874944,
+   "line": 82,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 81,
+   "original_position": 31,
+   "original_start_line": null,
+   "path": "nixos/tests/nextcloud/default.nix",
+   "position": 30,
+   "pull_request_review_id": 3549745567,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-12-08T00:11:17Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i wondered if the check could instead look at other clues like the user-specified `path`, tho i imagine that might give weird recursion.\r\nalternatively, if we cannot conditionally initialize these, we could instead consider the impact of this, i.e. whether external null-checks could be re-written to verify initialization of the secret (e.g. do we have output).\r\n",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2025-12-21T10:23:47Z",
+   "diff_hunk": "@@ -479,6 +479,26 @@ in\n       scrapers_path = mkIf (!cfg.mutableScrapers) cfg.scrapers;\n     };\n \n+    # I would prefer to have these in the \"default\" attr of the `services.stash.passwordFile` option\n+    # but I couldn't make it work.\n+    services.stash.passwordFile.input = mkIf (cfg.passwordFile != null) {\n+      owner = cfg.user;\n+      group = cfg.group;\n+      mode = \"0400\";\n+    };",
+   "id": 2637731673,
+   "in_reply_to_id": 2328714550,
+   "line": 488,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 488,
+   "original_position": 33,
+   "original_start_line": 484,
+   "path": "nixos/modules/services/web-apps/stash.nix",
+   "position": 33,
+   "pull_request_review_id": 3601637779,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 484,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2025-12-21T10:23:47Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "does #485453 offer a solution to this? if so, would that apply over here as well? if it does not apply, do we know why?",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "created_at": "2026-02-07T08:19:43Z",
+   "diff_hunk": "@@ -479,6 +479,26 @@ in\n       scrapers_path = mkIf (!cfg.mutableScrapers) cfg.scrapers;\n     };\n \n+    # I would prefer to have these in the \"default\" attr of the `services.stash.passwordFile` option\n+    # but I couldn't make it work.\n+    services.stash.passwordFile.input = mkIf (cfg.passwordFile != null) {\n+      owner = cfg.user;\n+      group = cfg.group;\n+      mode = \"0400\";\n+    };",
+   "id": 2777255521,
+   "in_reply_to_id": 2328714550,
+   "line": 488,
+   "original_commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "original_line": 488,
+   "original_position": 33,
+   "original_start_line": 484,
+   "path": "nixos/modules/services/web-apps/stash.nix",
+   "position": 33,
+   "pull_request_review_id": 3766694019,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 484,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-02-07T08:19:44Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "Please forgive me for a superficial first review and coming up with proofreading stuff, but maybe there's already something useful in here.\r\nCan't say particularly much about the broad design yet but I hope I've sprinkled a bit of useful info in there.\r\nI'd like to do a more in depth review later.",
+   "commit_id": null,
+   "id": 3103740433,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-10T21:42:41Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3104823164,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-11T09:21:12Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3104833539,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-11T09:24:52Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3104840664,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-11T09:27:18Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3104857762,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-11T09:32:54Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3104898386,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-11T09:44:48Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3105661553,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-11T12:44:00Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3106381794,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-11T15:17:39Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3106398931,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-11T15:21:16Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3106787911,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-11T16:40:58Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3106828036,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-11T16:52:29Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3109772001,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-12T10:18:11Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3109841934,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-12T10:37:58Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3110004316,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-12T11:26:45Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3110638310,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-12T13:32:40Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3122315607,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-14T22:51:05Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3123260820,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-15T08:38:09Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3123293429,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-15T08:55:41Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3136711540,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-20T13:50:52Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3168055892,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-29T09:30:30Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3194472144,
+   "state": "COMMENTED",
+   "submitted_at": "2025-09-07T14:35:20Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3194476454,
+   "state": "COMMENTED",
+   "submitted_at": "2025-09-07T14:46:14Z",
+   "user": {
+    "id": 610962,
+    "login": "aforemny",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3196204264,
+   "state": "COMMENTED",
+   "submitted_at": "2025-09-08T11:59:34Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3196206668,
+   "state": "COMMENTED",
+   "submitted_at": "2025-09-08T12:00:22Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3273208628,
+   "state": "COMMENTED",
+   "submitted_at": "2025-09-26T17:37:14Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3549745567,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-08T00:11:17Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "806da47057a25b05e5f76284cd16bde2e3562647",
+   "id": 3601637779,
+   "state": "COMMENTED",
+   "submitted_at": "2025-12-21T10:23:47Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "45ecb73070616f0a6be4d06df20a223927545c6b",
+   "id": 3766694019,
+   "state": "COMMENTED",
+   "submitted_at": "2026-02-07T08:19:43Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-08-10T13:52:37Z",
+   "event": "renamed",
+   "id": 19076155348,
+   "rename": {
+    "from": "Contracts rfc",
+    "to": "Contracts RFC 189"
+   }
+  },
+  {
+   "actor": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-20T21:30:54Z",
+   "event": "closed",
+   "id": 25778146368,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

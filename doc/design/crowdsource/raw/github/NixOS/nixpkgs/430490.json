@@ -1,0 +1,1953 @@
+{
+ "comments": [
+  {
+   "body": "> my biggest question with this PR is how can i view the documentation for this? whenever i write nixos modules i can easily build the nixos manual and view the options... i don't know how to do that here 🤔\r\n\r\n`nix-build nixos/release.nix -A manual.x86_64-linux` should do.",
+   "created_at": "2025-08-03T13:30:07Z",
+   "id": 3148426168,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-03T13:30:07Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That beign said, can you provide a link with some context?\r\n\r\nBecause I'm not sure I know the current state behind these ideas and thus I don't know how much effort it'd be to maintain/test this.",
+   "created_at": "2025-08-03T13:31:23Z",
+   "id": 3148426905,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-03T13:31:23Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> > my biggest question with this PR is how can i view the documentation for this? whenever i write nixos modules i can easily build the nixos manual and view the options... i don't know how to do that here 🤔\r\n> \r\n> `nix-build nixos/release.nix -A manual.x86_64-linux` should do.\r\n\r\ni guess there was a misunderstanding - as stated i know how to build the manual... i don't know where to look for rendered modular services options, though\r\n\r\n\r\n\r\n> That beign said, can you provide a link with some context?\r\n> \r\n> Because I'm not sure I know the current state behind these ideas and thus I don't know how much effort it'd be to maintain/test this.\r\n\r\nthere is no maintenance required on your part - [modular services](https://github.com/NixOS/nixpkgs/pull/372170) are _highly_ experimental and opt in... on top of that they could always be removed if they become a hassle due to being highly experimental",
+   "created_at": "2025-08-03T13:44:06Z",
+   "id": 3148433490,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-03T13:44:06Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Hey, I'd like to apologize for this important missing feature.\r\nWe don't have option rendering for these kinds of modules yet.\r\n- https://github.com/NixOS/nixpkgs/issues/428084\r\n\r\nI've just opened a ~hacky~ pragmatic PR to address this issue until we come up with a nicer solution.\r\n- #430876",
+   "created_at": "2025-08-04T10:08:50Z",
+   "id": 3149936533,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-08-04T10:08:50Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "<img width=\"608\" height=\"1148\" alt=\"Screenshot from 2025-08-04 12-14-50\" src=\"https://github.com/user-attachments/assets/6956fa53-b1f6-4a3c-ae17-ad21a22e5dd0\" />\r\n\r\nSorry about the pixels. Zoomed out too much and the page is too big to bother waiting to render again... I assume everyone happily uses search.nixos.org or the man page.",
+   "created_at": "2025-08-04T10:16:20Z",
+   "id": 3149967659,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-04T10:16:20Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "if there is no serious complaint with the structure of this modular service i will go ahead and merge this in a few days ... keeping a few things in mind:\r\n- this service isn't included in nixos so there is no incurred evaluation cost unless a user opts into importing it\r\n- modular services are *highly* experimental... and i will emphasize again, entirely opt in\r\n- anyone should feel empowered to revert this if it somehow magically causes problems... though again, it cannot :)\r\n\r\nnotes for @roberth and anyone else who cares about modular services:\r\n- it was really easy to write the general module! :rocket:\r\n- it was really easy to make platform specific tweaks as needed\r\n- `php-fpm` was an interesting choice because the nixos module is a \"multi\" type module... the modular service is a big improvement so i am really liking this so far :heart_eyes:\r\n- i wish i had an abstracted interface to `tmpfiles`... :thinking: there are [several](https://github.com/eweOS/pawprint) [basic](https://github.com/troglobit/finit/blob/master/src/tmpfiles.c) [implementations](https://github.com/nixos-bsd/mini-tmpfiles) around... but then again, maybe it isn't standardized enough accept as an interface yet",
+   "created_at": "2025-08-04T20:15:57Z",
+   "id": 3152215690,
+   "minimized": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2025-08-04T20:15:57Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Could you add a test? Otherwise this becomes hard to maintain.\r\n\r\n> * abstracted interface to `tmpfiles`.\r\n\r\nSome things, like creating a directory, are better to do as a startup script iirc, because then it also works at `nixos-rebuild switch` time.",
+   "created_at": "2025-08-05T12:08:16Z",
+   "id": 3154950260,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-08-05T12:08:16Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Some things, like creating a directory, are better to do as a startup script iirc, because then it also works at nixos-rebuild switch time.\r\n\r\nGiven that this gets imported into a \"traditional\" NixOS evaluation, I'm not sure I follow here?\r\n`systemd-tmpfiles-resetup.service` is required by `sysinit-reactivation.target`, so this will happen at activation time.\r\n\r\n> i guess there was a misunderstanding - as stated i know how to build the manual... i don't know where to look for rendered modular services options, though\r\n\r\nSowwy, I was too quick to try helping before I realized this is a different kind of module :see_no_evil: ",
+   "created_at": "2025-08-05T14:42:11Z",
+   "id": 3155518098,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-08-05T14:42:11Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> * i wish i had an abstracted interface to `tmpfiles`... 🤔 there are [several](https://github.com/eweOS/pawprint) [basic](https://github.com/troglobit/finit/blob/master/src/tmpfiles.c) [implementations](https://github.com/nixos-bsd/mini-tmpfiles) around... but then again, maybe it isn't standardized enough accept as an interface yet\r\n\r\nWorth also mentioning [smfh](https://github.com/feel-co/smfh). It's not compatible with `tmpfiles` manifests, but is closer to the existing format of `environment.etc` and home-manager's `home.file`, written as a json file.",
+   "created_at": "2025-08-12T02:32:49Z",
+   "id": 3177491264,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-08-12T02:32:49Z",
+   "user": {
+    "id": 628488,
+    "login": "boomshroom",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/430490",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\ni promised @roberth i would contribute to modular services... so here i go!\r\n\r\nmy biggest question with this PR is how can i view the documentation for this? whenever i write nixos modules i can easily build the nixos manual and view the options... i don't know how to do that here :thinking:\r\n\r\n---\r\n\r\nfor reference this is how i tested this module:\r\n\r\n```\r\n  system.services.php-fpm = {\r\n    imports = [ pkgs.php.services.default ];\r\n\r\n    php-fpm = {\r\n      package = pkgs.php81.buildEnv {\r\n        extraConfig = ''\r\n          # foo bar baz\r\n        '';\r\n      };\r\n      settings = {\r\n        www = {\r\n          \"user\" = \"wwwrun\";\r\n          \"group\" = \"wwwrun\";\r\n\r\n          \"listen.owner\" = \"caddy\";\r\n          \"listen.group\" = \"caddy\";\r\n          \"listen.mode\" = \"0666\";\r\n\r\n          \"pm\" = \"static\";\r\n          \"pm.max_children\" = 10;\r\n          \"pm.max_requests\" = 500;\r\n        };\r\n      };\r\n    };\r\n  };\r\n```\r\n\r\nfrom there i ran `caddy` and created a simple `index.php` with `phpinfo()` function to validate\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": "2025-08-12T01:24:44Z",
+  "closed_by": {
+   "id": 7755101,
+   "login": "aanderse",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 9,
+  "created_at": "2025-08-02T23:15:31Z",
+  "draft": false,
+  "id": 3286494194,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "PHP is a general-purpose scripting language geared towards web development.",
+    "id": 6685855770,
+    "name": "6.topic: php"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 430490,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/430490.diff",
+   "merged_at": "2025-08-12T01:24:44Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/430490.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 1,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "php.services.default: init",
+  "type": null,
+  "updated_at": "2026-07-23T17:17:16Z",
+  "user": {
+   "id": 7755101,
+   "login": "aanderse",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 268,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "748099a6ea7cb568348e6722e4cbb88da12a7a5a",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\ni promised @roberth i would contribute to modular services... so here i go!\r\n\r\nmy biggest question with this PR is how can i view the documentation for this? whenever i write nixos modules i can easily build the nixos manual and view the options... i don't know how to do that here :thinking:\r\n\r\n---\r\n\r\nfor reference this is how i tested this module:\r\n\r\n```\r\n  system.services.php-fpm = {\r\n    imports = [ pkgs.php.services.default ];\r\n\r\n    php-fpm = {\r\n      package = pkgs.php81.buildEnv {\r\n        extraConfig = ''\r\n          # foo bar baz\r\n        '';\r\n      };\r\n      settings = {\r\n        www = {\r\n          \"user\" = \"wwwrun\";\r\n          \"group\" = \"wwwrun\";\r\n\r\n          \"listen.owner\" = \"caddy\";\r\n          \"listen.group\" = \"caddy\";\r\n          \"listen.mode\" = \"0666\";\r\n\r\n          \"pm\" = \"static\";\r\n          \"pm.max_children\" = 10;\r\n          \"pm.max_requests\" = 500;\r\n        };\r\n      };\r\n    };\r\n  };\r\n```\r\n\r\nfrom there i ran `caddy` and created a simple `index.php` with `phpinfo()` function to validate\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 5,
+  "closed_at": "2025-08-12T01:24:44Z",
+  "comments": 9,
+  "commits": 2,
+  "created_at": "2025-08-02T23:15:31Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/430490.diff",
+  "draft": false,
+  "head": {
+   "label": "aanderse:nixos/modular/php-fpm",
+   "ref": "nixos/modular/php-fpm",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2018-08-04T01:55:49Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "aanderse/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/aanderse/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 143489391,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/aanderse/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/aanderse/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 7755101,
+     "login": "aanderse",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/aanderse/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-26T19:59:46Z",
+    "size": 2955465,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/aanderse/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/aanderse/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2023-07-09T23:11:48Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 2715478804,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "PHP is a general-purpose scripting language geared towards web development.",
+    "id": 6685855770,
+    "name": "6.topic: php"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "41bb9fdb70144a79b6a6d1595a8cf5ef2172b5e7",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2025-08-12T01:24:44Z",
+  "merged_by": {
+   "id": 7755101,
+   "login": "aanderse",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 430490,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/430490.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 63433,
+    "login": "talyz",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 252042,
+    "login": "drupol",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 705123,
+    "login": "jtojnar",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 1447245,
+    "login": "globin",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 26,
+  "state": "closed",
+  "title": "php.services.default: init",
+  "updated_at": "2026-07-23T17:17:16Z",
+  "user": {
+   "id": 7755101,
+   "login": "aanderse",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#430490",
+ "review_comments": [
+  {
+   "body": "It'd be weird for the `php81.services.default` (an older release) to have the current `php` as its default.\r\n```suggestion\r\n              php-fpm.package = lib.mkDefault finalAttrs.finalPackage;\r\n            };\r\n```\r\n\r\n`finalAttrs` can be acquired as `mkDerivation (finalAttrs: ...)` above.",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-05T12:01:27Z",
+   "diff_hunk": "@@ -387,6 +387,10 @@ let\n               in\n               php;\n             inherit ztsSupport;\n+\n+            services.default = {\n+              imports = [ ./service.nix ];\n+            };",
+   "id": 2254135238,
+   "line": 395,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 395,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/generic.nix",
+   "position": 16,
+   "pull_request_review_id": 3087982157,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-05T12:04:31Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@drupol i seem to recall you were a big fan of the `finalAttrs` pattern - is there any blockers you're aware of for us to utilize `finalAttrs` in the `php` packages?",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-05T12:06:45Z",
+   "diff_hunk": "@@ -387,6 +387,10 @@ let\n               in\n               php;\n             inherit ztsSupport;\n+\n+            services.default = {\n+              imports = [ ./service.nix ];\n+            };",
+   "id": 2254148631,
+   "in_reply_to_id": 2254135238,
+   "line": 395,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 395,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/generic.nix",
+   "position": 16,
+   "pull_request_review_id": 3088000350,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-05T12:06:45Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It is basically risk-free in technical terms, but having both a `final` binding and a `finalAttrs` may feel uncomfortable. That's a correct intuition, because multiple stages of functions and overriding don't play nice together unless extreme care is taken and coupling is introduced as a consequence. However, this \"extra\" layer that `finalAttrs` is part of has existed for the longest time, as the `overrideAttrs` function. So what this does is make that existing complexity a bit more visible.\r\nFor context, I've done some work (https://github.com/NixOS/nixpkgs/issues/273815 etc) to find an alternative that does not have this problem of multiple layers that does not play nice, but that'd be a more invasive change of which I'm not sure what would be the right time to introduce it, or to what degree it should look like `mkDerivation`.\r\n\r\nIn this particular instance, an alternative solution is to add something like `modules.services.php` to the flake, and something analogous for non-flake users. Then we don't need this module in passthru to serve as the entrypoint, but it pushes a bit more change and complexity onto users.\r\n\r\nEDIT: I would recommend to go with `finalAttrs`",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-05T12:22:31Z",
+   "diff_hunk": "@@ -387,6 +387,10 @@ let\n               in\n               php;\n             inherit ztsSupport;\n+\n+            services.default = {\n+              imports = [ ./service.nix ];\n+            };",
+   "id": 2254183248,
+   "in_reply_to_id": 2254135238,
+   "line": 395,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 395,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/generic.nix",
+   "position": 16,
+   "pull_request_review_id": 3088050807,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-05T12:22:59Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Disclaimer: I think trying modular services out is a good thing and I applaud the effort.\r\n\r\nThat being said, it must be clear that \"highly experimental\" means for me as a maintainer that the only guarantee I can give is that this expression stays syntactically valid. I'm not saying this to be mean or because I intend to break this, but because I'd like to make the implications of that statement explicit.\r\n\r\nBut what I'm actually trying to get at here: on what basis are we adding support for another init system?\r\nhttps://github.com/NixOS/rfcs/pull/163 was never ratified. I'm OK with the experimentation here, but I do have major reservations about supporting another init system in NixOS. Yes, this is experimental and all, but let's be honest, we have a history at making experimental stuff load-bearing (*couch* flakes) and I'm a little afraid that if this gets stabilized, we also add another init system (which in turn makes it harder for me to write modules that use all the features systemd has to offer because somebody wants support for another init system).",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-05T14:59:13Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3088676347,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-05T14:59:13Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "part of the \"highly experimental\" nature of this is that we spread out and see what works and what doesn't, learn the lessons we need to learn, and refine\r\n\r\na large perceived and important promise of modular services was that they could be service manager agnostic - so we need to push ahead here\r\n\r\n\r\n\r\n> on what basis are we adding support for another init system?\r\n\r\ni'd like to emphasize again... on purely an experimental basis. merge this PR and then revert it immediately after. break support for any part of this service you see fit. then fix it - or don't. these expressions can be moved out of tree at any point and that is fine... but there is value in having them in tree so we can learn from them, what works, what doesn't, etc... this is especially true for supporting alternative service managers - the exact problems you mention about \"use all the features\" is so useful for us to learn here. so yes, utilize all the features of `systemd` that you can in this module and let's see what we learn about modular services in the meantime",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-05T15:11:04Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2254652287,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3088723051,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-05T15:11:04Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Systemd still takes priority. If the presence of, say, `finit` definitions makes systemd support worse somehow, it means that `finit` needs to catch up. If it doesn't have a test it can't break and you can drop that. If that's a problem, the original contributor should have added tests and listed themselves as co-maintainer for at least that part. Hint hint @aanderse ;)\r\nThis way everyone wins. You don't need to feel weighed down, and you may even get someone to help review your own PRs as well. The more maintainers the merrier.",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-05T19:32:03Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2255161474,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3089453409,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-05T19:32:04Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\r\n        ExecReload = toString [\r\n          (lib.getExe' pkgs.coreutils \"kill\")\r\n          \"-USR2\"\r\n          \"$MAINPID\"\r\n        ];\r\n```\r\n\r\n<del>Sorry, I have a commandline tokenization kink.",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-05T23:05:29Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";",
+   "id": 2255506423,
+   "line": 166,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 166,
+   "original_position": 166,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 166,
+   "pull_request_review_id": 3089938263,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-05T23:05:29Z",
+   "user": {
+    "id": 131599,
+    "login": "mweinelt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i have switched to the `finallAttrs` pattern - thanks for the suggestion :heavy_check_mark:",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-06T00:51:29Z",
+   "diff_hunk": "@@ -387,6 +387,10 @@ let\n               in\n               php;\n             inherit ztsSupport;\n+\n+            services.default = {\n+              imports = [ ./service.nix ];\n+            };",
+   "id": 2255616010,
+   "in_reply_to_id": 2254135238,
+   "line": 395,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 395,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/generic.nix",
+   "position": 16,
+   "pull_request_review_id": 3090088832,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-06T00:51:29Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "well said @roberth! i have added the test as suggested :muscle:",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-06T00:52:46Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2255617697,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3090091434,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-06T00:52:46Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "right now we have `process` which is a list... maybe down the road we will get an equivalent `reload` which can be  a list\r\n\r\nfor now i think we can leave as is, if that doesn't offend you too much :sweat_smile: ",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-06T00:58:16Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";",
+   "id": 2255622513,
+   "in_reply_to_id": 2255506423,
+   "line": 166,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 166,
+   "original_position": 166,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 166,
+   "pull_request_review_id": 3090096786,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 1,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-06T00:58:16Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't suppose it implements the `notify-reload` protocol?",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-06T08:00:01Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";",
+   "id": 2256260494,
+   "line": 165,
+   "original_commit_id": "d3d42814faa3ee3951af373a5e8097b19c3c9948",
+   "original_line": 165,
+   "original_position": 165,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 165,
+   "pull_request_review_id": 3091065237,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-06T08:00:34Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "kinda, in a slightly unconventional way, if the configuration is correct\r\n\r\ni will keep this PR as a \"pristine\" example of \"converting\" an existing service into a modular one... the next PR, adding `notify-reload` support, can serve as a good example of making a change to a regular service and propagating the change to a modular service \r\n\r\nlet's not muddy the waters of this PR... but thanks for mentioning that! somehow this has slipped past the team so far 😅",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-06T22:28:45Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";",
+   "id": 2258445519,
+   "in_reply_to_id": 2256260494,
+   "line": 165,
+   "original_commit_id": "d3d42814faa3ee3951af373a5e8097b19c3c9948",
+   "original_line": 165,
+   "original_position": 165,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 165,
+   "pull_request_review_id": 3094502769,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-06T22:28:45Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "for my own reference this future PR can look something like...\r\n\r\n```suggestion\r\n        Type = if cfg.settings.systemd_interval or 0 > 0 then \"notify-reload\" else \"notify\";\r\n```\r\n\r\nand add to `finit`...\r\n```\r\n  finit.service = {\r\n    nohup = cfg.settings.systemd_interval or 0 == 0;\r\n  };\r\n```",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-07T03:02:41Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";",
+   "id": 2258778681,
+   "in_reply_to_id": 2256260494,
+   "line": 165,
+   "original_commit_id": "d3d42814faa3ee3951af373a5e8097b19c3c9948",
+   "original_line": 165,
+   "original_position": 165,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 165,
+   "pull_request_review_id": 3094935780,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-07T03:03:03Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Systemd still takes priority\r\n\r\nIt's not a matter of priority. It's a matter of \"what are we signing up for here?\" The `finit` backend that this is designed for *doesn't exist*, at least not in-tree. I don't think nixpkgs should be a playground for APIs that we have no implementations of. And we're certainly not *going* to have an implementation of a finit backend without an alternate-init-system RFC being ratified for NixOS. As-is, this is dead code. And for whatever finit backend *could* exist out-of-tree, it is now beholden to whatever finit expressions nixpkgs upstream is shipping, rather than being able to define and evolve its own API independently.\r\n\r\nWe're also suggesting that nixpkgs is open for people to contribute services built for out-of-tree backends, which just exacerbates those problems. For instance, I really don't want someone coming along and contributing a package to nixpkgs along with a modular service that includes a nix-darwin implementation. I think the nix-darwin maintainers want the nix-darwin API to be solely within and downstream of nix-darwin, not upstream of it. Once people start contributing nix-darwin modules to nixpkgs, the lives of nix-darwin maintainers get a lot harder, as breaking changes now have to be coordinated with nixpkgs and users have to be sync'd up on that coordination.\r\n\r\nSo we're signing up for:\r\n\r\n- Telling external backends what their API should look like, despite nixpkgs itself having no interest or investment in those implementations.\r\n- Maintaining expressions that are not usable in-tree.\r\n- Telling contributors that it's ok to create these problems for other systems like nix-darwin, system-manager, and home-manager that makes their maintainers' lives harder.\r\n\r\nThis should really be out-of-tree.",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-18T21:07:35Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2283471003,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3129923724,
+   "reactions": {
+    "+1": 4,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-18T21:07:36Z",
+   "user": {
+    "id": 1365692,
+    "login": "ElvishJerricco",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i understand your point and i think i said enough about experimental nature, can be removed if causes problems, proves the point of whether this modular service PR works... so i think quite simply we disagree on what we should do here\r\n\r\ni like to be agreeable but i just don't see how the modular services proposal can practically move forward without PRs like this... i apologize but i don't think _i_ can simply revert this PR - i guess you'll have to be bold, revert it yourself, and live knowing i am highly disappointed if you *really* want to push your specific agenda forward\r\n\r\nagain... i am sorry we can't just come to an agreement on this 🙇‍♂️",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-18T21:18:30Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2283508322,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3129978779,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-18T21:18:30Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "To be clear, I'm specifically talking about the `finit` backend part.",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-18T21:24:59Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2283531896,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3130014603,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-18T21:25:00Z",
+   "user": {
+    "id": 1365692,
+    "login": "ElvishJerricco",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "of course, as was i\r\n\r\nconsuming these services in different environments other than nixos is one *extremely* important part of modular services\r\n\r\nwe need some experience to see what works well, what doesn't \r\n\r\nif modular services aren't providing us the ability to run on platforms other than nixos then their value is diminished somewhat... we could have chosen *much* better solutions to have multiple instances of a systemd service in nixos rather than modular services\r\n\r\n---\r\n\r\nif you feel that we aren't fully understanding each other and there might be room for each of us to learn i would be happy to chat out of PR, just reach out if that is the case... but as i said before i feel fairly certain that we both have fairly simple opinions that are already understood by the other party",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-18T21:32:55Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2283545084,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3130039115,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-18T21:32:55Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Isn't it possible for modular services to be expanded on downstream? Like couldn't an external `finit` based project add a `finit` backend to this modular service? If not, then yea we have a major problem with the design of modular services.",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-18T21:39:17Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2283556963,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3130056607,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-18T21:39:17Z",
+   "user": {
+    "id": 1365692,
+    "login": "ElvishJerricco",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Isn't it possible for modular services to be expanded on downstream?\r\n\r\nin this scenario why does downstream even bother importing the service? nothing is gained, downstream should have simply implemented the entire service themselves\r\n\r\n> If not, then yea we have a major problem with the design of modular services.\r\n\r\nit sounds to me that you are fundamentally opposed to modular services. if there is a consensus that modular services shouldn't include things like what we have here then i will gladly join you in lobbying to remove this experimental feature from nixos... i believe without external support like we have here that modular services are a problem for nixos\r\n\r\n\r\n---\r\n\r\nhow can we move forward? Robert is a very busy guy and there is no rush to remove this... let's be patient, wait to hear back from him and then make some decisions from there\r\n\r\nthanks for the discussion 👍 ",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-18T22:15:40Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2283616076,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3130130356,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-18T22:15:41Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The fact that modular services as defined require backend specific definitions _in each service_ indicates to me that there's an issue with the abstraction, as it evidently can't represent even a basic service without an escape hatch. I'm not saying there should never be an escape hatch, but I am saying that if the only way to have \"modular services\" is to have every service provide configuration for every backend, then it's not very modular. ",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-18T22:49:40Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2283660404,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3130185092,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-18T22:49:40Z",
+   "user": {
+    "id": 386765,
+    "login": "K900",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The modularity aspect is mostly about the ability to import any piece of service logic into any service name, and the ability to group such services together into a single service with \"sub-services\".\r\n\r\n@ElvishJerricco @K900 what you describe is portability, which is separate from the modularity aspect. Portability is underdeveloped, that is very true. This system should grow more _inherently portable_ options, of which currently the only examples are `process.argv` and the sub-services option.\r\n\r\nThen why did we merge an unfinished abstraction?\r\n- The modularity part is finished and provides value independently of any attempt at portability.\r\n- The module system can deal with leaky abstractions. For instance, I can enable postgres and meddle with its systemd units in the same configuration. That's not to say it doesn't come at a cost, but some escape hatches are ok.\r\n- It gets the ball rolling on the portability aspect.\r\n- By having real services before we add more abstractions (inherently portable options), we are more likely to find the right abstractions without over-engineering them or getting stuck in analysis paralysis.\r\n\r\nI believe portability is worth pursuing, but some things need to happen:\r\n- Portability must not burden NixOS maintainers who have no interest in it. We've covered this somewhat in https://github.com/NixOS/nixpkgs/pull/431396 (only merged just now), but testing is still a problem.\r\n  We've had an undocumented rule saying Nixpkgs must not import expressions from elsewhere, for security, performance and monorepo simplicity reasons. `nixpkgs/ci/pinned.json` violates the most basic phrasing of the rule. Instead, production use of Nixpkgs must not import anything. We can still meet that requirement as long as any imported configuration managers are only used for tests; specifically `passthru`-style tests which aren't built by Hydra.\r\n- Improve our documentation / communication. I think #431396 may help, but probably needs more work.\r\n- Add more of these \"inherently portable\" options. For this, having all expressions in (mostly) one repo is a real benefit. Only if we have those tests though!\r\n\r\nI can help with documentation and reviews.\r\n\r\nWhether portability in nixpkgs modular services becomes a success depends entirely on participation from those who want it.\r\n\r\nI see two possible outcomes:\r\nA. The \"things that need to happen\" are done and service modules in Nixpkgs are increasingly portable.\r\nB. Those things aren't done, and portability of service modules is scrapped from Nixpkgs. Out-of-tree service modules can still choose to add their own portability, and they're only slightly worse off by the Nixpkgs decision.\r\n\r\n(A) would be great, and (B) is also acceptable.\r\nI would like us to provide an opportunity for (A), but if the current development approach is not deemed acceptable, we could go for (B) first and consider re-adding in-nixpkgs portability if and when all of the things to be done are covered.",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-19T13:41:34Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2285316847,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3132408058,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-19T13:41:34Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@aanderse Could you add an finit-based test?",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-19T13:47:36Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2285334088,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3132433150,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-19T13:47:36Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The reload functionality is probably not useful, because `nixos-rebuild switch` will restart the service because of this line.\r\nLooks like we'll need modular services to provide a fixed `environment.etc`-like path for this kind of config file.",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-19T14:15:07Z",
+   "diff_hunk": "@@ -0,0 +1,186 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile",
+   "id": 2285419467,
+   "line": 155,
+   "original_commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "original_line": 155,
+   "original_position": 155,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 155,
+   "pull_request_review_id": 3132556326,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-19T14:15:07Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Just a few quick words since before I'll hide back into vacation: the entire discussion makes me think that this is the kind of feature an RFC would actually make sense on (instead of it being a place where randos complain about moderation such as 177/176 with the STC doing essentially a non-job because they are no proper governance body). Like, this is the kind of discussion that would've made sense on the first introduction. And yes, I know this is an experimental feature but again, we have a history of starting to use those in a very unhealthy way, so I remain skeptical that this is what may happen here as well (I'll consider it long-term damage done by flakes from now on).\r\n\r\nThat being said, I'm sufficiently OK to not invest time to push back (as I said before, as a maintainer of the PHP-subsystem, the only guarantee I'm willing to give currently is that this file remains syntactically valid and I'm actually kinda interested to see where this is going).\r\n\r\nHowever, if finit-based things get anywhere near a tested-set for Hydra, I'll change my stance very quickly.",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-19T17:10:53Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2285857488,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3133169150,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-19T17:10:54Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "- https://github.com/NixOS/nixpkgs/pull/435060",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-19T18:16:54Z",
+   "diff_hunk": "@@ -0,0 +1,186 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile",
+   "id": 2285989118,
+   "in_reply_to_id": 2285419467,
+   "line": 155,
+   "original_commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "original_line": 155,
+   "original_position": 155,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 155,
+   "pull_request_review_id": 3133354452,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-19T18:16:54Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "No effect whatsoever on channel blockers!\r\nThat's a really good delineation that I agree we should take into account while this is experimental.\r\nThe portability work is meant as a module based implementation of RFC 163, but that connection has become a bit loose due to the original author's absence.\r\n\r\nEDIT: re 176/177, noted. We should deal with that. Enjoy your time off!",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "created_at": "2025-08-19T18:27:02Z",
+   "diff_hunk": "@@ -0,0 +1,182 @@\n+{\n+  options,\n+  config,\n+  pkgs,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.php-fpm;\n+  format = pkgs.formats.iniWithGlobalSection { };\n+  configFile = format.generate \"php-fpm.conf\" {\n+    globalSection = lib.filterAttrs (_: v: !lib.isAttrs v) cfg.settings;\n+    sections = lib.filterAttrs (_: lib.isAttrs) cfg.settings;\n+  };\n+\n+  poolOpts =\n+    { name, ... }:\n+    {\n+      freeformType =\n+        with lib.types;\n+        attrsOf (oneOf [\n+          str\n+          int\n+          bool\n+        ]);\n+      options = {\n+        listen = lib.mkOption {\n+          type =\n+            with lib.types;\n+            oneOf [\n+              path\n+              port\n+              str\n+            ];\n+          default = \"/run/php-fpm/${name}.sock\";\n+          description = ''\n+            The address on which to accept FastCGI requests. Valid syntaxes are: `ip.add.re.ss:port`, `port`, `/path/to/unix/socket`.\n+          '';\n+        };\n+\n+        pm = lib.mkOption {\n+          type = lib.types.enum [\n+            \"static\"\n+            \"ondemand\"\n+            \"dynamic\"\n+          ];\n+          description = ''\n+            Choose how the process manager will control the number of child processes.\n+\n+            `static` - the number of child processes is fixed (`pm.max_children`).\n+            `ondemand` - the processes spawn on demand (when requested, as opposed to `dynamic`, where `pm.start_servers` are started when the service is started).\n+            `dynamic` - the number of child processes is set dynamically based on the following directives: `pm.max_children`, `pm.start_servers`, pm.min_spare_servers, `pm.max_spare_servers`.\n+          '';\n+        };\n+\n+        \"pm.max_children\" = lib.mkOption {\n+          type = lib.types.int;\n+          description = ''\n+            The number of child processes to be created when `pm` is set to `static` and the maximum\n+            number of child processes to be created when `pm` is set to `dynamic`.\n+\n+            This option sets the limit on the number of simultaneous requests that will be served.\n+          '';\n+        };\n+\n+        user = lib.mkOption {\n+          type = lib.types.str;\n+          description = ''\n+            Unix user of FPM processes.\n+          '';\n+        };\n+      };\n+    };\n+in\n+{\n+  _class = \"service\";\n+\n+  options.php-fpm = {\n+    package = lib.mkPackageOption pkgs \"php\" {\n+      example = ''\n+        php.buildEnv {\n+          extensions =\n+            { all, ... }:\n+            with all;\n+            [\n+              imagick\n+              opcache\n+            ];\n+          extraConfig = \"memory_limit=256M\";\n+        }\n+      '';\n+    };\n+\n+    settings = lib.mkOption {\n+      type = lib.types.submodule {\n+        freeformType =\n+          with lib.types;\n+          attrsOf (oneOf [\n+            str\n+            int\n+            bool\n+            (submodule poolOpts)\n+          ]);\n+        options = {\n+          log_level = lib.mkOption {\n+            type = lib.types.enum [\n+              \"alert\"\n+              \"error\"\n+              \"warning\"\n+              \"notice\"\n+              \"debug\"\n+            ];\n+            default = \"notice\";\n+            description = ''\n+              Error log level.\n+            '';\n+          };\n+        };\n+      };\n+      default = { };\n+      example = lib.literalExpression ''\n+        {\n+          log_level = \"debug\";\n+          log_limit = 2048;\n+\n+          mypool = {\n+            \"user\" = \"php\";\n+            \"group\" = \"php\";\n+            \"listen.owner\" = \"caddy\";\n+            \"listen.group\" = \"caddy\";\n+            \"pm\" = \"dynamic\";\n+            \"pm.max_children\" = 75;\n+            \"pm.start_servers\" = 10;\n+            \"pm.min_spare_servers\" = 5;\n+            \"pm.max_spare_servers\" = 20;\n+            \"pm.max_requests\" = 500;\n+          }\n+        }\n+      '';\n+      description = ''\n+        PHP FPM configuration. Refer to [upstream documentation](https://www.php.net/manual/en/install.fpm.configuration.php) for details on supported values.\n+      '';\n+    };\n+  };\n+\n+  config = {\n+    php-fpm.settings = {\n+      error_log = \"syslog\";\n+      daemonize = false;\n+    };\n+\n+    process.argv = [\n+      \"${cfg.package}/bin/php-fpm\"\n+      \"-y\"\n+      configFile\n+    ];\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+\n+    systemd.service = {\n+      after = [ \"network.target\" ];\n+      documentation = [ \"man:php-fpm(8)\" ];\n+\n+      serviceConfig = {\n+        Type = \"notify\";\n+        ExecReload = \"${pkgs.coreutils}/bin/kill -USR2 $MAINPID\";\n+        RuntimeDirectory = \"php-fpm\";\n+        RuntimeDirectoryPreserve = true;\n+        Restart = \"always\";\n+      };\n+    };\n+\n+  }\n+  // lib.optionalAttrs (options ? finit) {\n+\n+    finit.service = {",
+   "id": 2286012009,
+   "in_reply_to_id": 2254621123,
+   "line": 176,
+   "original_commit_id": "1e4310f0e7e365fe6c42ea3a2cf54773697c1e11",
+   "original_line": 176,
+   "original_position": 176,
+   "original_start_line": null,
+   "path": "pkgs/development/interpreters/php/service.nix",
+   "position": 176,
+   "pull_request_review_id": 3133387021,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-19T18:39:03Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3087982157,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-05T12:04:31Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3088000350,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-05T12:06:45Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3088050807,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-05T12:22:31Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3088676347,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-05T14:59:13Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3088723051,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-05T15:11:04Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3089453409,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-05T19:32:03Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3089938263,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-05T23:05:29Z",
+   "user": {
+    "id": 131599,
+    "login": "mweinelt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3090088832,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-06T00:51:29Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3090091434,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-06T00:52:46Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3090096786,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-06T00:58:16Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3091065237,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-06T08:00:34Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "LGTM from modular services perspective.\r\nI have no knowledge of php-fpm.",
+   "commit_id": null,
+   "id": 3091093854,
+   "state": "APPROVED",
+   "submitted_at": "2025-08-06T08:04:00Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3094502769,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-06T22:28:45Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "id": 3094935780,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-07T03:02:41Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3129923724,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-18T21:07:36Z",
+   "user": {
+    "id": 1365692,
+    "login": "ElvishJerricco",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3129978779,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-18T21:18:30Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "id": 3130014603,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-18T21:25:00Z",
+   "user": {
+    "id": 1365692,
+    "login": "ElvishJerricco",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3130039115,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-18T21:32:55Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "id": 3130056607,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-18T21:39:17Z",
+   "user": {
+    "id": 1365692,
+    "login": "ElvishJerricco",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3130130356,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-18T22:15:41Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "id": 3130185092,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-18T22:49:40Z",
+   "user": {
+    "id": 386765,
+    "login": "K900",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3132408058,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-19T13:41:34Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3132433150,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-19T13:47:36Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "id": 3132556326,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-19T14:15:07Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3133169150,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-19T17:10:53Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "04b4c3cd17d9783f6bc11f60d6886870ccaf6db2",
+   "id": 3133354452,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-19T18:16:54Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3133387021,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-19T18:27:03Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "41bb9fdb70144a79b6a6d1595a8cf5ef2172b5e7",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/41bb9fdb70144a79b6a6d1595a8cf5ef2172b5e7",
+   "created_at": "2025-08-12T01:24:44Z",
+   "event": "merged",
+   "id": 19100800698
+  },
+  {
+   "actor": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-08-12T01:24:44Z",
+   "event": "closed",
+   "id": 19100800705,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

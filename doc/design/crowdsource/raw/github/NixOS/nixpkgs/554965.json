@@ -1,0 +1,70 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/554965",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Handling of program's CLI flags is a concern that cross-cuts across various consuming environments (NixOS, Home Manager, nix-darwin, ...), as explored in <https://github.com/Lassulus/wrappers>, so given its package-specific nature would seem like a good fit for nixpkgs' package modules.\n\nA likely first candidate to consume this might be modular services, which explored nix-idiomatic use of CLI flags at #546008.\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 0,
+  "created_at": "2026-08-21T07:21:55Z",
+  "id": 5211578471,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 554965,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "program CLI flags handled from package modules",
+  "type": null,
+  "updated_at": "2026-08-21T07:21:55Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#554965",
+ "sources": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": []
+}

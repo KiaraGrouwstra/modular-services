@@ -1,0 +1,272 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/546886",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "\n<!--\n^ Please summarise the changes you have done and explain why they are necessary here ^\n\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\nFor new packages please briefly describe the package or provide a link to its homepage.\n-->\n\n## Things done\n\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\n\n- Built on platform:\n  - [ ] x86_64-linux\n  - [ ] aarch64-linux\n  - [ ] aarch64-darwin\n- Tested, as applicable:\n  - [ ] [NixOS tests] in [nixos/tests].\n  - [ ] [Package tests] at `passthru.tests`.\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\n- Nixpkgs Release Notes\n  - [ ] Package update: when the change is major or breaking.\n- NixOS Release Notes\n  - [ ] Module addition: when adding a new NixOS module.\n  - [ ] Module update: when the change is significant.\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\n- [x] Follows the [automation/AI policy].\n\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\n\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 0,
+  "created_at": "2026-07-29T00:14:37Z",
+  "draft": true,
+  "id": 5004093586,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Linux.",
+    "id": 737642408,
+    "name": "10.rebuild-linux: 0"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 546886,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/546886.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/546886.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "chrony: init modular service",
+  "type": null,
+  "updated_at": "2026-07-30T20:15:59Z",
+  "user": {
+   "id": 88671402,
+   "login": "eveeifyeve",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 235,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "cc71996a4119831f81bcd1f13f609d9c1209b384",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "\n<!--\n^ Please summarise the changes you have done and explain why they are necessary here ^\n\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\nFor new packages please briefly describe the package or provide a link to its homepage.\n-->\n\n## Things done\n\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\n\n- Built on platform:\n  - [ ] x86_64-linux\n  - [ ] aarch64-linux\n  - [ ] aarch64-darwin\n- Tested, as applicable:\n  - [ ] [NixOS tests] in [nixos/tests].\n  - [ ] [Package tests] at `passthru.tests`.\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\n- Nixpkgs Release Notes\n  - [ ] Package update: when the change is major or breaking.\n- NixOS Release Notes\n  - [ ] Module addition: when adding a new NixOS module.\n  - [ ] Module update: when the change is significant.\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\n- [x] Follows the [automation/AI policy].\n\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\n\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\n",
+  "changed_files": 2,
+  "closed_at": null,
+  "comments": 0,
+  "commits": 1,
+  "created_at": "2026-07-29T00:14:37Z",
+  "deletions": 2,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/546886.diff",
+  "draft": true,
+  "head": {
+   "label": "eveeifyeve:chrony-update",
+   "ref": "chrony-update",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-04-18T00:01:04Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "eveeifyeve/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/eveeifyeve/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 788186231,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/eveeifyeve/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/eveeifyeve/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 88671402,
+     "login": "eveeifyeve",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/eveeifyeve/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-30T15:28:00Z",
+    "size": 2868504,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/eveeifyeve/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/eveeifyeve/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-05-22T01:48:59Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "57378c9f3454e37eb8a782781b44906298ad9a47",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4156071142,
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Linux.",
+    "id": 737642408,
+    "name": "10.rebuild-linux: 0"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": "226d26956b40b90e9231c61f44d02ac3fe2216bc",
+  "mergeable": true,
+  "mergeable_state": "unstable",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 546886,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/546886.patch",
+  "rebaseable": true,
+  "requested_reviewers": [
+   {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "open",
+  "title": "chrony: init modular service",
+  "updated_at": "2026-07-30T20:15:59Z",
+  "user": {
+   "id": 88671402,
+   "login": "eveeifyeve",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#546886",
+ "review_comments": [],
+ "reviews": [],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": []
+}

@@ -1,0 +1,897 @@
+{
+ "comments": [
+  {
+   "body": "May I suggest to make it possible to configure multiple servers? My use case is to have multiple environments (dev, staging, production) on one host and I like to have an instance for each.\r\n\r\nI already have built something for a local project but didn't have time to work it out with all options and create a PR for it.\r\n\r\nBut here's my implementation: https://gist.github.com/RafaelKr/e9ac5850da8b674a92f0bf4bb5bb9b7f\r\n\r\nEdit: I'm using systemd environment instead of CLI flags. It feels much cleaner to me as we don't have to concatenate the strings which possibly could lead to Shell Argument Parsing issues when the arguments contain spaces or quotes or similiar.\r\nEdit 4: Sorry, I didn't see the `cli.toGNUCommandLine`. So it's debatable, I don't know what the nixpkgs convention is there.\r\n\r\nEdit 2: I made the webroot configurable as in my project I'm exposing mailpit via nginx on a password protected route.\r\n\r\nEdit 3: Maybe we want to add some top-level options later to specify defaults, so we may put the options one level deeper. E.g. `services.mailpit.instances.<name>`",
+   "created_at": "2024-07-26T13:46:32Z",
+   "id": 2252803365,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-07-26T14:07:42Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@rkitover implemented `services.mailpit.instances` now. WDYT?",
+   "created_at": "2024-07-29T13:22:34Z",
+   "id": 2255936620,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-07-29T13:22:34Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "ping @leona-ya @RafaelKr \r\nJust rebased against latest master.\r\nPR should be ready to merge I guess? :) ",
+   "created_at": "2024-08-14T09:34:57Z",
+   "id": 2288294802,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-08-14T09:34:57Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think mailpit listens on `0.0.0.0` by default to make it easily usable inside docker. For usage with nix I would suggest switching to the more secure `127.0.0.1` by default. What do you think?\r\nBesides from that it LGTM! :)\r\n\r\nMaybe we want to wait for the merge of #334352 and rebase again before merging this PR.",
+   "created_at": "2024-08-14T13:09:39Z",
+   "id": 2288699086,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-08-14T13:09:39Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Maybe we want to wait for the merge of #334352 and rebase again before merging this PR.\r\n\r\nThis shouldn't give a conflict: `source.nix` isn't touched anymore in this PR.",
+   "created_at": "2024-08-14T14:11:27Z",
+   "id": 2288891555,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2024-08-14T14:11:27Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@RafaelKr done. If you agree, I'd merge :) ",
+   "created_at": "2024-08-14T14:22:53Z",
+   "id": 2288923588,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 1,
+    "total_count": 1
+   },
+   "updated_at": "2024-08-14T14:22:53Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Let's go! 🚀 :)",
+   "created_at": "2024-08-14T14:49:00Z",
+   "id": 2289027987,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-08-14T14:49:00Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This is from GSOC 2026 ideas: https://gsoc-explorer.vercel.app/ideas/nixos-foundation/#migrate-some-nixos-modules-to-modular-services\r\n\r\n> [Modular services](https://nixos.org/manual/nixos/stable/#modular-services)\r\nare a new NixOS feature to reduce evaluation time as more service modules are written, contrasting the historic evaluation time increases as the [central module list](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/module-list.nix)\r\nincreased, while also supporting more flexible usage patterns like multiple instances of a service type on the same host.\r\n> The workflow:\r\n>\r\n> - Pick a NixOS service whose maintainers agree to the pilot project\r\n> - Factor the core of the service into a modular services module, keeping the user-facing options of the NixOS module the same\r\n> - Implement a very basic test for the modular service itself that only tests the functionality of the modular service (typically config file and launch), leaving proper integration tests to the NixOS test\r\n\r\n@Ma27 with the instances option this would now be a perfect candidate for a 1:1 port as a modular service, WDYT?",
+   "created_at": "2026-07-13T09:53:24Z",
+   "id": 4956683698,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-13T09:53:24Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/329657",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "\r\n\r\n## Description of changes\r\nSimple module to configure a systemd service for mailpit.\r\n<!--\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [x] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://nixos.org/manual/nixpkgs/unstable/#ssec-nixos-tests-linking) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [24.11 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2411.section.md) (or backporting [23.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2311.section.md) and [24.05](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2405.section.md) Release notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [x] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#reviewing-contributions\r\n-->\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": "2024-08-14T15:37:55Z",
+  "closed_by": {
+   "id": 6025220,
+   "login": "Ma27",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 8,
+  "created_at": "2024-07-24T13:55:52Z",
+  "draft": false,
+  "id": 2427664000,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a module in `nixos/`",
+    "id": 290122827,
+    "name": "8.has: module (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR has tests",
+    "id": 3998253522,
+    "name": "8.has: tests"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 329657,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/329657.diff",
+   "merged_at": "2024-08-14T15:37:55Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/329657.patch"
+  },
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "nixos/mailpit: init",
+  "type": null,
+  "updated_at": "2026-07-13T09:53:24Z",
+  "user": {
+   "id": 6025220,
+   "login": "Ma27",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 150,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "f7962e8d6b6dcbc7768d4e0786d8dd6f7359b8d3",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "\r\n\r\n## Description of changes\r\nSimple module to configure a systemd service for mailpit.\r\n<!--\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [x] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://nixos.org/manual/nixpkgs/unstable/#ssec-nixos-tests-linking) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [24.11 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2411.section.md) (or backporting [23.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2311.section.md) and [24.05](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2405.section.md) Release notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [x] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md).\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#reviewing-contributions\r\n-->\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 5,
+  "closed_at": "2024-08-14T15:37:55Z",
+  "comments": 8,
+  "commits": 3,
+  "created_at": "2024-07-24T13:55:52Z",
+  "deletions": 3,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/329657.diff",
+  "draft": false,
+  "head": {
+   "label": "flyingcircusio:mailpit-module",
+   "ref": "mailpit-module",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2015-10-02T07:07:30Z",
+    "default_branch": "nixos-26.05",
+    "description": "The Flying Circus platform, based on NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 6,
+    "forks_count": 6,
+    "full_name": "flyingcircusio/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/flyingcircusio/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": false,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "https://flyingcircus.io",
+    "id": 43539931,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/flyingcircusio/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/flyingcircusio/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 344,
+    "open_issues_count": 344,
+    "owner": {
+     "id": 9945631,
+     "login": "flyingcircusio",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/flyingcircusio/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T13:36:22Z",
+    "size": 3267245,
+    "stargazers_count": 3,
+    "subscription_url": "https://api.github.com/repos/flyingcircusio/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/flyingcircusio/nixpkgs/tags",
+    "topics": [
+     "flyingcircus",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T13:48:23Z",
+    "visibility": "public",
+    "watchers": 3,
+    "watchers_count": 3,
+    "web_commit_signoff_required": false
+   },
+   "sha": "f07601ce07a1a2c5c9e456b10971487c246add29",
+   "user": {
+    "id": 9945631,
+    "login": "flyingcircusio",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "id": 1985517569,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a module in `nixos/`",
+    "id": 290122827,
+    "name": "8.has: module (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR has tests",
+    "id": 3998253522,
+    "name": "8.has: tests"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "d86f963742633b54631103b00fab728cd2b004e0",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2024-08-14T15:37:55Z",
+  "merged_by": {
+   "id": 6025220,
+   "login": "Ma27",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 329657,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/329657.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 89950,
+    "login": "stephank",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 11006031,
+    "login": "leona-ya",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 6,
+  "state": "closed",
+  "title": "nixos/mailpit: init",
+  "updated_at": "2026-07-13T09:53:24Z",
+  "user": {
+   "id": 6025220,
+   "login": "Ma27",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#329657",
+ "review_comments": [
+  {
+   "body": "This seems to be outdated, but as nixpkgs has a quite old version of mailpit it seems correct for now..",
+   "commit_id": "f07601ce07a1a2c5c9e456b10971487c246add29",
+   "created_at": "2024-07-26T11:44:46Z",
+   "diff_hunk": "@@ -0,0 +1,103 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.services.mailpit;\n+  inherit (lib)\n+    cli\n+    concatStringsSep\n+    const\n+    filterAttrs\n+    getExe\n+    mkEnableOption\n+    mkIf\n+    mkOption\n+    types\n+    ;\n+\n+  isNonNull = v: v != null;\n+  cliFlags = concatStringsSep \" \" (\n+    cli.toGNUCommandLine { } (filterAttrs (const isNonNull) cfg.settings)\n+  );\n+in\n+{\n+  options.services.mailpit = {\n+    enable = mkEnableOption \"mailpit\";\n+\n+    settings = mkOption {\n+      default = { };\n+      type = types.submodule {\n+        freeformType = types.attrsOf (\n+          types.oneOf [\n+            types.str\n+            types.int\n+            types.bool\n+          ]\n+        );\n+        options = {\n+          db-file = mkOption {",
+   "id": 1692945765,
+   "line": null,
+   "original_commit_id": "f3fd182694c334efad837e1e53ef2231fab4ac37",
+   "original_line": 42,
+   "original_position": 42,
+   "original_start_line": null,
+   "path": "nixos/modules/services/mail/mailpit.nix",
+   "position": 1,
+   "pull_request_review_id": 2201632540,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2024-07-26T11:44:52Z",
+   "user": {
+    "id": 11006031,
+    "login": "leona-ya",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Oof I already wondered why how I came up with `database` while hacking on that module 🤦 \r\nI guess I'll do an update of the software then, thanks for catching this.",
+   "commit_id": "f07601ce07a1a2c5c9e456b10971487c246add29",
+   "created_at": "2024-07-26T12:16:54Z",
+   "diff_hunk": "@@ -0,0 +1,103 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.services.mailpit;\n+  inherit (lib)\n+    cli\n+    concatStringsSep\n+    const\n+    filterAttrs\n+    getExe\n+    mkEnableOption\n+    mkIf\n+    mkOption\n+    types\n+    ;\n+\n+  isNonNull = v: v != null;\n+  cliFlags = concatStringsSep \" \" (\n+    cli.toGNUCommandLine { } (filterAttrs (const isNonNull) cfg.settings)\n+  );\n+in\n+{\n+  options.services.mailpit = {\n+    enable = mkEnableOption \"mailpit\";\n+\n+    settings = mkOption {\n+      default = { };\n+      type = types.submodule {\n+        freeformType = types.attrsOf (\n+          types.oneOf [\n+            types.str\n+            types.int\n+            types.bool\n+          ]\n+        );\n+        options = {\n+          db-file = mkOption {",
+   "id": 1692980498,
+   "in_reply_to_id": 1692945765,
+   "line": null,
+   "original_commit_id": "f3fd182694c334efad837e1e53ef2231fab4ac37",
+   "original_line": 42,
+   "original_position": 42,
+   "original_start_line": null,
+   "path": "nixos/modules/services/mail/mailpit.nix",
+   "position": 1,
+   "pull_request_review_id": 2201695850,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2024-07-26T12:16:54Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "FYI I already opened https://github.com/NixOS/nixpkgs/pull/324302 for automatic update PRs via @r-ryantm \r\nStill waiting to get it merged.\r\n\r\nBtw I also initiated that the mailpit documentation shows the version in which specific options were added. See https://github.com/axllent/mailpit/issues/328 for more info.",
+   "commit_id": "f07601ce07a1a2c5c9e456b10971487c246add29",
+   "created_at": "2024-07-26T13:30:58Z",
+   "diff_hunk": "@@ -0,0 +1,103 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.services.mailpit;\n+  inherit (lib)\n+    cli\n+    concatStringsSep\n+    const\n+    filterAttrs\n+    getExe\n+    mkEnableOption\n+    mkIf\n+    mkOption\n+    types\n+    ;\n+\n+  isNonNull = v: v != null;\n+  cliFlags = concatStringsSep \" \" (\n+    cli.toGNUCommandLine { } (filterAttrs (const isNonNull) cfg.settings)\n+  );\n+in\n+{\n+  options.services.mailpit = {\n+    enable = mkEnableOption \"mailpit\";\n+\n+    settings = mkOption {\n+      default = { };\n+      type = types.submodule {\n+        freeformType = types.attrsOf (\n+          types.oneOf [\n+            types.str\n+            types.int\n+            types.bool\n+          ]\n+        );\n+        options = {\n+          db-file = mkOption {",
+   "id": 1693066859,
+   "in_reply_to_id": 1692945765,
+   "line": null,
+   "original_commit_id": "f3fd182694c334efad837e1e53ef2231fab4ac37",
+   "original_line": 42,
+   "original_position": 42,
+   "original_start_line": null,
+   "path": "nixos/modules/services/mail/mailpit.nix",
+   "position": 1,
+   "pull_request_review_id": 2201840299,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2024-07-26T13:30:59Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Can be resolved, this PR now updates mailpit and thus `--database` can be used.",
+   "commit_id": "f07601ce07a1a2c5c9e456b10971487c246add29",
+   "created_at": "2024-07-29T13:22:11Z",
+   "diff_hunk": "@@ -0,0 +1,103 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  cfg = config.services.mailpit;\n+  inherit (lib)\n+    cli\n+    concatStringsSep\n+    const\n+    filterAttrs\n+    getExe\n+    mkEnableOption\n+    mkIf\n+    mkOption\n+    types\n+    ;\n+\n+  isNonNull = v: v != null;\n+  cliFlags = concatStringsSep \" \" (\n+    cli.toGNUCommandLine { } (filterAttrs (const isNonNull) cfg.settings)\n+  );\n+in\n+{\n+  options.services.mailpit = {\n+    enable = mkEnableOption \"mailpit\";\n+\n+    settings = mkOption {\n+      default = { };\n+      type = types.submodule {\n+        freeformType = types.attrsOf (\n+          types.oneOf [\n+            types.str\n+            types.int\n+            types.bool\n+          ]\n+        );\n+        options = {\n+          db-file = mkOption {",
+   "id": 1695230989,
+   "in_reply_to_id": 1692945765,
+   "line": null,
+   "original_commit_id": "f3fd182694c334efad837e1e53ef2231fab4ac37",
+   "original_line": 42,
+   "original_position": 42,
+   "original_start_line": null,
+   "path": "nixos/modules/services/mail/mailpit.nix",
+   "position": 1,
+   "pull_request_review_id": 2204958290,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2024-07-29T13:22:12Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Maybe default to `127.0.0.1:8025`. See https://github.com/NixOS/nixpkgs/pull/329657#issuecomment-2288699086",
+   "commit_id": "f07601ce07a1a2c5c9e456b10971487c246add29",
+   "created_at": "2024-08-14T13:10:49Z",
+   "diff_hunk": "@@ -0,0 +1,106 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  inherit (config.services.mailpit) instances;\n+  inherit (lib)\n+    cli\n+    concatStringsSep\n+    const\n+    filterAttrs\n+    getExe\n+    mapAttrs'\n+    mkIf\n+    mkOption\n+    nameValuePair\n+    types\n+    ;\n+\n+  isNonNull = v: v != null;\n+  genCliFlags =\n+    settings: concatStringsSep \" \" (cli.toGNUCommandLine { } (filterAttrs (const isNonNull) settings));\n+in\n+{\n+  options.services.mailpit.instances = mkOption {\n+    default = { };\n+    type = types.attrsOf (\n+      types.submodule {\n+        freeformType = types.attrsOf (\n+          types.oneOf [\n+            types.str\n+            types.int\n+            types.bool\n+          ]\n+        );\n+        options = {\n+          database = mkOption {\n+            type = types.nullOr types.str;\n+            default = null;\n+            example = \"mailpit.db\";\n+            description = ''\n+              Specify the local database filename to store persistent data.\n+              If `null`, a temporary file will be created that will be removed when the application stops.\n+              It's recommended to specify a relative path. The database will be written into the service's\n+              state directory then.\n+            '';\n+          };\n+          max = mkOption {\n+            type = types.ints.unsigned;\n+            default = 500;\n+            description = ''\n+              Maximum number of emails to keep. If the number is exceeded, old emails\n+              will be deleted.\n+\n+              Set to `0` to never prune old emails.\n+            '';\n+          };\n+          listen = mkOption {\n+            default = \"0.0.0.0:8025\";",
+   "id": 1716900300,
+   "line": null,
+   "original_commit_id": "15dab820a680659c3cb48809ecf4f47c1dfdb38a",
+   "original_line": 62,
+   "original_position": 62,
+   "original_start_line": null,
+   "path": "nixos/modules/services/mail/mailpit.nix",
+   "position": 1,
+   "pull_request_review_id": 2238121319,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2024-08-14T13:11:30Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Maybe default to `127.0.0.1:1025`. See https://github.com/NixOS/nixpkgs/pull/329657#issuecomment-2288699086",
+   "commit_id": "f07601ce07a1a2c5c9e456b10971487c246add29",
+   "created_at": "2024-08-14T13:11:11Z",
+   "diff_hunk": "@@ -0,0 +1,106 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+\n+let\n+  inherit (config.services.mailpit) instances;\n+  inherit (lib)\n+    cli\n+    concatStringsSep\n+    const\n+    filterAttrs\n+    getExe\n+    mapAttrs'\n+    mkIf\n+    mkOption\n+    nameValuePair\n+    types\n+    ;\n+\n+  isNonNull = v: v != null;\n+  genCliFlags =\n+    settings: concatStringsSep \" \" (cli.toGNUCommandLine { } (filterAttrs (const isNonNull) settings));\n+in\n+{\n+  options.services.mailpit.instances = mkOption {\n+    default = { };\n+    type = types.attrsOf (\n+      types.submodule {\n+        freeformType = types.attrsOf (\n+          types.oneOf [\n+            types.str\n+            types.int\n+            types.bool\n+          ]\n+        );\n+        options = {\n+          database = mkOption {\n+            type = types.nullOr types.str;\n+            default = null;\n+            example = \"mailpit.db\";\n+            description = ''\n+              Specify the local database filename to store persistent data.\n+              If `null`, a temporary file will be created that will be removed when the application stops.\n+              It's recommended to specify a relative path. The database will be written into the service's\n+              state directory then.\n+            '';\n+          };\n+          max = mkOption {\n+            type = types.ints.unsigned;\n+            default = 500;\n+            description = ''\n+              Maximum number of emails to keep. If the number is exceeded, old emails\n+              will be deleted.\n+\n+              Set to `0` to never prune old emails.\n+            '';\n+          };\n+          listen = mkOption {\n+            default = \"0.0.0.0:8025\";\n+            type = types.str;\n+            description = ''\n+              HTTP bind interface and port for UI.\n+            '';\n+          };\n+          smtp = mkOption {\n+            default = \"0.0.0.0:1025\";",
+   "id": 1716900857,
+   "line": null,
+   "original_commit_id": "15dab820a680659c3cb48809ecf4f47c1dfdb38a",
+   "original_line": 69,
+   "original_position": 69,
+   "original_start_line": null,
+   "path": "nixos/modules/services/mail/mailpit.nix",
+   "position": 1,
+   "pull_request_review_id": 2238121319,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2024-08-14T13:11:30Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2201632540,
+   "state": "APPROVED",
+   "submitted_at": "2024-07-26T11:44:52Z",
+   "user": {
+    "id": 11006031,
+    "login": "leona-ya",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2201695850,
+   "state": "COMMENTED",
+   "submitted_at": "2024-07-26T12:16:54Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2201840299,
+   "state": "COMMENTED",
+   "submitted_at": "2024-07-26T13:30:58Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2204958290,
+   "state": "COMMENTED",
+   "submitted_at": "2024-07-29T13:22:11Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "15dab820a680659c3cb48809ecf4f47c1dfdb38a",
+   "id": 2238121319,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2024-08-14T13:11:30Z",
+   "user": {
+    "id": 14234815,
+    "login": "RafaelKr",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2024-07-29T13:15:26Z",
+   "event": "renamed",
+   "id": 13680351897,
+   "rename": {
+    "from": "nixos/mailpit: init",
+    "to": "mailpit: 1.15.1 -> 1.19.3, init module"
+   }
+  },
+  {
+   "actor": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2024-08-14T09:35:08Z",
+   "event": "renamed",
+   "id": 13877213002,
+   "rename": {
+    "from": "mailpit: 1.15.1 -> 1.19.3, init module",
+    "to": "nixos/mailpit: init"
+   }
+  },
+  {
+   "actor": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "d86f963742633b54631103b00fab728cd2b004e0",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/d86f963742633b54631103b00fab728cd2b004e0",
+   "created_at": "2024-08-14T15:37:55Z",
+   "event": "merged",
+   "id": 13882784110
+  },
+  {
+   "actor": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2024-08-14T15:37:55Z",
+   "event": "closed",
+   "id": 13882784132,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

@@ -1,0 +1,1373 @@
+{
+ "comments": [
+  {
+   "body": "## `nixpkgs-review` result\r\n\r\nGenerated using [`nixpkgs-review`](https://github.com/Mic92/nixpkgs-review).\r\n\r\nCommand: `nixpkgs-review pr 520214`\r\nCommit: `98667b3fb4d2f00413fda61ea04e310a06d01aac`\r\n\r\n---\r\n### `x86_64-linux`\r\n<details>\r\n  <summary>:white_check_mark: 1 package built:</summary>\r\n  <ul>\r\n    <li>autopush-rs</li>\r\n  </ul>\r\n</details>\r\n",
+   "created_at": "2026-05-19T18:31:57Z",
+   "id": 4490842335,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-19T18:31:57Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha)\n\nCommand: `nixpkgs-review pr 520214`\nCommit: [`129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f`](https://github.com/NixOS/nixpkgs/commit/129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f..pull/520214/head))\nMerge: [`8e9606bc4d72431faba2bac3b775ee9cc0fd7471`](https://github.com/NixOS/nixpkgs/commit/8e9606bc4d72431faba2bac3b775ee9cc0fd7471)\n\nLogs: https://github.com/SuperSandro2000/nixpkgs-review-gha/actions/runs/26338448539\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 2 packages built:</summary>\n  <ul>\n    <li>autopush-rs</li>\n    <li>autopush-rs.fernet</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:white_check_mark: 2 packages built:</summary>\n  <ul>\n    <li>autopush-rs</li>\n    <li>autopush-rs.fernet</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-05-23T17:11:26Z",
+   "id": 4526035952,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-23T17:11:26Z",
+   "user": {
+    "id": 52544611,
+    "login": "SuperSandroBot",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/520214",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-05-23T17:18:06Z",
+  "closed_by": {
+   "id": 7258858,
+   "login": "SuperSandro2000",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 2,
+  "created_at": "2026-05-14T21:22:21Z",
+  "draft": false,
+  "id": 4449383540,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Linux.",
+    "id": 1955058054,
+    "name": "10.rebuild-linux: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 520214,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/520214.diff",
+   "merged_at": "2026-05-23T17:18:06Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/520214.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "autopush-rs: init at 1.81.3",
+  "type": null,
+  "updated_at": "2026-07-09T13:08:19Z",
+  "user": {
+   "id": 96021122,
+   "login": "zimward",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 391,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "4a29d733e8a7d5b824c3d8c958a946a9867b3eb2",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 5,
+  "closed_at": "2026-05-23T17:18:06Z",
+  "comments": 2,
+  "commits": 2,
+  "created_at": "2026-05-14T21:22:21Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/520214.diff",
+  "draft": false,
+  "head": {
+   "label": "zimward:push-vrvrvxvwtmpq",
+   "ref": "push-vrvrvxvwtmpq",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-04-29T17:27:12Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "zimward/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/zimward/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 793690266,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/zimward/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/zimward/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 96021122,
+     "login": "zimward",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/zimward/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-09T09:11:12Z",
+    "size": 2812516,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/zimward/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/zimward/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-05-16T10:46:54Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3685738184,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Linux.",
+    "id": 1955058054,
+    "name": "10.rebuild-linux: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "e0f4dd693715949fbdd85b3394d1957e9383d730",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-05-23T17:18:06Z",
+  "merged_by": {
+   "id": 7258858,
+   "login": "SuperSandro2000",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 520214,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/520214.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 18,
+  "state": "closed",
+  "title": "autopush-rs: init at 1.81.3",
+  "updated_at": "2026-07-09T13:08:19Z",
+  "user": {
+   "id": 96021122,
+   "login": "zimward",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#520214",
+ "review_comments": [
+  {
+   "body": "```suggestion\r\n```\r\n\r\nor is any of those causing the build to fail?",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "created_at": "2026-05-19T20:28:35Z",
+   "diff_hunk": "@@ -0,0 +1,126 @@\n+{\n+  lib,\n+  pkgs,\n+  nixosTests,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  stdenv,\n+  pkg-config,\n+  cmake,\n+  openssl,\n+  libffi,\n+  grpc,\n+  nix-update-script,\n+  python3Packages,\n+}:\n+let\n+  #script to generate the fernet key\n+  fernetKey =\n+    {\n+      src,\n+      version,\n+    }:\n+    python3Packages.buildPythonApplication {\n+      pname = \"fernet_key\";\n+      inherit version src;\n+\n+      __structuredAttrs = true;\n+\n+      format = \"other\";\n+      dontConfigure = true;\n+      dontBuild = true;\n+      dontStrip = true;\n+      dontCheck = true;",
+   "id": 3269420136,
+   "line": null,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 33,
+   "original_position": 33,
+   "original_start_line": 30,
+   "path": "pkgs/by-name/au/autopush-rs/package.nix",
+   "position": 1,
+   "pull_request_review_id": 4322934575,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-05-19T20:28:37Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Why do we not make this part of the main package, possible as an extra output?",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-05-19T20:29:03Z",
+   "diff_hunk": "@@ -0,0 +1,126 @@\n+{\n+  lib,\n+  pkgs,\n+  nixosTests,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  stdenv,\n+  pkg-config,\n+  cmake,\n+  openssl,\n+  libffi,\n+  grpc,\n+  nix-update-script,\n+  python3Packages,\n+}:\n+let\n+  #script to generate the fernet key\n+  fernetKey =\n+    {\n+      src,\n+      version,\n+    }:\n+    python3Packages.buildPythonApplication {\n+      pname = \"fernet_key\";\n+      inherit version src;\n+\n+      __structuredAttrs = true;\n+\n+      format = \"other\";\n+      dontConfigure = true;\n+      dontBuild = true;\n+      dontStrip = true;\n+      dontCheck = true;\n+\n+      dependencies = [ python3Packages.cryptography ];\n+\n+      installPhase = ''\n+        mkdir -p $out/bin\n+        echo \"#!/usr/bin/env python3\" |  \\\n+        cat - $src/scripts/fernet_key.py > $out/bin/fernet_key\n+        chmod +x $out/bin/fernet_key\n+      '';",
+   "id": 3269422552,
+   "line": 41,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 42,
+   "original_position": 42,
+   "original_start_line": 37,
+   "path": "pkgs/by-name/au/autopush-rs/package.nix",
+   "position": 41,
+   "pull_request_review_id": 4322937732,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 36,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-05-19T20:29:04Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It would be better to patch the cmake files so we know when we can remove this again.",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-05-19T20:29:48Z",
+   "diff_hunk": "@@ -0,0 +1,126 @@\n+{\n+  lib,\n+  pkgs,\n+  nixosTests,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  stdenv,\n+  pkg-config,\n+  cmake,\n+  openssl,\n+  libffi,\n+  grpc,\n+  nix-update-script,\n+  python3Packages,\n+}:\n+let\n+  #script to generate the fernet key\n+  fernetKey =\n+    {\n+      src,\n+      version,\n+    }:\n+    python3Packages.buildPythonApplication {\n+      pname = \"fernet_key\";\n+      inherit version src;\n+\n+      __structuredAttrs = true;\n+\n+      format = \"other\";\n+      dontConfigure = true;\n+      dontBuild = true;\n+      dontStrip = true;\n+      dontCheck = true;\n+\n+      dependencies = [ python3Packages.cryptography ];\n+\n+      installPhase = ''\n+        mkdir -p $out/bin\n+        echo \"#!/usr/bin/env python3\" |  \\\n+        cat - $src/scripts/fernet_key.py > $out/bin/fernet_key\n+        chmod +x $out/bin/fernet_key\n+      '';\n+\n+      postFixup = ''\n+        wrapPythonPrograms\n+      '';\n+    };\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"autopush\";\n+  version = \"1.81.3\";\n+\n+  __structuredAttrs = true;\n+  strictDeps = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"mozilla-services\";\n+    repo = \"autopush-rs\";\n+    tag = finalAttrs.version;\n+    hash = \"sha256-DP02mcEMoQoJqi5rw5eSuep0i7zeJ0LLYsakikt9hho=\";\n+  };\n+\n+  cargoHash = \"sha256-LqmuUtFF30TO6iw7LPFB7yJGrzrhh7R0OKCWMhe/OjU=\";\n+\n+  nativeBuildInputs = [\n+    pkg-config\n+    rustPlatform.bindgenHook\n+    cmake\n+  ];\n+\n+  buildInputs = [\n+    openssl\n+    libffi\n+    grpc\n+  ];\n+\n+  # by default only google bigtable is supported as a db\n+  buildNoDefaultFeatures = true;\n+  buildFeatures = [\n+    \"postgres\"\n+    \"redis\"\n+    \"reliable_report\"\n+  ];\n+\n+  env = {\n+    #needed for bingen to find libc\n+    BINDGEN_EXTRA_CLANG_ARGS = \"-I${stdenv.cc.libc.dev}/include\";\n+    CMAKE_POLICY_VERSION_MINIMUM = \"3.5\";",
+   "id": 3269426269,
+   "line": 92,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 88,
+   "original_position": 88,
+   "original_start_line": null,
+   "path": "pkgs/by-name/au/autopush-rs/package.nix",
+   "position": 92,
+   "pull_request_review_id": 4322942473,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-19T20:29:49Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "How ?",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-05-19T20:29:54Z",
+   "diff_hunk": "@@ -0,0 +1,126 @@\n+{\n+  lib,\n+  pkgs,\n+  nixosTests,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  stdenv,\n+  pkg-config,\n+  cmake,\n+  openssl,\n+  libffi,\n+  grpc,\n+  nix-update-script,\n+  python3Packages,\n+}:\n+let\n+  #script to generate the fernet key\n+  fernetKey =\n+    {\n+      src,\n+      version,\n+    }:\n+    python3Packages.buildPythonApplication {\n+      pname = \"fernet_key\";\n+      inherit version src;\n+\n+      __structuredAttrs = true;\n+\n+      format = \"other\";\n+      dontConfigure = true;\n+      dontBuild = true;\n+      dontStrip = true;\n+      dontCheck = true;\n+\n+      dependencies = [ python3Packages.cryptography ];\n+\n+      installPhase = ''\n+        mkdir -p $out/bin\n+        echo \"#!/usr/bin/env python3\" |  \\\n+        cat - $src/scripts/fernet_key.py > $out/bin/fernet_key\n+        chmod +x $out/bin/fernet_key\n+      '';\n+\n+      postFixup = ''\n+        wrapPythonPrograms\n+      '';\n+    };\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"autopush\";\n+  version = \"1.81.3\";\n+\n+  __structuredAttrs = true;\n+  strictDeps = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"mozilla-services\";\n+    repo = \"autopush-rs\";\n+    tag = finalAttrs.version;\n+    hash = \"sha256-DP02mcEMoQoJqi5rw5eSuep0i7zeJ0LLYsakikt9hho=\";\n+  };\n+\n+  cargoHash = \"sha256-LqmuUtFF30TO6iw7LPFB7yJGrzrhh7R0OKCWMhe/OjU=\";\n+\n+  nativeBuildInputs = [\n+    pkg-config\n+    rustPlatform.bindgenHook\n+    cmake\n+  ];\n+\n+  buildInputs = [\n+    openssl\n+    libffi\n+    grpc\n+  ];\n+\n+  # by default only google bigtable is supported as a db\n+  buildNoDefaultFeatures = true;\n+  buildFeatures = [\n+    \"postgres\"\n+    \"redis\"\n+    \"reliable_report\"\n+  ];\n+\n+  env = {\n+    #needed for bingen to find libc\n+    BINDGEN_EXTRA_CLANG_ARGS = \"-I${stdenv.cc.libc.dev}/include\";\n+    CMAKE_POLICY_VERSION_MINIMUM = \"3.5\";\n+  };\n+\n+  #check build fails",
+   "id": 3269426765,
+   "line": 95,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 91,
+   "original_position": 91,
+   "original_start_line": null,
+   "path": "pkgs/by-name/au/autopush-rs/package.nix",
+   "position": 95,
+   "pull_request_review_id": 4322943092,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-19T20:29:55Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Why not use mkPackageOption?",
+   "commit_id": "b1b2d6b96292ee5b26b4bf031c65f6d46ba85e49",
+   "created_at": "2026-05-19T20:30:31Z",
+   "diff_hunk": "@@ -0,0 +1,100 @@\n+#v Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  lib,\n+  options,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.autoconnect;\n+  tomlFmt = pkgs.formats.toml { };\n+in\n+{\n+  _class = \"service\";\n+  options = {\n+    package = lib.mkOption {",
+   "id": 3269430023,
+   "line": null,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 18,
+   "original_position": 18,
+   "original_start_line": null,
+   "path": "pkgs/by-name/au/autopush-rs/service-autoconnect.nix",
+   "position": 1,
+   "pull_request_review_id": 4322947000,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-19T20:30:32Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Why not use mkPackageOption?",
+   "commit_id": "b1b2d6b96292ee5b26b4bf031c65f6d46ba85e49",
+   "created_at": "2026-05-19T20:30:56Z",
+   "diff_hunk": "@@ -0,0 +1,102 @@\n+# Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  lib,\n+  config,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.autoendpoint;\n+  tomlFmt = pkgs.formats.toml { };\n+in\n+{\n+  _class = \"service\";\n+  options = {\n+    package = lib.mkOption {",
+   "id": 3269432158,
+   "line": null,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 18,
+   "original_position": 18,
+   "original_start_line": null,
+   "path": "pkgs/by-name/au/autopush-rs/service-autoendpoint.nix",
+   "position": 1,
+   "pull_request_review_id": 4322949535,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-19T20:30:57Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "that would entail patching the cmake files *inside* the vendored crate sources, which seems a lot more brittle and unnecessary effort compared to just checking if the build fails with these flags removed",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-05-19T21:01:06Z",
+   "diff_hunk": "@@ -0,0 +1,126 @@\n+{\n+  lib,\n+  pkgs,\n+  nixosTests,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  stdenv,\n+  pkg-config,\n+  cmake,\n+  openssl,\n+  libffi,\n+  grpc,\n+  nix-update-script,\n+  python3Packages,\n+}:\n+let\n+  #script to generate the fernet key\n+  fernetKey =\n+    {\n+      src,\n+      version,\n+    }:\n+    python3Packages.buildPythonApplication {\n+      pname = \"fernet_key\";\n+      inherit version src;\n+\n+      __structuredAttrs = true;\n+\n+      format = \"other\";\n+      dontConfigure = true;\n+      dontBuild = true;\n+      dontStrip = true;\n+      dontCheck = true;\n+\n+      dependencies = [ python3Packages.cryptography ];\n+\n+      installPhase = ''\n+        mkdir -p $out/bin\n+        echo \"#!/usr/bin/env python3\" |  \\\n+        cat - $src/scripts/fernet_key.py > $out/bin/fernet_key\n+        chmod +x $out/bin/fernet_key\n+      '';\n+\n+      postFixup = ''\n+        wrapPythonPrograms\n+      '';\n+    };\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"autopush\";\n+  version = \"1.81.3\";\n+\n+  __structuredAttrs = true;\n+  strictDeps = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"mozilla-services\";\n+    repo = \"autopush-rs\";\n+    tag = finalAttrs.version;\n+    hash = \"sha256-DP02mcEMoQoJqi5rw5eSuep0i7zeJ0LLYsakikt9hho=\";\n+  };\n+\n+  cargoHash = \"sha256-LqmuUtFF30TO6iw7LPFB7yJGrzrhh7R0OKCWMhe/OjU=\";\n+\n+  nativeBuildInputs = [\n+    pkg-config\n+    rustPlatform.bindgenHook\n+    cmake\n+  ];\n+\n+  buildInputs = [\n+    openssl\n+    libffi\n+    grpc\n+  ];\n+\n+  # by default only google bigtable is supported as a db\n+  buildNoDefaultFeatures = true;\n+  buildFeatures = [\n+    \"postgres\"\n+    \"redis\"\n+    \"reliable_report\"\n+  ];\n+\n+  env = {\n+    #needed for bingen to find libc\n+    BINDGEN_EXTRA_CLANG_ARGS = \"-I${stdenv.cc.libc.dev}/include\";\n+    CMAKE_POLICY_VERSION_MINIMUM = \"3.5\";",
+   "id": 3269594427,
+   "in_reply_to_id": 3269426269,
+   "line": 92,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 88,
+   "original_position": 88,
+   "original_start_line": null,
+   "path": "pkgs/by-name/au/autopush-rs/package.nix",
+   "position": 92,
+   "pull_request_review_id": 4323152836,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-19T21:01:06Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i decided against having it as an extra output on the main package but decided against that to make it easier to find for end-users as one needs it to generate the mandatory key. (also this is just the install phase for this python script, and i didn't know a better way of packaging a random script, though i am not well versed in the nixpkgs python ecosystem)",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-05-19T21:04:38Z",
+   "diff_hunk": "@@ -0,0 +1,126 @@\n+{\n+  lib,\n+  pkgs,\n+  nixosTests,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  stdenv,\n+  pkg-config,\n+  cmake,\n+  openssl,\n+  libffi,\n+  grpc,\n+  nix-update-script,\n+  python3Packages,\n+}:\n+let\n+  #script to generate the fernet key\n+  fernetKey =\n+    {\n+      src,\n+      version,\n+    }:\n+    python3Packages.buildPythonApplication {\n+      pname = \"fernet_key\";\n+      inherit version src;\n+\n+      __structuredAttrs = true;\n+\n+      format = \"other\";\n+      dontConfigure = true;\n+      dontBuild = true;\n+      dontStrip = true;\n+      dontCheck = true;\n+\n+      dependencies = [ python3Packages.cryptography ];\n+\n+      installPhase = ''\n+        mkdir -p $out/bin\n+        echo \"#!/usr/bin/env python3\" |  \\\n+        cat - $src/scripts/fernet_key.py > $out/bin/fernet_key\n+        chmod +x $out/bin/fernet_key\n+      '';",
+   "id": 3269612120,
+   "in_reply_to_id": 3269422552,
+   "line": 41,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 42,
+   "original_position": 42,
+   "original_start_line": 37,
+   "path": "pkgs/by-name/au/autopush-rs/package.nix",
+   "position": 41,
+   "pull_request_review_id": 4323174021,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 36,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-05-19T21:04:38Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```\r\n       >\r\n       > error[E0277]: the trait bound `AppState: Default` is not satisfied\r\n       >    --> autoconnect/autoconnect-ws/autoconnect-ws-sm/src/unidentified.rs:295:15\r\n       >     |\r\n       > 295 |             ..Default::default()\r\n       >     |               ^^^^^^^^^^^^^^^^^^ the trait `Default` is not implemented for `AppState`\r\n```\r\ni am not even sure if the unit tests are still maintained by upstream or if they fully rely on their docker stack for end to end testing",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-05-19T21:16:20Z",
+   "diff_hunk": "@@ -0,0 +1,126 @@\n+{\n+  lib,\n+  pkgs,\n+  nixosTests,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  stdenv,\n+  pkg-config,\n+  cmake,\n+  openssl,\n+  libffi,\n+  grpc,\n+  nix-update-script,\n+  python3Packages,\n+}:\n+let\n+  #script to generate the fernet key\n+  fernetKey =\n+    {\n+      src,\n+      version,\n+    }:\n+    python3Packages.buildPythonApplication {\n+      pname = \"fernet_key\";\n+      inherit version src;\n+\n+      __structuredAttrs = true;\n+\n+      format = \"other\";\n+      dontConfigure = true;\n+      dontBuild = true;\n+      dontStrip = true;\n+      dontCheck = true;\n+\n+      dependencies = [ python3Packages.cryptography ];\n+\n+      installPhase = ''\n+        mkdir -p $out/bin\n+        echo \"#!/usr/bin/env python3\" |  \\\n+        cat - $src/scripts/fernet_key.py > $out/bin/fernet_key\n+        chmod +x $out/bin/fernet_key\n+      '';\n+\n+      postFixup = ''\n+        wrapPythonPrograms\n+      '';\n+    };\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"autopush\";\n+  version = \"1.81.3\";\n+\n+  __structuredAttrs = true;\n+  strictDeps = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"mozilla-services\";\n+    repo = \"autopush-rs\";\n+    tag = finalAttrs.version;\n+    hash = \"sha256-DP02mcEMoQoJqi5rw5eSuep0i7zeJ0LLYsakikt9hho=\";\n+  };\n+\n+  cargoHash = \"sha256-LqmuUtFF30TO6iw7LPFB7yJGrzrhh7R0OKCWMhe/OjU=\";\n+\n+  nativeBuildInputs = [\n+    pkg-config\n+    rustPlatform.bindgenHook\n+    cmake\n+  ];\n+\n+  buildInputs = [\n+    openssl\n+    libffi\n+    grpc\n+  ];\n+\n+  # by default only google bigtable is supported as a db\n+  buildNoDefaultFeatures = true;\n+  buildFeatures = [\n+    \"postgres\"\n+    \"redis\"\n+    \"reliable_report\"\n+  ];\n+\n+  env = {\n+    #needed for bingen to find libc\n+    BINDGEN_EXTRA_CLANG_ARGS = \"-I${stdenv.cc.libc.dev}/include\";\n+    CMAKE_POLICY_VERSION_MINIMUM = \"3.5\";\n+  };\n+\n+  #check build fails",
+   "id": 3269681342,
+   "in_reply_to_id": 3269426765,
+   "line": 95,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 91,
+   "original_position": 91,
+   "original_start_line": null,
+   "path": "pkgs/by-name/au/autopush-rs/package.nix",
+   "position": 95,
+   "pull_request_review_id": 4323260808,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-19T21:16:20Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "mainly because all other modular services don't use it either (one of reasons for that is probably that one doesn't have access to the `finalPackage` from inside the module, but thats just my guess)",
+   "commit_id": "b1b2d6b96292ee5b26b4bf031c65f6d46ba85e49",
+   "created_at": "2026-05-19T21:27:53Z",
+   "diff_hunk": "@@ -0,0 +1,100 @@\n+#v Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  lib,\n+  options,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.autoconnect;\n+  tomlFmt = pkgs.formats.toml { };\n+in\n+{\n+  _class = \"service\";\n+  options = {\n+    package = lib.mkOption {",
+   "id": 3269755803,
+   "in_reply_to_id": 3269430023,
+   "line": null,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 18,
+   "original_position": 18,
+   "original_start_line": null,
+   "path": "pkgs/by-name/au/autopush-rs/service-autoconnect.nix",
+   "position": 1,
+   "pull_request_review_id": 4323349416,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-19T21:27:53Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "actually yeah no reason to not use it since pkgs is passed into it anyways",
+   "commit_id": "b1b2d6b96292ee5b26b4bf031c65f6d46ba85e49",
+   "created_at": "2026-05-21T08:42:19Z",
+   "diff_hunk": "@@ -0,0 +1,100 @@\n+#v Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  lib,\n+  options,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.autoconnect;\n+  tomlFmt = pkgs.formats.toml { };\n+in\n+{\n+  _class = \"service\";\n+  options = {\n+    package = lib.mkOption {",
+   "id": 3279810007,
+   "in_reply_to_id": 3269430023,
+   "line": null,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 18,
+   "original_position": 18,
+   "original_start_line": null,
+   "path": "pkgs/by-name/au/autopush-rs/service-autoconnect.nix",
+   "position": 1,
+   "pull_request_review_id": 4335343094,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-21T08:42:19Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "sleeping over it: having it as a special output is the right call as the script will only ever be used once and the modular service can just depend on the main `out` output",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-05-21T08:44:00Z",
+   "diff_hunk": "@@ -0,0 +1,126 @@\n+{\n+  lib,\n+  pkgs,\n+  nixosTests,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  stdenv,\n+  pkg-config,\n+  cmake,\n+  openssl,\n+  libffi,\n+  grpc,\n+  nix-update-script,\n+  python3Packages,\n+}:\n+let\n+  #script to generate the fernet key\n+  fernetKey =\n+    {\n+      src,\n+      version,\n+    }:\n+    python3Packages.buildPythonApplication {\n+      pname = \"fernet_key\";\n+      inherit version src;\n+\n+      __structuredAttrs = true;\n+\n+      format = \"other\";\n+      dontConfigure = true;\n+      dontBuild = true;\n+      dontStrip = true;\n+      dontCheck = true;\n+\n+      dependencies = [ python3Packages.cryptography ];\n+\n+      installPhase = ''\n+        mkdir -p $out/bin\n+        echo \"#!/usr/bin/env python3\" |  \\\n+        cat - $src/scripts/fernet_key.py > $out/bin/fernet_key\n+        chmod +x $out/bin/fernet_key\n+      '';",
+   "id": 3279819390,
+   "in_reply_to_id": 3269422552,
+   "line": 41,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 42,
+   "original_position": 42,
+   "original_start_line": 37,
+   "path": "pkgs/by-name/au/autopush-rs/package.nix",
+   "position": 41,
+   "pull_request_review_id": 4335355506,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 36,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-05-21T08:44:00Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": ":/ sad",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-05-23T16:56:25Z",
+   "diff_hunk": "@@ -0,0 +1,126 @@\n+{\n+  lib,\n+  pkgs,\n+  nixosTests,\n+  fetchFromGitHub,\n+  rustPlatform,\n+  stdenv,\n+  pkg-config,\n+  cmake,\n+  openssl,\n+  libffi,\n+  grpc,\n+  nix-update-script,\n+  python3Packages,\n+}:\n+let\n+  #script to generate the fernet key\n+  fernetKey =\n+    {\n+      src,\n+      version,\n+    }:\n+    python3Packages.buildPythonApplication {\n+      pname = \"fernet_key\";\n+      inherit version src;\n+\n+      __structuredAttrs = true;\n+\n+      format = \"other\";\n+      dontConfigure = true;\n+      dontBuild = true;\n+      dontStrip = true;\n+      dontCheck = true;\n+\n+      dependencies = [ python3Packages.cryptography ];\n+\n+      installPhase = ''\n+        mkdir -p $out/bin\n+        echo \"#!/usr/bin/env python3\" |  \\\n+        cat - $src/scripts/fernet_key.py > $out/bin/fernet_key\n+        chmod +x $out/bin/fernet_key\n+      '';\n+\n+      postFixup = ''\n+        wrapPythonPrograms\n+      '';\n+    };\n+in\n+rustPlatform.buildRustPackage (finalAttrs: {\n+  pname = \"autopush\";\n+  version = \"1.81.3\";\n+\n+  __structuredAttrs = true;\n+  strictDeps = true;\n+\n+  src = fetchFromGitHub {\n+    owner = \"mozilla-services\";\n+    repo = \"autopush-rs\";\n+    tag = finalAttrs.version;\n+    hash = \"sha256-DP02mcEMoQoJqi5rw5eSuep0i7zeJ0LLYsakikt9hho=\";\n+  };\n+\n+  cargoHash = \"sha256-LqmuUtFF30TO6iw7LPFB7yJGrzrhh7R0OKCWMhe/OjU=\";\n+\n+  nativeBuildInputs = [\n+    pkg-config\n+    rustPlatform.bindgenHook\n+    cmake\n+  ];\n+\n+  buildInputs = [\n+    openssl\n+    libffi\n+    grpc\n+  ];\n+\n+  # by default only google bigtable is supported as a db\n+  buildNoDefaultFeatures = true;\n+  buildFeatures = [\n+    \"postgres\"\n+    \"redis\"\n+    \"reliable_report\"\n+  ];\n+\n+  env = {\n+    #needed for bingen to find libc\n+    BINDGEN_EXTRA_CLANG_ARGS = \"-I${stdenv.cc.libc.dev}/include\";\n+    CMAKE_POLICY_VERSION_MINIMUM = \"3.5\";\n+  };\n+\n+  #check build fails",
+   "id": 3293190599,
+   "in_reply_to_id": 3269426765,
+   "line": 95,
+   "original_commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "original_line": 91,
+   "original_position": 91,
+   "original_start_line": null,
+   "path": "pkgs/by-name/au/autopush-rs/package.nix",
+   "position": 95,
+   "pull_request_review_id": 4351156599,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-23T16:56:25Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "shouldn't package be under  `autoendpoint`?\n\n```suggestion\n    autoendpoint = {\n        package = lib.mkPackageOption pkgs \"autopush-rs.out\" { };\n```\n\notherwise, https://search.nixos.org doesn't have the best UX\n\nsee https://search.nixos.org/options?channel=unstable&query=auto&source=modular_service\n`package` is listed without reference to which service unless you click and read which module is from, also clicking to see details opens the 2 `package` entry since they collide",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-07-09T12:42:01Z",
+   "diff_hunk": "@@ -0,0 +1,98 @@\n+# Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  lib,\n+  config,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.autoendpoint;\n+  tomlFmt = pkgs.formats.toml { };\n+in\n+{\n+  _class = \"service\";\n+  options = {\n+    package = lib.mkPackageOption pkgs \"autopush-rs.out\" { };\n+    autoendpoint = {",
+   "id": 3551632870,
+   "line": 19,
+   "original_commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "original_line": 19,
+   "original_position": 19,
+   "original_start_line": 18,
+   "path": "pkgs/by-name/au/autopush-rs/service-autoendpoint.nix",
+   "position": 19,
+   "pull_request_review_id": 4663040940,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": 18,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-09T12:48:58Z",
+   "user": {
+    "id": 45104896,
+    "login": "alexandru0-dev",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "same here",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-07-09T12:42:53Z",
+   "diff_hunk": "@@ -0,0 +1,96 @@\n+#v Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  lib,\n+  options,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.autoconnect;\n+  tomlFmt = pkgs.formats.toml { };\n+in\n+{\n+  _class = \"service\";\n+  options = {\n+    package = lib.mkPackageOption pkgs \"autopush-rs.out\" { };",
+   "id": 3551638160,
+   "line": 18,
+   "original_commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "original_line": 18,
+   "original_position": 18,
+   "original_start_line": null,
+   "path": "pkgs/by-name/au/autopush-rs/service-autoconnect.nix",
+   "position": 18,
+   "pull_request_review_id": 4663040940,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-09T12:48:58Z",
+   "user": {
+    "id": 45104896,
+    "login": "alexandru0-dev",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "hmm, imo it is more convenient to have it in the service toplevel, but i don't have strong opinions on it (especially as one should rarely need to change the default). feel free to open a PR ",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-07-09T12:54:31Z",
+   "diff_hunk": "@@ -0,0 +1,98 @@\n+# Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  lib,\n+  config,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.autoendpoint;\n+  tomlFmt = pkgs.formats.toml { };\n+in\n+{\n+  _class = \"service\";\n+  options = {\n+    package = lib.mkPackageOption pkgs \"autopush-rs.out\" { };\n+    autoendpoint = {",
+   "id": 3551714828,
+   "in_reply_to_id": 3551632870,
+   "line": 19,
+   "original_commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "original_line": 19,
+   "original_position": 19,
+   "original_start_line": 18,
+   "path": "pkgs/by-name/au/autopush-rs/service-autoendpoint.nix",
+   "position": 19,
+   "pull_request_review_id": 4663121087,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 18,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-09T12:54:31Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It's mostly about collisions on the nixos search webpage",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-07-09T12:56:13Z",
+   "diff_hunk": "@@ -0,0 +1,98 @@\n+# Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  lib,\n+  config,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.autoendpoint;\n+  tomlFmt = pkgs.formats.toml { };\n+in\n+{\n+  _class = \"service\";\n+  options = {\n+    package = lib.mkPackageOption pkgs \"autopush-rs.out\" { };\n+    autoendpoint = {",
+   "id": 3551727373,
+   "in_reply_to_id": 3551632870,
+   "line": 19,
+   "original_commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "original_line": 19,
+   "original_position": 19,
+   "original_start_line": 18,
+   "path": "pkgs/by-name/au/autopush-rs/service-autoendpoint.nix",
+   "position": 19,
+   "pull_request_review_id": 4663133289,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 18,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-09T12:56:13Z",
+   "user": {
+    "id": 45104896,
+    "login": "alexandru0-dev",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "generally i think that's something the web-search should work on (ie add some identifier)",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "created_at": "2026-07-09T13:08:19Z",
+   "diff_hunk": "@@ -0,0 +1,98 @@\n+# Non-module dependencies (`importApply`)\n+{ pkgs }:\n+\n+# Service module\n+{\n+  lib,\n+  config,\n+  options,\n+  ...\n+}:\n+let\n+  cfg = config.autoendpoint;\n+  tomlFmt = pkgs.formats.toml { };\n+in\n+{\n+  _class = \"service\";\n+  options = {\n+    package = lib.mkPackageOption pkgs \"autopush-rs.out\" { };\n+    autoendpoint = {",
+   "id": 3551811354,
+   "in_reply_to_id": 3551632870,
+   "line": 19,
+   "original_commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "original_line": 19,
+   "original_position": 19,
+   "original_start_line": 18,
+   "path": "pkgs/by-name/au/autopush-rs/service-autoendpoint.nix",
+   "position": 19,
+   "pull_request_review_id": 4663222425,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 18,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-07-09T13:08:19Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4322934575,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T20:28:36Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4322937732,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T20:29:04Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4322942473,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T20:29:49Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4322943092,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T20:29:55Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4322947000,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T20:30:32Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4322949535,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T20:30:57Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4323152836,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T21:01:06Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4323174021,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T21:04:38Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4323260808,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T21:16:20Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4323349416,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-19T21:27:53Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4335343094,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-21T08:42:19Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "98667b3fb4d2f00413fda61ea04e310a06d01aac",
+   "id": 4335355506,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-21T08:44:00Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "id": 4351156599,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-23T16:56:25Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "id": 4351160715,
+   "state": "APPROVED",
+   "submitted_at": "2026-05-23T16:59:15Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "sorry to comment on an already merged PR\ni can create a PR fixing the issues in questions",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "id": 4663040940,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-09T12:48:58Z",
+   "user": {
+    "id": 45104896,
+    "login": "alexandru0-dev",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "id": 4663121087,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-09T12:54:31Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "id": 4663133289,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-09T12:56:13Z",
+   "user": {
+    "id": 45104896,
+    "login": "alexandru0-dev",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "129bbf2f8ed5cdf4c6d89afc34e042b85b94dc8f",
+   "id": 4663222425,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-09T13:08:19Z",
+   "user": {
+    "id": 96021122,
+    "login": "zimward",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "e0f4dd693715949fbdd85b3394d1957e9383d730",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/e0f4dd693715949fbdd85b3394d1957e9383d730",
+   "created_at": "2026-05-23T17:18:06Z",
+   "event": "merged",
+   "id": 25886738728
+  },
+  {
+   "actor": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-23T17:18:06Z",
+   "event": "closed",
+   "id": 25886738824,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "7c3d9ddb1d21f82874a4528cec31928799891196",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nixpkgs/commits/7c3d9ddb1d21f82874a4528cec31928799891196",
+   "created_at": "2026-07-12T07:19:52Z",
+   "event": "referenced",
+   "id": 27869081994
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "c840a081676d56fd96855b8b087f863238840e67",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nixpkgs/commits/c840a081676d56fd96855b8b087f863238840e67",
+   "created_at": "2026-07-12T07:24:09Z",
+   "event": "referenced",
+   "id": 27869132601
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "39db39aaccd4c0ca4a60d62465d167a82fc1fb06",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nixpkgs/commits/39db39aaccd4c0ca4a60d62465d167a82fc1fb06",
+   "created_at": "2026-07-12T07:28:00Z",
+   "event": "referenced",
+   "id": 27869176704
+  },
+  {
+   "actor": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "6095460439dc2c1e81393e13f6fd5b6406dc7be7",
+   "commit_url": "https://api.github.com/repos/phanirithvij/nixpkgs/commits/6095460439dc2c1e81393e13f6fd5b6406dc7be7",
+   "created_at": "2026-07-12T07:58:04Z",
+   "event": "referenced",
+   "id": 27869544547
+  }
+ ]
+}

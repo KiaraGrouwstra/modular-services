@@ -1,0 +1,227 @@
+{
+ "comments": [
+  {
+   "body": "A sample version of recommendations:\r\n - For services using nginx add the `configureNginx = true/false` parameter, which will allow the user to enable/disable automatic configuration.\r\n - Add `configureNginxExtra = true/false` parameter, which adds additional headers such as `Strict-Transport-Security` and `Alt-Svc` that are activated depending on whether the `forceSSL` parameter and QUIC protocol are enabled.\r\n - Add a parameter to override the values set by the `configureNginxExtra` parameter.\r\n - Disable automatic overriding of `enableACME` and `forceSSL` parameters, so that the user decides whether to enable them or not. For example, if user wants to install a service that works only within local network. The current exception is the `mastodon` service, as it does not work without SSL.\r\n - Add the ability to automatically compress static files to gzip and brotli format. The feature has already been implemented in `mastodon` and `peertube` services.",
+   "created_at": "2023-12-30T13:52:25Z",
+   "id": 1872532134,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-12-30T13:52:25Z",
+   "user": {
+    "id": 26877687,
+    "login": "Izorkin",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> prohibit modules to provide nginx configurations for services that have their own server builtin (e.g. nodejs, uwsgi, Go/Rust binaries).\r\n\r\nI would probably add to that if the config is just proxyPass. Those could still require plentiful of locations. Also configuring TLS for each of those services is a pain and just using nginx for everything is easier.\r\n\r\n> * we may want to consider doing that in its own module (something like `services.nginx-vhosts.matrix-synapse`?\r\n\r\nI don't think we gain much by that move other than that it might be forgotten to be updated.\r\n\r\n> That way it might also be possible to point the proxyPass to a different machine).\r\n\r\nThat should probably be some kind of variable or nginx should be of the freeform type.\r\nAlso I don't want to support more remote types of deployment because we don't have full control over that in code.\r\n\r\n> either provide the standard configuration from upstream or try to do as few things as possible.\r\n> \r\n>     * does that mean we still enable TLS by default?\r\n\r\nUpstreams default vary from pretty good to outright dangerous and bad. Just copying upstream will usually not do it especially if we run postgres and phpfpm instead of dusted apache.\r\n\r\nAlso nudging people to do TLS is probably a good idea.\r\n\r\n---\r\n\r\nI think most problems we have boil down to nginx not being of a freeform type and having way to many specific settings for specific things that in the end just concats strings. \r\n\r\nMany of nginx' settings can only be set once per layer and otherwise crash nginx outright. It should be pretty easy to convert those to a freeform type. Some settings like add_header can be defined multiple times. If we had a type we could replace all the extraConfig and common options with, then extending the nginx config would be easy and providing good defaults, too.\r\n\r\nThen we could easily implement options like HSTS by default by creating a new option which writes into every block where headers are added.\r\n\r\nRight now the recommended* options already have that problem. If you need to change any option in there, you need to turn of the config, cop it's content and change the one setting you wanted to change.\r\n\r\n(Sidenote: I also recently noticed that headers are not propagated down layers and if a new add_header is written, then all before are ignored.)\r\n\r\n---\r\n\r\nIf we rewrite the nginx module to freeform, we probably need some more sophisticated types which know at which level they are (http,server,location,etc), if the option is valid for there (we could only do that for the most common ones), if it can be written once or multiple times and then we could move all the specifics like ACME into smaller submodules which use those types.\r\n\r\n---\r\n\r\nOr maybe we just write down what modules are expected to do with nginx configs and that except location blocks and the necessary configuration nothing should be added.\r\n\r\n---\r\n\r\nI've just recently discovered that you can easily expand the virtualHost/locations options in your own modules https://github.com/SuperSandro2000/nixos-modules/blob/master/modules/nginx.nix#L77-L79 .\r\n\r\nMaybe doing this as an addon to the nginx module would also be an idea?\r\n\r\nI really don't know whats the best option, but we should kick out some of the feature creep we have accumulated over the years.",
+   "created_at": "2023-12-31T02:36:30Z",
+   "id": 1872652777,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2023-12-31T02:47:51Z",
+   "user": {
+    "id": 7258858,
+    "login": "SuperSandro2000",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/pre-rfc-decouple-services-using-structured-typing/58257/27\n",
+   "created_at": "2025-01-21T12:01:44Z",
+   "id": 2604536135,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-01-21T12:01:44Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Sorry for not getting back on this.\n\nFwiw another idea I had after talking about this with @RaitoBezarius a few weeks ago is to implement modules in a way that the nginx-part can be deployed to a different host. That'd make the modules useful for more people in quite a bunch of cases.\n\n---\n\n> I don't think we gain much by that move other than that it might be forgotten to be updated.\n\nIsn't this something that can be enforced with tests and reviewers? Strictly speaking the risk of forgetting to update things already exists, with module/package pairs being the most obvious example.\n\n> I think most problems we have boil down to nginx not being of a freeform type and having way to many specific settings for specific things that in the end just concats strings.\n\nThe concrete problem is something different though: whenever I add a module where somebody added nginx-support, I have to check how exactly things are put together. Is there a weird default for the hostname? Do I need to enable/disable TLS? Are there some more assumptions I'm breaking by turning off nginx?\n\nThat being said, nginx is a pretty weird mix of declarative and imperative: e.g. the exact position of a `return` matters. Also, I'm not sure if there's a non-cursed way to write `if`-blocks with that. But that might be my bias of having touched too many grown, non-trivial nginx configurations.\n\n>  Also I don't want to support more remote types of deployment because we don't have full control over that in code.\n\nI think it's perfectly valid to make the constraint that both sides (i.e. reverse proxy and application) require the same nixpkgs with any other setup being unsupported and rejected with wontfix. Because I agree, otherwise we'll have no chance of progressing in any way.\n\n",
+   "created_at": "2025-08-03T13:27:01Z",
+   "id": 3148424556,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-03T13:27:01Z",
+   "user": {
+    "id": 6025220,
+    "login": "Ma27",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "If rewriting the nginx module is out of scope, then I would lean towards modules doing *less*, and letting the users define their own patterns. This will result in less \"out of the box\" experience, but through clear module documentation (suggested headers, etc), that pain can be alleviated. \n\nThat is: not providing any nginx config at all, unless they have a \"good reason\", which is identified on a per-case basis criteria which can include:\n\n- particularly complicated setup: synapse workers\n- clear guidance from upstream: nextcloud\n\nHowever I'm not particularly happy with what that means for your \"plan\" php applications that, as mentioned, have a tricky but small set of nginx + phpfpm config to get right (example [davis](https://search.nixos.org/options?channel=25.05&show=services.davis.hostname&from=0&size=50&sort=relevance&type=packages&query=davis)).",
+   "created_at": "2025-08-13T15:07:42Z",
+   "id": 3184316431,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-08-13T15:07:42Z",
+   "user": {
+    "id": 14830,
+    "login": "Ramblurr",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'm not adding anything really concrete to the debate apart from I see this as an issue too. The RFC I wrote intends to provide a pattern to solve this using the [inversion of dependencies principle](https://github.com/NixOS/rfcs/pull/189/files#diff-affe4e9f48f8a72234137e9fef5716a687eeed3e8371abea976b3f2246227979R592) (at least that's one way to see it).\n\nThe idea would be to remove anything specific to nginx from modules wanting to configure a reverse proxy. To pick a concrete example, a \"reverse proxy\" contract would site between the Nextcloud module and the Nginx module, acting as an interface between them. This could mean in practice moving those `recommended*` settings in the contract and keeping `nginx` lean. This contract would allow also to have a reverse proxy on [other hosts](https://github.com/NixOS/rfcs/pull/189/files#diff-affe4e9f48f8a72234137e9fef5716a687eeed3e8371abea976b3f2246227979R53).\n\nI've noticed this same inversion of dependencies in other areas, like databases. Why couldn't the final user create its own Postgres instance, and give some \"handle\" to it to Nextcloud that will then set it up using a contract?",
+   "created_at": "2025-09-18T12:32:40Z",
+   "id": 3307207015,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-18T12:32:58Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/277723",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "# Context & Motivation\r\n\r\nA lot of NixOS modules configuring web-services also provide configuring a reverse-proxy (usually `nginx`). Most common examples are:\r\n\r\n* `services.nextcloud`\r\n* `services.mastodon`\r\n* `services.discourse`\r\n* many more.\r\n\r\nThere are in fact a few good reason why this is done:\r\n\r\n* if the software is written in PHP it usually requires a non-trivial configuration involving rewrite rules, serving static content (mostly images/stylesheets/scripts) and forwarding requests against `.php` files to php-fpm.\r\n* if upstream provides a reasonably well, production-grade configuration, it might be sensible to keep it in nixpkgs to avoid having every administrator to upgrade the config when updating the service[1]. Also, the maintainer of such a module is probably more experienced with the software than the administrator using the module.\r\n\r\nHowever, I recently started getting some doubts whether adding nginx configurations to service-modules is generally a good idea.\r\n\r\n# Issues with nginx configurations\r\n\r\nSince there's no standardization (e.g. `configureNginx` vs `nginx.enable`, does the module also configure TLS&ACME?), you have to check for every single module how (and if) there's nginx configuration already provided because there's a high chance to encounter subtle differences. If there's something you need to change, that can become pretty hard because of that since nginx uses `extraConfig` rather than RFC42-style settings for a lot of stuff[2], an example is whether or not to add HSTS headers:\r\n\r\n* https://github.com/NixOS/nixpkgs/pull/172926\r\n* https://github.com/NixOS/nixpkgs/pull/276496#discussion_r1435867787\r\n\r\nThe stance I have on that is actually quite inconsistent: for Nextcloud, I came to the conclusion that it's the best if we try to stay as close to the upstream suggestions as possible. But on other modules I don't think it's good to inconsistently configure additional things (especially if there are no guidelines recommending that). My fear is that people might learn by accident that e.g. forceSSL implies HSTS, but that's only the case because of some magic a random list of modules is doing[3].\r\n\r\nIn fact, we have this problem already. You'll always have to look what to do when configuring nginx with TLS and ACME for $serviceModule.\r\n\r\nNext up, all of that machinery doesn't help at all in cases where the vhost isn't on the same machine as the service and that's something I'd consider rather common these days.\r\n\r\n# Moving forward\r\n\r\nA bunch of ideas I have:\r\n\r\n* prohibit modules to provide nginx configurations for services that have their own server builtin (e.g. nodejs, uwsgi, Go/Rust binaries).\r\n* if there's a good reason to provide that regardless (e.g. for load balancing synapse workers), we may want to consider doing that in its own module (something like `services.nginx-vhosts.matrix-synapse`? That way it might also be possible to point the proxyPass to a different machine).\r\n* either provide the standard configuration from upstream or try to do as few things as possible.\r\n  * does that mean we still enable TLS by default?\r\n\r\nAnd finally, what do we do with existing modules?\r\n\r\nCCing a few people who may have an opinion here: @lheckemann @RaitoBezarius @mweinelt @Izorkin @SuperSandro2000 \r\n\r\n[1] an extreme example is probably `ocmProviderIsNotAStaticDirAnymore` in `nextcloud` ;-)\r\n[2] I know that it will be very hard to implement that for nginx.\r\n[3] I'm well-aware that both of my positions contradict here, that's part of the reason why I'm opening this issue :) \r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [issues you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[issues you find important]: https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 6,
+  "created_at": "2023-12-30T13:14:40Z",
+  "id": 2060744233,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "https://github.com/NixOS/nixpkgs/blob/master/.github/STALE-BOT.md",
+    "id": 1721139926,
+    "name": "2.status: stale"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 277723,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 6,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 2,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 8
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Guidelines / Recommendations for when to configure nginx in a service module?",
+  "type": null,
+  "updated_at": "2026-03-19T15:56:41Z",
+  "user": {
+   "id": 6025220,
+   "login": "Ma27",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#277723",
+ "sources": [
+  "nixpkgs-nginx-in-modules"
+ ],
+ "timeline": []
+}

@@ -1,0 +1,298 @@
+{
+ "comments": [
+  {
+   "body": "a way to map from traditional to modular services would be maintaining the old cross-service option set to coordinate what each of them need and instantiate the modular services.\nthat might make for lower-hanging fruit for compatibility, though eventually supporting a distributed setting could require contracts still.",
+   "created_at": "2026-02-19T13:29:59Z",
+   "id": 3927328675,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-19T13:29:59Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "previous work on coordinating information across distributed services also includes clan's [`exports`](https://docs.clan.lol/latest/guides/services/exports/)",
+   "created_at": "2026-02-19T13:54:37Z",
+   "id": 3927462092,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-19T13:54:37Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/nixifying-kubernetes-with-nix-csi-easykubenix-and-dinix/70899/33\n",
+   "created_at": "2026-02-24T00:50:54Z",
+   "id": 3948228216,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-24T00:50:54Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "one simple idea might be to request external modules like:\n\n```nix\n# a modular service gets a metadata thing like this\nserviceRequests = {\n  # match name as used in service equivalent like services.postgresql\n  postgresql = {\n    # let's say we may make multiple (instance?) requests, and this is one\n    default = {\n      # match the structure of services.postgresql\n      ensureDatabases = {\n        # ...\n      };\n    };\n  };\n};\n```\n\nthe idea would be that this in itself would not yet do anything, instead exposing relevant info to the service consumer so that they might load such requested services as desired (same environment, different environment, ...).\n",
+   "created_at": "2026-02-24T15:16:23Z",
+   "id": 3952835703,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-02-24T15:16:23Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i added a test `nixos/tests/contracts/database-modular-services.nix` demonstrating this principle at #506343.",
+   "created_at": "2026-04-03T18:04:53Z",
+   "id": 4184568734,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-03T18:04:53Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "from [matrix](https://matrix.to/#/!skjfPnBZwrJbAxHTxh:nixos.org/$trZhh6jncSbGbsyeEqKNTgm4k3j4zOjF5DejV9J0um0?via=nixos.org&via=matrix.org&via=nixos.dev):\n\nkiara:\n> a modular service is expected to actually be scoped to one (systemd) service, which doesn't fit with our previous setting of like 'web service A can trigger db service B'\n\nroberth:\n> doesn't have to be. they can be nested groupings of services as well. This nesting could be used as a \"poor man's dependency wiring system\", as a module that defines multiple has the capability to set up those dependencies, but an alternative like contracts is still desirable, so that e.g. unique db per app does not become a requirement",
+   "created_at": "2026-04-28T20:31:48Z",
+   "id": 4338839039,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-28T20:31:48Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "(earlier i posted this [on matrix](https://matrix.to/#/!skjfPnBZwrJbAxHTxh:nixos.org/$0w5HDDoI65--l-hKWHOnOLY10sHo4dyIwoDC-W0zytU?via=nixos.org&via=matrix.org&via=nixos.dev):)\n\ni might have mentioned i considered modular services' child services feature something i had mixed feelings on, figuring that at face value i considered it closer to nixos services' way of doing things than to keeping distributing services across nodes a first-class citizen the way i'd like. i now managed to do a PoC on defining services on the nixpkgs side in a somewhat more logistics-agnostics way, such that the consumer could kind of rearrange things the way they prefer. i'll admit this builds upon contracts (this wasn't a 1-commit branch), but at least i now maybe got something tangible to show for how i generally felt on direction there, i guess.\nhttps://github.com/KiaraGrouwstra/nixpkgs/commit/c01bd0145f8bb829ea4875b1ca3a40b99e1b1371\n\ni considered having the rearrangements generated as well, but module system wanted separate evals to like prevent some infinite recursions. so maybe room for improvement still, but contracts-wise, the idea would be to have services client-style indicate what they'd want from lower-level services they'd consume. for the sake of simplicity, this example sorta cheated there by pretending the whole db config (i.e. also 'server side') is wholesale configured as part of that as well (on top of.. not being a real db).\nbut yeah, i hope the idea sorta came across.\n",
+   "created_at": "2026-07-23T21:16:57Z",
+   "id": 5063527082,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-23T21:16:57Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/modular-services-meeting-5-2026-07-24/79145/1\n",
+   "created_at": "2026-07-24T17:52:04Z",
+   "id": 5072850452,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-24T17:52:04Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/490688",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "our [modular services](https://nixos.org/manual/nixos/stable/#modular-services) implementations have so far ported over service modules that consisted of a single `systemd` service.\nmany of our existing service modules however are not restricted to this, instead making further use of ancilliary services, such as reverse proxies (say `services.nginx`) or databases (say `services.postgresql`).\nas such, to scale out or concept of modular services to cover, or even end up superseding, our incumbent service modules, we would need a method to elegantly handle such multi-service service modules as well.\n\n---\n\nto get feedback on my current train of thought there, i think we could go about this by giving each used service (e.g. an application's `services.postgresql`) its own modular service, so that e.g. the `default` modular service is the application itself, its `postgresql` modular service handles the `services.postgresql` bits, while a compatibility layer (see #475372) could wrap these all together, by default.\n\nnow, the challenge here is that modular services have options at the service level, whereas traditional service modules have a shared option set handling anything required (main service, ancilliary services, other NixOS configuration).\n\nwhile we could attempt to explicitly configure everything for each service even accepting options duplicated across sibling services, the problem here is that some of the info normally coordinated across services may be calculated in non-trivial ways, whereas in case info flows in both directions we may also need to deal with preventing infinite recursion.\n\nprior art on addressing scenarios like that seems using contracts (#506343).\n(also works [across nodes](https://github.com/ibizaman/selfhostblocks/issues/541).)\n\ncontracts offer a mechanism that, from the perspective of the application service making a request:\n\n- takes input (request parameters)\n- yields outputs (result)\n- may generate configuration on the side of the provider, rendering it effectful (unlike nix functions, which yield outputs from inputs without causing such side-effects for our purposes here)\n- .. all without automatically invoking things\n\nnote that, while contracts' [original motivation](https://shb.skarabox.com/contracts.html#contracts-why) involved abstracting over providers (e.g. have a reverse proxy contract rather than something specific to just e.g. nginx), solving our current challenge i think would not require such abstractions yet necessarily.\n\nfurther, while the contracts PR uses a dedicated [folder](https://github.com/NixOS/nixpkgs/pull/485453/changes#diff-6df642884f7ba1bbedf8129761ff176e7723736eebd5c03cd071037fe4df7e99) to gather contract implementations, i think in my idea here, in case of services offering multiple systemd services specific to the service (say a package offering an API service and a web service with some interaction in configuration), we could end up with contracts specific to an application, in which case it could be sensible to bundle such code with the modular rather than with general-use contracts.\n\nas an extra note here to inform alternative ideas, contracts' round-trip mechanism should be overkill [when not each of](https://github.com/NixOS/nixpkgs/pull/432529#issuecomment-3686663833) input/output/configuration are needed:\n\n- don't need configuration: should be able to settle for a nix function\n- don't need both input and output: should be able to settle for module system (possibly with custom types)\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 8,
+  "created_at": "2026-02-15T14:29:47Z",
+  "id": 3944195209,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 490688,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 3,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 1,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 4
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "modular services: porting legacy modules consisting of multiple services",
+  "type": null,
+  "updated_at": "2026-07-24T17:52:04Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#490688",
+ "sources": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "f78820239bf57ca00d0fe025b1ea2605057b7e62",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/f78820239bf57ca00d0fe025b1ea2605057b7e62",
+   "created_at": "2026-03-23T17:39:03Z",
+   "event": "referenced",
+   "id": 23822602660
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "330b3213eef5af9c72417e3f435f74b9161d4a5f",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/330b3213eef5af9c72417e3f435f74b9161d4a5f",
+   "created_at": "2026-03-26T11:24:28Z",
+   "event": "referenced",
+   "id": 23928777792
+  }
+ ]
+}

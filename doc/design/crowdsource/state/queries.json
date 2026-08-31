@@ -1,0 +1,2710 @@
+{
+ "discourse-meetings": [
+  {
+   "id": 79684,
+   "kept": true,
+   "posts_count": 2,
+   "title": "Modular services meeting #7 2026-08-21"
+  },
+  {
+   "id": 77846,
+   "kept": true,
+   "posts_count": 1,
+   "title": "Modular services meeting #1 2026-05-26"
+  },
+  {
+   "id": 79145,
+   "kept": true,
+   "posts_count": 1,
+   "title": "Modular services meeting #5 2026-07-24"
+  },
+  {
+   "id": 78582,
+   "kept": true,
+   "posts_count": 1,
+   "title": "Modular services meeting #3 2026-06-26"
+  },
+  {
+   "id": 79408,
+   "kept": true,
+   "posts_count": 2,
+   "title": "Modular services meeting #6 2026-08-07"
+  },
+  {
+   "id": 73751,
+   "kept": true,
+   "posts_count": 2,
+   "title": "Should we expose the type for modular services"
+  },
+  {
+   "id": 78235,
+   "kept": true,
+   "posts_count": 1,
+   "title": "Modular services meeting #2 2026-06-12"
+  },
+  {
+   "id": 78847,
+   "kept": true,
+   "posts_count": 2,
+   "title": "Modular services meeting #4 2026-07-10"
+  },
+  {
+   "id": 74338,
+   "kept": true,
+   "posts_count": 5,
+   "title": "Portable rust based service runner for the experimental modular services spec"
+  },
+  {
+   "id": 76749,
+   "kept": false,
+   "posts_count": 16,
+   "title": "Finix - a daily-drivable experimental os, featuring finit as pid 1, to explore the NixOS design space"
+  },
+  {
+   "id": 3032,
+   "kept": false,
+   "posts_count": 7151,
+   "title": "PRs ready for review _"
+  },
+  {
+   "id": 26963,
+   "kept": false,
+   "posts_count": 43,
+   "title": "Self Host Blocks - Building blocks for self-hosting with best practices"
+  },
+  {
+   "id": 2617,
+   "kept": false,
+   "posts_count": 3128,
+   "title": "PRs already reviewed"
+  },
+  {
+   "id": 78627,
+   "kept": false,
+   "posts_count": 48,
+   "title": "Let's create skills for nixpkgs development"
+  },
+  {
+   "id": 78333,
+   "kept": false,
+   "posts_count": 136,
+   "title": "Init System freedom on NixOS"
+  },
+  {
+   "id": 70899,
+   "kept": false,
+   "posts_count": 35,
+   "title": "Nixifying Kubernetes with nix-csi, easykubenix and dinix"
+  },
+  {
+   "id": 64882,
+   "kept": false,
+   "posts_count": 1,
+   "title": "Zürich 25.05 ZHF hackathon report"
+  },
+  {
+   "id": 79225,
+   "kept": false,
+   "posts_count": 5,
+   "title": "Replacing kubernetes with NixOS based cluster"
+  },
+  {
+   "id": 78858,
+   "kept": false,
+   "posts_count": 10,
+   "title": "Request for feedback for packeging software for a newbie (s6-overlay package)"
+  },
+  {
+   "id": 77174,
+   "kept": false,
+   "posts_count": 2,
+   "title": "Running nix eval for systemd service errors, but not for specific fields"
+  },
+  {
+   "id": 76998,
+   "kept": false,
+   "posts_count": 5,
+   "title": "Sddm not showing on external monitor"
+  },
+  {
+   "id": 77102,
+   "kept": false,
+   "posts_count": 4,
+   "title": "RCE found in vim and emacs?"
+  },
+  {
+   "id": 76855,
+   "kept": false,
+   "posts_count": 4,
+   "title": "Power-targets.nix"
+  },
+  {
+   "id": 65781,
+   "kept": false,
+   "posts_count": 15,
+   "title": "Are we having GSOC on 2026?"
+  },
+  {
+   "id": 21298,
+   "kept": false,
+   "posts_count": 83,
+   "title": "Restructuring NixOS to work without systemd? e.g., with SysVinit"
+  },
+  {
+   "id": 54109,
+   "kept": false,
+   "posts_count": 8,
+   "title": "Portable Submodules"
+  },
+  {
+   "id": 42473,
+   "kept": false,
+   "posts_count": 3,
+   "title": "Enable+config an unofficial service with Home Manager"
+  },
+  {
+   "id": 24991,
+   "kept": false,
+   "posts_count": 6,
+   "title": "How to get the service running for keyd?"
+  },
+  {
+   "id": 55787,
+   "kept": false,
+   "posts_count": 6,
+   "title": "Advice for Coreboot on NixOS"
+  },
+  {
+   "id": 5372,
+   "kept": false,
+   "posts_count": 22,
+   "title": "Does my first-ever configuration.nix look alright?"
+  },
+  {
+   "id": 1582,
+   "kept": false,
+   "posts_count": 3,
+   "title": "RFC: Accurate time synchronization dependencies via time-sync.target"
+  },
+  {
+   "id": 12880,
+   "kept": false,
+   "posts_count": 11,
+   "title": "How to differentiate configurations in modular configuration.nix"
+  },
+  {
+   "id": 50963,
+   "kept": false,
+   "posts_count": 4,
+   "title": "Seeking Guidance on Best Practices for NixOS Configuration Management"
+  },
+  {
+   "id": 74725,
+   "kept": false,
+   "posts_count": 3,
+   "title": "Foray into NixOS and IaC"
+  },
+  {
+   "id": 58257,
+   "kept": false,
+   "posts_count": 46,
+   "title": "Pre-RFC: Decouple services using structured typing"
+  },
+  {
+   "id": 78323,
+   "kept": false,
+   "posts_count": 31,
+   "title": "Adding rules to udev: easy or a consenus best practice"
+  },
+  {
+   "id": 32088,
+   "kept": false,
+   "posts_count": 5,
+   "title": "Global overlay not being applied"
+  },
+  {
+   "id": 66399,
+   "kept": false,
+   "posts_count": 12,
+   "title": "Design preview: PAM rule ordering and targets"
+  },
+  {
+   "id": 12245,
+   "kept": false,
+   "posts_count": 17,
+   "title": "Automating home manager setup"
+  },
+  {
+   "id": 65524,
+   "kept": false,
+   "posts_count": 4,
+   "title": "Failed to rebuild system"
+  },
+  {
+   "id": 56996,
+   "kept": false,
+   "posts_count": 11,
+   "title": "Suggestion: NixOS with sysvinit"
+  },
+  {
+   "id": 78177,
+   "kept": false,
+   "posts_count": 9,
+   "title": "Innernet on NixOS"
+  },
+  {
+   "id": 32542,
+   "kept": false,
+   "posts_count": 20,
+   "title": "Wirenix: A flake for creating wireguard mesh networks"
+  },
+  {
+   "id": 28171,
+   "kept": false,
+   "posts_count": 12,
+   "title": "NixOS Config Base: A modularized base for NixOS configs"
+  },
+  {
+   "id": 74807,
+   "kept": false,
+   "posts_count": 22,
+   "title": "I built a Nix binary cache backed by Git (82% storage reduction)"
+  },
+  {
+   "id": 30668,
+   "kept": false,
+   "posts_count": 6,
+   "title": "Could there ever be some kind of config.d or imports globbing, for easier programmatic editing?"
+  },
+  {
+   "id": 1924,
+   "kept": false,
+   "posts_count": 6,
+   "title": "Builds.sr.ht can now run builds in a NixOS image"
+  },
+  {
+   "id": 5817,
+   "kept": false,
+   "posts_count": 10,
+   "title": "Is this a good way to modularize home manager home.nix for home/work?"
+  },
+  {
+   "id": 58579,
+   "kept": false,
+   "posts_count": 8,
+   "title": "Infinite recursion when modularizing flake runNixOSTest"
+  },
+  {
+   "id": 61039,
+   "kept": false,
+   "posts_count": 2,
+   "title": "Adding custom options to nixpkgs modules with arbitrary attrSets"
+  }
+ ],
+ "finix-issues": [],
+ "finix-prs": [],
+ "home-manager-issues": [
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "nix-community/home-manager#9471",
+   "state": "open",
+   "title": "[Feature Request] Add shared helpers for common module boilerplate",
+   "updated_at": "2026-06-20T07:42:11Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "nix-community/home-manager#9212",
+   "state": "open",
+   "title": "bug: asciinema: mismatch version in programs.asciinema",
+   "updated_at": "2026-05-06T09:19:10Z"
+  },
+  {
+   "comments": 11,
+   "kept": true,
+   "ref": "nix-community/home-manager#4751",
+   "state": "open",
+   "title": "Support for non-systemd service managers.",
+   "updated_at": "2026-05-16T15:51:00Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "nix-community/home-manager#9473",
+   "state": "open",
+   "title": "[Feature Request] Add lib.hm.services helpers for repeated service wiring",
+   "updated_at": "2026-06-12T17:13:45Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "nix-community/home-manager#9263",
+   "state": "closed",
+   "title": "bug: Darwin broken after modular services support",
+   "updated_at": "2026-05-13T16:36:31Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "nix-community/home-manager#9185",
+   "state": "closed",
+   "title": "bug: `services.blueman.withApplet` is currently broken",
+   "updated_at": "2026-04-30T01:04:09Z"
+  }
+ ],
+ "home-manager-prs": [
+  {
+   "comments": 9,
+   "kept": true,
+   "ref": "nix-community/home-manager#9693",
+   "state": "open",
+   "title": "lib/systemd: expose systemd unit translation helpers",
+   "updated_at": "2026-07-28T18:17:52Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "nix-community/home-manager#9708",
+   "state": "closed",
+   "title": "modules: fix modular services with strict nixpkgs modules",
+   "updated_at": "2026-07-27T09:57:47Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "nix-community/home-manager#9215",
+   "state": "closed",
+   "title": "modules: add modular services support",
+   "updated_at": "2026-07-27T09:18:03Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "nix-community/home-manager#9264",
+   "state": "closed",
+   "title": "modular-services: incorporate post-merge feedback",
+   "updated_at": "2026-07-27T09:22:53Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "nix-community/home-manager#9714",
+   "state": "closed",
+   "title": "services-modular: accept both shapes of the nixpkgs service module",
+   "updated_at": "2026-07-28T18:23:41Z"
+  }
+ ],
+ "nix-darwin-issues": [],
+ "nix-darwin-prs": [
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "nix-darwin/nix-darwin#1765",
+   "state": "open",
+   "title": "services-modular: add modular service interface for launchd",
+   "updated_at": "2026-05-14T07:17:57Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "nix-darwin/nix-darwin#1744",
+   "state": "open",
+   "title": "programs/nh: new module",
+   "updated_at": "2026-08-17T20:44:44Z"
+  }
+ ],
+ "nixng-issues": [
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "nix-community/NixNG#67",
+   "state": "open",
+   "title": "Modular services",
+   "updated_at": "2025-08-20T10:10:22Z"
+  }
+ ],
+ "nixng-prs": [],
+ "nixos-search-issues": [
+  {
+   "comments": 18,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1281",
+   "state": "closed",
+   "title": "Remove support for home-manager",
+   "updated_at": "2026-07-26T20:20:53Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1207",
+   "state": "closed",
+   "title": "modular services search not working as expected",
+   "updated_at": "2026-04-16T11:33:57Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1167",
+   "state": "closed",
+   "title": "allow searching options of modular services",
+   "updated_at": "2026-04-12T19:57:02Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1197",
+   "state": "closed",
+   "title": "\"Bad Status Server returned 404\" when searching in https://search.nixos.org/(options/packages) with unstable channel",
+   "updated_at": "2026-07-26T21:35:17Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1210",
+   "state": "closed",
+   "title": "Feedback on recent UI changes for the options search",
+   "updated_at": "2026-05-10T12:04:42Z"
+  }
+ ],
+ "nixos-search-prs": [
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1464",
+   "state": "open",
+   "title": "feat(flake-info): index the modular-service base/environment split",
+   "updated_at": "2026-07-26T20:54:49Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1186",
+   "state": "closed",
+   "title": "allow searching options of modular services",
+   "updated_at": "2026-08-19T08:35:46Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1289",
+   "state": "closed",
+   "title": "mark modular services as experimental",
+   "updated_at": "2026-05-26T14:04:09Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1542",
+   "state": "closed",
+   "title": "Index how popular an option's package is",
+   "updated_at": "2026-08-22T21:30:28Z"
+  },
+  {
+   "comments": 15,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1262",
+   "state": "closed",
+   "title": "feat(frontend): static-asset-backed type-ahead for options (modular services, home-manager)",
+   "updated_at": "2026-07-13T09:11:49Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1346",
+   "state": "closed",
+   "title": "remove `_class` mentions` from option results' snippets",
+   "updated_at": "2026-08-19T08:34:54Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1189",
+   "state": "closed",
+   "title": "feat: support modular services (backend)",
+   "updated_at": "2026-04-12T20:57:35Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1192",
+   "state": "closed",
+   "title": "feat(frontend): show modular service options",
+   "updated_at": "2026-04-12T19:57:03Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1310",
+   "state": "closed",
+   "title": "feat(frontend): suggest the other search when one comes up empty",
+   "updated_at": "2026-06-05T21:35:36Z"
+  },
+  {
+   "comments": 11,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1217",
+   "state": "closed",
+   "title": "HM: handle back-end symmetrically to nixpkgs options and modular services",
+   "updated_at": "2026-04-27T15:12:58Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1209",
+   "state": "closed",
+   "title": "distinguish modular services by badges over cosmetic prefix `system.services.`",
+   "updated_at": "2026-04-16T11:33:58Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1194",
+   "state": "closed",
+   "title": "fix(flake-info): use nixpkgs hand-maintained service list",
+   "updated_at": "2026-04-12T15:27:54Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1222",
+   "state": "closed",
+   "title": "fix(flake-info): get package versions from fetched `packages.json.br`",
+   "updated_at": "2026-04-27T07:07:29Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1200",
+   "state": "closed",
+   "title": "Switch back to index version 45",
+   "updated_at": "2026-04-14T12:55:12Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1236",
+   "state": "closed",
+   "title": "feat(flake-info): import home-manager options into channel indexes",
+   "updated_at": "2026-04-28T20:27:43Z"
+  },
+  {
+   "comments": 9,
+   "kept": true,
+   "ref": "NixOS/nixos-search#1202",
+   "state": "closed",
+   "title": "home manager options: back + front",
+   "updated_at": "2026-04-28T20:15:36Z"
+  }
+ ],
+ "nixpkgs-label-issues": [
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#554965",
+   "state": "open",
+   "title": "program CLI flags handled from package modules",
+   "updated_at": "2026-08-21T07:21:55Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#545287",
+   "state": "open",
+   "title": "[modular services] User creation/specification",
+   "updated_at": "2026-08-21T17:23:48Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#545204",
+   "state": "open",
+   "title": "discoverability on which modular services are supported where",
+   "updated_at": "2026-07-28T16:01:46Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#490813",
+   "state": "open",
+   "title": "modular services: offer semantic interfaces to handle NixOS-specific parts",
+   "updated_at": "2026-07-23T17:20:08Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#490688",
+   "state": "open",
+   "title": "modular services: porting legacy modules consisting of multiple services",
+   "updated_at": "2026-07-24T17:52:04Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#490662",
+   "state": "closed",
+   "title": "modular services: factor out `systemd.mainExecStart`",
+   "updated_at": "2026-07-23T17:20:17Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#490640",
+   "state": "open",
+   "title": "modular services: expose metadata about ports",
+   "updated_at": "2026-07-23T17:19:56Z"
+  },
+  {
+   "comments": 7,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#432550",
+   "state": "open",
+   "title": "nixos/ghostunnel: Documentation rendering bug",
+   "updated_at": "2026-07-23T17:16:50Z"
+  },
+  {
+   "comments": 43,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#428084",
+   "state": "open",
+   "title": "Modular services tracking",
+   "updated_at": "2026-07-25T13:26:11Z"
+  }
+ ],
+ "nixpkgs-label-prs": [
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#557068",
+   "state": "open",
+   "title": "kea.services.{dns, dhcp}: init",
+   "updated_at": "2026-08-30T09:04:25Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#554366",
+   "state": "open",
+   "title": "git-pages.services.default: init",
+   "updated_at": "2026-08-30T03:10:15Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#548052",
+   "state": "closed",
+   "title": "modular-services: only emit ExecReload when there is a reload command",
+   "updated_at": "2026-08-03T17:53:24Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#546008",
+   "state": "closed",
+   "title": "lib/services/service: add flags and flagFormat options",
+   "updated_at": "2026-08-08T09:27:49Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#545732",
+   "state": "open",
+   "title": "lib/services: fix test expectations for the reload options",
+   "updated_at": "2026-08-21T17:23:48Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#545521",
+   "state": "open",
+   "title": "nixos/modular-services: add portable `process.environment` using `UnsetEnvironment`",
+   "updated_at": "2026-08-04T14:48:10Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#545295",
+   "state": "closed",
+   "title": "nixos/tests/ghostunnel-modular: disable landlock in modular service test",
+   "updated_at": "2026-07-30T21:28:51Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#541269",
+   "state": "closed",
+   "title": "nixosTests.ghostunnel-modular: fix test",
+   "updated_at": "2026-07-26T07:02:54Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#541020",
+   "state": "open",
+   "title": "backrest.services.default: init",
+   "updated_at": "2026-08-27T02:46:12Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#540974",
+   "state": "closed",
+   "title": "autopush-rs.services.{autoconnect,authoendpoint}: rename package attribute",
+   "updated_at": "2026-08-08T05:03:17Z"
+  },
+  {
+   "comments": 16,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#540863",
+   "state": "open",
+   "title": "nixos/modular-services: split system-specific config out of `pkgs.<pkg>.services.<service>`",
+   "updated_at": "2026-07-28T03:47:04Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#533562",
+   "state": "closed",
+   "title": "[Backport release-26.05] holo-daemon: 0.8.0 -> 0.9.0; init modular service",
+   "updated_at": "2026-07-24T15:09:26Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#524517",
+   "state": "open",
+   "title": "modular-services: allow running as user-level systemd services",
+   "updated_at": "2026-07-23T20:21:05Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#520118",
+   "state": "closed",
+   "title": "modular-services: document VM test best practices",
+   "updated_at": "2026-07-24T15:01:35Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#519015",
+   "state": "open",
+   "title": "docs: split out modular services options to a separate section",
+   "updated_at": "2026-08-31T13:29:08Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#518860",
+   "state": "closed",
+   "title": "nixos/modular-services: add portable `process.environment`",
+   "updated_at": "2026-07-25T11:16:24Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#518717",
+   "state": "open",
+   "title": "nixos/modular-services: reload/restart on `configData` change",
+   "updated_at": "2026-08-21T17:23:50Z"
+  },
+  {
+   "comments": 10,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#509595",
+   "state": "closed",
+   "title": "lib/services/service: add flags, flagFormat",
+   "updated_at": "2026-08-07T16:01:51Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#507052",
+   "state": "open",
+   "title": "lib/services: expose portable service lib as `lib.services`",
+   "updated_at": "2026-08-31T12:55:34Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#506645",
+   "state": "open",
+   "title": "easyturn: convert to modular service",
+   "updated_at": "2026-07-23T20:21:02Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#506343",
+   "state": "open",
+   "title": "contracts: init",
+   "updated_at": "2026-08-08T16:33:13Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#502210",
+   "state": "open",
+   "title": "stirling-pdf.services.default: init modular service",
+   "updated_at": "2026-07-23T20:21:02Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#496296",
+   "state": "open",
+   "title": "nixos/uptime-kuma: Make into modular service",
+   "updated_at": "2026-07-23T20:21:02Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#494052",
+   "state": "open",
+   "title": "kanata.services.default: init",
+   "updated_at": "2026-07-23T20:21:01Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#476861",
+   "state": "closed",
+   "title": "easytier.services.default: init",
+   "updated_at": "2026-08-07T16:23:56Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#475372",
+   "state": "open",
+   "title": "nixos/redlib: Make into modular service",
+   "updated_at": "2026-07-24T17:52:03Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#469450",
+   "state": "closed",
+   "title": "nixos/modular-services: add systemd.mainExecStart option",
+   "updated_at": "2026-07-23T17:19:27Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#435512",
+   "state": "closed",
+   "title": "portable/service: Reuse meta-maintainers.nix",
+   "updated_at": "2026-07-23T17:17:42Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#435092",
+   "state": "closed",
+   "title": "Modular services: no `pkgs`",
+   "updated_at": "2026-07-23T17:17:24Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#434262",
+   "state": "open",
+   "title": "nixos/phpfpm: set systemd Type to notify-reload when possible",
+   "updated_at": "2026-08-27T14:17:40Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#430876",
+   "state": "closed",
+   "title": "nixos/documentation/modular-services: init",
+   "updated_at": "2026-07-23T17:16:41Z"
+  },
+  {
+   "comments": 9,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#430490",
+   "state": "closed",
+   "title": "php.services.default: init",
+   "updated_at": "2026-07-23T17:17:16Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#401680",
+   "state": "open",
+   "title": "systemd: Add functions.escapeSystemdExecArg[s]",
+   "updated_at": "2026-07-23T20:21:00Z"
+  },
+  {
+   "comments": 49,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#372170",
+   "state": "closed",
+   "title": "Modular services",
+   "updated_at": "2026-07-23T17:17:07Z"
+  }
+ ],
+ "nixpkgs-lib-services-issues": [],
+ "nixpkgs-lib-services-prs": [
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#555154",
+   "state": "open",
+   "title": "lib.services: init `process.runtimeDirectory`",
+   "updated_at": "2026-08-24T15:31:38Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#507052",
+   "state": "open",
+   "title": "lib/services: expose portable service lib as `lib.services`",
+   "updated_at": "2026-08-31T12:55:34Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#506519",
+   "state": "closed",
+   "title": "lib/services: move portable service infrastructure out of nixos/",
+   "updated_at": "2026-04-05T20:19:28Z"
+  }
+ ],
+ "nixpkgs-module-system-watchlist": [
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#537565",
+   "state": "open",
+   "title": "Module Feature Request: NixOS test `testScript` in a separate file",
+   "updated_at": "2026-07-22T10:23:27Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#536086",
+   "state": "open",
+   "title": "Module System: making class more prevalent in submodule definitions",
+   "updated_at": "2026-06-28T14:01:39Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#536060",
+   "state": "open",
+   "title": "Module system core concepts revision",
+   "updated_at": "2026-07-15T11:43:55Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#519074",
+   "state": "open",
+   "title": "an external use case of deprecated `lib.modules.applyModuleArgsIfFunction`",
+   "updated_at": "2026-05-12T17:28:13Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#498911",
+   "state": "open",
+   "title": "lib.types.addCheck is broken on types implementing substSubModules",
+   "updated_at": "2026-03-18T15:50:39Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#446068",
+   "state": "open",
+   "title": "lib/modules: moduleArgs are magic",
+   "updated_at": "2026-03-25T16:48:47Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#431445",
+   "state": "open",
+   "title": "Module system: term \"location\" is ambiguous, change `loc` to `prefix` or `optionPath`",
+   "updated_at": "2026-02-06T15:21:32Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#410812",
+   "state": "open",
+   "title": "Rename `specialArgs`",
+   "updated_at": "2026-06-27T17:02:29Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#396021",
+   "state": "open",
+   "title": "lib.types.addCheck is broken",
+   "updated_at": "2026-01-16T18:41:40Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#391001",
+   "state": "open",
+   "title": "Tracking module system documentation",
+   "updated_at": "2025-09-15T16:53:30Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#377575",
+   "state": "open",
+   "title": "evalModules: Imports dont work in types.submodule",
+   "updated_at": "2026-07-10T13:59:50Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#371355",
+   "state": "open",
+   "title": "Can't rename / alias option trees",
+   "updated_at": "2025-07-05T21:24:24Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#369491",
+   "state": "open",
+   "title": "lib.mkRenamedOptionModule: does not handle `mkForce` priority",
+   "updated_at": "2025-11-30T23:41:22Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#355648",
+   "state": "open",
+   "title": "Module system: \"jig\"",
+   "updated_at": "2025-07-04T09:59:39Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#352253",
+   "state": "open",
+   "title": "`types.coercedTo` does not support type merging",
+   "updated_at": "2026-04-18T08:31:53Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#352243",
+   "state": "open",
+   "title": "Plain string is valid submodule definition",
+   "updated_at": "2025-10-18T17:40:43Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#351888",
+   "state": "open",
+   "title": "Module system `types.attrTag` shadows `name` argument for inner submodules",
+   "updated_at": "2025-07-04T09:35:57Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#342064",
+   "state": "open",
+   "title": "nixos: It would be nice if `hashedPasswordFile` could be set to a path",
+   "updated_at": "2025-07-04T08:26:39Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#337580",
+   "state": "open",
+   "title": "Documentation: NixOS module arguments passed by default",
+   "updated_at": "2025-07-04T07:51:06Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#324802",
+   "state": "open",
+   "title": "lib.doRename crashes on nested options with priorities",
+   "updated_at": "2025-07-04T06:55:13Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#305741",
+   "state": "open",
+   "title": "Module system: add arbitrary labels to options (`meta`/`labels`?)",
+   "updated_at": "2025-07-04T05:14:12Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#303004",
+   "state": "open",
+   "title": "`lib.types.coercedTo`: `coercedType` must not have submodules. Why?",
+   "updated_at": "2025-07-04T05:02:26Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#302893",
+   "state": "open",
+   "title": "Would `class` be a suitable name to use in the type description?",
+   "updated_at": "2025-07-04T05:02:24Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#297749",
+   "state": "open",
+   "title": "Nix module options should no longer be lazily evaluated alongside a user's configuration. ",
+   "updated_at": "2025-07-04T04:19:48Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#295690",
+   "state": "open",
+   "title": "Use of `deferredModule` leads to incomplete documentation",
+   "updated_at": "2025-07-04T04:06:40Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#295419",
+   "state": "open",
+   "title": "Always use `lazyAttrsOf`? Rename `attrsOf` to `strictAttrsOf`?",
+   "updated_at": "2025-07-04T04:06:37Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#293510",
+   "state": "open",
+   "title": "`nixosOptionsDoc` generates config for the built-in module system option `_module.args`.",
+   "updated_at": "2025-07-04T03:54:49Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#291536",
+   "state": "open",
+   "title": "Module attrNames is strict in option declaration",
+   "updated_at": "2025-07-04T03:33:56Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#289749",
+   "state": "open",
+   "title": "doc(nixos): Missing doc for availability of `_module.args.name` in submodules",
+   "updated_at": "2025-07-04T03:01:42Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#284381",
+   "state": "open",
+   "title": "`types.uniq` ignores `merge`-based checks",
+   "updated_at": "2025-07-04T01:40:44Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#276523",
+   "state": "open",
+   "title": "Replace natural language type descriptions by simple syntax rendered with links to docs",
+   "updated_at": "2025-07-03T23:50:58Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#265550",
+   "state": "open",
+   "title": "Module system option internal does not propagate type submodule",
+   "updated_at": "2025-07-03T23:00:26Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#260778",
+   "state": "open",
+   "title": "`_module.public` for standardized module return value?",
+   "updated_at": "2025-07-03T22:43:59Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#257302",
+   "state": "open",
+   "title": "`lib.literalOption` or better option marker rendering",
+   "updated_at": "2025-07-03T22:35:57Z"
+  },
+  {
+   "comments": 12,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#257300",
+   "state": "open",
+   "title": "Advanced options",
+   "updated_at": "2025-07-03T22:35:55Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#256535",
+   "state": "open",
+   "title": "[documentation, module system] Lists are pretty bad for overriding",
+   "updated_at": "2025-07-03T22:35:32Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#252096",
+   "state": "open",
+   "title": "module system: self import regression",
+   "updated_at": "2025-07-03T22:13:50Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#338959",
+   "state": "open",
+   "title": "Using and documenting the module system outside NixOS",
+   "updated_at": "2025-10-28T23:29:14Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#245265",
+   "state": "open",
+   "title": "nixos: impossible to disable the `rename.nix` module",
+   "updated_at": "2025-07-03T21:42:07Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#243303",
+   "state": "open",
+   "title": "Function defaults don't work for module arguments",
+   "updated_at": "2025-07-03T21:41:23Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#242288",
+   "state": "open",
+   "title": "Document non-interaction of `mkRenamedOptionModule` and `freeformType` or `attrsOf`",
+   "updated_at": "2025-07-03T21:33:47Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#238726",
+   "state": "open",
+   "title": "Any config change will cause a doc rebuild with documentation.nixos.includeAllModules",
+   "updated_at": "2025-09-15T01:29:36Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#238592",
+   "state": "open",
+   "title": "lib.modules: usage of newly-private `pushDownProperties` function",
+   "updated_at": "2025-07-03T21:24:31Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#231427",
+   "state": "open",
+   "title": "`lib.pushDownProperties` visibility change breaks external users",
+   "updated_at": "2026-05-10T04:42:26Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#230361",
+   "state": "open",
+   "title": "Documentation: Nixpkgs: module system evaluation order",
+   "updated_at": "2025-07-03T20:51:34Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#222753",
+   "state": "open",
+   "title": "mergeEqualOption: Add support for comparing packages",
+   "updated_at": "2025-07-03T20:25:33Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#217116",
+   "state": "open",
+   "title": "Highlight important options in the module system documentation",
+   "updated_at": "2025-07-03T19:59:45Z"
+  },
+  {
+   "comments": 9,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#215496",
+   "state": "open",
+   "title": "Module system: detect and report erroneous diamond dependency",
+   "updated_at": "2025-07-03T19:50:24Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#215486",
+   "state": "open",
+   "title": "A safe module system type for overlays",
+   "updated_at": "2025-07-03T19:50:23Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#207962",
+   "state": "open",
+   "title": "`either` does not propagate suboptions",
+   "updated_at": "2026-04-28T20:54:18Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#203848",
+   "state": "open",
+   "title": "Bad error message for bad `mkOption` call",
+   "updated_at": "2025-07-03T19:13:18Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#196729",
+   "state": "open",
+   "title": "Proper module system documentation",
+   "updated_at": "2026-06-10T18:45:31Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#196584",
+   "state": "open",
+   "title": "`imports` preprocessing function",
+   "updated_at": "2025-11-26T21:50:26Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#194056",
+   "state": "open",
+   "title": "Support merging/overriding for unspecified attr-set options within freeformTypes (for e.g. `nixpkgs.config`)",
+   "updated_at": "2025-07-03T18:41:52Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#190033",
+   "state": "open",
+   "title": "Feature Request: Diffing NixOS systems",
+   "updated_at": "2026-02-25T18:39:10Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#188171",
+   "state": "open",
+   "title": "Types: add optional attributes that represent Enum, Bounded, Show equivalents",
+   "updated_at": "2025-07-03T18:26:33Z"
+  },
+  {
+   "comments": 18,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#185234",
+   "state": "open",
+   "title": "\"Option definition\" is confusing",
+   "updated_at": "2025-07-03T18:14:12Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#181427",
+   "state": "open",
+   "title": "An infinite recursion in `nix.settings`",
+   "updated_at": "2025-07-03T17:59:39Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#162398",
+   "state": "open",
+   "title": "Disallow declaring options named `config` and `options` (and others)",
+   "updated_at": "2025-07-03T17:13:01Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#158606",
+   "state": "open",
+   "title": "Systemd unit options have problematic merging, checking and defaults",
+   "updated_at": "2025-07-03T17:04:16Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#158598",
+   "state": "open",
+   "title": "`config`-driven submodules?",
+   "updated_at": "2025-07-03T17:04:16Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#158594",
+   "state": "open",
+   "title": "RFC42-style options that default to unset, to have no attribute in `config` despite option",
+   "updated_at": "2025-07-03T17:04:14Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#158503",
+   "state": "open",
+   "title": "Lazy evaluation of types of `listOf oneOf` causes option missing errors when inner types are submodules",
+   "updated_at": "2025-07-03T17:04:14Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#154178",
+   "state": "open",
+   "title": "`lib.types.*.check`: return a message",
+   "updated_at": "2025-07-03T16:58:08Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#148364",
+   "state": "open",
+   "title": "`passthru.tests` but for modules",
+   "updated_at": "2022-06-19T19:17:17Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#147052",
+   "state": "open",
+   "title": "modules, types: A type modifier that requires explicit ordering",
+   "updated_at": "2025-07-03T16:39:46Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#144628",
+   "state": "open",
+   "title": "Potential regression / unexplained change in `buildEnv` string handling",
+   "updated_at": "2025-07-03T16:26:18Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#141103",
+   "state": "open",
+   "title": "Check module system example syntax",
+   "updated_at": "2022-08-01T12:41:28Z"
+  },
+  {
+   "comments": 24,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#137168",
+   "state": "open",
+   "title": "NixOS always imports all modules",
+   "updated_at": "2026-05-29T06:35:12Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#132419",
+   "state": "open",
+   "title": "Document NixOS module inputs",
+   "updated_at": "2025-07-03T16:00:37Z"
+  },
+  {
+   "comments": 12,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#122244",
+   "state": "open",
+   "title": "tests/plotinus, or NixOS environment variables can not be merged",
+   "updated_at": "2025-07-03T15:44:18Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#119178",
+   "state": "open",
+   "title": "Infinite types in module descriptions.",
+   "updated_at": "2026-04-28T11:14:41Z"
+  },
+  {
+   "comments": 13,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#114131",
+   "state": "open",
+   "title": "Anonymous NixOS modules (e.g. from flakes) cannot be disabled",
+   "updated_at": "2025-07-03T15:25:31Z"
+  },
+  {
+   "comments": 9,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#96006",
+   "state": "open",
+   "title": "mkRenamedOptionModule doesn't work in submodules",
+   "updated_at": "2025-12-02T05:42:56Z"
+  },
+  {
+   "comments": 12,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#85508",
+   "state": "open",
+   "title": "Cannot override options with type of `attrs`",
+   "updated_at": "2025-07-03T14:25:42Z"
+  },
+  {
+   "comments": 11,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#79943",
+   "state": "open",
+   "title": "NixOS evaluation speed regression",
+   "updated_at": "2026-05-29T06:35:11Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#70638",
+   "state": "open",
+   "title": "module system: No shorthand imports syntax in submodules",
+   "updated_at": "2025-09-14T21:16:39Z"
+  },
+  {
+   "comments": 25,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#57477",
+   "state": "open",
+   "title": "`nixos-rebuild --switch` too slow, tracking issue",
+   "updated_at": "2025-12-09T16:47:17Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#56519",
+   "state": "open",
+   "title": "lib.evalModules: module order is reversed",
+   "updated_at": "2020-09-29T05:02:49Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#19899",
+   "state": "open",
+   "title": "Fail loudly when importing pkgs.lib inside the module system",
+   "updated_at": "2020-09-29T10:41:16Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#16750",
+   "state": "open",
+   "title": "Remove types.string",
+   "updated_at": "2025-07-03T11:24:51Z"
+  },
+  {
+   "comments": 10,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#15417",
+   "state": "open",
+   "title": "Use builtins.unsafeGetAttrPos or similar to provide better module system locations",
+   "updated_at": "2025-07-03T11:13:03Z"
+  },
+  {
+   "comments": 12,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#9306",
+   "state": "open",
+   "title": "NixOS: Add a better description to enable options.",
+   "updated_at": "2025-07-03T11:12:47Z"
+  }
+ ],
+ "nixpkgs-phrase-issues": [
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#545287",
+   "state": "open",
+   "title": "[modular services] User creation/specification",
+   "updated_at": "2026-08-21T17:23:48Z"
+  },
+  {
+   "comments": 43,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#428084",
+   "state": "open",
+   "title": "Modular services tracking",
+   "updated_at": "2026-07-25T13:26:11Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#545204",
+   "state": "open",
+   "title": "discoverability on which modular services are supported where",
+   "updated_at": "2026-07-28T16:01:46Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#490640",
+   "state": "open",
+   "title": "modular services: expose metadata about ports",
+   "updated_at": "2026-07-23T17:19:56Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#490688",
+   "state": "open",
+   "title": "modular services: porting legacy modules consisting of multiple services",
+   "updated_at": "2026-07-24T17:52:04Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#490813",
+   "state": "open",
+   "title": "modular services: offer semantic interfaces to handle NixOS-specific parts",
+   "updated_at": "2026-07-23T17:20:08Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#554965",
+   "state": "open",
+   "title": "program CLI flags handled from package modules",
+   "updated_at": "2026-08-21T07:21:55Z"
+  },
+  {
+   "comments": 7,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#432550",
+   "state": "open",
+   "title": "nixos/ghostunnel: Documentation rendering bug",
+   "updated_at": "2026-07-23T17:16:50Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#536086",
+   "state": "open",
+   "title": "Module System: making class more prevalent in submodule definitions",
+   "updated_at": "2026-06-28T14:01:39Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#511741",
+   "state": "open",
+   "title": "openssh: /etc/ssh/authorized_keys.d/%u should be created even if services.openssh.enable = false",
+   "updated_at": "2026-04-26T22:46:51Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#509630",
+   "state": "open",
+   "title": "nixos/anubis: No way to set challenge type",
+   "updated_at": "2026-04-13T20:46:17Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#513026",
+   "state": "open",
+   "title": "allow configuring test drivers regardless of test driver currently used",
+   "updated_at": "2026-04-24T08:52:26Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#512864",
+   "state": "open",
+   "title": "beszel: Beszel Hub doesn't collect S.M.A.R.T. data",
+   "updated_at": "2026-07-16T11:48:26Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#548831",
+   "state": "closed",
+   "title": "nixos/nextcloud: support multiple instances",
+   "updated_at": "2026-08-04T14:19:47Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#490662",
+   "state": "closed",
+   "title": "modular services: factor out `systemd.mainExecStart`",
+   "updated_at": "2026-07-23T17:20:17Z"
+  },
+  {
+   "comments": 33,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#26067",
+   "state": "open",
+   "title": "Make a service abstraction layer",
+   "updated_at": "2026-06-23T17:27:10Z"
+  },
+  {
+   "comments": 9,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#513758",
+   "state": "open",
+   "title": "github-desktop: marked supported on Darwin but dependency isn't",
+   "updated_at": "2026-05-08T18:49:11Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#513251",
+   "state": "open",
+   "title": "gimp: scaling .png after drop pasting crash-terminates the program",
+   "updated_at": "2026-08-24T06:00:34Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#512671",
+   "state": "closed",
+   "title": "pkgs.azure-cli: Wrapper script prevents discovery of declaratively installed extensions",
+   "updated_at": "2026-04-28T08:41:14Z"
+  },
+  {
+   "comments": 1,
+   "kept": false,
+   "ref": "NixOS/nixpkgs#505794",
+   "state": "closed",
+   "title": "Update Request: waydroid 1.6.1 → 1.6.2",
+   "updated_at": "2026-04-18T04:13:24Z"
+  },
+  {
+   "comments": 3,
+   "kept": false,
+   "ref": "NixOS/nixpkgs#506617",
+   "state": "closed",
+   "title": "Backport to Stable: fflogs 8.17.101 → 9.0.24",
+   "updated_at": "2026-04-21T12:40:20Z"
+  },
+  {
+   "comments": 2,
+   "kept": false,
+   "ref": "NixOS/nixpkgs#310330",
+   "state": "closed",
+   "title": "Update request: inav-configurator 5.1.0 → 8.0.0",
+   "updated_at": "2026-04-23T03:15:04Z"
+  },
+  {
+   "comments": 2,
+   "kept": false,
+   "ref": "NixOS/nixpkgs#445152",
+   "state": "closed",
+   "title": "Update Request: zettlr 3.4.4 → 3.6.0",
+   "updated_at": "2026-04-17T13:30:59Z"
+  },
+  {
+   "comments": 6,
+   "kept": false,
+   "ref": "NixOS/nixpkgs#280744",
+   "state": "closed",
+   "title": "Update request: betterdiscord-installer 1.0.0-beta→ 1.3.0",
+   "updated_at": "2026-04-23T03:15:39Z"
+  },
+  {
+   "comments": 4,
+   "kept": false,
+   "ref": "NixOS/nixpkgs#383089",
+   "state": "closed",
+   "title": "Update Request: open-web-calendar 1.42 → 1.46",
+   "updated_at": "2026-04-23T03:13:15Z"
+  },
+  {
+   "comments": 4,
+   "kept": false,
+   "ref": "NixOS/nixpkgs#388262",
+   "state": "closed",
+   "title": "Update Request: dovecot 2.3.21.1 → 2.4.0",
+   "updated_at": "2026-04-17T14:29:42Z"
+  },
+  {
+   "comments": 2,
+   "kept": false,
+   "ref": "NixOS/nixpkgs#513227",
+   "state": "closed",
+   "title": "Build failure: gitFull",
+   "updated_at": "2026-04-28T19:08:48Z"
+  }
+ ],
+ "nixpkgs-phrase-prs": [
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#546886",
+   "state": "open",
+   "title": "chrony: init modular service",
+   "updated_at": "2026-07-30T20:15:59Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#506645",
+   "state": "open",
+   "title": "easyturn: convert to modular service",
+   "updated_at": "2026-07-23T20:21:02Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#545521",
+   "state": "open",
+   "title": "nixos/modular-services: add portable `process.environment` using `UnsetEnvironment`",
+   "updated_at": "2026-08-04T14:48:10Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#518717",
+   "state": "open",
+   "title": "nixos/modular-services: reload/restart on `configData` change",
+   "updated_at": "2026-08-21T17:23:50Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#475372",
+   "state": "open",
+   "title": "nixos/redlib: Make into modular service",
+   "updated_at": "2026-07-24T17:52:03Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#502210",
+   "state": "open",
+   "title": "stirling-pdf.services.default: init modular service",
+   "updated_at": "2026-07-23T20:21:02Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#496296",
+   "state": "open",
+   "title": "nixos/uptime-kuma: Make into modular service",
+   "updated_at": "2026-07-23T20:21:02Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#519015",
+   "state": "open",
+   "title": "docs: split out modular services options to a separate section",
+   "updated_at": "2026-08-31T13:29:08Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#524517",
+   "state": "open",
+   "title": "modular-services: allow running as user-level systemd services",
+   "updated_at": "2026-07-23T20:21:05Z"
+  },
+  {
+   "comments": 16,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#540863",
+   "state": "open",
+   "title": "nixos/modular-services: split system-specific config out of `pkgs.<pkg>.services.<service>`",
+   "updated_at": "2026-07-28T03:47:04Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#551799",
+   "state": "open",
+   "title": "nixos/tests: support a few more running on darwin + hygiene",
+   "updated_at": "2026-08-21T17:23:49Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#557068",
+   "state": "open",
+   "title": "kea.services.{dns, dhcp}: init",
+   "updated_at": "2026-08-30T09:04:25Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#506343",
+   "state": "open",
+   "title": "contracts: init",
+   "updated_at": "2026-08-08T16:33:13Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#494052",
+   "state": "open",
+   "title": "kanata.services.default: init",
+   "updated_at": "2026-07-23T20:21:01Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#541020",
+   "state": "open",
+   "title": "backrest.services.default: init",
+   "updated_at": "2026-08-27T02:46:12Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#554366",
+   "state": "open",
+   "title": "git-pages.services.default: init",
+   "updated_at": "2026-08-30T03:10:15Z"
+  },
+  {
+   "comments": 18,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#510662",
+   "state": "open",
+   "title": "mautrix-telegram: migrate to Go-based bridgev2 bridge",
+   "updated_at": "2026-08-17T21:10:01Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#401680",
+   "state": "open",
+   "title": "systemd: Add functions.escapeSystemdExecArg[s]",
+   "updated_at": "2026-07-23T20:21:00Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#495731",
+   "state": "open",
+   "title": "nixos/qbit-manage: init module",
+   "updated_at": "2026-07-27T16:08:09Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#545519",
+   "state": "closed",
+   "title": "Revert \"nixos/modular-services: add portable `process.environment`\"",
+   "updated_at": "2026-07-26T02:36:02Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#548052",
+   "state": "closed",
+   "title": "modular-services: only emit ExecReload when there is a reload command",
+   "updated_at": "2026-08-03T17:53:24Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#545295",
+   "state": "closed",
+   "title": "nixos/tests/ghostunnel-modular: disable landlock in modular service test",
+   "updated_at": "2026-07-30T21:28:51Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#552737",
+   "state": "closed",
+   "title": "trailbase: init at 0.32.2",
+   "updated_at": "2026-08-26T11:52:11Z"
+  },
+  {
+   "comments": 49,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#372170",
+   "state": "closed",
+   "title": "Modular services",
+   "updated_at": "2026-07-23T17:17:07Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#520118",
+   "state": "closed",
+   "title": "modular-services: document VM test best practices",
+   "updated_at": "2026-07-24T15:01:35Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#518860",
+   "state": "closed",
+   "title": "nixos/modular-services: add portable `process.environment`",
+   "updated_at": "2026-07-25T11:16:24Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#435092",
+   "state": "closed",
+   "title": "Modular services: no `pkgs`",
+   "updated_at": "2026-07-23T17:17:24Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#430876",
+   "state": "closed",
+   "title": "nixos/documentation/modular-services: init",
+   "updated_at": "2026-07-23T17:16:41Z"
+  },
+  {
+   "comments": 7,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#401751",
+   "state": "open",
+   "title": "nixosMinimal: init - nixos with minimal modules",
+   "updated_at": "2025-12-14T16:13:54Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#525025",
+   "state": "closed",
+   "title": "autopush-rs: add modular-service doc entry",
+   "updated_at": "2026-06-23T17:30:17Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#522054",
+   "state": "open",
+   "title": "Contracts for file backups",
+   "updated_at": "2026-06-12T22:47:27Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#469450",
+   "state": "closed",
+   "title": "nixos/modular-services: add systemd.mainExecStart option",
+   "updated_at": "2026-07-23T17:19:27Z"
+  },
+  {
+   "comments": 1,
+   "kept": false,
+   "ref": "NixOS/nixpkgs#533562",
+   "state": "closed",
+   "title": "[Backport release-26.05] holo-daemon: 0.8.0 -> 0.9.0; init modular service",
+   "updated_at": "2026-07-24T15:09:26Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#540857",
+   "state": "closed",
+   "title": "lib/services: fix reload/readiness bugs and add compliance coverage",
+   "updated_at": "2026-07-23T17:50:29Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#556069",
+   "state": "closed",
+   "title": "ocamlPackages.kapla: init at 0.4.0",
+   "updated_at": "2026-08-31T11:21:53Z"
+  },
+  {
+   "comments": 21,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#388939",
+   "state": "open",
+   "title": "postal: init at 3.3.7; nixos/postal: init module",
+   "updated_at": "2026-08-05T14:02:28Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#393051",
+   "state": "open",
+   "title": "libvirt: switch to socket based daemons",
+   "updated_at": "2025-09-30T12:18:47Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#356532",
+   "state": "open",
+   "title": "nixos/libvirtd: add options to configure modular libvirt daemons",
+   "updated_at": "2025-06-25T09:39:46Z"
+  },
+  {
+   "comments": 7,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#509610",
+   "state": "open",
+   "title": "nixos/autokuma: init module",
+   "updated_at": "2026-07-30T05:10:23Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#531062",
+   "state": "closed",
+   "title": "testers.modularServiceCompliance: init",
+   "updated_at": "2026-06-27T03:07:48Z"
+  },
+  {
+   "comments": 7,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#541270",
+   "state": "closed",
+   "title": "various: replace os.system with subprocess.run",
+   "updated_at": "2026-07-13T17:26:59Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#498536",
+   "state": "closed",
+   "title": "holo-daemon: 0.8.0 -> 0.9.0; init modular service",
+   "updated_at": "2026-06-20T09:49:35Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#520110",
+   "state": "closed",
+   "title": "docs: replace modular-services TBD with test best practices link",
+   "updated_at": "2026-05-14T18:33:29Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#546008",
+   "state": "closed",
+   "title": "lib/services/service: add flags and flagFormat options",
+   "updated_at": "2026-08-08T09:27:49Z"
+  },
+  {
+   "comments": 25,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#503858",
+   "state": "open",
+   "title": "utils: init genSecretsReplacement",
+   "updated_at": "2026-08-26T14:54:38Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#540974",
+   "state": "closed",
+   "title": "autopush-rs.services.{autoconnect,authoendpoint}: rename package attribute",
+   "updated_at": "2026-08-08T05:03:17Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#535695",
+   "state": "closed",
+   "title": "lib/services: add some generalization options",
+   "updated_at": "2026-07-31T22:35:41Z"
+  },
+  {
+   "comments": 7,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#508462",
+   "state": "closed",
+   "title": "tlshd: add modular service and test",
+   "updated_at": "2026-04-17T00:48:57Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#476861",
+   "state": "closed",
+   "title": "easytier.services.default: init",
+   "updated_at": "2026-08-07T16:23:56Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#534124",
+   "state": "closed",
+   "title": "NixOS/plasma6: Modularize various services, avoid \"with\" & mixed use of \"lib.\" / \"inherits\"",
+   "updated_at": "2026-06-24T03:27:22Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#507875",
+   "state": "closed",
+   "title": "snid: add modular service and test",
+   "updated_at": "2026-04-10T07:43:45Z"
+  },
+  {
+   "comments": 9,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#430490",
+   "state": "closed",
+   "title": "php.services.default: init",
+   "updated_at": "2026-07-23T17:17:16Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#509117",
+   "state": "closed",
+   "title": "nixos/documentation/modular-services: discover services via introspection",
+   "updated_at": "2026-04-12T10:34:31Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#520214",
+   "state": "closed",
+   "title": "autopush-rs: init at 1.81.3",
+   "updated_at": "2026-07-09T13:08:19Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#547171",
+   "state": "open",
+   "title": "(Draft) NixOS vars",
+   "updated_at": "2026-08-29T04:45:22Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#329657",
+   "state": "closed",
+   "title": "nixos/mailpit: init",
+   "updated_at": "2026-07-13T09:53:24Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#508577",
+   "state": "closed",
+   "title": "modular-services: document that services should be added to nixos/modules/misc/documentation/modular-services.nix",
+   "updated_at": "2026-04-11T23:25:18Z"
+  },
+  {
+   "comments": 9,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#510698",
+   "state": "closed",
+   "title": "types.attrList: init",
+   "updated_at": "2026-05-25T12:16:35Z"
+  },
+  {
+   "comments": 10,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#509595",
+   "state": "closed",
+   "title": "lib/services/service: add flags, flagFormat",
+   "updated_at": "2026-08-07T16:01:51Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#512367",
+   "state": "closed",
+   "title": "usbvfiod: fix links for homepage and changelog",
+   "updated_at": "2026-04-27T13:45:05Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#508211",
+   "state": "closed",
+   "title": "lib/services: improve configure function documentation",
+   "updated_at": "2026-04-26T10:46:53Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#506519",
+   "state": "closed",
+   "title": "lib/services: move portable service infrastructure out of nixos/",
+   "updated_at": "2026-04-05T20:19:28Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#513525",
+   "state": "closed",
+   "title": "nixos/tailscale: harden using suggested hardening options",
+   "updated_at": "2026-04-26T16:00:31Z"
+  },
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#507588",
+   "state": "closed",
+   "title": "switch-to-configuration-ng: restart changed user units on switch",
+   "updated_at": "2026-04-21T22:12:51Z"
+  },
+  {
+   "comments": 10,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#485453",
+   "state": "closed",
+   "title": "Contracts rfc functions",
+   "updated_at": "2026-05-20T21:29:30Z"
+  },
+  {
+   "comments": 10,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#489143",
+   "state": "closed",
+   "title": "nixos/stalwart: add module-specific `stateVersion`, clean up and switch logging from stdout to journal",
+   "updated_at": "2026-05-29T14:02:38Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#500287",
+   "state": "closed",
+   "title": "contracts RFC - alternate implementation using generated options",
+   "updated_at": "2026-04-03T17:39:24Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#510166",
+   "state": "closed",
+   "title": "pywal16: 3.8.14 -> 3.8.15",
+   "updated_at": "2026-04-20T07:10:17Z"
+  },
+  {
+   "comments": 31,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#487367",
+   "state": "closed",
+   "title": "update netbird server modules",
+   "updated_at": "2026-08-24T13:38:23Z"
+  },
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#495094",
+   "state": "closed",
+   "title": "holo-daemon: 0.8.0 -> 0.9.0",
+   "updated_at": "2026-03-12T12:42:19Z"
+  },
+  {
+   "comments": 28,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#432529",
+   "state": "closed",
+   "title": "Contracts RFC 189",
+   "updated_at": "2026-05-20T21:30:55Z"
+  },
+  {
+   "comments": 19,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#442886",
+   "state": "closed",
+   "title": "nixos/default.nix: Allow specialArgs to be passed",
+   "updated_at": "2026-07-11T17:19:42Z"
+  },
+  {
+   "comments": 11,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#519494",
+   "state": "closed",
+   "title": "rosec: init at 0.0.28",
+   "updated_at": "2026-08-25T07:40:59Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#470416",
+   "state": "closed",
+   "title": "nixos/goupile: init; goupile: init at 3.12.1",
+   "updated_at": "2026-05-12T16:57:02Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#435060",
+   "state": "closed",
+   "title": "Modular services `configData` (`etc` subdir)",
+   "updated_at": "2025-08-22T01:21:18Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#453196",
+   "state": "closed",
+   "title": "nixos/scx: support temporarily overriding scheduler",
+   "updated_at": "2026-01-07T22:00:38Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#431396",
+   "state": "closed",
+   "title": "Contributor documentation for Modular Services",
+   "updated_at": "2025-08-19T13:18:49Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#442408",
+   "state": "closed",
+   "title": "NixOS AMIs: send whole host public keys",
+   "updated_at": "2025-12-23T20:06:58Z"
+  },
+  {
+   "comments": 15,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#431450",
+   "state": "closed",
+   "title": "Factor out the NixOS `meta.maintainers` module",
+   "updated_at": "2025-08-30T23:06:07Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#461350",
+   "state": "closed",
+   "title": "ghostty: split xdg files into their own outputs",
+   "updated_at": "2025-11-14T03:12:33Z"
+  },
+  {
+   "comments": 10,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#419533",
+   "state": "closed",
+   "title": "fosrl-pangolin: 1.2.0 -> 1.8.0",
+   "updated_at": "2025-08-13T08:59:16Z"
+  },
+  {
+   "comments": 2,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#446133",
+   "state": "closed",
+   "title": "pop-launcher: 1.2.6 -> 1.2.7",
+   "updated_at": "2025-10-06T12:23:23Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#267111",
+   "state": "closed",
+   "title": "init Modular Portable Service Layer, proof of concept",
+   "updated_at": "2025-03-25T12:59:14Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#231065",
+   "state": "closed",
+   "title": "nixos/fastnetmon-advanced: init",
+   "updated_at": "2023-11-02T16:10:48Z"
+  },
+  {
+   "comments": 28,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#2920",
+   "state": "closed",
+   "title": "Various changes and fixes with the general aim to support netbooting NixOS",
+   "updated_at": "2017-08-29T11:17:53Z"
+  },
+  {
+   "comments": 1,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#13877",
+   "state": "closed",
+   "title": "freeradius: init at 3.0.11",
+   "updated_at": "2016-03-14T10:04:51Z"
+  },
+  {
+   "comments": 20,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#4594",
+   "state": "closed",
+   "title": "Make a configuration management tool based on Nix to manage User Profiles.",
+   "updated_at": "2015-11-20T21:43:58Z"
+  }
+ ],
+ "nixpkgs-portable-service-layer-issues": [
+  {
+   "comments": 43,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#428084",
+   "state": "open",
+   "title": "Modular services tracking",
+   "updated_at": "2026-07-25T13:26:11Z"
+  }
+ ],
+ "nixpkgs-portable-service-layer-prs": [
+  {
+   "comments": 16,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#540863",
+   "state": "open",
+   "title": "nixos/modular-services: split system-specific config out of `pkgs.<pkg>.services.<service>`",
+   "updated_at": "2026-07-28T03:47:04Z"
+  },
+  {
+   "comments": 8,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#267111",
+   "state": "closed",
+   "title": "init Modular Portable Service Layer, proof of concept",
+   "updated_at": "2025-03-25T12:59:14Z"
+  }
+ ],
+ "nixpkgs-system-services-issues": [
+  {
+   "comments": 7,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#432550",
+   "state": "open",
+   "title": "nixos/ghostunnel: Documentation rendering bug",
+   "updated_at": "2026-07-23T17:16:50Z"
+  },
+  {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#262151",
+   "state": "open",
+   "title": "dex module assumes local postgresql",
+   "updated_at": "2025-07-03T22:51:15Z"
+  },
+  {
+   "comments": 6,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#548831",
+   "state": "closed",
+   "title": "nixos/nextcloud: support multiple instances",
+   "updated_at": "2026-08-04T14:19:47Z"
+  }
+ ],
+ "nixpkgs-system-services-prs": [
+  {
+   "comments": 49,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#372170",
+   "state": "closed",
+   "title": "Modular services",
+   "updated_at": "2026-07-23T17:17:07Z"
+  },
+  {
+   "comments": 3,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#132407",
+   "state": "closed",
+   "title": "autosuspend: init at 3.1.3",
+   "updated_at": "2023-06-12T18:54:15Z"
+  }
+ ],
+ "rfcs-modular-service-issues": [],
+ "rfcs-modular-service-prs": [
+  {
+   "comments": 5,
+   "kept": true,
+   "ref": "NixOS/rfcs#201",
+   "state": "open",
+   "title": "[RFC 0201] security.artifacts: backend-agnostic secret management",
+   "updated_at": "2026-05-13T18:13:00Z"
+  },
+  {
+   "comments": 130,
+   "kept": true,
+   "ref": "NixOS/rfcs#163",
+   "state": "closed",
+   "title": "[RFC 0163] Portable Service Layer",
+   "updated_at": "2026-02-24T00:50:55Z"
+  }
+ ],
+ "rfcs-portable-service-issues": [],
+ "rfcs-portable-service-prs": [
+  {
+   "comments": 7,
+   "kept": true,
+   "ref": "NixOS/rfcs#189",
+   "state": "open",
+   "title": "[RFC 0189] Contracts",
+   "updated_at": "2026-08-26T12:49:12Z"
+  },
+  {
+   "comments": 130,
+   "kept": true,
+   "ref": "NixOS/rfcs#163",
+   "state": "closed",
+   "title": "[RFC 0163] Portable Service Layer",
+   "updated_at": "2026-02-24T00:50:55Z"
+  },
+  {
+   "comments": 15,
+   "kept": true,
+   "ref": "NixOS/rfcs#157",
+   "state": "closed",
+   "title": "[RFC 0157] More granular control over the system",
+   "updated_at": "2023-11-01T16:18:41Z"
+  }
+ ],
+ "this-repo-issues": [],
+ "this-repo-prs": [
+  {
+   "comments": 0,
+   "kept": false,
+   "ref": "KiaraGrouwstra/modular-services#4",
+   "state": "open",
+   "title": "build(deps): Bump nixpkgs from `e5bdc4a` to `56c02bc`",
+   "updated_at": "2026-08-24T20:18:24Z"
+  },
+  {
+   "comments": 0,
+   "kept": false,
+   "ref": "KiaraGrouwstra/modular-services#3",
+   "state": "closed",
+   "title": "build(deps): Bump nixpkgs from `b7c2ada` to `e5bdc4a`",
+   "updated_at": "2026-08-21T14:27:22Z"
+  },
+  {
+   "comments": 1,
+   "kept": false,
+   "ref": "KiaraGrouwstra/modular-services#2",
+   "state": "closed",
+   "title": "build(deps): Bump nixpkgs from `b7c2ada` to `f13ff45`",
+   "updated_at": "2026-08-17T20:17:22Z"
+  },
+  {
+   "comments": 1,
+   "kept": false,
+   "ref": "KiaraGrouwstra/modular-services#1",
+   "state": "closed",
+   "title": "build(deps): Bump the actions group across 1 directory with 2 updates",
+   "updated_at": "2026-08-08T20:06:40Z"
+  }
+ ]
+}

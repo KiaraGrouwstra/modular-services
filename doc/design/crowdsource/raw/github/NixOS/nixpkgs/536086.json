@@ -1,0 +1,147 @@
+{
+ "comments": [
+  {
+   "body": "I'm in favor, and it'd be wise to settle some details before we do more of this, so thank you for starting this conversation.\n\n> * provide a rule to ensure uniqueness, e.g. prefixed with reversed domain notation, e.g. `org.nixos`, `parts.flake`, …\n\nThis seems like a good idea, but we don't have migration features yet, for classes that already exist.\n1. accepting multiple classes as equivalent, e.g. specify a *list of* classes at `evalModules` and `submoduleWith`\n2. emitting migration warnings, though I'm reluctant because of cost/benefit\n\n1 would also benefit the lassulus-proposed integration of wrappers and modular services as \"package modules\", necessitating a class change, although modular services is at a scale where we could just get away with a treewide class change. Nonetheless, it's evidence that this kind of migration is relevant and worth implementing module system functionality for.",
+   "created_at": "2026-06-28T13:50:09Z",
+   "id": 4826296637,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-06-28T13:50:09Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I do not necessarily see the need to change the most used classes which are already kind of established, because those could be designated as \"officially acknowledged\" classes. But I’m not against unifying them given a migration exists.\n  \n> 1. accepting multiple classes as equivalent, e.g. specify a _list of_ classes at `evalModules` and `submoduleWith`\n\nBut while collecting examples, I stumbled across the systemd module system in nixpkgs ([systemd-lib.nix](https://github.com/NixOS/nixpkgs/blob/cb0e8bd5d3c00062a01ef24557152632a19596ce/nixos/lib/systemd-lib.nix) & [systemd-types.nix](https://github.com/NixOS/nixpkgs/blob/cb0e8bd5d3c00062a01ef24557152632a19596ce/nixos/lib/systemd-types.nix)), where it could make sense to make multiple classes `systemd-unit`, `systemd-service`, … and allow matching against multiple classes without wanting to migrate. So it could be useful to implement this either way.",
+   "created_at": "2026-06-28T14:01:39Z",
+   "id": 4826325919,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-28T14:01:39Z",
+   "user": {
+    "id": 1645646,
+    "login": "Zocker1999NET",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/536086",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "TL;DR: While implementing #536060, I suggest making the concept **class** more prevalent. Because as of now all `lib.types.submodule` do not have a **class** assigned, and IMO this is the case because the documentation does not currently mention it at all. And also because there is no shortcut solution like `lib.types.submodule… <class> <module>` available.\n\n\n## Reasoning\n\nIMO most configuration definitions should have a class configured. Because then by setting `_class` on module, importing then into the wrong configuration will provide great human-readable errors.\n\nIMO smaller **record** type (see #334680 / #536060) do not really need to set a class, because those are neither supposed or producing the need of being extended. But larger `submodule` constructions which contain \"programming\", are rather large (= a lot of option definitions), or are otherwise producing the need for extensibility should have a class set.\n\nProviding developers to rely on `_class` matching provides a way to clearly mark in what configurations a module is intended to be used, making it easier to split large module files apart into smaller files, improving code readability.\n\n\n## Examples\n\n… where `class` is not set despite that the submodule / subconfiguration is so complex to require a split into multiple files. In some cases already being extended by modules.\n\n* NixOS [`containers.*`](https://github.com/NixOS/nixpkgs/blob/dc34ddb2169de11221af038338f9ed6c840e155e/nixos/modules/virtualisation/nixos-containers.nix#L577)\n* NixOS [`fileSystems.*`](https://github.com/NixOS/nixpkgs/blob/4062d36ebeae843c750011eef6b61ec9a9dbc9a9/nixos/modules/tasks/filesystems.nix#L348)\n  * being extended by [overlayfs.nix](https://github.com/NixOS/nixpkgs/blob/4062d36ebeae843c750011eef6b61ec9a9dbc9a9/nixos/modules/tasks/filesystems/overlayfs.nix)\n* Home-Manager [`programs.vscode.profiles.*`](https://github.com/nix-community/home-manager/blob/8d8a6cc50ddc60748791a14ee1163c865ec57635/modules/programs/vscode/mkVscodeModule.nix#L86)\n\n\n## Needed Standardization\n\nMaking `class` more prevalent rises the question: what values should be used? **This is the main point needing discussion.** Those points should e.g. be provided (or linked to) in the NixOS manual (and later modules manual).\n\nI feel the following are must haves:\n* providing a canonical list of \"established\" class values ([`nixos`](https://github.com/NixOS/nixpkgs/blob/8c14fa3ccacddaec887134e523083b63c8ea57ac/nixos/lib/eval-cacheable-options.nix#L37), [`nixosTest`](https://github.com/NixOS/nixpkgs/blob/8c14fa3ccacddaec887134e523083b63c8ea57ac/nixos/lib/testing/default.nix#L8), [`homeManager`](https://github.com/nix-community/home-manager/blob/8d8a6cc50ddc60748791a14ee1163c865ec57635/modules/default.nix#L32)?, [`flake`](https://github.com/hercules-ci/flake-parts/blob/f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb/lib.nix#L145)?) in the manual / wiki / …\n* making clear that \"class\" values are technically used as opaque values, i.e. the value is never further inspected or parsed in \"productive\" code, e.g. `nixos/container`-modules are not necessarily accepted in `nixos`-configurations or vice versa.\n\nFurther I considered that some rules would be good to have (not enforced, but encouraged):\n* provide a rule for \"subconfigurations\", e.g. appending with `/`, e.g. `nixos/container`, `nixos/fileSystem`, `homeManager/vscodeProfile`, …)\n  * (which only make sense if those are limited to their 'super class')\n* provide a rule to ensure uniqueness, e.g. prefixed with reversed domain notation, e.g. `org.nixos`, `parts.flake`, …\n\n## Proposed Changes\n\n* providing an alias `lib.types.submoduleOf <class> <module>` making it easier to define class (name irrelevant)\n  * e.g. `submoduleOf = class: modules: submoduleWith { inherit class modules; … }`\n* adding the final standardization to the NixOS manual (or Module System manual)\n\n## What this issue is *not*\n\n* actually requiring all submodule definitions to set a class\n  * I only want that developers are encouraged to set one.\n* adding `class =` & `_class =` attributes to modules in nixpkgs / … at a large scale\n  * This could be discussed elsewhere.",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 2,
+  "created_at": "2026-06-27T18:04:41Z",
+  "id": 4759392828,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "About \"NixOS\" module system internals",
+    "id": 1919438524,
+    "name": "6.topic: module system"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 536086,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Module System: making class more prevalent in submodule definitions",
+  "type": null,
+  "updated_at": "2026-06-28T14:01:39Z",
+  "user": {
+   "id": 1645646,
+   "login": "Zocker1999NET",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#536086",
+ "sources": [
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 1645646,
+    "login": "Zocker1999NET",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "7724b946663e05d6cf4f7a7b29f5cb00ee11f6bb",
+   "commit_url": "https://api.github.com/repos/Zocker1999NET/home-manager/commits/7724b946663e05d6cf4f7a7b29f5cb00ee11f6bb",
+   "created_at": "2026-08-06T14:27:21Z",
+   "event": "referenced",
+   "id": 29073676296
+  },
+  {
+   "actor": {
+    "id": 1645646,
+    "login": "Zocker1999NET",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "2e641c39ce2bf9437c769af581e7c208ef12fbde",
+   "commit_url": "https://api.github.com/repos/Zocker1999NET/home-manager/commits/2e641c39ce2bf9437c769af581e7c208ef12fbde",
+   "created_at": "2026-08-06T15:20:43Z",
+   "event": "referenced",
+   "id": 29076587021
+  }
+ ]
+}

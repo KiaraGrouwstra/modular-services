@@ -1,0 +1,401 @@
+{
+ "comments": [
+  {
+   "body": "hey there, sorry again for NixOS/nixpkgs#518860 having broken downstream consumption like here.\r\n\r\nfor what it's worth, the underlying breaking change was reverted at NixOS/nixpkgs#545519, and the refile at NixOS/nixpkgs#545521 would lack the breaking change.\r\n\r\ni think the underlying issue here is in file-based imports being fragile, hence i'd filed a few PRs to shift toward going thru root-level entrypoints instead:\r\n\r\n- `lib` side: NixOS/nixpkgs#507052\r\n- nixos side: NixOS/nixpkgs#540863\r\n\r\non the approach proposed in the current PR, i think the tough part is that the breaking change in this particular case was maybe less about adding or removing an argument, more about the module there getting wrapped in a closure, which then maybe raises the question for me on whether the approach here wouldn't like break again with the (now-landed) revert at NixOS/nixpkgs#545519 - or, for that matter, with the refile at NixOS/nixpkgs#545521.\r\n\r\nin that sense, i wonder if the fix here would help more than just that revert upstream.\r\n",
+   "created_at": "2026-07-25T08:42:20Z",
+   "id": 5077780741,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-25T08:46:13Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> hey there, sorry again for [NixOS/nixpkgs#518860](https://github.com/NixOS/nixpkgs/pull/518860) having broken downstream consumption like here.\r\n> \r\n> for what it's worth, the underlying breaking change was reverted at [NixOS/nixpkgs#545519](https://github.com/NixOS/nixpkgs/pull/545519), and the refile at [NixOS/nixpkgs#545521](https://github.com/NixOS/nixpkgs/pull/545521) would lack the breaking change.\r\n> \r\n> i think the underlying issue here is in file-based imports being fragile, hence i'd filed a few PRs to shift toward going thru root-level entrypoints instead:\r\n> \r\n>     * `lib` side: [lib/services: expose portable service lib as `lib.services` NixOS/nixpkgs#507052](https://github.com/NixOS/nixpkgs/pull/507052)\r\n> \r\n>     * nixos side: [nixos/modular-services: split system-specific config out of `pkgs.<pkg>.services.<service>` NixOS/nixpkgs#540863](https://github.com/NixOS/nixpkgs/pull/540863)\r\n> \r\n> \r\n> on the approach proposed in the current PR, i think the tough part is that the breaking change in this particular case was maybe less about adding or removing an argument, more about the module there getting wrapped in a closure, which then maybe raises the question for me on whether the approach here wouldn't like break again with the (now-landed) revert at [NixOS/nixpkgs#545519](https://github.com/NixOS/nixpkgs/pull/545519) - or, for that matter, with the refile at [NixOS/nixpkgs#545521](https://github.com/NixOS/nixpkgs/pull/545521).\r\n> \r\n> in that sense, i wonder if the fix here would help more than just that revert upstream.\r\n\r\nThanks for the context! Since the follow up PRs are still pending, I’ll hold off for now.\r\nOnce those merged, I’ll test again and see whether this workaround is still needed.",
+   "created_at": "2026-07-25T08:48:52Z",
+   "id": 5077800008,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-25T08:48:52Z",
+   "user": {
+    "id": 4347318,
+    "login": "DaVinci42",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Tested again with the latest nixpkgs, and the build works fine now.\r\nClose this one.",
+   "created_at": "2026-07-25T13:21:37Z",
+   "id": 5078637151,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-25T13:21:37Z",
+   "user": {
+    "id": 4347318,
+    "login": "DaVinci42",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> hey there, sorry again for [NixOS/nixpkgs#518860](https://github.com/NixOS/nixpkgs/pull/518860) having broken downstream consumption like here.\r\n> \r\n> for what it's worth, the underlying breaking change was reverted at [NixOS/nixpkgs#545519](https://github.com/NixOS/nixpkgs/pull/545519), and the refile at [NixOS/nixpkgs#545521](https://github.com/NixOS/nixpkgs/pull/545521) would lack the breaking change.\r\n> \r\n> i think the underlying issue here is in file-based imports being fragile, hence i'd filed a few PRs to shift toward going thru root-level entrypoints instead:\r\n> \r\n>     * `lib` side: [lib/services: expose portable service lib as `lib.services` NixOS/nixpkgs#507052](https://github.com/NixOS/nixpkgs/pull/507052)\r\n> \r\n>     * nixos side: [nixos/modular-services: split system-specific config out of `pkgs.<pkg>.services.<service>` NixOS/nixpkgs#540863](https://github.com/NixOS/nixpkgs/pull/540863)\r\n> \r\n> \r\n> on the approach proposed in the current PR, i think the tough part is that the breaking change in this particular case was maybe less about adding or removing an argument, more about the module there getting wrapped in a closure, which then maybe raises the question for me on whether the approach here wouldn't like break again with the (now-landed) revert at [NixOS/nixpkgs#545519](https://github.com/NixOS/nixpkgs/pull/545519) - or, for that matter, with the refile at [NixOS/nixpkgs#545521](https://github.com/NixOS/nixpkgs/pull/545521).\r\n> \r\n> in that sense, i wonder if the fix here would help more than just that revert upstream.\r\n\r\nJust FYI, neither the revert or refile landed in the latest nixpkgs-unstable, breaking evaluation in a very significant way. Is there a way to avoid this with home-manager right now?",
+   "created_at": "2026-07-26T22:15:23Z",
+   "id": 5085652500,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-26T22:15:23Z",
+   "user": {
+    "id": 35778371,
+    "login": "pyrox0",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@pyrox0 thanks for notifying me! i filed a fix now at #9714.",
+   "created_at": "2026-07-27T09:57:47Z",
+   "id": 5089917395,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-27T09:57:47Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-community/home-manager/pull/9708",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Description\r\n\r\nFixes evaluation of modular services when the imported nixpkgs systemd service module does not accept every argument passed by the Home Manager module system.\r\n\r\nMinimal reproducer:\r\n\r\n```nix\r\n{\r\n  inputs = {\r\n    # Nixpkgs master as of 2026-07-25 06:57:37 UTC.\r\n    nixpkgs.url = \"github:NixOS/nixpkgs/9e3461d3ed9792395b1ebb8e99a9bb7f866cda7b\";\r\n    # Home Manager master as of 2026-07-24 17:12:39 UTC.\r\n    home-manager.url = \"github:nix-community/home-manager/079a3b5d1aa6a719920a51316253b7d6dd22738d\";\r\n    home-manager.inputs.nixpkgs.follows = \"nixpkgs\";\r\n  };\r\n\r\n  outputs =\r\n    {\r\n      nixpkgs,\r\n      home-manager,\r\n      ...\r\n    }:\r\n    let\r\n      pkgs = nixpkgs.legacyPackages.x86_64-linux;\r\n    in\r\n    {\r\n      homeConfigurations.repro = home-manager.lib.homeManagerConfiguration {\r\n        inherit pkgs;\r\n        modules = [\r\n          {\r\n            home.username = \"me\";\r\n            home.homeDirectory = \"/home/me\";\r\n            home.stateVersion = \"25.11\";\r\n            programs.home-manager.enable = true;\r\n          }\r\n        ];\r\n      };\r\n    };\r\n}\r\n```\r\n\r\nBuild command:\r\n\r\n```sh\r\nnix build .#homeConfigurations.repro.activationPackage --show-trace\r\n```\r\n\r\nThis currently fails while generating the Home Manager manpage/options:\r\n\r\n```text\r\nerror: function 'anonymous lambda' called with unexpected argument 'lib'\r\nat .../nixos/modules/system/service/systemd/service.nix:4:1:\r\n     3| # This makes service modules self-contained, allowing mixing of Nixpkgs versions.\r\n     4| { pkgs }:\r\n       | ^\r\n```\r\n\r\nThis happens because `modules/services-modular/service.nix` imports the nixpkgs systemd service module as a module path. The module system then calls it with the full Home Manager argument set. Some nixpkgs revisions expose that file as a stricter function and reject extra arguments such as `lib` or `specialArgs`.\r\n\r\nThe fix imports the nixpkgs module function explicitly and calls it with only the arguments declared by that function. This preserves compatibility with different nixpkgs signatures while avoiding accidental argument injection by the module system.\r\n\r\n### Checklist\r\n\r\n- [x] Change is backwards compatible.\r\n- [ ] Code formatted with `nix fmt` or\r\n      `nix-shell -A dev --run treefmt`.\r\n- [ ] Code tested through `nix build .#test-all`\r\n      or a targeted `nix run .#tests -- <pattern>`.\r\n- [ ] Test cases updated/added.\r\n",
+  "closed_at": "2026-07-25T13:21:37Z",
+  "closed_by": {
+   "id": 4347318,
+   "login": "DaVinci42",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 5,
+  "created_at": "2026-07-25T08:05:17Z",
+  "draft": true,
+  "id": 4974910600,
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 9708,
+  "pull_request": {
+   "diff_url": "https://github.com/nix-community/home-manager/pull/9708.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/nix-community/home-manager/pull/9708.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "closed",
+  "state_reason": null,
+  "title": "modules: fix modular services with strict nixpkgs modules",
+  "type": null,
+  "updated_at": "2026-07-27T09:57:47Z",
+  "user": {
+   "id": 4347318,
+   "login": "DaVinci42",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 10,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "nix-community:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2017-01-14T12:11:06Z",
+    "default_branch": "master",
+    "description": "Manage a user environment using Nix  [maintainer=@khaneliman, @rycee] ",
+    "disabled": false,
+    "fork": false,
+    "forks": 2465,
+    "forks_count": 2465,
+    "full_name": "nix-community/home-manager",
+    "git_commits_url": "https://api.github.com/repos/nix-community/home-manager/git/commits{/sha}",
+    "has_discussions": true,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": true,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-community.github.io/home-manager/",
+    "id": 78938149,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/nix-community/home-manager/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/nix-community/home-manager/milestones{/number}",
+    "name": "home-manager",
+    "open_issues": 1011,
+    "open_issues_count": 1011,
+    "owner": {
+     "id": 33221035,
+     "login": "nix-community",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/nix-community/home-manager/pulls{/number}",
+    "pushed_at": "2026-08-31T03:26:44Z",
+    "size": 355203,
+    "stargazers_count": 10299,
+    "subscription_url": "https://api.github.com/repos/nix-community/home-manager/subscription",
+    "tags_url": "https://api.github.com/repos/nix-community/home-manager/tags",
+    "topics": [
+     "dotfiles",
+     "nix",
+     "nix-dotfiles",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T07:33:23Z",
+    "visibility": "public",
+    "watchers": 10299,
+    "watchers_count": 10299,
+    "web_commit_signoff_required": false
+   },
+   "sha": "079a3b5d1aa6a719920a51316253b7d6dd22738d",
+   "user": {
+    "id": 33221035,
+    "login": "nix-community",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "### Description\r\n\r\nFixes evaluation of modular services when the imported nixpkgs systemd service module does not accept every argument passed by the Home Manager module system.\r\n\r\nMinimal reproducer:\r\n\r\n```nix\r\n{\r\n  inputs = {\r\n    # Nixpkgs master as of 2026-07-25 06:57:37 UTC.\r\n    nixpkgs.url = \"github:NixOS/nixpkgs/9e3461d3ed9792395b1ebb8e99a9bb7f866cda7b\";\r\n    # Home Manager master as of 2026-07-24 17:12:39 UTC.\r\n    home-manager.url = \"github:nix-community/home-manager/079a3b5d1aa6a719920a51316253b7d6dd22738d\";\r\n    home-manager.inputs.nixpkgs.follows = \"nixpkgs\";\r\n  };\r\n\r\n  outputs =\r\n    {\r\n      nixpkgs,\r\n      home-manager,\r\n      ...\r\n    }:\r\n    let\r\n      pkgs = nixpkgs.legacyPackages.x86_64-linux;\r\n    in\r\n    {\r\n      homeConfigurations.repro = home-manager.lib.homeManagerConfiguration {\r\n        inherit pkgs;\r\n        modules = [\r\n          {\r\n            home.username = \"me\";\r\n            home.homeDirectory = \"/home/me\";\r\n            home.stateVersion = \"25.11\";\r\n            programs.home-manager.enable = true;\r\n          }\r\n        ];\r\n      };\r\n    };\r\n}\r\n```\r\n\r\nBuild command:\r\n\r\n```sh\r\nnix build .#homeConfigurations.repro.activationPackage --show-trace\r\n```\r\n\r\nThis currently fails while generating the Home Manager manpage/options:\r\n\r\n```text\r\nerror: function 'anonymous lambda' called with unexpected argument 'lib'\r\nat .../nixos/modules/system/service/systemd/service.nix:4:1:\r\n     3| # This makes service modules self-contained, allowing mixing of Nixpkgs versions.\r\n     4| { pkgs }:\r\n       | ^\r\n```\r\n\r\nThis happens because `modules/services-modular/service.nix` imports the nixpkgs systemd service module as a module path. The module system then calls it with the full Home Manager argument set. Some nixpkgs revisions expose that file as a stricter function and reject extra arguments such as `lib` or `specialArgs`.\r\n\r\nThe fix imports the nixpkgs module function explicitly and calls it with only the arguments declared by that function. This preserves compatibility with different nixpkgs signatures while avoiding accidental argument injection by the module system.\r\n\r\n### Checklist\r\n\r\n- [x] Change is backwards compatible.\r\n- [ ] Code formatted with `nix fmt` or\r\n      `nix-shell -A dev --run treefmt`.\r\n- [ ] Code tested through `nix build .#test-all`\r\n      or a targeted `nix run .#tests -- <pattern>`.\r\n- [ ] Test cases updated/added.\r\n",
+  "changed_files": 1,
+  "closed_at": "2026-07-25T13:21:37Z",
+  "comments": 5,
+  "commits": 1,
+  "created_at": "2026-07-25T08:05:17Z",
+  "deletions": 2,
+  "diff_url": "https://github.com/nix-community/home-manager/pull/9708.diff",
+  "draft": true,
+  "head": {
+   "label": "DaVinci42:fix/modular-services-nixpkgs-args",
+   "ref": "fix/modular-services-nixpkgs-args",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2025-06-23T08:44:05Z",
+    "default_branch": "master",
+    "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "DaVinci42/home-manager",
+    "git_commits_url": "https://api.github.com/repos/DaVinci42/home-manager/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-community.github.io/home-manager/",
+    "id": 1006954945,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/DaVinci42/home-manager/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/DaVinci42/home-manager/milestones{/number}",
+    "name": "home-manager",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 4347318,
+     "login": "DaVinci42",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/DaVinci42/home-manager/pulls{/number}",
+    "pushed_at": "2026-07-25T08:10:59Z",
+    "size": 17076,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/DaVinci42/home-manager/subscription",
+    "tags_url": "https://api.github.com/repos/DaVinci42/home-manager/tags",
+    "topics": [],
+    "updated_at": "2026-07-25T07:30:54Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "e70de1e04ce35f18f88f2866e2c06980f6195cbf",
+   "user": {
+    "id": 4347318,
+    "login": "DaVinci42",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4131671211,
+  "labels": [],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "fcc39c5a81b612d69a44e4bb03ae942a15533322",
+  "mergeable": true,
+  "mergeable_state": "clean",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 9708,
+  "patch_url": "https://github.com/nix-community/home-manager/pull/9708.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "modules: fix modular services with strict nixpkgs modules",
+  "updated_at": "2026-07-27T09:57:47Z",
+  "user": {
+   "id": 4347318,
+   "login": "DaVinci42",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "nix-community/home-manager#9708",
+ "review_comments": [],
+ "reviews": [],
+ "sources": [
+  "home-manager-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 4347318,
+    "login": "DaVinci42",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-25T08:07:34Z",
+   "event": "renamed",
+   "id": 28471055780,
+   "rename": {
+    "from": "modules: keep modular services compatible with nixpkgs",
+    "to": "modules: fix modular services with strict nixpkgs modules"
+   }
+  },
+  {
+   "actor": {
+    "id": 4347318,
+    "login": "DaVinci42",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-25T13:21:37Z",
+   "event": "closed",
+   "id": 28475715238,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

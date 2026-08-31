@@ -1,0 +1,505 @@
+{
+ "comments": [
+  {
+   "body": "Marking this as a draft because some issues have been found that my testing couldn't find. Looking into this further.\r\n\r\nEdit: Issues have been dealt with, thank you to @isabelroses for helping.",
+   "created_at": "2026-04-26T00:46:57Z",
+   "id": 4320927025,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-26T01:24:07Z",
+   "user": {
+    "id": 35778371,
+    "login": "pyrox0",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Closing this since I rely on tailscale ssh, thanks for the help",
+   "created_at": "2026-04-26T16:00:22Z",
+   "id": 4322425289,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-26T16:00:22Z",
+   "user": {
+    "id": 35778371,
+    "login": "pyrox0",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/513525",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Uses the upstream suggested configuration(https://tailscale.com/docs/reference/best-practices/device-hardening#suggested-hardening-configuration-based-on-systemd) to harden the service. Massively reduces the scope of permissions allocated to the systemd service, notably it no longer runs as root.\r\n\r\nBefore:\r\n```\r\nOverall exposure level for tailscaled.service: 9.6 UNSAFE 😨\r\n```\r\n\r\nAfter:\r\n```\r\nOverall exposure level for tailscaled.service: 3.5 OK 🙂\r\n```\r\n\r\nManually tested by trying to add tailscale to my personal tailnet with this new configuration, and it worked well. I was still able to change its settings and ping other machines, so I consider this functional.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-04-26T16:00:31Z",
+  "closed_by": {
+   "id": 35778371,
+   "login": "pyrox0",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 2,
+  "created_at": "2026-04-26T00:04:56Z",
+  "draft": false,
+  "id": 4329568942,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 513525,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/513525.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/513525.patch"
+  },
+  "reactions": {
+   "+1": 5,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 5
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "nixos/tailscale: harden using suggested hardening options",
+  "type": null,
+  "updated_at": "2026-04-26T16:00:31Z",
+  "user": {
+   "id": 35778371,
+   "login": "pyrox0",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 82,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "5c26476b93df08dec4b5d417d37daf5322b14d1e",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Uses the upstream suggested configuration(https://tailscale.com/docs/reference/best-practices/device-hardening#suggested-hardening-configuration-based-on-systemd) to harden the service. Massively reduces the scope of permissions allocated to the systemd service, notably it no longer runs as root.\r\n\r\nBefore:\r\n```\r\nOverall exposure level for tailscaled.service: 9.6 UNSAFE 😨\r\n```\r\n\r\nAfter:\r\n```\r\nOverall exposure level for tailscaled.service: 3.5 OK 🙂\r\n```\r\n\r\nManually tested by trying to add tailscale to my personal tailnet with this new configuration, and it worked well. I was still able to change its settings and ping other machines, so I consider this functional.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 1,
+  "closed_at": "2026-04-26T16:00:31Z",
+  "comments": 2,
+  "commits": 1,
+  "created_at": "2026-04-26T00:04:56Z",
+  "deletions": 13,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/513525.diff",
+  "draft": false,
+  "head": {
+   "label": "pyrox0:sysd/tailscale",
+   "ref": "sysd/tailscale",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2022-02-25T22:00:42Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "pyrox0/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/pyrox0/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 463686975,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/pyrox0/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/pyrox0/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 35778371,
+     "login": "pyrox0",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/pyrox0/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:19:47Z",
+    "size": 2914699,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/pyrox0/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/pyrox0/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-08-31T16:29:22Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "4b17549ed782bced8bd25be18ba0e5ad13612ca6",
+   "user": {
+    "id": 35778371,
+    "login": "pyrox0",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3584620199,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "806aeea7afa877e52d7368009f89e18cf4a5e050",
+  "mergeable": true,
+  "mergeable_state": "unstable",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 513525,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/513525.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 613740,
+    "login": "martinbaillie",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 4929861,
+    "login": "mfrw",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 2,
+  "state": "closed",
+  "title": "nixos/tailscale: harden using suggested hardening options",
+  "updated_at": "2026-04-26T16:00:31Z",
+  "user": {
+   "id": 35778371,
+   "login": "pyrox0",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#513525",
+ "review_comments": [
+  {
+   "body": "```suggestion\n    users.users.tailscaled = {\n      isSystemUser = true;\n      group = \"tailscaled\";\n      extraGroups = lib.mkIf (config.security.tpm2.enable) [ config.security.tpm2.tssGroup ];\n    };\n    users.groups.tailscaled = { };\n```\n\nThis shouldn't need to create that group, as it is already covered by the [security.tpm2.tssGroup](https://search.nixos.org/options?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=security.tpm2.&show=option:security.tpm2.tssGroup) option.",
+   "commit_id": "4b17549ed782bced8bd25be18ba0e5ad13612ca6",
+   "created_at": "2026-04-26T07:19:06Z",
+   "diff_hunk": "@@ -142,6 +142,14 @@ in\n \n   config = mkIf cfg.enable {\n     environment.systemPackages = [ cfg.package ]; # for the CLI\n+\n+    users.users.tailscaled = {\n+      isSystemUser = true;\n+      group = \"tailscaled\";\n+      extraGroups = [ \"tss\" ];\n+    };\n+    users.groups.tailscaled = { };\n+    users.groups.tss = { };",
+   "id": 3143139654,
+   "line": 152,
+   "original_commit_id": "4b17549ed782bced8bd25be18ba0e5ad13612ca6",
+   "original_line": 152,
+   "original_position": 11,
+   "original_start_line": 146,
+   "path": "nixos/modules/services/networking/tailscale.nix",
+   "position": 11,
+   "pull_request_review_id": 4176657428,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 146,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-04-26T07:21:35Z",
+   "user": {
+    "id": 66798382,
+    "login": "MinerSebas",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "```suggestion\n        SupplementaryGroups = lib.mkIf (config.security.tpm2.enable)  config.security.tpm2.tssGroup ;\n```",
+   "commit_id": "4b17549ed782bced8bd25be18ba0e5ad13612ca6",
+   "created_at": "2026-04-26T07:19:24Z",
+   "diff_hunk": "@@ -153,19 +161,80 @@ in\n         pkgs.kmod # required to pass tailscale's v6nat check\n       ]\n       ++ lib.optional config.networking.resolvconf.enable config.networking.resolvconf.package;\n-      serviceConfig.Environment = [\n-        \"PORT=${toString cfg.port}\"\n-        ''\"FLAGS=--tun ${lib.escapeShellArg cfg.interfaceName} ${lib.concatStringsSep \" \" cfg.extraDaemonFlags}\"''\n-      ]\n-      ++ (lib.optionals (cfg.permitCertUid != null) [\n-        \"TS_PERMIT_CERT_UID=${cfg.permitCertUid}\"\n-      ])\n-      ++ (lib.optionals (cfg.disableTaildrop) [\n-        \"TS_DISABLE_TAILDROP=true\"\n-      ])\n-      ++ (lib.optionals (cfg.disableUpstreamLogging) [\n-        \"TS_NO_LOGS_NO_SUPPORT=true\"\n-      ]);\n+      serviceConfig = {\n+        Environment = [\n+          \"PORT=${toString cfg.port}\"\n+          ''\"FLAGS=--tun ${lib.escapeShellArg cfg.interfaceName} ${lib.concatStringsSep \" \" cfg.extraDaemonFlags}\"''\n+        ]\n+        ++ (lib.optionals (cfg.permitCertUid != null) [\n+          \"TS_PERMIT_CERT_UID=${cfg.permitCertUid}\"\n+        ])\n+        ++ (lib.optionals (cfg.disableTaildrop) [\n+          \"TS_DISABLE_TAILDROP=true\"\n+        ])\n+        ++ (lib.optionals (cfg.disableUpstreamLogging) [\n+          \"TS_NO_LOGS_NO_SUPPORT=true\"\n+        ]);\n+\n+        User = \"tailscaled\";\n+        Group = \"tailscaled\";\n+        SupplementaryGroups = \"tss\";",
+   "id": 3143139915,
+   "line": 181,
+   "original_commit_id": "4b17549ed782bced8bd25be18ba0e5ad13612ca6",
+   "original_line": 181,
+   "original_position": 49,
+   "original_start_line": null,
+   "path": "nixos/modules/services/networking/tailscale.nix",
+   "position": 49,
+   "pull_request_review_id": 4176657428,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-04-26T07:21:35Z",
+   "user": {
+    "id": 66798382,
+    "login": "MinerSebas",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "LGTM. tested on 2 of my machines!",
+   "commit_id": "4b17549ed782bced8bd25be18ba0e5ad13612ca6",
+   "id": 4176397011,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-26T01:24:28Z",
+   "user": {
+    "id": 71222764,
+    "login": "isabelroses",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "4b17549ed782bced8bd25be18ba0e5ad13612ca6",
+   "id": 4176474345,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-26T03:22:53Z",
+   "user": {
+    "id": 22654782,
+    "login": "SapphoSys",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The link also has this warning: `The following restrictions are not compatible with [Tailscale SSH](https://tailscale.com/docs/features/tailscale-ssh), as providing administrative access necessitates creating sessions using the privileges of another user.`\n\nFor this reason, there should be an option to easily turn on or off the hardening.\nAs this risk locking out users out of their ssh access, the decision whether hardening should be applied, should then depend on `stateVersion`.",
+   "commit_id": "4b17549ed782bced8bd25be18ba0e5ad13612ca6",
+   "id": 4176657428,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-04-26T07:21:35Z",
+   "user": {
+    "id": 66798382,
+    "login": "MinerSebas",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 35778371,
+    "login": "pyrox0",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-26T16:00:31Z",
+   "event": "closed",
+   "id": 24881496827,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

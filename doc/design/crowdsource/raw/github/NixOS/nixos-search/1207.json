@@ -1,0 +1,90 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixos-search/issues/1207",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "as per @ibizaman in the modular services matrix channel:\n\n> Any idea why https://search.nixos.org/options?channel=unstable&include_modular_service_options=1&include_nixos_options=0&query=ghostunnel returns options but\n>\n> - https://search.nixos.org/options?channel=unstable&include_modular_service_options=1&include_nixos_options=0&query=system returns only 1 option\n> - https://search.nixos.org/options?channel=unstable&include_modular_service_options=1&include_nixos_options=0&query=system.* returns none\n",
+  "closed_at": "2026-04-16T11:33:57Z",
+  "closed_by": {
+   "id": 131856,
+   "login": "raboof",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 0,
+  "created_at": "2026-04-15T08:56:32Z",
+  "id": 4267602272,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "e99695",
+    "default": true,
+    "description": "Something isn't working",
+    "id": 1940417079,
+    "name": "bug"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 1207,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 1,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixos-search",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "modular services search not working as expected",
+  "type": null,
+  "updated_at": "2026-04-16T11:33:57Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixos-search#1207",
+ "sources": [
+  "nixos-search-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-16T11:33:57Z",
+   "event": "closed",
+   "id": 24564609232,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

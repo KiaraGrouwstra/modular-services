@@ -1,0 +1,1304 @@
+{
+ "comments": [
+  {
+   "body": "Updated to 1.6.2. The highlight of this update is the new commands in `$out/bin`. I've also taken the opportunity to move the Pangolin scripts and static files to `$out/share/pangolin` so we can have some semblance of FHS paths instead of the mess NextJS forces unto us.",
+   "created_at": "2025-07-06T11:13:26Z",
+   "id": 3041326355,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-07-06T11:13:39Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review`](https://github.com/Mic92/nixpkgs-review).\n\nCommand: `nixpkgs-review pr 419533`\nCommit: `d299df66b63ba4e6f2f98f5b1e13bedd7b748d8b`\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>fosrl-pangolin</li>\n  </ul>\n</details>\n",
+   "created_at": "2025-07-23T15:51:29Z",
+   "id": 3109206596,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-07-23T15:51:29Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review`](https://github.com/Mic92/nixpkgs-review).\n\nCommand: `nixpkgs-review pr 419533`\nCommit: `d299df66b63ba4e6f2f98f5b1e13bedd7b748d8b`\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>fosrl-pangolin</li>\n  </ul>\n</details>\n",
+   "created_at": "2025-07-23T15:56:20Z",
+   "id": 3109225432,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-07-23T15:56:20Z",
+   "user": {
+    "id": 60861925,
+    "login": "ethancedwards8",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@NickCao would you mind taking another look at this? ",
+   "created_at": "2025-08-01T17:08:11Z",
+   "id": 3145223231,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-01T17:08:11Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Still not very convinced by the make it work out of nixos part (since most of these users would happily use docker instead), but otherwise lgtm.",
+   "created_at": "2025-08-01T17:59:26Z",
+   "id": 3145349573,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-01T17:59:26Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Still not very convinced by the make it work out of nixos part (since most of these users would happily use docker instead), but otherwise lgtm.\r\n\r\nYea, it's more for the people who use Nix + another distro already. We'll rewrite this as one of the new modular services at some point in the future anyway. ",
+   "created_at": "2025-08-01T18:10:33Z",
+   "id": 3145375544,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-01T18:10:33Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Well, this also has the benefit of making the module simpler. The `ollama-nextjs-webui` package also has something similar.",
+   "created_at": "2025-08-02T00:14:20Z",
+   "id": 3146042961,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-02T00:14:20Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@adamcstephens, would you mind taking a look at this? It's part of [the pangolin stack](https://github.com/NixOS/nixpkgs/pull/416148), for which you reviewed [olm](https://github.com/NixOS/nixpkgs/pull/429561) ",
+   "created_at": "2025-08-05T15:20:55Z",
+   "id": 3155656628,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-05T15:20:55Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Sorry this got lost in my pile of backlog.",
+   "created_at": "2025-08-06T20:44:26Z",
+   "id": 3161551463,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 3,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2025-08-06T20:44:26Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "No worries, thanks! This unblocks https://github.com/NixOS/nixpkgs/pull/416148, which i will rebase in an hour or so :) ",
+   "created_at": "2025-08-06T20:48:19Z",
+   "id": 3161561680,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-06T20:48:19Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/419533",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Changelogs: [1.3.0](https://github.com/fosrl/pangolin/releases/tag/1.3.0), [1.3.1](https://github.com/fosrl/pangolin/releases/tag/1.3.1), [1.3.2](https://github.com/fosrl/pangolin/releases/tag/1.3.2), [1.4.0](https://github.com/fosrl/pangolin/releases/tag/1.4.0), [1.5.0](https://github.com/fosrl/pangolin/releases/tag/1.5.0), [1.5.1](https://github.com/fosrl/pangolin/releases/tag/1.5.1), [1.6.0](https://github.com/fosrl/pangolin/releases/tag/1.6.0), [1.6.1](https://github.com/fosrl/pangolin/releases/tag/1.6.1), [1.6.2](https://github.com/fosrl/pangolin/releases/tag/1.6.2), [1.7.0](https://github.com/fosrl/pangolin/releases/tag/1.7.0), [1.7.1](https://github.com/fosrl/pangolin/releases/tag/1.7.1), [1.7.2](https://github.com/fosrl/pangolin/releases/tag/1.7.2), [1.7.3](https://github.com/fosrl/pangolin/releases/tag/1.7.3), [1.8.0](https://github.com/fosrl/pangolin/releases/tag/1.8.0).\r\n\r\nThis combined update introduces a new database type for Pangolin: PostgreSQL. The module for it will come at a later date, so no separate package for it right now.\r\n\r\n1.6.0 also introduces the `pangctl` command, which has inspired me to write the spaghetti you see in the `preFixup` section of the diff. By wrapping the `*.mjs` files to actual commands in `$out/bin`, we can simplify the NixOS module, make it easier to access `pangctl`, and allow non-NixOS users to start a Pangolin server without much hassle.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [ ] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#linking-nixos-module-tests-to-a-package) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [Nixpkgs 25.11 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/doc/release-notes/rl-2511.section.md) (or backporting [24.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/release-notes/rl-2411.section.md) and [25.05](https://github.com/NixOS/nixpkgs/blob/master/doc/manual/release-notes/rl-2505.section.md) Nixpkgs Release notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n- [NixOS 25.11 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2511.section.md) (or backporting [24.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2411.section.md) and [25.05](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) NixOS Release notes)\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [x] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md), [pkgs/README.md](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md), [maintainers/README.md](https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md) and other contributing documentation in corresponding paths.\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#reviewing-contributions\r\n-->\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": "2025-08-06T20:44:31Z",
+  "closed_by": {
+   "id": 15247171,
+   "login": "NickCao",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 10,
+  "created_at": "2025-06-24T11:28:16Z",
+  "draft": false,
+  "id": 3171620660,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Linux.",
+    "id": 1955058054,
+    "name": "10.rebuild-linux: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by a maintainer listed in any of the changed packages.",
+    "id": 4061482046,
+    "name": "12.approved-by: package-maintainer"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 419533,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/419533.diff",
+   "merged_at": "2025-08-06T20:44:31Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/419533.patch"
+  },
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "fosrl-pangolin: 1.2.0 -> 1.8.0",
+  "type": null,
+  "updated_at": "2025-08-13T08:59:16Z",
+  "user": {
+   "id": 174749595,
+   "login": "SigmaSquadron",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 127,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:38:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "f776abb2647e2e13d8b0e7b395278f175189fd50",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Changelogs: [1.3.0](https://github.com/fosrl/pangolin/releases/tag/1.3.0), [1.3.1](https://github.com/fosrl/pangolin/releases/tag/1.3.1), [1.3.2](https://github.com/fosrl/pangolin/releases/tag/1.3.2), [1.4.0](https://github.com/fosrl/pangolin/releases/tag/1.4.0), [1.5.0](https://github.com/fosrl/pangolin/releases/tag/1.5.0), [1.5.1](https://github.com/fosrl/pangolin/releases/tag/1.5.1), [1.6.0](https://github.com/fosrl/pangolin/releases/tag/1.6.0), [1.6.1](https://github.com/fosrl/pangolin/releases/tag/1.6.1), [1.6.2](https://github.com/fosrl/pangolin/releases/tag/1.6.2), [1.7.0](https://github.com/fosrl/pangolin/releases/tag/1.7.0), [1.7.1](https://github.com/fosrl/pangolin/releases/tag/1.7.1), [1.7.2](https://github.com/fosrl/pangolin/releases/tag/1.7.2), [1.7.3](https://github.com/fosrl/pangolin/releases/tag/1.7.3), [1.8.0](https://github.com/fosrl/pangolin/releases/tag/1.8.0).\r\n\r\nThis combined update introduces a new database type for Pangolin: PostgreSQL. The module for it will come at a later date, so no separate package for it right now.\r\n\r\n1.6.0 also introduces the `pangctl` command, which has inspired me to write the spaghetti you see in the `preFixup` section of the diff. By wrapping the `*.mjs` files to actual commands in `$out/bin`, we can simplify the NixOS module, make it easier to access `pangctl`, and allow non-NixOS users to start a Pangolin server without much hassle.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform(s)\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- For non-Linux: Is sandboxing enabled in `nix.conf`? (See [Nix manual](https://nixos.org/manual/nix/stable/command-ref/conf-file.html))\r\n  - [ ] `sandbox = relaxed`\r\n  - [ ] `sandbox = true`\r\n- [ ] Tested, as applicable:\r\n  - [NixOS test(s)](https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests) (look inside [nixos/tests](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests))\r\n  - and/or [package tests](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests)\r\n  - or, for functions and \"core\" functionality, tests in [lib/tests](https://github.com/NixOS/nixpkgs/blob/master/lib/tests) or [pkgs/test](https://github.com/NixOS/nixpkgs/blob/master/pkgs/test)\r\n  - made sure NixOS tests are [linked](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#linking-nixos-module-tests-to-a-package) to the relevant packages\r\n- [ ] Tested compilation of all packages that depend on this change using `nix-shell -p nixpkgs-review --run \"nixpkgs-review rev HEAD\"`. Note: all changes have to be committed, also see [nixpkgs-review usage](https://github.com/Mic92/nixpkgs-review#usage)\r\n- [ ] Tested basic functionality of all binary files (usually in `./result/bin/`)\r\n- [Nixpkgs 25.11 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/doc/release-notes/rl-2511.section.md) (or backporting [24.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/release-notes/rl-2411.section.md) and [25.05](https://github.com/NixOS/nixpkgs/blob/master/doc/manual/release-notes/rl-2505.section.md) Nixpkgs Release notes)\r\n  - [ ] (Package updates) Added a release notes entry if the change is major or breaking\r\n- [NixOS 25.11 Release Notes](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2511.section.md) (or backporting [24.11](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2411.section.md) and [25.05](https://github.com/NixOS/nixpkgs/blob/master/nixos/doc/manual/release-notes/rl-2505.section.md) NixOS Release notes)\r\n  - [ ] (Module updates) Added a release notes entry if the change is significant\r\n  - [ ] (Module addition) Added a release notes entry if adding a new NixOS module\r\n- [x] Fits [CONTRIBUTING.md](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md), [pkgs/README.md](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md), [maintainers/README.md](https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md) and other contributing documentation in corresponding paths.\r\n\r\n<!--\r\nTo help with the large amounts of pull requests, we would appreciate your\r\nreviews of other pull requests, especially simple package updates. Just leave a\r\ncomment describing what you have tested in the relevant package/service.\r\nReviewing helps to reduce the average time-to-merge for everyone.\r\nThanks a lot if you do!\r\n\r\nList of open PRs: https://github.com/NixOS/nixpkgs/pulls\r\nReviewing guidelines: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#reviewing-contributions\r\n-->\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 1,
+  "closed_at": "2025-08-06T20:44:31Z",
+  "comments": 10,
+  "commits": 1,
+  "created_at": "2025-06-24T11:28:16Z",
+  "deletions": 25,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/419533.diff",
+  "draft": false,
+  "head": {
+   "label": "SigmaSquadron:push-sqwpmnnxpymt",
+   "ref": "push-sqwpmnnxpymt",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-07-04T22:10:52Z",
+    "default_branch": "master",
+    "description": "SigmaSquadron's Nixpkgs Fork",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "SigmaSquadron/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/SigmaSquadron/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": false,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "https://nixos.org",
+    "id": 824329310,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/SigmaSquadron/nixpkgs/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/SigmaSquadron/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 174749595,
+     "login": "SigmaSquadron",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/SigmaSquadron/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-18T18:21:24Z",
+    "size": 2634196,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/SigmaSquadron/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/SigmaSquadron/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2025-05-16T20:46:23Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 2614701912,
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Linux.",
+    "id": 1955058054,
+    "name": "10.rebuild-linux: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by one person.",
+    "id": 4022792890,
+    "name": "12.approvals: 1"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by a maintainer listed in any of the changed packages.",
+    "id": 4061482046,
+    "name": "12.approved-by: package-maintainer"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "7c211acb7dc973b26e280259c886f04a59690480",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2025-08-06T20:44:31Z",
+  "merged_by": {
+   "id": 15247171,
+   "login": "NickCao",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 419533,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/419533.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 12,
+  "state": "closed",
+  "title": "fosrl-pangolin: 1.2.0 -> 1.8.0",
+  "updated_at": "2025-08-13T08:59:16Z",
+  "user": {
+   "id": 174749595,
+   "login": "SigmaSquadron",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#419533",
+ "review_comments": [
+  {
+   "body": "is there a reason this is not in the `installPhase`?",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-06T11:26:40Z",
+   "diff_hunk": "@@ -35,32 +64,104 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';",
+   "id": 2188197446,
+   "line": null,
+   "original_commit_id": "267360c1775fc95e7fe2b10be4aa32abc386f634",
+   "original_line": 78,
+   "original_position": 84,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 1,
+   "pull_request_review_id": 2991191623,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-06T11:26:40Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "is `lib.concatMapAttrsStringSep` possible here?",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-06T11:30:29Z",
+   "diff_hunk": "@@ -35,32 +64,104 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';\n \n   installPhase = ''\n     runHook preInstall\n-    mkdir -p $out/\n \n-    cp -r .next/standalone/* $out/\n-    cp -r .next/standalone/.next $out/\n+    cp -r node_modules $out/share/pangolin\n+\n+    cp -r .next/standalone/.next $out/share/pangolin\n+    cp .next/standalone/package.json $out/share/pangolin\n+\n+    cp -r .next/static $out/share/pangolin/.next/static\n+    cp -r public $out/share/pangolin/public\n+\n+    cp -r dist $out/share/pangolin/dist\n+    cp -r init $out/share/pangolin/dist/init\n \n-    cp -r .next/static $out/.next/static\n-    cp -r dist $out/dist\n-    cp -r init $out/dist/init\n+    cp server/db/names.json $out/share/pangolin/dist/names.json\n \n-    cp server/db/names.json $out/dist/names.json\n-    cp -r public $out/public\n-    cp -r node_modules $out/\n     runHook postInstall\n   '';\n \n+  postInstall = ''\n+    sed -i '1i #! /usr/bin/env node' $out/share/pangolin/dist/{migrations,server}.mjs\n+    chmod +x $out/share/pangolin/dist/{cli,migrations,server}.mjs\n+  '';\n+\n+  preFixup =\n+    let\n+      variablesMapped =\n+        isServer:\n+        (lib.concatMapStrings (attr: \"--set ${attr.name} ${attr.value} \") (\n+          lib.attrsToList (",
+   "id": 2188198634,
+   "line": null,
+   "original_commit_id": "267360c1775fc95e7fe2b10be4aa32abc386f634",
+   "original_line": 109,
+   "original_position": 124,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 1,
+   "pull_request_review_id": 2991192841,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-06T11:30:29Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I wanted to separate the phases as much as possible to give people overriding pangolin as many options as possible. (i.e. someone might want to make a new directory or fixup a file before installation but couldn't use `postBuild` for whatever reason)",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-06T11:30:48Z",
+   "diff_hunk": "@@ -35,32 +64,104 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';",
+   "id": 2188198738,
+   "in_reply_to_id": 2188197446,
+   "line": null,
+   "original_commit_id": "267360c1775fc95e7fe2b10be4aa32abc386f634",
+   "original_line": 78,
+   "original_position": 84,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 1,
+   "pull_request_review_id": 2991192924,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-06T11:36:29Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yes it is. Good catch.",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-06T11:34:20Z",
+   "diff_hunk": "@@ -35,32 +64,104 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';\n \n   installPhase = ''\n     runHook preInstall\n-    mkdir -p $out/\n \n-    cp -r .next/standalone/* $out/\n-    cp -r .next/standalone/.next $out/\n+    cp -r node_modules $out/share/pangolin\n+\n+    cp -r .next/standalone/.next $out/share/pangolin\n+    cp .next/standalone/package.json $out/share/pangolin\n+\n+    cp -r .next/static $out/share/pangolin/.next/static\n+    cp -r public $out/share/pangolin/public\n+\n+    cp -r dist $out/share/pangolin/dist\n+    cp -r init $out/share/pangolin/dist/init\n \n-    cp -r .next/static $out/.next/static\n-    cp -r dist $out/dist\n-    cp -r init $out/dist/init\n+    cp server/db/names.json $out/share/pangolin/dist/names.json\n \n-    cp server/db/names.json $out/dist/names.json\n-    cp -r public $out/public\n-    cp -r node_modules $out/\n     runHook postInstall\n   '';\n \n+  postInstall = ''\n+    sed -i '1i #! /usr/bin/env node' $out/share/pangolin/dist/{migrations,server}.mjs\n+    chmod +x $out/share/pangolin/dist/{cli,migrations,server}.mjs\n+  '';\n+\n+  preFixup =\n+    let\n+      variablesMapped =\n+        isServer:\n+        (lib.concatMapStrings (attr: \"--set ${attr.name} ${attr.value} \") (\n+          lib.attrsToList (",
+   "id": 2188199466,
+   "in_reply_to_id": 2188198634,
+   "line": null,
+   "original_commit_id": "267360c1775fc95e7fe2b10be4aa32abc386f634",
+   "original_line": 109,
+   "original_position": 124,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 1,
+   "pull_request_review_id": 2991193747,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-06T11:34:20Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This would be fixed up by patchShebangs or not?",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-24T00:04:22Z",
+   "diff_hunk": "@@ -35,32 +64,99 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';\n \n   installPhase = ''\n     runHook preInstall\n-    mkdir -p $out/\n \n-    cp -r .next/standalone/* $out/\n-    cp -r .next/standalone/.next $out/\n+    cp -r node_modules $out/share/pangolin\n+\n+    cp -r .next/standalone/.next $out/share/pangolin\n+    cp .next/standalone/package.json $out/share/pangolin\n+\n+    cp -r .next/static $out/share/pangolin/.next/static\n+    cp -r public $out/share/pangolin/public\n+\n+    cp -r dist $out/share/pangolin/dist\n+    cp -r init $out/share/pangolin/dist/init\n \n-    cp -r .next/static $out/.next/static\n-    cp -r dist $out/dist\n-    cp -r init $out/dist/init\n+    cp server/db/names.json $out/share/pangolin/dist/names.json\n \n-    cp server/db/names.json $out/dist/names.json\n-    cp -r public $out/public\n-    cp -r node_modules $out/\n     runHook postInstall\n   '';\n \n+  postInstall = ''\n+    sed -i '1i #! /usr/bin/env node' $out/share/pangolin/dist/{migrations,server}.mjs",
+   "id": 2226981399,
+   "line": null,
+   "original_commit_id": "d299df66b63ba4e6f2f98f5b1e13bedd7b748d8b",
+   "original_line": 100,
+   "original_position": 115,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 1,
+   "pull_request_review_id": 3049470254,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-24T00:06:29Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Why's constructing the command line flags done here not in the nixos module?",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-24T00:06:16Z",
+   "diff_hunk": "@@ -35,32 +64,99 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';\n \n   installPhase = ''\n     runHook preInstall\n-    mkdir -p $out/\n \n-    cp -r .next/standalone/* $out/\n-    cp -r .next/standalone/.next $out/\n+    cp -r node_modules $out/share/pangolin\n+\n+    cp -r .next/standalone/.next $out/share/pangolin\n+    cp .next/standalone/package.json $out/share/pangolin\n+\n+    cp -r .next/static $out/share/pangolin/.next/static\n+    cp -r public $out/share/pangolin/public\n+\n+    cp -r dist $out/share/pangolin/dist\n+    cp -r init $out/share/pangolin/dist/init\n \n-    cp -r .next/static $out/.next/static\n-    cp -r dist $out/dist\n-    cp -r init $out/dist/init\n+    cp server/db/names.json $out/share/pangolin/dist/names.json\n \n-    cp server/db/names.json $out/dist/names.json\n-    cp -r public $out/public\n-    cp -r node_modules $out/\n     runHook postInstall\n   '';\n \n+  postInstall = ''\n+    sed -i '1i #! /usr/bin/env node' $out/share/pangolin/dist/{migrations,server}.mjs\n+    chmod +x $out/share/pangolin/dist/{cli,migrations,server}.mjs\n+  '';\n+\n+  preFixup =\n+    let\n+      variablesMapped =\n+        isServer:\n+        (lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${value}\") (\n+          {\n+            NODE_OPTIONS = \"enable-source-maps\";\n+            NODE_ENV = \"development\";\n+            ENVIRONMENT = \"prod\";\n+          }\n+          // environmentVariables\n+        ))\n+        + lib.optionalString isServer \" --run '${\n+           (lib.concatMapStringsSep \" && \"\n+             (dir: \"test -L ${dir} || test -d ${dir} || ln -s ${placeholder \"out\"}/share/pangolin/${dir} .\")\n+             [\n+               \".next\"\n+               \"public\"\n+             ]\n+           )\n+         } && command ${placeholder \"out\"}/bin/migrate-pangolin-database'\";\n+    in\n+    lib.concatMapStrings\n+      (\n+        attr:\n+        \"makeWrapper $out/share/pangolin/dist/${attr.mjs}.mjs $out/bin/${attr.command} ${\n+          variablesMapped (attr.mjs == \"server\")",
+   "id": 2226983021,
+   "line": 136,
+   "original_commit_id": "d299df66b63ba4e6f2f98f5b1e13bedd7b748d8b",
+   "original_line": 136,
+   "original_position": 145,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 154,
+   "pull_request_review_id": 3049470254,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-24T00:06:29Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It wouldn't. This is adding a shebang for `patchShebangs` to fix.\n\nI guess this can be fixed upstream though.",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-24T00:47:23Z",
+   "diff_hunk": "@@ -35,32 +64,99 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';\n \n   installPhase = ''\n     runHook preInstall\n-    mkdir -p $out/\n \n-    cp -r .next/standalone/* $out/\n-    cp -r .next/standalone/.next $out/\n+    cp -r node_modules $out/share/pangolin\n+\n+    cp -r .next/standalone/.next $out/share/pangolin\n+    cp .next/standalone/package.json $out/share/pangolin\n+\n+    cp -r .next/static $out/share/pangolin/.next/static\n+    cp -r public $out/share/pangolin/public\n+\n+    cp -r dist $out/share/pangolin/dist\n+    cp -r init $out/share/pangolin/dist/init\n \n-    cp -r .next/static $out/.next/static\n-    cp -r dist $out/dist\n-    cp -r init $out/dist/init\n+    cp server/db/names.json $out/share/pangolin/dist/names.json\n \n-    cp server/db/names.json $out/dist/names.json\n-    cp -r public $out/public\n-    cp -r node_modules $out/\n     runHook postInstall\n   '';\n \n+  postInstall = ''\n+    sed -i '1i #! /usr/bin/env node' $out/share/pangolin/dist/{migrations,server}.mjs",
+   "id": 2227039150,
+   "in_reply_to_id": 2226981399,
+   "line": null,
+   "original_commit_id": "d299df66b63ba4e6f2f98f5b1e13bedd7b748d8b",
+   "original_line": 100,
+   "original_position": 115,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 1,
+   "pull_request_review_id": 3049550726,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-24T00:47:23Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I wanted to allow non-NixOS users to be able to run Pangolin with as little config as possible. The wrapper allows users to just `nix run nixpkgs#pangolin` and it'll work.",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-24T04:05:07Z",
+   "diff_hunk": "@@ -35,32 +64,99 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';\n \n   installPhase = ''\n     runHook preInstall\n-    mkdir -p $out/\n \n-    cp -r .next/standalone/* $out/\n-    cp -r .next/standalone/.next $out/\n+    cp -r node_modules $out/share/pangolin\n+\n+    cp -r .next/standalone/.next $out/share/pangolin\n+    cp .next/standalone/package.json $out/share/pangolin\n+\n+    cp -r .next/static $out/share/pangolin/.next/static\n+    cp -r public $out/share/pangolin/public\n+\n+    cp -r dist $out/share/pangolin/dist\n+    cp -r init $out/share/pangolin/dist/init\n \n-    cp -r .next/static $out/.next/static\n-    cp -r dist $out/dist\n-    cp -r init $out/dist/init\n+    cp server/db/names.json $out/share/pangolin/dist/names.json\n \n-    cp server/db/names.json $out/dist/names.json\n-    cp -r public $out/public\n-    cp -r node_modules $out/\n     runHook postInstall\n   '';\n \n+  postInstall = ''\n+    sed -i '1i #! /usr/bin/env node' $out/share/pangolin/dist/{migrations,server}.mjs\n+    chmod +x $out/share/pangolin/dist/{cli,migrations,server}.mjs\n+  '';\n+\n+  preFixup =\n+    let\n+      variablesMapped =\n+        isServer:\n+        (lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${value}\") (\n+          {\n+            NODE_OPTIONS = \"enable-source-maps\";\n+            NODE_ENV = \"development\";\n+            ENVIRONMENT = \"prod\";\n+          }\n+          // environmentVariables\n+        ))\n+        + lib.optionalString isServer \" --run '${\n+           (lib.concatMapStringsSep \" && \"\n+             (dir: \"test -L ${dir} || test -d ${dir} || ln -s ${placeholder \"out\"}/share/pangolin/${dir} .\")\n+             [\n+               \".next\"\n+               \"public\"\n+             ]\n+           )\n+         } && command ${placeholder \"out\"}/bin/migrate-pangolin-database'\";\n+    in\n+    lib.concatMapStrings\n+      (\n+        attr:\n+        \"makeWrapper $out/share/pangolin/dist/${attr.mjs}.mjs $out/bin/${attr.command} ${\n+          variablesMapped (attr.mjs == \"server\")",
+   "id": 2227279257,
+   "in_reply_to_id": 2226983021,
+   "line": 136,
+   "original_commit_id": "d299df66b63ba4e6f2f98f5b1e13bedd7b748d8b",
+   "original_line": 136,
+   "original_position": 145,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 154,
+   "pull_request_review_id": 3049898719,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-24T04:05:07Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Actually, some improvements can be made here.\n- We should copy the .next and public folders instead of symlinking them.\n- They should automatically update to the binary version being executed (so you don't run Pangolin 1.7.3 with data from 1.5.1)\n- There should be some way to skip the directory operations.\n\nMaybe we should also deploy a basic config and call $EDITOR on it if the config doesn't exist.",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-25T02:41:17Z",
+   "diff_hunk": "@@ -35,32 +64,99 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';\n \n   installPhase = ''\n     runHook preInstall\n-    mkdir -p $out/\n \n-    cp -r .next/standalone/* $out/\n-    cp -r .next/standalone/.next $out/\n+    cp -r node_modules $out/share/pangolin\n+\n+    cp -r .next/standalone/.next $out/share/pangolin\n+    cp .next/standalone/package.json $out/share/pangolin\n+\n+    cp -r .next/static $out/share/pangolin/.next/static\n+    cp -r public $out/share/pangolin/public\n+\n+    cp -r dist $out/share/pangolin/dist\n+    cp -r init $out/share/pangolin/dist/init\n \n-    cp -r .next/static $out/.next/static\n-    cp -r dist $out/dist\n-    cp -r init $out/dist/init\n+    cp server/db/names.json $out/share/pangolin/dist/names.json\n \n-    cp server/db/names.json $out/dist/names.json\n-    cp -r public $out/public\n-    cp -r node_modules $out/\n     runHook postInstall\n   '';\n \n+  postInstall = ''\n+    sed -i '1i #! /usr/bin/env node' $out/share/pangolin/dist/{migrations,server}.mjs\n+    chmod +x $out/share/pangolin/dist/{cli,migrations,server}.mjs\n+  '';\n+\n+  preFixup =\n+    let\n+      variablesMapped =\n+        isServer:\n+        (lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${value}\") (\n+          {\n+            NODE_OPTIONS = \"enable-source-maps\";\n+            NODE_ENV = \"development\";\n+            ENVIRONMENT = \"prod\";\n+          }\n+          // environmentVariables\n+        ))\n+        + lib.optionalString isServer \" --run '${\n+           (lib.concatMapStringsSep \" && \"\n+             (dir: \"test -L ${dir} || test -d ${dir} || ln -s ${placeholder \"out\"}/share/pangolin/${dir} .\")\n+             [\n+               \".next\"\n+               \"public\"\n+             ]\n+           )\n+         } && command ${placeholder \"out\"}/bin/migrate-pangolin-database'\";\n+    in\n+    lib.concatMapStrings\n+      (\n+        attr:\n+        \"makeWrapper $out/share/pangolin/dist/${attr.mjs}.mjs $out/bin/${attr.command} ${\n+          variablesMapped (attr.mjs == \"server\")",
+   "id": 2230017807,
+   "in_reply_to_id": 2226983021,
+   "line": 136,
+   "original_commit_id": "d299df66b63ba4e6f2f98f5b1e13bedd7b748d8b",
+   "original_line": 136,
+   "original_position": 145,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 154,
+   "pull_request_review_id": 3053926141,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-25T02:41:17Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Opened https://github.com/fosrl/pangolin/pull/1139",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-27T03:21:44Z",
+   "diff_hunk": "@@ -35,32 +64,99 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';\n \n   installPhase = ''\n     runHook preInstall\n-    mkdir -p $out/\n \n-    cp -r .next/standalone/* $out/\n-    cp -r .next/standalone/.next $out/\n+    cp -r node_modules $out/share/pangolin\n+\n+    cp -r .next/standalone/.next $out/share/pangolin\n+    cp .next/standalone/package.json $out/share/pangolin\n+\n+    cp -r .next/static $out/share/pangolin/.next/static\n+    cp -r public $out/share/pangolin/public\n+\n+    cp -r dist $out/share/pangolin/dist\n+    cp -r init $out/share/pangolin/dist/init\n \n-    cp -r .next/static $out/.next/static\n-    cp -r dist $out/dist\n-    cp -r init $out/dist/init\n+    cp server/db/names.json $out/share/pangolin/dist/names.json\n \n-    cp server/db/names.json $out/dist/names.json\n-    cp -r public $out/public\n-    cp -r node_modules $out/\n     runHook postInstall\n   '';\n \n+  postInstall = ''\n+    sed -i '1i #! /usr/bin/env node' $out/share/pangolin/dist/{migrations,server}.mjs",
+   "id": 2233622715,
+   "in_reply_to_id": 2226981399,
+   "line": null,
+   "original_commit_id": "d299df66b63ba4e6f2f98f5b1e13bedd7b748d8b",
+   "original_line": 100,
+   "original_position": 115,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 1,
+   "pull_request_review_id": 3058906511,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-27T03:21:44Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Should be done now.",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-07-27T05:53:45Z",
+   "diff_hunk": "@@ -35,32 +64,99 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';\n \n   installPhase = ''\n     runHook preInstall\n-    mkdir -p $out/\n \n-    cp -r .next/standalone/* $out/\n-    cp -r .next/standalone/.next $out/\n+    cp -r node_modules $out/share/pangolin\n+\n+    cp -r .next/standalone/.next $out/share/pangolin\n+    cp .next/standalone/package.json $out/share/pangolin\n+\n+    cp -r .next/static $out/share/pangolin/.next/static\n+    cp -r public $out/share/pangolin/public\n+\n+    cp -r dist $out/share/pangolin/dist\n+    cp -r init $out/share/pangolin/dist/init\n \n-    cp -r .next/static $out/.next/static\n-    cp -r dist $out/dist\n-    cp -r init $out/dist/init\n+    cp server/db/names.json $out/share/pangolin/dist/names.json\n \n-    cp server/db/names.json $out/dist/names.json\n-    cp -r public $out/public\n-    cp -r node_modules $out/\n     runHook postInstall\n   '';\n \n+  postInstall = ''\n+    sed -i '1i #! /usr/bin/env node' $out/share/pangolin/dist/{migrations,server}.mjs\n+    chmod +x $out/share/pangolin/dist/{cli,migrations,server}.mjs\n+  '';\n+\n+  preFixup =\n+    let\n+      variablesMapped =\n+        isServer:\n+        (lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${value}\") (\n+          {\n+            NODE_OPTIONS = \"enable-source-maps\";\n+            NODE_ENV = \"development\";\n+            ENVIRONMENT = \"prod\";\n+          }\n+          // environmentVariables\n+        ))\n+        + lib.optionalString isServer \" --run '${\n+           (lib.concatMapStringsSep \" && \"\n+             (dir: \"test -L ${dir} || test -d ${dir} || ln -s ${placeholder \"out\"}/share/pangolin/${dir} .\")\n+             [\n+               \".next\"\n+               \"public\"\n+             ]\n+           )\n+         } && command ${placeholder \"out\"}/bin/migrate-pangolin-database'\";\n+    in\n+    lib.concatMapStrings\n+      (\n+        attr:\n+        \"makeWrapper $out/share/pangolin/dist/${attr.mjs}.mjs $out/bin/${attr.command} ${\n+          variablesMapped (attr.mjs == \"server\")",
+   "id": 2233739827,
+   "in_reply_to_id": 2226983021,
+   "line": 136,
+   "original_commit_id": "d299df66b63ba4e6f2f98f5b1e13bedd7b748d8b",
+   "original_line": 136,
+   "original_position": 145,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 154,
+   "pull_request_review_id": 3059198997,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-07-27T05:54:38Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This was fixed upstream, so the `postInstall` was removed.",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "created_at": "2025-08-01T11:40:18Z",
+   "diff_hunk": "@@ -35,32 +64,99 @@ buildNpmPackage rec {\n   '';\n \n   preBuild = ''\n-    npx drizzle-kit generate --dialect sqlite --schema ./server/db/schemas/ --out init\n+    npx drizzle-kit generate --dialect ${db true} --schema ./server/db/${db false}/schema.ts --name migration --out init\n+  '';\n+\n+  npmBuildScript = \"build:${db false}\";\n+\n+  postBuild = ''\n+    npm run build:cli\n+  '';\n+\n+  preInstall = ''\n+    mkdir -p $out/{bin,share/pangolin}\n   '';\n \n   installPhase = ''\n     runHook preInstall\n-    mkdir -p $out/\n \n-    cp -r .next/standalone/* $out/\n-    cp -r .next/standalone/.next $out/\n+    cp -r node_modules $out/share/pangolin\n+\n+    cp -r .next/standalone/.next $out/share/pangolin\n+    cp .next/standalone/package.json $out/share/pangolin\n+\n+    cp -r .next/static $out/share/pangolin/.next/static\n+    cp -r public $out/share/pangolin/public\n+\n+    cp -r dist $out/share/pangolin/dist\n+    cp -r init $out/share/pangolin/dist/init\n \n-    cp -r .next/static $out/.next/static\n-    cp -r dist $out/dist\n-    cp -r init $out/dist/init\n+    cp server/db/names.json $out/share/pangolin/dist/names.json\n \n-    cp server/db/names.json $out/dist/names.json\n-    cp -r public $out/public\n-    cp -r node_modules $out/\n     runHook postInstall\n   '';\n \n+  postInstall = ''\n+    sed -i '1i #! /usr/bin/env node' $out/share/pangolin/dist/{migrations,server}.mjs",
+   "id": 2247767158,
+   "in_reply_to_id": 2226981399,
+   "line": null,
+   "original_commit_id": "d299df66b63ba4e6f2f98f5b1e13bedd7b748d8b",
+   "original_line": 100,
+   "original_position": 115,
+   "original_start_line": null,
+   "path": "pkgs/by-name/fo/fosrl-pangolin/package.nix",
+   "position": 1,
+   "pull_request_review_id": 3078900714,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-08-01T11:40:19Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "Lgtm",
+   "commit_id": null,
+   "id": 2955189653,
+   "state": "APPROVED",
+   "submitted_at": "2025-06-24T20:15:11Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2991191623,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-06T11:26:40Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2991192841,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-06T11:30:29Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2991192924,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-06T11:30:48Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 2991193747,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-06T11:34:20Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Revoked approval since nixos/pangolin needs to be updated at the same time as updating to 1.6 and above. ",
+   "commit_id": null,
+   "id": 3035958580,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2025-07-20T10:12:02Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3047758041,
+   "state": "APPROVED",
+   "submitted_at": "2025-07-23T14:37:29Z",
+   "user": {
+    "id": 56937175,
+    "login": "jackrosenberg",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3049470254,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-24T00:06:29Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3049550726,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-24T00:47:23Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3049898719,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-24T04:05:07Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3053926141,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-25T02:41:17Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3058906511,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-27T03:21:44Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3059198997,
+   "state": "COMMENTED",
+   "submitted_at": "2025-07-27T05:53:45Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3078900714,
+   "state": "COMMENTED",
+   "submitted_at": "2025-08-01T11:40:18Z",
+   "user": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0e85afdad01e3d4e3d30519dfec79027425c573c",
+   "id": 3094215552,
+   "state": "APPROVED",
+   "submitted_at": "2025-08-06T20:44:05Z",
+   "user": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-07-06T11:09:33Z",
+   "event": "renamed",
+   "id": 18491052695,
+   "rename": {
+    "from": "fosrl-pangolin: 1.2.0 -> 1.5.1; fosrl-pangolin-postgres: init at 1.5.1",
+    "to": "fosrl-pangolin: 1.2.0 -> 1.6.2; fosrl-pangolin-postgres: init at 1.6.2"
+   }
+  },
+  {
+   "actor": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-07-21T11:52:34Z",
+   "event": "renamed",
+   "id": 18727140565,
+   "rename": {
+    "from": "fosrl-pangolin: 1.2.0 -> 1.6.2; fosrl-pangolin-postgres: init at 1.6.2",
+    "to": "fosrl-pangolin: 1.2.0 -> 1.7.3; fosrl-pangolin-postgres: init at 1.7.3"
+   }
+  },
+  {
+   "actor": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-07-23T14:43:52Z",
+   "event": "renamed",
+   "id": 18776236380,
+   "rename": {
+    "from": "fosrl-pangolin: 1.2.0 -> 1.7.3; fosrl-pangolin-postgres: init at 1.7.3",
+    "to": "fosrl-pangolin: 1.2.0 -> 1.7.3"
+   }
+  },
+  {
+   "actor": {
+    "id": 174749595,
+    "login": "SigmaSquadron",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-08-01T11:34:21Z",
+   "event": "renamed",
+   "id": 18937962637,
+   "rename": {
+    "from": "fosrl-pangolin: 1.2.0 -> 1.7.3",
+    "to": "fosrl-pangolin: 1.2.0 -> 1.8.0"
+   }
+  },
+  {
+   "actor": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "7c211acb7dc973b26e280259c886f04a59690480",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/7c211acb7dc973b26e280259c886f04a59690480",
+   "created_at": "2025-08-06T20:44:31Z",
+   "event": "merged",
+   "id": 19021241234
+  },
+  {
+   "actor": {
+    "id": 15247171,
+    "login": "NickCao",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-08-06T20:44:31Z",
+   "event": "closed",
+   "id": 19021241260,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

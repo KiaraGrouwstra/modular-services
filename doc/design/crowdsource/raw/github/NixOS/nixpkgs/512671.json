@@ -1,0 +1,153 @@
+{
+ "comments": [
+  {
+   "body": "Check the documentation of the azure-cli package: https://search.nixos.org/packages?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=azure-cli&show=azure-cli\n\nYou need to create a version of azure-cli that has the extensions included, not just add them to the environment.",
+   "created_at": "2026-04-23T11:48:42Z",
+   "id": 4304107849,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-04-23T11:48:42Z",
+   "user": {
+    "id": 49727155,
+    "login": "katexochen",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "closing, assuming that this was solved by my previous comment",
+   "created_at": "2026-04-28T08:41:14Z",
+   "id": 4333670728,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-28T08:41:14Z",
+   "user": {
+    "id": 49727155,
+    "login": "katexochen",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/512671",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": {
+   "id": 49727155,
+   "login": "katexochen",
+   "site_admin": false,
+   "type": "User"
+  },
+  "assignees": [
+   {
+    "id": 49727155,
+    "login": "katexochen",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "body": "### Nixpkgs version\n\n- Stable (25.11)\n\n### Describe the bug\n\nThe wrapper script generated for `pkgs.azure-cli` hardcodes its `PYTHONPATH`, which prevents it from discovering any `azure-cli-extensions.*` packages that are also present in the environment. This makes it impossible to declaratively manage Azure CLI extensions in a Nix environment.\n\nThis also breaks https://github.com/jetify-com/devbox/issues/2824\n\n### Steps to reproduce\n\n1.  Create a `shell.nix` file with the following content:\n\n    ```nix\n    { pkgs ? import <nixpkgs> {} }:\n\n    pkgs.mkShell {\n      buildInputs = [\n        pkgs.azure-cli\n        pkgs.azure-cli-extensions.log-analytics-solution\n      ];\n    }\n    ```\n\n2.  Enter the environment:\n    ```bash\n    nix-shell\n    ```\n\n3.  Attempt to list the installed extensions:\n    ```bash\n    az extension list\n    ```\n\n### Expected behaviour\n\nThe `az extension list` command should discover and list the `log-analytics-solution` package from the Nix environment.\n\nActual behavior:\n\nThe command returns an empty list.\n\n\n\n### Screenshots\n\n_No response_\n\n### Relevant log output\n\n```console\n\n```\n\n### Additional context\n\nInspecting the `azure-cli` wrapper script (`cat $(which az)`) reveals the root cause. The script explicitly overwrites the environment's `PYTHONPATH`:\n\n```bash\n#! /nix/store/s0psayl7zvkvwdcqc8fy1sbv8rlf1yq8-bash-5.3p9/bin/bash -e\n# ...\nexport PYTHONPATH='...' # A very long, hardcoded path of azure-cli's dependencies\nexec -a \"$0\" \"/nix/store/qhakin6b66d0bphd7mqcrsas7byzlrgs-python3.13-azure-cli-2.84.0/bin/.az-wrapped_\"  \"$@\"\n```\n\nThis hardcoded `PYTHONPATH` does not (and cannot) include the path to `pkgs.azure-cli-extensions.log-analytics-solution`, so the extension is never found by the Azure CLI's `site-packages` discovery mechanism.\n\n### System metadata\n\n - system: `\"aarch64-darwin\"`\n - host os: `Darwin 25.4.0, macOS 26.4.1`\n - multi-user?: `yes`\n - sandbox: `no`\n - version: `nix-env (Determinate Nix 3.17.3) 2.33.3`\n - nixpkgs: `/nix/store/i2gsp87gqp16whm9mw0ybk9n84zir01x-source`\n\n### Notify maintainers\n\n@katexochen @ulrikstrid\n\n---\n\n**Note for maintainers:** Please tag this issue in your pull request description. (i.e. `Resolves #ISSUE`.)\n\n\n### I assert that this issue is relevant for Nixpkgs\n\n- [x] I assert that this is a bug and not a support request.\n- [x] I assert that this is not a [duplicate of an existing issue](https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+label%3A%220.kind%3A+bug%22+-label%3A%226.topic%3A+darwin%22+-label%3A%226.topic%3A+nixos%22). \n- [x] I assert that I have read the [NixOS Code of Conduct](https://github.com/NixOS/.github/blob/master/CODE_OF_CONDUCT.md) and agree to abide by it.\n\n### Is this issue important to you?\n\nAdd a :+1: [reaction] to [issues you find important].\n\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\n[issues you find important]: https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc\n",
+  "closed_at": "2026-04-28T08:41:14Z",
+  "closed_by": {
+   "id": 49727155,
+   "login": "katexochen",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 2,
+  "created_at": "2026-04-23T08:04:12Z",
+  "id": 4314473174,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Something is broken",
+    "id": 6314750,
+    "name": "0.kind: bug"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 512671,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "pkgs.azure-cli: Wrapper script prevents discovery of declaratively installed extensions",
+  "type": null,
+  "updated_at": "2026-04-28T08:41:14Z",
+  "user": {
+   "id": 33625292,
+   "login": "choeffer",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#512671",
+ "sources": [
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 49727155,
+    "login": "katexochen",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-28T08:41:14Z",
+   "event": "closed",
+   "id": 24939438210,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

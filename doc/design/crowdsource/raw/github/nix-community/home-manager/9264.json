@@ -1,0 +1,414 @@
+{
+ "comments": [
+  {
+   "body": "Thanks! I think this looks quite nice, just had a minor comment.",
+   "created_at": "2026-05-05T19:47:47Z",
+   "id": 4382468186,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 1,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-05T19:47:47Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks! Merged to master now 🙂 ",
+   "created_at": "2026-05-08T13:56:45Z",
+   "id": 4406971611,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 1,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-08T13:56:45Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-community/home-manager/pull/9264",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Description\r\n\r\nUpdates the implementation, tests and documentation for modular services based on feedback from @rycee at #9215.\r\n\r\nTo answer specific questions from that thread:\r\n\r\n> it would be nice to have an actual user service as an example.\r\n\r\nI've now added a manual `mpd` service as well as a service importing the upstream `php-fpm`, a modular service that makes for a more natural fit for the user context.\r\n\r\nNote that that service too hasn't been a perfect fit, see the commented line on it in the manual.\r\nRather than hiding that, I figured it would be more valuable to be upfront about that, because I believe it is symptomatic of a larger gap in portability that I have intended to make more visible by adding support for modular services on the Home Manager side.\r\n\r\n> How will the service know to reload or restart when the configuration changes?\r\n\r\nI've now made it set `X-Restart-Triggers` based on configuration files specified in `configData`.\r\n\r\n> Btw, how does the passtru work in the case of a package that can act as both a system and user service? E.g. mpd.\r\n\r\nWhile `mpd` currently does not expose a modular service, upstream `php-fpm` did have NixOS bits written for the system context. In that case, the implementation will now further use `default.target` over NixOS's `multi-user.target`. For what it's worth, attributes not relevant to the user context should already be ignored by systemd.\r\n\r\nDisclaimer: I used a coding agent in the creation of this patch.\r\n\r\n### Checklist\r\n\r\n- [x] Change is backwards compatible.\r\n\r\n- [x] Code formatted with `nix fmt` or\r\n      `nix-shell -A dev --run treefmt`.\r\n\r\n- [x] Code tested through `nix run .#tests -- test-all` or\r\n      `nix-shell --pure tests -A run.all`.\r\n\r\n- [x] Test cases updated/added. See [example](https://github.com/nix-community/home-manager/commit/f3fbb50b68df20da47f9b0def5607857fcc0d021#diff-b61a6d542f9036550ba9c401c80f00ef). - `nix run .#tests -- home-services`\r\n\r\n- [x] Commit messages are formatted like\r\n\r\n  ```\r\n  {component}: {description}\r\n\r\n  {long description}\r\n  ```\r\n\r\n  See [CONTRIBUTING](https://nix-community.github.io/home-manager/#sec-commit-style) for more information and [recent commit messages](https://github.com/nix-community/home-manager/commits/master) for examples.\r\n\r\n- If this PR adds a new module\r\n\r\n  - [ ] Added myself as module maintainer. See [example](https://github.com/nix-community/home-manager/blob/a51598236f23c89e59ee77eb8e0614358b0e896c/modules/programs/lesspipe.nix#L11).\r\n  - [ ] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n  - [ ] Basic tests added. See [Tests](https://nix-community.github.io/home-manager/index.xhtml#sec-tests)\r\n\r\n- If this PR adds an exciting new feature or contains a breaking change.\r\n  - [ ] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n",
+  "closed_at": "2026-05-08T13:56:36Z",
+  "closed_by": {
+   "id": 798147,
+   "login": "rycee",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 2,
+  "created_at": "2026-05-05T15:35:37Z",
+  "draft": false,
+  "id": 4385291050,
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 9264,
+  "pull_request": {
+   "diff_url": "https://github.com/nix-community/home-manager/pull/9264.diff",
+   "merged_at": "2026-05-08T13:56:36Z",
+   "patch_url": "https://github.com/nix-community/home-manager/pull/9264.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "closed",
+  "state_reason": null,
+  "title": "modular-services: incorporate post-merge feedback",
+  "type": null,
+  "updated_at": "2026-07-27T09:22:53Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 206,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "nix-community:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2017-01-14T12:11:06Z",
+    "default_branch": "master",
+    "description": "Manage a user environment using Nix  [maintainer=@khaneliman, @rycee] ",
+    "disabled": false,
+    "fork": false,
+    "forks": 2465,
+    "forks_count": 2465,
+    "full_name": "nix-community/home-manager",
+    "git_commits_url": "https://api.github.com/repos/nix-community/home-manager/git/commits{/sha}",
+    "has_discussions": true,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": true,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-community.github.io/home-manager/",
+    "id": 78938149,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/nix-community/home-manager/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/nix-community/home-manager/milestones{/number}",
+    "name": "home-manager",
+    "open_issues": 1011,
+    "open_issues_count": 1011,
+    "owner": {
+     "id": 33221035,
+     "login": "nix-community",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/nix-community/home-manager/pulls{/number}",
+    "pushed_at": "2026-08-31T03:26:44Z",
+    "size": 355203,
+    "stargazers_count": 10299,
+    "subscription_url": "https://api.github.com/repos/nix-community/home-manager/subscription",
+    "tags_url": "https://api.github.com/repos/nix-community/home-manager/tags",
+    "topics": [
+     "dotfiles",
+     "nix",
+     "nix-dotfiles",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T07:33:23Z",
+    "visibility": "public",
+    "watchers": 10299,
+    "watchers_count": 10299,
+    "web_commit_signoff_required": false
+   },
+   "sha": "00ed86e58bb6979a7921859fd1615d19382eac5c",
+   "user": {
+    "id": 33221035,
+    "login": "nix-community",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "### Description\r\n\r\nUpdates the implementation, tests and documentation for modular services based on feedback from @rycee at #9215.\r\n\r\nTo answer specific questions from that thread:\r\n\r\n> it would be nice to have an actual user service as an example.\r\n\r\nI've now added a manual `mpd` service as well as a service importing the upstream `php-fpm`, a modular service that makes for a more natural fit for the user context.\r\n\r\nNote that that service too hasn't been a perfect fit, see the commented line on it in the manual.\r\nRather than hiding that, I figured it would be more valuable to be upfront about that, because I believe it is symptomatic of a larger gap in portability that I have intended to make more visible by adding support for modular services on the Home Manager side.\r\n\r\n> How will the service know to reload or restart when the configuration changes?\r\n\r\nI've now made it set `X-Restart-Triggers` based on configuration files specified in `configData`.\r\n\r\n> Btw, how does the passtru work in the case of a package that can act as both a system and user service? E.g. mpd.\r\n\r\nWhile `mpd` currently does not expose a modular service, upstream `php-fpm` did have NixOS bits written for the system context. In that case, the implementation will now further use `default.target` over NixOS's `multi-user.target`. For what it's worth, attributes not relevant to the user context should already be ignored by systemd.\r\n\r\nDisclaimer: I used a coding agent in the creation of this patch.\r\n\r\n### Checklist\r\n\r\n- [x] Change is backwards compatible.\r\n\r\n- [x] Code formatted with `nix fmt` or\r\n      `nix-shell -A dev --run treefmt`.\r\n\r\n- [x] Code tested through `nix run .#tests -- test-all` or\r\n      `nix-shell --pure tests -A run.all`.\r\n\r\n- [x] Test cases updated/added. See [example](https://github.com/nix-community/home-manager/commit/f3fbb50b68df20da47f9b0def5607857fcc0d021#diff-b61a6d542f9036550ba9c401c80f00ef). - `nix run .#tests -- home-services`\r\n\r\n- [x] Commit messages are formatted like\r\n\r\n  ```\r\n  {component}: {description}\r\n\r\n  {long description}\r\n  ```\r\n\r\n  See [CONTRIBUTING](https://nix-community.github.io/home-manager/#sec-commit-style) for more information and [recent commit messages](https://github.com/nix-community/home-manager/commits/master) for examples.\r\n\r\n- If this PR adds a new module\r\n\r\n  - [ ] Added myself as module maintainer. See [example](https://github.com/nix-community/home-manager/blob/a51598236f23c89e59ee77eb8e0614358b0e896c/modules/programs/lesspipe.nix#L11).\r\n  - [ ] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n  - [ ] Basic tests added. See [Tests](https://nix-community.github.io/home-manager/index.xhtml#sec-tests)\r\n\r\n- If this PR adds an exciting new feature or contains a breaking change.\r\n  - [ ] Generate a news entry. See [News](https://nix-community.github.io/home-manager/index.xhtml#sec-news)\r\n",
+  "changed_files": 12,
+  "closed_at": "2026-05-08T13:56:36Z",
+  "comments": 2,
+  "commits": 9,
+  "created_at": "2026-05-05T15:35:37Z",
+  "deletions": 39,
+  "diff_url": "https://github.com/nix-community/home-manager/pull/9264.diff",
+  "draft": false,
+  "head": {
+   "label": "KiaraGrouwstra:modular-services-feedback",
+   "ref": "modular-services-feedback",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-12-27T17:40:18Z",
+    "default_branch": "master",
+    "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/home-manager",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-community.github.io/home-manager/",
+    "id": 909087867,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/milestones{/number}",
+    "name": "home-manager",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/pulls{/number}",
+    "pushed_at": "2026-07-28T18:23:41Z",
+    "size": 15912,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/home-manager/tags",
+    "topics": [],
+    "updated_at": "2024-12-27T17:40:19Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "11ecf89d9aa64356afbb53c68a0ad173672f8d0a",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3631519316,
+  "labels": [],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "fdb2ccba9d5e1238d32e0c4a3ec1a277efa80c1d",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-05-08T13:56:36Z",
+  "merged_by": {
+   "id": 798147,
+   "login": "rycee",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 9264,
+  "patch_url": "https://github.com/nix-community/home-manager/pull/9264.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 1,
+  "state": "closed",
+  "title": "modular-services: incorporate post-merge feedback",
+  "updated_at": "2026-07-27T09:22:53Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "nix-community/home-manager#9264",
+ "review_comments": [
+  {
+   "body": "I looked at the [documentation in Nixpkgs](https://github.com/NixOS/nixpkgs/blob/7f291a64a7b28106b00f6c58f162f587b14b453a/nixos/modules/system/service/README.md#configuration-data-configdata-design) and it seems to indicate that the service is supposed to be simply reloaded when these files change. So perhaps `X-Reload-Triggers` is more appropriate?",
+   "commit_id": "2e20546571ea44ba1ba088f4560897fe89a8f62c",
+   "created_at": "2026-05-05T19:47:23Z",
+   "diff_hunk": "@@ -66,6 +98,15 @@ can refer to its files at a stable location:\n }\n ```\n \n+The store paths of all enabled `configData` entries are automatically\n+added to the primary unit's `X-Restart-Triggers`, so `home-manager switch`",
+   "id": 3191132283,
+   "line": null,
+   "original_commit_id": "2e20546571ea44ba1ba088f4560897fe89a8f62c",
+   "original_line": 102,
+   "original_position": 105,
+   "original_start_line": null,
+   "path": "docs/manual/usage/modular-services.md",
+   "position": 1,
+   "pull_request_review_id": 4231141262,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-05-05T19:47:23Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "2e20546571ea44ba1ba088f4560897fe89a8f62c",
+   "id": 4231141262,
+   "state": "COMMENTED",
+   "submitted_at": "2026-05-05T19:47:23Z",
+   "user": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "home-manager-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fdb2ccba9d5e1238d32e0c4a3ec1a277efa80c1d",
+   "commit_url": "https://api.github.com/repos/nix-community/home-manager/commits/fdb2ccba9d5e1238d32e0c4a3ec1a277efa80c1d",
+   "created_at": "2026-05-08T13:56:36Z",
+   "event": "merged",
+   "id": 25308483953
+  },
+  {
+   "actor": {
+    "id": 798147,
+    "login": "rycee",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-08T13:56:36Z",
+   "event": "closed",
+   "id": 25308484024,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fad81549779b6f7b0c154d8a5f56349aa767d90c",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/fad81549779b6f7b0c154d8a5f56349aa767d90c",
+   "created_at": "2026-05-10T14:47:43Z",
+   "event": "referenced",
+   "id": 25354639086
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "2e34ddf55d6a0dc24cf77f648561349f28f0ee4e",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/2e34ddf55d6a0dc24cf77f648561349f28f0ee4e",
+   "created_at": "2026-05-10T20:20:32Z",
+   "event": "referenced",
+   "id": 25358461882
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "f0d89fefb62824fe4bd23e280f6db975038d41aa",
+   "commit_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/commits/f0d89fefb62824fe4bd23e280f6db975038d41aa",
+   "created_at": "2026-07-25T21:11:55Z",
+   "event": "referenced",
+   "id": 28484415793
+  }
+ ]
+}

@@ -1,0 +1,117 @@
+{
+ "comments": [
+  {
+   "body": "the `credentialFlags` is now used only in that `ghostunnel`, but given it seems intended to pass as flags file paths of systemd secrets, its potential use would seem broader, perhaps.\n\nuntil such further need emerges tho, perhaps this could be closed, if we are to believe premature optimization is the root of all evil.\n",
+   "created_at": "2026-03-08T23:19:29Z",
+   "id": 4020237948,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-08T23:19:29Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/490662",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "in our initial [modular service](https://nixos.org/manual/nixos/stable/#modular-services) `ghostunnel`, we find a [line](https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/gh/ghostunnel/service.nix):\n\nhttps://github.com/NixOS/nixpkgs/blob/e8e61410757b5a99ad77095d7300059ba483dbb3/pkgs/by-name/gh/ghostunnel/service.nix#L219-L221\n\nnow, from what i can tell, this line would appear not particularly specific to `ghostunnel`, to the point where in fact, i would expect other modular services to use similar logic.\nas such, i would expect this to be a good candidate to factor out, such that we might automate this logic for further modular services.\n\n(to be fair, @aanderse's [`php-fpm`](https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/interpreters/php/service.nix) seems to lack this. in case this was an oversight, that could perhaps make for a further argument for automation here. for what it's worth, perhaps its `finit` could benefit from something similar - i'm not so familiar with it.)\n",
+  "closed_at": "2026-03-08T23:19:29Z",
+  "closed_by": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 1,
+  "created_at": "2026-02-15T13:28:28Z",
+  "id": 3944091102,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 490662,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "modular services: factor out `systemd.mainExecStart`",
+  "type": null,
+  "updated_at": "2026-07-23T17:20:17Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#490662",
+ "sources": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-03-08T23:19:29Z",
+   "event": "closed",
+   "id": 23378337449,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

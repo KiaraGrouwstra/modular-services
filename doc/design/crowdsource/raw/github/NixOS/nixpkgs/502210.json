@@ -1,0 +1,1087 @@
+{
+ "comments": [
+  {
+   "body": "## `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha)\n\nCommand: `nixpkgs-review pr 502210 -p stirling-pdf -p stirling-pdf.passthru.tests`\nCommit: [`fb60eb72c80f15557f3e853d7f0d6e3ad4d94673`](https://github.com/NixOS/nixpkgs/commit/fb60eb72c80f15557f3e853d7f0d6e3ad4d94673) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/fb60eb72c80f15557f3e853d7f0d6e3ad4d94673..pull/502210/head))\nMerge: [`3e53f8531a7c1f54706d7d9600e26c4356dc796a`](https://github.com/NixOS/nixpkgs/commit/3e53f8531a7c1f54706d7d9600e26c4356dc796a)\n\nLogs: https://github.com/phanirithvij/nixpkgs-review-gha/actions/runs/23425396002\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:white_check_mark: 4 packages built:</summary>\n  <ul>\n    <li>stirling-pdf</li>\n    <li>stirling-pdf.passthru.tests.basic</li>\n    <li>stirling-pdf.passthru.tests.stirling-pdf-desktop</li>\n    <li>stirling-pdf.passthru.tests.stirling-pdf-modular</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:x: 3 packages failed to build:</summary>\n  <ul>\n    <li>stirling-pdf.passthru.tests.basic</li>\n    <li>stirling-pdf.passthru.tests.stirling-pdf-desktop</li>\n    <li>stirling-pdf.passthru.tests.stirling-pdf-modular</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>stirling-pdf</li>\n  </ul>\n</details>\n\n---\n<details>\n<summary>Error logs: `aarch64-linux`</summary>\n<details>\n<summary>stirling-pdf.passthru.tests.basic</summary>\n<pre>machine # [  588.482812] systemd[1]: Finished Virtual Console Setup.\nmachine # [  589.269400] systemd[1]: Listening on Load/Save RF Kill Switch Status /dev/rfkill Watch.\nmachine # [  596.281060] systemd-logind[651]: Watching system buttons on /dev/input/event3 (QEMU Virtio Keyboard)\nmachine # [  765.474925] Stirling-PDF[635]: 07:19:24.115 [main] INFO  s.s.S.config.MultipartConfiguration - Using default multipart file upload limit: 2000MB\nmachine # [  843.861841] Stirling-PDF[635]: 07:20:42.505 [main] INFO  s.s.p.s.configuration.DatabaseConfig - Using default H2 database\nmachine # [  922.302693] systemd[1]: Starting Cleanup of Temporary Directories...\nmachine # [  924.501016] systemd[1]: systemd-tmpfiles-clean.service: Deactivated successfully.\nmachine # [  924.502854] systemd[1]: Finished Cleanup of Temporary Directories.\n!!! Traceback (most recent call last):\n!!!   File &quot;&lt;string&gt;&quot;, line 3, in &lt;module&gt;\n!!!     machine.wait_for_open_port(8080)\n!!! \n!!! RequestedAssertionFailed: action timed out after 901.07 seconds (timeout=900)\ncleanup\nkill QemuMachine (pid 10)\nqemu-system-aarch64: terminating on signal 15 from pid 6 (/nix/store/nnz5k19wbai97d7y2x11qaq6dgxzhq4w-python3-3.13.12/bin/python3.13)\nvde_switch: EOF data port: Interrupted system call\nkill vlan (pid 7)\n(finished: cleanup, in 0.00 seconds)\nvde_switch: Caught signal 15, cleaning up and exiting</pre>\n</details>\n<details>\n<summary>stirling-pdf.passthru.tests.stirling-pdf-desktop</summary>\n<pre>server # [  301.676778] Stirling-PDF[623]: 07:11:40.139 [main] INFO  s.software.SPDF.SPDFApplication - Custom settings file: ./configs/custom_settings.yml\nserver # [  378.127284] Stirling-PDF[623]:  ____ _____ ___ ____  _     ___ _   _  ____       ____  ____  _____\nserver # [  378.157952] Stirling-PDF[623]: / ___|_   _|_ _|  _ \\| |   |_ _| \\ | |/ ___|     |  _ \\|  _ \\|  ___|\nserver # [  378.173774] Stirling-PDF[623]: \\___ \\ | |  | || |_) | |    | ||  \\| | |  _ _____| |_) | | | | |_\nserver # [  378.175217] Stirling-PDF[623]:  ___) || |  | ||  _ &lt;| |___ | || |\\  | |_| |_____|  __/| |_| |  _|\nserver # [  378.185333] Stirling-PDF[623]: |____/ |_| |___|_| \\_\\_____|___|_| \\_|\\____|     |_|   |____/|_|\nserver # [  378.186979] Stirling-PDF[623]: Powered by Spring Boot 4.0.3\nserver # [  388.658564] Stirling-PDF[623]: 07:13:07.098 [main] INFO  s.software.SPDF.SPDFApplication - Starting SPDFApplication v2.5.3 using Java 25.0.2 with PID 623 (/nix/store/mrqgjcicm1cs9fxwfgz5qcm1wgqdk18v-stirling-pdf-2.6.0/share/stirling-pdf/Stirling-PDF.jar started by stirling-pdf in /var/lib/private/stirling-pdf)\nserver # [  388.884962] Stirling-PDF[623]: 07:13:07.343 [main] INFO  s.software.SPDF.SPDFApplication - The following 1 profile is active: &quot;security&quot;\nserver # [  390.675481] input: QEMU Virtio Keyboard as /devices/platform/4010000000.pcie/pci0000:00/0000:00:08.0/virtio7/input/input3\nserver # [  422.941736] systemd[1]: Starting Virtual Console Setup...\nserver # [  429.681523] systemd[1]: Finished Virtual Console Setup.\nserver # [  432.369234] systemd[1]: Listening on Load/Save RF Kill Switch Status /dev/rfkill Watch.\nserver # [  438.143732] systemd-logind[639]: Watching system buttons on /dev/input/event3 (QEMU Virtio Keyboard)\ntimeout reached; test terminating...\nkill QemuMachine (pid 10)\nqemu-system-aarch64: terminating on signal 15 from pid 6 (/nix/store/nnz5k19wbai97d7y2x11qaq6dgxzhq4w-python3-3.13.12/bin/python3.13)\nvde_switch: EOF data port: Interrupted system call\nvde_switch: EOF on stdin, cleaning up and exiting\nTerminated                 /nix/store/qs6w5ld31k7iyh2nralfv20jzvgkzfid-nixos-test-driver-stirling-pdf-desktop/bin/nixos-test-driver -o $out</pre>\n</details>\n<details>\n<summary>stirling-pdf.passthru.tests.stirling-pdf-modular</summary>\n<pre>machine # [  888.618514] systemd[1]: Stopped Virtual Console Setup.\nmachine # [  888.708818] systemd[1]: Starting Virtual Console Setup...\nmachine # [  898.118767] systemd[1]: Finished Virtual Console Setup.\nmachine # [  900.699316] systemd[1]: Listening on Load/Save RF Kill Switch Status /dev/rfkill Watch.\nmachine # [  900.742032] systemd[1]: Starting Cleanup of Temporary Directories...\nmachine # [  905.389153] systemd[1]: systemd-tmpfiles-clean.service: Deactivated successfully.\nmachine # [  905.398092] systemd[1]: Finished Cleanup of Temporary Directories.\nmachine # [  917.499798] systemd-logind[664]: Watching system buttons on /dev/input/event3 (QEMU Virtio Keyboard)\n!!! Traceback (most recent call last):\n!!!   File &quot;&lt;string&gt;&quot;, line 4, in &lt;module&gt;\n!!!     machine.wait_for_open_port(8080)\n!!! \n!!! RequestedAssertionFailed: action timed out after 900.76 seconds (timeout=900)\ncleanup\nkill QemuMachine (pid 10)\nqemu-system-aarch64: terminating on signal 15 from pid 6 (/nix/store/nnz5k19wbai97d7y2x11qaq6dgxzhq4w-python3-3.13.12/bin/python3.13)\nvde_switch: EOF data port: Interrupted system call\nkill vlan (pid 7)\n(finished: cleanup, in 0.00 seconds)\nvde_switch: Caught signal 15, cleaning up and exiting</pre>\n</details>\n</details>\n",
+   "created_at": "2026-03-23T07:26:25Z",
+   "id": 4108543313,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-23T07:26:25Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "So github actions runner for aarch64 is not that powerful compared to their x86_64 offering. (I can run it thrice for each test or wait for ofborg)",
+   "created_at": "2026-03-23T07:38:13Z",
+   "id": 4108592158,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-23T07:41:51Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ofborg test stirling-pdf",
+   "created_at": "2026-03-23T07:49:56Z",
+   "id": 4108639997,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-23T07:49:56Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ofborg test stirling-pdf",
+   "created_at": "2026-03-23T07:54:16Z",
+   "id": 4108657481,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-23T07:54:16Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/502210",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Based on ideas from #475372 #496296\r\n\r\nIncludes work from https://github.com/NixOS/nixpkgs/pull/499612, will rebase once that is merged.\r\n\r\nStirling-PDF is a good candidate for modular services as it works fine with `process.argv` by default.\r\n\r\nNote: this migrates an existing systemd nixos module service\r\n\r\n**TBA** checklist for modular services\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [x] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] **TBA** Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 4,
+  "created_at": "2026-03-22T13:53:25Z",
+  "draft": true,
+  "id": 4116121281,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 502210,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/502210.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/502210.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "stirling-pdf.services.default: init modular service",
+  "type": null,
+  "updated_at": "2026-07-23T20:21:02Z",
+  "user": {
+   "id": 29627898,
+   "login": "phanirithvij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 491,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "5780921cf031e8784b054870313f78355d20b800",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Based on ideas from #475372 #496296\r\n\r\nIncludes work from https://github.com/NixOS/nixpkgs/pull/499612, will rebase once that is merged.\r\n\r\nStirling-PDF is a good candidate for modular services as it works fine with `process.argv` by default.\r\n\r\nNote: this migrates an existing systemd nixos module service\r\n\r\n**TBA** checklist for modular services\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [x] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [x] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] **TBA** Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 10,
+  "closed_at": null,
+  "comments": 4,
+  "commits": 5,
+  "created_at": "2026-03-22T13:53:25Z",
+  "deletions": 102,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/502210.diff",
+  "draft": true,
+  "head": {
+   "label": "phanirithvij:stirling-pdf-modular",
+   "ref": "stirling-pdf-modular",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2024-08-12T15:42:02Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 1,
+    "forks_count": 1,
+    "full_name": "phanirithvij/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/phanirithvij/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 841533886,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/phanirithvij/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/phanirithvij/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 29627898,
+     "login": "phanirithvij",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/phanirithvij/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:00:58Z",
+    "size": 2910843,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/phanirithvij/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/phanirithvij/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-08-31T16:21:48Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3430750001,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a new package",
+    "id": 290122734,
+    "name": "8.has: package (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 502210,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/502210.patch",
+  "rebaseable": false,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 13,
+  "state": "open",
+  "title": "stirling-pdf.services.default: init modular service",
+  "updated_at": "2026-07-23T20:21:02Z",
+  "user": {
+   "id": 29627898,
+   "login": "phanirithvij",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#502210",
+ "review_comments": [
+  {
+   "body": "I see several warnings in the logs\n\n```\nWeasyPrint version could not be determined (weasyprint --version)\n...\nMissing dependency rar\nMissing dependency ffmpeg\nMissing dependency ebook-convert\n...\nPython command '/opt/venv/bin/python3' not found; Python CFF conversion disabled\nFontForge command 'fontforge' not found; FontForge CFF conversion disabled\n```",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:11:10Z",
+   "diff_hunk": "@@ -0,0 +1,213 @@\n+# Non-module dependencies (`callPackage`)\n+{\n+  which,\n+  unpaper,\n+  libreoffice,\n+  qpdf,\n+  ocrmypdf,\n+  poppler-utils,\n+  unoserver,\n+  pngquant,\n+  tesseract,\n+  python3,\n+  ghostscript_headless,\n+  imagemagick,\n+  calibre,\n+  runCommand,\n+  makeBinaryWrapper,\n+  ...\n+}:\n+\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.stirling-pdf;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.stirling-pdf = {\n+    package = lib.mkOption {\n+      description = \"Package to use for stirling-pdf\";\n+      defaultText = \"The stirling-pdf package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    environment = lib.mkOption {\n+      type = lib.types.attrsOf (\n+        lib.types.oneOf [\n+          lib.types.str\n+          lib.types.int\n+        ]\n+      );\n+      default = { };\n+      example = {\n+        SERVER_PORT = 8080;\n+        INSTALL_BOOK_AND_ADVANCED_HTML_OPS = \"true\";\n+      };\n+      description = ''\n+        Environment variables for the stirling-pdf app.\n+        See <https://github.com/Stirling-Tools/Stirling-PDF#customisation> for available options.\n+      '';\n+    };\n+\n+    environmentFiles = lib.mkOption {\n+      type = lib.types.listOf lib.types.path;\n+      default = [ ];\n+      description = ''\n+        Files containing additional environment variables to pass to Stirling PDF.\n+        Secrets should be added in environmentFiles instead of environment.\n+      '';\n+    };\n+\n+    finalPackage = lib.mkOption {\n+      type = lib.types.package;\n+      readOnly = true;\n+      description = \"The finalPackage used by the service, constructed from `package`.\";\n+    };\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.stateDir = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd state directory.\";\n+    };\n+\n+    systemd.user = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd user.\";\n+    };\n+  };\n+\n+  config = lib.mkMerge [\n+    {\n+      stirling-pdf.finalPackage =\n+        let\n+          # following https://docs.stirlingpdf.com/Installation/Unix%20Installation\n+          path = lib.makeBinPath (\n+            [\n+              # `which` is used to test command availability\n+              # See https://github.com/Stirling-Tools/Stirling-PDF/blob/main/app/core/src/main/java/stirling/software/SPDF/config/ExternalAppDepConfig.java#L262\n+              which\n+              unpaper\n+              libreoffice\n+              qpdf\n+              ocrmypdf\n+              poppler-utils\n+              unoserver\n+              pngquant\n+              tesseract\n+              (python3.withPackages (\n+                p: with p; [\n+                  weasyprint",
+   "id": 2973260959,
+   "line": 109,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 109,
+   "original_position": 109,
+   "original_start_line": null,
+   "path": "pkgs/by-name/st/stirling-pdf/service.nix",
+   "position": 109,
+   "pull_request_review_id": 3989754186,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:12:16Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "remove these notes once it is clear where it can run\n\nconfirmed stirling-pdf runs on\n\n- mkNimiBin\n- nixos (nixos tests in this pr)",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:15:11Z",
+   "diff_hunk": "@@ -0,0 +1,213 @@\n+# Non-module dependencies (`callPackage`)\n+{\n+  which,\n+  unpaper,\n+  libreoffice,\n+  qpdf,\n+  ocrmypdf,\n+  poppler-utils,\n+  unoserver,\n+  pngquant,\n+  tesseract,\n+  python3,\n+  ghostscript_headless,\n+  imagemagick,\n+  calibre,\n+  runCommand,\n+  makeBinaryWrapper,\n+  ...\n+}:\n+\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.stirling-pdf;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.stirling-pdf = {\n+    package = lib.mkOption {\n+      description = \"Package to use for stirling-pdf\";\n+      defaultText = \"The stirling-pdf package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    environment = lib.mkOption {\n+      type = lib.types.attrsOf (\n+        lib.types.oneOf [\n+          lib.types.str\n+          lib.types.int\n+        ]\n+      );\n+      default = { };\n+      example = {\n+        SERVER_PORT = 8080;\n+        INSTALL_BOOK_AND_ADVANCED_HTML_OPS = \"true\";\n+      };\n+      description = ''\n+        Environment variables for the stirling-pdf app.\n+        See <https://github.com/Stirling-Tools/Stirling-PDF#customisation> for available options.\n+      '';\n+    };\n+\n+    environmentFiles = lib.mkOption {\n+      type = lib.types.listOf lib.types.path;\n+      default = [ ];\n+      description = ''\n+        Files containing additional environment variables to pass to Stirling PDF.\n+        Secrets should be added in environmentFiles instead of environment.\n+      '';\n+    };\n+\n+    finalPackage = lib.mkOption {\n+      type = lib.types.package;\n+      readOnly = true;\n+      description = \"The finalPackage used by the service, constructed from `package`.\";\n+    };\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.stateDir = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd state directory.\";\n+    };\n+\n+    systemd.user = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd user.\";\n+    };\n+  };\n+\n+  config = lib.mkMerge [\n+    {\n+      stirling-pdf.finalPackage =\n+        let\n+          # following https://docs.stirlingpdf.com/Installation/Unix%20Installation\n+          path = lib.makeBinPath (\n+            [\n+              # `which` is used to test command availability\n+              # See https://github.com/Stirling-Tools/Stirling-PDF/blob/main/app/core/src/main/java/stirling/software/SPDF/config/ExternalAppDepConfig.java#L262\n+              which\n+              unpaper\n+              libreoffice\n+              qpdf\n+              ocrmypdf\n+              poppler-utils\n+              unoserver\n+              pngquant\n+              tesseract\n+              (python3.withPackages (\n+                p: with p; [\n+                  weasyprint\n+                  opencv-python-headless\n+                ]\n+              ))\n+              ghostscript_headless\n+              imagemagick\n+            ]\n+            ++ lib.optional (cfg.environment.INSTALL_BOOK_AND_ADVANCED_HTML_OPS or \"false\" == \"true\") calibre\n+          );\n+        in\n+        runCommand \"stirling-pdf\"\n+          {\n+            nativeBuildInputs = [ makeBinaryWrapper ];\n+            inherit (cfg.package) meta;\n+          }\n+          ''\n+            makeWrapper \\\n+              \"${lib.getExe cfg.package}\" \"$out/bin/${cfg.package.meta.mainProgram}\" \\\n+              --prefix PATH : ${path} \\\n+              ${\n+                lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${toString value}\") cfg.environment\n+              } \\\n+              ${lib.pipe cfg.environmentFiles [\n+                (builtins.map (name: \"--run '. ${name}'\"))\n+                (lib.concatStringsSep \"\\n\")\n+              ]}\n+          '';\n+      process.argv = [\n+        (lib.getExe cfg.finalPackage)\n+      ];\n+    }\n+    # TODO\n+    # deplyoment targets\n+    # - nixos systemd service\n+    # - oci containers w/ nimi\n+    # - nix run w/ nimi\n+    # - systemd user service\n+    #   - home manager service\n+    # - sysm service\n+    # - nod service\n+    #   - For this service I don't know if it makes sense (too heavy and libreoffice drv can work on android?)\n+    # - nix-darwin service\n+    #   - For this I honestly don't care because I can't get access to free macos to improve their situation\n+    #   - For this service I don't know if it makes sense (libreoffice drv can work on macos?)\n+    # - systemd-nspawn containers\n+    #\n+    # - secret management for all above scenarios",
+   "id": 2973273947,
+   "line": 155,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 155,
+   "original_position": 155,
+   "original_start_line": null,
+   "path": "pkgs/by-name/st/stirling-pdf/service.nix",
+   "position": 155,
+   "pull_request_review_id": 3989767520,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:15:11Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I don't see darwin on the patforms for libreoffice, glad that's sorted",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:15:35Z",
+   "diff_hunk": "@@ -0,0 +1,213 @@\n+# Non-module dependencies (`callPackage`)\n+{\n+  which,\n+  unpaper,\n+  libreoffice,\n+  qpdf,\n+  ocrmypdf,\n+  poppler-utils,\n+  unoserver,\n+  pngquant,\n+  tesseract,\n+  python3,\n+  ghostscript_headless,\n+  imagemagick,\n+  calibre,\n+  runCommand,\n+  makeBinaryWrapper,\n+  ...\n+}:\n+\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.stirling-pdf;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.stirling-pdf = {\n+    package = lib.mkOption {\n+      description = \"Package to use for stirling-pdf\";\n+      defaultText = \"The stirling-pdf package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    environment = lib.mkOption {\n+      type = lib.types.attrsOf (\n+        lib.types.oneOf [\n+          lib.types.str\n+          lib.types.int\n+        ]\n+      );\n+      default = { };\n+      example = {\n+        SERVER_PORT = 8080;\n+        INSTALL_BOOK_AND_ADVANCED_HTML_OPS = \"true\";\n+      };\n+      description = ''\n+        Environment variables for the stirling-pdf app.\n+        See <https://github.com/Stirling-Tools/Stirling-PDF#customisation> for available options.\n+      '';\n+    };\n+\n+    environmentFiles = lib.mkOption {\n+      type = lib.types.listOf lib.types.path;\n+      default = [ ];\n+      description = ''\n+        Files containing additional environment variables to pass to Stirling PDF.\n+        Secrets should be added in environmentFiles instead of environment.\n+      '';\n+    };\n+\n+    finalPackage = lib.mkOption {\n+      type = lib.types.package;\n+      readOnly = true;\n+      description = \"The finalPackage used by the service, constructed from `package`.\";\n+    };\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.stateDir = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd state directory.\";\n+    };\n+\n+    systemd.user = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd user.\";\n+    };\n+  };\n+\n+  config = lib.mkMerge [\n+    {\n+      stirling-pdf.finalPackage =\n+        let\n+          # following https://docs.stirlingpdf.com/Installation/Unix%20Installation\n+          path = lib.makeBinPath (\n+            [\n+              # `which` is used to test command availability\n+              # See https://github.com/Stirling-Tools/Stirling-PDF/blob/main/app/core/src/main/java/stirling/software/SPDF/config/ExternalAppDepConfig.java#L262\n+              which\n+              unpaper\n+              libreoffice\n+              qpdf\n+              ocrmypdf\n+              poppler-utils\n+              unoserver\n+              pngquant\n+              tesseract\n+              (python3.withPackages (\n+                p: with p; [\n+                  weasyprint\n+                  opencv-python-headless\n+                ]\n+              ))\n+              ghostscript_headless\n+              imagemagick\n+            ]\n+            ++ lib.optional (cfg.environment.INSTALL_BOOK_AND_ADVANCED_HTML_OPS or \"false\" == \"true\") calibre\n+          );\n+        in\n+        runCommand \"stirling-pdf\"\n+          {\n+            nativeBuildInputs = [ makeBinaryWrapper ];\n+            inherit (cfg.package) meta;\n+          }\n+          ''\n+            makeWrapper \\\n+              \"${lib.getExe cfg.package}\" \"$out/bin/${cfg.package.meta.mainProgram}\" \\\n+              --prefix PATH : ${path} \\\n+              ${\n+                lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${toString value}\") cfg.environment\n+              } \\\n+              ${lib.pipe cfg.environmentFiles [\n+                (builtins.map (name: \"--run '. ${name}'\"))\n+                (lib.concatStringsSep \"\\n\")\n+              ]}\n+          '';\n+      process.argv = [\n+        (lib.getExe cfg.finalPackage)\n+      ];\n+    }\n+    # TODO\n+    # deplyoment targets\n+    # - nixos systemd service\n+    # - oci containers w/ nimi\n+    # - nix run w/ nimi\n+    # - systemd user service\n+    #   - home manager service\n+    # - sysm service\n+    # - nod service\n+    #   - For this service I don't know if it makes sense (too heavy and libreoffice drv can work on android?)\n+    # - nix-darwin service\n+    #   - For this I honestly don't care because I can't get access to free macos to improve their situation\n+    #   - For this service I don't know if it makes sense (libreoffice drv can work on macos?)",
+   "id": 2973275235,
+   "line": 152,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 152,
+   "original_position": 152,
+   "original_start_line": null,
+   "path": "pkgs/by-name/st/stirling-pdf/service.nix",
+   "position": 152,
+   "pull_request_review_id": 3989769084,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:15:35Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Test this via a simple nimi flake. (anything to do with [nimi](https://github.com/weyl-ai/nimi) will not be a part of this pr)",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:16:18Z",
+   "diff_hunk": "@@ -0,0 +1,213 @@\n+# Non-module dependencies (`callPackage`)\n+{\n+  which,\n+  unpaper,\n+  libreoffice,\n+  qpdf,\n+  ocrmypdf,\n+  poppler-utils,\n+  unoserver,\n+  pngquant,\n+  tesseract,\n+  python3,\n+  ghostscript_headless,\n+  imagemagick,\n+  calibre,\n+  runCommand,\n+  makeBinaryWrapper,\n+  ...\n+}:\n+\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.stirling-pdf;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.stirling-pdf = {\n+    package = lib.mkOption {\n+      description = \"Package to use for stirling-pdf\";\n+      defaultText = \"The stirling-pdf package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    environment = lib.mkOption {\n+      type = lib.types.attrsOf (\n+        lib.types.oneOf [\n+          lib.types.str\n+          lib.types.int\n+        ]\n+      );\n+      default = { };\n+      example = {\n+        SERVER_PORT = 8080;\n+        INSTALL_BOOK_AND_ADVANCED_HTML_OPS = \"true\";\n+      };\n+      description = ''\n+        Environment variables for the stirling-pdf app.\n+        See <https://github.com/Stirling-Tools/Stirling-PDF#customisation> for available options.\n+      '';\n+    };\n+\n+    environmentFiles = lib.mkOption {\n+      type = lib.types.listOf lib.types.path;\n+      default = [ ];\n+      description = ''\n+        Files containing additional environment variables to pass to Stirling PDF.\n+        Secrets should be added in environmentFiles instead of environment.\n+      '';\n+    };\n+\n+    finalPackage = lib.mkOption {\n+      type = lib.types.package;\n+      readOnly = true;\n+      description = \"The finalPackage used by the service, constructed from `package`.\";\n+    };\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.stateDir = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd state directory.\";\n+    };\n+\n+    systemd.user = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd user.\";\n+    };\n+  };\n+\n+  config = lib.mkMerge [\n+    {\n+      stirling-pdf.finalPackage =\n+        let\n+          # following https://docs.stirlingpdf.com/Installation/Unix%20Installation\n+          path = lib.makeBinPath (\n+            [\n+              # `which` is used to test command availability\n+              # See https://github.com/Stirling-Tools/Stirling-PDF/blob/main/app/core/src/main/java/stirling/software/SPDF/config/ExternalAppDepConfig.java#L262\n+              which\n+              unpaper\n+              libreoffice\n+              qpdf\n+              ocrmypdf\n+              poppler-utils\n+              unoserver\n+              pngquant\n+              tesseract\n+              (python3.withPackages (\n+                p: with p; [\n+                  weasyprint\n+                  opencv-python-headless\n+                ]\n+              ))\n+              ghostscript_headless\n+              imagemagick\n+            ]\n+            ++ lib.optional (cfg.environment.INSTALL_BOOK_AND_ADVANCED_HTML_OPS or \"false\" == \"true\") calibre\n+          );\n+        in\n+        runCommand \"stirling-pdf\"\n+          {\n+            nativeBuildInputs = [ makeBinaryWrapper ];\n+            inherit (cfg.package) meta;\n+          }\n+          ''\n+            makeWrapper \\\n+              \"${lib.getExe cfg.package}\" \"$out/bin/${cfg.package.meta.mainProgram}\" \\\n+              --prefix PATH : ${path} \\\n+              ${\n+                lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${toString value}\") cfg.environment\n+              } \\\n+              ${lib.pipe cfg.environmentFiles [\n+                (builtins.map (name: \"--run '. ${name}'\"))\n+                (lib.concatStringsSep \"\\n\")\n+              ]}\n+          '';\n+      process.argv = [\n+        (lib.getExe cfg.finalPackage)\n+      ];\n+    }\n+    # TODO\n+    # deplyoment targets\n+    # - nixos systemd service\n+    # - oci containers w/ nimi",
+   "id": 2973277573,
+   "line": 143,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 143,
+   "original_position": 143,
+   "original_start_line": null,
+   "path": "pkgs/by-name/st/stirling-pdf/service.nix",
+   "position": 143,
+   "pull_request_review_id": 3989771457,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:16:18Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This service need not care about all possible deployment targets, only that nixos works.\n\nI am just checking how many ways I can deploy this as of now.",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:25:04Z",
+   "diff_hunk": "@@ -0,0 +1,213 @@\n+# Non-module dependencies (`callPackage`)\n+{\n+  which,\n+  unpaper,\n+  libreoffice,\n+  qpdf,\n+  ocrmypdf,\n+  poppler-utils,\n+  unoserver,\n+  pngquant,\n+  tesseract,\n+  python3,\n+  ghostscript_headless,\n+  imagemagick,\n+  calibre,\n+  runCommand,\n+  makeBinaryWrapper,\n+  ...\n+}:\n+\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.stirling-pdf;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.stirling-pdf = {\n+    package = lib.mkOption {\n+      description = \"Package to use for stirling-pdf\";\n+      defaultText = \"The stirling-pdf package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    environment = lib.mkOption {\n+      type = lib.types.attrsOf (\n+        lib.types.oneOf [\n+          lib.types.str\n+          lib.types.int\n+        ]\n+      );\n+      default = { };\n+      example = {\n+        SERVER_PORT = 8080;\n+        INSTALL_BOOK_AND_ADVANCED_HTML_OPS = \"true\";\n+      };\n+      description = ''\n+        Environment variables for the stirling-pdf app.\n+        See <https://github.com/Stirling-Tools/Stirling-PDF#customisation> for available options.\n+      '';\n+    };\n+\n+    environmentFiles = lib.mkOption {\n+      type = lib.types.listOf lib.types.path;\n+      default = [ ];\n+      description = ''\n+        Files containing additional environment variables to pass to Stirling PDF.\n+        Secrets should be added in environmentFiles instead of environment.\n+      '';\n+    };\n+\n+    finalPackage = lib.mkOption {\n+      type = lib.types.package;\n+      readOnly = true;\n+      description = \"The finalPackage used by the service, constructed from `package`.\";\n+    };\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.stateDir = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd state directory.\";\n+    };\n+\n+    systemd.user = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd user.\";\n+    };\n+  };\n+\n+  config = lib.mkMerge [\n+    {\n+      stirling-pdf.finalPackage =\n+        let\n+          # following https://docs.stirlingpdf.com/Installation/Unix%20Installation\n+          path = lib.makeBinPath (\n+            [\n+              # `which` is used to test command availability\n+              # See https://github.com/Stirling-Tools/Stirling-PDF/blob/main/app/core/src/main/java/stirling/software/SPDF/config/ExternalAppDepConfig.java#L262\n+              which\n+              unpaper\n+              libreoffice\n+              qpdf\n+              ocrmypdf\n+              poppler-utils\n+              unoserver\n+              pngquant\n+              tesseract\n+              (python3.withPackages (\n+                p: with p; [\n+                  weasyprint\n+                  opencv-python-headless\n+                ]\n+              ))\n+              ghostscript_headless\n+              imagemagick\n+            ]\n+            ++ lib.optional (cfg.environment.INSTALL_BOOK_AND_ADVANCED_HTML_OPS or \"false\" == \"true\") calibre\n+          );\n+        in\n+        runCommand \"stirling-pdf\"\n+          {\n+            nativeBuildInputs = [ makeBinaryWrapper ];\n+            inherit (cfg.package) meta;\n+          }\n+          ''\n+            makeWrapper \\\n+              \"${lib.getExe cfg.package}\" \"$out/bin/${cfg.package.meta.mainProgram}\" \\\n+              --prefix PATH : ${path} \\\n+              ${\n+                lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${toString value}\") cfg.environment\n+              } \\\n+              ${lib.pipe cfg.environmentFiles [\n+                (builtins.map (name: \"--run '. ${name}'\"))\n+                (lib.concatStringsSep \"\\n\")\n+              ]}\n+          '';\n+      process.argv = [\n+        (lib.getExe cfg.finalPackage)\n+      ];\n+    }\n+    # TODO\n+    # deplyoment targets",
+   "id": 2973307857,
+   "line": 141,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 141,
+   "original_position": 141,
+   "original_start_line": null,
+   "path": "pkgs/by-name/st/stirling-pdf/service.nix",
+   "position": 141,
+   "pull_request_review_id": 3989802109,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:25:04Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@ju1m I'd like your review on this wrapper, especially the security of the `--run` part.\r\n\r\n- fyi this project is not part of nlnet or ngi\r\n- this project is most likey unfree, https://github.com/NixOS/nixpkgs/pull/499612#discussion_r2971314014\r\n- I am wrapping it like this as the enviornment files should ideally work even when systemd is not available.\r\n  - This is a workaround until a real solution as planned in modular services tracking issue for environment vars is implemented. But is this the best workaround possible?",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:29:45Z",
+   "diff_hunk": "@@ -0,0 +1,213 @@\n+# Non-module dependencies (`callPackage`)\n+{\n+  which,\n+  unpaper,\n+  libreoffice,\n+  qpdf,\n+  ocrmypdf,\n+  poppler-utils,\n+  unoserver,\n+  pngquant,\n+  tesseract,\n+  python3,\n+  ghostscript_headless,\n+  imagemagick,\n+  calibre,\n+  runCommand,\n+  makeBinaryWrapper,\n+  ...\n+}:\n+\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.stirling-pdf;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.stirling-pdf = {\n+    package = lib.mkOption {\n+      description = \"Package to use for stirling-pdf\";\n+      defaultText = \"The stirling-pdf package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    environment = lib.mkOption {\n+      type = lib.types.attrsOf (\n+        lib.types.oneOf [\n+          lib.types.str\n+          lib.types.int\n+        ]\n+      );\n+      default = { };\n+      example = {\n+        SERVER_PORT = 8080;\n+        INSTALL_BOOK_AND_ADVANCED_HTML_OPS = \"true\";\n+      };\n+      description = ''\n+        Environment variables for the stirling-pdf app.\n+        See <https://github.com/Stirling-Tools/Stirling-PDF#customisation> for available options.\n+      '';\n+    };\n+\n+    environmentFiles = lib.mkOption {\n+      type = lib.types.listOf lib.types.path;\n+      default = [ ];\n+      description = ''\n+        Files containing additional environment variables to pass to Stirling PDF.\n+        Secrets should be added in environmentFiles instead of environment.\n+      '';\n+    };\n+\n+    finalPackage = lib.mkOption {\n+      type = lib.types.package;\n+      readOnly = true;\n+      description = \"The finalPackage used by the service, constructed from `package`.\";\n+    };\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.stateDir = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd state directory.\";\n+    };\n+\n+    systemd.user = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd user.\";\n+    };\n+  };\n+\n+  config = lib.mkMerge [\n+    {\n+      stirling-pdf.finalPackage =\n+        let\n+          # following https://docs.stirlingpdf.com/Installation/Unix%20Installation\n+          path = lib.makeBinPath (\n+            [\n+              # `which` is used to test command availability\n+              # See https://github.com/Stirling-Tools/Stirling-PDF/blob/main/app/core/src/main/java/stirling/software/SPDF/config/ExternalAppDepConfig.java#L262\n+              which\n+              unpaper\n+              libreoffice\n+              qpdf\n+              ocrmypdf\n+              poppler-utils\n+              unoserver\n+              pngquant\n+              tesseract\n+              (python3.withPackages (\n+                p: with p; [\n+                  weasyprint\n+                  opencv-python-headless\n+                ]\n+              ))\n+              ghostscript_headless\n+              imagemagick\n+            ]\n+            ++ lib.optional (cfg.environment.INSTALL_BOOK_AND_ADVANCED_HTML_OPS or \"false\" == \"true\") calibre\n+          );\n+        in\n+        runCommand \"stirling-pdf\"\n+          {\n+            nativeBuildInputs = [ makeBinaryWrapper ];\n+            inherit (cfg.package) meta;\n+          }\n+          ''\n+            makeWrapper \\\n+              \"${lib.getExe cfg.package}\" \"$out/bin/${cfg.package.meta.mainProgram}\" \\\n+              --prefix PATH : ${path} \\\n+              ${\n+                lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${toString value}\") cfg.environment\n+              } \\\n+              ${lib.pipe cfg.environmentFiles [\n+                (builtins.map (name: \"--run '. ${name}'\"))\n+                (lib.concatStringsSep \"\\n\")\n+              ]}",
+   "id": 2973324073,
+   "line": 134,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 134,
+   "original_position": 134,
+   "original_start_line": 125,
+   "path": "pkgs/by-name/st/stirling-pdf/service.nix",
+   "position": 134,
+   "pull_request_review_id": 3989820144,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 125,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:43:45Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Does this make sense?",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:30:54Z",
+   "diff_hunk": "@@ -0,0 +1,213 @@\n+# Non-module dependencies (`callPackage`)\n+{\n+  which,\n+  unpaper,\n+  libreoffice,\n+  qpdf,\n+  ocrmypdf,\n+  poppler-utils,\n+  unoserver,\n+  pngquant,\n+  tesseract,\n+  python3,\n+  ghostscript_headless,\n+  imagemagick,\n+  calibre,\n+  runCommand,\n+  makeBinaryWrapper,\n+  ...\n+}:\n+\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.stirling-pdf;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.stirling-pdf = {\n+    package = lib.mkOption {\n+      description = \"Package to use for stirling-pdf\";\n+      defaultText = \"The stirling-pdf package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    environment = lib.mkOption {\n+      type = lib.types.attrsOf (\n+        lib.types.oneOf [\n+          lib.types.str\n+          lib.types.int\n+        ]\n+      );\n+      default = { };\n+      example = {\n+        SERVER_PORT = 8080;\n+        INSTALL_BOOK_AND_ADVANCED_HTML_OPS = \"true\";\n+      };\n+      description = ''\n+        Environment variables for the stirling-pdf app.\n+        See <https://github.com/Stirling-Tools/Stirling-PDF#customisation> for available options.\n+      '';\n+    };\n+\n+    environmentFiles = lib.mkOption {\n+      type = lib.types.listOf lib.types.path;\n+      default = [ ];\n+      description = ''\n+        Files containing additional environment variables to pass to Stirling PDF.\n+        Secrets should be added in environmentFiles instead of environment.\n+      '';\n+    };\n+\n+    finalPackage = lib.mkOption {\n+      type = lib.types.package;\n+      readOnly = true;\n+      description = \"The finalPackage used by the service, constructed from `package`.\";\n+    };\n+  }\n+  // lib.optionalAttrs (options ? systemd) {",
+   "id": 2973328884,
+   "line": 73,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 73,
+   "original_position": 73,
+   "original_start_line": null,
+   "path": "pkgs/by-name/st/stirling-pdf/service.nix",
+   "position": 73,
+   "pull_request_review_id": 3989825085,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:30:54Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Is this a good idea? replacing `importApply`?",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:31:12Z",
+   "diff_hunk": "@@ -166,7 +168,17 @@ stdenv.mkDerivation (finalAttrs: {\n     ln -s ${jre} \"$res_dir/runtime/jre\"\n   '';\n \n-  passthru.updateScript = nix-update-script { };\n+  passthru = {\n+    services.default = {\n+      imports = [\n+        # do what importApply does without duplicating tons of arguments\n+        (lib.setDefaultModuleLocation ./service.nix (callPackage ./service.nix { }))",
+   "id": 2973329963,
+   "line": 175,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 175,
+   "original_position": 18,
+   "original_start_line": null,
+   "path": "pkgs/by-name/st/stirling-pdf/package.nix",
+   "position": 18,
+   "pull_request_review_id": 3989826281,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:39:27Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Here I found this approach to import the module.\r\n\r\nWhat do people feel about having nixos tests tied to a package's directory? Now that modular services live there as well. (I like it)",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:32:29Z",
+   "diff_hunk": "@@ -0,0 +1,137 @@\n+{ lib, hostPkgs, ... }:\n+let\n+  port = 8080;\n+  server = \"http://server:${toString port}\";\n+in\n+{\n+  name = \"stirling-pdf-desktop\";\n+  meta = {\n+    maintainers = with lib.maintainers; [ timhae ];\n+  };\n+\n+  enableOCR = true;\n+  globalTimeout = 600;\n+  nodes = {\n+    server =\n+      { config, pkgs, ... }:\n+      {\n+        services.stirling-pdf = {\n+          enable = true;\n+          package = pkgs.stirling-pdf;\n+          environment = {\n+            SERVER_PORT = port;\n+            DISABLE_ADDITIONAL_FEATURES = \"false\";\n+            SECURITY_ENABLELOGIN = \"true\";\n+          };\n+        };\n+        networking.firewall.allowedTCPPorts = [ port ];\n+      };\n+    client =\n+      { config, pkgs, ... }:\n+      {\n+        virtualisation.cores = 4;\n+        virtualisation.memorySize = 4096;\n+        virtualisation.qemu.options = [\n+          # Force qemu at 640x480 resolution\n+          \"-vga none -device virtio-gpu-pci,xres=640,yres=480\"\n+        ];\n+        imports = [ (hostPkgs.path + \"/nixos/tests/common/wayland-cage.nix\") ];",
+   "id": 2973334948,
+   "line": 38,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 38,
+   "original_position": 38,
+   "original_start_line": null,
+   "path": "pkgs/by-name/st/stirling-pdf/tests/desktop-integration-test.nix",
+   "position": 38,
+   "pull_request_review_id": 3989831852,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:39:57Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "idea copied from redlib modular service pr.\n\nCan be changed to `mkRenamedOptionModule` once we are all happy with modular services becoming the default way to add new modules. (i.e once all missing features mentioned in the tracking issue are covered)",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:34:07Z",
+   "diff_hunk": "@@ -4,116 +4,51 @@\n   pkgs,\n   ...\n }:\n-\n let\n+  inherit (lib.strings)\n+    splitString\n+    ;\n   cfg = config.services.stirling-pdf;\n in\n {\n+  imports =\n+    map\n+      (\n+        opt:\n+        lib.mkAliasOptionModule",
+   "id": 2973341064,
+   "line": 18,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 18,
+   "original_position": 16,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/stirling-pdf.nix",
+   "position": 16,
+   "pull_request_review_id": 3989837954,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:35:47Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "will conflict with every new pr adding a modular service.",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T07:34:22Z",
+   "diff_hunk": "@@ -21,6 +21,8 @@ let\n     options = {\n       \"<imports = [ pkgs.ghostunnel.services.default ]>\" = fakeSubmodule pkgs.ghostunnel.services.default;\n       \"<imports = [ pkgs.php.services.default ]>\" = fakeSubmodule pkgs.php.services.default;\n+      \"<imports = [ pkgs.stirling-pdf.services.default ]>\" =",
+   "id": 2973342002,
+   "line": 24,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 24,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/modules/misc/documentation/modular-services.nix",
+   "position": 4,
+   "pull_request_review_id": 3989838805,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-23T07:34:36Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I have not reviewed the overall to understand the big picture, but what I can tell you so far is:\n1. Loading secrets into envvars make them available to children and some sibling processes (eg. `grep --text . /proc/*/environ`). See https://serverfault.com/a/1110351\nSo this sentence (already present before this PR) is problematic:\n> Secrets should be added in environmentFiles instead of environment.\n\nIf the underlying software cannot consume its secrets securely, this is an issue.\n\n2. Sourcing (with `.`) the environment file does not export the envvars to the wrapped program unless they're prefixed with `export` which they must not for `EnvironmentFile=`. Thus you may have to use some bash to `read` the names of the envvar and `export` them. Something like (not tested):\n```done\nwhile IFS='=' read -r n x; do test -z \"$n\" || export \"$n\"; done <${name}\n```\n\n3. There's a `lib.concatMapStringsSep`.\n \nHTH",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T12:20:53Z",
+   "diff_hunk": "@@ -0,0 +1,213 @@\n+# Non-module dependencies (`callPackage`)\n+{\n+  which,\n+  unpaper,\n+  libreoffice,\n+  qpdf,\n+  ocrmypdf,\n+  poppler-utils,\n+  unoserver,\n+  pngquant,\n+  tesseract,\n+  python3,\n+  ghostscript_headless,\n+  imagemagick,\n+  calibre,\n+  runCommand,\n+  makeBinaryWrapper,\n+  ...\n+}:\n+\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.stirling-pdf;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.stirling-pdf = {\n+    package = lib.mkOption {\n+      description = \"Package to use for stirling-pdf\";\n+      defaultText = \"The stirling-pdf package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    environment = lib.mkOption {\n+      type = lib.types.attrsOf (\n+        lib.types.oneOf [\n+          lib.types.str\n+          lib.types.int\n+        ]\n+      );\n+      default = { };\n+      example = {\n+        SERVER_PORT = 8080;\n+        INSTALL_BOOK_AND_ADVANCED_HTML_OPS = \"true\";\n+      };\n+      description = ''\n+        Environment variables for the stirling-pdf app.\n+        See <https://github.com/Stirling-Tools/Stirling-PDF#customisation> for available options.\n+      '';\n+    };\n+\n+    environmentFiles = lib.mkOption {\n+      type = lib.types.listOf lib.types.path;\n+      default = [ ];\n+      description = ''\n+        Files containing additional environment variables to pass to Stirling PDF.\n+        Secrets should be added in environmentFiles instead of environment.\n+      '';\n+    };\n+\n+    finalPackage = lib.mkOption {\n+      type = lib.types.package;\n+      readOnly = true;\n+      description = \"The finalPackage used by the service, constructed from `package`.\";\n+    };\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.stateDir = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd state directory.\";\n+    };\n+\n+    systemd.user = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd user.\";\n+    };\n+  };\n+\n+  config = lib.mkMerge [\n+    {\n+      stirling-pdf.finalPackage =\n+        let\n+          # following https://docs.stirlingpdf.com/Installation/Unix%20Installation\n+          path = lib.makeBinPath (\n+            [\n+              # `which` is used to test command availability\n+              # See https://github.com/Stirling-Tools/Stirling-PDF/blob/main/app/core/src/main/java/stirling/software/SPDF/config/ExternalAppDepConfig.java#L262\n+              which\n+              unpaper\n+              libreoffice\n+              qpdf\n+              ocrmypdf\n+              poppler-utils\n+              unoserver\n+              pngquant\n+              tesseract\n+              (python3.withPackages (\n+                p: with p; [\n+                  weasyprint\n+                  opencv-python-headless\n+                ]\n+              ))\n+              ghostscript_headless\n+              imagemagick\n+            ]\n+            ++ lib.optional (cfg.environment.INSTALL_BOOK_AND_ADVANCED_HTML_OPS or \"false\" == \"true\") calibre\n+          );\n+        in\n+        runCommand \"stirling-pdf\"\n+          {\n+            nativeBuildInputs = [ makeBinaryWrapper ];\n+            inherit (cfg.package) meta;\n+          }\n+          ''\n+            makeWrapper \\\n+              \"${lib.getExe cfg.package}\" \"$out/bin/${cfg.package.meta.mainProgram}\" \\\n+              --prefix PATH : ${path} \\\n+              ${\n+                lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${toString value}\") cfg.environment\n+              } \\\n+              ${lib.pipe cfg.environmentFiles [\n+                (builtins.map (name: \"--run '. ${name}'\"))\n+                (lib.concatStringsSep \"\\n\")\n+              ]}",
+   "id": 2974690437,
+   "in_reply_to_id": 2973324073,
+   "line": 134,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 134,
+   "original_position": 134,
+   "original_start_line": 125,
+   "path": "pkgs/by-name/st/stirling-pdf/service.nix",
+   "position": 134,
+   "pull_request_review_id": 3991336865,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": 125,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-23T12:29:28Z",
+   "user": {
+    "id": 21160136,
+    "login": "ju1m",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks, will rethink the approach here. See what ghostunnel and others are doing.",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "created_at": "2026-03-23T12:44:42Z",
+   "diff_hunk": "@@ -0,0 +1,213 @@\n+# Non-module dependencies (`callPackage`)\n+{\n+  which,\n+  unpaper,\n+  libreoffice,\n+  qpdf,\n+  ocrmypdf,\n+  poppler-utils,\n+  unoserver,\n+  pngquant,\n+  tesseract,\n+  python3,\n+  ghostscript_headless,\n+  imagemagick,\n+  calibre,\n+  runCommand,\n+  makeBinaryWrapper,\n+  ...\n+}:\n+\n+{\n+  config,\n+  options,\n+  lib,\n+  ...\n+}:\n+let\n+  cfg = config.stirling-pdf;\n+in\n+{\n+  _class = \"service\";\n+\n+  options.stirling-pdf = {\n+    package = lib.mkOption {\n+      description = \"Package to use for stirling-pdf\";\n+      defaultText = \"The stirling-pdf package that provided this module.\";\n+      type = lib.types.package;\n+    };\n+\n+    environment = lib.mkOption {\n+      type = lib.types.attrsOf (\n+        lib.types.oneOf [\n+          lib.types.str\n+          lib.types.int\n+        ]\n+      );\n+      default = { };\n+      example = {\n+        SERVER_PORT = 8080;\n+        INSTALL_BOOK_AND_ADVANCED_HTML_OPS = \"true\";\n+      };\n+      description = ''\n+        Environment variables for the stirling-pdf app.\n+        See <https://github.com/Stirling-Tools/Stirling-PDF#customisation> for available options.\n+      '';\n+    };\n+\n+    environmentFiles = lib.mkOption {\n+      type = lib.types.listOf lib.types.path;\n+      default = [ ];\n+      description = ''\n+        Files containing additional environment variables to pass to Stirling PDF.\n+        Secrets should be added in environmentFiles instead of environment.\n+      '';\n+    };\n+\n+    finalPackage = lib.mkOption {\n+      type = lib.types.package;\n+      readOnly = true;\n+      description = \"The finalPackage used by the service, constructed from `package`.\";\n+    };\n+  }\n+  // lib.optionalAttrs (options ? systemd) {\n+    systemd.stateDir = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd state directory.\";\n+    };\n+\n+    systemd.user = lib.mkOption {\n+      type = lib.types.nonEmptyStr;\n+      default = \"stirling-pdf\";\n+      example = \"stirling-pdf\";\n+      description = \"Name of the systemd user.\";\n+    };\n+  };\n+\n+  config = lib.mkMerge [\n+    {\n+      stirling-pdf.finalPackage =\n+        let\n+          # following https://docs.stirlingpdf.com/Installation/Unix%20Installation\n+          path = lib.makeBinPath (\n+            [\n+              # `which` is used to test command availability\n+              # See https://github.com/Stirling-Tools/Stirling-PDF/blob/main/app/core/src/main/java/stirling/software/SPDF/config/ExternalAppDepConfig.java#L262\n+              which\n+              unpaper\n+              libreoffice\n+              qpdf\n+              ocrmypdf\n+              poppler-utils\n+              unoserver\n+              pngquant\n+              tesseract\n+              (python3.withPackages (\n+                p: with p; [\n+                  weasyprint\n+                  opencv-python-headless\n+                ]\n+              ))\n+              ghostscript_headless\n+              imagemagick\n+            ]\n+            ++ lib.optional (cfg.environment.INSTALL_BOOK_AND_ADVANCED_HTML_OPS or \"false\" == \"true\") calibre\n+          );\n+        in\n+        runCommand \"stirling-pdf\"\n+          {\n+            nativeBuildInputs = [ makeBinaryWrapper ];\n+            inherit (cfg.package) meta;\n+          }\n+          ''\n+            makeWrapper \\\n+              \"${lib.getExe cfg.package}\" \"$out/bin/${cfg.package.meta.mainProgram}\" \\\n+              --prefix PATH : ${path} \\\n+              ${\n+                lib.concatMapAttrsStringSep \" \" (name: value: \"--set ${name} ${toString value}\") cfg.environment\n+              } \\\n+              ${lib.pipe cfg.environmentFiles [\n+                (builtins.map (name: \"--run '. ${name}'\"))\n+                (lib.concatStringsSep \"\\n\")\n+              ]}",
+   "id": 2974806730,
+   "in_reply_to_id": 2973324073,
+   "line": 134,
+   "original_commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "original_line": 134,
+   "original_position": 134,
+   "original_start_line": 125,
+   "path": "pkgs/by-name/st/stirling-pdf/service.nix",
+   "position": 134,
+   "pull_request_review_id": 3991470199,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": 125,
+   "start_side": "RIGHT",
+   "subject_type": "line",
+   "updated_at": "2026-03-23T12:44:43Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989754186,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:11:10Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989767520,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:15:11Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989769084,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:15:35Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989771457,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:16:18Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989802109,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:25:04Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989820144,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:29:45Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989825085,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:30:54Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989826281,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:31:12Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989831852,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:32:29Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989837954,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:34:07Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3989838805,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T07:34:22Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "8b5c861f03ce3787b3e8bcbae65b4516a5a8d2f1",
+   "id": 3991336865,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T12:20:53Z",
+   "user": {
+    "id": 21160136,
+    "login": "ju1m",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "fb60eb72c80f15557f3e853d7f0d6e3ad4d94673",
+   "id": 3991470199,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-23T12:44:43Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": []
+}

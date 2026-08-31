@@ -1,0 +1,127 @@
+{
+ "comments": [
+  {
+   "body": "My knee-jerk reaction would be to suggest upgrading [`NixOS/nixpkgs` -- `pkgs/by-name/as/asciinema/package.nix`](https://github.com/NixOS/nixpkgs/blob/18dc8a95fb9d1378d66e52d67c35e0fad509c58e/pkgs/by-name/as/asciinema/package.nix) to version 3+\n\n... Though that might break stuff for folks already using `asciinema` and self managing configs without Home Manager :-\\\n\nAlternatively we could support both and have a version check via something like `let version_main = lib.lists.last (builtins.match \"(([[:alnum:]]+).*)\" package.version) in`\n\n... If that be the preferred route, then `asciinema` config by version links are currently at;\n- [v2](https://docs.asciinema.org/manual/cli/configuration/v2/)\n- [v3](https://docs.asciinema.org/manual/cli/configuration/v3/)\n\nQuick skim on my end shows some of the blocks got renamed, as well as key names, and a few values transitioned from `yes`/`no` to `true`/`false`, plus string-like values went from no extra quotes to explicit quotes...\nHmm, problem space is finite, but may still result in less-than eloquent code here to handle config version differences",
+   "created_at": "2026-05-02T16:50:58Z",
+   "id": 4364285448,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-02T16:50:58Z",
+   "user": {
+    "id": 4116150,
+    "login": "S0AndS0",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think the best would be to have `programs.asciinema` be for version `2.4.0` and adding a `programs.asciinema_3` for version `3+` as that's how the versions are named in the `nixpkgs 25.11`\n\notherwise having `programs.asciinema.settings` be for version `2.4.0` in the stable repository as this is the version installed with `programs.asciinema.enable` and having version `3+` in the unstable and ready to become stable with the `nixpkgs 26.5`",
+   "created_at": "2026-05-06T09:19:10Z",
+   "id": 4386658390,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-06T09:19:10Z",
+   "user": {
+    "id": 119439839,
+    "login": "Rignchen",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-community/home-manager/issues/9212",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Are you following the right branch?\n\n- [x] My Nixpkgs and Home Manager versions are in sync\n\n### Is there an existing issue for this?\n\n- [x] I have searched the existing issues\n\n### Issue description\n\nwhen adding `programs.asciinema.enable` it downloads `asciinema 2.4.0`\nwhen adding `programs.asciinema.settings` it creats a config file for `asciinema 3.0+` (as expected when reading [search.nixos.org](https://search.nixos.org/options?channel=25.11&include_home_manager_options=1&include_modular_service_options=0&include_nixos_options=0&query=programs.asciinema.settings))\n\n### Maintainer CC\n\n@S0AndS0 \n\n### System information\n\n```markdown\n- system: `\"x86_64-linux\"`\n - host os: `Linux 6.19.10, NixOS, 25.11 (Xantusia), 25.11.9840.a4bf06618f0b`\n - multi-user?: `yes`\n - sandbox: `yes`\n - version: `nix-env (Nix) 2.31.4`\n - channels(root): `\"home-manager-25.11.tar.gz, nixos-25.11, nixpkgs-unstable\"`\n - nixpkgs: `/nix/store/9df564facn4vqsg8w5sw8k3g82wha28s-nixos-25.11/nixos`\n```",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 2,
+  "created_at": "2026-04-29T11:50:29Z",
+  "id": 4350294753,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "ee0701",
+    "default": true,
+    "description": null,
+    "id": 518121614,
+    "name": "bug"
+   },
+   {
+    "color": "006b75",
+    "default": false,
+    "description": "Issues or feature request that have not been triaged yet",
+    "id": 3183407014,
+    "name": "triage"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 9212,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "bug: asciinema: mismatch version in programs.asciinema",
+  "type": null,
+  "updated_at": "2026-05-06T09:19:10Z",
+  "user": {
+   "id": 119439839,
+   "login": "Rignchen",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "nix-community/home-manager#9212",
+ "sources": [
+  "home-manager-issues"
+ ],
+ "timeline": []
+}

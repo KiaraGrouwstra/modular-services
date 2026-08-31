@@ -1,0 +1,87 @@
+{
+ "comments": [
+  {
+   "body": "https://github.com/NixOS/nixpkgs/pull/435092 adds an entrypoint (`configure`) that should make integration a little bit easier.\nYou'll need to implement functionality analogous to `nixos/modules/system/service/systemd` to complete the integration into NixNG.\nThat just under 400 lines as of now. It will expand as more features get implemented, but probably still a good idea to start doing this, so that you can follow along more easily (no huge code dump) and so that you can help steer the modular services feature in the right direction.",
+   "created_at": "2025-08-20T10:10:22Z",
+   "id": 3205350095,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-20T10:10:22Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-community/NixNG/issues/67",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "See https://github.com/NixOS/nixpkgs/issues/428084 for the what. As for why, if supported modular services we could make use of a much bigger service pool.",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 1,
+  "created_at": "2025-08-10T09:26:46Z",
+  "id": 3307381585,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 67,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/NixNG",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Modular services",
+  "type": null,
+  "updated_at": "2025-08-20T10:10:22Z",
+  "user": {
+   "id": 8005463,
+   "login": "MagicRB",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "nix-community/NixNG#67",
+ "sources": [
+  "nixng-issues"
+ ],
+ "timeline": []
+}

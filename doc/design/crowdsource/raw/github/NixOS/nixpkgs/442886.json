@@ -1,0 +1,1361 @@
+{
+ "comments": [
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/specialargs-outside-of-flakes/69375/1\n",
+   "created_at": "2025-09-14T11:31:41Z",
+   "id": 3289468441,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-14T11:31:41Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Wait, this isn't a thing yet? I don't think I ever used it, but I am surprised. Like... how?",
+   "created_at": "2025-09-14T12:38:56Z",
+   "id": 3289512760,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-14T12:38:56Z",
+   "user": {
+    "id": 635591,
+    "login": "mightyiam",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "EDIT: redacted since I misread the PR and the comment resulted in being irrelevant.",
+   "created_at": "2025-09-14T12:57:39Z",
+   "id": 3289525001,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-14T13:24:39Z",
+   "user": {
+    "id": 44400303,
+    "login": "thefossguy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Right, this about people that aren't using flakes :)\r\n\r\nEDIT: to make this abundantly clear, the function being patched is not used by flakes. Flakes use flake.nix, and the `lib.nixosSystem` function mentioned in the cover letter. The whole point is to expose the same opportunities outside of flakes as within.\r\n\r\nEDIT2: edited title to make even more explicit.",
+   "created_at": "2025-09-14T13:04:49Z",
+   "id": 3289529578,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-14T13:18:32Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Right, this about people that aren't using flakes :)\r\n> \r\n> EDIT: to make this abundantly clear, the function being patched is not used by flakes. Flakes use flake.nix, and the `lib.nixosSystem` function mentioned in the cover letter. The whole point is to expose the same opportunities outside of flakes as within.\r\n> \r\n> EDIT2: edited title to make even more explicit.\r\n\r\nUsually a PR that even mentions flakes is adding a feature for flakes. I'm a victim of not reading properly. Sorry about that!",
+   "created_at": "2025-09-14T13:23:56Z",
+   "id": 3289544216,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 2,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2025-09-14T13:23:56Z",
+   "user": {
+    "id": 44400303,
+    "login": "thefossguy",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Wait, this isn't a thing yet? I don't think I ever used it, but I am surprised. Like... how?\r\n\r\nI think because most users are _not_ directly calling this function instead relying on `<nixos-config>` rather than `-f` when calling `nixos-rebuild`. People that want a more controlled experience are using flakes. I think this style of configuration has just slipped the cracks, but I think it's what we should be promoting while flakes are stabilising and I intend to try to add some docs to nix.dev once this is merged (assuming it does get merged).",
+   "created_at": "2025-09-14T14:03:44Z",
+   "id": 3289571324,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2025-09-14T14:03:44Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Wait, this isn't a thing yet? I don't think I ever used it, but I am surprised. Like... how?\r\n\r\nFWIW, if I were to use `nixos-rebuild -f` or similar, I would just use `lib/eval-config.nix` which had these arguments all along. The `default.nix` is a wrapper that does almost nothing. But I guess `nix-build <nixpkgs/nixos>` is the closest we have to a blessed API for this pattern (which is not really promoted much).",
+   "created_at": "2025-09-14T14:17:17Z",
+   "id": 3289582382,
+   "minimized": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2025-09-14T14:17:17Z",
+   "user": {
+    "id": 662666,
+    "login": "justinas",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> FWIW, if I were to use `nixos-rebuild -f` or similar, I would just use `lib/eval-config.nix` which had these arguments all along. The `default.nix` is a wrapper that does almost nothing. But I guess `nix-build <nixpkgs/nixos>` is the closest we have to a blessed API for this pattern (which is not really promoted much).\r\n\r\nYeah exactly. Writing your own eval-config.nix wrapper is trivial, but exposing it in a \"blessed\" entry point would make more discoverable / documentable.",
+   "created_at": "2025-09-14T14:44:23Z",
+   "id": 3289602583,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-14T14:46:48Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`_module.args` is considered preferred wherever possible (well strictly speaking, creating an actual option is usually even more preferable for the way some module args are misused), while `specialArgs` is quite niche IMO:\r\n\r\nhttps://github.com/NixOS/nixpkgs/blob/eafcebdf2549472a2cd72e8aae32a55fd48520fd/lib/modules.nix#L88-L92\r\n\r\nand can usually be worked around.",
+   "created_at": "2025-09-14T16:53:53Z",
+   "id": 3289685211,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-09-14T17:00:34Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Apart from when it can't, which is specifically called out as the motivation for this PR:\r\n\r\n```\r\nlet\r\n  sources = import ./npins;\r\n  nixos = import (sources.nixpkgs + \"/nixos\")\r\nin\r\nnixos {\r\n  configuration.imports  = [\r\n     { _module.args = { inherit sources; }; }\r\n     { sources, ... }: {\r\n       import = [ sources.modules ];\r\n     }\r\n  ];\r\n}\r\n```\r\n\r\nThis doesn't work. It can't work. It does work with specialArgs. If specialArgs is niche, why is it exposed in `lib.nixosSystem`? Seems to me it exists to do exactly what this is _trying_ to do. I mean the answer is in the comment you are quoting:\r\n\r\n> This should only be used for special arguments that need to be evaluated when resolving module structure (like in imports)\r\n\r\nEDIT: fwiw I am happy to be told how I can achieve the above in a different way. I don't want to die on the hill of this patch, I just want a way to have nice configuration with out experimental features.",
+   "created_at": "2025-09-14T17:04:21Z",
+   "id": 3289692387,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-14T17:15:21Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> If specialArgs is niche, why is it exposed in `lib.nixosSystem`?\r\n\r\nDunno, I wasn't using nixos [in 2015 when it was introduced](https://github.com/NixOS/nixpkgs/commit/b13cb5461433ccf7ae1a2e8d2691c3111441e984). Doesn't mean I think it's a great design pattern to have two things that do almost the same thing with slightly different nuances, nor do I want to encourage it.\r\n\r\nYour example isn't valid syntax but whatever, I'll assume you meant\r\n\r\n```nix\r\nlet\r\n  sources = import ./npins;\r\n  nixos = import (sources.nixpkgs + \"/nixos\");\r\nin\r\nnixos {\r\n  configuration.imports = [\r\n    { _module.args = { inherit sources; }; }\r\n    (\r\n      { sources, ... }:\r\n      {\r\n        imports = [ (import sources.modules) ];\r\n      }\r\n    )\r\n  ];\r\n}\r\n```\r\n\r\nwhich infrecs. But `sources` is already in scope due to the earlier binding, so you could write\r\n\r\n```nix\r\nlet\r\n  sources = import ./npins;\r\n  nixos = import (sources.nixpkgs + \"/nixos\");\r\nin\r\nnixos {\r\n  configuration.imports = [\r\n    { _module.args = { inherit sources; }; }\r\n    {\r\n      imports = [ (import sources.modules) ];\r\n    }\r\n  ];\r\n}\r\n```\r\n\r\nEDIT: I'm also just... not convinced of the intent to put modules into module args. Which is why I wouldn't.",
+   "created_at": "2025-09-14T17:29:16Z",
+   "id": 3289708607,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-09-14T17:34:33Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Your example isn't valid syntax but whatever, I'll assume you meant\r\n\r\nYes, my bad. That is what I meant.\r\n\r\n> But sources is already in scope due to the earlier binding, so you could write\r\n\r\nOk, but that implies now that everything in my npins that exposes a module needs to be enumerated right there in one file. This is pretty crappy. I have 23 pins in my system setup, and it is far more preferable to\r\n\r\n1. import the sources once and expose them via `specialArgs`\r\n2. to have small modules with a well-defined scope that deal with both doing the import, and setting attendant options for that import. It's anti-modular to force every import into one file, or alternatively, force splitting the import and the usage of the import across two files, with one of those files being a file that has to grow with no bound because _all_ the modules need to imported there.\r\n\r\nAside: the commit you link is instructive. The motivation was to allow for `modulesPath`, which has the explicit goal of allowing imports from the nixos modules collections without knowing the root path. Which is effectively what I am doing. I don't want every file to have to know where it is relative to `./npins`. I don't want to have put all the imports into a single file. That's arbitrary and doesn't scale well to larger more interesting configurations.\r\n\r\nIt's also not the commit I was thinking of. I was actually thinking of [this](https://github.com/NixOS/nixpkgs/commit/57ccd736bb7afb52f44ea9b6fb8357e4bf591d7e) which also has an interesting motivation in the commit msg: \"export a function for building nixos systems\". There are tons of flake configs with `inputs` passed as special args because it's useful.\r\n",
+   "created_at": "2025-09-14T17:50:05Z",
+   "id": 3289719798,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-09-14T21:37:43Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/organizing-your-nix-configuration-without-flakes/71009/3\n",
+   "created_at": "2025-10-18T12:38:42Z",
+   "id": 3418403409,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-10-18T12:38:42Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I'll fixup the commit when I get home. Thanks for the feedback!",
+   "created_at": "2025-10-18T13:04:05Z",
+   "id": 3418416977,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-10-18T13:48:39Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@adamcstephens please let me know if the commit message meets standards for contribution.",
+   "created_at": "2025-10-19T22:20:58Z",
+   "id": 3420006414,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2025-10-19T22:20:58Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@infinisil you were added as a reviewer automatically, do you have any thoughts about this?",
+   "created_at": "2025-10-20T10:05:46Z",
+   "id": 3421375788,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-10-20T10:05:46Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/prs-ready-for-review/3032/5994\n",
+   "created_at": "2025-10-28T21:32:22Z",
+   "id": 3458580261,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-10-28T21:32:22Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks @roberth / @MattSturgeon for the review!",
+   "created_at": "2025-11-09T18:36:44Z",
+   "id": 3508666565,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-11-09T18:36:44Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/looking-for-setups-blog-not-using-flakes/78870/8\n",
+   "created_at": "2026-07-11T17:19:42Z",
+   "id": 4948005966,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-11T17:19:42Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/442886",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "To allow plain nixos configrations the same power as flakes, we must expose `specialArgs`, otherwise a classic pattern importing all of ones \"inputs\" (i.e. npins sources), and then exposing them to the module system becomes impossible due to the fact that imports must be statically resolvable so these sources cannot be passed in the existing entry point using `_module.args` if the sources themselves have modules to be imported.\r\n\r\nThis patch seems trivial and it seems overly-restrictive that flakes enjoy the equivalent under `lib.nixosSystem` but not users outside of the flakes ecosystem. I've been running this patch for a few months with no ill effects, but open to feedback on why this is a horrible idea :)\r\n\r\n## Things done\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "closed_at": "2025-11-09T18:16:26Z",
+  "closed_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 19,
+  "created_at": "2025-09-14T11:29:28Z",
+  "draft": false,
+  "id": 3414936697,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "24DD1A",
+    "default": false,
+    "description": "This PR was reviewed and approved by three or more persons.",
+    "id": 4022795151,
+    "name": "12.approvals: 3+"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 442886,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/442886.diff",
+   "merged_at": "2025-11-09T18:16:26Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/442886.patch"
+  },
+  "reactions": {
+   "+1": 6,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 2,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 8
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "nixos/default.nix: Allow specialArgs to be passed",
+  "type": null,
+  "updated_at": "2026-07-11T17:19:42Z",
+  "user": {
+   "id": 290429,
+   "login": "benjumanji",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 4,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21132,
+    "open_issues_count": 21132,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:37:19Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "8376340a1fd7fceab895684f3eb4686aa617fc96",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "To allow plain nixos configrations the same power as flakes, we must expose `specialArgs`, otherwise a classic pattern importing all of ones \"inputs\" (i.e. npins sources), and then exposing them to the module system becomes impossible due to the fact that imports must be statically resolvable so these sources cannot be passed in the existing entry point using `_module.args` if the sources themselves have modules to be imported.\r\n\r\nThis patch seems trivial and it seems overly-restrictive that flakes enjoy the equivalent under `lib.nixosSystem` but not users outside of the flakes ecosystem. I've been running this patch for a few months with no ill effects, but open to feedback on why this is a horrible idea :)\r\n\r\n## Things done\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\n---\r\n\r\nAdd a :+1: [reaction] to [pull requests you find important].\r\n\r\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\r\n[pull requests you find important]: https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+sort%3Areactions-%2B1-desc\r\n",
+  "changed_files": 1,
+  "closed_at": "2025-11-09T18:16:26Z",
+  "comments": 19,
+  "commits": 1,
+  "created_at": "2025-09-14T11:29:28Z",
+  "deletions": 1,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/442886.diff",
+  "draft": false,
+  "head": {
+   "label": "benjumanji:specialArgs",
+   "ref": "specialArgs",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2025-04-18T19:24:19Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "benjumanji/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/benjumanji/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 968811212,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/benjumanji/nixpkgs/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/benjumanji/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 290429,
+     "login": "benjumanji",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/benjumanji/nixpkgs/pulls{/number}",
+    "pushed_at": "2025-11-09T18:36:06Z",
+    "size": 1714474,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/benjumanji/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/benjumanji/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2025-04-18T19:24:19Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "96acd099e1645908c2dded2a4adc14e065553387",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 2826621741,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "24DD1A",
+    "default": false,
+    "description": "This PR was reviewed and approved by three or more persons.",
+    "id": 4022795151,
+    "name": "12.approvals: 3+"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "83d73e9cbb8db8b655d2cd10fc1535ab93200e32",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2025-11-09T18:16:26Z",
+  "merged_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 442886,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/442886.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 50398876,
+    "login": "hsjobeki",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 9,
+  "state": "closed",
+  "title": "nixos/default.nix: Allow specialArgs to be passed",
+  "updated_at": "2026-07-11T17:19:42Z",
+  "user": {
+   "id": 290429,
+   "login": "benjumanji",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#442886",
+ "review_comments": [
+  {
+   "body": "\n\nMost of the time you want to create an option declaration + definition (maybe a `visible = false` or `internal = true` option).\n\nIf you really do want a module arg instead of an option, using the `_module.args` option is usually the way to do it.\n\nIf you need to be able to import modules from the thing you're binding, it's usually better to use lexical scoping (e.g. https://github.com/NixOS/nixpkgs/pull/442886#issuecomment-3289708607) or use `lib.modules.importApply`, which exists specifically for this purpose:\n\nhttps://github.com/NixOS/nixpkgs/blob/c4e9b72d0bf394509a3b2aff27be35b7e3c99b85/lib/modules.nix#L1953-L2001\n\nI'd recommend clarifying that `specialArgs` usually _isn't_ what you want.\n\nOne way we can do that is copying the comment from `evalModules`:\n\n```suggestion\n  # This should only be used for special arguments that need to be evaluated when resolving module structure (like in imports).\n  # For everything else, there's _module.args.\n  specialArgs ? { },\n```\n\nBut it's not great having to copy-paste and duplicate this throughout the repo...",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "created_at": "2025-11-05T14:14:21Z",
+   "diff_hunk": "@@ -1,12 +1,13 @@\n {\n   configuration ? import ./lib/from-env.nix \"NIXOS_CONFIG\" <nixos-config>,\n   system ? builtins.currentSystem,\n+  specialArgs ? { },",
+   "id": 2494697913,
+   "line": 6,
+   "original_commit_id": "c88694451ea49860da5ed4cb6881406d01ba0099",
+   "original_line": 4,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/default.nix",
+   "position": 6,
+   "pull_request_review_id": 3422324471,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-11-09T12:03:47Z",
+   "user": {
+    "id": 5046562,
+    "login": "MattSturgeon",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> The nix file must contain a function that returns a module.\r\n\r\nThe unfortunate result of this approach is that the modules have to be rearchitected around `importApply`? If so, I think this wouldn't work for most modules in the wild, as they would lack the `staticArg`s.",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "created_at": "2025-11-05T14:45:00Z",
+   "diff_hunk": "@@ -1,12 +1,13 @@\n {\n   configuration ? import ./lib/from-env.nix \"NIXOS_CONFIG\" <nixos-config>,\n   system ? builtins.currentSystem,\n+  specialArgs ? { },",
+   "id": 2494851457,
+   "in_reply_to_id": 2494697913,
+   "line": 6,
+   "original_commit_id": "c88694451ea49860da5ed4cb6881406d01ba0099",
+   "original_line": 4,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/default.nix",
+   "position": 6,
+   "pull_request_review_id": 3422536268,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-11-05T14:45:29Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> The unfortunate result of this approach is that the modules have to be rearchitected around `importApply`? If so, I think this wouldn't work for most modules in the wild, as they would lack the `staticArg`s.\r\n\r\nYes. The point of `importApply` isn't that end-users use it to import third-party modules. The point is that the third-party modules use it in the first place, so that the module doesn't depend on any (special) args. The third-party source is then expected to provide a reference to the already-applied module.",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "created_at": "2025-11-05T14:47:48Z",
+   "diff_hunk": "@@ -1,12 +1,13 @@\n {\n   configuration ? import ./lib/from-env.nix \"NIXOS_CONFIG\" <nixos-config>,\n   system ? builtins.currentSystem,\n+  specialArgs ? { },",
+   "id": 2494867750,
+   "in_reply_to_id": 2494697913,
+   "line": 6,
+   "original_commit_id": "c88694451ea49860da5ed4cb6881406d01ba0099",
+   "original_line": 4,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/default.nix",
+   "position": 6,
+   "pull_request_review_id": 3422560504,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-11-05T14:47:49Z",
+   "user": {
+    "id": 5046562,
+    "login": "MattSturgeon",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@MattSturgeon thank you for taking the time to look at this! I have added your suggested warning to the commit.\r\n\r\nEDIT: I guess ignore the below, I missed that this got merged. Ha!\r\n\r\nAs to the rest: I don't understand the motivation for comments like \"prefer lexical scoping\" or \"declare an option\" or \"use `_module.args`\". They don't solve the problem that motivates the PR, otherwise I wouldn't have made it. I think the PR is clear in it's motivating case (although apparently not :D). You can't use npins or similar to import a source, and assign that to any kind of ergonomic thing (option, _module.args) and import a module provided by that source without causing infrec. The only thing you can use is `specialArgs` (or manually plumb the argument everywhere, or reimport the npins directory everywhere, both of which are worse than what flakes happily allows you to do today). AFACIT using `importApply` doesn't solve this either.\r\n\r\nI have pushed a small stupid repository here: https://github.com/benjumanji/nixos-smol. I want specifically to be able to write modules that look like https://github.com/benjumanji/nixos-smol/blob/master/indirection/nix-index-database/default.nix. I am totally open to any technique to produce the same outcome that skips `specialArgs` that doesn't involve manually plumbing sources around or reimporting them. That doesn't scale to larger, more interesting module trees. I can make my own fixed point using `haumea`, but I think there should be a nixpkgs \"native\" way to do this without patching or wrapping `./lib/eval-config.nix`.\r\n",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "created_at": "2025-11-09T18:33:42Z",
+   "diff_hunk": "@@ -1,12 +1,13 @@\n {\n   configuration ? import ./lib/from-env.nix \"NIXOS_CONFIG\" <nixos-config>,\n   system ? builtins.currentSystem,\n+  specialArgs ? { },",
+   "id": 2508241449,
+   "in_reply_to_id": 2494697913,
+   "line": 6,
+   "original_commit_id": "c88694451ea49860da5ed4cb6881406d01ba0099",
+   "original_line": 4,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/default.nix",
+   "position": 6,
+   "pull_request_review_id": 3440235861,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-11-09T18:35:36Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Generally the pattern is either this combination\r\n1. a module without any local dependencies injected `package = mkOption { }; # no default`, that kind of thing.\r\n2. a file that combines the module with local dependencies `module = { imports = [ ./module.nix ]; package = package /* from local lexical scope */; }`. This can be `flake.nix` or something else.\r\n3. all concrete configurations (e.g. `nixosConfigurations`) refer to (2) or may be defined in (2)\r\n\r\nor\r\n1. a \"module\" file that's really a function returning a module with `globalArgs: moduleArgs@{ options.package = ...; config.package = lib.mkOptionDefault globalArgs.package; }`\r\n2. a file that calls `importApply` and is otherwise similar to the previous pattern\r\n3. same\r\n\r\nIn both cases you produce modules that are fully self-contained and not dependent on any `specialArgs`, in the form of variables or attributes in file (2).\r\nScaling works in terms of evaluation, because you get memoization from (2).\r\nInteresting module trees can still be declared in (2); not in (1), because a module in (1) can not know what other modules need in terms of dependencies. That's ok.\r\n(Also I'd be wary of complex hierarchies, but that's a different story)",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "created_at": "2025-11-09T20:29:46Z",
+   "diff_hunk": "@@ -1,12 +1,13 @@\n {\n   configuration ? import ./lib/from-env.nix \"NIXOS_CONFIG\" <nixos-config>,\n   system ? builtins.currentSystem,\n+  specialArgs ? { },",
+   "id": 2508308314,
+   "in_reply_to_id": 2494697913,
+   "line": 6,
+   "original_commit_id": "c88694451ea49860da5ed4cb6881406d01ba0099",
+   "original_line": 4,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/default.nix",
+   "position": 6,
+   "pull_request_review_id": 3440352624,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-11-09T20:29:46Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@roberth thank you so much for responding. Sorry if I am being silly or unclear, but I don't think any of what you listed helps solve my problem. If you can spare the time (and zero worries if not), have a look at the repository I linked above. I cannot see anyway to lift `sources` out of `specialArgs` because I need `{ imports = [ sources.foo.someModule ]; }`, which must infrec if it isn't injected outside of evaluation. Or otherwise manually plumb it everywhere. I am essentially trying to solve the same problem of `modulesPath`, which had to go in via `specialArgs` as well.",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "created_at": "2025-11-09T22:40:12Z",
+   "diff_hunk": "@@ -1,12 +1,13 @@\n {\n   configuration ? import ./lib/from-env.nix \"NIXOS_CONFIG\" <nixos-config>,\n   system ? builtins.currentSystem,\n+  specialArgs ? { },",
+   "id": 2508369775,
+   "in_reply_to_id": 2494697913,
+   "line": 6,
+   "original_commit_id": "c88694451ea49860da5ed4cb6881406d01ba0099",
+   "original_line": 4,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/default.nix",
+   "position": 6,
+   "pull_request_review_id": 3440403588,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-11-09T22:40:31Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think we've exhausted the straightforward options.\r\n- `specialArgs`\r\n- self-contained modules (multiple ways), but somewhat \"centralizes\" your indirections\r\n\r\nIn terms of straightforward uses of the module system that's about it. There's probably things that could be done, building dependency management on top of the module system, or into it, but I'm not sure that's what we want to discuss (idk).\r\n\r\nWhen I spoke of anti-modular patterns that's in the context of wanting to publish and distribute modules in a specific self-contained way that's congruent with what people expect from e.g. a module inside a flake.\r\n\r\nI don't think that's necessarily what you want to achieve. Generally with something like npins you're looking at composing less self-contained stuff that you wire up yourself, where e.g. you provide your own [`pkgs`](https://github.com/nix-community/nix-index-database/blob/15c5451c63f4c612874a43846bfe3fa828b03eee/default.nix#L1) instead of relying on your dependency's lock (or flakes dependency injection).\r\n\r\nWhen doing things this way, you as end consumer are responsible for more of the wiring, and you're not meant to \"export\" that wiring anyway, so `specialArgs` is not such a big deal.\r\n\r\n",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "created_at": "2025-11-10T14:55:50Z",
+   "diff_hunk": "@@ -1,12 +1,13 @@\n {\n   configuration ? import ./lib/from-env.nix \"NIXOS_CONFIG\" <nixos-config>,\n   system ? builtins.currentSystem,\n+  specialArgs ? { },",
+   "id": 2510882977,
+   "in_reply_to_id": 2494697913,
+   "line": 6,
+   "original_commit_id": "c88694451ea49860da5ed4cb6881406d01ba0099",
+   "original_line": 4,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/default.nix",
+   "position": 6,
+   "pull_request_review_id": 3443680419,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-11-10T14:55:50Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Regarding dependency management, there's issues like https://github.com/NixOS/nixpkgs/issues/215496 that are not solved by a ~_comparatively_ simple~ mere _imports_ system; the more self-contained and self-similar still suffers from that, and I don't think the (let's call it) npins style even tries to solve that problem. There's still plenty to be solved in this area.\r\n\r\n[Modular services](https://github.com/NixOS/nixpkgs/issues/428084) is an instance of the self-contained style, but piggybacks on the NixOS and Nixpkgs dependency structure to solve its dependency management problems. When everything you do is in a submodule anyway, you tend to have a wealth of things you could import from.\r\n\r\nI'll stop infodumping now ;)\r\n(EDIT: but I will take questions :))",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "created_at": "2025-11-10T15:04:37Z",
+   "diff_hunk": "@@ -1,12 +1,13 @@\n {\n   configuration ? import ./lib/from-env.nix \"NIXOS_CONFIG\" <nixos-config>,\n   system ? builtins.currentSystem,\n+  specialArgs ? { },",
+   "id": 2510917085,
+   "in_reply_to_id": 2494697913,
+   "line": 6,
+   "original_commit_id": "c88694451ea49860da5ed4cb6881406d01ba0099",
+   "original_line": 4,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/default.nix",
+   "position": 6,
+   "pull_request_review_id": 3443724242,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-11-10T15:04:59Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Awesome thanks for taking the time and the explanations, curiosity sated!",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "created_at": "2025-11-10T19:25:30Z",
+   "diff_hunk": "@@ -1,12 +1,13 @@\n {\n   configuration ? import ./lib/from-env.nix \"NIXOS_CONFIG\" <nixos-config>,\n   system ? builtins.currentSystem,\n+  specialArgs ? { },",
+   "id": 2511705161,
+   "in_reply_to_id": 2494697913,
+   "line": 6,
+   "original_commit_id": "c88694451ea49860da5ed4cb6881406d01ba0099",
+   "original_line": 4,
+   "original_position": 4,
+   "original_start_line": null,
+   "path": "nixos/default.nix",
+   "position": 6,
+   "pull_request_review_id": 3444799166,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2025-11-10T19:25:30Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "The title and commit message don't meet contribution standards. Maybe something like `nixos/default.nix: <your text title>`",
+   "commit_id": null,
+   "id": 3353579139,
+   "state": "COMMENTED",
+   "submitted_at": "2025-10-18T12:54:40Z",
+   "user": {
+    "id": 2071575,
+    "login": "adamcstephens",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3368117382,
+   "state": "APPROVED",
+   "submitted_at": "2025-10-23T03:18:05Z",
+   "user": {
+    "id": 264788,
+    "login": "somasis",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3422324471,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-05T14:14:21Z",
+   "user": {
+    "id": 5046562,
+    "login": "MattSturgeon",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3422536268,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-05T14:45:00Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3422560504,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-05T14:47:49Z",
+   "user": {
+    "id": 5046562,
+    "login": "MattSturgeon",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "While I'm not keen on encouraging further use of `specialArgs`, this isn't the place to have that debate.\n\nThis PR improves consistency across module eval interfaces and retains the relevant caveat from `lib.evalModules`.",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "id": 3439875445,
+   "state": "APPROVED",
+   "submitted_at": "2025-11-09T12:08:05Z",
+   "user": {
+    "id": 5046562,
+    "login": "MattSturgeon",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "`specialArgs` is actively anti-modular, but for some code bases modularity is not a concern.\r\nIt's unfortunate that this creates non-modular habits, making code in the ecosystem harder to reuse, but that harm is already done.",
+   "commit_id": "96acd099e1645908c2dded2a4adc14e065553387",
+   "id": 3440228538,
+   "state": "APPROVED",
+   "submitted_at": "2025-11-09T18:10:28Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3440235861,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-09T18:33:42Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3440352624,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-09T20:29:46Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3440403588,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-09T22:40:12Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3443680419,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-10T14:55:50Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3443724242,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-10T15:04:37Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": null,
+   "id": 3444799166,
+   "state": "COMMENTED",
+   "submitted_at": "2025-11-10T19:25:30Z",
+   "user": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-09-14T13:17:59Z",
+   "event": "renamed",
+   "id": 19685404911,
+   "rename": {
+    "from": "Allow specialArgs to be passed to nixos",
+    "to": "Allow specialArgs to be passed to nixos outside of flakes"
+   }
+  },
+  {
+   "actor": {
+    "id": 290429,
+    "login": "benjumanji",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-10-18T13:03:14Z",
+   "event": "renamed",
+   "id": 20360285467,
+   "rename": {
+    "from": "Allow specialArgs to be passed to nixos outside of flakes",
+    "to": "nixos/default.nix: Allow specialArgs to be passed"
+   }
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "83d73e9cbb8db8b655d2cd10fc1535ab93200e32",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/83d73e9cbb8db8b655d2cd10fc1535ab93200e32",
+   "created_at": "2025-11-09T18:16:26Z",
+   "event": "merged",
+   "id": 20820769327
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2025-11-09T18:16:26Z",
+   "event": "closed",
+   "id": 20820769339,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 264788,
+    "login": "somasis",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "ee3116a7d8ddd0e4e20d349c2dea1e7ed187ac9c",
+   "commit_url": "https://api.github.com/repos/somasis/puter/commits/ee3116a7d8ddd0e4e20d349c2dea1e7ed187ac9c",
+   "created_at": "2025-11-17T20:23:34Z",
+   "event": "referenced",
+   "id": 20996799097
+  }
+ ]
+}

@@ -1,0 +1,1325 @@
+{
+ "comments": [
+  {
+   "body": "right now this looks like a secret-only version of the earlier PRs with the (module system type based) secrets contract logic inlined.\r\nthat inlined secret logic currently looks duplicated, so i added a comment on deduplicating this - but this is looking kinda clean already i think.\r\n\r\notherwise i mostly still see questions from before:\r\n\r\n- [x] the [impact of distributed set-ups on contract design](https://github.com/ibizaman/selfhostblocks/issues/541), if any - answered by #506343\r\n- [x] [`LoadCredential`](https://github.com/NixOS/nixpkgs/pull/485453#issuecomment-3862136410)\r\n- [x] [questions around secret generation](https://github.com/ibizaman/selfhostblocks/issues/467) - answered by https://github.com/KiaraGrouwstra/nixpkgs/compare/contracts-automated...contracts-new-types\r\n\r\ni gotta say i would regard secrets as maybe not the easiest topic out there in that sense.\r\n\r\ncode right now looks not too bad tho i think, (as far as i can tell fixable) duplication aside.\r\n",
+   "created_at": "2026-03-03T18:24:30Z",
+   "id": 3992817266,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-17T09:42:39Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> The following builds were skipped because they don't evaluate on x86_64-linux: hardcoded-secret, hardcoded-secret.passthru.tests\r\n\r\nDid I do something wrong here? Shouldn't those tests run?",
+   "created_at": "2026-03-03T19:31:32Z",
+   "id": 3993090918,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-03T21:07:04Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": ">  that inlined secret logic currently looks duplicated, so i added a comment on deduplicating this - but this is looking kinda clean already i think.\r\n\r\nJust to reiterate my [other comment](https://github.com/NixOS/nixpkgs/pull/495303#discussion_r2880460238), that was on purpose to focus on the contract itself.\r\n\r\n> LoadCredentials\r\n\r\nIf I'm not mistaken, if the service/module uses LoadCredentials, then this contract \"simplifies\" by setting owner and group to `root` and mode as `0400`. So the contract consumer (stash here) would set those as defaults.\r\n\r\n> the impact of distributed set-ups on contract design\r\n\r\nI do believe contracts enable this. I'm not sure how to best pass information across nodes and I don't think contracts will solve that, but what contracts do is allow to create providers as one see fit without needing upstream modifications.\r\n\r\n> Secret generation\r\n\r\nSimilarly, I don't think contracts will solve that directly. Something that would help is a way to catalog all consumers of a particular contract. This would be very nice for documentation too. I'm not sure how to do that cleverly without recursing in all options.\r\n\r\n> i gotta say i would regard secrets as maybe not the easiest topic out there in that sense.\r\n\r\nI agree but as long as the PR/contract is one step in the correct direction and does not hinder any future goals, I'd say it's good enough.",
+   "created_at": "2026-03-03T21:37:38Z",
+   "id": 3993692594,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-03T21:37:38Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> I agree but as long as the PR/contract is one step in the correct direction and does not hinder any future goals, I'd say it's good enough.\r\n\r\ni guess my question would be if we could tell that facilitating those three use-cases might not make for breaking changes if users would come to rely on e.g. this implementation\r\n",
+   "created_at": "2026-03-04T09:01:27Z",
+   "id": 3996177918,
+   "minimized": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-03-04T09:01:27Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/self-host-blocks-building-blocks-for-self-hosting-with-best-practices/26963/41\n",
+   "created_at": "2026-03-04T22:42:21Z",
+   "id": 4000759908,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-04T22:42:21Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Tbh, I think basing this on how secrets are currently handled by NixOS/sops-nix/agenix is a significant limitation, though I understand why you do.\r\n\r\nBut to make my case, the current mechanism is *already* inadequate for more sophisticated use cases. Most services that use `DynamicUser` cannot handle secrets; you have to explicitly do indirection by manually setting `serviceConfig.LoadCredential` and then hard-coding a path to `/run/credentials`, or neuter the usefulness of `DynamicUser` by making a static user/group after all (as many services do, presumably because people don't know about `LoadCredential`).\r\n\r\nAny sane implementation using `LoadCredential` on the other hand would also inherently break the contract as written, because the secrets will only exist at service runtime, not immediately after deployment.\r\n\r\nI also don't see too clearly how this would integrate with services like e.g. vault, or more complex things like secrets that are encrypted-at-rest, while integrating cleanly with more granular service management than the activation script.\r\n\r\nIt'd be nice to see at least a sketch of how more sophisticated secrets management than shoving around files would be implemented. It's probably *possible* to adhere to this contract, but I think it would be limiting and encourage bad practices (like what we do today with creating secrets in multiple locations just so that systemd-creds can read them from somewhere).\r\n\r\nIn my eyes, ideally a secrets management contract for NixOS wouldn't worry about file ownership as a first-class citizen. That seems like a detail of methods of storing secrets, rather than communicating how secrets should be found and accessed *in general*.\r\n\r\nI don't mean to make the perfect the enemy of the good, but I feel like this is the type of thing that will be hard to change, and I already see issues. We'd probably do better by looking at the schemas for things like systemd-creds or vault and coming up with a way to implement local-file based secrets using those schemas, rather than the other way around. That'd likely also result in a nicer interface for secrets generation.\r\n\r\nI think it'd be *very* nice if contracts could help finally get secrets management to be a first-class concept in the NixOS world, but that probably takes a bit more design work. So I agree with @KiaraGrouwstra that this might not be the best use case to choose for a first attempt.",
+   "created_at": "2026-03-05T02:03:28Z",
+   "id": 4001594804,
+   "minimized": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2026-03-05T02:06:56Z",
+   "user": {
+    "id": 6654841,
+    "login": "TLATER",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks @TLATER this is exactly the kind of feedback I wanted.\r\n\r\nI want to recognize that I know there is a lot of baggage surrounding secrets. But I think it is unfair to block any work on secrets by requiring them to solve every problems.\r\n\r\nContracts originated from a few considerations:\r\n\r\n- **Code reuse**. Setting up a database, reverse proxy, SSO auth and others should not live inside modules. There should be some common reusable code for these concerns. This avoids everyone wasting their time making their own implementation and will increase code quality.\r\n- **Loose coupling**. Modules that use a contract do not care how they are implemented as long as the implementation follows the behavior outlined by the contract.\r\n- **Separation of concerns**. The consumer and provider are separated with a clear boundary. The maintainer of a module using a contract can be different from the maintainers of the implementation, allowing them to be experts in their own respective fields.\r\n- **Extensibility**. The final user themselves can choose an implementation, even new custom implementations not available in nixpkgs, without changing existing code.\r\n- **Testability**. Thanks to NixOS VM test, we can ensure each implementation of a contract, even custom ones, provides required options and behaves as the contract requires thanks to generic NixOS tests.\r\n\r\nAll that to say I don't think it should be contracts' role to impose one way of working. Actually quite the opposite, I see contracts as a way to decouple parts of the whole NixOS system and allow for experimentation. Similarly, I wouldn't see it as necessarily an issue to have multiple contracts with different options for a common concept. For example for backups, backing up files and databases are using totally different and incompatible mechanisms.\r\n\r\nIn that light, I see the effort of correctly using `LoadCredential` as an effort totally worth undertaking but it should be kept orthogonal. Separating the two is IMO a survival necessity otherwise we'll never get there. Of course, one shouldn't hinder the other and it is fair to ask for that.\r\n\r\n> you have to explicitly do indirection by manually setting serviceConfig.LoadCredential and then hard-coding a path to /run/credentials\r\n\r\nI don't see how this is bad because it's not leaking secrets. It could be argued that it's a clumsy API that could be hidden by a NixOS systemd specific option (which I did undertake in a previous PR but that's another story).\r\n\r\n> neuter the usefulness of DynamicUser by making a static user/group after all (as many services do, presumably because people don't know about LoadCredential).\r\n\r\nThat is completely fair and a misuse of systemd configuration. I'd argue this should be solved by at least better documentation which is completely lacking in the NixOS manual, nixpkgs manual or NixOS wiki (in order of preference for this to exist in). We should be able to review PRs that handle secrets with systemd and redirect to a page explaining the established best practices with motivation. But again, this should be an orthogonal effort.\r\n\r\n> Any sane implementation using LoadCredential on the other hand would also inherently break the contract as written, because the secrets will only exist at service runtime, not immediately after deployment.\r\n\r\nI don't see how. I envisioned the contract to work this way with `DynamicUser` and `LoadCredential`:\r\n\r\n```nix\r\n# Consumer\r\n{ config, ... }:\r\nlet\r\n  cfg = config.myservice;\r\nin\r\n{\r\n  options = {\r\n    myservice.mysecret.input = {\r\n      # Pseudo code here, think of these surrounded by mkOption and setting the default.\r\n      owner = \"root\";\r\n      group = \"root\";\r\n      mode = \"0440\";\r\n    };\r\n  };\r\n\r\n  config = {\r\n    systemd.services.myservice = {\r\n      serviceConfig = {\r\n        DynamicUser = true;\r\n        LoadCredential = [ \"MYSECRET:${cfg.mysecret.output.path}\" ];\r\n      };\r\n      environment.MYSECRET = \"%d/MYSECRET\";\r\n\r\n      # Maybe a new option could be introduced which sets both environment and LoadCredntial\r\n      # secrets.MYSECRET = cfg.mysecret.output.path\r\n    };\r\n  };\r\n}\r\n```\r\n\r\nSo having the contract doesn't hinder using `LoadCredential` although it doesn't force one to use it correctly either.\r\n\r\n> I also don't see too clearly how this would integrate with services like e.g. vault, or more complex things like secrets that are encrypted-at-rest, while integrating cleanly with more granular service management than the activation script.\r\n> It'd be nice to see at least a sketch of how more sophisticated secrets management than shoving around files would be implemented. It's probably possible to adhere to this contract, but I think it would be limiting and encourage bad practices (like what we do today with creating secrets in multiple locations just so that systemd-creds can read them from somewhere).\r\n\r\nAFAIK services consume secrets in 3 fashion:\r\n\r\n- Reading environment variables.\r\n- Reading a file.\r\n- Embedded in the their configuration file. (Good services allow to specify a file in that configuration so we're back to reading a file, bad ones require us to generate this config at runtime but this is a separate issue).\r\n\r\nIf any, the quantity of services that handle getting secrets from vault is very small in NixOS. So if one uses Vault, they will anyway need to create some adapter to fit how upstream services handle secrets. I don't see how to get away without this. I think it will be the same for other such more complex secrets providers.\r\n\r\nFor encrypted-at-rest, do you mean secrets that would be decrypted as the systemd service starts? The only module using `LoadCredentialEncrypted` is radicle and it's super cool but imposing that to others should be done in a separate effort.\r\n\r\nFor better or worse, the current state in NixOS is using a file for the common denominator to share secrets. That's where the contract meets users by making the situation a bit better still by removing this possible permission mismatch and runtime error.\r\n\r\n> In my eyes, ideally a secrets management contract for NixOS wouldn't worry about file ownership as a first-class citizen. That seems like a detail of methods of storing secrets, rather than communicating how secrets should be found and accessed in general.\r\n\r\nAbout finding secrets, you can't get around the fact that you need to distinguish secrets. We need to name them and have a mapping between the filesystem where files are stored encrypted and that name.\r\n\r\nCurrently this mapping is manual and sometimes tedious. I assume you're saying it would be great if this mapping was done automatically? Like the Vars initiative? A service could then request for a secret and it is automatically created at deploy time for example.\r\n\r\nIn any case, I still think this contract has value. Because at some point that automated system will need to make this secret available to the service in the way the service expects it. And this is what the contract encodes. We can always create a second more overarching contract which handles nicely such automated systems when we get there.\r\n\r\n> I don't mean to make the perfect the enemy of the good, but I feel like this is the type of thing that will be hard to change, and I already see issues. We'd probably do better by looking at the schemas for things like systemd-creds or vault and coming up with a way to implement local-file based secrets using those schemas, rather than the other way around. That'd likely also result in a nicer interface for secrets generation.\r\n> I think it'd be very nice if contracts could help finally get secrets management to be a first-class concept in the NixOS world, but that probably takes a bit more design work. So I agree with @KiaraGrouwstra that this might not be the best use case to choose for a first attempt.\r\n\r\nI see what you mean by hard to change but I see this instead as a nice stepping stone to build these automated systems with. Thanks to this contract you get a clean separation between the consumers and the providers. This lets one experiment however they like on the provider side. Now, with the current state of NixOS and its ubiquitous reliance on systemd, the only common denominator for sharing secrets I see in the short and medium term is through files.\r\n\r\nBtw that system that translates vault secrets to files for systemd seem to exist: https://github.com/numtide/systemd-vaultd\r\nWe could make this system a provider for this contract quite trivially.",
+   "created_at": "2026-03-05T19:25:09Z",
+   "id": 4007199401,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-05T19:39:51Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> We could make this system a provider for this contract quite trivially.\r\n\r\nif that works it should address the `LoadCredential` question, yeah.\r\n\r\non another note, i no longer see the round-trip mechanism in this version. that makes me wonder if my [earlier classification](https://github.com/NixOS/nixpkgs/pull/432529/#issuecomment-3686663833) of whether cases needed such a round-trip is still relevant.\r\n\r\nif not, perhaps one of those other use-cases for contracts might raise less questions?\r\n",
+   "created_at": "2026-03-06T17:31:15Z",
+   "id": 4013049550,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-06T17:31:15Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Yep, thanks @ibizaman, I think this effort is great, I'm just a bit fearful of working ourselves into a corner we can never get out of again; Breaking changes to contracts will likely not be easily accepted, as they'll always involve changes to every single module that uses them.\r\n\r\n> In that light, I see the effort of correctly using LoadCredential as an effort totally worth undertaking but it should be kept orthogonal. Separating the two is IMO a survival necessity otherwise we'll never get there. Of course, one shouldn't hinder the other and it is fair to ask for that.\r\n\r\n... which is what I'm worried about. I don't think contracts *need* to be blocked on secrets, and I think rushing improvements to secrets through contracts will hinder improvements there.\r\n\r\nSpecifically:\r\n\r\n> So having the contract doesn't hinder using LoadCredential although it doesn't force one to use it correctly either.\r\n\r\nA future initiative to enforce using systemd-creds (or vault, or other services) \"correctly\" would involve changing the secrets contract. AIUI, it becomes impossible to use `ImportCredential`, which doesn't involve file paths - it loads credentials from the set of system credentials that systemd defines (and may stem from a variety of sources, including things like kernel params).\r\n\r\nI think the case of vault exposes that problem a bit better:\r\n\r\n> If any, the quantity of services that handle getting secrets from vault is very small in NixOS. So if one uses Vault, they will anyway need to create some adapter to fit how upstream services handle secrets. I don't see how to get away without this.\r\n>\r\n> ...\r\n>\r\n> For better or worse, the current state in NixOS is using a file for the common denominator to share secrets.\r\n\r\nExactly! I think it's possible to design something here, it might be e.g. some kind of adapter that reads metadata from a contract. But if we codify everything as using filepaths today, it will be hard to introduce a solution like that. Worse, existing services that do support vault will not be able to do so at all, since the contract specifies that secrets management must be done through the filesystem.\r\n\r\n---\r\n\r\nSo, again, I completely understand why you're proposing this as-is; It's very pragmatic to just encode what is done in NixOS *today*, and just accept that that's how secrets will be handled in this ecosystem. I'm really worried it'll get us stuck there, though.\r\n\r\nThat's not to say I don't like the idea, I'm here precisely because I've stumbled upon my own desire for a solution like what vars/selfhostblocks/etc. are proposing, and am finally catching up with the work y'all have been doing. The terminology is great and we need a contract like this for secrets.\r\n\r\n---\r\n\r\nIf I were to counter-propose something today, I'd suggest using simply an attrset that defines a set of secrets without any other metadata, and to document that this makes the secrets available in the systemd credentials store.\r\n\r\nAny implementation of the contract could then use systemd's ~~[generator](https://systemd.io/CREDENTIALS/#programming-interface-from-generator-code) concept~~ credentials dir to provide the secrets at runtime; I honestly think agenix/sops-nix should be re-implemented as such anyway, and you've linked to a service that can provide this for vault.\r\n\r\n~~Even if they aren't implemented as generators, simply adding the secrets to the systemd credentials store would make everything work.~~ No, misread the doc on generators, those were new to me ^^\r\n\r\nAdapting your pseudocode would look like this:\r\n\r\n```nix\r\n# Consumer\r\n{ config, ... }: {\r\n  config = {\r\n    secrets.mysecret = { };\r\n\r\n    systemd.services.myservice = {\r\n      serviceConfig = {\r\n        DynamicUser = true;\r\n        ImportCredential = [\r\n          config.secrets.mysecret.output # evaluates simply to: \"mysecret\"\r\n        ];\r\n      };\r\n      environment.MYSECRET = \"%d/mysecret\";\r\n    };\r\n  };\r\n}\r\n```\r\n\r\nHooking this up to e.g. sops-nix becomes trivial, since we no longer have to worry about file ownerships:\r\n\r\n```nix\r\n{\r\n  sops.defaultSopsFile = \"/etc/sops/secrets.yaml\";\r\n  # Behind the scenes, sops simply grabs `config.secrets.*` that have matching names in\r\n  # `secrets.yaml` and places them in `/run/credstore/`\r\n}\r\n```\r\n\r\nBut this is probably *too* married to systemd; It is limited as far as user services go, and *some* vault-using services will likely want to be able to access secrets at runtime via an API or something. I also imagine that the anti-systemd crowd would find this solution very unappealing.",
+   "created_at": "2026-03-06T22:19:58Z",
+   "id": 4014469608,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-06T22:30:44Z",
+   "user": {
+    "id": 6654841,
+    "login": "TLATER",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> if that works it should address the LoadCredential question, yeah.\r\n\r\nWasn't this answered with the snippet I shared above with `LaodCredential` and `DynamicUser`?\r\n\r\n> on another note, i no longer see the round-trip mechanism in this version. that makes me wonder if my earlier classification of whether cases needed such a round-trip is still relevant.\r\n\r\nNote that a full cycle never existed because then you get into infinite recursion. What we have is a dual link between the consumer and the provider done by the end user. This is the case here too. Let's take as example stash for the consumer and sops-nix for the provider. The code for linking both looks like this:\r\n\r\n```nix\r\n{ config, ... }:\r\n{\r\n  config = {\r\n    sops.secrets.\"stash/password\".input = config.stash.passwordFile.input;  # 1\r\n    stash.passwordFile.output = config.sops.secrets.\"stash/password\".output;  # 2\r\n  };\r\n}\r\n```\r\n\r\nUsing the same numbers as above, the following diagram presents the situation:\r\n\r\n<img width=\"671\" height=\"361\" alt=\"Contract\" src=\"https://github.com/user-attachments/assets/e42ece25-b280-4d79-a65f-02623a51b385\" />\r\n\r\n1. The end user links the input of the consumer to the input of the provider. This defines the owner, group and mode in sops-nix from the default values in stash.\r\n2. The end user links the output of the provider to the output of the consumer. This defines the path in stash from the default values in sops-nix.\r\n3. The provider uses the values from its input to set some options.\r\n4. The output path is in this particular case set uniquely from the attr name the end user chose but it could be derived from the input in other contracts. \r\n\r\nWhat the other PRs had on top of this was a way to generate the consumer and provider options from a unique definition, ensuring their compatibility. There never was a full cycle there either.\r\n",
+   "created_at": "2026-03-06T23:17:16Z",
+   "id": 4014722976,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-06T23:24:05Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Wasn't this answered with the snippet I shared above with `LoadCredential` and `DynamicUser`?\r\n\r\nright -- thanks!\r\n\r\n> Note that a full cycle never existed\r\n\r\nyeah, to be more precise i meant that the consumer would grab some return value from the provider, which seemed not to happen in the back-up ones.\r\nat the time i considered that distinction relevant in the sense that without that i was under the impression that implementation got easier, tho since this PR i'm no longer sure of that.\r\n",
+   "created_at": "2026-03-07T00:08:44Z",
+   "id": 4014898331,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-07T17:38:35Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> without that i had under the impression that implementation got easier\r\n\r\nYou're right, that made the implementation in the other PRs simpler but for the consumer option and provider option generator. (Not sure how to correctly call that part, I'm talking about https://github.com/NixOS/nixpkgs/pull/485453/changes#diff-6f2c3b22633946b34d7d8179bb3bb3dbb5767164cd4d491cc2c84ab03c730b1f and https://github.com/NixOS/nixpkgs/pull/432529/changes#diff-52f2397a5f73a560e904e384c5d1c554c844c46db1d372afb7758d53b9de1a7e). With this PR I wanted to show that contracts are usable without that code which in the end complicates things. We can always go back to those PRs when a few contracts are established. This should make the discussions more concrete.",
+   "created_at": "2026-03-07T00:13:18Z",
+   "id": 4014915814,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-07T00:13:18Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@TLATER I understand your arguments and fears but I don't agree with the conclusion. I still see this contract as a good (small) step towards better secret management.\r\n\r\nFrom a technical standpoint, I really don't see how codifying the permissions on the file path can ever hinder future initiatives to make secrets management better. We already rely on paths and codifying the permissions helps make the user experience better as explained in my previous comment.\r\n\r\nWith a huge project like nixpkgs, not all parts of the system can or should evolve in lockstep. It is necessary to accept a transition period where modules/services are updated one after the other. Agreeing on a common goal or implementation is nice though. So say we find a better solution some day, we'll create a PR like this one which updates one module and start from there. I don't see a way around this. This PR proposes something concrete we can use now while the better solution is still up in the air. It's a bit unfair to block it for fear of something without a concrete counterargument to it. (I'm not saying that in a dismissive manner, I'm glad you commented on this). Similarly, not all parts of nixpkgs are of the same quality and that's to be expected.\r\n\r\nNote that the goal of contracts is to allow more interoperability between providers. I believe allowing the end user to choose between providers is very important. So should you be a proponent of systemd or not, I see a solution that interoperability between both as a good thing.\r\n\r\nMaybe this contract should be renamed to \"fileSecretsContract\" or something like that. I never had the ambition to solve all issues related to secrets management with this. I don't see it as a bad thing to have an hypothetical second competing contract related to secrets for services that work in a different way if we see the necessity for one. There is already something alike for backup contracts which distinguish backing up files and streams (e.g. databases).\r\n\r\n---\r\n\r\nI think our dependence on paths to store secrets is pretty much immuable. Isn't systemd also using paths at some point even when using `ImportCredential`? Your snippet includes `environment.MYSECRET = \"%d/mysecret\";` and `Behind the scenes, sops simply grabs config.secrets.* that have matching names in secrets.yaml and places them in /run/credstore/` which all references paths. The [documentation](https://systemd.io/CREDENTIALS/) even says (emphasis mine):\r\n\r\n> The ImportCredential= setting will search for the **source file** to read the credential from automatically. Primarily, these credentials are searched among the credentials passed into the system. **If not found there, they are searched in /etc/credstore/, /run/credstore/, /usr/lib/credstore/**.\r\n\r\nIt's paths all the way down.\r\n\r\nOne other issue to consider is if the upstream service relies on paths for secret, what can we do? Going through all such upstream services and create PRs to make them support another mechanism is a daunting task.\r\n\r\nI don't see systemd change anytime soon and we shouldn't wait on all upstream services to update before making progress on our side.\r\n\r\n---\r\n\r\nI think what you want is to create a layer above all these paths shenanigans which is fair and would be nice.\r\n\r\nMy claim is what you're talking about will be a new layer on top of the current situation. And because it is above, this new layer will require to abstract over paths so having the path permission be encoded will help.\r\n\r\nBut again I have no idea what this new layer should look like. Especially if you consider that new layer should be a contract which allow interoperability with multiple providers. The way Vault and Systemd credentials work is very different and from a cursory read of the documentation I only see paths as the common denominator, for better or worse.",
+   "created_at": "2026-03-07T00:28:48Z",
+   "id": 4014964892,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-07T00:28:48Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i now understand what you mean about the machinery being intended to propagate defaults from the consuming modules, and how that intent has led to the three existing implementations.\r\ni think i'd be fine with ~~either of the three for now~~, tho on the first one it'd be good to document fragility issues still.\r\n\r\nedit: since one service could have many secrets, maybe this PR would end up maybe a bit less elegant than the second one to scale it\r\n\r\n> Maybe this contract should be renamed to \"fileSecretsContract\" or something like that.\r\n\r\nhaving the name mention files i would consider as helping clarify scope, yeah.\r\n",
+   "created_at": "2026-03-07T18:22:29Z",
+   "id": 4017066334,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-07T22:43:05Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Cool I'm glad the picture is getting clearer. For me too TBH.\r\n\r\n>  i think i'd be fine with either of the three for now, tho on the first one it'd be good to document fragility issues still.\r\n\r\nI want to make clear that this PR implements just the contract. The consumer and provider agree on the options so they fit together but nothing forces this to be true apart from humans reviewing the code. I say that but the generic test ensures the provider has the correct options and using the `hardcodedsecret` provider in the `stash` NixOS test makes sure the consumer has the correct options too.\r\n\r\nWhat the other 2 PRs do is propose an implementation for a system which do force the consumer and provider to have the same options. The first PR tried that by (ab?)using the module system and the second by resorting to traditional functions. But this system which forces the option is not necessary per say for contracts to exist, as we can see in this PR.\r\n\r\nSeeing how the tests here do still make sure the options are correct, it seems the 2 other PRs are less necessary than I initially thought. I mean what those 2 PRs really add is a way to not need to define those options everywhere since they are the same across all consumers and providers. But will this really be necessary in practice? I don't know.\r\n\r\n> having the name mention files i would consider as helping clarify scope, yeah.\r\n\r\nI did just update the PR title and will update the code shortly.",
+   "created_at": "2026-03-07T22:51:31Z",
+   "id": 4017582825,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-07T22:52:55Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> will this really be necessary in practice? I don't know.\r\n\r\ni think one use-case for deduplication is easing refactors that might change some details\r\n",
+   "created_at": "2026-03-07T23:00:05Z",
+   "id": 4017593632,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-03-07T23:00:05Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "if propagation seems mostly about defaults, i tried checking if we could just have like a `contracts.fileSecrets = types.submodule ...`, then from places wanting the defaults in there, like `services.stash` here, just kinda merge them in by like `lib.recursiveUpdate contracts.fileSecrets <defaults>`.\r\nit seems tho that `types.submodule` does process its submodule in a few places, so proper propagation would require to them to be in from the `types.submodule` call, as was done in #485453.",
+   "created_at": "2026-03-13T14:41:02Z",
+   "id": 4055649546,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-03-13T14:41:02Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This PR is replaced by https://github.com/NixOS/nixpkgs/pull/522054\r\n\r\nSee that PR’s description for why it is better than this one.",
+   "created_at": "2026-05-20T21:31:39Z",
+   "id": 4502812767,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-20T21:31:39Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "in retrospect, i think we might as well reopen this (maybe with request/response naming as suggested at #522054).\r\n\r\nif vars people would object to this abstraction i think their feedback would be of value (cc @prescientmoon, @mrVanDalo, @Lassulus), while for sops/age i think we could just provide an out-of-tree usage example.\r\n\r\nthe compatibility concern i'm not sure i follow, given stash would retain its support for path-typed secrets.\r\n",
+   "created_at": "2026-08-02T13:37:50Z",
+   "id": 5158255002,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-02T13:37:50Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I decided to reopen this PR because I don’t see it as competing at all with the Vars initiative. If anything, the contract is downstream of Vars. Vars is about how to generate a secret and how to pass it to services while the contract was how services should advertise they want a secret in a file.",
+   "created_at": "2026-08-03T22:47:15Z",
+   "id": 5172550729,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 2,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-08-03T22:47:15Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/conventions-for-service-modules/79706/2\n",
+   "created_at": "2026-08-23T13:49:11Z",
+   "id": 5386342614,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-23T13:49:11Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/495303",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Yet another PR for contracts, yes I know. But this one is different, hear me out!\r\n\r\nStarting with presenting an underlying implementation was I realize a mistake.\r\nThe concept of contracts is still too abstract, for me too, to be able to choose the best implementation.\r\nI noticed this because none of the comments in the previous PRs talked about the actual contracts.\r\n\r\nSo this PR focuses on one contract. The contract for secrets that are exchanged through files. With no fluff, no clever implementation. Just the plain old options which work because the consumer and provider sides agree on which options should exist. We can always reconvene later on when and if we find it important to have some sort of underlying implementation to contracts.\r\n\r\n## Motivation\r\n\r\nThe contract for file secrets intends to improve the user experience when a user must provide a secret to a module and its underlying service(s) through a file path.\r\n\r\nCurrently, most modules declare one or several options of type `string` which expect to receive the path to a file.\r\nThis file is expected to exist at runtime, on the target host, before the service that requires them are started.\r\nNo constrain is set on how that file is generated nor when, as long as it exists when it is required.\r\n\r\nAn issue arise when the permissions of that file is incorrect.\r\nIn that case, the service that will try to read it will fail to do so and will not be able to start.\r\nIn other words, although the nix code correctly evaluates, a runtime error will happen which is bad user experience.\r\n\r\nAt best, some services do document what permissions they expect. But this is quite weak.\r\n\r\n## Contract Definition\r\n\r\nThis contract encodes what permissions the file should have.\r\n\r\nA module or service that requires such a file is called a consumer.\r\nOne that will generate the file is called a provider. Sops-nix and Agenix are two such providers.\r\n\r\n- Consumer options:\r\n  - `mode` (type `string`): the expected mode of the file.\r\n  - `owner` (type `string`): the expected owner of the file.\r\n  - `group` (type `string`): the expected group of the file.\r\n- Provider options:\r\n  - `path` (type `string`): the path at which the file will exist on the target host.\r\n\r\nWe could maybe remove the `mode` option if we made the `mode` be `0400` if `group == \"root\"` and `0440` otherwise. I'm not sure if this cover all cases.\r\n\r\nThe consumer and provider options are fully compatible with Sops-nix and Agenix and even share the same names.\r\n\r\n## Vars?\r\n\r\nIf you're wondering if this is a competing implementation to the Vars initiative, fear not, it is not!\r\n\r\nThe contract is downstream of Vars. Vars is about how to generate a secret and how to pass it to services while the contract is how services should advertise they want a secret in a file.\r\n\r\n## Hardcoded Secrets Provider\r\n\r\nThis PR introduces a new provider.\r\nThe intention is to replace current usage of `pkgs.writeText` in the tests with this contract provider.\r\nLike `pkgs.writeText`, the `hardcodedsecrets` module does store the secret in the nix store.\r\nBut although `pkgs.writeText` creates a file accessible by all users,\r\nthe `hardcodedsecrets` module correctly set the mode, owner and group of the file as expected by the consumer.\r\nThis is useful to make sure the consumer sets the options correctly.\r\n\r\n## Generic test\r\n\r\nA generic test is added to make sure any provider claiming to implement this contract behaves as expected.\r\nThe test makes sure the file generated by a provider has the correct content, mode, owner and group.\r\n\r\nThe `hardcodedsecrets` provider uses this test.\r\n\r\n## Consumer Module: Stash\r\n\r\nThe Stash module's options has been changed to implement the consumer contract but still be backwards compatible.\r\n\r\n## Next Steps\r\n\r\nI'd like reviews to address at least the options of the contract. Are they enough? Too much?\r\n\r\nAlso I’d love to hear thoughts on the genetic test.\r\n\r\nI did myself successfully use this exact set of options in about 15 modules in my project and find them good as is and cover all use cases.\r\n\r\n## What Comes Next\r\n\r\n- Create more PRs to convert string/path options to use this contract.\r\n- Create documentation advertising about this contract. Show how to use Sops-nix and Agenix with it.\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\nEDIT: Update to make scope clearer - this contract is for files.",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 21,
+  "created_at": "2026-02-28T20:54:00Z",
+  "draft": false,
+  "id": 4005380423,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 495303,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/495303.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/495303.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 1,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "Contract for files containing secrets",
+  "type": null,
+  "updated_at": "2026-08-23T13:49:11Z",
+  "user": {
+   "id": 1044950,
+   "login": "ibizaman",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 391,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:31:00Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "c747ea5725dc8a66c5bafbb1903b43ae82cb98cb",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Yet another PR for contracts, yes I know. But this one is different, hear me out!\r\n\r\nStarting with presenting an underlying implementation was I realize a mistake.\r\nThe concept of contracts is still too abstract, for me too, to be able to choose the best implementation.\r\nI noticed this because none of the comments in the previous PRs talked about the actual contracts.\r\n\r\nSo this PR focuses on one contract. The contract for secrets that are exchanged through files. With no fluff, no clever implementation. Just the plain old options which work because the consumer and provider sides agree on which options should exist. We can always reconvene later on when and if we find it important to have some sort of underlying implementation to contracts.\r\n\r\n## Motivation\r\n\r\nThe contract for file secrets intends to improve the user experience when a user must provide a secret to a module and its underlying service(s) through a file path.\r\n\r\nCurrently, most modules declare one or several options of type `string` which expect to receive the path to a file.\r\nThis file is expected to exist at runtime, on the target host, before the service that requires them are started.\r\nNo constrain is set on how that file is generated nor when, as long as it exists when it is required.\r\n\r\nAn issue arise when the permissions of that file is incorrect.\r\nIn that case, the service that will try to read it will fail to do so and will not be able to start.\r\nIn other words, although the nix code correctly evaluates, a runtime error will happen which is bad user experience.\r\n\r\nAt best, some services do document what permissions they expect. But this is quite weak.\r\n\r\n## Contract Definition\r\n\r\nThis contract encodes what permissions the file should have.\r\n\r\nA module or service that requires such a file is called a consumer.\r\nOne that will generate the file is called a provider. Sops-nix and Agenix are two such providers.\r\n\r\n- Consumer options:\r\n  - `mode` (type `string`): the expected mode of the file.\r\n  - `owner` (type `string`): the expected owner of the file.\r\n  - `group` (type `string`): the expected group of the file.\r\n- Provider options:\r\n  - `path` (type `string`): the path at which the file will exist on the target host.\r\n\r\nWe could maybe remove the `mode` option if we made the `mode` be `0400` if `group == \"root\"` and `0440` otherwise. I'm not sure if this cover all cases.\r\n\r\nThe consumer and provider options are fully compatible with Sops-nix and Agenix and even share the same names.\r\n\r\n## Vars?\r\n\r\nIf you're wondering if this is a competing implementation to the Vars initiative, fear not, it is not!\r\n\r\nThe contract is downstream of Vars. Vars is about how to generate a secret and how to pass it to services while the contract is how services should advertise they want a secret in a file.\r\n\r\n## Hardcoded Secrets Provider\r\n\r\nThis PR introduces a new provider.\r\nThe intention is to replace current usage of `pkgs.writeText` in the tests with this contract provider.\r\nLike `pkgs.writeText`, the `hardcodedsecrets` module does store the secret in the nix store.\r\nBut although `pkgs.writeText` creates a file accessible by all users,\r\nthe `hardcodedsecrets` module correctly set the mode, owner and group of the file as expected by the consumer.\r\nThis is useful to make sure the consumer sets the options correctly.\r\n\r\n## Generic test\r\n\r\nA generic test is added to make sure any provider claiming to implement this contract behaves as expected.\r\nThe test makes sure the file generated by a provider has the correct content, mode, owner and group.\r\n\r\nThe `hardcodedsecrets` provider uses this test.\r\n\r\n## Consumer Module: Stash\r\n\r\nThe Stash module's options has been changed to implement the consumer contract but still be backwards compatible.\r\n\r\n## Next Steps\r\n\r\nI'd like reviews to address at least the options of the contract. Are they enough? Too much?\r\n\r\nAlso I’d love to hear thoughts on the genetic test.\r\n\r\nI did myself successfully use this exact set of options in about 15 modules in my project and find them good as is and cover all use cases.\r\n\r\n## What Comes Next\r\n\r\n- Create more PRs to convert string/path options to use this contract.\r\n- Create documentation advertising about this contract. Show how to use Sops-nix and Agenix with it.\r\n\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\nEDIT: Update to make scope clearer - this contract is for files.",
+  "changed_files": 8,
+  "closed_at": null,
+  "comments": 21,
+  "commits": 2,
+  "created_at": "2026-02-28T20:54:00Z",
+  "deletions": 55,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/495303.diff",
+  "draft": false,
+  "head": {
+   "label": "ibizaman:contract-secrets",
+   "ref": "contract-secrets",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2022-05-23T06:55:50Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "ibizaman/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/ibizaman/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 495292405,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/ibizaman/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/ibizaman/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 1044950,
+     "login": "ibizaman",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/ibizaman/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-20T17:42:06Z",
+    "size": 3103279,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/ibizaman/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/ibizaman/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2024-02-06T12:57:14Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3339344713,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": "8538380f0600b1cd6f12060fcbee9c269235bf33",
+  "mergeable": true,
+  "mergeable_state": "unstable",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 495303,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/495303.patch",
+  "rebaseable": true,
+  "requested_reviewers": [
+   {
+    "id": 22124013,
+    "login": "DrakeTDL",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 9,
+  "state": "open",
+  "title": "Contract for files containing secrets",
+  "updated_at": "2026-08-23T13:49:11Z",
+  "user": {
+   "id": 1044950,
+   "login": "ibizaman",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#495303",
+ "review_comments": [
+  {
+   "body": "typo",
+   "commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "created_at": "2026-03-03T08:37:54Z",
+   "diff_hunk": "@@ -0,0 +1,4 @@\n+{ runTest }:\n+{\n+  secrets-hardocded-secret = runTest ./secrets/hardcoded-secret.nix;",
+   "id": 2876887439,
+   "line": null,
+   "original_commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "original_line": 3,
+   "original_position": 3,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3881075031,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-03T08:37:54Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i wonder if backward compatibility with path would be more desirable than just with plain string, given path is insecure",
+   "commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "created_at": "2026-03-03T17:55:00Z",
+   "diff_hunk": "@@ -514,9 +577,15 @@ in\n               install -d ${cfg.settings.generated}\n               if [[ -z \"${toString cfg.mutableSettings}\" || ! -f ${cfg.dataDir}/config.yml ]]; then\n                 env \\\n-                  password=$(< ${cfg.passwordFile}) \\\n-                  jwtSecretKeyFile=$(< ${cfg.jwtSecretKeyFile}) \\\n-                  sessionStoreKeyFile=$(< ${cfg.sessionStoreKeyFile}) \\\n+                  password=$(< ${\n+                    if lib.isPath cfg.passwordFile then cfg.passwordFile else cfg.passwordFile.output.path\n+                  }) \\\n+                  jwtSecretKeyFile=$(< ${\n+                    if lib.isPath cfg.jwtSecretKey then cfg.jwtSecretKey else cfg.jwtSecretKey.output.path\n+                  }) \\\n+                  sessionStoreKeyFile=$(< ${\n+                    if lib.isPath cfg.sessionStoreKey then cfg.sessionStoreKey else cfg.sessionStoreKey.output.path",
+   "id": 2879710145,
+   "line": 587,
+   "original_commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "original_line": 587,
+   "original_position": 110,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/stash.nix",
+   "position": 110,
+   "pull_request_review_id": 3884202180,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-03T17:55:00Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "from what i can tell the submodules look similar, with this one also providing `default` values.\nwould it cause recursion problems if such a module were just exposed in some mutually accessible location, be it at e.g. `contracts.secrets`?\n\n`options.contracts` could be an option taking type `attrsOf deferredModule` or the like, so that on the `config` side we could then plug in your shared submodule for `contract.secrets`, then access that from both places that got it now.\n",
+   "commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "created_at": "2026-03-03T18:15:04Z",
+   "diff_hunk": "@@ -366,6 +366,69 @@ let\n             done\n           '';\n     };\n+\n+  secretOptionType =\n+    let\n+      contractSecretsType = types.submodule {",
+   "id": 2879808692,
+   "line": 372,
+   "original_commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "original_line": 372,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/stash.nix",
+   "position": 7,
+   "pull_request_review_id": 3884319472,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-03T18:15:04Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It took me a while to see it :sweat_smile: ",
+   "commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "created_at": "2026-03-03T20:21:21Z",
+   "diff_hunk": "@@ -0,0 +1,4 @@\n+{ runTest }:\n+{\n+  secrets-hardocded-secret = runTest ./secrets/hardcoded-secret.nix;",
+   "id": 2880297362,
+   "in_reply_to_id": 2876887439,
+   "line": null,
+   "original_commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "original_line": 3,
+   "original_position": 3,
+   "original_start_line": null,
+   "path": "nixos/tests/contracts/default.nix",
+   "position": 1,
+   "pull_request_review_id": 3884849990,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-03T20:21:21Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I agree in principle but I'm not sure I get what you mean. Isn't this the case here? Also note here I tried to be backwards compatible with the stash module in particular.",
+   "commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "created_at": "2026-03-03T20:55:58Z",
+   "diff_hunk": "@@ -514,9 +577,15 @@ in\n               install -d ${cfg.settings.generated}\n               if [[ -z \"${toString cfg.mutableSettings}\" || ! -f ${cfg.dataDir}/config.yml ]]; then\n                 env \\\n-                  password=$(< ${cfg.passwordFile}) \\\n-                  jwtSecretKeyFile=$(< ${cfg.jwtSecretKeyFile}) \\\n-                  sessionStoreKeyFile=$(< ${cfg.sessionStoreKeyFile}) \\\n+                  password=$(< ${\n+                    if lib.isPath cfg.passwordFile then cfg.passwordFile else cfg.passwordFile.output.path\n+                  }) \\\n+                  jwtSecretKeyFile=$(< ${\n+                    if lib.isPath cfg.jwtSecretKey then cfg.jwtSecretKey else cfg.jwtSecretKey.output.path\n+                  }) \\\n+                  sessionStoreKeyFile=$(< ${\n+                    if lib.isPath cfg.sessionStoreKey then cfg.sessionStoreKey else cfg.sessionStoreKey.output.path",
+   "id": 2880438369,
+   "in_reply_to_id": 2879710145,
+   "line": 587,
+   "original_commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "original_line": 587,
+   "original_position": 110,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/stash.nix",
+   "position": 110,
+   "pull_request_review_id": 3885001513,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-03T20:55:58Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I fully agree but isn't this one more implementation competing with the other two big PRs? Not saying we shouldn't think about it but TBH I purposely kept that out of this PR to focus on the contract for secrets. Unless a good argument for, I'd rather not introduce this complexity in the PR.\r\n\r\nMy hope by doing it like this is to create a handful of contracts, use them in a handful of places and then we can think of an underlying implementation with concrete use cases.\r\n\r\nNote also that on one side, we set default values on the consumer side of the contract and on the other on the provider side of the contract. So both sides are not exactly the same although the overall shape is.",
+   "commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "created_at": "2026-03-03T21:01:23Z",
+   "diff_hunk": "@@ -366,6 +366,69 @@ let\n             done\n           '';\n     };\n+\n+  secretOptionType =\n+    let\n+      contractSecretsType = types.submodule {",
+   "id": 2880460238,
+   "in_reply_to_id": 2879808692,
+   "line": 372,
+   "original_commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "original_line": 372,
+   "original_position": 7,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/stash.nix",
+   "position": 7,
+   "pull_request_review_id": 3885023962,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-03-03T21:01:23Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "adjust terminology here? (+ at stash)",
+   "commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "created_at": "2026-08-04T19:15:40Z",
+   "diff_hunk": "@@ -0,0 +1,127 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+let\n+  cfg = config.testing.hardcoded-secret;\n+\n+  inherit (lib) mapAttrs' mkOption nameValuePair;\n+  inherit (lib.types)\n+    attrsOf\n+    str\n+    submodule\n+    ;\n+  inherit (pkgs) writeText;\n+in\n+{\n+  options.testing.hardcoded-secret = mkOption {\n+    default = { };\n+    description = ''\n+      Hardcoded file secrets. These should only be used in tests.\n+\n+      They aim to replace the usage of pkgs.writeText in NixOS VM tests\n+      as those make the file world readable\n+      while this module set runtime permissions on the file.\n+      This makes the tests more accurate, ensuring the permissions\n+      set by the contract consumer are correct.\n+    '';\n+    example = lib.literalExpression ''\n+      {\n+        mySecret = {\n+          input = {\n+            user = \"me\";\n+            mode = \"0400\";\n+          };\n+          content = \"My Secret\";\n+        };\n+      }\n+    '';\n+    type = attrsOf (\n+      submodule (\n+        { name, ... }:\n+        {\n+          options = {\n+            input = mkOption {",
+   "id": 3715480574,
+   "line": 46,
+   "original_commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "original_line": 46,
+   "original_position": 46,
+   "original_start_line": null,
+   "path": "nixos/modules/testing/hardcoded-secret.nix",
+   "position": 46,
+   "pull_request_review_id": 4858105589,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-04T19:15:40Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "in practice, i think may be common for modules to have options not specific to a given instance like the `options.testing.hardcoded-secret.<name>` here.\n\nif we were to add those later tho, i would imagine that in the case of this current module one would then want to move the current `options.testing.hardcoded-secret` down.\n\ni'm not sure nixos has a great way of moving options down tho (renamed options are expected to not simultaneously exist as the new of a new option), so in that sense, i think it could be helpful to complicate this module like that already, maybe like my earlier [example](https://github.com/NixOS/nixpkgs/pull/506343/changes#diff-ef033c3c9dfe634dd4478a7eba6ca454fc5ef267a83475c85489eba321fb3f4aR36-R41) there.\n",
+   "commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "created_at": "2026-08-04T19:23:44Z",
+   "diff_hunk": "@@ -0,0 +1,127 @@\n+{\n+  config,\n+  lib,\n+  pkgs,\n+  ...\n+}:\n+let\n+  cfg = config.testing.hardcoded-secret;\n+\n+  inherit (lib) mapAttrs' mkOption nameValuePair;\n+  inherit (lib.types)\n+    attrsOf\n+    str\n+    submodule\n+    ;\n+  inherit (pkgs) writeText;\n+in\n+{\n+  options.testing.hardcoded-secret = mkOption {",
+   "id": 3715532586,
+   "line": 19,
+   "original_commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "original_line": 19,
+   "original_position": 19,
+   "original_start_line": null,
+   "path": "nixos/modules/testing/hardcoded-secret.nix",
+   "position": 19,
+   "pull_request_review_id": 4858165213,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-04T19:23:44Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i seem unable to mark this thread as resolved for some reason",
+   "commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "created_at": "2026-08-04T19:24:20Z",
+   "diff_hunk": "@@ -514,9 +577,15 @@ in\n               install -d ${cfg.settings.generated}\n               if [[ -z \"${toString cfg.mutableSettings}\" || ! -f ${cfg.dataDir}/config.yml ]]; then\n                 env \\\n-                  password=$(< ${cfg.passwordFile}) \\\n-                  jwtSecretKeyFile=$(< ${cfg.jwtSecretKeyFile}) \\\n-                  sessionStoreKeyFile=$(< ${cfg.sessionStoreKeyFile}) \\\n+                  password=$(< ${\n+                    if lib.isPath cfg.passwordFile then cfg.passwordFile else cfg.passwordFile.output.path\n+                  }) \\\n+                  jwtSecretKeyFile=$(< ${\n+                    if lib.isPath cfg.jwtSecretKey then cfg.jwtSecretKey else cfg.jwtSecretKey.output.path\n+                  }) \\\n+                  sessionStoreKeyFile=$(< ${\n+                    if lib.isPath cfg.sessionStoreKey then cfg.sessionStoreKey else cfg.sessionStoreKey.output.path",
+   "id": 3715536045,
+   "in_reply_to_id": 2879710145,
+   "line": 587,
+   "original_commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "original_line": 587,
+   "original_position": 110,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/stash.nix",
+   "position": 110,
+   "pull_request_review_id": 4858169457,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-04T19:24:21Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "id": 3881075031,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-03T08:37:54Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "id": 3884202180,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-03T17:55:00Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "id": 3884319472,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-03T18:15:04Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "id": 3884849990,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-03T20:21:21Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "id": 3885001513,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-03T20:55:58Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "6d5493de9b86649d5d865f8b86b42b6994d894ec",
+   "id": 3885023962,
+   "state": "COMMENTED",
+   "submitted_at": "2026-03-03T21:01:23Z",
+   "user": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "id": 4858105589,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-04T19:15:40Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "id": 4858165213,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-04T19:23:44Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "dea828c56967f3d716b9e2523e867e0af44c62ce",
+   "id": 4858169457,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-04T19:24:20Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-secrets-contract"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-02-28T21:01:54Z",
+   "event": "renamed",
+   "id": 23160094969,
+   "rename": {
+    "from": "Contract secrets",
+    "to": "Contract for secrets"
+   }
+  },
+  {
+   "actor": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-03-07T22:46:47Z",
+   "event": "renamed",
+   "id": 23364936336,
+   "rename": {
+    "from": "Contract for secrets",
+    "to": "Contract for files containing secrets"
+   }
+  },
+  {
+   "actor": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-20T21:31:39Z",
+   "event": "closed",
+   "id": 25778171422,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 1044950,
+    "login": "ibizaman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-08-03T22:45:39Z",
+   "event": "reopened",
+   "id": 28916761185,
+   "state_reason": null
+  }
+ ]
+}

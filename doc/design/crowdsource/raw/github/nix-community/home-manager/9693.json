@@ -1,0 +1,852 @@
+{
+ "comments": [
+  {
+   "body": "That PR is more architectural than it is specific to those packages\r\n\r\nI think the relevant people are @rycee, @khaneliman, @KiaraGrouwstra",
+   "created_at": "2026-07-21T13:56:31Z",
+   "id": 5034930194,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-21T13:56:31Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Btw most of the additional lines are due to nixdoc comments. the rest is because splitting files duplicate some boilerplate of course",
+   "created_at": "2026-07-21T16:47:09Z",
+   "id": 5036657222,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-21T16:47:09Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That PR is good only if we want to keep using those options;\n\nHowever, most of it wouldn't be needed if home manager mirrored NixOS' options, right?\n\nIs there a reason why NixOS options for systemd don't match the ini values? \nI know it doesn't just merely generate the end result file and adds some typing / checks on top of it, but can't it just do this AND mirror the systemd ini schema anyway?",
+   "created_at": "2026-07-21T16:53:52Z",
+   "id": 5036723195,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-21T16:53:52Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "i wouldn't know the answer there.\r\n\r\nthat said, i'm trying to add user services there as well (https://github.com/NixOS/nixpkgs/pull/524517), but also wanna make things more principled upstream (https://github.com/NixOS/nixpkgs/pull/540863).",
+   "created_at": "2026-07-21T16:59:15Z",
+   "id": 5036776176,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-21T16:59:15Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "That's cool, maybe this PR shouldn't be merged, then?\r\n\r\nAnd also, is there someone I can @ mention there who would be able to answer https://github.com/nix-community/home-manager/pull/9693#issuecomment-5036723195 ?",
+   "created_at": "2026-07-21T17:06:00Z",
+   "id": 5036839963,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-21T17:07:35Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@KiaraGrouwstra when your nixpkgs modular services framework in NixOS/nixpkgs#524517 is merged and Home Manager adopts it as a first class citizen by allowing running a modular service directly in HM, lib.hm.systemd.toHmIni and such will be obsolete (for the better)\r\n\r\nSo if this is planned, and doable in the \"short\" term, I don't think this PR is good to be merged since it will create soon-to-be-deprecated libs that users could depend on (it's not the end of the world since we can create the usual deprecation warning anyway, but still)",
+   "created_at": "2026-07-21T18:02:59Z",
+   "id": 5037379384,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-21T18:07:51Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> is there someone I can @ mention there who would be able to answer https://github.com/nix-community/home-manager/pull/9693#issuecomment-5036723195 ?\r\n\r\nperhaps @roberth would know more on systemd use at nixpkgs? otherwise it's probably gonna be a git blame.\r\n\r\n> That's cool, maybe this PR shouldn't be merged, then?\r\n\r\n> @KiaraGrouwstra when your nixpkgs modular services framework in https://github.com/NixOS/nixpkgs/pull/524517 is merged and Home Manager adopts it as a first class citizen by allowing running a modular service directly in HM, lib.hm.systemd.toHmIni and such will be obsolete (for the better)\r\n\r\n> So if this is planned, and doable in the \"short\" term, I don't think this PR is good to be merged since it will create soon-to-be-deprecated libs that users could depend on (it's not the end of the world since we can create the usual deprecation warning anyway, but still)\r\n\r\ni'll try and get a read on where the room is at on the next modular service meeting, maybe that could help.\r\n\r\n\r\n",
+   "created_at": "2026-07-21T19:03:05Z",
+   "id": 5037970134,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-21T19:03:05Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> So if this is planned, and doable in the \"short\" term, I don't think this PR is good to be merged since it will create soon-to-be-deprecated libs that users could depend on (it's not the end of the world since we can create the usual deprecation warning anyway, but still)\r\n\r\nI wouldn't hold the PR for this as modular services stuff seem controversial and might take some time to get merged. \r\nIf it gets merged before 26.11 we dont care about backwards compat, we can scrap api etc otherwise we can alias or update the expressions to become wrappers of nixpkgs' new functions.",
+   "created_at": "2026-07-27T13:26:24Z",
+   "id": 5091907486,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-27T13:26:24Z",
+   "user": {
+    "id": 886074,
+    "login": "teto",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@teto ok then",
+   "created_at": "2026-07-27T13:40:22Z",
+   "id": 5092072687,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-27T13:40:22Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-community/home-manager/pull/9693",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Description\r\n\r\nThis PR extracts Home Manager's internal systemd unit translation logic (`toHmIni`, `toHmIniSocket`, `normalizeTarget`, `envToList`, `pickSection`, `installSection`) into a public library module `lib.hm.systemd` (`modules/lib/systemd.nix`).\r\n\r\nIt enables flake authors maintaining both `nixosModules` and `homeModules` to easily convert and reuse NixOS-style unit definitions in Home Manager without duplicating unit metadata and scripts.\r\n\r\nAdditionally, 5 service modules (`comodoro`, `exo`, `local-ai`, `ollama`, `radicle`) have been refactored to use `lib.hm.systemd.envToList` instead of ad-hoc `mapAttrsToList` string formatting.\r\n\r\nAn alternative is to make Home Manager options to have the same schema as NixOS' ones (or the other way around)\r\nI find it preferable, but don't know if this is possible nor desirable\r\n\r\n### Checklist\r\n\r\n- [x] Change is backwards compatible.\r\n- [x] Code formatted with `nix fmt` or `nix-shell -A dev --run treefmt`.\r\n- [ ] Code tested through `nix build .#test-all` or a targeted `nix run .#tests -- <pattern>`.\r\n- [ ] Test cases updated/added.\r\n- [x] Commit messages are formatted like `{component}: {description}`.\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 9,
+  "created_at": "2026-07-21T13:37:07Z",
+  "draft": false,
+  "id": 4939459017,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "306F87",
+    "default": false,
+    "description": "",
+    "id": 8482203553,
+    "name": "git"
+   },
+   {
+    "color": "bfd4f2",
+    "default": false,
+    "description": "",
+    "id": 8704466584,
+    "name": "productivity"
+   },
+   {
+    "color": "98F34D",
+    "default": false,
+    "description": "",
+    "id": 10546153549,
+    "name": "ai"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 9693,
+  "pull_request": {
+   "diff_url": "https://github.com/nix-community/home-manager/pull/9693.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/nix-community/home-manager/pull/9693.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "open",
+  "state_reason": null,
+  "title": "lib/systemd: expose systemd unit translation helpers",
+  "type": null,
+  "updated_at": "2026-07-28T18:17:52Z",
+  "user": {
+   "id": 76160668,
+   "login": "Malix-Labs",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 257,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "nix-community:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2017-01-14T12:11:06Z",
+    "default_branch": "master",
+    "description": "Manage a user environment using Nix  [maintainer=@khaneliman, @rycee] ",
+    "disabled": false,
+    "fork": false,
+    "forks": 2465,
+    "forks_count": 2465,
+    "full_name": "nix-community/home-manager",
+    "git_commits_url": "https://api.github.com/repos/nix-community/home-manager/git/commits{/sha}",
+    "has_discussions": true,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": true,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-community.github.io/home-manager/",
+    "id": 78938149,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/nix-community/home-manager/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/nix-community/home-manager/milestones{/number}",
+    "name": "home-manager",
+    "open_issues": 1011,
+    "open_issues_count": 1011,
+    "owner": {
+     "id": 33221035,
+     "login": "nix-community",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/nix-community/home-manager/pulls{/number}",
+    "pushed_at": "2026-08-31T03:26:44Z",
+    "size": 355203,
+    "stargazers_count": 10299,
+    "subscription_url": "https://api.github.com/repos/nix-community/home-manager/subscription",
+    "tags_url": "https://api.github.com/repos/nix-community/home-manager/tags",
+    "topics": [
+     "dotfiles",
+     "nix",
+     "nix-dotfiles",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T07:33:23Z",
+    "visibility": "public",
+    "watchers": 10299,
+    "watchers_count": 10299,
+    "web_commit_signoff_required": false
+   },
+   "sha": "10174c0fe02099dbdee2bf918f1a92659fc9217f",
+   "user": {
+    "id": 33221035,
+    "login": "nix-community",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "### Description\r\n\r\nThis PR extracts Home Manager's internal systemd unit translation logic (`toHmIni`, `toHmIniSocket`, `normalizeTarget`, `envToList`, `pickSection`, `installSection`) into a public library module `lib.hm.systemd` (`modules/lib/systemd.nix`).\r\n\r\nIt enables flake authors maintaining both `nixosModules` and `homeModules` to easily convert and reuse NixOS-style unit definitions in Home Manager without duplicating unit metadata and scripts.\r\n\r\nAdditionally, 5 service modules (`comodoro`, `exo`, `local-ai`, `ollama`, `radicle`) have been refactored to use `lib.hm.systemd.envToList` instead of ad-hoc `mapAttrsToList` string formatting.\r\n\r\nAn alternative is to make Home Manager options to have the same schema as NixOS' ones (or the other way around)\r\nI find it preferable, but don't know if this is possible nor desirable\r\n\r\n### Checklist\r\n\r\n- [x] Change is backwards compatible.\r\n- [x] Code formatted with `nix fmt` or `nix-shell -A dev --run treefmt`.\r\n- [ ] Code tested through `nix build .#test-all` or a targeted `nix run .#tests -- <pattern>`.\r\n- [ ] Test cases updated/added.\r\n- [x] Commit messages are formatted like `{component}: {description}`.\r\n",
+  "changed_files": 13,
+  "closed_at": null,
+  "comments": 9,
+  "commits": 5,
+  "created_at": "2026-07-21T13:37:07Z",
+  "deletions": 69,
+  "diff_url": "https://github.com/nix-community/home-manager/pull/9693.diff",
+  "draft": false,
+  "head": {
+   "label": "Malix-Labs:expose_services-modular",
+   "ref": "expose_services-modular",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2025-12-19T21:28:45Z",
+    "default_branch": "master",
+    "description": "Manage a user environment using Nix  [maintainer=@khaneliman, @rycee] ",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "Malix-Labs/home-manager",
+    "git_commits_url": "https://api.github.com/repos/Malix-Labs/home-manager/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": true,
+    "homepage": "https://nix-community.github.io/home-manager/",
+    "id": 1119793089,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/Malix-Labs/home-manager/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/Malix-Labs/home-manager/milestones{/number}",
+    "name": "home-manager",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 76160668,
+     "login": "Malix-Labs",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/Malix-Labs/home-manager/pulls{/number}",
+    "pushed_at": "2026-08-17T21:56:03Z",
+    "size": 149724,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/Malix-Labs/home-manager/subscription",
+    "tags_url": "https://api.github.com/repos/Malix-Labs/home-manager/tags",
+    "topics": [],
+    "updated_at": "2026-07-25T14:00:09Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "10d5a0a542c6cbbb063c0345fff7c57b5df4dffe",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4100057650,
+  "labels": [
+   {
+    "color": "306F87",
+    "default": false,
+    "description": "",
+    "id": 8482203553,
+    "name": "git"
+   },
+   {
+    "color": "bfd4f2",
+    "default": false,
+    "description": "",
+    "id": 8704466584,
+    "name": "productivity"
+   },
+   {
+    "color": "98F34D",
+    "default": false,
+    "description": "",
+    "id": 10546153549,
+    "name": "ai"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merge_commit_sha": "ca446490c40a7286b1a09f92c0eb4792ce7d705b",
+  "mergeable": true,
+  "mergeable_state": "clean",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 9693,
+  "patch_url": "https://github.com/nix-community/home-manager/pull/9693.patch",
+  "rebaseable": true,
+  "requested_reviewers": [
+   {
+    "id": 280235,
+    "login": "terlar",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 427866,
+    "login": "matthiasbeyer",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 542154,
+    "login": "lorenzleutgeb",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 10437171,
+    "login": "soywod",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 33558632,
+    "login": "ipsavitsky",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 99584622,
+    "login": "0xdsqr",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 6,
+  "state": "open",
+  "title": "lib/systemd: expose systemd unit translation helpers",
+  "updated_at": "2026-07-28T18:17:52Z",
+  "user": {
+   "id": 76160668,
+   "login": "Malix-Labs",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "nix-community/home-manager#9693",
+ "review_comments": [
+  {
+   "body": "issue (blocking): fix directive casing before publishing this API\n\n`pickSection` uses `lib.toSentenceCase`, which emits `Bindsto`, `Partof`, `Onfailure`, and `Onsuccess`; systemd will not apply the intended dependency directives. Use an explicit key mapping and add direct tests for the exported translators, or keep them private.",
+   "commit_id": "10d5a0a542c6cbbb063c0345fff7c57b5df4dffe",
+   "created_at": "2026-07-22T03:24:37Z",
+   "diff_hunk": "@@ -0,0 +1,129 @@\n+{ lib }:\n+\n+let\n+  /*\n+    Common NixOS-style systemd unit option keys that are mapped to PascalCase\n+    [Unit] section keys in Home Manager INI unit files.\n+  */\n+  unitAttrKeys = [\n+    \"description\"\n+    \"documentation\"\n+    \"requires\"\n+    \"wants\"\n+    \"upholds\"\n+    \"after\"\n+    \"before\"\n+    \"bindsTo\"\n+    \"partOf\"\n+    \"conflicts\"\n+    \"requisite\"\n+    \"onFailure\"\n+    \"onSuccess\"\n+  ];\n+\n+  /*\n+    Translate a system-level target (e.g. `multi-user.target`) to its user-session\n+    equivalent (`default.target`).\n+\n+    Type: normalizeTarget :: String -> String\n+  */\n+  normalizeTarget = t: if t == \"multi-user.target\" then \"default.target\" else t;\n+\n+  /*\n+    Normalize target string or list of target strings.\n+\n+    Type: normalizeTargets :: (String | List String) -> (String | List String)\n+  */\n+  normalizeTargets = v: if lib.isList v then map normalizeTarget v else v;\n+\n+  /*\n+    Filter and convert camelCase NixOS unit option keys into PascalCase INI\n+    section keys using `lib.toSentenceCase`.\n+\n+    Type: pickSection :: List String -> AttrSet -> AttrSet\n+  */\n+  pickSection =\n+    keys: src:\n+    lib.listToAttrs (\n+      lib.concatMap (\n+        k:\n+        lib.optional (src ? ${k} && src.${k} != null && src.${k} != [ ]) {\n+          name = lib.toSentenceCase k;\n+          value = normalizeTargets src.${k};\n+        }\n+      ) keys\n+    );\n+\n+  /*\n+    Convert an environment attribute set into a list of `KEY=VALUE` strings\n+    for systemd INI `Environment=` settings.\n+\n+    Type: envToList :: AttrSet -> List String\n+  */\n+  envToList =\n+    env: lib.mapAttrsToList (k: v: \"${k}=${toString v}\") (lib.filterAttrs (_: v: v != null) env);\n+\n+  /*\n+    Construct the `[Install]` INI section mapping `wantedBy` and `requiredBy` to\n+    normalized user target names.\n+\n+    Type: installSection :: AttrSet -> AttrSet\n+  */\n+  installSection =\n+    u:\n+    lib.filterAttrs (_: v: v != [ ]) {\n+      WantedBy = map normalizeTarget (u.wantedBy or [ ]);\n+      RequiredBy = map normalizeTarget (u.requiredBy or [ ]);\n+    };\n+\n+  /*\n+    Translate a NixOS-style systemd unit attrset (wantedBy, serviceConfig,\n+    unitConfig, environment, ...) into the section-based INI shape that\n+    Home Manager's `systemd.user.<unitType>` expects (Unit/Service/Install).\n+    Only the common keys are mapped; uncommon options can still be set\n+    explicitly via `unitConfig` / `serviceConfig` / `socketConfig`.\n+\n+    Type: toHmIni :: AttrSet -> AttrSet\n+  */\n+  toHmIni = unit: {\n+    Unit = pickSection unitAttrKeys unit // (unit.unitConfig or { });\n+    Service =\n+      (unit.serviceConfig or { })\n+      // lib.optionalAttrs (unit ? environment && unit.environment != { }) {\n+        Environment = envToList unit.environment;\n+      };\n+    Install = installSection unit;\n+  };\n+\n+  /*\n+    Translate a NixOS-style systemd socket unit attrset into the section-based\n+    INI shape that Home Manager expects (Unit/Socket/Install). Maps\n+    `listenStreams` and `listenDatagrams` to `ListenStream` and `ListenDatagram`.\n+\n+    Type: toHmIniSocket :: AttrSet -> AttrSet\n+  */\n+  toHmIniSocket = sock: {\n+    Unit = pickSection unitAttrKeys sock // (sock.unitConfig or { });\n+    Socket =\n+      (sock.socketConfig or { })\n+      // lib.optionalAttrs (sock ? listenStreams && sock.listenStreams != [ ]) {\n+        ListenStream = sock.listenStreams;\n+      }\n+      // lib.optionalAttrs (sock ? listenDatagrams && sock.listenDatagrams != [ ]) {\n+        ListenDatagram = sock.listenDatagrams;\n+      };\n+    Install = installSection sock;\n+  };\n+in\n+{\n+  inherit\n+    unitAttrKeys\n+    normalizeTarget\n+    normalizeTargets\n+    pickSection\n+    envToList\n+    installSection",
+   "id": 3627219785,
+   "line": 133,
+   "original_commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "original_line": 125,
+   "original_position": 125,
+   "original_start_line": null,
+   "path": "modules/lib/systemd.nix",
+   "position": 133,
+   "pull_request_review_id": 4750724336,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-28T17:39:20Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "todo (non-blocking): pin the corrected environment semantics\n\nThis switch intentionally improves behavior: null entries are omitted, while declared-valid path and package values no longer abort evaluation. Add a Radicle service test covering null omission and path/package serialization so this user-visible change stays stable.",
+   "commit_id": "10d5a0a542c6cbbb063c0345fff7c57b5df4dffe",
+   "created_at": "2026-07-22T03:24:37Z",
+   "diff_hunk": "@@ -34,7 +32,7 @@ let\n   radicleHome = config.home.homeDirectory + \"/.radicle\";\n \n   gitPath = [ \"PATH=${getBin pkgs.gitMinimal}/bin\" ];\n-  env = attrs: (mapAttrsToList (generators.mkKeyValueDefault { } \"=\") attrs) ++ gitPath;\n+  env = attrs: (lib.hm.systemd.envToList attrs) ++ gitPath;",
+   "id": 3627219789,
+   "line": 35,
+   "original_commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "original_line": 35,
+   "original_position": 17,
+   "original_start_line": null,
+   "path": "modules/services/radicle.nix",
+   "position": 17,
+   "pull_request_review_id": 4750724336,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-28T17:39:20Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Add a Radicle service test covering null omission and path/package serialization so this user-visible change stays stable.\r\n\r\nShould this be handled in this PR or should I let this to Radicle's module maintainers?",
+   "commit_id": "10d5a0a542c6cbbb063c0345fff7c57b5df4dffe",
+   "created_at": "2026-07-28T17:42:24Z",
+   "diff_hunk": "@@ -34,7 +32,7 @@ let\n   radicleHome = config.home.homeDirectory + \"/.radicle\";\n \n   gitPath = [ \"PATH=${getBin pkgs.gitMinimal}/bin\" ];\n-  env = attrs: (mapAttrsToList (generators.mkKeyValueDefault { } \"=\") attrs) ++ gitPath;\n+  env = attrs: (lib.hm.systemd.envToList attrs) ++ gitPath;",
+   "id": 3667893119,
+   "in_reply_to_id": 3627219789,
+   "line": 35,
+   "original_commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "original_line": 35,
+   "original_position": 17,
+   "original_start_line": null,
+   "path": "modules/services/radicle.nix",
+   "position": 17,
+   "pull_request_review_id": 4800250330,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-28T17:46:11Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It'd be appreciated, but not required. ",
+   "commit_id": "10d5a0a542c6cbbb063c0345fff7c57b5df4dffe",
+   "created_at": "2026-07-28T17:46:14Z",
+   "diff_hunk": "@@ -34,7 +32,7 @@ let\n   radicleHome = config.home.homeDirectory + \"/.radicle\";\n \n   gitPath = [ \"PATH=${getBin pkgs.gitMinimal}/bin\" ];\n-  env = attrs: (mapAttrsToList (generators.mkKeyValueDefault { } \"=\") attrs) ++ gitPath;\n+  env = attrs: (lib.hm.systemd.envToList attrs) ++ gitPath;",
+   "id": 3667917692,
+   "in_reply_to_id": 3627219789,
+   "line": 35,
+   "original_commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "original_line": 35,
+   "original_position": 17,
+   "original_start_line": null,
+   "path": "modules/services/radicle.nix",
+   "position": 17,
+   "pull_request_review_id": 4800280173,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-28T17:46:14Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "done",
+   "commit_id": "10d5a0a542c6cbbb063c0345fff7c57b5df4dffe",
+   "created_at": "2026-07-28T18:07:33Z",
+   "diff_hunk": "@@ -0,0 +1,129 @@\n+{ lib }:\n+\n+let\n+  /*\n+    Common NixOS-style systemd unit option keys that are mapped to PascalCase\n+    [Unit] section keys in Home Manager INI unit files.\n+  */\n+  unitAttrKeys = [\n+    \"description\"\n+    \"documentation\"\n+    \"requires\"\n+    \"wants\"\n+    \"upholds\"\n+    \"after\"\n+    \"before\"\n+    \"bindsTo\"\n+    \"partOf\"\n+    \"conflicts\"\n+    \"requisite\"\n+    \"onFailure\"\n+    \"onSuccess\"\n+  ];\n+\n+  /*\n+    Translate a system-level target (e.g. `multi-user.target`) to its user-session\n+    equivalent (`default.target`).\n+\n+    Type: normalizeTarget :: String -> String\n+  */\n+  normalizeTarget = t: if t == \"multi-user.target\" then \"default.target\" else t;\n+\n+  /*\n+    Normalize target string or list of target strings.\n+\n+    Type: normalizeTargets :: (String | List String) -> (String | List String)\n+  */\n+  normalizeTargets = v: if lib.isList v then map normalizeTarget v else v;\n+\n+  /*\n+    Filter and convert camelCase NixOS unit option keys into PascalCase INI\n+    section keys using `lib.toSentenceCase`.\n+\n+    Type: pickSection :: List String -> AttrSet -> AttrSet\n+  */\n+  pickSection =\n+    keys: src:\n+    lib.listToAttrs (\n+      lib.concatMap (\n+        k:\n+        lib.optional (src ? ${k} && src.${k} != null && src.${k} != [ ]) {\n+          name = lib.toSentenceCase k;\n+          value = normalizeTargets src.${k};\n+        }\n+      ) keys\n+    );\n+\n+  /*\n+    Convert an environment attribute set into a list of `KEY=VALUE` strings\n+    for systemd INI `Environment=` settings.\n+\n+    Type: envToList :: AttrSet -> List String\n+  */\n+  envToList =\n+    env: lib.mapAttrsToList (k: v: \"${k}=${toString v}\") (lib.filterAttrs (_: v: v != null) env);\n+\n+  /*\n+    Construct the `[Install]` INI section mapping `wantedBy` and `requiredBy` to\n+    normalized user target names.\n+\n+    Type: installSection :: AttrSet -> AttrSet\n+  */\n+  installSection =\n+    u:\n+    lib.filterAttrs (_: v: v != [ ]) {\n+      WantedBy = map normalizeTarget (u.wantedBy or [ ]);\n+      RequiredBy = map normalizeTarget (u.requiredBy or [ ]);\n+    };\n+\n+  /*\n+    Translate a NixOS-style systemd unit attrset (wantedBy, serviceConfig,\n+    unitConfig, environment, ...) into the section-based INI shape that\n+    Home Manager's `systemd.user.<unitType>` expects (Unit/Service/Install).\n+    Only the common keys are mapped; uncommon options can still be set\n+    explicitly via `unitConfig` / `serviceConfig` / `socketConfig`.\n+\n+    Type: toHmIni :: AttrSet -> AttrSet\n+  */\n+  toHmIni = unit: {\n+    Unit = pickSection unitAttrKeys unit // (unit.unitConfig or { });\n+    Service =\n+      (unit.serviceConfig or { })\n+      // lib.optionalAttrs (unit ? environment && unit.environment != { }) {\n+        Environment = envToList unit.environment;\n+      };\n+    Install = installSection unit;\n+  };\n+\n+  /*\n+    Translate a NixOS-style systemd socket unit attrset into the section-based\n+    INI shape that Home Manager expects (Unit/Socket/Install). Maps\n+    `listenStreams` and `listenDatagrams` to `ListenStream` and `ListenDatagram`.\n+\n+    Type: toHmIniSocket :: AttrSet -> AttrSet\n+  */\n+  toHmIniSocket = sock: {\n+    Unit = pickSection unitAttrKeys sock // (sock.unitConfig or { });\n+    Socket =\n+      (sock.socketConfig or { })\n+      // lib.optionalAttrs (sock ? listenStreams && sock.listenStreams != [ ]) {\n+        ListenStream = sock.listenStreams;\n+      }\n+      // lib.optionalAttrs (sock ? listenDatagrams && sock.listenDatagrams != [ ]) {\n+        ListenDatagram = sock.listenDatagrams;\n+      };\n+    Install = installSection sock;\n+  };\n+in\n+{\n+  inherit\n+    unitAttrKeys\n+    normalizeTarget\n+    normalizeTargets\n+    pickSection\n+    envToList\n+    installSection",
+   "id": 3668068099,
+   "in_reply_to_id": 3627219785,
+   "line": 133,
+   "original_commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "original_line": 125,
+   "original_position": 125,
+   "original_start_line": null,
+   "path": "modules/lib/systemd.nix",
+   "position": 133,
+   "pull_request_review_id": 4800458984,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-28T18:12:42Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "done",
+   "commit_id": "10d5a0a542c6cbbb063c0345fff7c57b5df4dffe",
+   "created_at": "2026-07-28T18:09:39Z",
+   "diff_hunk": "@@ -34,7 +32,7 @@ let\n   radicleHome = config.home.homeDirectory + \"/.radicle\";\n \n   gitPath = [ \"PATH=${getBin pkgs.gitMinimal}/bin\" ];\n-  env = attrs: (mapAttrsToList (generators.mkKeyValueDefault { } \"=\") attrs) ++ gitPath;\n+  env = attrs: (lib.hm.systemd.envToList attrs) ++ gitPath;",
+   "id": 3668081635,
+   "in_reply_to_id": 3627219789,
+   "line": 35,
+   "original_commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "original_line": 35,
+   "original_position": 17,
+   "original_start_line": null,
+   "path": "modules/services/radicle.nix",
+   "position": 17,
+   "pull_request_review_id": 4800475530,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-07-28T18:12:32Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "this looks much cleaner already compared to my original there - thanks!",
+   "commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "id": 4746890242,
+   "state": "APPROVED",
+   "submitted_at": "2026-07-21T16:43:41Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "id": 4787465411,
+   "state": "APPROVED",
+   "submitted_at": "2026-07-27T13:26:30Z",
+   "user": {
+    "id": 886074,
+    "login": "teto",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The extraction is mechanically sound, but the public translator currently mis-cases several multiword systemd directives and has no direct API coverage. The Radicle environment conversion looks corrective and is non-blocking once its intended behavior is tested.",
+   "commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "id": 4750724336,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-28T17:39:20Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "id": 4800250330,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-28T17:42:24Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "id": 4800280173,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-28T17:46:14Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "id": 4800458984,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-28T18:07:33Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "38507d9536755f5868981ca9e2ff9954bbce02d5",
+   "id": 4800475530,
+   "state": "COMMENTED",
+   "submitted_at": "2026-07-28T18:09:40Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "home-manager-prs"
+ ],
+ "timeline": []
+}

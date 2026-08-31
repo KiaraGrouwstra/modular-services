@@ -1,0 +1,165 @@
+{
+ "comments": [
+  {
+   "body": "I got broken builds on `x86_64-linux`\n\n`/lib/services/lib.nix` does not exist in `nixos-25.11` branch of `nixpkgs`.\n\nas far as I can tell `nixpkgs-unstable` has this path, so it's breaking stable and everything older.",
+   "created_at": "2026-05-11T10:29:12Z",
+   "id": 4419764054,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-11T10:29:12Z",
+   "user": {
+    "id": 36997087,
+    "login": "evlli",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Thanks for the report.\n\nThis looks like a branch mismatch rather than a supported compatibility issue. Home Manager `master` tracks unstable nixpkgs, and is not expected to work with stable release branches such as `nixos-25.11`.\n\nPlease use the Home Manager branch that matches the nixpkgs branch used to evaluate your configuration. For `nixos-25.11`, that means `home-manager/release-25.11`. If you want to follow Home Manager `master`, nixpkgs should follow `nixpkgs-unstable` / `nixos-unstable` as well.\n\nClosing as unsupported configuration. If this still reproduces with matching Home Manager and nixpkgs branches, please reopen  with the exact revisions and a minimal reproduction.",
+   "created_at": "2026-05-13T16:35:32Z",
+   "id": 4443229752,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 3,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 3
+   },
+   "updated_at": "2026-05-13T16:36:31Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-community/home-manager/issues/9263",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Are you following the right branch?\n\n- [x] My Nixpkgs and Home Manager versions are in sync\n\n### Is there an existing issue for this?\n\n- [x] I have searched the existing issues\n\n### Issue description\n\nI believe https://github.com/nix-community/home-manager/commit/fb6a0c6d398179f746ac6636d1acdf757e19eded has broken support for Darwin\n\n### Maintainer CC\n\n_No response_\n\n### System information\n\n```markdown\n- system: `\"aarch64-darwin\"`\n - host os: `Darwin 25.4.0, macOS 26.4.1`\n - multi-user?: `yes`\n - sandbox: `no`\n - version: `nix-env (Determinate Nix 3.19.1) 2.34.6`\n - nixpkgs: `/nix/store/ps8fhbglachs62pf47aw3rzx8zfij8sp-source`\n```",
+  "closed_at": "2026-05-13T16:35:33Z",
+  "closed_by": {
+   "id": 1778670,
+   "login": "khaneliman",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 2,
+  "created_at": "2026-05-05T15:21:15Z",
+  "id": 4385204219,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "ee0701",
+    "default": true,
+    "description": null,
+    "id": 518121614,
+    "name": "bug"
+   },
+   {
+    "color": "006b75",
+    "default": false,
+    "description": "Issues or feature request that have not been triaged yet",
+    "id": 3183407014,
+    "name": "triage"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 9263,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "closed",
+  "state_reason": "completed",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "bug: Darwin broken after modular services support",
+  "type": null,
+  "updated_at": "2026-05-13T16:36:31Z",
+  "user": {
+   "id": 5804237,
+   "login": "hurricanehrndz",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "nix-community/home-manager#9263",
+ "sources": [
+  "home-manager-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 5804237,
+    "login": "hurricanehrndz",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-05T15:21:26Z",
+   "event": "renamed",
+   "id": 25182724958,
+   "rename": {
+    "from": "bug: Darwing builds broken after modular services support",
+    "to": "bug: Darwin broken after modular services support"
+   }
+  },
+  {
+   "actor": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-13T16:35:33Z",
+   "event": "closed",
+   "id": 25491650866,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

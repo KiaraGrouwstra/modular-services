@@ -1,0 +1,815 @@
+{
+ "comments": [
+  {
+   "body": "I'm sure I already saw an issue or at least some discussion regarding this recently... Can't remember where exactly though.",
+   "created_at": "2021-09-09T13:04:39Z",
+   "id": 916072712,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-09-09T13:04:39Z",
+   "user": {
+    "id": 2588851,
+    "login": "jansol",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It comes up in discussions every now and then, but usually it dies down because of scope creep and/or the prospect of a large and/or invasive change. I'd be interested to know of past issues, threads, etc, so I can address any concerns from those. I couldn't find an issue for this idea, but maybe I searched wrong.",
+   "created_at": "2021-09-09T13:10:31Z",
+   "id": 916077694,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-09-09T13:10:31Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Ah, it was this one: #57477",
+   "created_at": "2021-09-09T13:13:01Z",
+   "id": 916079508,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2021-09-09T13:13:01Z",
+   "user": {
+    "id": 2588851,
+    "login": "jansol",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The problem with modules is just loading them can have side effects (even though well-designed modules put all functionality behind enable flags.) This means they can't be lazily evaluated like packages, which would be the ideal imo.",
+   "created_at": "2021-09-10T13:31:22Z",
+   "id": 916906863,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2021-09-10T13:31:22Z",
+   "user": {
+    "id": 2133510,
+    "login": "jbalme",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This is also related to https://github.com/NixOS/nixpkgs/issues/79943 and [RFC0022](https://github.com/NixOS/rfcs/pull/22) as well.",
+   "created_at": "2021-09-10T21:27:19Z",
+   "id": 917222823,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2021-09-10T21:27:19Z",
+   "user": {
+    "id": 2817565,
+    "login": "rnhmjoj",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This is gathering more attention than I expected.\r\n\r\n@jbalme That's a correct intuition for why we can't fix this with a localized change in the module system in `nixpkgs/lib`.\r\n\r\n@rnhmjoj Thanks!\r\n\r\nIt seems that these efforts were cut short because of flakes. Flakes are a fairly low level system of distributing expressions, not modules specifically. Flakes solve a problem that is largely independent: moving the files, whereas the performance can be fixed by refactoring the files. Such refactoring needs to happen before the modules can be moved, so it is not a wasted effort.\r\n\r\nThat said, I do think we tend to underestimate the value of having a somewhat coherent distribution of modules. We'll lose that if we switch entirely. Making broad changes to the NixOS modules will be much more painful because all the individual maintainers need to reinvent the such migrations. Flakes could be extended with versioning features perhaps to relieve some of the pain. Per-repo tooling is also a big cost.\r\n\r\n------\r\n\r\n_What my issue is about_\r\n\r\nBasically, [RFC 22](https://github.com/NixOS/rfcs/pull/22) can be picked up. I've considered working on this issue in coming December, but the restructuring technique employed should be agreed on for such an effort to be effective. I'll describe the steps summarily here:\r\n\r\nThe first goal is to provide a new entrypoints into NixOS that do not make use of the complete module list. I'd probably start with a module that builds `/etc` and `toplevel`, which seem to be some of the least optional aspects of what NixOS can hypothetically be.\r\n\r\nTo bring the _`imports` closure_ down to this minimum, I may encounter some dependencies on modules that are not essential to `/etc` and `toplevel`. These dependencies can be inverted, using new options if necessary. An alternative technique is to check `options?foo.bar` before defining anything (`optionals`, not `mkIf`!), but this is far less preferable. I believe this technique is only appropriate for out-of-tree compatibility logic.\r\n\r\nWith this core in place, new features can be refactored to make their closures minimal too.\r\n\r\nEventually, `services` can be added, with its infamously inefficient `enable` options. Instead of trying to model the problem in the module system somehow, I suggest moving away from this pattern. This can be done in a backwards compatible way. `lib.nixosSystem` will continue to function the way it does.\r\n\r\n_An illustration of what the `imports` relation looks like (arrows between boxes) and how they're referenced (arrows without boxes)._\r\n\r\n```\r\nnixosConfigurations.my-laptop\r\n          │\r\n          │\r\n          │\r\n          └────────►lib.nixosSystem\r\n                           │\r\n                           │\r\n                           │\r\n                           │       ┌──────────────────┐      ┌───────────────────────────┐\r\n                           └───────► modules-list.nix ├──────► services/foo/optional.nix │\r\n                                   └──────────────────┘      └─┬───────────▲─────────────┘\r\n                                                               │           │\r\n                                             ┌─────────────────┘           │\r\n nixosConfigurations.some-server             │                             │\r\n        │ │                        ┌─────────▼────────┐      ┌─────────────┴─────────────┐\r\n        │ │                        │ systemd.nix      │      │ services/foo/default.nix  │\r\n        │ │                        └─────────┬────────┘      └─────────────▲─────────────┘\r\n        │ └────────►lib.nixosCore            │                             │\r\n        │                  │                 │                             │\r\n        │                  │                 │                             │\r\n        │                  │       ┌─────────▼────────┐                    │\r\n        │                  └───────► etc.nix          │                    │\r\n        │                          └──────────────────┘                    │\r\n        │                                                                  │\r\n        │                                                                  │\r\n        └──────────────────────────────────────────────────────────────────┘\r\n```\r\n\r\nNotable changes when applying this pattern\r\n - The nixos configuration of some-server needs to reference the `foo` service via `imports`, because it doesn't use `modules-list.nix`\r\n - The foo module was moved to `foo/optional.nix`. `foo/default.nix` imports `foo/optional.nix` and enables it. This is a low tech way to avoid having to enable services twice (imports, enable). A fancier solution is outside the scope, because it can be applied later with little effort.\r\n - Leaving `systemd.nix` out of `nixosCore` seems like wishful thinking today, but it lowers the bar for experimentation. The next init system tinkerer won't have to extract or reinvent `/etc`. Let's not focus on this though. It's more important that other system services can be included similarly.\r\n - Speaking of including other services. Sometimes we don't want to enable them, in which case we can either\r\n     - depend on an extracted interface (`options` in a separate module)\r\n     - only set the relevant `config` entries as follows `optionals (options?services.someOptionalService) { services.someOptionalService.settings.foo.bar = true; }` to avoid the otherwise problematic undeclared option errors\r\n\r\nThere's a couple of solutions and non-issues that I'm forgetting to write about right now.\r\n\r\n------\r\n\r\n_What's next?_\r\n\r\nI'm glad I've shared my ideas, but I won't be able to spend much time at all on it in the coming months. On the plus side, this means that if you want to give it a go, it won't be a duplicated effort. Not that it would matter, because it's probably a good learning experience.",
+   "created_at": "2021-09-10T22:52:46Z",
+   "id": 917257915,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2021-09-10T22:52:46Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It _is_ possible to do dynamic `imports` in a staged manner using submodules. However, I believe this to be a distraction because it is quite limiting and doesn't solve the problem completely, as we still have to process a list of all modules every time. Nonetheless, I'll include a proof of concept for completeness, and in case my assessment is wrong.\r\n\r\nThe significant limitation is that it is staged. The modules that are dynamically imported can not perform dynamic imports themselves. All the logic that could produce `imports` must reside at the root of the config tree, outside the `configuration` submodule in the proof of concept; a partitioned namespace apart from all the normal options.\r\n~I am not convinced that this logic would amount to something different than building a closure of `imports`, just like `imports` already does by itself.~ This solution can provide a more predictable module ordering than using `imports` directly.\r\n\r\n<details><summary>Proof of Concept: modules producing dynamic imports with a necessarily limited scope of writing</summary>\r\n\r\n-----\r\n\r\n`staged-imports.nix`\r\n```nix\r\nlet\r\n  coreModule =\r\n    { lib, config, ... }:\r\n    {\r\n      options = {\r\n        importList = lib.mkOption {\r\n          type = lib.types.listOf lib.types.unspecified;\r\n        };\r\n\r\n        configuration = lib.mkOption {\r\n          type = lib.types.submoduleWith { modules = [ initSystemModule ]; };\r\n        };\r\n      };\r\n\r\n      config = {\r\n        configuration = { ... }: {\r\n          imports = config.importList;\r\n        };\r\n      };\r\n    };\r\n\r\n  serviceModule =\r\n    { lib, config, ... }: {\r\n      options = {\r\n        foo.enable = lib.mkEnableOption \"foo\";\r\n      };\r\n      config = lib.mkIf config.foo.enable {\r\n        importList = [ fooModule ];\r\n      };\r\n    };\r\n\r\n  initSystemModule = { lib, ... }: {\r\n    options = {\r\n      services = lib.mkOption {\r\n        type = lib.types.listOf lib.types.str;\r\n      };\r\n    };\r\n  };\r\n\r\n  fooModule = { ... }: {\r\n    config = {\r\n      services = [ \"foo\" ];\r\n    };\r\n  };\r\n\r\n  # something like configuration.nix\r\n  configurationModule = { ... }: {\r\n    foo.enable = true;\r\n  };\r\n\r\n  lib = import ./lib;\r\nin lib.evalModules { modules = [ coreModule serviceModule configurationModule ]; }\r\n```\r\n\r\n`terminal`\r\n```console\r\n$ nix repl staged-imports.nix\r\nnix-repl> config.configuration.services\r\n[ \"foo\" ]\r\n\r\n```\r\n\r\n\r\n</details>",
+   "created_at": "2021-10-03T20:27:06Z",
+   "id": 933019922,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2021-10-04T11:29:40Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "hi @roberth :wave:\r\n\r\nuntil this issue is resolved what is my best course of action? specify a [baseModules](https://github.com/NixOS/nixpkgs/blob/46ec6ef07f11ffa2ef8d95cb7c9faadd35b917c9/nixos/lib/eval-config.nix#L22) argument to [eval-config.nix](https://github.com/NixOS/nixpkgs/blob/master/nixos/lib/eval-config.nix) which is a whittled down list of exactly what i need?",
+   "created_at": "2024-01-10T23:36:49Z",
+   "id": 1885927082,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-01-10T23:36:49Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@aanderse While that is a possibility, it is a bit fragile, because it will not take into account new mandatory modules. Usually that leads to an evaluation error, but if not, it could be very bad for your deployment.\r\n\r\nTo do it properly, I think we should at least identify two sets of modules and separate those in Nixpkgs:\r\n - \"core\" modules that are always required, and which you will always want to import\r\n - \"optional\" modules that are imported by default when using the traditional entrypoints without \"special\" arguments such as `baseModules`, but which include everything from postgres to whatever obscure program or whatever.\r\n\r\nThat way, we put an upper bound on how bad it could get.\r\n\r\nTo make it work well *in general*, this concept needs more buy-in from the community.\r\n\r\nI've done some experimental work which is only used in some tests as of now.\r\n\r\n- `nixos.evalModules`, which is meant as a minimal entrypoint, not unlike `eval-config.nix`, but actually minimal by default, and without inheriting legacy complexity. (`nixos` referring to `inputs.nixpkgs.lib.nixos` or `import <nixpkgs/nixos/lib>`)\r\n\r\n- `nixosTests.etc` and one or two other tests that only use this new \"minimal\" infrastructure.\r\n\r\nWhile this works well enough, it is not well known. That's not a problem in itself, but something to be aware of.\r\nAlso, as actually using this becomes feasible, we should document it. It's a bit of a chicken and egg problem to not document such experimental-ish things, so this lack of docs in the manual would be really good to start fixing.\r\n\r\nThe crucial thing that's missing right now, is an actually useful and meaningful `imports` graph. Currently, this graph is hardly a graph, but a very flat one that imports everything from basically the root. This is a local optimum where it is simple, but importing anything but that root is not guaranteed to be complete.\r\nIn order to use make effective use of optional modules, they need to have a reasonably complete `imports`, and this should be tested. So one of the ways forward is to start writing NixOS tests in this way. (ie extend `nixos/lib/testing/nodes.nix` to allow use of a different entrypoint and start using that in tests. For this in turn it'd help a lot to make test matrixes easier, because we need both traditional and minimal usages to work - although that's falling to deep into the rabbit hole perhaps? Nonetheless, see https://github.com/NixOS/nixpkgs/pull/176557#issuecomment-1554080211)\r\nTo make the testing more effective, it would also help a lot if we could make ofborg aware of a mapping from files to relevant tests. Package-based change detection is not going to trigger the right tests for NixOS, if any at all.\r\n\r\nBy solving these problems, we have a coherent story for supporting both traditional and minimal use of modules, and we can explain why the small changes we need are useful. For instance, adding traditionally redundant imports currently leads to some resistance and some might even \"clean them up\".",
+   "created_at": "2024-01-11T13:08:13Z",
+   "id": 1887130285,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2024-01-11T13:08:13Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "thanks for the helpful response @roberth - as always, very thorough :heart:",
+   "created_at": "2024-01-11T14:57:20Z",
+   "id": 1887359186,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-01-11T14:57:20Z",
+   "user": {
+    "id": 7755101,
+    "login": "aanderse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This logic is not only related to performance. It can be problematic (and even dangerous sometimes)\r\n\r\nSee an example just found: https://github.com/NixOS/nixpkgs/issues/305304",
+   "created_at": "2024-04-19T19:49:41Z",
+   "id": 2067193173,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-04-19T19:49:41Z",
+   "user": {
+    "id": 42209822,
+    "login": "Aleksanaa",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Would it be possible to construct the import graph using the module system's existing options?\r\n\r\nWhenever a service needs i.e. postgres, they set `services.postgres.enable = true`. Couldn't we make it so that, initially, the posgres module only exists as a stub `.enable` option which, upon enablement, imports the actual postgres module?  \r\nThat would side-step the issue of individual modules needing to explicitly declare dependencies for non-core modules because they already do so via enable options.\r\n\r\nOf course such optional modules would have some limitations such that `config` they set is only active when the enable option is true.  \r\nMost service modules we have are already set up like that however (or could trivially be converted) as this is an existing convention in NixOS. All of these would just be made to behave lazily like that at essentially no cost.\r\n\r\nThat wouldn't be a silver bullet fixing performance issues all at once but it should at least remove an entire category of modules (optional services you don't care about) from the user's module system eval.  \r\nIt'd also open a path towards incremental progress by people converting more modules to such \"standard\" modules (guarded behind an import condition) to gradually improve performance.\r\n\r\nA further step that could be done would be to broaden the enablement condition to also include arbitrary options under the module's \"namespace\" being set. The foo module could be imported when `services.foo != { }` for instance. This would be handy for modules that don't have a typical `.enable` option but are only active when some option is in a non-default config.  \r\nThis would again rely on existing conventions (everything under an attr is handled by one module) but I think that's at the very least a good starting point.",
+   "created_at": "2024-06-29T18:23:37Z",
+   "id": 2198285785,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-06-29T18:23:37Z",
+   "user": {
+    "id": 18599032,
+    "login": "Atemu",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Couldn't we make it so that, initially, the posgres module only exists as a stub `.enable` option which, upon enablement, imports the actual postgres module?\r\n\r\nI have to note, conditional importing sounds like an absolute nightmare for debuggability",
+   "created_at": "2024-06-29T19:13:19Z",
+   "id": 2198313558,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-06-29T19:13:19Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "What specific issues do you forsee?\r\n\r\nIt should also be possible to have an option to turn this optimisation off and always import the full list of modules, regardless of enablement. \r\n\r\nI also found out that I wasn't the first person to think of this general idea: https://github.com/NixOS/nixpkgs/issues/57477#issuecomment-816881802",
+   "created_at": "2024-06-29T20:59:24Z",
+   "id": 2198333558,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-06-29T20:59:24Z",
+   "user": {
+    "id": 18599032,
+    "login": "Atemu",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Whenever a service needs i.e. postgres, they set `services.postgres.enable = true`. Couldn't we make it so that, initially, the posgres module only exists as a stub `.enable` option which, upon enablement, imports the actual postgres module?\n\nI totally thought so. Let's talk about it in a few days.",
+   "created_at": "2024-06-30T01:57:28Z",
+   "id": 2198403369,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2024-06-30T01:57:28Z",
+   "user": {
+    "id": 42209822,
+    "login": "Aleksanaa",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@Atemu it requires that you either have\r\n\r\n### Fixpoint iteration on top of the fixpoint we have\r\n\r\nPerform fixpoint _iteration_ on top of the lazy fixpoint we already have for the config. This may indeed be horrible for debugging, because you would have to consider whether the error occurs during which phase or iteration. Also fixpoint iteration relies on a termination condition that produces a boolean, so you'd have to make huge `==` comparisons for each iteration, and you can't compare the whole config, because the config is designed to be lazy. Some types aren't even comparable, such as `functionTo` and `deferredModule`. You'd have to figure out which options matter and treat them specially, at which point you're implementing an unnecessarily complicated version of the alternative, which is...\r\n \r\n### Better use of submodules\r\n \r\nDo the expensive stuff in a submodule. It is perfectly fine for a module to control what goes into its submodule(s), with all sorts of conditions and whatnot, as long as those don't depend on the evaluation of that submodule. This way we don't need new complicated generic machinery; the module system tools we have suffice.\r\n\r\nThis is also what I've proposed [here](https://github.com/NixOS/nixpkgs/pull/267111). The \"portability\" aspect of that may well be a minor detail. I've jokingly referred to it as the Importable Service Layer, and if you un-split some modules and rename some things, that's actually what it is.\r\n\r\nIt does cause changes to the option structure, but that is actually beneficial because it adds the ability to have multiple instances of a service to all services in a consistent manner. It's also possible to remain interface compatible by creating a few options that forward their definitions to a service module with a hardcoded \"default\" name, such as `\"cups\"`.\r\nThis has the effect of:\r\n\r\n> Whenever a service needs i.e. postgres, they set `services.postgres.enable = true`. Couldn't we make it so that, initially, the posgres module only exists as a stub `.enable` option which, upon enablement, imports the actual postgres module?\r\n",
+   "created_at": "2024-06-30T11:37:21Z",
+   "id": 2198531971,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2024-06-30T11:37:21Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I think it is a good idea to define a base set of modules.\r\n\r\nFor some reason the set of necessary modules for evaluation != the set of modules needed for a proper system. Or rather, the minimal set of modules for evaluation.",
+   "created_at": "2024-09-10T17:44:59Z",
+   "id": 2341585065,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2024-09-10T17:46:02Z",
+   "user": {
+    "id": 22758444,
+    "login": "eadwu",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> For some reason the set of necessary modules for evaluation != the set of modules needed for a proper system.\r\n\r\nFor eval this is currently all you need, more or less:\r\nhttps://github.com/eclairevoyant/nix-templates/blob/main/nixos/flake.nix#L12-L22\r\n\r\nWhat you mean by the \"set of modules needed for a _proper_ system\" is unclear here.\r\n(I'm also unclear on how that related to this issue.)",
+   "created_at": "2024-09-10T17:55:40Z",
+   "id": 2341609927,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-09-10T17:57:04Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "If you try to minimize the number of modules imported as the metric for reducing modules, you will end up with an inoperable system, i.e. in the event where there is no option evaluated and the config is always active `{ config = { environment.systemPackages = [ pkgs.ssss ]; }; }` as you can remove any of those modules safely without breaking evaluation.\r\n\r\nYour profile does not reduce the number of modules imported.",
+   "created_at": "2024-09-10T18:02:35Z",
+   "id": 2341635882,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2024-09-10T18:04:47Z",
+   "user": {
+    "id": 22758444,
+    "login": "eadwu",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/automatically-generate-smaller-base-nixpkgs-module-list/61561/2\n",
+   "created_at": "2025-03-12T12:12:22Z",
+   "id": 2717682613,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-03-12T12:12:22Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/a-look-at-nixos-nixpkgs-evaluation-times-over-the-years/65114/37\n",
+   "created_at": "2025-06-11T18:04:52Z",
+   "id": 2963722988,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-06-11T18:04:52Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Sorry for the low-effort-ness of this comment. Just throwing a thought that probably had occcurred to some of the people involved but nontheless: perhaps the module system could have some new strict mode in which\n\n> a module that provides a definition for an option must either declare that option or import a module that declares that option",
+   "created_at": "2025-07-22T06:55:40Z",
+   "id": 3101335603,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-07-22T06:55:40Z",
+   "user": {
+    "id": 635591,
+    "login": "mightyiam",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/nixpkgs-module-system-config-modules-graph/67722/1\n",
+   "created_at": "2025-08-07T16:34:24Z",
+   "id": 3164947712,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2025-08-07T16:34:24Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This issue has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/vertical-nixos-module-organisation-and-module-dependency/77888/5\n",
+   "created_at": "2026-05-29T06:31:19Z",
+   "id": 4571547946,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-29T06:31:19Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/137168",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Describe the bug\r\n\r\nNixOS always imports all modules, leading to degrading performance as NixOS grows.\r\n\r\n### Steps To Reproduce\r\nSteps to reproduce the behavior:\r\n1. Add many modules\r\n2. Watch performance drop\r\n\r\nBut to really see the potential:\r\n\r\n1. Make significant cuts in `modules-list.nix` and fix a few broken options references\r\n2. Watch instantiation of `toplevel` go down from 4.0 to 1.4 seconds.\r\n\r\nSee proof of concept: https://github.com/hercules-ci/nixpkgs/commit/97dcbe8698b1332c90ba16cb5736e11d0097b061\r\n\r\n### Expected behavior\r\n\r\nNew modules don't reduce NixOS evaluation performance. NixOS can scale in complexity.\r\n\r\n### Additional context\r\n\r\nI'll probably write an RFC suggesting the required refactorings and module authoring guidelines. This can all be achieved in a backcompatible manner, but the performance gains may be require some opting in.\r\n\r\n\r\n### Notify maintainers\r\n\r\n@Infinisil \r\n\r\n### Metadata\r\nPlease run `nix-shell -p nix-info --run \"nix-info -m\"` and paste the result.\r\n\r\n```console\r\n[user@system:~]$ nix-shell -p nix-info --run \"nix-info -m\"\r\noutput here\r\n```\r\n\r\nMaintainer information:\r\n```yaml\r\n# a list of nixpkgs attributes affected by the problem\r\nattribute:\r\n - nixos\r\n - lib.nixosSystem\r\n# a list of nixos modules affected by the problem\r\nmodule: # most of them\r\n```\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 24,
+  "created_at": "2021-09-09T09:07:53Z",
+  "id": 991981735,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Something is broken",
+    "id": 6314750,
+    "name": "0.kind: bug"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "About \"NixOS\" module system internals",
+    "id": 1919438524,
+    "name": "6.topic: module system"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 137168,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 32,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 32
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "NixOS always imports all modules",
+  "type": null,
+  "updated_at": "2026-05-29T06:35:12Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#137168",
+ "sources": [
+  "nixpkgs-imports-all-modules"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fdf9956836597d43744d09fa93c974e67e4d7966",
+   "commit_url": "https://api.github.com/repos/DavHau/nixpkgs/commits/fdf9956836597d43744d09fa93c974e67e4d7966",
+   "created_at": "2025-04-25T13:09:50Z",
+   "event": "referenced",
+   "id": 17406320396
+  },
+  {
+   "actor": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "4d6e9cafcb5e2e8af233bdf05de5afec5b342c7e",
+   "commit_url": "https://api.github.com/repos/DavHau/nixpkgs/commits/4d6e9cafcb5e2e8af233bdf05de5afec5b342c7e",
+   "created_at": "2025-04-25T13:11:27Z",
+   "event": "referenced",
+   "id": 17406344029
+  },
+  {
+   "actor": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "3601f9edfa264618c6a5123df4e6b7be508298e6",
+   "commit_url": "https://api.github.com/repos/DavHau/nixpkgs/commits/3601f9edfa264618c6a5123df4e6b7be508298e6",
+   "created_at": "2025-04-25T13:13:57Z",
+   "event": "referenced",
+   "id": 17406383168
+  },
+  {
+   "actor": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "8f516ca48edd117e8ab43460199e6aeeb1c10a03",
+   "commit_url": "https://api.github.com/repos/DavHau/nixpkgs/commits/8f516ca48edd117e8ab43460199e6aeeb1c10a03",
+   "created_at": "2025-04-25T14:12:48Z",
+   "event": "referenced",
+   "id": 17407274670
+  },
+  {
+   "actor": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "c32788c13b857b1cf6751333d9690a85af726812",
+   "commit_url": "https://api.github.com/repos/DavHau/nixpkgs/commits/c32788c13b857b1cf6751333d9690a85af726812",
+   "created_at": "2025-04-25T15:57:23Z",
+   "event": "referenced",
+   "id": 17408780844
+  },
+  {
+   "actor": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "76bd3fcd5367a6aab27299267b4e8ae5bfcab25a",
+   "commit_url": "https://api.github.com/repos/DavHau/nixpkgs/commits/76bd3fcd5367a6aab27299267b4e8ae5bfcab25a",
+   "created_at": "2025-05-15T11:56:38Z",
+   "event": "referenced",
+   "id": 17670724023
+  },
+  {
+   "actor": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "a44f5889299e7de0ac09972d70b554a324c2bea7",
+   "commit_url": "https://api.github.com/repos/DavHau/nixpkgs/commits/a44f5889299e7de0ac09972d70b554a324c2bea7",
+   "created_at": "2025-05-15T12:01:21Z",
+   "event": "referenced",
+   "id": 17670801544
+  },
+  {
+   "actor": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "b40b008a7a771ccf60a45e90bad38bd5408d4f59",
+   "commit_url": "https://api.github.com/repos/DavHau/nixpkgs/commits/b40b008a7a771ccf60a45e90bad38bd5408d4f59",
+   "created_at": "2025-05-15T12:02:29Z",
+   "event": "referenced",
+   "id": 17670821011
+  },
+  {
+   "actor": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "85b16b53651ae88da34d7e24dc7e5922542da987",
+   "commit_url": "https://api.github.com/repos/DavHau/nixpkgs/commits/85b16b53651ae88da34d7e24dc7e5922542da987",
+   "created_at": "2025-05-15T12:03:53Z",
+   "event": "referenced",
+   "id": 17670844208
+  },
+  {
+   "actor": {
+    "id": 42246742,
+    "login": "DavHau",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "a1738af3b2b843842d6a81cca631553111c28eae",
+   "commit_url": "https://api.github.com/repos/DavHau/nixpkgs/commits/a1738af3b2b843842d6a81cca631553111c28eae",
+   "created_at": "2025-05-15T15:11:36Z",
+   "event": "referenced",
+   "id": 17674448727
+  }
+ ]
+}

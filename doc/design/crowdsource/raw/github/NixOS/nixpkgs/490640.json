@@ -1,0 +1,70 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/490640",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "so far, [modular services](https://nixos.org/manual/nixos/stable/#modular-services)' `process` metadata consists of [`argv`](https://github.com/NixOS/nixpkgs/blob/release-25.11/nixos/modules/system/service/portable/service.nix#L42-L53).\n\nto facilitate use of modular services in micro-service like setups, where services run on separate nodes expected to communicate over the network, we could further add metadata on ports.\nsuch info could be used to determine relevant ports to advertise, expose or forward, in run-time environments such as:\n\n- [qemu](https://wiki.qemu.org/Documentation/Networking#Advanced_user_networking_options) - potentially including for our QEMU-based test driver\n- [containers](https://docs.docker.com/reference/dockerfile/#expose) - where info on ports might make for a missing link to [generate containers](https://github.com/DeterminateSystems/nix-to-kubernetes/blob/da68e8c0274e1eea7ce66b64ffed1b1bf3e7c5c1/flake.nix#L79) from modular services\n- [nomad](https://developer.hashicorp.com/nomad/docs/job-specification/service#port) / [openwonton](https://openwonton.org/docs/job-specification/service)\n- [k8s](https://kubernetes.io/docs/concepts/workloads/pods/#using-pods)\n\nrelevant considerations here include:\n\n- given services make ports configurable, a way to incorporate that information here\n- whether ports use TCP or UDP\n- support for multiple ports\n    - support for port [ranges](https://search.nixos.org/options?channel=unstable&query=ports&show=nix.firewall.allowedTCPPorts) ([example application](https://docs.bigbluebutton.org/administration/firewall-configuration/#configure-your-firewall) needing that)\n    - if service use ports by function, a way to distinguish/annotate those as such ('used' in say nomad)\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 0,
+  "created_at": "2026-02-15T11:52:15Z",
+  "id": 3943912941,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 490640,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 1,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "modular services: expose metadata about ports",
+  "type": null,
+  "updated_at": "2026-07-23T17:19:56Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#490640",
+ "sources": [
+  "nixpkgs-label-issues",
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": []
+}

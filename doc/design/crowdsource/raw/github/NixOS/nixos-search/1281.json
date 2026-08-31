@@ -1,0 +1,533 @@
+{
+ "comments": [
+  {
+   "body": "i'm seeing some mixed reactions here, which maybe raises the question what considerations those here saw.\n\nmine i guess were maybe somewhat simple: i'd like to see this project grow in functionality, while i see in practice people seem to depend on more than just NixOS proper.\nthis wasn't so much meant as a knock on other projects like `nix-darwin` or `hjem-rum`, just gradual steps in trying to see how we may better serve nix users' needs.\n\ni'll admit as a nixos user i've personally found it hard to manage a usable workstation without resorting to use of home-manager so far, so that might bias me here - tho perhaps some of the others who reacted here felt similar.\n\n> (Even modular services should be marked as \"experimental\" to make it clear that it's not officially in use as of now.)\n\nfair!\n\n> h-m is a separate project completely unaffiliated with nixpkgs/nixos\n\nto be fair, i've felt under the impression that nixos.org has been less nixos-only, but rather about nix as well, which in case one would extend such reasoning to search.nixos.org definitely raises some valid questions about proper scope here.\n\n> Having it in the search is more noise [...]\n\nthis sounds like a UX thing - which is good feedback, tho then there might be multiple ways to approach this.\ni'm not sure what the solution here is, and i might be making things less consistent by blurring the boundary between the main options page vs the 'third-party flakes' one - and maybe we might be better off changing that boundary, if not finding further inspiration at <https://search.nüschtos.de/>.\n\n> Having it in the search [...] unnecessarily privileges one random project over any others\n\nif we'd consider adding further projects, i wonder if the concern might gradually alleviate - such an opt-in fashion would be not unlike what had been used here for the flakes page for longer already.\n\n> making it look official\n\nthis sounds like a matter of setting expectations - i wonder if just like with modular services and marking as experimental, marking this particular repo as being in the `nix-community` org might help prevent at least some such misunderstandings?\n\nnow, to be fair, while i've had some activity at this repo lately, many the design decisions here also feel like subject to the documentation team (/cc @hsjobeki), whose [document](https://github.com/NixOS/nix.dev/blob/master/maintainers/vision.md) i might have read, tho they're probably a better arbiter of interpreting such overall strategy.\n",
+   "created_at": "2026-05-21T18:08:55Z",
+   "id": 4511220051,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-21T18:08:55Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> this wasn't so much meant as a knock on other projects like `nix-darwin` or `hjem-rum`, just gradual steps in trying to see how we may better serve nix users' needs.\n\nThat's completely backwards, though. The package and options search are for what's in nixpkgs. If the repo supports user-level management, MacOS management, etc. then sure of course it should be added, but it currently doesn't (other than packages that build on MacOS and are already present in search). An official site not just mentioning but even _depending_ on third-party repos is ripe for misuse and misunderstanding, and fundamentally inverts the relationship to said repos. Documenting every repo that uses `lib.evalModules` would be absurd as well, so the inclusion here is entirely based on preferences rather than what makes sense for NixOS/nixpkgs.",
+   "created_at": "2026-05-21T18:30:40Z",
+   "id": 4511491713,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-21T18:33:24Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> An official site not just mentioning but even _depending_ on third-party repos is ripe for misuse and misunderstanding, and fundamentally inverts the relationship to said repos.\n\nnow, i think there is precedent here with the flakes section, but admittedly there's a gap in transparency right now.\n\n> what makes sense for NixOS/nixpkgs\n\nperhaps one question is whether the search on this nix site should be scoped to nixpkgs, which may be a question for documentation team, but aside from that... i would think that software doesn't have needs, while users do. in that sense, i'd maybe wanna ask if you could rephrase, so i could confirm my understanding.\n\n> the inclusion here is entirely based on preferences\n\nso, the flakes page adds stuff as people add them.\non the difference here, i would see the current state as temporary - i think we want to see things expand in a way serving user needs, but we may just need to experiment with performance metrics for a bit (see e.g. #1262, #1237, NixOS/nixpkgs#518825) before scaling things out en masse.\n\nwould that make some sense?\n",
+   "created_at": "2026-05-21T20:12:48Z",
+   "id": 4512391550,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-21T20:12:48Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The flakes section should probably be removed as well, but that's a separate discussion. I'm not discussing \"precedent\", and this is not a courtroom so that's not relevant.\n\nThings are already confusing enough _for users_ as is without promoting 3rd-party projects, especially promoting them as if they are official and implying they are required. I feel like I don't need to rephrase as I've said that multiple times.\n\nIf users want to use 3rd-party projects, all of them have their respective documentation on their own sites.",
+   "created_at": "2026-05-22T01:01:23Z",
+   "id": 4514031119,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-22T01:03:43Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "The goal of nixos-search is to be as helpful to the wider nixos community as possible. Making 3rd-party flakes and other widely-used tools such as home-manager more discoverable aligns with that just fine.\n\nI could see adding a note to the home-manager (and modular services) result pages to explain what they are, also making it clearer that home-manager is a community project rather than an 'official' part of NixOS.\n\n(FWIW I don't even use home-manager, and choosing what/how to present different software is somewhat of a judgement call (see also #1252), but in this case it seems fairly obvious home-manager is widely used in the community, so IMO it makes sense to have)",
+   "created_at": "2026-05-22T06:53:26Z",
+   "id": 4516007270,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 4,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2026-05-22T06:53:26Z",
+   "user": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Again, it's clear to established users, but not to beginners. I still see beginners thinking flakes and home-manager and [insert fad] are both official and required. This is worsening that situation.\n\nAnd note, \"beginners\" includes users that have used NixOS for years, if they are not familiar with the ecosystem.",
+   "created_at": "2026-05-22T10:51:48Z",
+   "id": 4518017210,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-22T10:56:29Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> Again, it's clear to established users, but not to beginners.\n\nI did not claim it was clear and I agree it would be good to make it clearer.\n\n> I still see beginners thinking flakes and home-managers and [insert fad] are both official and required. This is worsening that situation.\n\nI think the way to make it clearer would be a short note/reference explaining what various things are, not making popular things (whatever your opinion may be on them) harder to find/use.",
+   "created_at": "2026-05-22T10:59:25Z",
+   "id": 4518061922,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-22T10:59:25Z",
+   "user": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It's not harder to use when they are literally explained on the official site. You are talking about opinions, I am stating facts. It is an **objective fact** that unofficial projects are not subject to the official nixpkgs guidelines, and it is an **objective fact** that users still think home-manager and co are official, see discourse if you don't believe me.\n\nClearly the \"short note\" approach doesn't work for flakes, as people still think flakes are official and required despite the \"experimental\" notes everywhere, and people still change `stateVersion` despite the longer notes warning them not to, so there is ample evidence to see that this extremely naive note approach will not work for home-manager.\n\nIs this really a community project or just <1% of the 300+ committers pushing their opinions on the community?",
+   "created_at": "2026-05-22T12:59:05Z",
+   "id": 4518851098,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-22T13:09:40Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "if we got PRs, fwiw i won't stand in their way if relevant stakeholders are aligned - but now it's turned out there's some different takes here i feel reluctant to call this one myself",
+   "created_at": "2026-05-22T13:35:11Z",
+   "id": 4519164034,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 2,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-05-22T13:35:11Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Writing in personal capacity right now: I found myself agreeing with @eclairevoyant.\n\nI didn't see the PR that added home-manager to the search. I'll discuss with @NixOS/documentation-team.\n\nBelow this is my personal opinion for now: \n\nThe problem is that landing this PR inverted the policy question:\n\nBefore: \"Should we add home-manager?\"\nNow: \"Should we remove home-manager?\"\n\nI would favor reverting, and then starting the discussion the right way around.\n\nwe don't own home-manager's options. search.nixos.org should reflect what's in nixpkgs. Mixing in third-party projects, however widely used, makes them appear official when they're not.\n\nWe simply cannot add all external projects' module options to the NixOS search. Adding home-manager creates an unfairness if we then decline other external projects. And I don't want to get into defining at what point a project is big enough or widely used enough to qualify.\n\nThat doesn't mean we should pretend home-manager doesn't exist. If we want to serve users who rely on it, we can reference its own option search as an external resource. That preserves discoverability without conflating third-party projects with nixpkgs.",
+   "created_at": "2026-05-24T14:47:59Z",
+   "id": 4529058606,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 1,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 3,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 4
+   },
+   "updated_at": "2026-05-26T08:41:36Z",
+   "user": {
+    "id": 50398876,
+    "login": "hsjobeki",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> If we want to serve users who rely on it, we can reference its own option search as an external resource.\n\nThat seems much more appropriate IMO.",
+   "created_at": "2026-05-24T15:30:04Z",
+   "id": 4529164111,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-24T15:30:26Z",
+   "user": {
+    "id": 848000,
+    "login": "eclairevoyant",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> making it look official\n\nThe SC has been in conversation with the maintainers of home manager to make the project official, since the nix-community has entered a state of being somewhat unmaintained. \n\nPersonally, I do think this is appropriate. I've always been of the view that NixOS is more than a distro for servers, and with home-manager becoming official, I see no reason not to support it.\n\nTo add onto that, another personal opinion is that I'd not be wildly against adding other projects to the search, given they were aligned with our values and goals, and had a somewhat proven track record. Having guidelines for inclusion would likely be helpful, if that is something the community is interested in, I can bring that up.\n\nHowever, I've not immediately thought of other projects that are at a state where I think they should be there yet. But I may be wrong.",
+   "created_at": "2026-05-26T08:21:35Z",
+   "id": 4542060765,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-26T08:21:35Z",
+   "user": {
+    "id": 89321978,
+    "login": "cafkafk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've learnt about home-manager being in the process of becoming official just yesterday from @roberth and @infinisil  \n\nThis changes the outcome of this issue.\n\nI think in that case we should support the process of it becoming official.\n\n> Having guidelines for inclusion would likely be helpful, if that is something the community is interested in, I can bring that up.\n\nI think https://search.nüschtos.de/ is offering a great UX for finding options. We should consider offering the same native experience;\nBut i want to visually separate community resources from official ones. That should also address @eclairevoyant 's point.\n\ni don't think we need a policy yet, just a better experience.\n",
+   "created_at": "2026-05-26T08:39:50Z",
+   "id": 4542241258,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-26T08:40:58Z",
+   "user": {
+    "id": 50398876,
+    "login": "hsjobeki",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> i don't think we need a policy yet, just a better experience.\n\nI agree on this part (knowing fully that it actually takes people to volunteer to do this, and that the current work on search is already awesome).",
+   "created_at": "2026-05-26T09:20:03Z",
+   "id": 4542733669,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-05-26T09:20:03Z",
+   "user": {
+    "id": 89321978,
+    "login": "cafkafk",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Modular services are clearly experimental and shouldn't be exposed to end users at this point.",
+   "created_at": "2026-05-26T10:18:58Z",
+   "id": 4543304883,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 5,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 5
+   },
+   "updated_at": "2026-05-26T10:18:58Z",
+   "user": {
+    "id": 131599,
+    "login": "mweinelt",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I just created #1397 to clarify that Home Manager (and other projects) are not from @NixOS",
+   "created_at": "2026-07-15T18:42:32Z",
+   "id": 4984125522,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-07-15T18:42:32Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Actually it's close to being official: https://github.com/NixOS/org/pull/269",
+   "created_at": "2026-07-15T21:48:24Z",
+   "id": 4985598558,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 1,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-07-15T21:48:24Z",
+   "user": {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Very cool, I will remove the badge once it's merged",
+   "created_at": "2026-07-15T23:08:21Z",
+   "id": 4986140102,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-07-16T02:25:42Z",
+   "user": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixos-search/issues/1281",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "h-m is a separate project completely unaffiliated with nixpkgs/nixos and doesn't follow its basic coding standards. In fact in many cases it goes against the design of nixos.\n\nHaving it in the search is more noise and unnecessarily privileges one random project over any others, making it look official. (Even modular services should be marked as \"experimental\" to make it clear that it's not officially in use as of now.)",
+  "closed_at": "2026-07-26T20:20:53Z",
+  "closed_by": {
+   "id": 53050011,
+   "login": "Sigmanificient",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 18,
+  "created_at": "2026-05-15T01:37:21Z",
+  "id": 4450548037,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 1281,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 3,
+   "-1": 16,
+   "confused": 0,
+   "eyes": 2,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 21
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixos-search",
+  "state": "closed",
+  "state_reason": "not_planned",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "Remove support for home-manager",
+  "type": null,
+  "updated_at": "2026-07-26T20:20:53Z",
+  "user": {
+   "id": 848000,
+   "login": "eclairevoyant",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixos-search#1281",
+ "sources": [
+  "nixos-search-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 53050011,
+    "login": "Sigmanificient",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-07-26T20:20:53Z",
+   "event": "closed",
+   "id": 28506792643,
+   "intent": null,
+   "state_reason": "not_planned"
+  }
+ ]
+}

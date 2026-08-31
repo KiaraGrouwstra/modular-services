@@ -1,0 +1,434 @@
+{
+ "comments": [
+  {
+   "body": "@NixOS/nixpkgs-merge-bot merge",
+   "created_at": "2026-04-23T06:58:49Z",
+   "id": 4302326042,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 1,
+    "confused": 0,
+    "eyes": 1,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 2
+   },
+   "updated_at": "2026-04-23T06:58:49Z",
+   "user": {
+    "id": 6476416,
+    "login": "snue",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "<!-- comment: IC_kwDOAEVQ_M8AAAABAHBJGg -->\n@snue wants to merge this PR.\n\nRequirements to merge this PR with `@NixOS/nixpkgs-merge-bot merge`:\n- :white_check_mark: PR targets a [development branch](https://github.com/NixOS/nixpkgs/blob/-/ci/README.md#branch-classification).\n- :white_check_mark: PR touches only files of packages in `pkgs/by-name/`.\n- :x: PR is at least one of:\n  - :white_large_square: Approved by a [committer](https://github.com/orgs/NixOS/teams/nixpkgs-committers).\n  - :white_large_square: Backported via label.\n  - :white_large_square: Opened by a [committer](https://github.com/orgs/NixOS/teams/nixpkgs-committers).\n  - :white_large_square: Opened by [@r-ryantm](https://nix-community.github.io/nixpkgs-update/r-ryantm/).\n- :white_check_mark: PR is not a draft\n- :white_check_mark: snue is a member of [@NixOS/nixpkgs-maintainers](https://github.com/orgs/NixOS/teams/nixpkgs-maintainers).\n- :x: snue is a maintainer of all touched packages.\n\n> [!TIP]\n> Maintainers eligible to merge are:\n> - lbeierlieb\n\n:x: Pull Request could not be merged (#305350)",
+   "created_at": "2026-04-23T07:35:12Z",
+   "id": 4302523549,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-23T07:35:12Z",
+   "user": {
+    "id": 190413589,
+    "login": "nixpkgs-ci[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/512367",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "#509586 introduced usbvfiod to nixpkgs last week. @snue realized on [NixOS Search](https://search.nixos.org/packages?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=usbvfiod) that the homepage attribute still points to the github page of cloud-hypervisor (whose derivation I used as the template for usbvfiod's derivation).\r\n\r\nThis PR fixes the homepage and changelog attributes (there was also a typo in the changelog URL), and it adds @snue as a package maintainer ([his maintainer entry for reference](https://github.com/NixOS/nixpkgs/blob/ae3803233d8c8dcc524862ab39ac41723c3dd21b/maintainers/maintainer-list.nix#L25598)).\r\n\r\nThese changes do not affect the binary, only the meta field. \r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-04-27T13:45:04Z",
+  "closed_by": {
+   "id": 61635709,
+   "login": "nikstur",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 2,
+  "created_at": "2026-04-22T12:26:26Z",
+  "draft": false,
+  "id": 4308981825,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Linux.",
+    "id": 737642408,
+    "name": "10.rebuild-linux: 0"
+   },
+   {
+    "color": "ddeecc",
+    "default": false,
+    "description": "This PR was created by a maintainer of all the package it changes.",
+    "id": 740714914,
+    "name": "11.by: package-maintainer"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 512367,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/512367.diff",
+   "merged_at": "2026-04-27T13:45:04Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/512367.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "usbvfiod: fix links for homepage and changelog",
+  "type": null,
+  "updated_at": "2026-04-27T13:45:05Z",
+  "user": {
+   "id": 16045805,
+   "login": "lbeierlieb",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 3,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "ae3803233d8c8dcc524862ab39ac41723c3dd21b",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "#509586 introduced usbvfiod to nixpkgs last week. @snue realized on [NixOS Search](https://search.nixos.org/packages?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=usbvfiod) that the homepage attribute still points to the github page of cloud-hypervisor (whose derivation I used as the template for usbvfiod's derivation).\r\n\r\nThis PR fixes the homepage and changelog attributes (there was also a typo in the changelog URL), and it adds @snue as a package maintainer ([his maintainer entry for reference](https://github.com/NixOS/nixpkgs/blob/ae3803233d8c8dcc524862ab39ac41723c3dd21b/maintainers/maintainer-list.nix#L25598)).\r\n\r\nThese changes do not affect the binary, only the meta field. \r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [ ] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 1,
+  "closed_at": "2026-04-27T13:45:04Z",
+  "comments": 2,
+  "commits": 2,
+  "created_at": "2026-04-22T12:26:26Z",
+  "deletions": 2,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/512367.diff",
+  "draft": false,
+  "head": {
+   "label": "lbeierlieb:usbvfiod",
+   "ref": "usbvfiod",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2026-04-13T13:03:42Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "lbeierlieb/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/lbeierlieb/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 1209464007,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/lbeierlieb/nixpkgs/issues{/number}",
+    "language": null,
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/lbeierlieb/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 0,
+    "open_issues_count": 0,
+    "owner": {
+     "id": 16045805,
+     "login": "lbeierlieb",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/lbeierlieb/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-04-22T12:05:32Z",
+    "size": 2499767,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/lbeierlieb/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/lbeierlieb/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2026-04-13T13:03:43Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "0abdfa2133ecd0fc18d35cf9fde78965bf359b80",
+   "user": {
+    "id": 16045805,
+    "login": "lbeierlieb",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3567171499,
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Linux.",
+    "id": 737642408,
+    "name": "10.rebuild-linux: 0"
+   },
+   {
+    "color": "ddeecc",
+    "default": false,
+    "description": "This PR was created by a maintainer of all the package it changes.",
+    "id": 740714914,
+    "name": "11.by: package-maintainer"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "fb3ab0ee64cd9b813095e60808b49f344a7791c7",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-04-27T13:45:04Z",
+  "merged_by": {
+   "id": 61635709,
+   "login": "nikstur",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 512367,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/512367.patch",
+  "rebaseable": null,
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "usbvfiod: fix links for homepage and changelog",
+  "updated_at": "2026-04-27T13:45:05Z",
+  "user": {
+   "id": 16045805,
+   "login": "lbeierlieb",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#512367",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "0abdfa2133ecd0fc18d35cf9fde78965bf359b80",
+   "id": 4155230592,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-22T13:57:49Z",
+   "user": {
+    "id": 6476416,
+    "login": "snue",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0abdfa2133ecd0fc18d35cf9fde78965bf359b80",
+   "id": 4169233344,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-24T08:59:29Z",
+   "user": {
+    "id": 37907,
+    "login": "blitz",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0abdfa2133ecd0fc18d35cf9fde78965bf359b80",
+   "id": 4169233601,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-24T08:59:32Z",
+   "user": {
+    "id": 37907,
+    "login": "blitz",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "0abdfa2133ecd0fc18d35cf9fde78965bf359b80",
+   "id": 4181356475,
+   "state": "APPROVED",
+   "submitted_at": "2026-04-27T13:39:10Z",
+   "user": {
+    "id": 61635709,
+    "login": "nikstur",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 61635709,
+    "login": "nikstur",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "fb3ab0ee64cd9b813095e60808b49f344a7791c7",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/fb3ab0ee64cd9b813095e60808b49f344a7791c7",
+   "created_at": "2026-04-27T13:45:04Z",
+   "event": "merged",
+   "id": 24908147909
+  },
+  {
+   "actor": {
+    "id": 61635709,
+    "login": "nikstur",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-27T13:45:04Z",
+   "event": "closed",
+   "id": 24908147987,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

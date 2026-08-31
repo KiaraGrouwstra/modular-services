@@ -1,0 +1,416 @@
+{
+ "comments": [
+  {
+   "body": "The way it is packaged right now hinges on `electron` being available: https://github.com/NixOS/nixpkgs/blob/a3854adcaf99548d2a7b3bb72710a0b7d100c63f/pkgs/by-name/gi/github-desktop/package.nix#L172\n\nI'll look in a way to package for darwin, but I might need some help with testing from you as I can't really test it (and I have little to no knowledge about packaging for nix-darwin)",
+   "created_at": "2026-04-26T18:37:29Z",
+   "id": 4322718178,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-26T18:37:29Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "> but I might need some help with testing from you as I can't really test it (and I have little to no knowledge about packaging for nix-darwin)\n\nHappy to help @dtomvan !\n\n",
+   "created_at": "2026-04-26T18:38:36Z",
+   "id": 4322720133,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-26T18:38:36Z",
+   "user": {
+    "id": 44438314,
+    "login": "djmaxus",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Little clarification: I tried to add this package via standalone Home Manager, not via `nix-darwin` as such:\n\n```nix\nhome.packages = [ pkgs.github-desktop ];\n```",
+   "created_at": "2026-04-26T18:41:21Z",
+   "id": 4322725085,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-26T18:41:59Z",
+   "user": {
+    "id": 44438314,
+    "login": "djmaxus",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I also guess it's possible to either build by following the [official instructions](https://github.com/desktop/desktop/blob/development/docs/contributing/setup-macos.md) or by just downloading a binary from the release artefacts (seems ok on non-Linux platforms)",
+   "created_at": "2026-04-26T18:51:42Z",
+   "id": 4322747392,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-26T18:51:42Z",
+   "user": {
+    "id": 44438314,
+    "login": "djmaxus",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I overrode `electron-packager` to output a darwin package while on linux and it happily obliged (outside of a nix build, to test out what gets output):\n\n```ShellSession\n$ erd dist -L 2\n     4096 B    ┌─ LICENSE\n     4096 B    ├─ version\n 15704064 B    ├─ LICENSES.chromium.html\n516440064 B    ├─ desktop.app\n532152320 B ┌─ desktop-darwin-x64\n532152320 B dist\n```\n\nSo I tried this (since it seems like one can just copy the appdir into `$out/Applications` for macos): https://github.com/dtomvan/nixpkgs/commit/6870742095fbaf5fba7a4aadf75ae92642e7f0d0\n\nAt least evals on my machine with:\n\n```ShellSession\n$ nix-build --expr 'with import ./. { system = \"aarch64-darwin\"; }; github-desktop'\nthese 2 derivations will be built:\n  /nix/store/mbsaxj2wkmadhqlz19wfkwkj9r9bi48p-github-desktop.desktop.drv\n  /nix/store/459kbci7lin9pz1vxmkanskgc80mzws1-github-desktop-3.5.8.drv\n[...]\nerror: Cannot build '/nix/store/mbsaxj2wkmadhqlz19wfkwkj9r9bi48p-github-desktop.desktop.drv'.\n       Reason: platform mismatch\n       Required system: 'aarch64-darwin'\n       Current system: 'x86_64-linux'\n```\n\nSo I think that's ready for you to test. I hope it works 🤞🏼 \n\nCould you try to build this with:\n\n```ShellSession\n$ nix --extra-experimental-features 'nix-command flakes' build -L --keep-failed github:dtomvan/nixpkgs/6870742095fbaf5fba7a4aadf75ae92642e7f0d0#github-desktop\n(or git checkout 6870742095fbaf5fba7a4aadf75ae92642e7f0d0 if you happen to have nixpkgs cloned)\n$ ./result/bin/github-desktop\n```",
+   "created_at": "2026-04-26T19:22:57Z",
+   "id": 4322813383,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 1,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-26T19:22:57Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Test not yet successful :(\n\n```log\n[nix-shell:~/test]$ nix --extra-experimental-features 'nix-command flakes' build -L --keep-failed github:dtomvan/nixpkgs/6870742095fbaf5fba7a4aadf75ae92642e7f0d0#github-desktop\ngithub-desktop> Running phase: unpackPhase\ngithub-desktop> unpacking source archive /nix/store/mw49b84krapvpxrjzjcaa0q9b5w2qa8v-source\ngithub-desktop> source root is source\ngithub-desktop> Running phase: patchPhase\ngithub-desktop> Running phase: updateAutotoolsGnuConfigScriptsPhase\ngithub-desktop> Running phase: configurePhase\ngithub-desktop> no configure script, doing nothing\ngithub-desktop> Executing yarnConfigHook\ngithub-desktop> Validating consistency between /nix/var/nix/builds/nix-5016-1916735362/source/yarn.lock and /nix/store/y72yvm3fax373ag7dwigbi2gdafkhzga-github-desktop-cache-root/yarn.lock\ngithub-desktop> yarn config v1.21.1\ngithub-desktop> success Set \"yarn-offline-mirror\" to \"/nix/store/y72yvm3fax373ag7dwigbi2gdafkhzga-github-desktop-cache-root\".\ngithub-desktop> ✨  Done in 0.03s.\ngithub-desktop> no resolved URL for package printenvz@file:./vendor/printenvz\ngithub-desktop> Rewriting URL for local file dependency printenvz@file:./vendor/printenvz\ngithub-desktop> yarn install v1.21.1\ngithub-desktop> [1/4] 🔍  Resolving packages...\ngithub-desktop> (node:5460) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\ngithub-desktop> (Use `node --trace-deprecation ...` to show where the warning was created)\ngithub-desktop> [2/4] 🚚  Fetching packages...\ngithub-desktop> [3/4] 🔗  Linking dependencies...\ngithub-desktop> warning \"eslint-plugin-github > @typescript-eslint/eslint-plugin@8.21.0\" has incorrect peer dependency \"eslint@^8.57.0 || ^9.0.0\".\ngithub-desktop> warning \"eslint-plugin-github > @typescript-eslint/eslint-plugin@8.21.0\" has incorrect peer dependency \"typescript@>=4.8.4 <5.8.0\".\ngithub-desktop> warning \"eslint-plugin-github > @typescript-eslint/parser@8.21.0\" has incorrect peer dependency \"eslint@^8.57.0 || ^9.0.0\".\ngithub-desktop> warning \"eslint-plugin-github > @typescript-eslint/parser@8.21.0\" has incorrect peer dependency \"typescript@>=4.8.4 <5.8.0\".\ngithub-desktop> warning \"eslint-plugin-github > typescript-eslint@8.21.0\" has incorrect peer dependency \"eslint@^8.57.0 || ^9.0.0\".\ngithub-desktop> warning \"eslint-plugin-github > typescript-eslint@8.21.0\" has incorrect peer dependency \"typescript@>=4.8.4 <5.8.0\".\ngithub-desktop> warning \"eslint-plugin-github > @typescript-eslint/eslint-plugin > @typescript-eslint/type-utils@8.21.0\" has incorrect peer dependency \"eslint@^8.57.0 || ^9.0.0\".\ngithub-desktop> warning \"eslint-plugin-github > @typescript-eslint/eslint-plugin > @typescript-eslint/type-utils@8.21.0\" has incorrect peer dependency \"typescript@>=4.8.4 <5.8.0\".\ngithub-desktop> warning \"eslint-plugin-github > @typescript-eslint/eslint-plugin > @typescript-eslint/utils@8.21.0\" has incorrect peer dependency \"eslint@^8.57.0 || ^9.0.0\".\ngithub-desktop> warning \"eslint-plugin-github > @typescript-eslint/eslint-plugin > @typescript-eslint/utils@8.21.0\" has incorrect peer dependency \"typescript@>=4.8.4 <5.8.0\".\ngithub-desktop> warning \"eslint-plugin-github > @typescript-eslint/parser > @typescript-eslint/typescript-estree@8.21.0\" has incorrect peer dependency \"typescript@>=4.8.4 <5.8.0\".\ngithub-desktop> [4/4] 🔨  Rebuilding all packages...\ngithub-desktop> warning Ignored scripts due to flag.\ngithub-desktop> ✨  Done in 140.58s.\ngithub-desktop> patching script interpreter paths in node_modules\ngithub-desktop> node_modules/is-docker/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/css-loader/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/jsesc/bin/jsesc: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/tldts/bin/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/browserslist/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/flat/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/normalize-package-data/node_modules/semver/bin/semver: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@playwright/test/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/temp/node_modules/rimraf/bin.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/loose-envify/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/import-local/fixtures/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/he/bin/he: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/playwright-core/bin/reinstall_msedge_beta_linux.sh: interpreter directive changed from \"#!/usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/playwright-core/bin/reinstall_chrome_beta_linux.sh: interpreter directive changed from \"#!/usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/playwright-core/bin/reinstall_msedge_beta_mac.sh: interpreter directive changed from \"#!/usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/playwright-core/bin/reinstall_msedge_stable_mac.sh: interpreter directive changed from \"#!/usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/playwright-core/bin/reinstall_chrome_stable_mac.sh: interpreter directive changed from \"#!/usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/playwright-core/bin/reinstall_msedge_stable_linux.sh: interpreter directive changed from \"#!/usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/playwright-core/bin/reinstall_chrome_beta_mac.sh: interpreter directive changed from \"#!/usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/playwright-core/bin/reinstall_msedge_dev_linux.sh: interpreter directive changed from \"#!/usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/playwright-core/bin/reinstall_chrome_stable_linux.sh: interpreter directive changed from \"#!/usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/playwright-core/bin/reinstall_msedge_dev_mac.sh: interpreter directive changed from \"#!/usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/playwright-core/lib/utilsBundleImpl/xdg-open: interpreter directive changed from \"#!/bin/sh\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/sh\"\ngithub-desktop> node_modules/playwright-core/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/rimraf/dist/esm/bin.mjs: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/rimraf/node_modules/glob/dist/esm/bin.mjs: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/resolve/bin/resolve: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@eslint/eslintrc/node_modules/acorn/bin/acorn: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/global-agent/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/nanoid/bin/nanoid.cjs: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/acorn/bin/acorn: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/extract-zip/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/prettier/bin-prettier.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/fast-xml-parser/src/cli/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/tsx/dist/cli.mjs: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/typescript/bin/tsserver: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/typescript/bin/tsc: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/flat-cache/node_modules/rimraf/bin.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@typescript-eslint/experimental-utils/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@typescript-eslint/typescript-estree/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@typescript-eslint/type-utils/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@typescript-eslint/eslint-plugin/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/js-yaml/bin/js-yaml.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/ts-node/dist/bin.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/eslint-plugin-github/bin/eslint-ignore-errors.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/eslint-plugin-github/node_modules/prettier/bin/prettier.cjs: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/eslint-plugin-github/node_modules/eslint-config-prettier/bin/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/cacache/node_modules/glob/dist/esm/bin.mjs: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/playwright/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/eslint-plugin-jsx-a11y/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/damerau-levenshtein/scripts/update-changelog.sh: interpreter directive changed from \"#! /usr/bin/env bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/esprima/bin/esparse.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/esprima/bin/esvalidate.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/legal-eagle/bin/legal-eagle: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/webpack-cli/bin/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/read-installed/node_modules/semver/bin/semver: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/opener/bin/opener-bin.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/webpack/bin/webpack.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@npmcli/fs/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/asar/bin/asar.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/front-matter/node_modules/js-yaml/bin/js-yaml.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/electron-packager/bin/electron-packager.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/electron-packager/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/envinfo/dist/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/ts-loader/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/markdown-it/bin/markdown-it.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@babel/core/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@babel/core/node_modules/json5/lib/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@babel/parser/bin/babel-parser.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@babel/helper-compilation-targets/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@babel/helpers/node_modules/@babel/parser/bin/babel-parser.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/json5/lib/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/update-browserslist-db/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/node-gyp/bin/node-gyp.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/node-gyp/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/node-gyp/node_modules/glob/dist/esm/bin.mjs: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/node-gyp/node_modules/which/bin/which.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/node-gyp/gyp/gyp_main.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/pylib/gyp/common_test.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/pylib/gyp/win_tool.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/pylib/gyp/input_test.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/pylib/gyp/__init__.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/pylib/gyp/flock_tool.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/pylib/gyp/generator/msvs_test.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/pylib/gyp/MSVSSettings_test.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/pylib/gyp/mac_tool.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/pylib/gyp/easy_xml_test.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/test_gyp.py: interpreter directive changed from \"#!/usr/bin/env python3\" to \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> node_modules/node-gyp/gyp/gyp: interpreter directive changed from \"#!/bin/sh\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/sh\"\ngithub-desktop> node_modules/webpack-bundle-analyzer/lib/bin/analyzer.js: interpreter directive changed from \"#! /usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/cross-env/src/bin/cross-env-shell.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/cross-env/src/bin/cross-env.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/eslint-config-prettier/bin/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/espree/node_modules/acorn/bin/acorn: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/espree/node_modules/acorn-jsx/node_modules/acorn/bin/acorn: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/eslint/bin/eslint.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/eslint/node_modules/acorn/bin/acorn: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/esbuild/bin/esbuild: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/terser/bin/uglifyjs: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/terser/bin/terser: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/cssesc/bin/cssesc: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/eslint-plugin-react/node_modules/resolve/bin/resolve: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/eslint-plugin-react/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/electron/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/sass/sass.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/html-minifier-terser/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/tar/node_modules/mkdirp/bin/cmd.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/markdownlint-cli/markdownlint.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/node-test-parser/.husky/commit-msg: interpreter directive changed from \"#!/usr/bin/env sh\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/sh\"\ngithub-desktop> node_modules/node-test-parser/.husky/pre-commit: interpreter directive changed from \"#!/usr/bin/env sh\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/sh\"\ngithub-desktop> node_modules/node-test-parser/test/e2e/compare.sh: interpreter directive changed from \"#!/bin/bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/ansi-html-community/bin/ansi-html: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/which/bin/node-which: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/node-test-github-reporter/test/e2e/compare.sh: interpreter directive changed from \"#!/bin/bash\" to \"/nix/store/f700nj7wlwg441h39gkq29qbviy99sgq-bash-5.3p9/bin/bash\"\ngithub-desktop> node_modules/mkdirp/bin/cmd.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@electron/get/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@electron/asar/bin/asar.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@electron/osx-sign/bin/electron-osx-flat.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@electron/osx-sign/bin/electron-osx-sign.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/nopt/bin/nopt.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@esbuild/android-arm/bin/esbuild: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@esbuild/android-x64/bin/esbuild: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> finished yarnConfigHook\ngithub-desktop> /nix/var/nix/builds/nix-5016-1916735362/source/app /nix/var/nix/builds/nix-5016-1916735362/source\ngithub-desktop> Executing yarnConfigHook\ngithub-desktop> Validating consistency between /nix/var/nix/builds/nix-5016-1916735362/source/app/yarn.lock and /nix/store/a3r39mxy6qk7nvlj69p0p6kpk6mpdwm2-github-desktop-cache-app/yarn.lock\ngithub-desktop> yarn config v1.21.1\ngithub-desktop> success Set \"yarn-offline-mirror\" to \"/nix/store/a3r39mxy6qk7nvlj69p0p6kpk6mpdwm2-github-desktop-cache-app\".\ngithub-desktop> ✨  Done in 0.03s.\ngithub-desktop> no resolved URL for package desktop-notifications@file:../vendor/desktop-notifications\ngithub-desktop> Rewriting URL for local file dependency desktop-notifications@file:../vendor/desktop-notifications\ngithub-desktop> no resolved URL for package desktop-trampoline@file:../vendor/desktop-trampoline\ngithub-desktop> Rewriting URL for local file dependency desktop-trampoline@file:../vendor/desktop-trampoline\ngithub-desktop> no resolved URL for package windows-argv-parser@file:../vendor/windows-argv-parser\ngithub-desktop> Rewriting URL for local file dependency windows-argv-parser@file:../vendor/windows-argv-parser\ngithub-desktop> yarn install v1.21.1\ngithub-desktop> [1/4] 🔍  Resolving packages...\ngithub-desktop> (node:6409) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\ngithub-desktop> (Use `node --trace-deprecation ...` to show where the warning was created)\ngithub-desktop> [2/4] 🚚  Fetching packages...\ngithub-desktop> [3/4] 🔗  Linking dependencies...\ngithub-desktop> [4/4] 🔨  Rebuilding all packages...\ngithub-desktop> warning Ignored scripts due to flag.\ngithub-desktop> ✨  Done in 37.81s.\ngithub-desktop> patching script interpreter paths in node_modules\ngithub-desktop> node_modules/codemirror/bin/source-highlight: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/prebuild-install/bin.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/react-transition-group/node_modules/loose-envify/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/loose-envify/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/node-addon-api/tools/conversion.js: interpreter directive changed from \"#! /usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/detect-libc/bin/detect-libc.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/registry-js/node_modules/node-addon-api/tools/conversion.js: interpreter directive changed from \"#! /usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/marked/bin/marked.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@github/copilot/index.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/@github/copilot/npm-loader.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/fs-admin/node_modules/prebuild-install/bin.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/fs-admin/node_modules/node-addon-api/tools/conversion.js: interpreter directive changed from \"#! /usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/semver/bin/semver: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/cross-spawn/node_modules/which/bin/which: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/prop-types/node_modules/loose-envify/cli.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/keytar/node_modules/prebuild-install/bin.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/keytar/node_modules/node-addon-api/tools/conversion.js: interpreter directive changed from \"#! /usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/keytar/node_modules/semver/bin/semver.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/ansi-html/bin/ansi-html: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/rc/cli.js: interpreter directive changed from \"#! /usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/which/bin/which.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> node_modules/mkdirp/bin/cmd.js: interpreter directive changed from \"#!/usr/bin/env node\" to \"/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/bin/node\"\ngithub-desktop> finished yarnConfigHook\ngithub-desktop> /nix/var/nix/builds/nix-5016-1916735362/source\ngithub-desktop> yarn run v1.21.1\ngithub-desktop> $ node-gyp rebuild && tsc\ngithub-desktop> gyp info it worked if it ends with ok\ngithub-desktop> gyp info using node-gyp@12.3.0\ngithub-desktop> gyp info using node@24.14.1 | darwin | arm64\ngithub-desktop> gyp info find Python using Python version 3.13.12 found at \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> gyp info spawn /nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\ngithub-desktop> gyp info spawn args [\ngithub-desktop> gyp info spawn args '/nix/store/ddzrqa6nbfyvsrjh5grfnia4ppfkyzjl-node-gyp-12.3.0/lib/node_modules/node-gyp/gyp/gyp_main.py',\ngithub-desktop> gyp info spawn args 'binding.gyp',\ngithub-desktop> gyp info spawn args '-f',\ngithub-desktop> gyp info spawn args 'make',\ngithub-desktop> gyp info spawn args '-I',\ngithub-desktop> gyp info spawn args '/nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/desktop-notifications/build/config.gypi',\ngithub-desktop> gyp info spawn args '-I',\ngithub-desktop> gyp info spawn args '/nix/store/ddzrqa6nbfyvsrjh5grfnia4ppfkyzjl-node-gyp-12.3.0/lib/node_modules/node-gyp/addon.gypi',\ngithub-desktop> gyp info spawn args '-I',\ngithub-desktop> gyp info spawn args '/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/include/node/common.gypi',\ngithub-desktop> gyp info spawn args '-Dlibrary=shared_library',\ngithub-desktop> gyp info spawn args '-Dvisibility=default',\ngithub-desktop> gyp info spawn args '-Dnode_root_dir=/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1',\ngithub-desktop> gyp info spawn args '-Dnode_gyp_dir=/nix/store/ddzrqa6nbfyvsrjh5grfnia4ppfkyzjl-node-gyp-12.3.0/lib/node_modules/node-gyp',\ngithub-desktop> gyp info spawn args '-Dnode_lib_file=/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/$(Configuration)/node.lib',\ngithub-desktop> gyp info spawn args '-Dmodule_root_dir=/nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/desktop-notifications',\ngithub-desktop> gyp info spawn args '-Dnode_engine=v8',\ngithub-desktop> gyp info spawn args '--depth=.',\ngithub-desktop> gyp info spawn args '--no-parallel',\ngithub-desktop> gyp info spawn args '--generator-output',\ngithub-desktop> gyp info spawn args 'build',\ngithub-desktop> gyp info spawn args '-Goutput_dir=.'\ngithub-desktop> gyp info spawn args ]\ngithub-desktop> gyp info spawn make\ngithub-desktop> gyp info spawn args [ 'BUILDTYPE=Release', '-C', 'build' ]\ngithub-desktop> make: Entering directory '/nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/desktop-notifications/build'\ngithub-desktop>   CXX(target) Release/obj.target/desktop-notifications/src/mac/main_mac.o\ngithub-desktop>   CXX(target) Release/obj.target/desktop-notifications/src/mac/GHDesktopNotificationsManager.o\ngithub-desktop>   CXX(target) Release/obj.target/desktop-notifications/src/mac/Utils.o\ngithub-desktop>   SOLINK_MODULE(target) Release/desktop-notifications.node\ngithub-desktop> ld: warning: dylib (/nix/store/y232hw0pamh3zsmjf8ilfyq2ichnzv6q-gettext-1.0/lib/libintl.dylib) was built for newer macOS version (14.0) than being linked (11.0)\ngithub-desktop> make: Leaving directory '/nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/desktop-notifications/build'\ngithub-desktop> gyp info ok\ngithub-desktop> ✨  Done in 24.41s.\ngithub-desktop> /nix/var/nix/builds/nix-5016-1916735362/source/node_modules/printenvz /nix/var/nix/builds/nix-5016-1916735362/source\ngithub-desktop> gyp info it worked if it ends with ok\ngithub-desktop> gyp info using node-gyp@10.3.1\ngithub-desktop> gyp info using node@24.14.1 | darwin | arm64\ngithub-desktop> (node:6791) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\ngithub-desktop> (Use `node --trace-deprecation ...` to show where the warning was created)\ngithub-desktop> gyp info find Python using Python version 3.13.12 found at \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> gyp info spawn /nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\ngithub-desktop> gyp info spawn args [\ngithub-desktop> gyp info spawn args '/nix/var/nix/builds/nix-5016-1916735362/source/node_modules/node-gyp/gyp/gyp_main.py',\ngithub-desktop> gyp info spawn args 'binding.gyp',\ngithub-desktop> gyp info spawn args '-f',\ngithub-desktop> gyp info spawn args 'make',\ngithub-desktop> gyp info spawn args '-I',\ngithub-desktop> gyp info spawn args '/nix/var/nix/builds/nix-5016-1916735362/source/node_modules/printenvz/build/config.gypi',\ngithub-desktop> gyp info spawn args '-I',\ngithub-desktop> gyp info spawn args '/nix/var/nix/builds/nix-5016-1916735362/source/node_modules/node-gyp/addon.gypi',\ngithub-desktop> gyp info spawn args '-I',\ngithub-desktop> gyp info spawn args '/nix/store/qldjjimvi200yhn43dfyp5hlwl7ml169-electron-41.2.0-headers/include/node/common.gypi',\ngithub-desktop> gyp info spawn args '-Dlibrary=shared_library',\ngithub-desktop> gyp info spawn args '-Dvisibility=default',\ngithub-desktop> gyp info spawn args '-Dnode_root_dir=/nix/store/qldjjimvi200yhn43dfyp5hlwl7ml169-electron-41.2.0-headers',\ngithub-desktop> gyp info spawn args '-Dnode_gyp_dir=/nix/var/nix/builds/nix-5016-1916735362/source/node_modules/node-gyp',\ngithub-desktop> gyp info spawn args '-Dnode_lib_file=/nix/store/qldjjimvi200yhn43dfyp5hlwl7ml169-electron-41.2.0-headers/$(Configuration)/node.lib',\ngithub-desktop> gyp info spawn args '-Dmodule_root_dir=/nix/var/nix/builds/nix-5016-1916735362/source/node_modules/printenvz',\ngithub-desktop> gyp info spawn args '-Dnode_engine=v8',\ngithub-desktop> gyp info spawn args '--depth=.',\ngithub-desktop> gyp info spawn args '--no-parallel',\ngithub-desktop> gyp info spawn args '--generator-output',\ngithub-desktop> gyp info spawn args 'build',\ngithub-desktop> gyp info spawn args '-Goutput_dir=.'\ngithub-desktop> gyp info spawn args ]\ngithub-desktop> gyp info ok\ngithub-desktop> /nix/var/nix/builds/nix-5016-1916735362/source\ngithub-desktop> yarn run v1.21.1\ngithub-desktop> $ node-gyp rebuild\ngithub-desktop> gyp info it worked if it ends with ok\ngithub-desktop> gyp info using node-gyp@12.3.0\ngithub-desktop> gyp info using node@24.14.1 | darwin | arm64\ngithub-desktop> gyp info find Python using Python version 3.13.12 found at \"/nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\"\ngithub-desktop> gyp info spawn /nix/store/kwnbzccaiqi6iwdchcy6xc8br4x9hn0j-python3-3.13.12/bin/python3\ngithub-desktop> gyp info spawn args [\ngithub-desktop> gyp info spawn args '/nix/store/ddzrqa6nbfyvsrjh5grfnia4ppfkyzjl-node-gyp-12.3.0/lib/node_modules/node-gyp/gyp/gyp_main.py',\ngithub-desktop> gyp info spawn args 'binding.gyp',\ngithub-desktop> gyp info spawn args '-f',\ngithub-desktop> gyp info spawn args 'make',\ngithub-desktop> gyp info spawn args '-I',\ngithub-desktop> gyp info spawn args '/nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/fs-admin/build/config.gypi',\ngithub-desktop> gyp info spawn args '-I',\ngithub-desktop> gyp info spawn args '/nix/store/ddzrqa6nbfyvsrjh5grfnia4ppfkyzjl-node-gyp-12.3.0/lib/node_modules/node-gyp/addon.gypi',\ngithub-desktop> gyp info spawn args '-I',\ngithub-desktop> gyp info spawn args '/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/include/node/common.gypi',\ngithub-desktop> gyp info spawn args '-Dlibrary=shared_library',\ngithub-desktop> gyp info spawn args '-Dvisibility=default',\ngithub-desktop> gyp info spawn args '-Dnode_root_dir=/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1',\ngithub-desktop> gyp info spawn args '-Dnode_gyp_dir=/nix/store/ddzrqa6nbfyvsrjh5grfnia4ppfkyzjl-node-gyp-12.3.0/lib/node_modules/node-gyp',\ngithub-desktop> gyp info spawn args '-Dnode_lib_file=/nix/store/sf85v1qd1glkmsyfxwn9p8wridb4qf6y-nodejs-24.14.1/$(Configuration)/node.lib',\ngithub-desktop> gyp info spawn args '-Dmodule_root_dir=/nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/fs-admin',\ngithub-desktop> gyp info spawn args '-Dnode_engine=v8',\ngithub-desktop> gyp info spawn args '--depth=.',\ngithub-desktop> gyp info spawn args '--no-parallel',\ngithub-desktop> gyp info spawn args '--generator-output',\ngithub-desktop> gyp info spawn args 'build',\ngithub-desktop> gyp info spawn args '-Goutput_dir=.'\ngithub-desktop> gyp info spawn args ]\ngithub-desktop> gyp info spawn make\ngithub-desktop> gyp info spawn args [ 'BUILDTYPE=Release', '-C', 'build' ]\ngithub-desktop> make: Entering directory '/nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/fs-admin/build'\ngithub-desktop>   CXX(target) Release/obj.target/fs_admin/src/main.o\ngithub-desktop> In file included from ../src/main.cc:1:\ngithub-desktop> ../node_modules/node-addon-api/napi.h:861:39: error: in-class initializer for static data member is not a constant expression\ngithub-desktop>   861 |     static const napi_typedarray_type unknown_array_type = static_cast<napi_typedarray_type>(-1);\ngithub-desktop>       |                                       ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ngithub-desktop> ../node_modules/node-addon-api/napi.h:861:60: note: integer value -1 is outside the valid range of values [0, 15] for the enumeration type 'napi_typedarray_type'\ngithub-desktop>   861 |     static const napi_typedarray_type unknown_array_type = static_cast<napi_typedarray_type>(-1);\ngithub-desktop>       |                                                            ^\ngithub-desktop> 1 error generated.\ngithub-desktop> make: *** [fs_admin.target.mk:125: Release/obj.target/fs_admin/src/main.o] Error 1\ngithub-desktop> make: Leaving directory '/nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/fs-admin/build'\ngithub-desktop> gyp ERR! build error\ngithub-desktop> gyp ERR! stack Error: `make` failed with exit code: 2\ngithub-desktop> gyp ERR! stack at ChildProcess.<anonymous> (/nix/store/ddzrqa6nbfyvsrjh5grfnia4ppfkyzjl-node-gyp-12.3.0/lib/node_modules/node-gyp/lib/build.js:219:23)\ngithub-desktop> gyp ERR! System Darwin 24.6.0\ngithub-desktop> gyp ERR! command \"/nix/store/va22g750kafjvkbwvhbnwqqmj9f9dm8m-nodejs-slim-24.14.1/bin/node\" \"/nix/store/ddzrqa6nbfyvsrjh5grfnia4ppfkyzjl-node-gyp-12.3.0/lib/node_modules/node-gyp/bin/node-gyp.js\" \"rebuild\"\ngithub-desktop> gyp ERR! cwd /nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/fs-admin\ngithub-desktop> gyp ERR! node -v v24.14.1\ngithub-desktop> gyp ERR! node-gyp -v v12.3.0\ngithub-desktop> gyp ERR! $npm_package_name fs-admin\ngithub-desktop> gyp ERR! $npm_package_version 0.19.0\ngithub-desktop> gyp ERR! not ok\ngithub-desktop> error Command failed with exit code 1.\ngithub-desktop> info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.\nnote: keeping build directory \"/nix/var/nix/builds/nix-5016-1916735362\"\nerror: Cannot build '/nix/store/459kbci7lin9pz1vxmkanskgc80mzws1-github-desktop-3.5.8.drv'.\n       Reason: builder failed with exit code 1.\n       Output paths:\n         /nix/store/35p9q6w4whvi5s1fhmq0hgs1qghyc2dx-github-desktop-3.5.8\n       Last 25 log lines:\n       > make: Entering directory '/nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/fs-admin/build'\n       >   CXX(target) Release/obj.target/fs_admin/src/main.o\n       > In file included from ../src/main.cc:1:\n       > ../node_modules/node-addon-api/napi.h:861:39: error: in-class initializer for static data member is not a constant expression\n       >   861 |     static const napi_typedarray_type unknown_array_type = static_cast<napi_typedarray_type>(-1);\n       >       |                                       ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n       > ../node_modules/node-addon-api/napi.h:861:60: note: integer value -1 is outside the valid range of values [0, 15] for the enumeration type 'napi_typedarray_type'\n       >   861 |     static const napi_typedarray_type unknown_array_type = static_cast<napi_typedarray_type>(-1);\n       >       |                                                            ^\n       > 1 error generated.\n       > make: *** [fs_admin.target.mk:125: Release/obj.target/fs_admin/src/main.o] Error 1\n       > make: Leaving directory '/nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/fs-admin/build'\n       > gyp ERR! build error\n       > gyp ERR! stack Error: `make` failed with exit code: 2\n       > gyp ERR! stack at ChildProcess.<anonymous> (/nix/store/ddzrqa6nbfyvsrjh5grfnia4ppfkyzjl-node-gyp-12.3.0/lib/node_modules/node-gyp/lib/build.js:219:23)\n       > gyp ERR! System Darwin 24.6.0\n       > gyp ERR! command \"/nix/store/va22g750kafjvkbwvhbnwqqmj9f9dm8m-nodejs-slim-24.14.1/bin/node\" \"/nix/store/ddzrqa6nbfyvsrjh5grfnia4ppfkyzjl-node-gyp-12.3.0/lib/node_modules/node-gyp/bin/node-gyp.js\" \"rebuild\"\n       > gyp ERR! cwd /nix/var/nix/builds/nix-5016-1916735362/source/app/node_modules/fs-admin\n       > gyp ERR! node -v v24.14.1\n       > gyp ERR! node-gyp -v v12.3.0\n       > gyp ERR! $npm_package_name fs-admin\n       > gyp ERR! $npm_package_version 0.19.0\n       > gyp ERR! not ok\n       > error Command failed with exit code 1.\n       > info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.\n       For full logs, run:\n         nix log /nix/store/459kbci7lin9pz1vxmkanskgc80mzws1-github-desktop-3.5.8.drv\n``` ",
+   "created_at": "2026-04-26T20:08:33Z",
+   "id": 4322896115,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-26T20:08:33Z",
+   "user": {
+    "id": 44438314,
+    "login": "djmaxus",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I tried various things, but it's getting late. I'll see what I can do on wednesday or something (most likely switch to a binary for darwin 😅 )",
+   "created_at": "2026-04-26T20:42:19Z",
+   "id": 4322956176,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-04-26T20:42:19Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Ended up making a binary version. Pushed https://github.com/NixOS/nixpkgs/pull/514489 and https://github.com/NixOS/nixpkgs/pull/514490 :)",
+   "created_at": "2026-04-28T17:58:47Z",
+   "id": 4337862762,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-04-28T17:58:47Z",
+   "user": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "https://github.com/NixOS/nixpkgs/pull/514489 is still open",
+   "created_at": "2026-05-08T18:48:18Z",
+   "id": 4409015823,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-05-08T18:48:18Z",
+   "user": {
+    "id": 44438314,
+    "login": "djmaxus",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/issues/513758",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "### Nixpkgs version\n\n- Unstable (26.05)\n\n### Describe the bug\n\n[Marked supported on Darwin at search.nixos.org](https://search.nixos.org/packages?channel=unstable&include_modular_service_options=1&include_nixos_options=1&query=github-desktop&show=github-desktop)\n\nBut in practice, the build fails on `aarch64-darwin`\n\n`meta.platforms` is inherited from `pkgs.electron`: https://github.com/NixOS/nixpkgs/blob/a3854adcaf99548d2a7b3bb72710a0b7d100c63f/pkgs/by-name/gi/github-desktop/package.nix#L205\n\nHowever, electron [seems to be Linux only]:https://github.com/NixOS/nixpkgs/blob/b44e340c49abc9184a9f4b4dbe65c8d4a76a3937/pkgs/development/tools/electron/common.nix#L314\n\n### Steps to reproduce\n\nRun `nix-build -A github-desktop --show-trace` at `nixpgs/master` and compare the result with NixOS Search info.\n\n### Expected behaviour\n\na) Should be available on Darwin because the upstream app is supported\nb) NixOS Search should reflect the actual scope of supported platforms to avoid confusion\n\n### Screenshots\n\n_No response_\n\n### Relevant log output\n\n```console\n~/G/nixpkgs $ nix-build -A github-desktop --show-trace\nerror:\n       … while calling the 'derivationStrict' builtin\n         at <nix/derivation-internal.nix>:37:12:\n           36|\n           37|   strict = derivationStrict drvAttrs;\n             |            ^\n           38|\n\n       … while evaluating derivation 'github-desktop-3.5.8'\n         whose name attribute is located at /Users/melizare/GitHub/nixpkgs/pkgs/stdenv/generic/make-derivation.nix:541:11\n\n       … while evaluating attribute 'buildInputs' of derivation 'github-desktop-3.5.8'\n         at /Users/melizare/GitHub/nixpkgs/pkgs/stdenv/generic/make-derivation.nix:593:11:\n          592|           depsHostHost = elemAt (elemAt dependencies 1) 0;\n          593|           buildInputs = elemAt (elemAt dependencies 1) 1;\n             |           ^\n          594|           depsTargetTarget = elemAt (elemAt dependencies 2) 0;\n\n       … in the condition of the assert statement\n         at /Users/melizare/GitHub/nixpkgs/lib/customisation.nix:428:15:\n          427|             outPath =\n          428|               assert condition;\n             |               ^\n          429|               drv.${outputName}.outPath;\n\n       … while evaluating the attribute 'handled'\n         at /Users/melizare/GitHub/nixpkgs/pkgs/stdenv/generic/check-meta.nix:685:9:\n          684|         valid = \"no\";\n          685|         handled = handle {\n             |         ^\n          686|           inherit attrs meta;\n\n       … from call site\n         at /Users/melizare/GitHub/nixpkgs/pkgs/stdenv/generic/check-meta.nix:685:19:\n          684|         valid = \"no\";\n          685|         handled = handle {\n             |                   ^\n          686|           inherit attrs meta;\n\n       … while calling 'handle'\n         at /Users/melizare/GitHub/nixpkgs/pkgs/stdenv/generic/check-meta.nix:626:5:\n          625|   handle =\n          626|     {\n             |     ^\n          627|       attrs,\n\n       … while calling the 'seq' builtin\n         at /Users/melizare/GitHub/nixpkgs/pkgs/stdenv/generic/check-meta.nix:660:5:\n          659|     # Give all warnings first, then error if any\n          660|     builtins.seq (foldl' giveWarning null warnings) withError;\n             |     ^\n          661|\n\n       … while calling the 'throw' builtin\n         at /Users/melizare/GitHub/nixpkgs/pkgs/stdenv/generic/check-meta.nix:648:13:\n          647|           else\n          648|             throw msg;\n             |             ^\n          649|\n\n       error: Refusing to evaluate package 'gnome-keyring-48.0' in /Users/melizare/GitHub/nixpkgs/pkgs/by-name/gn/gnome-keyring/package.nix:120 because it is not available on the requested hostPlatform:\n         hostPlatform.system = \"aarch64-darwin\"\n         package.meta.platforms = [\n           \"aarch64-linux\"\n           \"arc-linux\"\n           \"armv5tel-linux\"\n           \"armv6l-linux\"\n           \"armv7a-linux\"\n           \"armv7l-linux\"\n           \"i686-linux\"\n           \"loongarch64-linux\"\n           \"m68k-linux\"\n           \"microblaze-linux\"\n           \"microblazeel-linux\"\n           \"mips-linux\"\n           \"mips64-linux\"\n           \"mips64el-linux\"\n           \"mipsel-linux\"\n           \"powerpc-linux\"\n           \"powerpc64-linux\"\n           \"powerpc64le-linux\"\n           \"riscv32-linux\"\n           \"riscv64-linux\"\n           \"s390-linux\"\n           \"s390x-linux\"\n           \"x86_64-linux\"\n         ]\n         package.meta.badPlatforms = [ ]\n\n       a) To temporarily allow packages that are unsupported for this system, you can use an environment variable\n          for a single invocation of the nix tools.\n\n            $ export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1\n\n          Note: When using `nix shell`, `nix build`, `nix develop`, etc with a flake,\n                then pass `--impure` in order to allow use of environment variables.\n\n       b) For `nixos-rebuild` you can set\n         { nixpkgs.config.allowUnsupportedSystem = true; }\n       in configuration.nix to override this.\n\n       c) For `nix-env`, `nix-build`, `nix-shell` or any other Nix command you can add\n         { allowUnsupportedSystem = true; }\n       to ~/.config/nixpkgs/config.nix.\n```\n\n### Additional context\n\n_No response_\n\n### System metadata\n\n```\n - system: `\"aarch64-darwin\"`\n - host os: `Darwin 24.6.0, macOS 15.7.5`\n - multi-user?: `yes`\n - sandbox: `no`\n - version: `nix-env (Nix) 2.28.3`\n - channels(root): `\"nixpkgs\"`\n - nixpkgs: `/nix/store/2b2m638sjbpdsypx564aidc76vj3a3h4-source`\n```\n\n### Notify maintainers\n\n@dtomvan \n\n---\n\n**Note for maintainers:** Please tag this issue in your pull request description. (i.e. `Resolves #ISSUE`.)\n\n\n### I assert that this issue is relevant for Nixpkgs\n\n- [x] I assert that this is a bug and not a support request.\n- [x] I assert that this is not a [duplicate of an existing issue](https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+label%3A%220.kind%3A+bug%22+-label%3A%226.topic%3A+darwin%22+-label%3A%226.topic%3A+nixos%22). \n- [x] I assert that I have read the [NixOS Code of Conduct](https://github.com/NixOS/.github/blob/master/CODE_OF_CONDUCT.md) and agree to abide by it.\n\n### Is this issue important to you?\n\nAdd a :+1: [reaction] to [issues you find important].\n\n[reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/\n[issues you find important]: https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 9,
+  "created_at": "2026-04-26T18:31:17Z",
+  "id": 4331643629,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "84b6eb",
+    "default": false,
+    "description": "Something is broken",
+    "id": 6314750,
+    "name": "0.kind: bug"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 513758,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 1
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": "reopened",
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "github-desktop: marked supported on Darwin but dependency isn't",
+  "type": null,
+  "updated_at": "2026-05-08T18:49:11Z",
+  "user": {
+   "id": 44438314,
+   "login": "djmaxus",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "NixOS/nixpkgs#513758",
+ "sources": [
+  "nixpkgs-phrase-issues"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "97701da7d92bf51e65fbf1679b764ae8c6c92b64",
+   "commit_url": "https://api.github.com/repos/dtomvan/nixpkgs/commits/97701da7d92bf51e65fbf1679b764ae8c6c92b64",
+   "created_at": "2026-04-28T18:01:23Z",
+   "event": "referenced",
+   "id": 24959895072
+  },
+  {
+   "actor": {
+    "id": 140964,
+    "login": "pbsds",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-08T16:03:02Z",
+   "event": "closed",
+   "id": 25312939702,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 261596211,
+    "login": "nixos-cuda-channel-updater[bot]",
+    "site_admin": false,
+    "type": "Bot"
+   },
+   "commit_id": "a8f7483d920f062a76a6d8675446356230ac927a",
+   "commit_url": "https://api.github.com/repos/nixos-cuda/nixpkgs/commits/a8f7483d920f062a76a6d8675446356230ac927a",
+   "created_at": "2026-05-08T16:05:09Z",
+   "event": "referenced",
+   "id": 25313015777
+  },
+  {
+   "actor": {
+    "id": 140964,
+    "login": "pbsds",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-05-08T18:49:11Z",
+   "event": "reopened",
+   "id": 25318783463,
+   "state_reason": "reopened"
+  },
+  {
+   "actor": {
+    "id": 25513724,
+    "login": "Bad3r",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "35da300e3cc8871a5c183205ef526238a497d3df",
+   "commit_url": "https://api.github.com/repos/Bad3r/nixpkgs/commits/35da300e3cc8871a5c183205ef526238a497d3df",
+   "created_at": "2026-05-13T07:13:43Z",
+   "event": "referenced",
+   "id": 25469049952
+  },
+  {
+   "actor": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "636c11c8180c49d605d856b1eaffd0c7fe60a13e",
+   "commit_url": "https://api.github.com/repos/dtomvan/nixpkgs/commits/636c11c8180c49d605d856b1eaffd0c7fe60a13e",
+   "created_at": "2026-05-23T19:32:05Z",
+   "event": "referenced",
+   "id": 25888315054
+  },
+  {
+   "actor": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "d0086414646971b6a54ef0ba313dc396487b7d6f",
+   "commit_url": "https://api.github.com/repos/dtomvan/nixpkgs/commits/d0086414646971b6a54ef0ba313dc396487b7d6f",
+   "created_at": "2026-05-24T17:45:11Z",
+   "event": "referenced",
+   "id": 25902770547
+  },
+  {
+   "actor": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "d0583a6948ab1b515e42ff5c6419a6e934da1b59",
+   "commit_url": "https://api.github.com/repos/dtomvan/nixpkgs/commits/d0583a6948ab1b515e42ff5c6419a6e934da1b59",
+   "created_at": "2026-05-24T17:46:26Z",
+   "event": "referenced",
+   "id": 25902787162
+  },
+  {
+   "actor": {
+    "id": 51440893,
+    "login": "dtomvan",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "11bd729a155b5b20d22a9c0a25537eb3733840ac",
+   "commit_url": "https://api.github.com/repos/dtomvan/nixpkgs/commits/11bd729a155b5b20d22a9c0a25537eb3733840ac",
+   "created_at": "2026-05-26T15:59:04Z",
+   "event": "referenced",
+   "id": 25975413368
+  }
+ ]
+}

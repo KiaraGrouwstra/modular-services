@@ -1,0 +1,558 @@
+{
+ "comments": [
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/prs-already-reviewed/2617/3214\n",
+   "created_at": "2026-08-04T16:54:45Z",
+   "id": 5182113181,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-04T16:54:45Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/prs-already-reviewed/2617/3220\n",
+   "created_at": "2026-08-07T14:47:46Z",
+   "id": 5218517318,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-07T14:47:46Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Tests pass :tada:\r\n```sh\r\nnix-build -A nixosTests.system-services-compliance\r\nnix-build -A nixosTests.ghostunnel-modular  # sanity check\r\n```",
+   "created_at": "2026-08-07T15:58:27Z",
+   "id": 5219246659,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-07T15:58:27Z",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "This pull request has been mentioned on **NixOS Discourse**. There might be relevant details there:\n\nhttps://discourse.nixos.org/t/modular-services-meeting-6-2026-08-07/79408/1\n",
+   "created_at": "2026-08-07T18:40:04Z",
+   "id": 5220771276,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-07T18:40:04Z",
+   "user": {
+    "id": 45043797,
+    "login": "nixos-discourse",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Are flags an extension to be used by modular services defined in nixpkgs or is this standardized complexity required for all implementations of modular services?",
+   "created_at": "2026-08-08T07:17:30Z",
+   "id": 5225088832,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-08T07:17:30Z",
+   "user": {
+    "id": 273540141,
+    "login": "state-plumber",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "@state-plumber: the lifting from `process.{flags,flagsFormat}` to `process.argv` is done within `lib` here already. new services can use this as sugar if they like. new environments (consuming the same shared services that already defined those `process` bits) shouldn't really have to think about this feature.",
+   "created_at": "2026-08-08T09:27:49Z",
+   "id": 5225513175,
+   "minimized": null,
+   "reactions": {
+    "+1": 1,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 1
+   },
+   "updated_at": "2026-08-08T09:27:49Z",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/546008",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Rebases #509595, and implements its [suggestion](https://github.com/NixOS/nixpkgs/pull/509595#discussion_r3113562002) to order flags after `argv` (while still allowing the user control over arg order by `mkOrder`):\r\n\r\n- Adds declarative command-line construction to modular services, so service modules stop hand-rolling `argv` out of `concatMap`/`optional` chains.\r\n\r\n- `process.flags` is an `attrListWith` of flag name to value. `null` omits the flag, booleans render per `explicitBool`, and strings, paths and integers become the option's argument. Paths are coerced to their store path, matching `argv`. The list form allows a flag to be repeated: `[ { \"--host\" = \"a\"; } { \"--host\" = \"b\"; } ]`.\r\n\r\n- `process.flagFormat` maps a flag name to an option spec for `lib.cli.toCommandLine`, controlling the option prefix, the separator between option and argument, and whether booleans are spelled out. The default renders the key verbatim with the argument as a separate `argv` entry.\r\n\r\n- `pkgs/by-name/sn/snid/service.nix` is converted as the first consumer.\r\n\r\n## Ordering\r\n\r\n`attrListWith` re-emits every flag as an `lib.mkOrder` definition, so `flags` and `argv` share a single ordering space. A flag carrying no ordering property of its own is placed at priority 1250, between `lib.modules.defaultOrderPriority` (1000) and `lib.mkAfter` (1500). That gives three guarantees:\r\n\r\n- plain flags follow the command name and any other plain `argv` arguments;\r\n- `lib.mkAfter` on `argv` still lands after the flags, which is how trailing positional arguments are expressed;\r\n- an explicit `lib.mkOrder` on a flag is honoured verbatim against `argv`, so a sub-command can sit between two groups of flags.\r\n\r\n```nix\r\nargv = mkMerge [ (mkBefore [ \"/bin/gt\" ]) (mkOrder 800 [ \"server\" ]) (mkAfter [ \"TRAILING\" ]) ];\r\nflags = mkMerge [ { listen = \"a\"; } { disable-landlock = mkOrder 600 true; } ];\r\n=> [ \"/bin/gt\" \"--disable-landlock\" \"server\" \"--listen\" \"a\" \"TRAILING\" ]\r\n```\r\n\r\nOne wart, documented on the option: because 1250 is substituted for flags without an ordering property, `lib.mkOrder 1000` on a flag is indistinguishable from leaving it unadorned. Use a priority next to 1000, such as 999 or 1001, to order a flag around plain `argv` entries.\r\n\r\n`lib/services/test.nix` covers the default and a custom `flagFormat`, each value kind, the repeated-flag list form, and the ordering case above.\r\n\r\n## Out of scope\r\n\r\n- A read-only composed `process.commandLine` (`argv` ++ rendered flags) as a later refinement. Three sites read `config.process.argv` today and would need migrating: `nixos/modules/system/service/systemd/service.nix:112`, `pkgs/by-name/gh/ghostunnel/service.nix:223`, `nixos/modules/system/service/systemd/test.nix:91`. Worth flagging because an unmigrated reader would silently drop flags.\r\n- `process.env`, now proposed as `process.environment` in #545521. Inheriting from the parent environment, and how that interacts with ordering, still needs a design.\r\n- A dedicated option controlling `argv[0]`, and the wider sub-command and positional-argument discussion, including that flags can differ per service manager.\r\n\r\n## Notes for merging\r\n\r\nThe first commit cherry-picks the test fix from #545732 and drops out once that merges; without it `nix-instantiate --eval lib/services/test.nix` is broken on `master`.\r\n\r\n#545521 also touches `lib/services/service.nix` and `lib/services/test.nix`, so whichever of the two lands second needs a small rebase.\r\n\r\nAssisted-by: claude-opus-5\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n    - `nix-build -A nixosTests.snid`\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [x] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n    - `nix-instantiate --eval lib/services/test.nix`\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": "2026-08-07T16:04:03Z",
+  "closed_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 6,
+  "created_at": "2026-07-26T17:11:16Z",
+  "draft": false,
+  "id": 4981659198,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   },
+   {
+    "color": "7b845a",
+    "default": false,
+    "description": "Contributions that include code generation with LLMs",
+    "id": 11544961878,
+    "name": "llm-assisted"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 546008,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/546008.diff",
+   "merged_at": "2026-08-07T16:04:03Z",
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/546008.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "lib/services/service: add flags and flagFormat options",
+  "type": null,
+  "updated_at": "2026-08-08T09:27:49Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 264,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21134,
+    "open_issues_count": 21134,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:32:14Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:09:05Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "38352561a0b868ad8f31c8125de3c6395c70ff42",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Rebases #509595, and implements its [suggestion](https://github.com/NixOS/nixpkgs/pull/509595#discussion_r3113562002) to order flags after `argv` (while still allowing the user control over arg order by `mkOrder`):\r\n\r\n- Adds declarative command-line construction to modular services, so service modules stop hand-rolling `argv` out of `concatMap`/`optional` chains.\r\n\r\n- `process.flags` is an `attrListWith` of flag name to value. `null` omits the flag, booleans render per `explicitBool`, and strings, paths and integers become the option's argument. Paths are coerced to their store path, matching `argv`. The list form allows a flag to be repeated: `[ { \"--host\" = \"a\"; } { \"--host\" = \"b\"; } ]`.\r\n\r\n- `process.flagFormat` maps a flag name to an option spec for `lib.cli.toCommandLine`, controlling the option prefix, the separator between option and argument, and whether booleans are spelled out. The default renders the key verbatim with the argument as a separate `argv` entry.\r\n\r\n- `pkgs/by-name/sn/snid/service.nix` is converted as the first consumer.\r\n\r\n## Ordering\r\n\r\n`attrListWith` re-emits every flag as an `lib.mkOrder` definition, so `flags` and `argv` share a single ordering space. A flag carrying no ordering property of its own is placed at priority 1250, between `lib.modules.defaultOrderPriority` (1000) and `lib.mkAfter` (1500). That gives three guarantees:\r\n\r\n- plain flags follow the command name and any other plain `argv` arguments;\r\n- `lib.mkAfter` on `argv` still lands after the flags, which is how trailing positional arguments are expressed;\r\n- an explicit `lib.mkOrder` on a flag is honoured verbatim against `argv`, so a sub-command can sit between two groups of flags.\r\n\r\n```nix\r\nargv = mkMerge [ (mkBefore [ \"/bin/gt\" ]) (mkOrder 800 [ \"server\" ]) (mkAfter [ \"TRAILING\" ]) ];\r\nflags = mkMerge [ { listen = \"a\"; } { disable-landlock = mkOrder 600 true; } ];\r\n=> [ \"/bin/gt\" \"--disable-landlock\" \"server\" \"--listen\" \"a\" \"TRAILING\" ]\r\n```\r\n\r\nOne wart, documented on the option: because 1250 is substituted for flags without an ordering property, `lib.mkOrder 1000` on a flag is indistinguishable from leaving it unadorned. Use a priority next to 1000, such as 999 or 1001, to order a flag around plain `argv` entries.\r\n\r\n`lib/services/test.nix` covers the default and a custom `flagFormat`, each value kind, the repeated-flag list form, and the ordering case above.\r\n\r\n## Out of scope\r\n\r\n- A read-only composed `process.commandLine` (`argv` ++ rendered flags) as a later refinement. Three sites read `config.process.argv` today and would need migrating: `nixos/modules/system/service/systemd/service.nix:112`, `pkgs/by-name/gh/ghostunnel/service.nix:223`, `nixos/modules/system/service/systemd/test.nix:91`. Worth flagging because an unmigrated reader would silently drop flags.\r\n- `process.env`, now proposed as `process.environment` in #545521. Inheriting from the parent environment, and how that interacts with ordering, still needs a design.\r\n- A dedicated option controlling `argv[0]`, and the wider sub-command and positional-argument discussion, including that flags can differ per service manager.\r\n\r\n## Notes for merging\r\n\r\nThe first commit cherry-picks the test fix from #545732 and drops out once that merges; without it `nix-instantiate --eval lib/services/test.nix` is broken on `master`.\r\n\r\n#545521 also touches `lib/services/service.nix` and `lib/services/test.nix`, so whichever of the two lands second needs a small rebase.\r\n\r\nAssisted-by: claude-opus-5\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n    - `nix-build -A nixosTests.snid`\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [x] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n    - `nix-instantiate --eval lib/services/test.nix`\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 3,
+  "closed_at": "2026-08-07T16:04:03Z",
+  "comments": 6,
+  "commits": 4,
+  "created_at": "2026-07-26T17:11:16Z",
+  "deletions": 21,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/546008.diff",
+  "draft": false,
+  "head": {
+   "label": "KiaraGrouwstra:service-flags-env-rebased",
+   "ref": "service-flags-env-rebased",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2018-06-10T10:36:34Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 136799825,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 1,
+    "open_issues_count": 1,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-30T19:20:59Z",
+    "size": 3035282,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2024-06-23T17:05:42Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "89e1ea15f2c1e16775401206ef235f496611d399",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4137101436,
+  "labels": [
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "0E8A16",
+    "default": false,
+    "description": "This PR was reviewed and approved by two persons.",
+    "id": 4022794309,
+    "name": "12.approvals: 2"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "The Nixpkgs function library",
+    "id": 5712674630,
+    "name": "6.topic: lib"
+   },
+   {
+    "color": "7b845a",
+    "default": false,
+    "description": "Contributions that include code generation with LLMs",
+    "id": 11544961878,
+    "name": "llm-assisted"
+   },
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Modular services / package configuration modules https://matrix.to/#/#modular-services:nixos.org",
+    "id": 11610252144,
+    "name": "6.topic: package configuration modules"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": "bdc192c43d94ef398bf055f4e3164005fcff73cc",
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "merged": true,
+  "merged_at": "2026-08-07T16:04:03Z",
+  "merged_by": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  },
+  "milestone": null,
+  "number": 546008,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/546008.patch",
+  "rebaseable": null,
+  "requested_reviewers": [
+   {
+    "id": 61303,
+    "login": "tomfitzhenry",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 20525370,
+    "login": "infinisil",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 50398876,
+    "login": "hsjobeki",
+    "site_admin": false,
+    "type": "User"
+   },
+   {
+    "id": 78693624,
+    "login": "llakala",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "lib/services/service: add flags and flagFormat options",
+  "updated_at": "2026-08-08T09:27:49Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#546008",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "89e1ea15f2c1e16775401206ef235f496611d399",
+   "id": 4856880885,
+   "state": "APPROVED",
+   "submitted_at": "2026-08-04T16:46:06Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "89e1ea15f2c1e16775401206ef235f496611d399",
+   "id": 4883871440,
+   "state": "APPROVED",
+   "submitted_at": "2026-08-07T14:46:34Z",
+   "user": {
+    "id": 621759,
+    "login": "Lassulus",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-label-prs",
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "bdc192c43d94ef398bf055f4e3164005fcff73cc",
+   "commit_url": "https://api.github.com/repos/NixOS/nixpkgs/commits/bdc192c43d94ef398bf055f4e3164005fcff73cc",
+   "created_at": "2026-08-07T16:04:03Z",
+   "event": "merged",
+   "id": 29128381092
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-08-07T16:04:03Z",
+   "event": "closed",
+   "id": 29128381221,
+   "intent": null,
+   "state_reason": null
+  }
+ ]
+}

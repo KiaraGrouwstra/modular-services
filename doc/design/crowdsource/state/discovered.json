@@ -1,0 +1,973 @@
+{
+ "found": [
+  {
+   "mentions": 10,
+   "ref": "NixOS/nixpkgs#75584"
+  },
+  {
+   "mentions": 7,
+   "ref": "NixOS/nixpkgs#82743"
+  },
+  {
+   "mentions": 6,
+   "ref": "NixOS/nixpkgs#370444"
+  },
+  {
+   "mentions": 4,
+   "ref": "NixOS/nixpkgs#425923"
+  },
+  {
+   "mentions": 4,
+   "ref": "NixOS/rfcs#22"
+  },
+  {
+   "mentions": 4,
+   "ref": "NixOS/rfcs#5"
+  },
+  {
+   "mentions": 3,
+   "ref": "NixOS/nix#16300"
+  },
+  {
+   "mentions": 3,
+   "ref": "NixOS/nixpkgs#24146"
+  },
+  {
+   "mentions": 3,
+   "ref": "NixOS/nixpkgs#495933"
+  },
+  {
+   "mentions": 3,
+   "ref": "NixOS/nixpkgs#499612"
+  },
+  {
+   "mentions": 3,
+   "ref": "NixOS/nixpkgs#70138"
+  },
+  {
+   "mentions": 3,
+   "ref": "cachix/secretspec#203"
+  },
+  {
+   "mentions": 3,
+   "ref": "discourse:discourse.nixos.org/t/29612"
+  },
+  {
+   "mentions": 3,
+   "ref": "discourse:discourse.nixos.org/t/78302"
+  },
+  {
+   "mentions": 3,
+   "ref": "namecoin/namecoin-core#148"
+  },
+  {
+   "mentions": 3,
+   "ref": "nix-community/impermanence#10"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/RFCs#42"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#132392"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#206467"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#237040"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#294763"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#344904"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#362160"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#362270"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#362325"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#416148"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#422093"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#451424"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#506555"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#509378"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#510860"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#514489"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#515268"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#5246"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#545714"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#57477"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#75539"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#81138"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#82802"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#9250"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/nixpkgs#94636"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/rfcs#140"
+  },
+  {
+   "mentions": 2,
+   "ref": "NixOS/rfcs#155"
+  },
+  {
+   "mentions": 2,
+   "ref": "applicative-systems/declarative-runtime#4"
+  },
+  {
+   "mentions": 2,
+   "ref": "cachix/devenv#3073"
+  },
+  {
+   "mentions": 2,
+   "ref": "cachix/secretspec#200"
+  },
+  {
+   "mentions": 2,
+   "ref": "cachix/secretspec#362"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/26574"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/32934"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/46707"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/48230"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/57518"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/6096"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/61823"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/63964"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/65114"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/77328"
+  },
+  {
+   "mentions": 2,
+   "ref": "discourse:discourse.nixos.org/t/77888"
+  },
+  {
+   "mentions": 2,
+   "ref": "ibizaman/selfhostblocks#482"
+  },
+  {
+   "mentions": 2,
+   "ref": "ibizaman/selfhostblocks#494"
+  },
+  {
+   "mentions": 2,
+   "ref": "ibizaman/selfhostblocks#588"
+  },
+  {
+   "mentions": 2,
+   "ref": "ibizaman/selfhostblocks#591"
+  },
+  {
+   "mentions": 2,
+   "ref": "ibizaman/selfhostblocks#596"
+  },
+  {
+   "mentions": 2,
+   "ref": "ibizaman/selfhostblocks#659"
+  },
+  {
+   "mentions": 2,
+   "ref": "ibizaman/skarabox#183"
+  },
+  {
+   "mentions": 2,
+   "ref": "jellyfin/jellyfin#14422"
+  },
+  {
+   "mentions": 2,
+   "ref": "jellyfin/jellyfin#16168"
+  },
+  {
+   "mentions": 2,
+   "ref": "kubernetes/enhancements#5474"
+  },
+  {
+   "mentions": 2,
+   "ref": "kubernetes/enhancements#5475"
+  },
+  {
+   "mentions": 2,
+   "ref": "lldap/lldap#1218"
+  },
+  {
+   "mentions": 2,
+   "ref": "lldap/lldap#1223"
+  },
+  {
+   "mentions": 2,
+   "ref": "ngi-nix/projects#134"
+  },
+  {
+   "mentions": 2,
+   "ref": "ngi-nix/projects#1568"
+  },
+  {
+   "mentions": 2,
+   "ref": "ngi-nix/projects#1569"
+  },
+  {
+   "mentions": 2,
+   "ref": "ngi-nix/projects#2136"
+  },
+  {
+   "mentions": 2,
+   "ref": "ngi-nix/projects#2237"
+  },
+  {
+   "mentions": 2,
+   "ref": "openzfs/zfs#11400"
+  },
+  {
+   "mentions": 2,
+   "ref": "prometheus-community/systemd_exporter#181"
+  },
+  {
+   "mentions": 2,
+   "ref": "systemd/systemd#2913"
+  },
+  {
+   "mentions": 1,
+   "ref": "DeterminateSystems/nix-src#213"
+  },
+  {
+   "mentions": 1,
+   "ref": "Lassulus/vars#5"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/infra#1074"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nix#16156"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nix#329"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nix#6257"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nix#8887"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixops#627"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixos-search#1226"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixos-search#1240"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#102397"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#107323"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#110614"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#134618"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#142282"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#154123"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#155892"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#172926"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#176557"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#18881"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#19504"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#210666"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#215496"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#223064"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#231138"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#231316"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#232490"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#239291"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#24331"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#24341"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#24366"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#24755"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#25116"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#263900"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#273815"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#276496"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#305304"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#31715"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#324302"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#330708"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#330822"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#345459"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#351888"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#354032"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#402298"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#413205"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#428330"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#429561"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#435005"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#444040"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#4493"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#475107"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#477882"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#509254"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#509450"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#510142"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#513757"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#514184"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#514490"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#518825"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#525587"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#554815"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#57123"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#57554"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#62853"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#65728"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#67392"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#70469"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#76739"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#78640"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#79943"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#80933"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#82379"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#82441"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#93659"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#95599"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#95880"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/nixpkgs#97392"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/org#269"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/rfcs#132"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/rfcs#136"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/rfcs#151"
+  },
+  {
+   "mentions": 1,
+   "ref": "NixOS/rfcs#52"
+  },
+  {
+   "mentions": 1,
+   "ref": "aws/amazon-ec2-metadata-mock#234"
+  },
+  {
+   "mentions": 1,
+   "ref": "axllent/mailpit#328"
+  },
+  {
+   "mentions": 1,
+   "ref": "bedrocklinux/bedrocklinux-userland#221"
+  },
+  {
+   "mentions": 1,
+   "ref": "cachix/secretspec#179"
+  },
+  {
+   "mentions": 1,
+   "ref": "dev/2020-03-04#3133786"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/10560"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/10992"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/14400"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/16922"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/17079"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/18425"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/1902"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/2538"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/25793"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/30862"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/34070"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/34772"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/34846"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/3751"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/39538"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/40851"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/41338"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/41829"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/42643"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/43512"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/45414"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/46113"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/46817"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/47589"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/4809"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/48678"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/50170"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/50831"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/51514"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/51597"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/52224"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/5268"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/5325"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/53690"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/53747"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/53789"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/55095"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/55888"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/56591"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/57636"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/58395"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/58396"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/59113"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/59304"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/61561"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/61868"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/6375"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/63859"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/67722"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/69375"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/71009"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/74021"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/74466"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/75791"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/77581"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/78870"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/870"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/8779"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/9274"
+  },
+  {
+   "mentions": 1,
+   "ref": "discourse:discourse.nixos.org/t/9539"
+  },
+  {
+   "mentions": 1,
+   "ref": "fosrl/pangolin#1139"
+  },
+  {
+   "mentions": 1,
+   "ref": "jetify-com/devbox#2824"
+  },
+  {
+   "mentions": 1,
+   "ref": "ngi-nix/forge#765"
+  },
+  {
+   "mentions": 1,
+   "ref": "ngi-nix/ngipkgs#507"
+  },
+  {
+   "mentions": 1,
+   "ref": "nix-darwin/nix-darwin#942"
+  },
+  {
+   "mentions": 1,
+   "ref": "nixos/nixpkgs#57477"
+  },
+  {
+   "mentions": 1,
+   "ref": "nixos/rfcs#42"
+  },
+  {
+   "mentions": 1,
+   "ref": "numtide/devshell#170"
+  },
+  {
+   "mentions": 1,
+   "ref": "numtide/devshell#47"
+  },
+  {
+   "mentions": 1,
+   "ref": "svanderburg/nix-processmgmt#5"
+  },
+  {
+   "mentions": 1,
+   "ref": "systemd/systemd#14264"
+  },
+  {
+   "mentions": 1,
+   "ref": "systemd/systemd#14532"
+  },
+  {
+   "mentions": 1,
+   "ref": "systemd/systemd#16568"
+  },
+  {
+   "mentions": 1,
+   "ref": "t184256/nix-on-droid#75"
+  },
+  {
+   "mentions": 1,
+   "ref": "ttacon/glorious#49"
+  }
+ ],
+ "note": "Links seen in the fetched material that no source in sources.json tracks, most-mentioned first. Promote what belongs into sources.json; add the rest to `ignore`."
+}

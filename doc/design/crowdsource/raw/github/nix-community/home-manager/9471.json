@@ -1,0 +1,132 @@
+{
+ "comments": [
+  {
+   "body": "Related diagnostic requirement from recent warning/assertion location work:\n\nDiagnostic file context must point to user configuration definitions, not the Home Manager module that emitted the diagnostic.\n\n`config.warnings` is a plain list of strings, so generic enrichment via `options.warnings.definitionsWithLocations` only finds where the warning was added to `warnings`. For module-generated warnings this often points at `modules/...`, which is not actionable for users.\n\nBetter direction:\n\n- deprecation helpers should accept `options` + `option` path and derive `files = options.<path>.files`\n- non-deprecation warnings should use a helper like `lib.hm.diagnostics.warningForOption`\n- assertions should carry `relatedOptions`, and assertion formatting can derive files from those option definitions\n- avoid global warning enrichment unless warnings become structured values\n\nThis fits the broader helper-consolidation goal: central helpers should make actionable diagnostics cheap, while preserving user-owned definition locations.\n",
+   "created_at": "2026-06-12T17:59:28Z",
+   "id": 4693918997,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-12T17:59:28Z",
+   "user": {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "It would be good to consider a helper as well for modular services or what will eventually become package modules.",
+   "created_at": "2026-06-20T07:41:24Z",
+   "id": 4756883404,
+   "minimized": null,
+   "pin": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-06-20T07:42:11Z",
+   "user": {
+    "id": 88671402,
+    "login": "eveeifyeve",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/nix-community/home-manager/issues/9471",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": {
+   "id": 1778670,
+   "login": "khaneliman",
+   "site_admin": false,
+   "type": "User"
+  },
+  "assignees": [
+   {
+    "id": 1778670,
+    "login": "khaneliman",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "body": "### Module Name\n\n`lib.hm` / module infrastructure\n\n### Requested Feature\n\nAdd opt-in helper APIs for module shapes that Home Manager already repeats\nacross many modules:\n\n- `lib.hm.modules.mkProgramModule`: factory for simple program modules with\n  `enable`, nullable `package`, typed freeform `settings`, package\n  installation, and config-file generation.\n- `lib.hm.services` helpers: shared service wiring for common systemd/launchd\n  patterns, graphical-session units, and generated config restart triggers.\n- `lib.hm.darwin` config path helper: one place for choosing Linux XDG paths\n  vs macOS `Library/Application Support` / `Library/Preferences` paths.\n\nGoal is not mass abstraction. Goal is to capture conventions already used in\ntree, make new modules cheaper to review, and reduce drift when same option\nshape or service wiring appears repeatedly.\n\nProposed follow-up issues:\n\n- [ ] #9472 `lib.hm.modules.mkProgramModule`\n- [ ] #9473 `lib.hm.services` helpers\n- [ ] #9474 `lib.hm.darwin` config-path helper\n\n### Current Limitations\n\nCommon module structure is reimplemented by hand:\n\n- Current tree has 399 importable entries under `modules/programs` and 174\n  under `modules/services`.\n- Local grep survey found 102 obvious program modules with same core shape:\n  `mkEnableOption`, nullable `mkPackageOption`, `settings`, `home.packages`,\n  and `xdg.configFile`.\n- 19 modules define both `systemd.user.services` and `launchd.agents`, often\n  deriving both from same command and environment.\n- 60 module files set `PartOf = [ \"graphical-session.target\" ]`, 46 set\n  `After = [ \"graphical-session.target\" ]`, and 72 set\n  `WantedBy = [ \"graphical-session.target\" ]` (file counts for the exact\n  single-element pattern under `modules/`; looser patterns find more).\n- 26 program/service modules define `X-Restart-Triggers`; many are coupled to\n  generated config files by convention only.\n- 56 module files reference `Library/Application Support` or\n  `Library/Preferences` directly.\n\nConsequences:\n\n- New simple modules copy 25-50 lines from nearby modules.\n- Small conventions drift, especially nullable package guards,\n  empty-settings guards, restart triggers, and Darwin path handling.\n- Reviews spend time re-checking repeated plumbing instead of module-specific\n  behavior.\n- Later settings additions can miss restart triggers because file generation\n  and service restart wiring are separate manual edits.\n\n### Additional Context\n\nExisting in-tree precedent:\n\n- `lib.hm.shell.mk*IntegrationOption` is already used heavily for shell\n  integration options.\n- `modules/programs/vscode/mkVscodeModule.nix` generates multiple related\n  program modules from one factory.\n- `modules/services-modular` already maps abstract service definitions to\n  Home Manager systemd units and config files. New service helpers should be\n  compatible with that direction rather than competing with it.\n\nGround rules:\n\n- Helpers are opt-in.\n- Migration should happen in small mechanical batches.\n- Migrated modules should have zero diff in rendered option docs and generated\n  files.\n- Modules that no longer fit simple shapes stay hand-written.\n- Helpers must preserve useful option declaration locations in generated docs.\n- Service helpers must expose per-platform overrides; systemd and launchd do\n  not have 1:1 semantics.\n\nRelated upstream issues found while searching:\n\n- #3703: some service modules do not expose a `systemdTarget` option\n- #5506: `swayosd` should expose `systemdTarget`\n- #8034: systemd user services sometimes start without expected environment\n\nNo direct duplicate found for shared module factories/helpers.\n\n\n### Prior art: nixvim\n\n[nixvim](https://github.com/nix-community/nixvim) already runs this model at\nscale. Nearly all of its plugin modules are generated by two factories,\n`mkNeovimPlugin` and `mkVimPlugin`\n([`lib/plugins/`](https://github.com/nix-community/nixvim/tree/main/lib/plugins)):\n416 of 452 `plugins/by-name` entries (~92%) use one of them, with hand-written\nmodules reserved for unusual cases.\n\nRelevant takeaways for Home Manager:\n\n- The factory owns the repeated shape (`enable`, package resolution, typed\n  freeform `settings` via a shared `mkSettingsOption`, maintainers) while\n  escape hatches (`extraOptions`, `extraConfig = cfg: { ... }`, `imports`)\n  absorb per-module variation. Same escape-hatch set proposed here; nixvim's\n  adoption rate suggests it is sufficient in practice.\n- The factory also centralizes deprecation plumbing\n  (`optionsRenamedToSettings`, `deprecateExtraOptions`), so option migrations\n  stay mechanical and consistent across hundreds of modules.\n- Options declared through the factories render correctly in nixvim's\n  generated docs, which is the same docs/declaration-location requirement\n  called out above.\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 2,
+  "created_at": "2026-06-12T17:00:44Z",
+  "id": 4651117574,
+  "issue_dependencies_summary": {
+   "blocked_by": 0,
+   "blocking": 0,
+   "total_blocked_by": 0,
+   "total_blocking": 0
+  },
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "3D690B",
+    "default": false,
+    "description": "",
+    "id": 2649370186,
+    "name": "feature request"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 9471,
+  "pinned_comment": null,
+  "reactions": {
+   "+1": 1,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 1,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 1,
+   "total_count": 3
+  },
+  "repository_url": "https://api.github.com/repos/nix-community/home-manager",
+  "state": "open",
+  "state_reason": null,
+  "sub_issues_summary": {
+   "completed": 0,
+   "percent_completed": 0,
+   "total": 0
+  },
+  "title": "[Feature Request] Add shared helpers for common module boilerplate",
+  "type": null,
+  "updated_at": "2026-06-20T07:42:11Z",
+  "user": {
+   "id": 1778670,
+   "login": "khaneliman",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "issue",
+ "ref": "nix-community/home-manager#9471",
+ "sources": [
+  "home-manager-issues"
+ ],
+ "timeline": []
+}

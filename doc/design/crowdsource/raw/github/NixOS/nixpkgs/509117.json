@@ -1,0 +1,414 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/509117",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "Replace the hand-maintained list of modular services in `documentation.nixos.extraModules` with a walk of `pkgs` that picks up any package exposing `passthru.services`.\r\n\r\nReplaces the hand-maintained list in `nixos/modules/misc/documentation/modular-services.nix` with a walk of `pkgs` that automatically picks up any package exposing\r\n`passthru.services`. New modular services no longer need a manual entry in the\r\ndocumentation module to appear in the rendered manual.\r\n\r\nInspired by the introspection approach used in `nixos-search`\r\n(NixOS/nixos-search@dae57bd).\r\n\r\nsupersedes #508577.\r\n\r\n## How it works\r\n\r\n- `discoveredServices` walks `builtins.attrNames pkgs`, `tryEval`s each package, and collects every attr under `.services` that is an attrset (service modules ride on `passthru`, so the enclosing package is typically a derivation - that is allowed; individual service entries must not be derivations).\r\n- `fingerprint` keys each service module on the sorted list of `_file` paths from its `imports`. `lib.modules.importApply` attaches `_file` to its result, so all packages that re-export the same service module fingerprint identically.\r\n- `dedupedServices` groups entries by `moduleName` + fingerprint and keeps the one with the alphabetically-shortest `pkgName`. Entries that cannot be fingerprinted are kept individually.\r\n- The resulting attrset feeds `documentation.nixos.extraModules` using the same `\"<imports = [ pkgs.X.services.Y ]>\"` naming convention the manual rendering already relies on, so no downstream changes are needed.\r\n\r\nVerified via `nix-instantiate` that a NixOS eval currently discovers exactly `pkgs.ghostunnel.services.default`, `pkgs.php.services.default` (with `php81`..`php85` collapsed onto `php`), and `pkgs.snid.services.default` - matching the previous hand-maintained set.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\ndisclaimer i used a coding agent in the creation of this patch.\r\n",
+  "closed_at": "2026-04-12T10:34:31Z",
+  "closed_by": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  },
+  "comments": 0,
+  "created_at": "2026-04-11T23:08:04Z",
+  "draft": false,
+  "id": 4245980209,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 509117,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/509117.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/509117.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "closed",
+  "state_reason": null,
+  "title": "nixos/documentation/modular-services: discover services via introspection",
+  "type": null,
+  "updated_at": "2026-04-12T10:34:31Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 111,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2012-06-04T02:49:46Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection & NixOS",
+    "disabled": false,
+    "fork": false,
+    "forks": 19956,
+    "forks_count": 19956,
+    "full_name": "NixOS/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/NixOS/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": true,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": "",
+    "id": 4542716,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/NixOS/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/NixOS/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 21133,
+    "open_issues_count": 21133,
+    "owner": {
+     "id": 487568,
+     "login": "NixOS",
+     "site_admin": false,
+     "type": "Organization"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/NixOS/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-31T16:36:04Z",
+    "size": 3387141,
+    "stargazers_count": 25997,
+    "subscription_url": "https://api.github.com/repos/NixOS/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/NixOS/nixpkgs/tags",
+    "topics": [
+     "hacktoberfest",
+     "linux",
+     "nix",
+     "nixos",
+     "nixpkgs"
+    ],
+    "updated_at": "2026-08-31T16:34:22Z",
+    "visibility": "public",
+    "watchers": 25997,
+    "watchers_count": 25997,
+    "web_commit_signoff_required": false
+   },
+   "sha": "86ab6aea5099ecae02ef2331cfd3f1d53362f1db",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "Replace the hand-maintained list of modular services in `documentation.nixos.extraModules` with a walk of `pkgs` that picks up any package exposing `passthru.services`.\r\n\r\nReplaces the hand-maintained list in `nixos/modules/misc/documentation/modular-services.nix` with a walk of `pkgs` that automatically picks up any package exposing\r\n`passthru.services`. New modular services no longer need a manual entry in the\r\ndocumentation module to appear in the rendered manual.\r\n\r\nInspired by the introspection approach used in `nixos-search`\r\n(NixOS/nixos-search@dae57bd).\r\n\r\nsupersedes #508577.\r\n\r\n## How it works\r\n\r\n- `discoveredServices` walks `builtins.attrNames pkgs`, `tryEval`s each package, and collects every attr under `.services` that is an attrset (service modules ride on `passthru`, so the enclosing package is typically a derivation - that is allowed; individual service entries must not be derivations).\r\n- `fingerprint` keys each service module on the sorted list of `_file` paths from its `imports`. `lib.modules.importApply` attaches `_file` to its result, so all packages that re-export the same service module fingerprint identically.\r\n- `dedupedServices` groups entries by `moduleName` + fingerprint and keeps the one with the alphabetically-shortest `pkgName`. Entries that cannot be fingerprinted are kept individually.\r\n- The resulting attrset feeds `documentation.nixos.extraModules` using the same `\"<imports = [ pkgs.X.services.Y ]>\"` naming convention the manual rendering already relies on, so no downstream changes are needed.\r\n\r\nVerified via `nix-instantiate` that a NixOS eval currently discovers exactly `pkgs.ghostunnel.services.default`, `pkgs.php.services.default` (with `php81`..`php85` collapsed onto `php`), and `pkgs.snid.services.default` - matching the previous hand-maintained set.\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] x86_64-darwin\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [ ] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [ ] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [ ] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n\r\ndisclaimer i used a coding agent in the creation of this patch.\r\n",
+  "changed_files": 1,
+  "closed_at": "2026-04-12T10:34:31Z",
+  "comments": 0,
+  "commits": 1,
+  "created_at": "2026-04-11T23:08:04Z",
+  "deletions": 4,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/509117.diff",
+  "draft": false,
+  "head": {
+   "label": "KiaraGrouwstra:auto-modular-manual",
+   "ref": "auto-modular-manual",
+   "repo": {
+    "allow_forking": true,
+    "archived": false,
+    "created_at": "2018-06-10T10:36:34Z",
+    "default_branch": "master",
+    "description": "Nix Packages collection",
+    "disabled": false,
+    "fork": true,
+    "forks": 0,
+    "forks_count": 0,
+    "full_name": "KiaraGrouwstra/nixpkgs",
+    "git_commits_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/git/commits{/sha}",
+    "has_discussions": false,
+    "has_downloads": false,
+    "has_issues": false,
+    "has_pages": false,
+    "has_projects": true,
+    "has_pull_requests": true,
+    "has_wiki": false,
+    "homepage": null,
+    "id": 136799825,
+    "is_template": false,
+    "issues_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/issues{/number}",
+    "language": "Nix",
+    "license": {
+     "key": "mit",
+     "name": "MIT License",
+     "spdx_id": "MIT"
+    },
+    "milestones_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/milestones{/number}",
+    "name": "nixpkgs",
+    "open_issues": 1,
+    "open_issues_count": 1,
+    "owner": {
+     "id": 3059397,
+     "login": "KiaraGrouwstra",
+     "site_admin": false,
+     "type": "User"
+    },
+    "private": false,
+    "pull_request_creation_policy": "all",
+    "pulls_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/pulls{/number}",
+    "pushed_at": "2026-08-30T19:20:59Z",
+    "size": 3035282,
+    "stargazers_count": 0,
+    "subscription_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/subscription",
+    "tags_url": "https://api.github.com/repos/KiaraGrouwstra/nixpkgs/tags",
+    "topics": [],
+    "updated_at": "2024-06-23T17:05:42Z",
+    "visibility": "public",
+    "watchers": 0,
+    "watchers_count": 0,
+    "web_commit_signoff_required": false
+   },
+   "sha": "3205e9f2c05148d4edea82b2f6faec78520cf386",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 3518381810,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "e6e6e6",
+    "default": false,
+    "description": "This PR has merge conflicts with the target branch",
+    "id": 292322837,
+    "name": "2.status: merge conflict"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR does not cause any packages to rebuild on Darwin.",
+    "id": 737642262,
+    "name": "10.rebuild-darwin: 0"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": false,
+  "merge_commit_sha": null,
+  "mergeable": false,
+  "mergeable_state": "dirty",
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 509117,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/509117.patch",
+  "rebaseable": false,
+  "requested_reviewers": [
+   {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  ],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "closed",
+  "title": "nixos/documentation/modular-services: discover services via introspection",
+  "updated_at": "2026-04-12T10:34:31Z",
+  "user": {
+   "id": 3059397,
+   "login": "KiaraGrouwstra",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#509117",
+ "review_comments": [],
+ "reviews": [
+  {
+   "body": "This shallowly evaluates every attr in `pkgs`, which is not acceptable. At the bare minimum, that means evaluating every single `pkgs/by-name/*/*/package.nix` file (and corresponding files for attrs that haven't been moved to `by-name` yet). On IO-bound basis alone, that's too expensive.\r\n\r\nOn a mid-range SSD using ext4, evaluating the manual takes ~5x longer, and evaluating a minimal NixOS config takes ~3x longer. This is regardless of whether the kernel page cache has these files cached.\r\n\r\n| | Page Cache | Eval | Mean [s] | Min [s] | Max [s] |\r\n|:---|---:|---:|---:|---:|---:|\r\n| before | cold | nixos | 3.787 ± 0.727 | 3.524 | 5.854 |\r\n| after | cold | nixos | 11.883 ± 0.151 | 11.680 | 12.105 |\r\n| before | cold | manual | 1.948 ± 0.026 | 1.928 | 2.001 |\r\n| after | cold | manual | 10.721 ± 0.043 | 10.665 | 10.805 |\r\n| before | warm | nixos | 3.014 ± 0.026 | 2.994 | 3.080 |\r\n| after | warm | nixos | 6.965 ± 0.032 | 6.892 | 7.016 |\r\n| before | warm | manual | 1.486 ± 0.014 | 1.461 | 1.503 |\r\n| after | warm | manual | 5.921 ± 0.040 | 5.864 | 5.990 |\r\n\r\n(hi I've discovered hyperfine and have been having too much fun with it, can you tell?)",
+   "commit_id": "3205e9f2c05148d4edea82b2f6faec78520cf386",
+   "id": 4094386807,
+   "state": "CHANGES_REQUESTED",
+   "submitted_at": "2026-04-12T00:46:33Z",
+   "user": {
+    "id": 1365692,
+    "login": "ElvishJerricco",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-04-12T10:34:31Z",
+   "event": "closed",
+   "id": 24419126159,
+   "intent": null,
+   "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "d5e4851901680098a825678d4c7f09d85a0173a3",
+   "commit_url": "https://api.github.com/repos/NixOS/nixos-search/commits/d5e4851901680098a825678d4c7f09d85a0173a3",
+   "created_at": "2026-04-12T10:52:05Z",
+   "event": "referenced",
+   "id": 24419342341
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "86ce38c64c40b457c175205fc7b96281d2ef8f0c",
+   "commit_url": "https://api.github.com/repos/NixOS/nixos-search/commits/86ce38c64c40b457c175205fc7b96281d2ef8f0c",
+   "created_at": "2026-04-12T11:06:43Z",
+   "event": "referenced",
+   "id": 24419466001
+  },
+  {
+   "actor": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "d74a0753f5c2644e70ec4e44c993802995498705",
+   "commit_url": "https://api.github.com/repos/NixOS/nixos-search/commits/d74a0753f5c2644e70ec4e44c993802995498705",
+   "created_at": "2026-04-12T11:41:42Z",
+   "event": "referenced",
+   "id": 24419865208
+  },
+  {
+   "actor": {
+    "id": 131856,
+    "login": "raboof",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "710c7b512ca4ca68b8d86db6118f4f1cdd4d74ba",
+   "commit_url": "https://api.github.com/repos/NixOS/nixos-search/commits/710c7b512ca4ca68b8d86db6118f4f1cdd4d74ba",
+   "created_at": "2026-04-12T15:27:54Z",
+   "event": "referenced",
+   "id": 24422171860
+  },
+  {
+   "actor": {
+    "id": 76160668,
+    "login": "Malix-Labs",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "55e4d67bff7f14b77702f1844ee4441d7846c6c9",
+   "commit_url": "https://api.github.com/repos/Malix-Labs/nixos-search/commits/55e4d67bff7f14b77702f1844ee4441d7846c6c9",
+   "created_at": "2026-05-30T10:28:18Z",
+   "event": "referenced",
+   "id": 26140319574
+  }
+ ]
+}
