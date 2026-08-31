@@ -141,8 +141,23 @@ TIMELINE_EVENTS = {
 }
 
 
+# A pull request carries the whole repository object three times over -- on
+# `base`, on `head` and on the issue -- and that object holds nixpkgs' live
+# star, fork and open-issue counts. Left in, every refresh rewrites every pull
+# request file with numbers nobody asked about, and the diff that is supposed
+# to *be* the report becomes a hundred files of fork counts. So a
+# repository-shaped dict is reduced to what identifies it.
+REPO_KEEP = ("full_name", "id", "private", "fork", "archived", "default_branch")
+
+
+def is_repo(d: dict) -> bool:
+    return "full_name" in d and "owner" in d and "stargazers_count" in d
+
+
 def prune(value):
     if isinstance(value, dict):
+        if is_repo(value):
+            return {k: value[k] for k in REPO_KEEP if k in value}
         out = {}
         for k, v in value.items():
             if k in PRUNE_KEYS:
@@ -199,14 +214,16 @@ class Fetcher:
                 self.search_times = [t for t in self.search_times if now - t < 60]
         self.search_times.append(time.monotonic())
 
-    def conditional(self, path: str):
-        """Single-page GET replaying the stored ETag.
+    def conditional(self, path: str, replay: bool = True):
+        """Single-page GET, recording the ETag of what comes back.
 
         Returns `(True, data)` when the resource changed and `(False, None)`
         when the server answered 304. A resource never seen before always
-        counts as changed.
+        counts as changed. `replay=False` asks for the body unconditionally
+        while still learning its validator, which is how an endpoint fetched
+        for its content ends up cheap to check next time.
         """
-        etag = self.etags.get(path)
+        etag = self.etags.get(path) if replay else None
         cmd = ["gh", "api", "-i", path]
         if etag:
             cmd += ["-H", f"If-None-Match: {etag}"]
@@ -230,16 +247,24 @@ class Fetcher:
                 continue
             head, _, body = raw.partition("\n\n")
             status = 0
+            tags: list[str] = []
             for line in head.split("\n"):
                 if line.startswith("HTTP/"):
                     status = int(line.split()[1])
                 elif line.lower().startswith("etag:"):
-                    self.etags[path] = line.split(":", 1)[1].strip()
+                    tags.append(line.split(":", 1)[1].strip())
                 elif line.lower().startswith("x-ratelimit-remaining:"):
                     self.rate_remaining = int(line.split(":", 1)[1].strip())
+            # Only a 200 teaches a validator. GitHub answers 304 with the same
+            # tag stripped of its `W/` prefix and then refuses to match the
+            # stripped form on the next request, so storing it would turn every
+            # second run back into a full fetch.
             if status == 304:
                 self.not_modified += 1
                 return False, None
+            if tags:
+                # The last one, so a redirect's intermediate head cannot win.
+                self.etags[path] = tags[-1]
             if status == 404:
                 return True, None
             if status >= 400:
@@ -406,11 +431,11 @@ def fetch_github_item(
         pr_changed, _ = f.conditional(f"{base}/pulls/{number}")
         if not pr_changed:
             return existing, False
-        issue = f.gh(f"{base}/issues/{number}")
+        _, issue = f.conditional(f"{base}/issues/{number}", replay=False)
     elif issue is None:
         if not changed:
             # An ETag without the file it described: fetch unconditionally.
-            issue = f.gh(f"{base}/issues/{number}")
+            _, issue = f.conditional(f"{base}/issues/{number}", replay=False)
         if issue is None:
             return None, True
 
@@ -428,7 +453,9 @@ def fetch_github_item(
         ],
     }
     if is_pr:
-        record["pull_request"] = f.gh(f"{base}/pulls/{number}")
+        # Through `conditional` rather than `gh`, so the next run can gate the
+        # five requests below this one on a 304 for it.
+        _, record["pull_request"] = f.conditional(f"{base}/pulls/{number}", replay=False)
         record["reviews"] = f.gh(f"{base}/pulls/{number}/reviews?per_page=100", paginate=True) or []
         record["review_comments"] = (
             f.gh(f"{base}/pulls/{number}/comments?per_page=100", paginate=True) or []
@@ -582,15 +609,19 @@ DISCOURSE_POST_DROP = {
     "reviewable_id",
     "reviewable_score_count",
     "reviewable_score_pending_count",
+    # Counters that move because somebody opened the page, not because
+    # somebody said something.
+    "reads",
     "calendar_details",
     "mentioned_users",
     "post_url",
     "notice",
 }
 
+# `views` is deliberately absent for the same reason as a post's `reads`.
 DISCOURSE_TOPIC_KEYS = (
     "id title slug posts_count created_at last_posted_at category_id tags "
-    "views like_count reply_count word_count closed archived archetype"
+    "like_count reply_count word_count closed archived archetype"
 ).split()
 
 

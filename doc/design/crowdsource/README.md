@@ -115,9 +115,21 @@ against nobody's quota.
 discussion: the `*_url` fields that are derivable from the ids beside them,
 `node_id`, avatar URLs, the `body_html`/`cooked` renderings of a body kept
 verbatim anyway, and the viewer-dependent flags Discourse attaches to every
-post. It cuts the corpus by roughly two thirds, and -- the reason that matters
--- it keeps a diff between two syncs readable. An avatar URL that gained a `?v=4`
-is churn nobody can act on, and a corpus that reports churn stops being read.
+post. That is roughly two thirds of the bytes.
+
+The saving is not the point. Keeping the diff between two syncs *readable* is,
+and two of the rules exist only for that:
+
+A pull request carries the whole repository object three times over, and that
+object holds nixpkgs' live star, fork and open-issue counts. Left in, every
+refresh rewrote a hundred files with numbers nobody asked about. A
+repository-shaped dict is therefore reduced to what identifies it.
+
+Discourse counts reads per post and views per topic. Both move because somebody
+opened a page, so both are dropped.
+
+What is left changes when a person writes something, which is what makes
+`git diff` after a sync worth reading at all.
 
 The timeline is kept only for what the rest of the record does not already say:
 which commits and issues point at an item, what its title used to be, and when

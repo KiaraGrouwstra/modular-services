@@ -43,7 +43,6 @@
    "primary_group_name": null,
    "quote_count": 0,
    "raw": "https://weyl.ai/plan/put-nix-services-anywhere/",
-   "reads": 107,
    "reply_count": 0,
    "reply_to_post_number": null,
    "topic_accepted_answer": null,
@@ -73,7 +72,6 @@
    "primary_group_name": null,
    "quote_count": 0,
    "raw": "but… one of the core purposes for modular services was to abstract over service manager… by implementing another service manager it feels very backward in a sense\n\nin no way to i mean to discourage you here… i’m just trying to understand the rationale of `nimi` as a solution to the problems modular services attempt to resolve\n\n---\n\naside from all this, `nimi` looks cool, great work :+1:",
-   "reads": 100,
    "reply_count": 1,
    "reply_to_post_number": null,
    "topic_accepted_answer": null,
@@ -103,7 +101,6 @@
    "primary_group_name": null,
    "quote_count": 0,
    "raw": "It’s more just to have an alternative to `systemd` that can run in `devShell`s or containers as that’s currently the only implemented target (to my knowledge).",
-   "reads": 99,
    "reply_count": 0,
    "reply_to_post_number": 2,
    "reply_to_user": {
@@ -148,7 +145,6 @@
    "primary_group_name": null,
    "quote_count": 0,
    "raw": "Nice!\n\nIn a similar vein, I found [this project ](https://github.com/rglonek/docker-systemd/)which emulates systemd by running unit files, I've been meaning to try it against some NixOS systemd services to see what could work. (I don’t understand why systemd itself doesn't provide something to do that more easily…)",
-   "reads": 84,
    "reply_count": 0,
    "reply_to_post_number": null,
    "topic_accepted_answer": null,
@@ -201,7 +197,6 @@
    "primary_group_name": null,
    "quote_count": 0,
    "raw": "Since we are talking about similar projects, for development i use https://tilt.dev/. It has some issues, but [`local_resource`](https://docs.tilt.dev/api.html#api.local_resource) works well enough for most things.\n\nExample:\n\nhttps://github.com/aigis-llm/aigis/blob/73f2c1615bac87cba9c18808a3b3fadd9e1e3df7/Tiltfile",
-   "reads": 68,
    "reply_count": 0,
    "reply_to_post_number": null,
    "title_is_group": false,
@@ -226,6 +221,5 @@
  "tags": null,
  "title": "Portable rust based service runner for the experimental modular services spec",
  "url": "https://discourse.nixos.org/t/portable-rust-based-service-runner-for-the-experimental-modular-services-spec/74338",
- "views": 347,
  "word_count": 204
 }
