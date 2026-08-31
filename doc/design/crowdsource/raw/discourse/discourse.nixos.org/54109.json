@@ -20,7 +20,6 @@
    "event": null,
    "flair_name": null,
    "id": 180318,
-   "incoming_link_count": 612,
    "link_counts": [
     {
      "clicks": 176,
@@ -58,7 +57,6 @@
    "event": null,
    "flair_name": null,
    "id": 180319,
-   "incoming_link_count": 4,
    "link_counts": [
     {
      "clicks": 45,
@@ -96,7 +94,6 @@
    "event": null,
    "flair_name": null,
    "id": 180331,
-   "incoming_link_count": 11,
    "name": "Silvan Mosberger",
    "post_number": 3,
    "post_type": 1,
@@ -125,7 +122,6 @@
    "event": null,
    "flair_name": null,
    "id": 180333,
-   "incoming_link_count": 4,
    "link_counts": [
     {
      "clicks": 5,
@@ -170,7 +166,6 @@
    "event": null,
    "flair_name": null,
    "id": 180336,
-   "incoming_link_count": 32,
    "link_counts": [
     {
      "clicks": 16,
@@ -209,7 +204,6 @@
    "event": null,
    "flair_name": null,
    "id": 180358,
-   "incoming_link_count": 17,
    "name": "",
    "post_number": 6,
    "post_type": 1,
@@ -238,7 +232,6 @@
    "event": null,
    "flair_name": null,
    "id": 181856,
-   "incoming_link_count": 1,
    "name": "Jake Hamilton",
    "post_number": 7,
    "post_type": 1,
@@ -273,7 +266,6 @@
    "event": null,
    "flair_name": null,
    "id": 181858,
-   "incoming_link_count": 7,
    "name": "Robert Hensing",
    "post_number": 8,
    "post_type": 1,

@@ -134,9 +134,6 @@
   "labels": [],
   "locked": false,
   "maintainer_can_modify": false,
-  "merge_commit_sha": "94f1ff37e1c6fb47efbb6a4e2b427dbb289ee56b",
-  "mergeable": null,
-  "mergeable_state": "unknown",
   "merged": true,
   "merged_at": "2026-04-16T11:33:56Z",
   "merged_by": {
@@ -148,7 +145,6 @@
   "milestone": null,
   "number": 1209,
   "patch_url": "https://github.com/NixOS/nixos-search/pull/1209.patch",
-  "rebaseable": null,
   "requested_reviewers": [],
   "requested_teams": [],
   "review_comments": 0,

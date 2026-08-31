@@ -5,7 +5,7 @@ entry links its source and names the `sources.json` entries that
 reached it; `why` there is the standing answer to what an entry is
 doing in the corpus.
 
-## GitHub issues and pull requests (169)
+## GitHub issues and pull requests (171)
 
 ### ibizaman/selfhostblocks (2)
 
@@ -13,6 +13,12 @@ doing in the corpus.
 | --- | --- | --- | --- | --- | --- |
 | [#467](https://github.com/ibizaman/selfhostblocks/issues/467) | secrets provider: vars | open | 15 | 2026-04-07 | selfhostblocks-vars |
 | [#541](https://github.com/ibizaman/selfhostblocks/issues/541) | use of contracts across nodes? | closed | 19 | 2026-08-29 | selfhostblocks-contracts-across-nodes |
+
+### KiaraGrouwstra/modular-services (1)
+
+| item | title | state | comments | last activity | reached by |
+| --- | --- | --- | --- | --- | --- |
+| [#5](https://github.com/KiaraGrouwstra/modular-services/pull/5) | Add data dump of most design discussions | open | 0 | 2026-08-31 | this-repo-prs |
 
 ### nix-community/home-manager (11)
 
@@ -75,7 +81,7 @@ doing in the corpus.
 | [#1464](https://github.com/NixOS/nixos-search/pull/1464) | feat(flake-info): index the modular-service base/environment split | open | 2 | 2026-07-26 | nixos-search-prs |
 | [#1542](https://github.com/NixOS/nixos-search/pull/1542) | Index how popular an option's package is | closed | 1 | 2026-08-22 | nixos-search-prs |
 
-### NixOS/nixpkgs (124)
+### NixOS/nixpkgs (125)
 
 | item | title | state | comments | last activity | reached by |
 | --- | --- | --- | --- | --- | --- |
@@ -200,6 +206,7 @@ doing in the corpus.
 | [#552737](https://github.com/NixOS/nixpkgs/pull/552737) | trailbase: init at 0.32.2 | merged | 16 | 2026-08-26 | nixpkgs-phrase-prs |
 | [#554366](https://github.com/NixOS/nixpkgs/pull/554366) | git-pages.services.default: init | open | 15 | 2026-08-30 | nixpkgs-label-prs, nixpkgs-phrase-prs |
 | [#554965](https://github.com/NixOS/nixpkgs/issues/554965) | program CLI flags handled from package modules | open | 0 | 2026-08-21 | nixpkgs-label-issues, nixpkgs-phrase-issues |
+| [#555141](https://github.com/NixOS/nixpkgs/pull/555141) | nixos/opengist: init; opengist: add git to path | open | 8 | 2026-08-31 | nixpkgs-phrase-prs |
 | [#555154](https://github.com/NixOS/nixpkgs/pull/555154) | lib.services: init `process.runtimeDirectory` | open | 0 | 2026-08-24 | nixpkgs-lib-services-prs |
 | [#556069](https://github.com/NixOS/nixpkgs/pull/556069) | ocamlPackages.kapla: init at 0.4.0 | merged | 13 | 2026-08-31 | nixpkgs-phrase-prs |
 | [#557068](https://github.com/NixOS/nixpkgs/pull/557068) | kea.services.{dns, dhcp}: init | open | 0 | 2026-08-30 | nixpkgs-label-prs, nixpkgs-phrase-prs |

@@ -109,9 +109,6 @@
   "labels": [],
   "locked": false,
   "maintainer_can_modify": false,
-  "merge_commit_sha": "fe6c96269436ba80aa6453714947ce8dccdc7689",
-  "mergeable": null,
-  "mergeable_state": "unknown",
   "merged": true,
   "merged_at": "2026-07-28T16:39:14Z",
   "merged_by": {
@@ -123,7 +120,6 @@
   "milestone": null,
   "number": 9714,
   "patch_url": "https://github.com/nix-community/home-manager/pull/9714.patch",
-  "rebaseable": null,
   "requested_reviewers": [
    {
     "id": 798147,

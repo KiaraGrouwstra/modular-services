@@ -248,9 +248,6 @@
   ],
   "locked": false,
   "maintainer_can_modify": false,
-  "merge_commit_sha": "ef8925c8e11df062cd6817614a3da03f6c71c567",
-  "mergeable": null,
-  "mergeable_state": "unknown",
   "merged": true,
   "merged_at": "2026-06-26T15:16:36Z",
   "merged_by": {
@@ -262,7 +259,6 @@
   "milestone": null,
   "number": 531062,
   "patch_url": "https://github.com/NixOS/nixpkgs/pull/531062.patch",
-  "rebaseable": null,
   "requested_reviewers": [
    {
     "id": 43863,
@@ -401,6 +397,19 @@
    "id": 27252131960,
    "intent": null,
    "state_reason": null
+  },
+  {
+   "actor": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": "8bc7476dd168495ec2ecd2824f9a6ba8e5daf885",
+   "commit_url": "https://api.github.com/repos/roberth/modular-services/commits/8bc7476dd168495ec2ecd2824f9a6ba8e5daf885",
+   "created_at": "2026-08-31T18:50:44Z",
+   "event": "referenced",
+   "id": 30298874114
   }
  ]
 }

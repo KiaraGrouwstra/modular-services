@@ -158,9 +158,6 @@
   "labels": [],
   "locked": false,
   "maintainer_can_modify": false,
-  "merge_commit_sha": "fdb2ccba9d5e1238d32e0c4a3ec1a277efa80c1d",
-  "mergeable": null,
-  "mergeable_state": "unknown",
   "merged": true,
   "merged_at": "2026-05-08T13:56:36Z",
   "merged_by": {
@@ -172,7 +169,6 @@
   "milestone": null,
   "number": 9264,
   "patch_url": "https://github.com/nix-community/home-manager/pull/9264.patch",
-  "rebaseable": null,
   "requested_reviewers": [],
   "requested_teams": [],
   "review_comments": 1,

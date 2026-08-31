@@ -603,16 +603,12 @@
   ],
   "locked": false,
   "maintainer_can_modify": true,
-  "merge_commit_sha": null,
-  "mergeable": false,
-  "mergeable_state": "dirty",
   "merged": false,
   "merged_at": null,
   "merged_by": null,
   "milestone": null,
   "number": 540863,
   "patch_url": "https://github.com/NixOS/nixpkgs/pull/540863.patch",
-  "rebaseable": false,
   "requested_reviewers": [
    {
     "id": 1181,

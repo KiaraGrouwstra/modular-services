@@ -426,9 +426,6 @@
   ],
   "locked": false,
   "maintainer_can_modify": false,
-  "merge_commit_sha": "41bb9fdb70144a79b6a6d1595a8cf5ef2172b5e7",
-  "mergeable": null,
-  "mergeable_state": "unknown",
   "merged": true,
   "merged_at": "2025-08-12T01:24:44Z",
   "merged_by": {
@@ -440,7 +437,6 @@
   "milestone": null,
   "number": 430490,
   "patch_url": "https://github.com/NixOS/nixpkgs/pull/430490.patch",
-  "rebaseable": null,
   "requested_reviewers": [
    {
     "id": 63433,

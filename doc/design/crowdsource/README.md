@@ -56,8 +56,9 @@ Without Nix, `python3 doc/design/crowdsource/sync.py` does the same. It needs
 `gh` authenticated; that is enough for every source but the Matrix room, which
 needs `MATRIX_TOKEN` and is skipped without it.
 
-A run prints what is new, what changed, what is no longer tracked, and what was
-skipped for want of a credential, then lists the untracked links that came up.
+A run prints what is new, what changed, what is no longer tracked, which queries
+matched nothing, and what was skipped for want of a credential, then lists the
+untracked links that came up.
 The files it writes are the rest of the report: `git diff` after a sync shows
 every comment the world added, in place.
 
@@ -102,6 +103,52 @@ Recurring noise goes in `ignore` with a note saying what it was.
 Only human-written fields are harvested for those links -- a `diff_hunk` repeats
 the surrounding patch on every review comment, and a URL that happens to sit in
 a nearby source line would otherwise outrank the links people actually posted.
+
+## Is it repeatable?
+
+Two different questions, and they have different answers.
+
+**Fetching is.** Delete `raw/` and `state/`, run the sync, and you get the same
+bytes back, give or take what the world did in between. That was tested rather
+than assumed: a from-scratch rebuild was diffed against an incrementally
+refreshed corpus, and the 36 files that differed turned out to be four fields
+that had nothing to do with anybody's discussion. `mergeable`,
+`mergeable_state` and `rebaseable` are computed lazily by GitHub -- ask the
+first time and you get `null`, ask again and you get the answer -- so they
+recorded *when you asked*. `merge_commit_sha` moves with the base branch,
+`incoming_link_count` moves when somebody links a topic, and a removal used to
+leave empty directories behind. All five are gone, and the same comparison now
+comes back clean apart from real movement.
+
+**Finding the roots is not**, and this section is the nearest substitute.
+`sources.json` records what is tracked and why, but not how anybody arrived at
+it. That was: reading the repository's own links, following the link list at the
+top of the pad -- which is maintained by the people in the meetings and found
+most of the rest -- sweeping the nixpkgs label and the phrase under *both* names
+the subsystem has had, checking each sibling framework repository in turn, and
+triaging what the fetched material linked to.
+
+To look again for what is missing, in rough order of yield:
+
+1. **The pad's link list.** It is curated by the people doing the work and runs
+   ahead of everything else.
+2. **`state/discovered.json`.** Every sync recounts it. The top of that list is
+   the next round of curation.
+3. **Old names.** The subsystem has been "portable service layer" and is now
+   "modular services"; a third name would need a third query. This is the
+   likeliest way for the corpus to go quietly stale.
+4. **Sibling repositories.** Any framework that grows an integration is a new
+   `github-query`, and its complaints are the most informative material there
+   is, because they are what the portable layer assumed without noticing.
+
+A run reports **queries matching nothing**, which is the quiet failure this part
+is exposed to: the subsystem gets renamed, a search stops reaching anything, and
+the corpus goes on looking complete. Some are legitimately empty -- a repository
+where nobody has filed anything yet -- so it reports rather than fails, and
+`state/queries.json` keeps the hit counts for comparison between runs.
+
+What no amount of this reaches: a venue nobody links from. That was true of the
+Matrix room until it was added, and it is the assumption to keep distrusting.
 
 ## Rate limits
 

@@ -365,16 +365,12 @@
   ],
   "locked": false,
   "maintainer_can_modify": true,
-  "merge_commit_sha": "ca446490c40a7286b1a09f92c0eb4792ce7d705b",
-  "mergeable": true,
-  "mergeable_state": "clean",
   "merged": false,
   "merged_at": null,
   "merged_by": null,
   "milestone": null,
   "number": 9693,
   "patch_url": "https://github.com/nix-community/home-manager/pull/9693.patch",
-  "rebaseable": true,
   "requested_reviewers": [
    {
     "id": 280235,

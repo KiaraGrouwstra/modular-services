@@ -123,6 +123,16 @@ PRUNE_KEYS = {
     "user_view_type",
     "author_association",
     "_links",
+    # GitHub computes mergeability lazily: the first request for a pull request
+    # answers `null` / `"unknown"` and kicks off a background job, and a later
+    # one answers the result. So these three say when you asked, not what
+    # anybody did, and a corpus rebuilt from scratch disagreed with an
+    # incrementally refreshed one on 31 files because of them alone.
+    "mergeable",
+    "mergeable_state",
+    "rebaseable",
+    # The speculative merge commit, recomputed whenever the base branch moves.
+    "merge_commit_sha",
 }
 
 # The timeline is kept only for what the rest of the record does not already
@@ -379,6 +389,7 @@ class Report:
     new: list[str] = field(default_factory=list)
     updated: list[str] = field(default_factory=list)
     unchanged: int = 0
+    barren: list[str] = field(default_factory=list)
     removed: list[str] = field(default_factory=list)
     skipped: list[str] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
@@ -629,9 +640,10 @@ DISCOURSE_POST_DROP = {
     "reviewable_id",
     "reviewable_score_count",
     "reviewable_score_pending_count",
-    # Counters that move because somebody opened the page, not because
-    # somebody said something.
+    # Counters that move because somebody opened the page or linked to it, not
+    # because somebody said something.
     "reads",
+    "incoming_link_count",
     "calendar_details",
     "mentioned_users",
     "post_url",
@@ -1124,10 +1136,10 @@ def run(args) -> int:
                     note(sid, ref)
                     tracked_items.append(ref)
             query_results[sid] = rows
-            print(
-                f"        {len(rows)} hits, {sum(1 for r in rows if r['kept'])} kept",
-                file=sys.stderr,
-            )
+            kept = sum(1 for r in rows if r["kept"])
+            if not kept:
+                report.barren.append(f"{sid}: {s['q']}")
+            print(f"        {len(rows)} hits, {kept} kept", file=sys.stderr)
         elif kind == "discourse-query":
             print(f"[query] {sid}: {s['q']}", file=sys.stderr)
             host = s["host"]
@@ -1145,10 +1157,10 @@ def run(args) -> int:
                 if row["kept"] and s.get("expand", True):
                     note(sid, f"discourse:{host}/t/{t['id']}")
             query_results[sid] = rows
-            print(
-                f"        {len(rows)} hits, {sum(1 for r in rows if r['kept'])} kept",
-                file=sys.stderr,
-            )
+            kept = sum(1 for r in rows if r["kept"])
+            if not kept:
+                report.barren.append(f"{sid}: {s['q']}")
+            print(f"        {len(rows)} hits, {kept} kept", file=sys.stderr)
         elif kind == "discourse-topic":
             note(sid, f"discourse:{s['host']}/t/{s['topic']}")
         elif kind in ("github-project", "hedgedoc", "matrix-room"):
@@ -1329,6 +1341,13 @@ def run(args) -> int:
             if not args.check:
                 path.unlink()
 
+    # A removal that leaves the directory behind makes a corpus rebuilt from
+    # scratch differ from a refreshed one for no reason anybody can see.
+    if not args.check:
+        for path in sorted(RAW.rglob("*"), reverse=True):
+            if path.is_dir() and not any(path.iterdir()):
+                path.rmdir()
+
     discovered = {
         k: v
         for k, v in sorted(links.items(), key=lambda kv: (-kv[1], kv[0]))
@@ -1395,6 +1414,14 @@ def report_run(report: Report, f: Fetcher, discovered: dict) -> None:
         for k, v in top:
             print(f"  ? {k}  ({v})")
         print("  -> state/discovered.json for the full list")
+    # A query that matches nothing is the quiet failure of the roots half: the
+    # subsystem gets renamed, the search stops reaching anything, and the corpus
+    # goes on looking complete. Several are legitimately empty (a repository
+    # where nobody has filed anything yet), so this reports rather than fails.
+    if report.barren:
+        print(f"queries matching nothing ({len(report.barren)}):")
+        for x in report.barren:
+            print(f"  ? {x}")
     if report.skipped:
         print(f"skipped ({len(report.skipped)}):")
         for x in report.skipped:

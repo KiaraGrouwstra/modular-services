@@ -3838,9 +3838,6 @@
   ],
   "locked": false,
   "maintainer_can_modify": false,
-  "merge_commit_sha": "45b76f20add8d7e0e1d0bc0eed9357b067c899a6",
-  "mergeable": null,
-  "mergeable_state": "unknown",
   "merged": true,
   "merged_at": "2021-01-14T05:46:00Z",
   "merged_by": {
@@ -3852,7 +3849,6 @@
   "milestone": null,
   "number": 42,
   "patch_url": "https://github.com/NixOS/rfcs/pull/42.patch",
-  "rebaseable": null,
   "requested_reviewers": [],
   "requested_teams": [],
   "review_comments": 88,

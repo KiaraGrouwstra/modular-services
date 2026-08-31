@@ -164,9 +164,6 @@
   ],
   "locked": false,
   "maintainer_can_modify": false,
-  "merge_commit_sha": "a9cd600c3c1b5eec36eaa04cdc18d3e32bb0dce6",
-  "mergeable": null,
-  "mergeable_state": "unknown",
   "merged": true,
   "merged_at": "2016-03-14T10:04:51Z",
   "merged_by": {
@@ -178,7 +175,6 @@
   "milestone": null,
   "number": 13877,
   "patch_url": "https://github.com/NixOS/nixpkgs/pull/13877.patch",
-  "rebaseable": null,
   "requested_reviewers": [],
   "requested_teams": [],
   "review_comments": 2,

@@ -230,16 +230,12 @@
   "labels": [],
   "locked": false,
   "maintainer_can_modify": false,
-  "merge_commit_sha": "fcc39c5a81b612d69a44e4bb03ae942a15533322",
-  "mergeable": true,
-  "mergeable_state": "clean",
   "merged": false,
   "merged_at": null,
   "merged_by": null,
   "milestone": null,
   "number": 9708,
   "patch_url": "https://github.com/nix-community/home-manager/pull/9708.patch",
-  "rebaseable": false,
   "requested_reviewers": [
    {
     "id": 3059397,

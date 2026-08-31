@@ -1,0 +1,131 @@
+{
+ "comments": [],
+ "html_url": "https://github.com/KiaraGrouwstra/modular-services/pull/5",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "# What\r\n\r\nAdds JSON dumps of discussions on\r\n- GitHub (various repos)\r\n- discourse.nixos.org\r\n- matrix\r\n- the pad (technically a small subset of discourse, but whatever)\r\n\r\nAdds docs and machinery.\r\n4 MB.\r\n\r\n# Why\r\n\r\nHaving all design inputs in one place is very useful. Greppable and all.\r\nIt's not a replacement for actual design guidelines or anything, but it's useful input that could perhaps substantiate those.\r\n\r\n# How\r\n\r\nBuilt with like a dozen prompts. Should be self-documenting etc.\r\nI have not tested the GHA auto updating functionality.\r\nTo update matrix you'd have to provide a `MATRIX_TOKEN`. (probably want a separate account for that purpose)\r\n\r\n# Really?\r\n\r\nNot sure if we want to merge this into main. Maybe a separate branch or separate repo is better.",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 0,
+  "created_at": "2026-08-31T19:04:43Z",
+  "draft": true,
+  "id": 5303834725,
+  "labels": [],
+  "locked": false,
+  "milestone": null,
+  "number": 5,
+  "pull_request": {
+   "diff_url": "https://github.com/KiaraGrouwstra/modular-services/pull/5.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/KiaraGrouwstra/modular-services/pull/5.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/KiaraGrouwstra/modular-services",
+  "state": "open",
+  "state_reason": null,
+  "title": "Add data dump of most design discussions",
+  "updated_at": "2026-08-31T19:13:56Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 193360,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "KiaraGrouwstra:main",
+   "ref": "main",
+   "repo": {
+    "archived": false,
+    "default_branch": "main",
+    "fork": false,
+    "full_name": "KiaraGrouwstra/modular-services",
+    "id": 1328078190,
+    "private": false
+   },
+   "sha": "69a6ab035de8e9b98ff318110f2842c718c03f3c",
+   "user": {
+    "id": 3059397,
+    "login": "KiaraGrouwstra",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "body": "# What\r\n\r\nAdds JSON dumps of discussions on\r\n- GitHub (various repos)\r\n- discourse.nixos.org\r\n- matrix\r\n- the pad (technically a small subset of discourse, but whatever)\r\n\r\nAdds docs and machinery.\r\n4 MB.\r\n\r\n# Why\r\n\r\nHaving all design inputs in one place is very useful. Greppable and all.\r\nIt's not a replacement for actual design guidelines or anything, but it's useful input that could perhaps substantiate those.\r\n\r\n# How\r\n\r\nBuilt with like a dozen prompts. Should be self-documenting etc.\r\nI have not tested the GHA auto updating functionality.\r\nTo update matrix you'd have to provide a `MATRIX_TOKEN`. (probably want a separate account for that purpose)\r\n\r\n# Really?\r\n\r\nNot sure if we want to merge this into main. Maybe a separate branch or separate repo is better.",
+  "changed_files": 209,
+  "closed_at": null,
+  "comments": 0,
+  "commits": 8,
+  "created_at": "2026-08-31T19:04:43Z",
+  "deletions": 1,
+  "diff_url": "https://github.com/KiaraGrouwstra/modular-services/pull/5.diff",
+  "draft": true,
+  "head": {
+   "label": "roberth:doc/design-crowdsource",
+   "ref": "doc/design-crowdsource",
+   "repo": {
+    "archived": false,
+    "default_branch": "main",
+    "fork": true,
+    "full_name": "roberth/modular-services",
+    "id": 1352734302,
+    "private": false
+   },
+   "sha": "8bc7476dd168495ec2ecd2824f9a6ba8e5daf885",
+   "user": {
+    "id": 496447,
+    "login": "roberth",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4405399444,
+  "labels": [],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 5,
+  "patch_url": "https://github.com/KiaraGrouwstra/modular-services/pull/5.patch",
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 0,
+  "state": "open",
+  "title": "Add data dump of most design discussions",
+  "updated_at": "2026-08-31T19:13:56Z",
+  "user": {
+   "id": 496447,
+   "login": "roberth",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "KiaraGrouwstra/modular-services#5",
+ "review_comments": [],
+ "reviews": [],
+ "sources": [
+  "this-repo-prs"
+ ],
+ "timeline": []
+}

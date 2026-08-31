@@ -1,0 +1,578 @@
+{
+ "comments": [
+  {
+   "body": "Thanks, please fix the lint failures. I will try to review this pr soon.",
+   "created_at": "2026-08-21T18:19:20Z",
+   "id": 5373642206,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-21T18:20:06Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "I've fixed the linting. Tested nixosTests.opengist and got it to work. I need just to investigate what's the issue with manual",
+   "created_at": "2026-08-21T19:23:51Z",
+   "id": 5374280619,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-21T19:23:51Z",
+   "user": {
+    "id": 137088692,
+    "login": "tomasriveral",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "fix the doc problem. There is two `rl-2611.section.md` files in two different places in nixpkgs. I wrote in the wrong one. Normally all CI should pass now",
+   "created_at": "2026-08-21T19:43:35Z",
+   "id": 5374520291,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-21T19:43:35Z",
+   "user": {
+    "id": 137088692,
+    "login": "tomasriveral",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "## :white_check_mark: `nixpkgs-review` result\n\nGenerated using [`nixpkgs-review-gha`](https://github.com/Defelo/nixpkgs-review-gha) ([`b0ab82d`](https://github.com/Defelo/nixpkgs-review-gha/commit/b0ab82d778a1d560a28162740e63d23dad3e546c))\n\nCommand: `nixpkgs-review pr 555141`\nCommit: [`5b84f276a861efeea7896a1702f6804f29e56d12`](https://github.com/NixOS/nixpkgs/commit/5b84f276a861efeea7896a1702f6804f29e56d12) ([subsequent changes](https://github.com/NixOS/nixpkgs/compare/5b84f276a861efeea7896a1702f6804f29e56d12..pull/555141/head))\nMerge: [`0bbc02b20d4ae72b77c0c35873d0705a51a530c8`](https://github.com/NixOS/nixpkgs/commit/0bbc02b20d4ae72b77c0c35873d0705a51a530c8)\n\nLogs: https://github.com/tomasriveral/nixpkgs-review-gha/actions/runs/32520655864/attempts/1\n\n\n---\n### `x86_64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>opengist</li>\n  </ul>\n</details>\n\n---\n### `aarch64-linux`\n<details>\n  <summary>:fast_forward: 2 packages blacklisted:</summary>\n  <ul>\n    <li>nixos-install-tools</li>\n    <li>tests.nixos-functions.nixos-test</li>\n  </ul>\n</details>\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>opengist</li>\n  </ul>\n</details>\n\n---\n### `aarch64-darwin` (sandbox = relaxed)\n<details>\n  <summary>:white_check_mark: 1 package built:</summary>\n  <ul>\n    <li>opengist</li>\n  </ul>\n</details>\n",
+   "created_at": "2026-08-21T19:58:39Z",
+   "id": 5374698624,
+   "minimized": null,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "updated_at": "2026-08-21T19:58:39Z",
+   "user": {
+    "id": 137088692,
+    "login": "tomasriveral",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "html_url": "https://github.com/NixOS/nixpkgs/pull/555141",
+ "issue": {
+  "active_lock_reason": null,
+  "assignee": null,
+  "assignees": [],
+  "body": "It's the first module I write from scratch. I've propably done some errors.\r\n\r\n~And how can I test that locally? For pkgs, i use nix run. Is there some equivalent ?~ Got it. Just gotta run `nix run .#nixosTests.opengist`\r\n\r\nNo AI/Automation was used for this PR. I tried following the module and tests for gatus.\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "closed_at": null,
+  "closed_by": null,
+  "comments": 4,
+  "created_at": "2026-08-21T16:55:26Z",
+  "draft": false,
+  "id": 5216334133,
+  "issue_field_values": [],
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a module in `nixos/`",
+    "id": 290122827,
+    "name": "8.has: module (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Darwin.",
+    "id": 1955058051,
+    "name": "10.rebuild-darwin: 1"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR has tests",
+    "id": 3998253522,
+    "name": "8.has: tests"
+   }
+  ],
+  "locked": false,
+  "milestone": null,
+  "number": 555141,
+  "pull_request": {
+   "diff_url": "https://github.com/NixOS/nixpkgs/pull/555141.diff",
+   "merged_at": null,
+   "patch_url": "https://github.com/NixOS/nixpkgs/pull/555141.patch"
+  },
+  "reactions": {
+   "+1": 0,
+   "-1": 0,
+   "confused": 0,
+   "eyes": 0,
+   "heart": 0,
+   "hooray": 0,
+   "laugh": 0,
+   "rocket": 0,
+   "total_count": 0
+  },
+  "repository_url": "https://api.github.com/repos/NixOS/nixpkgs",
+  "state": "open",
+  "state_reason": null,
+  "title": "nixos/opengist: init; opengist: add git to path",
+  "type": null,
+  "updated_at": "2026-08-31T18:43:51Z",
+  "user": {
+   "id": 137088692,
+   "login": "tomasriveral",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "kind": "pull_request",
+ "pull_request": {
+  "active_lock_reason": null,
+  "additions": 441,
+  "assignee": null,
+  "assignees": [],
+  "auto_merge": null,
+  "base": {
+   "label": "NixOS:master",
+   "ref": "master",
+   "repo": {
+    "archived": false,
+    "default_branch": "master",
+    "fork": false,
+    "full_name": "NixOS/nixpkgs",
+    "id": 4542716,
+    "private": false
+   },
+   "sha": "6e7b7053ad18156dc9dd3c7a439a913b90ee1079",
+   "user": {
+    "id": 487568,
+    "login": "NixOS",
+    "site_admin": false,
+    "type": "Organization"
+   }
+  },
+  "body": "It's the first module I write from scratch. I've propably done some errors.\r\n\r\n~And how can I test that locally? For pkgs, i use nix run. Is there some equivalent ?~ Got it. Just gotta run `nix run .#nixosTests.opengist`\r\n\r\nNo AI/Automation was used for this PR. I tried following the module and tests for gatus.\r\n<!--\r\n^ Please summarise the changes you have done and explain why they are necessary here ^\r\n\r\nFor package updates please link to a changelog or describe changes, this helps your fellow maintainers discover breaking updates.\r\nFor new packages please briefly describe the package or provide a link to its homepage.\r\n-->\r\n\r\n## Things done\r\n\r\n<!-- Please check what applies. Note that these are not hard requirements but merely serve as information for reviewers. -->\r\n\r\n- Built on platform:\r\n  - [x] x86_64-linux\r\n  - [ ] aarch64-linux\r\n  - [ ] aarch64-darwin\r\n- Tested, as applicable:\r\n  - [x] [NixOS tests] in [nixos/tests].\r\n  - [ ] [Package tests] at `passthru.tests`.\r\n  - [ ] Tests in [lib/tests] or [pkgs/test] for functions and \"core\" functionality.\r\n- [ ] Ran `nixpkgs-review` on this PR. See [nixpkgs-review usage].\r\n- [ ] Tested basic functionality of all binary files, usually in `./result/bin/`.\r\n- Nixpkgs Release Notes\r\n  - [ ] Package update: when the change is major or breaking.\r\n- NixOS Release Notes\r\n  - [x] Module addition: when adding a new NixOS module.\r\n  - [ ] Module update: when the change is significant.\r\n- [x] Fits [CONTRIBUTING.md], [pkgs/README.md], [maintainers/README.md] and other READMEs.\r\n- [x] Follows the [automation/AI policy].\r\n\r\n[NixOS tests]: https://nixos.org/manual/nixos/unstable/index.html#sec-nixos-tests\r\n[Package tests]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests\r\n[nixpkgs-review usage]: https://github.com/Mic92/nixpkgs-review#usage\r\n\r\n[CONTRIBUTING.md]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md\r\n[automation/AI policy]: https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md#automationai-policy\r\n[lib/tests]: https://github.com/NixOS/nixpkgs/blob/master/lib/tests\r\n[maintainers/README.md]: https://github.com/NixOS/nixpkgs/blob/master/maintainers/README.md\r\n[nixos/tests]: https://github.com/NixOS/nixpkgs/blob/master/nixos/tests\r\n[pkgs/README.md]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md\r\n[pkgs/test]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/test\r\n",
+  "changed_files": 6,
+  "closed_at": null,
+  "comments": 4,
+  "commits": 2,
+  "created_at": "2026-08-21T16:55:26Z",
+  "deletions": 0,
+  "diff_url": "https://github.com/NixOS/nixpkgs/pull/555141.diff",
+  "draft": false,
+  "head": {
+   "label": "tomasriveral:opengist-module",
+   "ref": "opengist-module",
+   "repo": {
+    "archived": false,
+    "default_branch": "master",
+    "fork": true,
+    "full_name": "tomasriveral/nixpkgs",
+    "id": 1197009083,
+    "private": false
+   },
+   "sha": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "user": {
+    "id": 137088692,
+    "login": "tomasriveral",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  "id": 4333699008,
+  "labels": [
+   {
+    "color": "fef2c0",
+    "default": false,
+    "description": "Issues or PRs affecting NixOS modules, or package usability issues specific to NixOS",
+    "id": 60265212,
+    "name": "6.topic: nixos"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes documentation",
+    "id": 290122655,
+    "name": "8.has: documentation"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds or changes release notes",
+    "id": 290122698,
+    "name": "8.has: changelog"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR adds a module in `nixos/`",
+    "id": 290122827,
+    "name": "8.has: module (new)"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR changes an existing module in `nixos/`",
+    "id": 290122884,
+    "name": "8.has: module (update)"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Linux.",
+    "id": 731733923,
+    "name": "10.rebuild-linux: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes between 1 and 10 packages to rebuild on Darwin.",
+    "id": 731735222,
+    "name": "10.rebuild-darwin: 1-10"
+   },
+   {
+    "color": "eeffee",
+    "default": false,
+    "description": "This PR causes 1 package to rebuild on Darwin.",
+    "id": 1955058051,
+    "name": "10.rebuild-darwin: 1"
+   },
+   {
+    "color": "009800",
+    "default": false,
+    "description": "This PR has tests",
+    "id": 3998253522,
+    "name": "8.has: tests"
+   }
+  ],
+  "locked": false,
+  "maintainer_can_modify": true,
+  "merged": false,
+  "merged_at": null,
+  "merged_by": null,
+  "milestone": null,
+  "number": 555141,
+  "patch_url": "https://github.com/NixOS/nixpkgs/pull/555141.patch",
+  "requested_reviewers": [],
+  "requested_teams": [],
+  "review_comments": 4,
+  "state": "open",
+  "title": "nixos/opengist: init; opengist: add git to path",
+  "updated_at": "2026-08-31T18:43:51Z",
+  "user": {
+   "id": 137088692,
+   "login": "tomasriveral",
+   "site_admin": false,
+   "type": "User"
+  }
+ },
+ "ref": "NixOS/nixpkgs#555141",
+ "review_comments": [
+  {
+   "body": "I was recently made aware of https://github.com/NixOS/rfcs/blob/master/rfcs/0042-config-option.md#part-2-balancing-module-option-count from https://github.com/NixOS/nixpkgs/pull/554366#discussion_r3842780480\n\nDo you think all the options here are needed? Only the important ones are useful.",
+   "commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "created_at": "2026-08-31T18:34:20Z",
+   "diff_hunk": "@@ -0,0 +1,400 @@\n+{\n+  pkgs,\n+  lib,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.opengist;\n+  settingsFormat = pkgs.formats.yaml { };\n+  settingsFile = settingsFormat.generate \"opengist-settings\" cfg.settings;\n+\n+  inherit (lib)\n+    concatStringsSep\n+    getExe\n+    mkEnableOption\n+    mkIf\n+    mkOption\n+    mkPackageOption\n+    ;\n+  inherit (lib.types)\n+    bool\n+    enum\n+    listOf\n+    int\n+    nullOr\n+    oneOf\n+    path\n+    str\n+    submodule\n+    ;\n+in\n+{\n+  options.services.opengist = {\n+    enable = mkEnableOption \"opengist\";\n+\n+    package = mkPackageOption pkgs \"opengist\" { };\n+\n+    environmentFile = mkOption {\n+      type = nullOr path;\n+      default = null;\n+      description = ''\n+        File to load as environment file.\n+        See https://github.com/thomiceli/opengist/blob/master/docs/configuration/cheat-sheet.md for variable names and description.\n+        Some options can be configured through both the config file (via this module) and the environment. Conflict between those two is undocumented.\n+      '';\n+    };\n+\n+    settings = mkOption {\n+      # note to myself follow https://github.com/thomiceli/opengist/blob/master/config.yml\n+      type = submodule {\n+        freeformType = settingsFormat.type;\n+        options = {\n+          /*\n+            Most options are also available via the environmentFile.\n+            Opengist will set itself default values if set to null.\n+            It's better to set the default as null rather than a normal default value in case the user wants to modify the option with the environmentFile (the conflict between those two is undocumented).\n+          */\n+\n+          log-level = mkOption {\n+            type = nullOr (enum [\n+              \"debug\"\n+              \"info\"\n+              \"warn\"\n+              \"error\"\n+              \"fatal\"\n+            ]);\n+            default = null;\n+            description = ''\n+              Set the log level.\n+              When set to null, will default to \"warn\".\n+              You can also set this option via $OG_LOG_LEVEL in `services.opengist.environmentFile`.\n+            '';\n+          };\n+\n+          log-output = mkOption {\n+            type = nullOr (enum [\n+              \"stdout\"\n+              \"file\"\n+              \"stdout,file\"\n+            ]);\n+            default = null;\n+            description = ''\n+              Set the destination of the log output.\n+              When set to null, will default to \"stdout,file\"\n+              You can also set this option via $OG_LOG_OUTPUT in `services.opengist.environmentFile`.\n+            '';\n+          };\n+\n+          log-path = mkOption {\n+            type = nullOr path;\n+            default = null;\n+            description = ''\n+              Set the directory where the log file (opengist.log) is written.\n+              When set to null, will default to $OG_OPENGIST_HOME/log.\n+              $OG_OPENGIST_HOME can be set with the with the environment file (`services.opengist.environmentFile`) or with the option `services.opengist.settings.opengist-home`.\n+              You can also set this option via $OG_LOG_PATH in `services.opengist.environmentFile`.\n+            '';\n+          };\n+",
+   "id": 3897264777,
+   "line": 99,
+   "original_commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "original_line": 99,
+   "original_position": 99,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/opengist.nix",
+   "position": 99,
+   "pull_request_review_id": 5069867117,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-31T18:34:20Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "In nixpkgs there is an experimental way to write modules, maybe you have come across them, called modular services. https://github.com/NixOS/nixpkgs/blob/master/nixos/README-modular-services.md\nIf you are interested we can turn this module into a modular service, which comes with a good UX for running multiple instances of the same service, among other things.\n\nLet me know if you are interested in porting this to a modular service, or I am happy to adapt this PR while keeping your ownership and giving you the proper credit.\n\nI will respect your decision if you think we should not pursue it for this module at all, so don't feel pressured into using them.",
+   "commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "created_at": "2026-08-31T18:40:32Z",
+   "diff_hunk": "@@ -0,0 +1,400 @@\n+{\n+  pkgs,\n+  lib,\n+  config,\n+  ...\n+}:\n+let\n+  cfg = config.services.opengist;\n+  settingsFormat = pkgs.formats.yaml { };\n+  settingsFile = settingsFormat.generate \"opengist-settings\" cfg.settings;\n+\n+  inherit (lib)\n+    concatStringsSep\n+    getExe\n+    mkEnableOption\n+    mkIf\n+    mkOption\n+    mkPackageOption\n+    ;\n+  inherit (lib.types)\n+    bool\n+    enum\n+    listOf\n+    int\n+    nullOr\n+    oneOf\n+    path\n+    str\n+    submodule\n+    ;\n+in\n+{\n+  options.services.opengist = {",
+   "id": 3897307065,
+   "line": 33,
+   "original_commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "original_line": 33,
+   "original_position": 33,
+   "original_start_line": null,
+   "path": "nixos/modules/services/web-apps/opengist.nix",
+   "position": 33,
+   "pull_request_review_id": 5069915157,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-31T18:47:02Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "A slightly more useful test here would be a smoke test, unless opengist already does e2e tests during the building of its package derivation, in which case a curl health check is good enough.\n\nI'm thinking the smoke test should create an account, then login to opengist, create a gist, clone it via ssh as well as http and check that files cloned match.",
+   "commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "created_at": "2026-08-31T18:43:18Z",
+   "diff_hunk": "@@ -0,0 +1,21 @@\n+{ lib, ... }:\n+{\n+  name = \"opengist\";\n+  meta.maintainers = with lib.maintainers; [ tomasrivera ];\n+\n+  nodes.machine = { ... }: {\n+    services.opengist = {\n+      enable = true;\n+      settings = {\n+        opengist-home = \"/tmp/test\";\n+      };\n+    };\n+  };\n+\n+  testScript = ''\n+    machine.wait_for_unit(\"opengist.service\")\n+    print(machine.execute(\"systemctl status opengist\"))\n+    print(machine.execute(\"journalctl -u opengist -n 100 --no-pager\"))\n+    machine.wait_until_succeeds(\"curl -s http://localhost:6157\", timeout=60)",
+   "id": 3897326317,
+   "line": 19,
+   "original_commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "original_line": 19,
+   "original_position": 19,
+   "original_start_line": null,
+   "path": "nixos/tests/opengist.nix",
+   "position": 19,
+   "pull_request_review_id": 5069937134,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-31T18:43:18Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "Could be `gitMinimal` but I think `git` is good.",
+   "commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "created_at": "2026-08-31T18:43:51Z",
+   "diff_hunk": "@@ -69,9 +75,19 @@ buildGoModule (finalAttrs: {\n     cp -R ${finalAttrs.frontend}/public/assets public/\n   '';\n \n+  postInstall = ''\n+    wrapProgram $out/bin/opengist \\\n+      --prefix PATH : ${\n+        lib.makeBinPath [\n+          git",
+   "id": 3897330174,
+   "line": 82,
+   "original_commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "original_line": 82,
+   "original_position": 28,
+   "original_start_line": null,
+   "path": "pkgs/by-name/op/opengist/package.nix",
+   "position": 28,
+   "pull_request_review_id": 5069941490,
+   "reactions": {
+    "+1": 0,
+    "-1": 0,
+    "confused": 0,
+    "eyes": 0,
+    "heart": 0,
+    "hooray": 0,
+    "laugh": 0,
+    "rocket": 0,
+    "total_count": 0
+   },
+   "side": "RIGHT",
+   "start_line": null,
+   "start_side": null,
+   "subject_type": "line",
+   "updated_at": "2026-08-31T18:43:51Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "reviews": [
+  {
+   "body": "",
+   "commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "id": 5069867117,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-31T18:34:20Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "id": 5069915157,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-31T18:40:31Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "id": 5069937134,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-31T18:43:17Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  },
+  {
+   "body": "",
+   "commit_id": "5b84f276a861efeea7896a1702f6804f29e56d12",
+   "id": 5069941490,
+   "state": "COMMENTED",
+   "submitted_at": "2026-08-31T18:43:50Z",
+   "user": {
+    "id": 29627898,
+    "login": "phanirithvij",
+    "site_admin": false,
+    "type": "User"
+   }
+  }
+ ],
+ "sources": [
+  "nixpkgs-phrase-prs"
+ ],
+ "timeline": [
+  {
+   "actor": {
+    "id": 137088692,
+    "login": "tomasriveral",
+    "site_admin": false,
+    "type": "User"
+   },
+   "commit_id": null,
+   "commit_url": null,
+   "created_at": "2026-08-21T19:21:37Z",
+   "event": "renamed",
+   "id": 29823799720,
+   "rename": {
+    "from": "nixos/opengist: init",
+    "to": "nixos/opengist: init; opengist: add git to path"
+   }
+  }
+ ]
+}

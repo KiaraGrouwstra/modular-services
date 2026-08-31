@@ -1,4 +1,7 @@
 {
+ "KiaraGrouwstra/modular-services#5": [
+  "this-repo-prs"
+ ],
  "NixOS/nix#8": [
   "nix-private-files"
  ],
@@ -475,6 +478,9 @@
  "NixOS/nixpkgs#554965": [
   "nixpkgs-label-issues",
   "nixpkgs-phrase-issues"
+ ],
+ "NixOS/nixpkgs#555141": [
+  "nixpkgs-phrase-prs"
  ],
  "NixOS/nixpkgs#555154": [
   "nixpkgs-lib-services-prs"

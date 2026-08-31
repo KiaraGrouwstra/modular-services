@@ -230,9 +230,6 @@
   "labels": [],
   "locked": false,
   "maintainer_can_modify": false,
-  "merge_commit_sha": "fb6a0c6d398179f746ac6636d1acdf757e19eded",
-  "mergeable": null,
-  "mergeable_state": "unknown",
   "merged": true,
   "merged_at": "2026-05-04T15:22:17Z",
   "merged_by": {
@@ -244,7 +241,6 @@
   "milestone": null,
   "number": 9215,
   "patch_url": "https://github.com/nix-community/home-manager/pull/9215.patch",
-  "rebaseable": null,
   "requested_reviewers": [],
   "requested_teams": [],
   "review_comments": 12,

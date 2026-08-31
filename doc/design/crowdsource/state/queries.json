@@ -1970,6 +1970,14 @@
    "updated_at": "2026-07-23T20:21:01Z"
   },
   {
+   "comments": 4,
+   "kept": true,
+   "ref": "NixOS/nixpkgs#555141",
+   "state": "open",
+   "title": "nixos/opengist: init; opengist: add git to path",
+   "updated_at": "2026-08-31T18:43:51Z"
+  },
+  {
    "comments": 0,
    "kept": true,
    "ref": "NixOS/nixpkgs#541020",
@@ -2674,6 +2682,14 @@
  ],
  "this-repo-issues": [],
  "this-repo-prs": [
+  {
+   "comments": 0,
+   "kept": true,
+   "ref": "KiaraGrouwstra/modular-services#5",
+   "state": "open",
+   "title": "Add data dump of most design discussions",
+   "updated_at": "2026-08-31T19:04:43Z"
+  },
   {
    "comments": 0,
    "kept": false,
