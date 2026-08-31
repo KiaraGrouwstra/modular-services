@@ -11,7 +11,7 @@ it beat, and that lives in the discussion.
 
 | directory | what |
 | --- | --- |
-| [`crowdsource/`](./crowdsource/README.md) | The discussion itself, fetched from where it happened: nixpkgs issues and pull requests, RFCs, Discourse, the meeting pad and the project board. Refreshed by `nix run .#crowdsource-sync`; nobody writes into it by hand. |
+| [`crowdsource/`](./crowdsource/README.md) | The discussion itself, fetched from where it happened: nixpkgs issues and pull requests, RFCs, Discourse topics, the Matrix room, the meeting pad and the project board. Refreshed by `nix run .#crowdsource-sync`. Everything under `raw/`, `state/` and `INDEX.md` is generated and should never be hand-edited; `sources.json` is the opposite, and is where the judgement lives. |
 
 Analysis belongs here beside `crowdsource/`, citing files inside it. Anything
 that ends up being true of the subsystem as shipped belongs in the manual

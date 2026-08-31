@@ -440,19 +440,14 @@
   ],
   "unfetched": [
     {
-      "what": "roberth's compliance-suite branch",
-      "url": "https://github.com/NixOS/nixpkgs/compare/master...roberth:nixpkgs:modular-services-compliance-suite",
-      "why": "Code under discussion, not discussion. Cited from the pad; fetch the diff from git when it matters."
-    },
-    {
-      "what": "DigitalBrewStudios service-api generalization branch",
-      "url": "https://github.com/NixOS/nixpkgs/compare/master...DigitalBrewStudios:nixpkgs:modular-service-generalization-service-api",
-      "why": "As above: a proposal carried as a branch rather than as a pull request, so it has no thread to fetch."
+      "what": "Proposal branches",
+      "url": "https://github.com/NixOS/nixpkgs/branches",
+      "why": "Meetings and threads cite work-in-progress branches on personal nixpkgs forks. Those are code, not discussion: git already stores them, they are deleted when they merge or are abandoned, and the argument about them happens in a pull request or a meeting that this corpus does track. The compliance suite is the worked example -- cited from the pad as a branch, merged as NixOS/nixpkgs#531062, and in `raw/` under that number."
     },
     {
       "what": "DigitalBrewStudios/Database-Modular-Services and DigitalBrewStudios/nix-windows",
       "url": "https://github.com/DigitalBrewStudios/Database-Modular-Services",
-      "why": "Out-of-tree experiments named in the meetings. Neither carries issues yet; add a github-query here when one does."
+      "why": "Out-of-tree experiments named in the meetings. Both have issues enabled and neither has any, so there is nothing to fetch; add a github-query when that changes. This is the one entry here worth re-checking, and checking it is one API call."
     }
   ],
   "ignore": [
@@ -461,5 +456,6 @@
     "^discourse:discourse\\.nixos\\.org/t/(2617|3032|17574|18589|64882)$",
     "^[\\w.-]+/[\\w.-]+#0$"
   ],
-  "ignore_why": "Seen often enough to crowd the triage list, and not about this design. The `actions/checkout` refs come from this repository's own Dependabot pull requests; nixpkgs#77858 is a dracut issue quoted inside a diff hunk in RFC 157; the Discourse topics are the review queues, the breaking-changes announcement, the community calendar and a hackathon report."
+  "ignore_why": "Seen often enough to crowd the triage list, and not about this design. The `actions/checkout` refs come from this repository's own Dependabot pull requests; nixpkgs#77858 is a dracut issue quoted inside a diff hunk in RFC 157; the Discourse topics are the review queues, the breaking-changes announcement, the community calendar and a hackathon report.",
+  "unfetched_why": "Things a reader might expect to find here and will not. Kept deliberately general: an earlier version of this list named two specific nixpkgs branches, and both were gone within weeks -- one merged, one renamed -- which is what a hand-maintained list of ephemeral things does. State the rule, not the instance."
 }

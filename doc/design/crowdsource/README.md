@@ -31,8 +31,9 @@ link, not in place of it.
 
 | path | what |
 | --- | --- |
-| [`sources.json`](./sources.json) | The manifest: every source, and why it is one. The only file to edit by hand. |
+| [`sources.json`](./sources.json) | The manifest: every source, and why it is one. Adding a source means editing this and nothing else. |
 | [`sync.py`](./sync.py) | Fetches everything the manifest names, writes `raw/`, `state/` and `INDEX.md`. |
+| [`manifest-valid.nix`](./manifest-valid.nix) | `checks.crowdsource-manifest`: the manifest is well-formed, at eval time rather than twenty minutes into a sync. |
 | [`INDEX.md`](./INDEX.md) | Generated. Every item with title, state, activity and the manifest entries that reached it. |
 | `raw/github/<owner>/<repo>/<n>.json` | One issue or pull request: body, comments, reviews, review comments, and the timeline events that point elsewhere. |
 | `raw/discourse/<host>/<n>.json` | One Discourse topic, every post, Markdown source rather than rendered HTML. |
@@ -51,22 +52,29 @@ $ nix run .#crowdsource-sync          # fetch, write, report
 $ nix run .#crowdsource-sync -- --check   # report only; exit 1 if stale
 ```
 
-Without Nix, `python3 doc/design/crowdsource/sync.py` does the same; it needs
-`gh` authenticated and nothing else.
+Without Nix, `python3 doc/design/crowdsource/sync.py` does the same. It needs
+`gh` authenticated; that is enough for every source but the Matrix room, which
+needs `MATRIX_TOKEN` and is skipped without it.
 
-A run prints what is new, what changed, and which untracked links came up. The
-files it writes are the rest of the report: `git diff` after a sync shows every
-comment the world added, in place.
+A run prints what is new, what changed, what is no longer tracked, and what was
+skipped for want of a credential, then lists the untracked links that came up.
+The files it writes are the rest of the report: `git diff` after a sync shows
+every comment the world added, in place.
 
 `--check` writes nothing and exits 1 when a real run would change something,
 which is what the scheduled workflow in
 [`.github/workflows/crowdsource.yml`](../../../.github/workflows/crowdsource.yml)
 uses to decide whether there is a pull request to open.
 
-Other flags: `--only <id>...` for one source, `--force` to ignore the validator
-cache, `--no-prune` to keep every API field, `-v` to log each request.
+Other flags: `--force` to ignore the validator cache, `--no-prune` to keep every
+API field, `--dir` to point at a corpus other than the script's own directory
+(which is how the Nix wrapper writes to the working tree while running from the
+store), and `-v` to log every request.
 
-`MATRIX_TOKEN` is the one credential beyond `gh`; see below.
+`--only <id>...` narrows a run to named sources, and then deliberately does
+less: it removes nothing and rewrites neither the state files nor `INDEX.md`,
+because a run that has seen a fraction of the manifest must not write that
+fraction down as the whole of it.
 
 ## What "tracked" means, and what it does not
 
@@ -100,11 +108,10 @@ a nearby source line would otherwise outrank the links people actually posted.
 GitHub allows 5000 core requests an hour and **30 searches a minute**; the
 searches are the tighter of the two, and `sync.py` paces itself under them.
 
-A full fetch is around 950 requests. A refresh where nothing moved is about 240,
+A full fetch is around 990 requests. A refresh where nothing moved is about 245,
 of which fewer than 30 count against the limit, because every item is gated
-behind one conditional request: the ETag of
-the last response is replayed as `If-None-Match`, and GitHub answers 304 without
-counting it against the limit.
+behind one conditional request: the ETag of the last response is replayed as
+`If-None-Match`, and GitHub answers 304 without counting it against the limit.
 
 The gate is `issues/{n}`, for pull requests too. A pull request is an issue
 underneath, and both endpoints report the same `updated_at` -- moved by a
@@ -118,17 +125,20 @@ refetched a hundred pull requests a run to write byte-identical files.
 
 `--force` declines the whole arrangement.
 
-Discourse and the project board send `cache-control: no-store` and no validator,
-so they are fetched unconditionally every time. That is most of what a quiet
-refresh still spends, and it is against nobody's quota.
+Discourse, the project board and Matrix have no validator to replay -- the first
+two send `cache-control: no-store`, and Matrix has no conditional form -- so they
+are fetched every time. Together they are most of what a quiet refresh still
+spends, and none of it touches GitHub's quota. The Matrix room is cheap for its
+own reason: a refresh pages backwards only until it meets an event already on
+disk, which is six requests rather than the twenty-six a first fetch takes.
 
 ## What is pruned, and why
 
 `raw/` holds the API response minus a fixed list of keys that carry no
 discussion: the `*_url` fields that are derivable from the ids beside them,
-`node_id`, avatar URLs, the `body_html`/`cooked` renderings of a body kept
-verbatim anyway, and the viewer-dependent flags Discourse attaches to every
-post. That is roughly two thirds of the bytes.
+`node_id`, avatar URLs, the `body_html` / `cooked` / `formatted_body` renderings
+of a body kept verbatim anyway, and the viewer-dependent flags Discourse attaches
+to every post. That is roughly two thirds of the bytes.
 
 The saving is not the point. Keeping the diff between two syncs *readable* is,
 and two of the rules exist only for that:
@@ -147,8 +157,9 @@ What is left changes when a person writes something, which is what makes
 The timeline is kept only for what the rest of the record does not already say:
 which commits and issues point at an item, what its title used to be, and when
 it opened and closed. `commented` and `reviewed` events are dropped because they
-restate `comments` and `reviews` in full -- 2113 times over 173 items, when they
-were kept.
+restate `comments` and `reviews` in full: keeping them added 2113 redundant
+events against the 495 that say something, at the size the corpus was when it
+was measured.
 
 `--no-prune` turns all of it off. The prune list is at the top of `sync.py`.
 

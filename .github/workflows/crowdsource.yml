@@ -97,6 +97,10 @@ jobs:
               nothing has usually been outlived by a rename.
             - **New files under `raw/`** -- a thread that entered the record on
               its own, via a query rather than a decision.
+            - **A `skipped` line in the job log** -- the Matrix room needs
+              `MATRIX_TOKEN`, and without it the room silently stops advancing
+              while everything else keeps refreshing. The skip is reported for
+              exactly that reason.
 
             Nothing here needs merging urgently; an out-of-date corpus is worse
             than a stale pull request, but not by much.
