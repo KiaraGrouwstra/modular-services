@@ -157,11 +157,23 @@ rules.
 ## The gap
 
 The Matrix channel `#modular-services:nixos.org` is where the day-to-day
-conversation happens, and nothing here reads it: that needs an account and a
-homeserver, and a checked-in sync tool should not carry credentials for one.
-What is decided there is expected to reach the pad or an issue. If that stops
-being true, this is the gap to close, and `sources.json` records it under
-`unfetched` alongside the two proposal branches that have no thread to fetch.
+conversation happens, and nothing here reads it.
+
+Not for want of a public door. The alias resolves unauthenticated to
+`!skjfPnBZwrJbAxHTxh:nixos.org`, but every read of the room answers
+`M_MISSING_TOKEN`; `matrix.nixos.org` has guest access and registration both
+disabled; the Matrix Public Archive that used to render world-readable rooms as
+static HTML has been discontinued; and the room is absent from that
+homeserver's public directory, so even its history-visibility setting is
+unreadable from outside. Fetching it needs an access token for an account that
+has joined.
+
+That is a solvable problem, not an impossible one -- the token would be an
+environment variable and a CI secret exactly as `GH_TOKEN` already is -- and it
+is simply not solved yet. `sources.json` records it under `unfetched` alongside
+the two proposal branches that have no thread to fetch. Until it is solved, this
+corpus rests on the assumption that what is decided in the channel reaches the
+pad or an issue, and that assumption is worth distrusting.
 
 ## Adding a source
 

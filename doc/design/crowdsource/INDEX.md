@@ -379,8 +379,8 @@ answer to what an entry is doing in the corpus.
 
 ## Deliberately not fetched
 
-- **Matrix: #modular-services:nixos.org** -- <https://matrix.to/#/#modular-services:nixos.org>  
-  The day-to-day channel. Reading it needs an account and a homeserver, which a checked-in sync tool should not carry credentials for. Anything decided there is expected to reach the pad or an issue; if that stops being true, this becomes a gap worth solving.
+- **Matrix: #modular-services:nixos.org (!skjfPnBZwrJbAxHTxh:nixos.org)** -- <https://matrix.to/#/#modular-services:nixos.org>  
+  The day-to-day channel, and the one real hole in this corpus. What was checked, so nobody has to check it again: the alias resolves without authentication, but every read of the room returns M_MISSING_TOKEN; matrix.nixos.org has guest access disabled and registration disabled; the Matrix Public Archive, which used to render world-readable rooms as static HTML, was discontinued by the Matrix.org Foundation; and the room is not in that homeserver's public directory, so its history-visibility setting cannot be read from outside either. Fetching it therefore needs an access token for an account that has joined. That is doable -- the token would be an environment variable and a CI secret, the way GH_TOKEN already is -- and it is not done. Until it is, what gets decided here is expected to reach the pad or an issue.
 - **roberth's compliance-suite branch** -- <https://github.com/NixOS/nixpkgs/compare/master...roberth:nixpkgs:modular-services-compliance-suite>  
   Code under discussion, not discussion. Cited from the pad; fetch the diff from git when it matters.
 - **DigitalBrewStudios service-api generalization branch** -- <https://github.com/NixOS/nixpkgs/compare/master...DigitalBrewStudios:nixpkgs:modular-service-generalization-service-api>  
