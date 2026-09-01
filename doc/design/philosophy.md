@@ -209,14 +209,6 @@ Stage 3 lets NixOS modules depend on modular services and moves the feature from
 The cap is there to stop conversions consuming the attention the interface needs,
 and to limit the impact of breaking interface changes.
 
-The work is already visible. `process.environment`, `flags` and `flagFormat`, and the reload options have landed.
-`process.runtimeDirectory` is in progress,
-user-level services and reload on `configData` change are waiting on review,
-and the user model has a design aligned with this design philosophy document:
-each service gets its own user derived from its place in the sub-service hierarchy,
-a service declares only that it *shares* another's user,
-and configuration managers without users ignore it ([nixpkgs#545287][users]).
-
 ## Every escape hatch has a name
 
 The alternative design, a portable service layer with no service manager specific options inside the submodules, was considered and rejected.
