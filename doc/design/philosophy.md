@@ -225,15 +225,23 @@ Example:
 There is no `extraConfig` string at the framework level, and the
 only freeform surfaces are a service's own `settings`.
 
-## Avoid implicit functionality
+## Avoid implicit differences in functionality
 
-`systemd.mainExecStart` is the source of truth for what a systemd integration wires into the system.
-It defaults to the *escaped* form of `process.argv`,
-so that a service must explicitly ask for systemd specifier substitution instead of something it gets without choice,
-or without warning when this presumed "`process.argv` functionality" is missing on other service managers.
+All integrations should interpret the shared options in the same way.
 
-Simply put: literal arguments stay literal
-([nixpkgs#469450][mainexecstart]).
+For instance, systemd has specific substitution functionality in its `ExecStart` and similar entries,
+but this functionality is not present in `process.argv`.
+
+For this reason, the systemd service unit is built from `systemd.mainExecStart`,
+which defaults to the *escaped* form of `process.argv`.
+
+This ensures that use of systemd-specific functionality does not remain implicit,
+and either
+- leads to an evaluation error instead of a runtime failure when a service manager does not implement, or
+- pushes the responsibility for fallback to the user, which is reasonable here.
+
+So you can see both the implicit differences and escape hatches principles in action.
+See [nixpkgs#469450][mainexecstart].
 
 ## Declare a difference rather than hiding it
 
