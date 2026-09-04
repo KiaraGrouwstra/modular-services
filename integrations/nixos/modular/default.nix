@@ -16,6 +16,7 @@
 {
   system = {
     ghostunnel.default = ./ghostunnel/default/system.nix;
+    git-pages.default = ./git-pages/default/system.nix;
     snid.default = ./snid/default/system.nix;
     ktls-utils.default = ./ktls-utils/default/system.nix;
     autopush-rs = {

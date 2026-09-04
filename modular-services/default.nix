@@ -45,6 +45,28 @@ in
     ghostunnel.package = lib.mkDefault pkgs.ghostunnel;
   };
 
+  git-pages = pkgs: {
+    imports = [
+      (importApply ./git-pages/service.nix {
+        inherit (pkgs) formats coreutils;
+      })
+    ];
+    # Upstream patches the package so the server creates its storage root with
+    # `os.MkdirAll`. The service relies on that instead of an `ExecStartPre`.
+    # Drop the override when the pinned nixpkgs carries the patch.
+    git-pages.package = lib.mkDefault (
+      pkgs.git-pages.overrideAttrs (previousAttrs: {
+        patches = (previousAttrs.patches or [ ]) ++ [
+          (pkgs.fetchpatch {
+            name = "mkdirall-parent-dir-create.patch";
+            url = "https://codeberg.org/git-pages/git-pages/commit/507e57edbcfc0ec933a877bf26b1756ca0a61870.patch";
+            hash = "sha256-1CjU4yGmDOmYsxo3U44Cg2xLJkrmUOX5ZXTycdLs6OE=";
+          })
+        ];
+      })
+    );
+  };
+
   holo-daemon = pkgs: {
     imports = [ (importApply ./holo-daemon/service.nix { inherit pkgs; }) ];
     holo-daemon.package = lib.mkDefault pkgs.holo-daemon;

@@ -55,6 +55,7 @@ let
     autopush-rs = ./packages/autopush-rs.nix;
     easytier = ./packages/easytier.nix;
     ghostunnel = ./packages/ghostunnel.nix;
+    git-pages = ./packages/git-pages.nix;
     holo-daemon = ./packages/holo-daemon.nix;
     snid = ./packages/snid.nix;
     tlshd = ./packages/tlshd.nix;
