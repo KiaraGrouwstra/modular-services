@@ -13,6 +13,7 @@
   "autopush-rs-autoendpoint"
   "easytier"
   "ghostunnel"
+  "git-pages"
   "holo-daemon"
   "ktls-utils"
   "php"

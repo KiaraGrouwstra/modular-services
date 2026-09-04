@@ -89,6 +89,7 @@ in the pinned nixpkgs.
 | `integrations/nixos/tests/packages/autopush-rs.nix` | `nixos/tests/autopush-rs.nix` | modified | Keeps the `autoconnect.settings.auth_keys` line, which the pinned nixpkgs has and the variant split has not yet reached. |
 | `integrations/nixos/tests/packages/easytier.nix` | `nixos/tests/easytier-modular.nix` | modified | `pkgs.easytier.services.default` becomes `config.modularServices.easytier.default`. Upstream registers no `easytier` variant, so this one has no counterpart there. |
 | `integrations/nixos/tests/packages/ghostunnel.nix` | `nixos/tests/ghostunnel-modular.nix` | verbatim | |
+| `integrations/nixos/tests/packages/git-pages.nix` | `nixos/tests/git-pages.nix` | modified | `pkgs.git-pages.services.default` becomes `config.modularServices.git-pages.default`, the variant path the package tests here import. |
 | `integrations/nixos/tests/packages/holo-daemon.nix` | `nixos/tests/holo-daemon-modular.nix` | verbatim | |
 | `integrations/nixos/tests/packages/snid.nix` | `nixos/tests/snid.nix` | verbatim | |
 | `integrations/nixos/tests/packages/tlshd.nix` | `nixos/tests/tlshd.nix` | verbatim | |
@@ -97,6 +98,7 @@ in the pinned nixpkgs.
 | `modular-services/autopush-rs/service-autoendpoint.nix` | `pkgs/by-name/au/autopush-rs/service-autoendpoint.nix` | modified | The systemd hardening moves to `integrations/nixos/modular/autopush-rs/autoendpoint/system.nix`, leaving the service itself naming no service manager. |
 | `modular-services/easytier/service.nix` | `pkgs/by-name/ea/easytier/service.nix` | verbatim | |
 | `modular-services/ghostunnel/service.nix` | `pkgs/by-name/gh/ghostunnel/service.nix` | modified | The systemd definitions, including the credential flags `mainExecStart` appends, move to `integrations/nixos/modular/ghostunnel/default/system.nix`. |
+| `modular-services/git-pages/service.nix` | `pkgs/by-name/gi/git-pages/service.nix` | verbatim | |
 | `modular-services/holo-daemon/service.nix` | `pkgs/by-name/ho/holo-daemon/service.nix` | verbatim | |
 | `modular-services/ktls-utils/service.nix` | `pkgs/by-name/kt/ktls-utils/service.nix` | modified | The systemd definitions move to `integrations/nixos/modular/ktls-utils/default/system.nix`. |
 | `modular-services/snid/service.nix` | `pkgs/by-name/sn/snid/service.nix` | modified | The systemd definitions move to `integrations/nixos/modular/snid/default/system.nix`. |
@@ -132,6 +134,13 @@ in the pinned nixpkgs.
   CI plumbing; neither the ownership file nor that test is vendored here.
 - `nixos/modules/system/service/README.md`. Superseded by
   [`integrations/nixos/README.md`](./integrations/nixos/README.md).
+- `pkgs/by-name/gi/git-pages/package.nix`. Its `passthru.services.default`
+  is the wiring that lives in
+  [`modular-services/default.nix`](./modular-services/default.nix) here. The
+  same file also patches the package so the server creates its storage root
+  with `os.MkdirAll`, which the service module depends on; the `git-pages`
+  entry in `modular-services/default.nix` applies that patch to the pinned
+  package until nixpkgs carries it.
 
 [nixpkgs]: https://github.com/NixOS/nixpkgs
 [Home Manager]: https://github.com/nix-community/home-manager
