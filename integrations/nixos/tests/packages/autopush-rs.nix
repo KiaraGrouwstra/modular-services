@@ -1,6 +1,3 @@
-# Non-module dependencies (`importApply`)
-{ modularServices }:
-
 { lib, ... }:
 {
   _class = "nixosTest";
@@ -20,7 +17,7 @@
         };
         system.services.autopush-autoconnect = {
           imports = [
-            (modularServices.autopush-rs-autoconnect pkgs)
+            config.modularServices.autopush-rs.autoconnect
           ];
           autoconnect.settings = {
             #do not use this key in production!!!
@@ -31,7 +28,7 @@
         };
         system.services.autopush-autoendpoint = {
           imports = [
-            (modularServices.autopush-rs-autoendpoint pkgs)
+            config.modularServices.autopush-rs.autoendpoint
           ];
           autoendpoint.settings = {
             #do not use this key in production!!!

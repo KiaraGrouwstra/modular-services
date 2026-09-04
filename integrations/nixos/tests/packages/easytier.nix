@@ -1,6 +1,3 @@
-# Non-module dependencies (`importApply`)
-{ modularServices }:
-
 { lib, ... }:
 {
   _class = "nixosTest";
@@ -11,7 +8,7 @@
     let
       genPeer =
         hostConfig:
-        { pkgs, ... }:
+        { config, ... }:
         lib.mkMerge [
           {
             networking.useDHCP = false;
@@ -25,7 +22,7 @@
             ];
 
             system.services."easytier-default" = {
-              imports = [ (modularServices.easytier pkgs) ];
+              imports = [ config.modularServices.easytier.default ];
               easytier.settings = {
                 instance_name = "default";
                 dev_name = "et_def";
@@ -42,7 +39,7 @@
     in
     {
       relay =
-        { pkgs, ... }@args:
+        { config, ... }@args:
         lib.mkMerge [
           (genPeer {
             virtualisation.vlans = [
@@ -76,7 +73,7 @@
             networking.firewall.allowedUDPPorts = [ 11020 ];
 
             system.services."easytier-second" = {
-              imports = [ (modularServices.easytier pkgs) ];
+              imports = [ config.modularServices.easytier.default ];
               easytier = {
                 peers = [
                   "tcp://192.168.1.11:11010"

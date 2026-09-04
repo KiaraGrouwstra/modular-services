@@ -1,6 +1,3 @@
-# Non-module dependencies (`importApply`)
-{ modularServices }:
-
 { lib, pkgs, ... }:
 let
   runWithOpenSSL =
@@ -34,10 +31,10 @@ in
 
   nodes = {
     server =
-      { pkgs, ... }:
+      { config, ... }:
       {
         system.services.tlshd = {
-          imports = [ (modularServices.ktls-utils pkgs) ];
+          imports = [ config.modularServices.ktls-utils.default ];
           tlshd.settings = {
             "authenticate.server" = {
               "x509.certificate" = toString serverCert;
@@ -59,10 +56,10 @@ in
       };
 
     client =
-      { pkgs, ... }:
+      { config, ... }:
       {
         system.services.tlshd = {
-          imports = [ (modularServices.ktls-utils pkgs) ];
+          imports = [ config.modularServices.ktls-utils.default ];
           tlshd.settings = {
             "authenticate.client" = {
               "x509.certificate" = toString clientCert;

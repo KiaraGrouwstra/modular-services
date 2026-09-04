@@ -1,6 +1,3 @@
-# Non-module dependencies (`importApply`)
-{ modularServices }:
-
 { lib, ... }:
 {
   _class = "nixosTest";
@@ -8,10 +5,10 @@
 
   nodes = {
     machine =
-      { pkgs, ... }:
+      { config, ... }:
       {
         system.services.snid = {
-          imports = [ (modularServices.snid pkgs) ];
+          imports = [ config.modularServices.snid.default ];
           snid = {
             listen = [ "tcp:8443" ];
             mode = "tcp";

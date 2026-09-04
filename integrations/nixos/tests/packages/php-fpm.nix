@@ -1,9 +1,6 @@
 # Run with:
 #   nix build .#checks.<system>.nixos-pkg-php-fpm
 
-# Non-module dependencies (`importApply`)
-{ modularServices }:
-
 { lib, php, ... }:
 {
   name = "php-${php.version}-fpm-modular-nginx-test";
@@ -39,7 +36,7 @@
       };
 
       system.services.php-fpm = {
-        imports = [ (modularServices.php pkgs) ];
+        imports = [ config.modularServices.php.default ];
         php-fpm = {
           package = php;
           settings = {

@@ -12,6 +12,7 @@ so the two cannot both be live.
 | `default.nix` | What a NixOS configuration imports (`nixosModules.default`): the disable plus the implementation. |
 | `disable-upstream.nix` | `disabledModules` for the in-tree copy (`nixosModules.disableUpstream`). |
 | `systemd/` | The systemd implementation (`nixosModules.systemServices`): `system.services`, the systemd unit options, and `configData` paths. One directory per service manager, so a second would sit beside it. |
+| `modular/` | The NixOS variant of each service: what `modular-services/` cannot say because it is not systemd. Registered as `config.modularServices.<pkg>.<svc>`. |
 | `documentation.nix` | Renders `doc/registry.nix` into `documentation.nixos.extraModules` (`nixosModules.documentation`), replacing the upstream registry the disable removes. |
 | `lib.nix` | `evalModules` / `evalSystem` / `runTest`, reproducing what `nixos/tests/all-tests.nix` gives in-tree tests. |
 | `tests/` | The integration's test set. |
@@ -19,6 +20,25 @@ so the two cannot both be live.
 `systemd/user.nix` is a stub, here as upstream. Per-user services arrive as
 `users.users.<name>.services` in this same evaluation rather than as a second
 integration; [`../README.md`](../README.md) explains what makes an integration.
+
+## Service variants
+
+A module under [`../../modular-services/`](../../modular-services) says what a
+service is. It names no service manager, so it cannot say that `tlshd` wants
+`remote-fs.target` or runs as a `DynamicUser`. That half lives here, in
+[`modular/<pkg>/<svc>/`](./modular): `default.nix` imports the service itself out
+of `modularServices.<pkg>`, and `system.nix` adds the systemd definitions.
+
+[`modular/default.nix`](./modular/default.nix) registers the pairs, and
+[`systemd/defaults.nix`](./systemd/defaults.nix) makes that registry the default
+of `config.modularServices.<pkg>.<svc>` -- so a configuration can substitute its
+own variant, and a test reaches the same one a real system gets.
+
+The registry holds *paths*, not `import`s of paths. An `import` yields a bare
+function, which carries no `_file`, so the variant's own file drops out of
+anything keyed on where a definition came from: `meta.maintainers`, option
+attribution, error messages. `checks.nixos-modular-variants` asserts that it
+does not.
 
 ## Usage
 
@@ -31,9 +51,9 @@ integration; [`../README.md`](../README.md) explains what makes an integration.
       modules = [
         modular-services.nixosModules.default
         (
-          { pkgs, ... }:
+          { config, ... }:
           {
-            system.services.tlshd.imports = [ (modular-services.modularServices.ktls-utils pkgs) ];
+            system.services.tlshd.imports = [ config.modularServices.ktls-utils.default ];
           }
         )
       ];
@@ -46,13 +66,13 @@ Without flakes, the same thing from [`../../default.nix`](../../default.nix),
 with `src` however you fetched this repository:
 
 ```nix
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   modular-services = import src { inherit (pkgs) lib; };
 in
 {
   imports = [ modular-services.nixosModules.default ];
-  system.services.tlshd.imports = [ (modular-services.modularServices.ktls-utils pkgs) ];
+  system.services.tlshd.imports = [ config.modularServices.ktls-utils.default ];
 }
 ```
 
@@ -72,6 +92,6 @@ false.
 
 **`pkgs.<pkg>.services.default`.** Package `passthru` is untouched, so that
 attribute still resolves to the service module vendored in nixpkgs. Use
-`modularServices.<pkg> pkgs`, which is what every test here does, or apply
-`overlays.passthruServices` if you have existing code written against the
+`config.modularServices.<pkg>.<svc>`, which is what every test here does, or
+apply `overlays.passthruServices` if you have existing code written against the
 `passthru` path.

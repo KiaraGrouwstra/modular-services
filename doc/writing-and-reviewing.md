@@ -32,7 +32,7 @@ When reviewing a modular service, you should check the following. Details and ra
 - [ ] Has a VM test, in every integration it claims to support (at minimum `integrations/nixos/tests/packages/`)
 - [ ] Registered in that integration's `tests/default.nix`
 - [ ] Has a `meta.maintainers` attribute
-- [ ] Systemd-specific definitions are behind `optionalAttrs (options ? systemd)` to promote portability.
+- [ ] Systemd-specific definitions live in a NixOS variant, not in the service itself, to promote portability.
 - [ ] `_class = "service"`
 - [ ] Imports nothing from `lib/services`, so that it stays integration-agnostic
 - [ ] Has an entry in `modular-services/default.nix` whose `<ns>.package` default comes from the providing package
@@ -45,8 +45,18 @@ When reviewing a modular service, you should check the following. Details and ra
 ### VM test {#writing-and-reviewing-vm-test}
 
 For NixOS, add the test to [`integrations/nixos/tests/packages/`](https://github.com/kiaragrouwstra/modular-services/blob/main/integrations/nixos/tests/packages) and register it in [`integrations/nixos/tests/default.nix`](https://github.com/kiaragrouwstra/modular-services/blob/main/integrations/nixos/tests/default.nix); the surrounding tests there are worked examples.
-A test file takes `modularServices` as a non-module dependency and imports `(modularServices.<name> pkgs)` into the service.
+A test file imports `config.modularServices.<pkg>.<svc>` into the service, so that it exercises the same variant a NixOS configuration gets.
 Best practices: keep tests minimal and focused (boot a VM, enable the service, and assert a basic request succeeds). For general guidance, see the [NixOS Tests chapter](https://nixos.org/manual/nixos/unstable/#sec-nixos-tests).
+
+### Integration-specific definitions {#writing-and-reviewing-variants}
+
+A service module under [`modular-services/`](https://github.com/kiaragrouwstra/modular-services/blob/main/modular-services) declares what the service *is*: its options, and `process.argv`.
+Anything that only one service manager understands -- unit dependencies, `serviceConfig`, credentials -- belongs to a variant of that service, in the integration that understands it.
+For NixOS that is `integrations/nixos/modular/<pkg>/<svc>/`, a pair of files: `default.nix` imports the pure module out of `modularServices.<pkg>`, and `system.nix` adds the systemd definitions.
+Register the pair in [`integrations/nixos/modular/default.nix`](https://github.com/kiaragrouwstra/modular-services/blob/main/integrations/nixos/modular/default.nix), as a *path* rather than an `import`, so that the variant keeps its own file attribution; `checks.nixos-modular-variants` asserts that.
+
+Keeping the two apart is what lets a service be loaded into a configuration manager that has no `systemd` option tree at all.
+A service that must vary its own definitions per manager can still do so inline, with `lib.optionalAttrs (options ? systemd)`; see [Portability](#modular-service-portability).
 
 ### `_class = "service"` {#writing-and-reviewing-class}
 

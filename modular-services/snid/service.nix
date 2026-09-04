@@ -5,7 +5,6 @@
 {
   lib,
   config,
-  options,
   ...
 }:
 let
@@ -159,17 +158,5 @@ in
       (map (v: { listen = v; }) cfg.listen)
       (map (v: { backend-cidr = v; }) cfg.backendCidrs)
     ];
-  }
-  // lib.optionalAttrs (options ? systemd) {
-    systemd.service = {
-      after = [ "network.target" ];
-      wants = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Restart = "on-failure";
-        DynamicUser = true;
-        AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
-      };
-    };
   };
 }

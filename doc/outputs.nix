@@ -37,10 +37,12 @@
   # them here.
   generated = {
     modularServices = ''
-      `modularServices.<pkg> pkgs` yields a module to import into an
-      integration's services option, and is the canonical way to consume a
-      service. `pkgs.<pkg>.services.*` still resolves to the nixpkgs copy
-      unless `overlays.passthruServices` is applied.
+      `modularServices.<pkg> pkgs` yields the service itself, naming no
+      service manager. A NixOS configuration imports
+      `config.modularServices.<pkg>.<svc>` instead, which is this plus the
+      systemd definitions the integration adds. `pkgs.<pkg>.services.*` still
+      resolves to the nixpkgs copy unless `overlays.passthruServices` is
+      applied.
     '';
     checks = ''
       Every test, integration and repo-level alike. `kind` splits the CI

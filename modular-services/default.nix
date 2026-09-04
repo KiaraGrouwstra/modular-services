@@ -18,10 +18,13 @@
 # is strictly more permissive, and the review checklist only requires that the
 # default come from the providing package.
 #
-# `modularServices.<pkg>` is the canonical way to consume a service from this
-# repo. `overlays.passthruServices` exists as an opt-in compatibility shim for
-# code written against `pkgs.<pkg>.services.*`; see ../overlays/README section
-# in ../README.md for why it is not the default.
+# These are the services themselves, and nothing more: an integration adds what
+# its service manager needs on top. On NixOS that is
+# `integrations/nixos/modular/<pkg>/<svc>/`, reached as
+# `config.modularServices.<pkg>.<svc>`, which is how a NixOS configuration
+# consumes a service. `overlays.passthruServices` exists as an opt-in
+# compatibility shim for code written against `pkgs.<pkg>.services.*`; see
+# ../overlays/README section in ../README.md for why it is not the default.
 { lib }:
 
 let
@@ -60,7 +63,7 @@ in
   php = pkgs: {
     imports = [
       (importApply ./php/service.nix {
-        inherit (pkgs) formats coreutils;
+        inherit (pkgs) formats;
       })
     ];
     php-fpm.package = lib.mkDefault pkgs.php;
