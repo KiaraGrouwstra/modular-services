@@ -65,13 +65,13 @@ in the pinned nixpkgs.
 
 | repo path | nixpkgs path | state | reason |
 |---|---|---|---|
-| `lib/services/default.nix` | `lib/services/lib.nix` | modified | Renamed to `default.nix` so `import ./lib/services` resolves. The `configure` docstring is retargeted from a `nix-darwin` sketch to the `integrations/<name>/` contract, which makes it the how-to-add-an-integration guide. |
-| `lib/services/service.nix` | `lib/services/service.nix` | modified | The two out-of-tree imports point at `./vendor/` instead of `../../modules/generic/` and `../../nixos/modules/misc/`. |
+| `lib/services/default.nix` | `lib/services/lib.nix` | modified | Renamed to `default.nix` so `import ./lib/services` resolves. The `configure` docstring is retargeted from a `nix-darwin` sketch to the `integrations/<name>/` contract, which makes it the how-to-add-an-integration guide. Names `importService` from the portable layer itself, where upstream adds `lib.importService` to the nixpkgs `lib`. |
+| `lib/services/service.nix` | `lib/services/service.nix` | modified | The two out-of-tree imports point at `./vendor/` instead of `../modules/generic/`. |
 | `lib/services/config-data.nix` | `lib/services/config-data.nix` | modified | Test-path comment retargeted to `integrations/nixos/tests/etc/test.nix`. |
 | `lib/services/config-data-item.nix` | `lib/services/config-data-item.nix` | modified | Test-path comment retargeted to `integrations/nixos/tests/etc/test.nix`. |
 | `lib/services/test.nix` | `lib/services/test.nix` | modified | Takes `lib` as a parameter instead of `import ../.`, so it runs against whichever `lib` the consumer pins. Imports `./.` rather than `./lib.nix`. |
 | `lib/services/vendor/meta-maintainers.nix` | `modules/generic/meta-maintainers.nix` | verbatim | `lib`-only dependency of the portable layer; vendored so `lib/services` needs nothing outside itself. |
-| `lib/services/vendor/assertions.nix` | `nixos/modules/misc/assertions.nix` | verbatim | `lib`-only dependency of the portable layer; vendored so `lib/services` needs nothing outside itself. |
+| `lib/services/vendor/assertions.nix` | `lib/modules/generic/assertions.nix` | verbatim | `lib`-only dependency of the portable layer; vendored so `lib/services` needs nothing outside itself. Upstream keeps this next to `meta-maintainers.nix` under `lib/modules/generic/`, where it is class-agnostic (`_class = null`) rather than a NixOS module; the pinned nixpkgs still has the NixOS-only copy at `nixos/modules/misc/assertions.nix`. |
 | `compliance/default.nix` | `pkgs/build-support/testers/modular-service-compliance.nix` | modified | Two doc-link comments retargeted from the nixpkgs manual to `compliance/README.md`. |
 | `integrations/nixos/systemd/system.nix` | `nixos/modules/system/service/systemd/system.nix` | modified | The portable-layer import becomes `../../../lib/services`. This is the single line that made the whole in-tree `lib/services` reachable from a NixOS evaluation. |
 | `integrations/nixos/systemd/service.nix` | `nixos/modules/system/service/systemd/service.nix` | verbatim | |
