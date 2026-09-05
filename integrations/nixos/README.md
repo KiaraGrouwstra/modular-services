@@ -17,9 +17,32 @@ so the two cannot both be live.
 | `lib.nix` | `evalModules` / `evalSystem` / `runTest`, reproducing what `nixos/tests/all-tests.nix` gives in-tree tests. |
 | `tests/` | The integration's test set. |
 
-`systemd/user.nix` is a stub, here as upstream. Per-user services arrive as
-`users.users.<name>.services` in this same evaluation rather than as a second
-integration; [`../README.md`](../README.md) explains what makes an integration.
+`systemd/` splits into `system/` and `user/`, one per systemd manager instance.
+Per-user services are `users.users.<name>.services`, in this same evaluation
+rather than as a second integration; [`../README.md`](../README.md) explains what
+makes an integration.
+
+## Per-user services
+
+`users.users.<name>.services` is the same service submodule as
+`system.services`, evaluated once per user so that `configData` paths and the
+`default.target` default can be baked in. It reaches systemd twice over.
+
+The unit itself is global: it lands in `systemd.user.services` under
+`<user>--<service>`, so two users may both have a `hello` service without
+colliding, and it is generated with `wantedBy` forced empty so that a global
+user unit does not start for everyone. Auto-start is then wired per user, by a
+`user-services-<name>` package added to `users.users.<name>.packages`. That
+package carries `share/systemd/user/<service>.service` as a symlink to the
+global unit and `share/systemd/user/default.target.wants/<service>.service`
+pointing at it, which is what a user's systemd instance finds through
+`$XDG_DATA_DIRS`. The local name is the unprefixed one, so a user sees
+`hello.service`.
+
+`configData` follows the same profile: paths are
+`/etc/profiles/per-user/<name>/etc/xdg/user-services/<service>/<file>`, which is
+in `$XDG_CONFIG_DIRS`, and the entries are symlinked into the same package
+rather than into `environment.etc`.
 
 ## Service variants
 

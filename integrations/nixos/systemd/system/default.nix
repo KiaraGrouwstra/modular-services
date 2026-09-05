@@ -15,9 +15,9 @@ let
     mapAttrsToList
     ;
 
-  portable-lib = import ../../../lib/services { inherit lib; };
+  portable-lib = import ../../../../lib/services { inherit lib; };
 
-  modularServices = import ../../../modular-services { inherit lib; };
+  modularServices = import ../../../../modular-services { inherit lib; };
 
   dash =
     before: after:
@@ -65,7 +65,7 @@ let
   modularServiceConfiguration = portable-lib.configure {
     serviceManagerPkgs = pkgs;
     extraRootModules = [
-      ./service.nix
+      ../service.nix
       ./config-data-path.nix
     ];
     extraRootSpecialArgs = {
@@ -81,7 +81,7 @@ in
   _class = "nixos";
 
   imports = [
-    ./defaults.nix
+    ../defaults.nix
   ];
 
   # First half of the magic: mix systemd logic into the otherwise abstract services
