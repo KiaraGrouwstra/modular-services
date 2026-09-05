@@ -33,10 +33,12 @@ answers, one level deep.
 
 Flat bounds `integrations/` itself, not what an integration contains. The
 implementation sits one level down, in a directory named for the service manager
-it targets: `integrations/nixos/systemd/`. A framework that grows a second
-manager -- NixOS on finit, say -- gets a sibling there rather than a second
-integration, since it shares both answers, and `integrations/nixos/default.nix`
-is where the choice between them is made.
+it targets: `integrations/nixos/systemd/`. Beside it, `integrations/nixos/modular/`
+holds the *variants*: for each service, the definitions that only that manager
+understands, registered as `config.modularServices.<pkg>.<svc>`. A framework
+that grows a second manager -- NixOS on finit, say -- gets a sibling of both
+there rather than a second integration, since it shares both answers, and
+`integrations/nixos/default.nix` is where the choice between them is made.
 
 The rule is about those two answers rather than about an axis, because the axes
 are not knowable up front. Three are visible already and they do not nest: the
@@ -47,10 +49,10 @@ Whether a permutation is then a second integration, a second implementation
 inside this one, or a variant key is worth deciding against something that runs.
 Four small files per integration is what keeps that decision cheap to revisit.
 
-Two in-progress upstream changes show the rule applied, and it lands on opposite
-sides of them.
+Two upstream changes show the rule applied, and it lands on opposite sides of
+them.
 
-The first declares `users.users.<name>.services` as a NixOS module siphoning into
+The first, in progress, declares `users.users.<name>.services` as a NixOS module siphoning into
 `systemd.user.services`, reusing the same `service.nix` and reading
 `config.systemd.package` from the same evaluation as `system.services`. An
 `integrations/nixos-user/` would restate all four contract files to describe one
@@ -58,22 +60,23 @@ evaluation, and would double the NixOS test runs to prove it twice. It is a
 second option surface inside `integrations/nixos/`, nested under `systemd/` as
 `system/` and `user/` the way upstream nests it.
 
-The second splits each service module in two: a pure half, and a variant holding
-what only holds in one place -- `DynamicUser`, `AmbientCapabilities`,
-`wantedBy = [ "multi-user.target" ]` -- enumerated in a registry keyed
-`<variant>.<pkg>.<service>`, with `system` today and `user` expected beside it.
-Upstream calls that first key an environment; by the rule above it is not an
+The second, landed here, splits each service module in two: a pure half in
+`modular-services/`, and a variant holding what only holds in one place --
+`DynamicUser`, `AmbientCapabilities`, `wantedBy = [ "multi-user.target" ]` --
+enumerated in a registry keyed `<environment>.<pkg>.<service>`, with `system`
+today and `user` expected beside it. The environment key is not an
 integration, because it selects a service module rather than an evaluation, and
 it selects along the privilege level of a systemd unit, which cuts *across*
 frameworks. Home Manager emits systemd user units too, so a `user` variant is one
-both it and NixOS want. An `integrations/nixos-user/` would bury it in one
-framework's directory, for the other to reach into.
+both it and NixOS want.
 
-Variants therefore belong beside the services they vary, in
-`modular-services/`, and an integration owns the *registry*: which variant key
-it consumes, and which services it claims to support there. Upstream keeps its
-registry under `nixos/modules/`, having one integration to serve; that placement
-is the one part of its shape that does not carry over.
+The variants and their registry live in the integration whose service manager
+they speak for, `integrations/nixos/modular/`, mirroring upstream's
+`nixos/modules/system/service/modular/`; see
+[`nixos/README.md`](./nixos/README.md). What that placement leaves open is how a
+second integration on the same service manager shares a variant rather than
+reaching into `integrations/nixos/` for it. Worth deciding against something
+that runs, when Home Manager arrives.
 
 Home Manager decides the other way on the same reasoning. It also targets systemd
 user units, and it is still its own integration, because a Home Manager
@@ -90,11 +93,11 @@ configuration is evaluated and tested through an entirely different entry point.
   `callReload`, and may add its own manager-specific assertions on top;
   `integrations/nixos/tests/compliance.nix` shows both halves.
 - **The services** (`modular-services/`) are shared: every one declares
-  `_class = "service"` and none imports anything from `lib/services`. A service
-  that needs settings holding at only one privilege level gets a variant beside
-  the pure module, not a copy inside an integration; see "What makes an
-  integration" above. An integration that cannot run a given service simply does
-  not test it.
+  `_class = "service"`, none imports anything from `lib/services`, and none
+  names a service manager. What a service needs from one manager is a variant in
+  the integration that understands it, `integrations/nixos/modular/<pkg>/<svc>/`
+  for NixOS, not a copy of the service; see "What makes an integration" above.
+  An integration that cannot run a given service simply does not test it.
 
 ## Where to start
 
@@ -106,7 +109,7 @@ sketch. Then mirror `integrations/nixos/` for the other three files.
 Home Manager is the intended next integration; it slots in as
 `integrations/home-manager/` under the same four-file contract. [finix], which
 runs finit as pid 1, is the other obvious candidate: it already carries its own
-integration, and `modular-services/php/service.nix` keeps upstream's dormant
-`lib.optionalAttrs (options ? finit)` branch for exactly that manager.
+integration, and the `finit` half of each service would sit beside the systemd
+one as a second variant.
 
 [finix]: https://github.com/finix-community/finix

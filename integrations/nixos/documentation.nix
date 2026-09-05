@@ -27,7 +27,7 @@ let
       type = lib.types.submoduleWith {
         modules = [ serviceModule ];
       };
-      description = "This is a [modular service](https://nixos.org/manual/nixos/unstable/#modular-services), which can be imported into a NixOS configuration using the [`system.services`](https://search.nixos.org/options?channel=unstable&show=system.services&query=modular+service) option.";
+      description = "This is a [modular service](https://nixos.org/manual/nixos/unstable/#modular-services), which can be imported into a NixOS configuration using the [`system.services`](https://search.nixos.org/options?channel=unstable&show=system.services&query=modular+service) option. `config.modularServices.<pkg>.<svc>` is this service together with the systemd definitions the NixOS integration adds; `modularServices.<name> pkgs` is the service on its own.";
     };
 
   modularServicesModule = {

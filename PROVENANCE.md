@@ -51,12 +51,12 @@ with the reason; those are the only places where a divergence exists at all.
 
 No `SPDX-License-Identifier` line either. Those earn their keep when files in one
 tree carry different licences; here every file is MIT under the same notice, so a
-header per file would restate `LICENSE` 53 times and still not say which upstream
-the file came from -- which is the question this table answers.
+header per file would restate `LICENSE` once per file and still not say which
+upstream the file came from -- which is the question this table answers.
 
 No per-row revision either. [`flake.lock`](./flake.lock) records the pin, and a
-second copy per row would only be another thing to keep in step, touching all 39
-rows on every re-vendor. Note that the pin is the `nixos-unstable` channel, which
+second copy per row would only be another thing to keep in step, touching every
+row on every re-vendor. Note that the pin is the `nixos-unstable` channel, which
 advances only once Hydra has built it and so trails the nixpkgs default branch by
 a few days: a file vendored from the branch can be *newer* than its counterpart
 in the pinned nixpkgs.

@@ -13,13 +13,13 @@
 #
 # ```nix
 # # in a NixOS configuration, with `src` however you fetched this repository
-# { pkgs, ... }:
+# { config, pkgs, ... }:
 # let
 #   modular-services = import src { inherit (pkgs) lib; };
 # in
 # {
 #   imports = [ modular-services.nixosModules.default ];
-#   system.services.tlshd.imports = [ (modular-services.modularServices.ktls-utils pkgs) ];
+#   system.services.tlshd.imports = [ config.modularServices.ktls-utils.default ];
 # }
 # ```
 {
@@ -77,8 +77,10 @@ let
     };
 
     /**
-      The canonical way to consume a service: `modularServices.<pkg> pkgs` yields a
-      module to import into `system.services.<name>`.
+      The services on their own: `modularServices.<pkg> pkgs` yields the module
+      that names no service manager, for an integration to build on. A NixOS
+      configuration imports `config.modularServices.<pkg>.<svc>` instead, the
+      variant `integrations/nixos/modular/` adds the systemd definitions to.
     */
     inherit modularServices;
 

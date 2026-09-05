@@ -3,7 +3,9 @@
 # override anything.
 #
 # `modularServices.<name> pkgs` is the same value; this overlay only saves
-# threading the flake through to the place that needs a service module.
+# threading the flake through to the place that needs a service module. It is
+# the service on its own, without systemd definitions: a NixOS configuration
+# imports `config.modularServices.<pkg>.<svc>` instead.
 { modularServices }:
 
 final: _prev: {

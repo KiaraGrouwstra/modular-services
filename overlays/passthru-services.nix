@@ -2,7 +2,9 @@
 # service modules instead of the ones vendored in nixpkgs.
 #
 # Not part of `overlays.default`, and not used by any test in this repo. The
-# canonical API is `modularServices.<pkg> pkgs`, for three reasons:
+# canonical API is `modularServices.<pkg> pkgs` for the service on its own, and
+# `config.modularServices.<pkg>.<svc>` for the NixOS variant of it, for three
+# reasons:
 #
 #   1. `passthru.services` is upstream's attribute. Silently swapping it makes
 #      it impossible to A/B a service against the nixpkgs copy, which is much
@@ -41,8 +43,9 @@ in
 # `passthru.overrideAttrs`, and `php.buildEnv` / `php.withExtensions`
 # regenerate `passthru.services` from `mkBuildEnv`. An overlay entry here would
 # therefore be silently discarded by exactly the wrappers that real
-# configurations use. Consume `modularServices.php pkgs` instead; that is the
-# decisive reason `modularServices` is the canonical API rather than an overlay.
+# configurations use. Consume `modularServices.php pkgs`, or on NixOS
+# `config.modularServices.php.default`, instead; that is the decisive reason
+# `modularServices` is the canonical API rather than an overlay.
 lib.foldl' lib.mergeAttrs { } [
   (withServices "easytier" { default = modularServices.easytier final; })
   (withServices "ghostunnel" { default = modularServices.ghostunnel final; })

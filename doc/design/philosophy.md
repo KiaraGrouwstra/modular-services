@@ -245,17 +245,21 @@ See [nixpkgs#469450][mainexecstart].
 
 ## Declare a difference rather than hiding it
 
-Note that wee are considering alternatives for this `options ? ...` approach, such as letting the service manager integration extend the module set ([nixpkgs#540863]).
-The following two paragraphs describe the status quo.
+Portability here works by keeping the manager-specific definitions out of the
+service module. A module under `modular-services/` says what a service is, and
+what only holds under one service manager lives in a variant owned by the
+integration that understands it: `integrations/nixos/modular/<pkg>/<svc>/system.nix`
+for NixOS on systemd, registered as `config.modularServices.<pkg>.<svc>`
+([nixpkgs#540863]). The service is then portable by construction.
 
-Portability here works by feature detection on the definition side.
-A service wraps its systemd definitions in `lib.optionalAttrs (options ? systemd)`,
-and they are ignored where that option does not exist.
-The `php` service keeps a dormant `options ? finit` branch for the same reason.
+The older escape hatch remains available for a definition that varies inline:
+feature detection on the definition side, wrapping systemd definitions in
+`lib.optionalAttrs (options ? systemd)` so that they fall away where that option
+does not exist.
 
-This is deliberately not an abstraction that papers over the managers. It is a
-way for a definition to say what it knows about, and for the parts it does not
-know about to fall away.
+Neither is an abstraction that papers over the managers. Both are a way for a
+definition to say what it knows about, and for the parts it does not know about
+to fall away.
 
 The principle of declaring differences also decides smaller questions.
 Readiness is modelled as a negotiation in which the service says which notification dialect it can emit
