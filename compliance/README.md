@@ -3,7 +3,8 @@
 Compliance suite for [modular service](../doc/modular-services.md) integrations.
 
 Tests that a service manager integration correctly handles the portable modular
-services contract: `process.argv`, sub-services, assertions, and warnings.
+services contract: `process.argv`, `process.environment` (including `null`
+values that unset a variable), sub-services, assertions, and warnings.
 
 The suite is integration-agnostic. Each integration under
 [`integrations/`](../integrations) instantiates it once, supplying the four
