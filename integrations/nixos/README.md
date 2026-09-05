@@ -76,6 +76,26 @@ in
 }
 ```
 
+## Applying `configData` changes
+
+A `configData` entry becomes an `environment.etc` file, so a change to one is
+part of the system closure and is on disk the moment a configuration is
+activated. Whether the running service is told about it is
+`applyConfigDataChanges`, which the portable layer declares next to `configData`
+itself: "this service picks up configuration changes on its own" is a property
+of the program, not of the service manager. It is a `bool` rather than a
+reload-or-restart enum, so it says only *whether* changes should be applied and
+leaves *how* to the service manager. A single noisy file opts out on its own
+through `configData.<name>.applyChanges`, which defaults to `null` and so
+inherits the service-level setting.
+
+Here, *how* is a trigger on the service's primary unit: `reloadTriggers` when
+the unit declares an `ExecReload`, and `restartTriggers` when it does not.
+`switch-to-configuration-ng` does not fall back from reload to restart --
+`X-Reload-Triggers` on a unit without `ExecReload=` makes activation exit with
+code 4 -- so the choice is made when the unit is generated. Sub-services get
+their triggers from their own `configData`, not from the parent's.
+
 ## Known residue
 
 Two things survive the disable. Both are documented rather than fixed, because
