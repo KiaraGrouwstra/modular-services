@@ -77,6 +77,11 @@ in
     tlshd.package = lib.mkDefault pkgs.ktls-utils;
   };
 
+  redlib = pkgs: {
+    imports = [ (importApply ./redlib/service.nix { }) ];
+    redlib.package = lib.mkDefault pkgs.redlib;
+  };
+
   snid = pkgs: {
     imports = [ (importApply ./snid/service.nix { }) ];
     snid.package = lib.mkDefault pkgs.snid;
