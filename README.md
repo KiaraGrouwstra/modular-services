@@ -133,7 +133,7 @@ whatever the system, and a flake publishes them unkeyed.
 | `lib/services/` | The portable layer. No nixpkgs paths, no `pkgs` module argument. |
 | `compliance/` | The integration-agnostic compliance suite each integration instantiates. |
 | `integrations/` | One directory per integration. See [`integrations/README.md`](./integrations/README.md). |
-| `modular-services/` | The services themselves: `_class = "service"`, integration-agnostic, one directory per providing package. |
+| `modular-services/` | The services themselves: `_class = "service"`, integration-agnostic, one directory per providing package. What each needs from systemd is a variant under `integrations/nixos/modular/`. |
 | `doc/` | The manual: its hand-written chapters, and the lists its generated ones render -- the services whose options it documents, and what each output is for. One book about the subsystem, not one per integration; each integration renders the service list its own way. |
 | `overlays/`, `ci/` | Overlays, and the test/matrix wiring. |
 | `default.nix`, `flake.nix` | Every output, and the flake wrapper that keys the per-system ones by system. |

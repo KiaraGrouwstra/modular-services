@@ -17,8 +17,9 @@
     "lib.mkComplianceSuite" = "The integration-agnostic compliance suite, for a package set.";
 
     "nixosModules.default" =
-      "This repository's implementation, plus the disable of the nixpkgs copy. The one to import.";
-    "nixosModules.systemServices" = "Just the systemd implementation, without the disable.";
+      "This repository's implementation and the `modularServices` variant registry, plus the disable of the nixpkgs copy. The one to import.";
+    "nixosModules.systemServices" =
+      "Just the systemd implementation and the variant registry, without the disable.";
     "nixosModules.disableUpstream" = "Just the disable, without the implementation.";
     "nixosModules.documentation" =
       "Replacement for the option-documentation registry that the disable removes.";

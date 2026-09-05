@@ -73,6 +73,16 @@ let
     lib.attrNames self.modularServices
   );
 
+  # The NixOS variants, read from the registry the `modularServices` option
+  # defaults to.
+  variantModules = lib.concatStringsSep "\n" (
+    lib.concatLists (
+      lib.mapAttrsToList (
+        pkg: svcs: map (svc: "- `config.modularServices.${pkg}.${svc}`") (lib.attrNames svcs)
+      ) (import ../integrations/nixos/modular).system
+    )
+  );
+
   checkRows = lib.concatMapStringsSep "\n" (
     n:
     let
@@ -113,6 +123,10 @@ pkgs.writeText "flake-attributes.md" ''
   ${oneLine generated.modularServices}
 
   ${serviceModules}
+
+  The NixOS variant of each, which a configuration imports:
+
+  ${variantModules}
 
   ## ${groups.checks.title} {#${groups.checks.anchor}}
 
