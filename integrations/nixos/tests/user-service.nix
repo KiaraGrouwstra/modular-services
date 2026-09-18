@@ -43,10 +43,8 @@
       "test -L /etc/profiles/per-user/alice/share/systemd/user/default.target.wants/hello.service"
     )
 
-    # The profile symlink targets the global (prefixed) unit file.
-    machine.succeed(
-      "readlink /etc/profiles/per-user/alice/share/systemd/user/hello.service | grep -q alice--hello"
-    )
+    # The unit is in the profile of alice alone, not in /etc/systemd/user.
+    machine.fail("ls /etc/systemd/user | grep -q -- 'alice--'")
 
     # hello.service should have been auto-started via default.target.wants.
     machine.wait_until_succeeds(

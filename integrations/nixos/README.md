@@ -30,38 +30,35 @@ baked in. The integration sets `defaultWantedBy` to `default.target`, the target
 of a per-user systemd instance, where the system integration sets
 `multi-user.target`. A service reaches systemd twice over.
 
-The unit itself is global: it lands in `systemd.user.services` under
-`<user>--<service>`, so two users may both have a `hello` service without
-colliding, and it is generated with `wantedBy` forced empty so that a global
-user unit does not start for everyone. Auto-start is then wired per user, by a
-`user-services-<name>` package added to `users.users.<name>.packages`. That
-package carries `share/systemd/user/<service>.service` as a symlink to the
-global unit and `share/systemd/user/default.target.wants/<service>.service`
-pointing at it, which is what a user's systemd instance finds through
-`$XDG_DATA_DIRS`. The local name is the unprefixed one, so a user sees
-`hello.service`.
+A user reaches their services through a `user-services-<name>` package added to
+`users.users.<name>.packages`. That package carries
+`share/systemd/user/<service>.service` and, for each target the unit wants,
+`share/systemd/user/<target>.wants/<service>.service`. A user's systemd
+instance finds these through `$XDG_DATA_DIRS`. The name there is the short one,
+so a user sees `hello.service`.
 
 `configData` follows the same profile: paths are
 `/etc/profiles/per-user/<name>/etc/xdg/user-services/<service>/<file>`, which is
 in `$XDG_CONFIG_DIRS`, and the entries are symlinked into the same package
 rather than into `environment.etc`.
 
-### What the global unit costs
+### Why the units are not in `/etc/systemd/user`
 
-`/etc/systemd/user` is read by every user's systemd instance, so a unit put
-there is systemd-wide even when only one user is meant to have it. Two things
-follow. The `<user>--` prefix is visible to everybody, so each user's
-`systemctl --user list-unit-files` lists every other user's services. And any
-user may start `<other>--<service>`: it then runs in the caller's own instance
-and under the caller's own account, on the caller's own copy of the
-`configData`. What is per user is the auto-start and the short name, not the
-unit.
+`systemd.user.units` writes `/etc/systemd/user`, which the systemd instance of
+every user reads. A unit put there is systemd-wide even when one user alone is
+meant to have it. Three things follow. It needs a `<user>--` prefix, because two
+users may both have a `hello` service. That prefix is visible to everybody, so
+each user's `systemctl --user list-unit-files` lists every other user's
+services. And any user may start `<other>--<service>`: it then runs in the
+caller's own instance and under the caller's own account, on the caller's own
+copy of the `configData`.
 
-A unit that belongs to one user alone has to be generated into that user's
-profile instead of into `systemd.user.services`, because
-`/etc/profiles/per-user/<name>/etc/xdg` is in that user's `$XDG_CONFIG_DIRS`
-and in no other's. That needs unit generation of its own, since
-`systemd.user.units` is what renders `/etc/systemd/user`.
+The unit files go in the profile of their user instead, where
+`/etc/profiles/per-user/<name>/share/systemd/user` is in that user's
+`$XDG_DATA_DIRS` and in no other's. The integration renders them with the same
+`systemdUtils` helpers that NixOS uses for its own units. The cost is that these
+units are not in `systemd.user.services`, thus options and tools that read that
+option do not find them.
 
 ## Service variants
 

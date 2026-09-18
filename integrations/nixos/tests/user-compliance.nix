@@ -60,8 +60,8 @@ self.lib.mkComplianceSuite pkgs {
       checkDrv = machine.config.system.build.toplevel;
     };
 
-  # The global unit is `alice--reload-inner`, but the user's own instance finds
-  # it through their profile under the short name.
+  # The unit is in alice's profile, where her own systemd instance finds it
+  # under the short name.
   callReload =
     path: "systemctl --user --machine=${userName}@ reload ${lib.concatStringsSep "-" path}.service";
 

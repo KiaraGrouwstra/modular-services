@@ -38,7 +38,7 @@ let
 
       users.users.bob = {
         isNormalUser = true;
-        # Same service name as alice — must not collide.
+        # Same service name as alice -- must not collide.
         services.hello.process.argv = [
           hello'
           "--greeting"
@@ -90,16 +90,11 @@ runCommand "test-modular-user-service-systemd-units"
     (
       set -x
 
-      # Global units exist in /etc/systemd/user/ with double-dash prefix.
-      [[ -e ${toplevel}/etc/systemd/user/alice--hello.service ]]
-      [[ -e ${toplevel}/etc/systemd/user/bob--hello.service ]]
-      [[ -e ${toplevel}/etc/systemd/user/alice--bar.service ]]
-      [[ -e ${toplevel}/etc/systemd/user/alice--bar-db.service ]]
+      # No unit of a user goes to /etc/systemd/user, which all users read.
+      [[ ! -e ${toplevel}/etc/systemd/user/alice--hello.service ]]
+      [[ -z "$(find ${toplevel}/etc/systemd/user/ \( -name 'alice*' -o -name 'bob*' \) -print -quit)" ]]
 
-      # Global units must NOT have WantedBy= (auto-start suppressed system-wide).
-      grep -v 'WantedBy=' ${toplevel}/etc/systemd/user/alice--hello.service
-
-      # Per-user profile for alice: local names exposed via symlinks.
+      # Per-user profile for alice: the unit files, under their local names.
       [[ -L ${aliceProfile}/share/systemd/user/hello.service ]]
       [[ -L ${aliceProfile}/share/systemd/user/bar.service ]]
       [[ -L ${aliceProfile}/share/systemd/user/bar-db.service ]]
@@ -109,16 +104,17 @@ runCommand "test-modular-user-service-systemd-units"
       [[ -L ${aliceProfile}/share/systemd/user/default.target.wants/bar.service ]]
       [[ -L ${aliceProfile}/share/systemd/user/default.target.wants/bar-db.service ]]
 
-      # Alice's hello.service symlink resolves to alice-- global unit, not bob--.
-      [[ $(readlink ${aliceServicePkg}/share/systemd/user/hello.service) == *alice--hello* ]]
+      # The profile holds the unit itself, not a link to a global unit.
+      [[ $(readlink ${aliceServicePkg}/share/systemd/user/hello.service) != *alice--* ]]
 
-      # Bob's profile has its own hello.service resolving to bob-- global unit.
+      # Bob has a service of the same name. It must be his own, not alice's.
       [[ -L ${bobProfile}/share/systemd/user/hello.service ]]
-      [[ $(readlink ${bobServicePkg}/share/systemd/user/hello.service) == *bob--hello* ]]
+      [[ $(readlink ${bobServicePkg}/share/systemd/user/hello.service) != *alice--* ]]
 
-      # ExecStart in global unit contains the correct greeting.
-      grep '"hi alice"' ${toplevel}/etc/systemd/user/alice--hello.service
-      grep '"hi bob"' ${toplevel}/etc/systemd/user/bob--hello.service
+      # ExecStart in each unit contains the greeting of its own user.
+      grep '"hi alice"' ${aliceProfile}/share/systemd/user/hello.service
+      grep '"hi bob"' ${bobProfile}/share/systemd/user/hello.service
+      grep '"bar-db"' ${aliceProfile}/share/systemd/user/bar-db.service
     )
     touch $out
   ''

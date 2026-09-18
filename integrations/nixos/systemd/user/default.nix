@@ -3,6 +3,7 @@
   config,
   options,
   pkgs,
+  utils,
   ...
 }:
 
@@ -40,34 +41,65 @@ let
       };
     };
 
-  # Like system/default.nix's makeUnits, but prefixes with "${userName}--" and
-  # suppresses WantedBy= on services (auto-start is wired per-user via the profile package).
+  # Like system/default.nix's makeUnits. A sub-service joins its parent's name
+  # with a dash, so the whole tree is flat by the time it is a set of units.
   makeUnits =
-    userName: unitType: prefix: service:
+    unitType: prefix: service:
     concatMapAttrs (unitName: unitModule: {
-      "${userName}--${dash prefix unitName}" =
+      # A function, not a bare attrset: the systemd unit types set
+      # `shorthandOnlyDefinesConfig`, which makes an attrset a `config` body.
+      ${dash prefix unitName} =
         { ... }:
         {
           imports = [ unitModule ];
-        }
-        // lib.optionalAttrs (unitType == "services") {
-          wantedBy = lib.mkForce [ ];
         };
     }) service.systemd.${unitType}
     // concatMapAttrs (
-      subServiceName: subService: makeUnits userName unitType (dash prefix subServiceName) subService
+      subServiceName: subService: makeUnits unitType (dash prefix subServiceName) subService
     ) service.services;
 
-  # Collect (globalName -> localName) pairs for all service units in the tree,
-  # used to build the per-user profile package symlinks.
-  collectServiceNames =
-    userName: prefix: service:
-    lib.mapAttrs' (
-      unitName: _: lib.nameValuePair "${userName}--${dash prefix unitName}" (dash prefix unitName)
-    ) service.systemd.services
-    // concatMapAttrs (
-      subServiceName: subService: collectServiceNames userName (dash prefix subServiceName) subService
-    ) service.services;
+  # The units of one user's whole service tree, keyed by the name that the
+  # systemd instance of the user knows them by.
+  localUnits =
+    unitType: user:
+    concatMapAttrs (serviceName: service: makeUnits unitType serviceName service) user.services;
+
+  # `systemd.user.units` writes `/etc/systemd/user`, which every user reads. A
+  # unit of one user only can not go there, so evaluate and write it here, with
+  # the helpers that NixOS uses for its own units.
+  evalUnits =
+    unitType: units:
+    (lib.evalModules {
+      modules = [
+        { options.units = mkOption { type = utils.systemdUtils.types.${unitType}; }; }
+        { inherit units; }
+      ];
+    }).config.units;
+
+  toUnit = {
+    services = utils.systemdUtils.lib.serviceToUnit;
+    sockets = utils.systemdUtils.lib.socketToUnit;
+  };
+
+  # Unit file name -> { source, wantedBy } for the per-user profile. The systemd
+  # instance of the user finds these through `$XDG_DATA_DIRS`.
+  profileUnits =
+    user:
+    concatMapAttrs (
+      unitType: defToUnit:
+      concatMapAttrs (
+        _: def:
+        let
+          unit = defToUnit def;
+        in
+        {
+          ${def.name} = {
+            source = "${utils.systemdUtils.lib.makeUnit def.name unit}/${def.name}";
+            inherit (unit) wantedBy;
+          };
+        }
+      ) (evalUnits unitType (localUnits unitType user))
+    ) toUnit;
 
   makeEtcLinks =
     prefix: service:
@@ -87,30 +119,26 @@ let
       ) service.services
     );
 
-  # Build the per-user profile package containing unit symlinks and configData.
-  # `user` is the user submodule config; `config.systemd.user.units` is the outer NixOS
-  # config, closed over from the module arguments above.
+  # Build the per-user profile package containing the unit files and configData.
+  # `user` is the user submodule config.
   makeUserPkg =
     userName: user:
     let
-      allNames = concatMapAttrs (
-        serviceName: service: collectServiceNames userName serviceName service
-      ) user.services;
-
       etcLinks = lib.foldl' (acc: m: acc // m) { } (
         concatLists (mapAttrsToList (serviceName: service: makeEtcLinks serviceName service) user.services)
       );
 
-      unitSymlinks = lib.concatMapAttrs (
-        globalName: localName:
-        let
-          unitDrv = config.systemd.user.units."${globalName}.service".unit;
-        in
+      unitSymlinks = concatMapAttrs (
+        unitFile: unit:
         {
-          "share/systemd/user/${localName}.service" = "${unitDrv}/${globalName}.service";
-          "share/systemd/user/default.target.wants/${localName}.service" = "../${localName}.service";
+          "share/systemd/user/${unitFile}" = unit.source;
         }
-      ) allNames;
+        // lib.listToAttrs (
+          map (
+            target: lib.nameValuePair "share/systemd/user/${target}.wants/${unitFile}" "../${unitFile}"
+          ) unit.wantedBy
+        )
+      ) (profileUnits user);
     in
     pkgs.runCommand "user-services-${userName}" { preferLocalBuild = true; } ''
       ${lib.concatStringsSep "\n" (
@@ -190,19 +218,5 @@ in
         )
       ) config.users.users
     );
-
-    systemd.user.services = concatMapAttrs (
-      userName: user:
-      concatMapAttrs (
-        serviceName: topLevelService: makeUnits userName "services" serviceName topLevelService
-      ) user.services
-    ) config.users.users;
-
-    systemd.user.sockets = concatMapAttrs (
-      userName: user:
-      concatMapAttrs (
-        serviceName: topLevelService: makeUnits userName "sockets" serviceName topLevelService
-      ) user.services
-    ) config.users.users;
   };
 }
