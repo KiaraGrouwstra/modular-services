@@ -2,6 +2,7 @@
   lib,
   config,
   systemdPackage,
+  defaultWantedBy,
   ...
 }:
 let
@@ -192,7 +193,7 @@ in
             ./service.nix
           ];
           specialArgs = {
-            inherit systemdPackage;
+            inherit systemdPackage defaultWantedBy;
           };
         }
       );
@@ -208,7 +209,10 @@ in
     # Note that this is the systemd.services option above, not the system one.
     systemd.services."" = {
       # TODO description;
-      wantedBy = lib.mkDefault [ "multi-user.target" ];
+      # The target to start with is a property of the service manager instance,
+      # so each integration picks it: `multi-user.target` for the system
+      # manager, `default.target` for a per-user one.
+      wantedBy = lib.mkDefault defaultWantedBy;
       serviceConfig = {
         ExecReload = lib.mkIf (config.systemd.mainExecReload != null) config.systemd.mainExecReload;
         Type = lib.mkDefault (if config.notificationProtocol.systemd then "notify" else "simple");

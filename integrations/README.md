@@ -50,8 +50,8 @@ Four small files per integration is what keeps that decision cheap to revisit.
 Two in-progress upstream changes show the rule applied, and it lands on opposite
 sides of them.
 
-The first declares `users.users.<name>.services` as a NixOS module siphoning into
-`systemd.user.services`, reusing the same `service.nix` and reading
+The first declares `users.users.<name>.services` as a NixOS module that writes
+unit files into the profile of the user, reusing the same `service.nix` and reading
 `config.systemd.package` from the same evaluation as `system.services`. An
 `integrations/nixos-user/` would restate all four contract files to describe one
 evaluation, and would double the NixOS test runs to prove it twice. It is a

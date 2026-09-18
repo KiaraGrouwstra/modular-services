@@ -1,7 +1,7 @@
 # The modular services themselves, as `modularServices.<name> pkgs`.
 #
 # A modular service is a module with `_class = "service"`. That is what makes
-# this directory the one holding them: `integrations/nixos/systemd/system.nix`
+# this directory the one holding them: `integrations/nixos/systemd/system/default.nix`
 # declares the option surface a service lands in and translates what does, but
 # is not itself a service.
 #

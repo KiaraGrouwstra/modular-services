@@ -17,9 +17,48 @@ so the two cannot both be live.
 | `lib.nix` | `evalModules` / `evalSystem` / `runTest`, reproducing what `nixos/tests/all-tests.nix` gives in-tree tests. |
 | `tests/` | The integration's test set. |
 
-`systemd/user.nix` is a stub, here as upstream. Per-user services arrive as
-`users.users.<name>.services` in this same evaluation rather than as a second
-integration; [`../README.md`](../README.md) explains what makes an integration.
+`systemd/` splits into `system/` and `user/`, one per systemd manager instance.
+Per-user services are `users.users.<name>.services`, in this same evaluation
+rather than as a second integration; [`../README.md`](../README.md) explains what
+makes an integration.
+
+## Per-user services
+
+`users.users.<name>.services` is the same service submodule as
+`system.services`, evaluated once per user so that the `configData` paths can be
+baked in. The integration sets `defaultWantedBy` to `default.target`, the target
+of a per-user systemd instance, where the system integration sets
+`multi-user.target`. A service reaches systemd twice over.
+
+A user reaches their services through a `user-services-<name>` package added to
+`users.users.<name>.packages`. That package carries
+`share/systemd/user/<service>.service` and, for each target the unit wants,
+`share/systemd/user/<target>.wants/<service>.service`. A user's systemd
+instance finds these through `$XDG_DATA_DIRS`. The name there is the short one,
+so a user sees `hello.service`.
+
+`configData` follows the same profile: paths are
+`/etc/profiles/per-user/<name>/etc/xdg/user-services/<service>/<file>`, which is
+in `$XDG_CONFIG_DIRS`, and the entries are symlinked into the same package
+rather than into `environment.etc`.
+
+### Why the units are not in `/etc/systemd/user`
+
+`systemd.user.units` writes `/etc/systemd/user`, which the systemd instance of
+every user reads. A unit put there is systemd-wide even when one user alone is
+meant to have it. Three things follow. It needs a `<user>--` prefix, because two
+users may both have a `hello` service. That prefix is visible to everybody, so
+each user's `systemctl --user list-unit-files` lists every other user's
+services. And any user may start `<other>--<service>`: it then runs in the
+caller's own instance and under the caller's own account, on the caller's own
+copy of the `configData`.
+
+The unit files go in the profile of their user instead, where
+`/etc/profiles/per-user/<name>/share/systemd/user` is in that user's
+`$XDG_DATA_DIRS` and in no other's. The integration renders them with the same
+`systemdUtils` helpers that NixOS uses for its own units. The cost is that these
+units are not in `systemd.user.services`, thus options and tools that read that
+option do not find them.
 
 ## Service variants
 
