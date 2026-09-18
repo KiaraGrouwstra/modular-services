@@ -34,6 +34,15 @@ let
       ;
   };
 
+  user-compliance = import ./user-compliance.nix {
+    inherit
+      pkgs
+      self
+      evalSystem
+      runTest
+      ;
+  };
+
   eval = drv: {
     kind = "eval";
     inherit drv;
@@ -94,6 +103,10 @@ in
   name = "compliance-${name}";
   value = if lib.hasSuffix "eval" name then eval value else vm value;
 }) compliance
+// lib.mapAttrs' (name: value: {
+  name = "user-compliance-${name}";
+  value = if lib.hasSuffix "eval" name then eval value else vm value;
+}) user-compliance
 // lib.mapAttrs' (name: module: {
   name = "pkg-${name}";
   value = vm (runTest module);
