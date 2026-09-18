@@ -78,11 +78,10 @@ in the pinned nixpkgs.
 | `integrations/nixos/modular/<pkg>/<svc>/system.nix` | `nixos/modules/system/service/modular/<pkg>/<svc>/system.nix` | verbatim | The systemd half of each variant, holding what the service modules below no longer do. `easytier` has no upstream counterpart: like `python-http-server` it defines nothing, and exists so that every service in `modular-services/` is registered. |
 | `integrations/nixos/systemd/system/default.nix` | `nixos/modules/system/service/systemd/system/default.nix` | modified | The portable-layer import becomes `../../../../lib/services`. This is the single line that made the whole in-tree `lib/services` reachable from a NixOS evaluation. `extraRootSpecialArgs` gains `modularServices` alongside `pkgs`, since a variant reaches its base through that set rather than through package `passthru`. |
 | `integrations/nixos/systemd/defaults.nix` | `nixos/modules/system/service/systemd/defaults.nix` | verbatim | |
-| `integrations/nixos/systemd/service.nix` | `nixos/modules/system/service/systemd/service.nix` | verbatim | |
+| `integrations/nixos/systemd/service.nix` | `nixos/modules/system/service/systemd/service.nix` | modified | The default `wantedBy` of a unit becomes a `defaultWantedBy` special argument, which each integration sets to the target of its own systemd instance. Upstream keeps `multi-user.target` here and lets the per-user integration override it. |
 | `integrations/nixos/systemd/system/config-data-path.nix` | `nixos/modules/system/service/systemd/system/config-data-path.nix` | modified | Test-path comment retargeted to `../../tests/etc/test.nix`. |
-| `integrations/nixos/systemd/user/default.nix` | `nixos/modules/system/service/systemd/user/default.nix` | modified | The portable-layer import becomes `../../../../lib/services`, as in `../system/default.nix`. |
-| `integrations/nixos/systemd/user/config-data-path.nix` | `nixos/modules/system/service/systemd/user/config-data-path.nix` | verbatim | |
-| `integrations/nixos/systemd/user/defaults.nix` | `nixos/modules/system/service/systemd/user/defaults.nix` | verbatim | |
+| `integrations/nixos/systemd/user/default.nix` | `nixos/modules/system/service/systemd/user/default.nix` | modified | The portable-layer import becomes `../../../../lib/services`, as in `../system/default.nix`. The integration passes `defaultWantedBy = [ "default.target" ]` rather than importing an override module. |
+| `integrations/nixos/systemd/user/config-data-path.nix` | `nixos/modules/system/service/systemd/user/config-data-path.nix` | modified | The header points at [`integrations/nixos/README.md`](./integrations/nixos/README.md) for the per-user profile, instead of repeating it. |
 | `integrations/nixos/tests/units.nix` | `nixos/modules/system/service/systemd/system/test.nix` | modified | Run-instruction comment only; `evalSystem` now comes from `integrations/nixos/lib.nix` instead of `all-tests.nix`, which needs no change to the file. |
 | `integrations/nixos/tests/modular-variants.nix` | `nixos/modules/system/service/modular/test.nix` | modified | Run-instruction comment, the `system.stateVersion` this repository's tests use, and the expected attribution paths, which name `integrations/nixos/modular/` and `modular-services/` rather than the nixpkgs tree. |
 | `integrations/nixos/tests/user-units.nix` | `nixos/modules/system/service/systemd/user/test.nix` | modified | Run-instruction comment only, as for `units.nix`. |
@@ -113,6 +112,10 @@ in the pinned nixpkgs.
 
 ## Not ported
 
+- `nixos/modules/system/service/systemd/user/defaults.nix`. It overrides the
+  `multi-user.target` default that the shared unit block sets. Here that default
+  is a `defaultWantedBy` special argument and the per-user integration sets it
+  directly, so there is nothing to override.
 - `nixos/tests/all-tests.nix`'s `callTest` / `findTests` plumbing. It exists to
   satisfy the nixpkgs test registry and has no counterpart here;
   `pkgs.testers.runNixOSTest` returns a derivation directly.

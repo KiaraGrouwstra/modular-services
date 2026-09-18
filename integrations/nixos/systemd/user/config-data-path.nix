@@ -1,9 +1,10 @@
 # Analogous to ../system/config-data-path.nix but scoped per user.
-# Usage: import ./config-data-path.nix userName
+# This file is a *function to* a module.
+#
+# Documentation: integrations/nixos/README.md#per-user-services
 #
 # configData paths land under the per-user profile:
 #   /etc/profiles/per-user/$USER/etc/xdg/user-services/...
-# which is in $XDG_CONFIG_DIRS (boot/systemd/user.nix wires this in).
 userName:
 let
   setPathsModule =

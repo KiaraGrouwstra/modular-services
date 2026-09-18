@@ -33,10 +33,10 @@ let
       extraRootModules = [
         ../service.nix
         (import ./config-data-path.nix userName)
-        ./defaults.nix
       ];
       extraRootSpecialArgs = {
         systemdPackage = config.systemd.package;
+        defaultWantedBy = [ "default.target" ];
       };
     };
 

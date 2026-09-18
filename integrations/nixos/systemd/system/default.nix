@@ -70,6 +70,7 @@ let
     ];
     extraRootSpecialArgs = {
       systemdPackage = config.systemd.package;
+      defaultWantedBy = [ "multi-user.target" ];
       # Exposed so environment-specific service variants under
       # `integrations/nixos/modular/` can pull in their pure base from
       # `modularServices.<name>`.
