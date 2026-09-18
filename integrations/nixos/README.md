@@ -25,8 +25,10 @@ makes an integration.
 ## Per-user services
 
 `users.users.<name>.services` is the same service submodule as
-`system.services`, evaluated once per user so that `configData` paths and the
-`default.target` default can be baked in. It reaches systemd twice over.
+`system.services`, evaluated once per user so that the `configData` paths can be
+baked in. The integration sets `defaultWantedBy` to `default.target`, the target
+of a per-user systemd instance, where the system integration sets
+`multi-user.target`. A service reaches systemd twice over.
 
 The unit itself is global: it lands in `systemd.user.services` under
 `<user>--<service>`, so two users may both have a `hello` service without
@@ -43,6 +45,23 @@ pointing at it, which is what a user's systemd instance finds through
 `/etc/profiles/per-user/<name>/etc/xdg/user-services/<service>/<file>`, which is
 in `$XDG_CONFIG_DIRS`, and the entries are symlinked into the same package
 rather than into `environment.etc`.
+
+### What the global unit costs
+
+`/etc/systemd/user` is read by every user's systemd instance, so a unit put
+there is systemd-wide even when only one user is meant to have it. Two things
+follow. The `<user>--` prefix is visible to everybody, so each user's
+`systemctl --user list-unit-files` lists every other user's services. And any
+user may start `<other>--<service>`: it then runs in the caller's own instance
+and under the caller's own account, on the caller's own copy of the
+`configData`. What is per user is the auto-start and the short name, not the
+unit.
+
+A unit that belongs to one user alone has to be generated into that user's
+profile instead of into `systemd.user.services`, because
+`/etc/profiles/per-user/<name>/etc/xdg` is in that user's `$XDG_CONFIG_DIRS`
+and in no other's. That needs unit generation of its own, since
+`systemd.user.units` is what renders `/etc/systemd/user`.
 
 ## Service variants
 
