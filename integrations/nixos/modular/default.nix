@@ -24,6 +24,7 @@
       autoendpoint = ./autopush-rs/autoendpoint/system.nix;
     };
     php.default = ./php/default/system.nix;
+    postgresql.default = ./postgresql/default/system.nix;
     holo-daemon.default = ./holo-daemon/default/system.nix;
     easytier.default = ./easytier/default/system.nix;
     python-http-server.default = ./python-http-server/default/system.nix;

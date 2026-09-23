@@ -91,6 +91,15 @@ in
     php-fpm.package = lib.mkDefault pkgs.php;
   };
 
+  postgresql = pkgs: {
+    imports = [
+      (importApply ./postgresql/service.nix {
+        inherit (pkgs) writeText runCommand stdenv;
+      })
+    ];
+    postgresql.package = lib.mkDefault pkgs.postgresql;
+  };
+
   autopush-rs-autoconnect = pkgs: {
     imports = [ (importApply ./autopush-rs/service-autoconnect.nix { inherit pkgs; }) ];
     autoconnect.package = lib.mkDefault pkgs.autopush-rs;
