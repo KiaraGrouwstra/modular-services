@@ -31,6 +31,8 @@
       "This repository's implementation for devenv, as devenv processes. The one to import in a devenv configuration.";
     "nixbsdModules.default" =
       "This repository's implementation for NixBSD, on FreeBSD rc. It disables the NixBSD copy. The one to import in a NixBSD configuration.";
+    "darwinModules.default" =
+      "This repository's implementation for nix-darwin, on launchd. The one to import in a nix-darwin configuration.";
     "nixngModules.default" =
       "This repository's implementation for NixNG, on its `init.services`. The one to import in a NixNG configuration.";
 

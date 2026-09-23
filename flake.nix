@@ -48,6 +48,10 @@
       url = "github:nixos-bsd/mini-tmpfiles";
       flake = false;
     };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      flake = false;
+    };
   };
 
   outputs =

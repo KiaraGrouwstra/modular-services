@@ -103,7 +103,7 @@ Read the `configure` docstring in
 authoritative how-to for the `default.nix` half, with a worked `nix-darwin`
 sketch. Then mirror `integrations/nixos/` for the other three files.
 
-Next to `integrations/nixos/`, five integrations exist:
+Next to `integrations/nixos/`, six integrations exist:
 
 - `integrations/finix/` runs the services on [finix], which runs finit as pid
   1. It is exposed as `finixModules.default`.
@@ -122,12 +122,16 @@ Next to `integrations/nixos/`, five integrations exist:
   replaces the copy that NixBSD has. It is exposed as `nixbsdModules.default`.
   Its tests only evaluate the system, as a build needs a cross-compiled
   FreeBSD.
+- `integrations/nix-darwin/` adds the services to launchd of [nix-darwin], as
+  daemons. It is exposed as `darwinModules.default`. Its tests only evaluate
+  the system, as a build needs a Darwin builder.
 
 Home Manager is the intended next integration; it slots in as
 `integrations/home-manager/` under the same four-file contract.
 
 [devenv]: https://github.com/cachix/devenv
 [finix]: https://github.com/finix-community/finix
+[nix-darwin]: https://github.com/nix-darwin/nix-darwin
 [NixBSD]: https://github.com/nixos-bsd/nixbsd
 [NixNG]: https://github.com/nix-community/NixNG
 [process-compose-flake]: https://github.com/Platonic-Systems/process-compose-flake

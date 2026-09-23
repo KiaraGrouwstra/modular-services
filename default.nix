@@ -146,6 +146,12 @@ let
       default = ./integrations/nixbsd;
     };
 
+    darwinModules = {
+      # Modular services from this repository on launchd. nix-darwin has no
+      # copy of its own to disable.
+      default = ./integrations/nix-darwin;
+    };
+
     overlays = {
       # Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.
       default = import ./overlays { inherit modularServices; };

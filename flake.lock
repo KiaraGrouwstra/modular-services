@@ -32,6 +32,22 @@
         "type": "github"
       }
     },
+    "nix-darwin": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786845137,
+        "narHash": "sha256-oQFip+v0luP8NIxJzmiW4Wu8bILsbFWom5l0zonl8hQ=",
+        "owner": "nix-darwin",
+        "repo": "nix-darwin",
+        "rev": "4cff07de74b50e64bdd68cd4e722ab5b6b35ee48",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-darwin",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "nixbsd": {
       "flake": false,
       "locked": {
@@ -126,6 +142,7 @@
       "inputs": {
         "devenv": "devenv",
         "finix": "finix",
+        "nix-darwin": "nix-darwin",
         "nixbsd": "nixbsd",
         "nixbsd-mini-tmpfiles": "nixbsd-mini-tmpfiles",
         "nixbsd-nixpkgs": "nixbsd-nixpkgs",
