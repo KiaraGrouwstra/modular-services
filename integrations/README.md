@@ -126,10 +126,41 @@ Next to `integrations/nixos/`, six integrations exist:
   daemons. It is exposed as `darwinModules.default`. Its tests only evaluate
   the system, as a build needs a Darwin builder.
 
+[docker-library] is not an integration yet. Its official PostgreSQL image runs
+one server in a container, and configures it with environment variables and
+an entrypoint script, not with a service manager. TODO: find out if a
+container image, built with `dockerTools` from the options of a service, is
+a useful integration.
+
+## Integration comparison
+
+The table below shows which options of a modular service each integration
+uses, and which options of the `postgresql` service its variant supports. In
+the table, "yes" means that the integration uses the option as the NixOS
+integration does.
+
+| option | NixOS | finix | services-flake | devenv | NixNG | NixBSD | nix-darwin | docker-library |
+|---|---|---|---|---|---|---|---|---|
+| `process.argv` | yes | yes | yes | yes | yes | yes | yes | TODO |
+| `process.reloadSignal`, `process.reloadCommand` | yes | yes | no | no | no | no | no | TODO |
+| `notificationProtocol` | yes | yes | no, a readiness probe in the variant | no, a readiness probe in the variant | no | no | no | TODO |
+| `configData` | yes, in `/etc` | yes, in `/etc` | yes, in the Nix store | yes, in the Nix store | yes, in `/etc` | yes, in `/etc` | yes, in `/etc` | TODO |
+| `services` (sub-services) | yes | yes | yes | yes | yes | yes | yes | TODO |
+| `warnings` | yes | yes | yes | yes | no | yes | yes | TODO |
+| `assertions` | yes | yes | yes | yes | yes | yes | yes | TODO |
+| `postgresql.*` | yes | yes | yes | yes | yes | yes | yes | TODO |
+| `postgresql`: fast shutdown with `SIGINT` | yes | yes | yes | yes | no, `SIGTERM` | no, `SIGTERM` | no, `SIGTERM` | TODO |
+| `postgresql`: setup scripts at each server start | yes | yes | yes | yes | yes | yes | no, only when launchd loads the daemon | TODO |
+| `postgresql` test | VM | VM | build sandbox | build sandbox | evaluation and build | evaluation | evaluation | TODO |
+
+The variants and the integrations have `TODO` comments that tell why an
+option is not supported, and what is necessary to support it.
+
 Home Manager is the intended next integration; it slots in as
 `integrations/home-manager/` under the same four-file contract.
 
 [devenv]: https://github.com/cachix/devenv
+[docker-library]: https://github.com/docker-library/postgres
 [finix]: https://github.com/finix-community/finix
 [nix-darwin]: https://github.com/nix-darwin/nix-darwin
 [NixBSD]: https://github.com/nixos-bsd/nixbsd
