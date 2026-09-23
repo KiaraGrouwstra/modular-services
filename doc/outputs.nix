@@ -23,6 +23,9 @@
     "nixosModules.documentation" =
       "Replacement for the option-documentation registry that the disable removes.";
 
+    "finixModules.default" =
+      "This repository's implementation for finix, on finit. The one to import in a finix configuration.";
+
     "overlays.default" = "Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.";
     "overlays.passthruServices" =
       "Opt-in: repoints `pkgs.<pkg>.services.*` at this repository. Excludes `php`, which regenerates its own `passthru`.";

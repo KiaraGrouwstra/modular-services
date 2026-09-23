@@ -6,10 +6,19 @@
     # the download, and it only advances once Hydra has built the channel, so
     # every derivation this flake evaluates is already in cache.nixos.org.
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+
+    # The other configuration frameworks that `integrations/` targets. Only
+    # their tests use them. They are sources, not flakes (`flake = false`), so
+    # `./default.nix` can fetch each one from `flake.lock` in the same way,
+    # and their own inputs do not go into the lock.
+    finix = {
+      url = "github:finix-community/finix";
+      flake = false;
+    };
   };
 
   outputs =
-    { self, nixpkgs }:
+    { self, nixpkgs, ... }@inputs:
     let
       inherit (nixpkgs) lib;
 
@@ -21,6 +30,12 @@
         import ./. (
           {
             nixpkgs = nixpkgs.outPath;
+            inputs = lib.mapAttrs (_: input: input.outPath) (
+              lib.removeAttrs inputs [
+                "self"
+                "nixpkgs"
+              ]
+            );
             src = self;
             revision = self.rev or self.dirtyRev or "dirty";
           }

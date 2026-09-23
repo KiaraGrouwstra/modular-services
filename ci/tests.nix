@@ -7,6 +7,7 @@
 {
   lib,
   nixpkgs,
+  inputs,
   self,
   pkgs,
 }:
@@ -35,6 +36,7 @@ let
           inherit
             lib
             nixpkgs
+            inputs
             self
             pkgs
             ;

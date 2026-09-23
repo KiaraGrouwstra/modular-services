@@ -12,7 +12,7 @@ four things and the rest of the repository picks the integration up on its own:
 | `default.nix` | The module to import into that configuration system. Declares the services option in terms of `lib.services.configure`, and translates the resulting service tree into whatever the integration's service manager consumes. |
 | `disable-upstream.nix` | Eval-time removal of that framework's own in-tree copy of modular services, if it has one. No patching of the input, no fork branch. Imported by `default.nix`. |
 | `lib.nix` | `{ evalSystem, runTest, ... }`: how to evaluate a configuration and how to run a VM test *there*. |
-| `tests/default.nix` | `{ <name> = { kind = "eval" \| "vm"; drv = <derivation>; }; }`, taking `{ lib, nixpkgs, self, pkgs }`. |
+| `tests/default.nix` | `{ <name> = { kind = "eval" \| "vm"; drv = <derivation>; }; }`, taking `{ lib, nixpkgs, inputs, self, pkgs }`. `inputs` holds the source of each framework input in `flake.lock`. |
 
 `ci/tests.nix` reads `integrations/` from the filesystem and picks up any
 directory containing `tests/default.nix`, exposing its tests as
