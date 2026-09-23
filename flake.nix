@@ -28,6 +28,10 @@
       url = "github:cachix/devenv";
       flake = false;
     };
+    nixng = {
+      url = "github:nix-community/NixNG";
+      flake = false;
+    };
   };
 
   outputs =

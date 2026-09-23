@@ -134,6 +134,12 @@ let
       default = ./integrations/devenv;
     };
 
+    nixngModules = {
+      # Modular services from this repository on NixNG's `init.services`.
+      # NixNG has no copy of its own to disable.
+      default = ./integrations/nixng;
+    };
+
     overlays = {
       # Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.
       default = import ./overlays { inherit modularServices; };

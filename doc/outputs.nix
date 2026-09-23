@@ -29,6 +29,8 @@
       "This repository's implementation for process-compose-flake. The one to import next to services-flake's `processComposeModules.default`.";
     "devenvModules.default" =
       "This repository's implementation for devenv, as devenv processes. The one to import in a devenv configuration.";
+    "nixngModules.default" =
+      "This repository's implementation for NixNG, on its `init.services`. The one to import in a NixNG configuration.";
 
     "overlays.default" = "Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.";
     "overlays.passthruServices" =

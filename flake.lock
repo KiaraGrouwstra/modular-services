@@ -32,6 +32,22 @@
         "type": "github"
       }
     },
+    "nixng": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785618522,
+        "narHash": "sha256-drDIDeY1uLjfrQ0lBMdEA6MSGp1NvMO/AlGr+M6pLMM=",
+        "owner": "nix-community",
+        "repo": "NixNG",
+        "rev": "c2a314e8a145421cd5dd8f34e4e9ac3ad37c7f7b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NixNG",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1788179007,
@@ -65,6 +81,7 @@
       "inputs": {
         "devenv": "devenv",
         "finix": "finix",
+        "nixng": "nixng",
         "nixpkgs": "nixpkgs",
         "process-compose-flake": "process-compose-flake",
         "services-flake": "services-flake"
