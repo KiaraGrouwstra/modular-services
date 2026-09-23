@@ -32,6 +32,22 @@
       url = "github:nix-community/NixNG";
       flake = false;
     };
+    nixbsd = {
+      url = "github:nixos-bsd/nixbsd";
+      flake = false;
+    };
+    # The nixpkgs that NixBSD locks. NixBSD imports modules from nixpkgs, thus
+    # it does not evaluate with any other nixpkgs. Update it with `nixbsd`.
+    nixbsd-nixpkgs = {
+      url = "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1032146.dc29ee8fa098/nixexprs.tar.xz";
+      flake = false;
+    };
+    # NixBSD adds the `mini-tmpfiles` package with the overlay of this flake.
+    # The overlay does not use `nixpkgs`. Update it with `nixbsd`.
+    nixbsd-mini-tmpfiles = {
+      url = "github:nixos-bsd/mini-tmpfiles";
+      flake = false;
+    };
   };
 
   outputs =

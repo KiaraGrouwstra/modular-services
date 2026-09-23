@@ -32,6 +32,51 @@
         "type": "github"
       }
     },
+    "nixbsd": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789138908,
+        "narHash": "sha256-+/WSbZJNBOKUqf/vU6UCh4oOC48MEYHoXvwdkqpWGrQ=",
+        "owner": "nixos-bsd",
+        "repo": "nixbsd",
+        "rev": "1a5550d6b78feb23d339777438efd26ce3152ee0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos-bsd",
+        "repo": "nixbsd",
+        "type": "github"
+      }
+    },
+    "nixbsd-mini-tmpfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742754557,
+        "narHash": "sha256-nGxgiNhA94eSl8jcQwCboJ5Ed132z8yrFdOoT+rf8bE=",
+        "owner": "nixos-bsd",
+        "repo": "mini-tmpfiles",
+        "rev": "534ee577692c7092fdcd035f89bc29b663c6f9ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos-bsd",
+        "repo": "mini-tmpfiles",
+        "type": "github"
+      }
+    },
+    "nixbsd-nixpkgs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783697152,
+        "narHash": "sha256-4eOaoE0Z2OR28W/vdzp1H9Qkl84ajh7tdVsfNwTuG5U=",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1032146.dc29ee8fa098/nixexprs.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1032146.dc29ee8fa098/nixexprs.tar.xz"
+      }
+    },
     "nixng": {
       "flake": false,
       "locked": {
@@ -81,6 +126,9 @@
       "inputs": {
         "devenv": "devenv",
         "finix": "finix",
+        "nixbsd": "nixbsd",
+        "nixbsd-mini-tmpfiles": "nixbsd-mini-tmpfiles",
+        "nixbsd-nixpkgs": "nixbsd-nixpkgs",
         "nixng": "nixng",
         "nixpkgs": "nixpkgs",
         "process-compose-flake": "process-compose-flake",

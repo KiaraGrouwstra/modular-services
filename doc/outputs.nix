@@ -29,6 +29,8 @@
       "This repository's implementation for process-compose-flake. The one to import next to services-flake's `processComposeModules.default`.";
     "devenvModules.default" =
       "This repository's implementation for devenv, as devenv processes. The one to import in a devenv configuration.";
+    "nixbsdModules.default" =
+      "This repository's implementation for NixBSD, on FreeBSD rc. It disables the NixBSD copy. The one to import in a NixBSD configuration.";
     "nixngModules.default" =
       "This repository's implementation for NixNG, on its `init.services`. The one to import in a NixNG configuration.";
 

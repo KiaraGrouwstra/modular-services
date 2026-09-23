@@ -140,6 +140,12 @@ let
       default = ./integrations/nixng;
     };
 
+    nixbsdModules = {
+      # Modular services from this repository on FreeBSD rc. It disables
+      # NixBSD's own copy.
+      default = ./integrations/nixbsd;
+    };
+
     overlays = {
       # Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.
       default = import ./overlays { inherit modularServices; };
