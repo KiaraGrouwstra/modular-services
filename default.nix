@@ -121,6 +121,13 @@ let
       default = ./integrations/finix;
     };
 
+    processComposeModules = {
+      # Modular services from this repository as process-compose processes,
+      # for process-compose-flake and services-flake. Neither has a copy of
+      # its own to disable.
+      default = ./integrations/services-flake;
+    };
+
     overlays = {
       # Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.
       default = import ./overlays { inherit modularServices; };

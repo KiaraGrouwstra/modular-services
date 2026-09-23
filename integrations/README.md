@@ -103,10 +103,18 @@ Read the `configure` docstring in
 authoritative how-to for the `default.nix` half, with a worked `nix-darwin`
 sketch. Then mirror `integrations/nixos/` for the other three files.
 
+Next to `integrations/nixos/`, two integrations exist:
+
+- `integrations/finix/` runs the services on [finix], which runs finit as pid
+  1. It is exposed as `finixModules.default`.
+- `integrations/services-flake/` runs the services as processes of
+  [process-compose-flake], next to the services of [services-flake]. It is
+  exposed as `processComposeModules.default`. Its tests run the processes in
+  the build sandbox, without a virtual machine.
+
 Home Manager is the intended next integration; it slots in as
-`integrations/home-manager/` under the same four-file contract. [finix], which
-runs finit as pid 1, is the other obvious candidate: it already carries its own
-integration, and `modular-services/php/service.nix` keeps upstream's dormant
-`lib.optionalAttrs (options ? finit)` branch for exactly that manager.
+`integrations/home-manager/` under the same four-file contract.
 
 [finix]: https://github.com/finix-community/finix
+[process-compose-flake]: https://github.com/Platonic-Systems/process-compose-flake
+[services-flake]: https://github.com/juspay/services-flake

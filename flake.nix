@@ -15,6 +15,15 @@
       url = "github:finix-community/finix";
       flake = false;
     };
+    services-flake = {
+      url = "github:juspay/services-flake";
+      flake = false;
+    };
+    # services-flake builds on it, and does not pin it itself.
+    process-compose-flake = {
+      url = "github:Platonic-Systems/process-compose-flake";
+      flake = false;
+    };
   };
 
   outputs =
