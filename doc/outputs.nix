@@ -27,6 +27,8 @@
       "This repository's implementation for finix, on finit. The one to import in a finix configuration.";
     "processComposeModules.default" =
       "This repository's implementation for process-compose-flake. The one to import next to services-flake's `processComposeModules.default`.";
+    "devenvModules.default" =
+      "This repository's implementation for devenv, as devenv processes. The one to import in a devenv configuration.";
 
     "overlays.default" = "Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.";
     "overlays.passthruServices" =

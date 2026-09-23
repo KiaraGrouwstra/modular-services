@@ -128,6 +128,12 @@ let
       default = ./integrations/services-flake;
     };
 
+    devenvModules = {
+      # Modular services from this repository as devenv processes. devenv has
+      # no copy of its own to disable.
+      default = ./integrations/devenv;
+    };
+
     overlays = {
       # Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.
       default = import ./overlays { inherit modularServices; };

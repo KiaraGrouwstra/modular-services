@@ -24,6 +24,10 @@
       url = "github:Platonic-Systems/process-compose-flake";
       flake = false;
     };
+    devenv = {
+      url = "github:cachix/devenv";
+      flake = false;
+    };
   };
 
   outputs =

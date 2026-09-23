@@ -7,7 +7,12 @@
 # `process.reloadCommand`.
 { config, lib, ... }:
 let
-  inherit (lib) mkDefault mkIf mkOption types;
+  inherit (lib)
+    mkDefault
+    mkIf
+    mkOption
+    types
+    ;
 
   notify = config.notificationProtocol;
 in
@@ -44,7 +49,9 @@ in
   config = {
     finit.services."" = {
       command = mkDefault (lib.escapeShellArgs config.process.argv);
-      notify = mkIf (notify.systemd || notify.s6) (mkDefault (if notify.systemd then "systemd" else "s6"));
+      notify = mkIf (notify.systemd || notify.s6) (
+        mkDefault (if notify.systemd then "systemd" else "s6")
+      );
       # finit sets `$MAINPID`, which the default `reloadCommand` uses.
       exec-reload = mkIf (config.process.reloadCommand != null) (mkDefault config.process.reloadCommand);
     };

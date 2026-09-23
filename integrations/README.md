@@ -103,7 +103,7 @@ Read the `configure` docstring in
 authoritative how-to for the `default.nix` half, with a worked `nix-darwin`
 sketch. Then mirror `integrations/nixos/` for the other three files.
 
-Next to `integrations/nixos/`, two integrations exist:
+Next to `integrations/nixos/`, three integrations exist:
 
 - `integrations/finix/` runs the services on [finix], which runs finit as pid
   1. It is exposed as `finixModules.default`.
@@ -111,10 +111,14 @@ Next to `integrations/nixos/`, two integrations exist:
   [process-compose-flake], next to the services of [services-flake]. It is
   exposed as `processComposeModules.default`. Its tests run the processes in
   the build sandbox, without a virtual machine.
+- `integrations/devenv/` runs the services as processes of [devenv]. It is
+  exposed as `devenvModules.default`. Its tests run the processes with
+  process-compose in the build sandbox, without `devenv-tasks`.
 
 Home Manager is the intended next integration; it slots in as
 `integrations/home-manager/` under the same four-file contract.
 
+[devenv]: https://github.com/cachix/devenv
 [finix]: https://github.com/finix-community/finix
 [process-compose-flake]: https://github.com/Platonic-Systems/process-compose-flake
 [services-flake]: https://github.com/juspay/services-flake

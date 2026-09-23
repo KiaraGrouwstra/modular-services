@@ -289,10 +289,12 @@ in
         }
         # A `DynamicUser` unit gets access to the data directory only through
         # its own `StateDirectory` or `ReadWritePaths`.
-        // (if stateDirectory == null then
-          { ReadWritePaths = [ cfg.dataDir ]; }
-        else
-          { StateDirectory = stateDirectory; });
+        // (
+          if stateDirectory == null then
+            { ReadWritePaths = [ cfg.dataDir ]; }
+          else
+            { StateDirectory = stateDirectory; }
+        );
 
         path = [
           cfg.finalPackage

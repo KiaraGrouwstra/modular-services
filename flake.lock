@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "devenv": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790121233,
+        "narHash": "sha256-VujZkKX8bfdMSHB3OE2oLtKlVCJ28aKFhhxVIgOM4/0=",
+        "owner": "cachix",
+        "repo": "devenv",
+        "rev": "74075803bf275361b5e3c40f33797a9f308cb54b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "devenv",
+        "type": "github"
+      }
+    },
     "finix": {
       "flake": false,
       "locked": {
@@ -47,6 +63,7 @@
     },
     "root": {
       "inputs": {
+        "devenv": "devenv",
         "finix": "finix",
         "nixpkgs": "nixpkgs",
         "process-compose-flake": "process-compose-flake",

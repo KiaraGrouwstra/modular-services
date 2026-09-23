@@ -32,7 +32,8 @@ let
   postgresql = system.finit.services.postgresql-default;
 in
 assert lib.assertMsg (failed == [ ]) (lib.concatMapStringsSep "\n" (a: a.message) failed);
-assert lib.hasInfix "--config-file=/etc/system-services/postgresql-default/postgresql.conf" postgresql.command;
+assert lib.hasInfix "--config-file=/etc/system-services/postgresql-default/postgresql.conf"
+  postgresql.command;
 assert postgresql.user == "postgres";
 assert postgresql.notify == "systemd";
 assert lib.hasInfix "kill -HUP" postgresql.exec-reload;
