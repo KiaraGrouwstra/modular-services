@@ -11,6 +11,7 @@
   nixpkgs,
   self,
   pkgs,
+  ...
 }:
 
 let
@@ -57,6 +58,7 @@ let
     ghostunnel = ./packages/ghostunnel.nix;
     git-pages = ./packages/git-pages.nix;
     holo-daemon = ./packages/holo-daemon.nix;
+    postgresql = ./packages/postgresql.nix;
     snid = ./packages/snid.nix;
     tlshd = ./packages/tlshd.nix;
   };

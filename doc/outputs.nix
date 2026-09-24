@@ -23,6 +23,19 @@
     "nixosModules.documentation" =
       "Replacement for the option-documentation registry that the disable removes.";
 
+    "finixModules.default" =
+      "This repository's implementation for finix, on finit. The one to import in a finix configuration.";
+    "processComposeModules.default" =
+      "This repository's implementation for process-compose-flake. The one to import next to services-flake's `processComposeModules.default`.";
+    "devenvModules.default" =
+      "This repository's implementation for devenv, as devenv processes. The one to import in a devenv configuration.";
+    "nixbsdModules.default" =
+      "This repository's implementation for NixBSD, on FreeBSD rc. It disables the NixBSD copy. The one to import in a NixBSD configuration.";
+    "darwinModules.default" =
+      "This repository's implementation for nix-darwin, on launchd. The one to import in a nix-darwin configuration.";
+    "nixngModules.default" =
+      "This repository's implementation for NixNG, on its `init.services`. The one to import in a NixNG configuration.";
+
     "overlays.default" = "Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.";
     "overlays.passthruServices" =
       "Opt-in: repoints `pkgs.<pkg>.services.*` at this repository. Excludes `php`, which regenerates its own `passthru`.";

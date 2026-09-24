@@ -1,4 +1,7 @@
 Copyright (c) 2003-2026 Eelco Dolstra and the Nixpkgs/NixOS contributors
+Copyright (c) 2017 Daiderd Jordan
+Copyright (c) 2023 Juspay Technologies
+Copyright (c) 2024 Artemis Tosini, Audrey Dutcher, and NixOS/nixbsd contributors
 Copyright (c) 2026 the modular-services contributors
 
 Permission is hereby granted, free of charge, to any person obtaining
@@ -19,3 +22,17 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+Some files also contain code under a different license. Their
+`SPDX-License-Identifier` header gives all the licenses that apply to the
+file, and their `SPDX-FileCopyrightText` headers give the copyright holders.
+The texts of these licenses are in the `LICENSES` directory:
+
+- `Apache-2.0`: `LICENSES/Apache-2.0.txt`. Code from devenv,
+  copyright the devenv contributors.
+- `MPL-2.0`: `LICENSES/MPL-2.0.txt`. Code from NixNG, copyright 2021
+  Richard Brežák and NixNG contributors.
+
+PROVENANCE.md lists these files.

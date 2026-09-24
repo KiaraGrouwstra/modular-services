@@ -12,9 +12,9 @@ into whatever its service manager consumes.
 The subsystem lives in nixpkgs as of NixOS 25.11, still marked in development.
 This repository carries the canonical copy so it can move at its own pace, be
 consumed by NixOS, Home Manager and `nix-darwin` alike, and grow per-integration
-test coverage that the nixpkgs tree cannot host. Everything here came from
-nixpkgs; [`PROVENANCE.md`](./PROVENANCE.md) records what, from where, and what
-changed.
+test coverage that the nixpkgs tree cannot host. Most of the code here came
+from nixpkgs, and some from the other environments it integrates with;
+[`PROVENANCE.md`](./PROVENANCE.md) records what, from where, and what changed.
 
 ## Using it
 
@@ -243,9 +243,12 @@ does the same job through the
 GitHub Actions cache with no external account, at the cost of a 10 GB
 per-repository ceiling that VM test closures can reach.
 
-## Licence
+## License
 
-MIT, as nixpkgs, Home Manager, `nix-darwin` and finix all are, so code moves into
-this repository and back out to any of them without a relicensing step.
-Contributions are taken under the same terms. See [`LICENSE`](./LICENSE) and the
-licensing section of [`PROVENANCE.md`](./PROVENANCE.md#licensing).
+MIT, as nixpkgs, Home Manager, `nix-darwin`, finix, NixBSD and services-flake
+all are, so code moves into this repository and back out to any of them without
+a relicensing step. Contributions are taken under the same terms. The
+PostgreSQL variants for devenv and NixNG also contain code under Apache-2.0 and
+MPL-2.0; their SPDX headers say so, and the license texts are in
+[`LICENSES/`](./LICENSES). See [`LICENSE`](./LICENSE) and the licensing section
+of [`PROVENANCE.md`](./PROVENANCE.md#licensing).

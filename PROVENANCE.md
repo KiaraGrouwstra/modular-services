@@ -1,9 +1,10 @@
 # Provenance
 
-Everything in this repository that came from [nixpkgs] is listed below, with
-where it came from and whether it was changed. This table is the substantive
-attribution required by the MIT licence in [`LICENSE`](./LICENSE), which carries
-both the nixpkgs copyright line and this project's.
+Everything in this repository that came from another project is listed below,
+with where it came from and whether it was changed. Most of it came from
+[nixpkgs]. These tables are the substantive attribution required by the
+licenses in [`LICENSE`](./LICENSE), which carries the copyright line of each
+MIT upstream and this project's.
 
 Keeping it current is a review responsibility, not an automated one. The same
 people maintain this subsystem here and in nixpkgs, so a change on either side
@@ -16,52 +17,60 @@ into a no-op without any error.
 
 ## Licensing
 
-MIT throughout, which is what makes carrying code in both directions
-unremarkable. Every project this repository draws on, or expects to feed back
-into, ships the same licence text: [nixpkgs], [Home Manager], [`nix-darwin`] and
-[finix] are all MIT, and none of them asks a contributor to sign anything on top.
-Code that arrives here from one of them, or leaves here for one of them, is MIT
-at both ends, with no relicensing step for anyone to get wrong.
+MIT by default, which is what makes carrying code in both directions
+unremarkable. Most projects this repository draws on, or expects to feed back
+into, ship the same license text: [nixpkgs], [Home Manager], [`nix-darwin`],
+[finix], [NixBSD] and [services-flake] are all MIT, and none of them asks a
+contributor to sign anything on top. Code that arrives here from one of them,
+or leaves here for one of them, is MIT at both ends, with no relicensing step
+for anyone to get wrong.
 
-Two rules keep it that way.
+Three rules keep it that way.
 
 **Contributions here are MIT.** Opening a pull request against this repository
 offers the change under [`LICENSE`](./LICENSE). A patch that cannot be offered on
 those terms cannot be taken, however good it is: it would strand whatever it
 touched, since that file could then never go upstream.
 
-**Vendoring from a new project adds that project's copyright line** to `LICENSE`,
-above the permission notice, and its files to the table below. One permission
-notice over several copyright lines is the ordinary shape for a derived work, and
-it is the whole of what MIT asks as long as the licence text itself is identical
-across the sources -- which, so far, it is.
+**Vendoring from a new MIT project adds that project's copyright line** to
+`LICENSE`, above the permission notice, and its files to the tables below. One
+permission notice over several copyright lines is the ordinary shape for a
+derived work, and it is the whole of what MIT asks as long as the license text
+itself is identical across the sources.
 
-The case to plan for is an upstream that is *not* MIT. [NixNG] is MPL-2.0, which
-is copyleft per file: its code cannot be folded into an MIT file, so an
-integration built on it would need its own directory and its own `LICENSE`
-rather than another line in this one. Nothing here is in that position today.
+**Code from a project that is not MIT stays marked per file.** [devenv] is
+Apache-2.0 and [NixNG] is MPL-2.0, which is copyleft per file. A file with such
+code has an `SPDX-License-Identifier` header that gives each license that
+applies, such as `MIT AND MPL-2.0`, and an `SPDX-FileCopyrightText` header per
+copyright holder. The license texts are in [`LICENSES/`](./LICENSES), and
+`LICENSE` names them. Today this is only the PostgreSQL variants of these two
+integrations. Keep such code in its own files, so that the rest of the
+integration stays MIT and a later split, or a rewrite, touches only those files.
 
-## No per-file provenance headers
+## Provenance headers
 
-Vendored files carry **no** added header comment. That is deliberate: keeping
-them byte-identical to upstream makes a plain `diff` against a nixpkgs checkout
-a usable answer to "what did we change", and a header would defeat it on every
-single file. The files that genuinely had to change are marked `modified` below
-with the reason; those are the only places where a divergence exists at all.
+Files vendored from nixpkgs, in [the nixpkgs table](#from-nixpkgs), carry
+**no** added header comment. That is deliberate: keeping them byte-identical to
+upstream makes a plain `diff` against a nixpkgs checkout a usable answer to
+"what did we change", and a header would defeat it on every single file. The
+files that genuinely had to change are marked `modified` with the reason; those
+are the only places where a divergence exists at all. They carry no
+`SPDX-License-Identifier` line either: they are all MIT under the same notice.
 
-No `SPDX-License-Identifier` line either. Those earn their keep when files in one
-tree carry different licences; here every file is MIT under the same notice, so a
-header per file would restate `LICENSE` 53 times and still not say which upstream
-the file came from -- which is the question this table answers.
+Files in [the table of derived files](#derived-files) are different: they are
+derived from more than one upstream, or split and rewritten for a different
+service manager, so a `diff` against one upstream file does not apply. Each has
+`SPDX-License-Identifier` and `SPDX-FileCopyrightText` headers, and a comment
+that names its upstream files and the differences from them.
 
-No per-row revision either. [`flake.lock`](./flake.lock) records the pin, and a
-second copy per row would only be another thing to keep in step, touching all 39
-rows on every re-vendor. Note that the pin is the `nixos-unstable` channel, which
-advances only once Hydra has built it and so trails the nixpkgs default branch by
-a few days: a file vendored from the branch can be *newer* than its counterpart
-in the pinned nixpkgs.
+No per-row revision either. [`flake.lock`](./flake.lock) records the pin of each
+upstream, and a second copy per row would only be another thing to keep in
+step, touching every row on every re-vendor. Note that the nixpkgs pin is the
+`nixos-unstable` channel, which advances only once Hydra has built it and so
+trails the nixpkgs default branch by a few days: a file vendored from the branch
+can be *newer* than its counterpart in the pinned nixpkgs.
 
-## The table
+## From nixpkgs
 
 | repo path | nixpkgs path | state | reason |
 |---|---|---|---|
@@ -74,8 +83,8 @@ in the pinned nixpkgs.
 | `lib/services/vendor/assertions.nix` | `lib/modules/generic/assertions.nix` | verbatim | `lib`-only dependency of the portable layer; vendored so `lib/services` needs nothing outside itself. Upstream keeps this next to `meta-maintainers.nix` under `lib/modules/generic/`, where it is class-agnostic (`_class = null`) rather than a NixOS module; the pinned nixpkgs still has the NixOS-only copy at `nixos/modules/misc/assertions.nix`. |
 | `compliance/default.nix` | `pkgs/build-support/testers/modular-service-compliance.nix` | modified | Two doc-link comments retargeted from the nixpkgs manual to `compliance/README.md`. |
 | `integrations/nixos/modular/default.nix` | `nixos/modules/system/service/modular/default.nix` | modified | Registers an `easytier` variant, which upstream's registry omits. Service instances are keyed on `modularServices.<name>` rather than on package `passthru`, and the note on `_file` points at `../tests/modular-variants.nix`. |
-| `integrations/nixos/modular/<pkg>/<svc>/default.nix` | `nixos/modules/system/service/modular/<pkg>/<svc>/default.nix` | modified | The pure half of each variant. Imports `(modularServices.<name> pkgs)` instead of `pkgs.<pkg>.services.<svc>`, which is the nixpkgs copy; `modularServices` reaches the variant as a root special arg set in `../../../systemd/system.nix`. `python-http-server` imports its base by path in both trees, here `../../../tests/etc/python-http-server.nix`. `easytier` has no upstream counterpart. |
-| `integrations/nixos/modular/<pkg>/<svc>/system.nix` | `nixos/modules/system/service/modular/<pkg>/<svc>/system.nix` | verbatim | The systemd half of each variant, holding what the service modules below no longer do. `easytier` has no upstream counterpart: like `python-http-server` it defines nothing, and exists so that every service in `modular-services/` is registered. |
+| `integrations/nixos/modular/<pkg>/<svc>/default.nix` | `nixos/modules/system/service/modular/<pkg>/<svc>/default.nix` | modified | The pure half of each variant. Imports `(modularServices.<name> pkgs)` instead of `pkgs.<pkg>.services.<svc>`, which is the nixpkgs copy; `modularServices` reaches the variant as a root special arg set in `../../../systemd/system.nix`. `python-http-server` imports its base by path in both trees, here `../../../tests/etc/python-http-server.nix`. `easytier` and `postgresql` have no upstream counterpart. |
+| `integrations/nixos/modular/<pkg>/<svc>/system.nix` | `nixos/modules/system/service/modular/<pkg>/<svc>/system.nix` | verbatim | The systemd half of each variant, holding what the service modules below no longer do. `easytier` has no upstream counterpart: like `python-http-server` it defines nothing, and exists so that every service in `modular-services/` is registered. `postgresql` is in [the table of derived files](#derived-files). |
 | `integrations/nixos/systemd/system.nix` | `nixos/modules/system/service/systemd/system.nix` | modified | The portable-layer import becomes `../../../lib/services`. This is the single line that made the whole in-tree `lib/services` reachable from a NixOS evaluation. `extraRootSpecialArgs` gains `modularServices` alongside `pkgs`, since a variant reaches its base through that set rather than through package `passthru`. |
 | `integrations/nixos/systemd/defaults.nix` | `nixos/modules/system/service/systemd/defaults.nix` | verbatim | |
 | `integrations/nixos/systemd/service.nix` | `nixos/modules/system/service/systemd/service.nix` | verbatim | |
@@ -106,6 +115,28 @@ in the pinned nixpkgs.
 | `doc/modular-services.md` | `doc/modules/modular-services.section.md`, `nixos/doc/manual/development/modular-services.md` | modified | One chapter where nixpkgs has two: the portable material lives in the nixpkgs manual and the NixOS manual carries a pointer chapter with the systemd-specific options, whereas this is one book about the subsystem rather than one chapter per integration. Adds a note on this repository's relationship to nixpkgs; the consumption example uses `modularServices`. The two option-type links become absolute NixOS-manual URLs, because the chapter renders as a standalone book where a bare `#anchor` is resolved against the book and rejected when it names nothing. Links into this repository are absolute for the same reason, so that they resolve both here and in the rendered manual. Keeps the `@PORTABLE_SERVICE_OPTIONS@` / `@SYSTEMD_SERVICE_OPTIONS@` placeholders. |
 | `doc/writing-and-reviewing.md` | `nixos/README-modular-services.md` | modified | Review checklist and worked examples retargeted at this repository's paths, and links into it made absolute. Every heading gains an explicit anchor, because the file is a chapter of the rendered manual rather than a standalone README. |
 | `compliance/README.md` | `doc/build-helpers/testers.chapter.md` | modified | Extracted from the `modularServiceCompliance` section of the testers chapter; the nixpkgs-manual markup is dropped and the invocation example uses `self.lib.mkComplianceSuite`. |
+
+## Derived files
+
+The upstream paths are relative to the root of each upstream. The `modular/postgresql/default/system.nix` files take the setup script of the `postgresql-setup` unit from nixpkgs' `nixos/modules/services/databases/postgresql.nix`, in addition to the upstream file in their row.
+
+| repo path | upstream | upstream path | license |
+|---|---|---|---|
+| `modular-services/postgresql/service.nix` | [nixpkgs] | `nixos/modules/services/databases/postgresql.nix` | MIT |
+| `integrations/nixos/modular/postgresql/default/system.nix` | [nixpkgs] | `nixos/modules/services/databases/postgresql.nix` | MIT |
+| `integrations/finix/finit/service.nix` | [finix-modular-services] | `modules/finit/service.nix` | MIT |
+| `integrations/finix/finit/system.nix` | [finix-modular-services] | `modules/default.nix`, `modules/finit/system.nix` | MIT |
+| `integrations/finix/modular/postgresql/default/system.nix` | [finix] | `modules/services/postgresql/default.nix` | MIT |
+| `integrations/services-flake/modular/postgresql/default/system.nix` | [services-flake] | `nix/services/postgres/default.nix` | MIT |
+| `integrations/devenv/modular/postgresql/default/system.nix` | [devenv] | `src/modules/services/postgres.nix` | MIT AND Apache-2.0 |
+| `integrations/nixng/init/service.nix` | [finix-modular-services] | `modules/finit/service.nix`, through `integrations/finix/finit/service.nix` | MIT |
+| `integrations/nixng/init/system.nix` | [finix-modular-services] | `modules/default.nix`, `modules/finit/system.nix`, through `integrations/finix/finit/system.nix` | MIT |
+| `integrations/nixng/modular/postgresql/default/system.nix` | [NixNG] | `modules/services/postgresql.nix` | MIT AND MPL-2.0 |
+| `integrations/nixbsd/freebsd/service.nix` | [NixBSD] | `modules/system/service/freebsd/service.nix` | MIT |
+| `integrations/nixbsd/freebsd/system.nix` | [NixBSD] | `modules/system/service/freebsd/system.nix` | MIT |
+| `integrations/nixbsd/freebsd/config-data-path.nix` | [NixBSD] | `modules/system/service/freebsd/config-data-path.nix` | MIT |
+| `integrations/nixbsd/modular/postgresql/default/system.nix` | [NixBSD] | `modules/services/databases/postgresql.nix` | MIT |
+| `integrations/nix-darwin/modular/postgresql/default/system.nix` | [`nix-darwin`] | `modules/services/postgresql/default.nix` | MIT |
 
 ## Not ported
 
@@ -152,3 +183,7 @@ in the pinned nixpkgs.
 [`nix-darwin`]: https://github.com/nix-darwin/nix-darwin
 [finix]: https://github.com/finix-community/finix
 [NixNG]: https://github.com/nix-community/NixNG
+[NixBSD]: https://github.com/nixos-bsd/nixbsd
+[services-flake]: https://github.com/juspay/services-flake
+[devenv]: https://github.com/cachix/devenv
+[finix-modular-services]: https://github.com/DigitalBrewStudios/finix-modular-services

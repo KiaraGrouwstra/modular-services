@@ -6,10 +6,56 @@
     # the download, and it only advances once Hydra has built the channel, so
     # every derivation this flake evaluates is already in cache.nixos.org.
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+
+    # The other configuration frameworks that `integrations/` targets. Only
+    # their tests use them. They are sources, not flakes (`flake = false`), so
+    # `./default.nix` can fetch each one from `flake.lock` in the same way,
+    # and their own inputs do not go into the lock.
+    finix = {
+      url = "github:finix-community/finix";
+      flake = false;
+    };
+    services-flake = {
+      url = "github:juspay/services-flake";
+      flake = false;
+    };
+    # services-flake builds on it, and does not pin it itself.
+    process-compose-flake = {
+      url = "github:Platonic-Systems/process-compose-flake";
+      flake = false;
+    };
+    devenv = {
+      url = "github:cachix/devenv";
+      flake = false;
+    };
+    nixng = {
+      url = "github:nix-community/NixNG";
+      flake = false;
+    };
+    nixbsd = {
+      url = "github:nixos-bsd/nixbsd";
+      flake = false;
+    };
+    # The nixpkgs that NixBSD locks. NixBSD imports modules from nixpkgs, thus
+    # it does not evaluate with any other nixpkgs. Update it with `nixbsd`.
+    nixbsd-nixpkgs = {
+      url = "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1032146.dc29ee8fa098/nixexprs.tar.xz";
+      flake = false;
+    };
+    # NixBSD adds the `mini-tmpfiles` package with the overlay of this flake.
+    # The overlay does not use `nixpkgs`. Update it with `nixbsd`.
+    nixbsd-mini-tmpfiles = {
+      url = "github:nixos-bsd/mini-tmpfiles";
+      flake = false;
+    };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      flake = false;
+    };
   };
 
   outputs =
-    { self, nixpkgs }:
+    { self, nixpkgs, ... }@inputs:
     let
       inherit (nixpkgs) lib;
 
@@ -21,6 +67,12 @@
         import ./. (
           {
             nixpkgs = nixpkgs.outPath;
+            inputs = lib.mapAttrs (_: input: input.outPath) (
+              lib.removeAttrs inputs [
+                "self"
+                "nixpkgs"
+              ]
+            );
             src = self;
             revision = self.rev or self.dirtyRev or "dirty";
           }

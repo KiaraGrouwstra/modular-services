@@ -12,7 +12,7 @@ four things and the rest of the repository picks the integration up on its own:
 | `default.nix` | The module to import into that configuration system. Declares the services option in terms of `lib.services.configure`, and translates the resulting service tree into whatever the integration's service manager consumes. |
 | `disable-upstream.nix` | Eval-time removal of that framework's own in-tree copy of modular services, if it has one. No patching of the input, no fork branch. Imported by `default.nix`. |
 | `lib.nix` | `{ evalSystem, runTest, ... }`: how to evaluate a configuration and how to run a VM test *there*. |
-| `tests/default.nix` | `{ <name> = { kind = "eval" \| "vm"; drv = <derivation>; }; }`, taking `{ lib, nixpkgs, self, pkgs }`. |
+| `tests/default.nix` | `{ <name> = { kind = "eval" \| "vm"; drv = <derivation>; }; }`, taking `{ lib, nixpkgs, inputs, self, pkgs }`. `inputs` holds the source of each framework input in `flake.lock`. |
 
 `ci/tests.nix` reads `integrations/` from the filesystem and picks up any
 directory containing `tests/default.nix`, exposing its tests as
@@ -103,10 +103,67 @@ Read the `configure` docstring in
 authoritative how-to for the `default.nix` half, with a worked `nix-darwin`
 sketch. Then mirror `integrations/nixos/` for the other three files.
 
-Home Manager is the intended next integration; it slots in as
-`integrations/home-manager/` under the same four-file contract. [finix], which
-runs finit as pid 1, is the other obvious candidate: it already carries its own
-integration, and `modular-services/php/service.nix` keeps upstream's dormant
-`lib.optionalAttrs (options ? finit)` branch for exactly that manager.
+Next to `integrations/nixos/`, six integrations exist:
 
+- `integrations/finix/` runs the services on [finix], which runs finit as pid
+  1. It is exposed as `finixModules.default`.
+- `integrations/services-flake/` runs the services as processes of
+  [process-compose-flake], next to the services of [services-flake]. It is
+  exposed as `processComposeModules.default`. Its tests run the processes in
+  the build sandbox, without a virtual machine.
+- `integrations/devenv/` runs the services as processes of [devenv]. It is
+  exposed as `devenvModules.default`. Its tests run the processes with
+  process-compose in the build sandbox, without `devenv-tasks`.
+- `integrations/nixng/` adds the services to `init.services` of [NixNG], for
+  both of its init systems, runit and dinit. It is exposed as
+  `nixngModules.default`. Its tests only evaluate the system and build its
+  `toplevel`, as NixNG has no test driver.
+- `integrations/nixbsd/` adds the services to FreeBSD rc of [NixBSD], and
+  replaces the copy that NixBSD has. It is exposed as `nixbsdModules.default`.
+  Its tests only evaluate the system, as a build needs a cross-compiled
+  FreeBSD.
+- `integrations/nix-darwin/` adds the services to launchd of [nix-darwin], as
+  daemons. It is exposed as `darwinModules.default`. Its tests only evaluate
+  the system, as a build needs a Darwin builder.
+
+[docker-library] is not an integration yet. Its official PostgreSQL image runs
+one server in a container, and configures it with environment variables and
+an entrypoint script, not with a service manager. TODO: find out if a
+container image, built with `dockerTools` from the options of a service, is
+a useful integration.
+
+## Integration comparison
+
+The table below shows which options of a modular service each integration
+uses, and which options of the `postgresql` service its variant supports. In
+the table, "yes" means that the integration uses the option as the NixOS
+integration does.
+
+| option | NixOS | finix | services-flake | devenv | NixNG | NixBSD | nix-darwin | docker-library |
+|---|---|---|---|---|---|---|---|---|
+| `process.argv` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | TODO |
+| `process.reloadSignal`, `process.reloadCommand` | ✅ | ✅ | no | no | no | no | no | TODO |
+| `notificationProtocol` | ✅ | ✅ | no, a readiness probe in the variant | no, a readiness probe in the variant | no | no | no | TODO |
+| `configData` | ✅, in `/etc` | ✅, in `/etc` | ✅, in the Nix store | ✅, in the Nix store | ✅, in `/etc` | ✅, in `/etc` | ✅, in `/etc` | TODO |
+| `services` (sub-services) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | TODO |
+| `warnings` | ✅ | ✅ | ✅ | ✅ | no | ✅ | ✅ | TODO |
+| `assertions` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | TODO |
+| `postgresql.*` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | TODO |
+| `postgresql`: fast shutdown with `SIGINT` | ✅ | ✅ | ✅ | ✅ | no, `SIGTERM` | no, `SIGTERM` | no, `SIGTERM` | TODO |
+| `postgresql`: setup scripts at each server start | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | no, only when launchd loads the daemon | TODO |
+| `postgresql` test | VM | VM | build sandbox | build sandbox | evaluation and build | evaluation | evaluation | TODO |
+
+The variants and the integrations have `TODO` comments that tell why an
+option is not supported, and what is necessary to support it.
+
+Home Manager is the intended next integration; it slots in as
+`integrations/home-manager/` under the same four-file contract.
+
+[devenv]: https://github.com/cachix/devenv
+[docker-library]: https://github.com/docker-library/postgres
 [finix]: https://github.com/finix-community/finix
+[nix-darwin]: https://github.com/nix-darwin/nix-darwin
+[NixBSD]: https://github.com/nixos-bsd/nixbsd
+[NixNG]: https://github.com/nix-community/NixNG
+[process-compose-flake]: https://github.com/Platonic-Systems/process-compose-flake
+[services-flake]: https://github.com/juspay/services-flake

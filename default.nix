@@ -37,6 +37,25 @@
 
   lib ? import (nixpkgs + "/lib"),
 
+  # The sources of the other configuration frameworks that the integrations
+  # are tested against, as `{ <input> = <path>; }`. Only the integration tests
+  # use them. Read out of `flake.lock` for the same reasons as `nixpkgs`.
+  inputs ?
+    let
+      lock = builtins.fromJSON (builtins.readFile ./flake.lock);
+      fetch =
+        node:
+        let
+          inherit (lock.nodes.${node}) locked;
+        in
+        assert locked.type == "github";
+        builtins.fetchTarball {
+          url = "https://github.com/${locked.owner}/${locked.repo}/archive/${locked.rev}.tar.gz";
+          sha256 = locked.narHash;
+        };
+    in
+    builtins.mapAttrs (_: fetch) (builtins.removeAttrs lock.nodes.root.inputs [ "nixpkgs" ]),
+
   system ? builtins.currentSystem,
 
   pkgs ? import nixpkgs {
@@ -96,6 +115,43 @@ let
       };
     };
 
+    finixModules = {
+      # Modular services from this repository on finit. finix has no copy of
+      # its own to disable.
+      default = ./integrations/finix;
+    };
+
+    processComposeModules = {
+      # Modular services from this repository as process-compose processes,
+      # for process-compose-flake and services-flake. Neither has a copy of
+      # its own to disable.
+      default = ./integrations/services-flake;
+    };
+
+    devenvModules = {
+      # Modular services from this repository as devenv processes. devenv has
+      # no copy of its own to disable.
+      default = ./integrations/devenv;
+    };
+
+    nixngModules = {
+      # Modular services from this repository on NixNG's `init.services`.
+      # NixNG has no copy of its own to disable.
+      default = ./integrations/nixng;
+    };
+
+    nixbsdModules = {
+      # Modular services from this repository on FreeBSD rc. It disables
+      # NixBSD's own copy.
+      default = ./integrations/nixbsd;
+    };
+
+    darwinModules = {
+      # Modular services from this repository on launchd. nix-darwin has no
+      # copy of its own to disable.
+      default = ./integrations/nix-darwin;
+    };
+
     overlays = {
       # Adds `pkgs.modularServices.*`. Overrides nothing, so no rebuilds.
       default = import ./overlays { inherit modularServices; };
@@ -125,6 +181,7 @@ let
       inherit
         lib
         nixpkgs
+        inputs
         self
         pkgs
         ;

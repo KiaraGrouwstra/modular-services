@@ -1,5 +1,114 @@
 {
   "nodes": {
+    "devenv": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790121233,
+        "narHash": "sha256-VujZkKX8bfdMSHB3OE2oLtKlVCJ28aKFhhxVIgOM4/0=",
+        "owner": "cachix",
+        "repo": "devenv",
+        "rev": "74075803bf275361b5e3c40f33797a9f308cb54b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "devenv",
+        "type": "github"
+      }
+    },
+    "finix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789785348,
+        "narHash": "sha256-zz+eqC+AhSIDSSToDcAZp6bZyGtSs9D59K6Jjh+82n4=",
+        "owner": "finix-community",
+        "repo": "finix",
+        "rev": "bb5965afe646b8c1055be3646b6df39e754d03a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "finix-community",
+        "repo": "finix",
+        "type": "github"
+      }
+    },
+    "nix-darwin": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786845137,
+        "narHash": "sha256-oQFip+v0luP8NIxJzmiW4Wu8bILsbFWom5l0zonl8hQ=",
+        "owner": "nix-darwin",
+        "repo": "nix-darwin",
+        "rev": "4cff07de74b50e64bdd68cd4e722ab5b6b35ee48",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-darwin",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "nixbsd": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789138908,
+        "narHash": "sha256-+/WSbZJNBOKUqf/vU6UCh4oOC48MEYHoXvwdkqpWGrQ=",
+        "owner": "nixos-bsd",
+        "repo": "nixbsd",
+        "rev": "1a5550d6b78feb23d339777438efd26ce3152ee0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos-bsd",
+        "repo": "nixbsd",
+        "type": "github"
+      }
+    },
+    "nixbsd-mini-tmpfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742754557,
+        "narHash": "sha256-nGxgiNhA94eSl8jcQwCboJ5Ed132z8yrFdOoT+rf8bE=",
+        "owner": "nixos-bsd",
+        "repo": "mini-tmpfiles",
+        "rev": "534ee577692c7092fdcd035f89bc29b663c6f9ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos-bsd",
+        "repo": "mini-tmpfiles",
+        "type": "github"
+      }
+    },
+    "nixbsd-nixpkgs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783697152,
+        "narHash": "sha256-4eOaoE0Z2OR28W/vdzp1H9Qkl84ajh7tdVsfNwTuG5U=",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1032146.dc29ee8fa098/nixexprs.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1032146.dc29ee8fa098/nixexprs.tar.xz"
+      }
+    },
+    "nixng": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785618522,
+        "narHash": "sha256-drDIDeY1uLjfrQ0lBMdEA6MSGp1NvMO/AlGr+M6pLMM=",
+        "owner": "nix-community",
+        "repo": "NixNG",
+        "rev": "c2a314e8a145421cd5dd8f34e4e9ac3ad37c7f7b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NixNG",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1788179007,
@@ -13,9 +122,50 @@
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
       }
     },
+    "process-compose-flake": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782060835,
+        "narHash": "sha256-Q8HH2t1l3MITtWCWY4ytcH5F/Q7aAHo3Iq/QTMAKTe0=",
+        "owner": "Platonic-Systems",
+        "repo": "process-compose-flake",
+        "rev": "464ff6880737f063c3f0d3d2c7781fda9190868f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Platonic-Systems",
+        "repo": "process-compose-flake",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "devenv": "devenv",
+        "finix": "finix",
+        "nix-darwin": "nix-darwin",
+        "nixbsd": "nixbsd",
+        "nixbsd-mini-tmpfiles": "nixbsd-mini-tmpfiles",
+        "nixbsd-nixpkgs": "nixbsd-nixpkgs",
+        "nixng": "nixng",
+        "nixpkgs": "nixpkgs",
+        "process-compose-flake": "process-compose-flake",
+        "services-flake": "services-flake"
+      }
+    },
+    "services-flake": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789263995,
+        "narHash": "sha256-yyCUpY/4kLrrGYvGka00HZt/R1TlF0hyoVa2B0qrGsE=",
+        "owner": "juspay",
+        "repo": "services-flake",
+        "rev": "7db381d71793d5990ee95d9fb706185e4f14d5bb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "juspay",
+        "repo": "services-flake",
+        "type": "github"
       }
     }
   },
