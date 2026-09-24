@@ -25,6 +25,16 @@ rec {
           # The CLI sets it to the project directory. The tests set the
           # directories that they use.
           devenv.root = "/devenv-root";
+          # devenv builds `devenv-tasks` with the nixpkgs that devenv locks,
+          # and gets that nixpkgs through import from derivation. The
+          # `--no-build` check in CI cannot do import from derivation. The
+          # tests do not use `devenv-tasks`, thus a stub replaces it.
+          task.package = lib.mkDefault (
+            pkgs.writeShellScriptBin "devenv-tasks" ''
+              echo "devenv-tasks is not available in this evaluation" >&2
+              exit 1
+            ''
+          );
         }
         self.devenvModules.default
         module
