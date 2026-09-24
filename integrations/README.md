@@ -141,16 +141,16 @@ integration does.
 
 | option | NixOS | finix | services-flake | devenv | NixNG | NixBSD | nix-darwin | docker-library |
 |---|---|---|---|---|---|---|---|---|
-| `process.argv` | yes | yes | yes | yes | yes | yes | yes | TODO |
-| `process.reloadSignal`, `process.reloadCommand` | yes | yes | no | no | no | no | no | TODO |
-| `notificationProtocol` | yes | yes | no, a readiness probe in the variant | no, a readiness probe in the variant | no | no | no | TODO |
-| `configData` | yes, in `/etc` | yes, in `/etc` | yes, in the Nix store | yes, in the Nix store | yes, in `/etc` | yes, in `/etc` | yes, in `/etc` | TODO |
-| `services` (sub-services) | yes | yes | yes | yes | yes | yes | yes | TODO |
-| `warnings` | yes | yes | yes | yes | no | yes | yes | TODO |
-| `assertions` | yes | yes | yes | yes | yes | yes | yes | TODO |
-| `postgresql.*` | yes | yes | yes | yes | yes | yes | yes | TODO |
-| `postgresql`: fast shutdown with `SIGINT` | yes | yes | yes | yes | no, `SIGTERM` | no, `SIGTERM` | no, `SIGTERM` | TODO |
-| `postgresql`: setup scripts at each server start | yes | yes | yes | yes | yes | yes | no, only when launchd loads the daemon | TODO |
+| `process.argv` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | TODO |
+| `process.reloadSignal`, `process.reloadCommand` | ✅ | ✅ | no | no | no | no | no | TODO |
+| `notificationProtocol` | ✅ | ✅ | no, a readiness probe in the variant | no, a readiness probe in the variant | no | no | no | TODO |
+| `configData` | ✅, in `/etc` | ✅, in `/etc` | ✅, in the Nix store | ✅, in the Nix store | ✅, in `/etc` | ✅, in `/etc` | ✅, in `/etc` | TODO |
+| `services` (sub-services) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | TODO |
+| `warnings` | ✅ | ✅ | ✅ | ✅ | no | ✅ | ✅ | TODO |
+| `assertions` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | TODO |
+| `postgresql.*` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | TODO |
+| `postgresql`: fast shutdown with `SIGINT` | ✅ | ✅ | ✅ | ✅ | no, `SIGTERM` | no, `SIGTERM` | no, `SIGTERM` | TODO |
+| `postgresql`: setup scripts at each server start | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | no, only when launchd loads the daemon | TODO |
 | `postgresql` test | VM | VM | build sandbox | build sandbox | evaluation and build | evaluation | evaluation | TODO |
 
 The variants and the integrations have `TODO` comments that tell why an
