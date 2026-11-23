@@ -23,7 +23,7 @@ jobs:
       vm: ${{ steps.matrix.outputs.vm }}
     steps:
       - uses: actions/checkout@v7
-      - uses: cachix/install-nix-action@v31
+      - uses: cachix/install-nix-action@v32
       - uses: cachix/cachix-action@v17
         with:
           name: modular-services
@@ -56,7 +56,7 @@ jobs:
     name: eval (${{ matrix.integration }}) ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v7
-      - uses: cachix/install-nix-action@v31
+      - uses: cachix/install-nix-action@v32
       - uses: cachix/cachix-action@v17
         with:
           name: modular-services
@@ -89,7 +89,7 @@ jobs:
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7
-      - uses: cachix/install-nix-action@v31
+      - uses: cachix/install-nix-action@v32
       - uses: cachix/cachix-action@v17
         with:
           name: modular-services
@@ -125,7 +125,7 @@ jobs:
       - name: Free disk space
         # A VM test closure does not fit in the ~14 GB a fresh runner has left.
         # Pinned to a tag rather than a branch so Dependabot can see it.
-        uses: jlumbroso/free-disk-space@v1.3.1
+        uses: jlumbroso/free-disk-space@v2.0.0
         with:
           # The runner needs its swap; reclaiming it trades disk for OOM kills.
           swap-storage: false
@@ -138,7 +138,7 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - uses: actions/checkout@v7
-      - uses: cachix/install-nix-action@v31
+      - uses: cachix/install-nix-action@v32
         with:
           # Tests that declare `containers` rather than `nodes` run under
           # `systemd-nspawn`, which needs pid 0 inside the build sandbox. That
